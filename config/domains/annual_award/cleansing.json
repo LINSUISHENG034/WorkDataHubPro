@@ -1,0 +1,19 @@
+{
+  "domain": "annual_award",
+  "rule_pack_id": "annual-award-core",
+  "rule_pack_version": "2026.04.11",
+  "activation_order": [
+    "company_name",
+    "plan_code",
+    "plan_type",
+    "product_line_code",
+    "award_amount"
+  ],
+  "enabled_fields": [
+    "company_name",
+    "plan_code",
+    "plan_type",
+    "product_line_code",
+    "award_amount"
+  ]
+}
