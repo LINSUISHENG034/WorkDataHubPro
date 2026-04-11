@@ -1,0 +1,15 @@
+{
+  "domain": "annuity_performance",
+  "rule_pack_id": "annuity-performance-core",
+  "rule_pack_version": "2026.04.11",
+  "activation_order": [
+    "company_name",
+    "plan_code",
+    "sales_amount"
+  ],
+  "enabled_fields": [
+    "company_name",
+    "plan_code",
+    "sales_amount"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "release_id": "2026-04-11-annuity-performance-baseline",
+  "rule_pack_versions": {
+    "annuity_performance": "2026.04.11"
+  },
+  "domains": {
+    "annuity_performance": "config/domains/annuity_performance/cleansing.json"
+  }
+}
