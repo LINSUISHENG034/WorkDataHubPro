@@ -5,6 +5,7 @@
 is split across `docs/`, `config/`, `reference/`, `src/`, and `tests/`.
 
 - `docs/superpowers/specs/` holds the active architecture blueprint. Start with `docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md`.
+- when the task involves new slice selection, legacy coverage, or retirement decisions, also read `docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md` and `docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md`.
 - `docs/superpowers/plans/` holds executable implementation plans for approved slices.
 - `docs/disciplines/` holds operational rules. Use the Discipline Router below to decide which file to read.
 - `config/` holds governed domain, policy, and release configuration.

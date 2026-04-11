@@ -17,6 +17,7 @@
 - do not start implementation directly on `main`
 - prefer one explicit validation slice over partially building multiple independent subsystems
 - do not continue from a local-only plan that can block checkout, merge, or review flow later
+- do not start a new slice unless the target legacy behavior is already registered in the active legacy coverage matrix and admitted by the refactor program
 
 ## 1. Preferred Slice Execution Order
 
@@ -50,6 +51,13 @@ Execution-critical documents must be intentionally tracked.
 
 Do not leave active plans or runbooks as untracked local files once execution is
 underway.
+
+When slice admission, domain sequencing, legacy coverage, or retirement status
+is the question, read these governance specs before writing or executing a new
+slice plan:
+
+- `docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md`
+- `docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md`
 
 ## 3. Scope Rule
 
