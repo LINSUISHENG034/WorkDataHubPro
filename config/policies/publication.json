@@ -20,5 +20,32 @@
       "transaction_group": "projection-publication",
       "idempotency_scope": "run"
     }
+  },
+  "annual_award": {
+    "fact_annual_award": {
+      "mode": "REFRESH",
+      "transaction_group": "fact-publication",
+      "idempotency_scope": "batch"
+    },
+    "company_reference": {
+      "mode": "UPSERT",
+      "transaction_group": "reference-publication",
+      "idempotency_scope": "company_id"
+    },
+    "customer_master_signal": {
+      "mode": "UPSERT",
+      "transaction_group": "reference-publication",
+      "idempotency_scope": "company_id+period"
+    },
+    "contract_state": {
+      "mode": "REFRESH",
+      "transaction_group": "projection-publication",
+      "idempotency_scope": "period"
+    },
+    "monthly_snapshot": {
+      "mode": "APPEND_ONLY",
+      "transaction_group": "projection-publication",
+      "idempotency_scope": "run"
+    }
   }
 }

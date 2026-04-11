@@ -20,8 +20,26 @@ class ReferenceDerivationService:
                         "source_fact_id": fact.record_id,
                     },
                     source_record_ids=[fact.record_id],
-                    derivation_rule_id="company-reference-from-annuity-performance",
+                    derivation_rule_id=f"company-reference-from-{fact.domain.replace('_', '-')}",
                     derivation_rule_version="1",
                 )
             )
+            if fact.domain == "annual_award":
+                period = str(fact.fields["period"])
+                candidates.append(
+                    DerivationCandidate(
+                        target_object="customer_master_signal",
+                        candidate_payload={
+                            "company_id": fact.fields["company_id"],
+                            "period": period,
+                            "plan_code": fact.fields["plan_code"],
+                            "customer_type": "WINNING_CUSTOMER",
+                            "award_tag": f"{period[2:4]}{period[5:7]}-AWARD",
+                            "source_fact_id": fact.record_id,
+                        },
+                        source_record_ids=[fact.record_id],
+                        derivation_rule_id="customer-master-from-annual-award",
+                        derivation_rule_version="1",
+                    )
+                )
         return candidates

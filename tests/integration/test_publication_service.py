@@ -71,3 +71,63 @@ def test_publication_service_executes_visible_transaction_groups() -> None:
     ]
     assert storage.read("fact_annuity_performance")[0]["record_id"] == "fact-001"
     assert storage.read("company_reference")[0]["company_name"] == "ACME"
+
+
+def test_publication_service_supports_annual_award_fact_and_signal_targets() -> None:
+    storage = InMemoryTableStore()
+    service = PublicationService(storage)
+    policy = load_publication_policy(
+        Path("config/policies/publication.json"),
+        domain="annual_award",
+    )
+
+    results = service.execute(
+        [
+            PublicationBundle(
+                plan=build_publication_plan(
+                    policy=policy,
+                    publication_id="publication-award-facts",
+                    target_name="fact_annual_award",
+                    target_kind="fact",
+                    refresh_keys=["batch_id"],
+                    upsert_keys=[],
+                    source_batch_id="annual_award:2026-03",
+                    source_run_id="run-001",
+                ),
+                rows=[
+                    {
+                        "record_id": "fact-001",
+                        "batch_id": "annual_award:2026-03",
+                        "company_id": "company-001",
+                        "plan_code": "P9001",
+                        "period": "2026-03",
+                    }
+                ],
+            ),
+            PublicationBundle(
+                plan=build_publication_plan(
+                    policy=policy,
+                    publication_id="publication-customer-signal",
+                    target_name="customer_master_signal",
+                    target_kind="reference",
+                    refresh_keys=[],
+                    upsert_keys=["company_id", "period"],
+                    source_batch_id="annual_award:2026-03",
+                    source_run_id="run-001",
+                ),
+                rows=[
+                    {
+                        "company_id": "company-001",
+                        "period": "2026-03",
+                        "customer_type": "WINNING_CUSTOMER",
+                    }
+                ],
+            ),
+        ]
+    )
+
+    assert [result.target_name for result in results] == [
+        "fact_annual_award",
+        "customer_master_signal",
+    ]
+    assert storage.read("customer_master_signal")[0]["customer_type"] == "WINNING_CUSTOMER"
