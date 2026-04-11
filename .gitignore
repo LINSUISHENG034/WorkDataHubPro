@@ -1,5 +1,6 @@
 # Local agent and tool state
 .serena/
+.worktrees/
 
 # Python caches and virtual environments
 __pycache__/
