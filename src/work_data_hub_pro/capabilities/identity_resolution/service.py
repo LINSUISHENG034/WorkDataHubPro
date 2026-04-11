@@ -55,23 +55,32 @@ class CacheFirstIdentityResolutionService:
         config_release_id: str,
     ) -> ResolvedFact:
         company_name = str(fact.fields["company_name"])
-        cached_id = self._cache.get(company_name)
+        source_company_id = str(
+            fact.fields.get("company_id") or fact.fields.get("source_company_id") or ""
+        )
 
-        if cached_id is not None:
-            company_id = cached_id
-            method = "cache_hit"
+        if source_company_id:
+            company_id = source_company_id
+            method = "source_value"
             fallback_level = "none"
         else:
-            provider_id = self._provider.lookup(company_name)
-            if provider_id is not None:
-                company_id = provider_id
-                self._cache.set(company_name, provider_id)
-                method = "provider_lookup"
+            cached_id = self._cache.get(company_name)
+
+            if cached_id is not None:
+                company_id = cached_id
+                method = "cache_hit"
                 fallback_level = "none"
             else:
-                company_id = f"TEMP-{company_name}"
-                method = "temp_id_fallback"
-                fallback_level = "temporary"
+                provider_id = self._provider.lookup(company_name)
+                if provider_id is not None:
+                    company_id = provider_id
+                    self._cache.set(company_name, provider_id)
+                    method = "provider_lookup"
+                    fallback_level = "none"
+                else:
+                    company_id = f"TEMP-{company_name}"
+                    method = "temp_id_fallback"
+                    fallback_level = "temporary"
 
         updated_fields = dict(fact.fields)
         updated_fields["company_id"] = company_id

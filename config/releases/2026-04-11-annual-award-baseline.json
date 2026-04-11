@@ -1,0 +1,9 @@
+{
+  "release_id": "2026-04-11-annual-award-baseline",
+  "rule_pack_versions": {
+    "annual_award": "2026.04.11"
+  },
+  "domains": {
+    "annual_award": "config/domains/annual_award/cleansing.json"
+  }
+}

@@ -7,25 +7,23 @@ from work_data_hub_pro.capabilities.projections.monthly_snapshot import (
 from work_data_hub_pro.platform.storage.in_memory_tables import InMemoryTableStore
 
 
-def test_projections_consume_published_fact_and_fixture_publications_only() -> None:
+def test_projections_consume_published_annual_award_facts_with_compatibility_bridge() -> None:
     storage = InMemoryTableStore(
         seed={
             "fact_annuity_performance": [
                 {
-                    "record_id": "fact-001",
+                    "record_id": "fact-perf-001",
                     "company_id": "company-001",
-                    "plan_code": "PLAN-A",
+                    "plan_code": "P9001",
                     "period": "2026-03",
                 }
             ],
-            "fixture_annual_award": [
+            "fact_annual_award": [
                 {
+                    "record_id": "fact-award-001",
                     "company_id": "company-001",
-                    "plan_code": "PLAN-A",
+                    "plan_code": "P9001",
                     "period": "2026-03",
-                    "award_code": "AWARD-01",
-                    "source_sheet": "AwardRegister",
-                    "source_record_id": "award-001",
                 }
             ],
             "fixture_annual_loss": [
@@ -56,9 +54,10 @@ def test_projections_consume_published_fact_and_fixture_publications_only() -> N
     assert contract_rows.rows == [
         {
             "company_id": "company-001",
-            "plan_code": "PLAN-A",
+            "plan_code": "P9001",
             "period": "2026-03",
             "has_annuity_performance": True,
+            "has_annual_award_fact": True,
             "has_annual_award_fixture": True,
             "has_annual_loss_fixture": False,
         }

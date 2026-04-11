@@ -28,3 +28,31 @@ def test_reference_derivation_builds_company_reference_candidates() -> None:
     assert candidates[0].target_object == "company_reference"
     assert candidates[0].candidate_payload["company_id"] == "company-001"
     assert candidates[0].candidate_payload["company_name"] == "ACME"
+
+
+def test_reference_derivation_adds_customer_master_signal_for_annual_award() -> None:
+    service = ReferenceDerivationService()
+    fact = CanonicalFactRecord(
+        run_id="run-001",
+        record_id="fact-001",
+        batch_id="annual_award:2026-03",
+        domain="annual_award",
+        fact_type="annual_award",
+        fields={
+            "company_name": "ACME",
+            "company_id": "company-001",
+            "plan_code": "P9001",
+            "period": "2026-03",
+        },
+        lineage_ref="record-001",
+        trace_ref="trace:record-001",
+    )
+
+    candidates = service.derive([fact])
+
+    assert [candidate.target_object for candidate in candidates] == [
+        "company_reference",
+        "customer_master_signal",
+    ]
+    assert candidates[1].candidate_payload["customer_type"] == "WINNING_CUSTOMER"
+    assert candidates[1].candidate_payload["award_tag"] == "2603-AWARD"

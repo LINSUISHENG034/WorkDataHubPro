@@ -59,3 +59,35 @@ def test_identity_resolution_falls_back_to_temp_id_when_provider_misses() -> Non
     assert resolved.result.resolution_method == "temp_id_fallback"
     assert resolved.result.fallback_level == "temporary"
     assert resolved.fact.fields["company_id"] == "TEMP-OMEGA"
+
+
+def test_identity_resolution_preserves_source_company_id_before_cache_lookup() -> None:
+    service = CacheFirstIdentityResolutionService(
+        cache=InMemoryIdentityCache({"ACME": "company-cache-999"}),
+        provider=StaticIdentityProvider({"ACME": "company-provider-999"}),
+    )
+    fact = CanonicalFactRecord(
+        run_id="run-001",
+        record_id="fact-001",
+        batch_id="annual_award:2026-03",
+        domain="annual_award",
+        fact_type="annual_award",
+        fields={
+            "company_name": "ACME",
+            "company_id": "company-source-001",
+            "plan_code": "",
+            "period": "2026-03",
+        },
+        lineage_ref="record-001",
+        trace_ref="trace:record-001",
+    )
+
+    resolved = service.resolve(
+        fact,
+        anchor_row_no=2,
+        config_release_id="2026-04-11-annual-award-baseline",
+    )
+
+    assert resolved.fact.fields["company_id"] == "company-source-001"
+    assert resolved.result.resolution_method == "source_value"
+    assert resolved.result.evidence_refs == ["identity:source_value:ACME"]

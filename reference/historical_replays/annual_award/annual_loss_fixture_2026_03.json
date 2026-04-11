@@ -1,0 +1,10 @@
+[
+  {
+    "company_id": "company-001",
+    "plan_code": "LOSS-99",
+    "period": "2026-03",
+    "loss_code": "LOSS-99",
+    "source_sheet": "LossRegister",
+    "source_record_id": "loss-001"
+  }
+]

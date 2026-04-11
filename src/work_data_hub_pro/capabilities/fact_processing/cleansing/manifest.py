@@ -35,7 +35,39 @@ RULE_PACKS: dict[tuple[str, str], dict[str, CleansingRule]] = {
             field_name="sales_amount",
             transform=parse_decimal,
         ),
-    }
+    },
+    ("annual-award-core", "2026.04.11"): {
+        "company_name": CleansingRule(
+            rule_id="uppercase-company-name",
+            version="1",
+            field_name="company_name",
+            transform=strip_and_uppercase,
+        ),
+        "plan_code": CleansingRule(
+            rule_id="normalize-plan-code",
+            version="1",
+            field_name="plan_code",
+            transform=normalize_plan_code,
+        ),
+        "plan_type": CleansingRule(
+            rule_id="normalize-plan-type",
+            version="1",
+            field_name="plan_type",
+            transform=strip_and_uppercase,
+        ),
+        "product_line_code": CleansingRule(
+            rule_id="normalize-product-line-code",
+            version="1",
+            field_name="product_line_code",
+            transform=strip_and_uppercase,
+        ),
+        "award_amount": CleansingRule(
+            rule_id="parse-award-amount",
+            version="1",
+            field_name="award_amount",
+            transform=parse_decimal,
+        ),
+    },
 }
 
 
