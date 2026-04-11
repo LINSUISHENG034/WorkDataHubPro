@@ -12,3 +12,6 @@ class LineageRegistry:
 
     def get(self, record_id: str) -> LineageLink | None:
         return self._links.get(record_id)
+
+    def all(self) -> list[LineageLink]:
+        return list(self._links.values())

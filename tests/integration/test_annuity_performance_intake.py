@@ -29,3 +29,4 @@ def test_annuity_performance_intake_builds_anchor_preserving_records(tmp_path) -
     assert result.trace_events[0].stage_id == "source_intake"
     assert result.trace_events[0].field_name == "raw_payload"
     assert result.trace_events[0].anchor_row_no == 2
+    workbook_path.unlink()

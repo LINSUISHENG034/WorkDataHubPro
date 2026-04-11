@@ -17,7 +17,7 @@ def strip_and_uppercase(value: Any) -> str:
 
 
 def normalize_plan_code(value: Any) -> str:
-    return str(value).strip().upper()
+    return strip_and_uppercase(value)
 
 
 def parse_decimal(value: Any) -> float:

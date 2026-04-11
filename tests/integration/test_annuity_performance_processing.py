@@ -48,3 +48,34 @@ def test_fact_processing_applies_governed_cleansing_and_emits_trace_events() -> 
         "2026.04.11.1",
         "2026.04.11.1",
     ]
+
+
+def test_fact_processing_records_failed_trace_event_when_field_is_missing() -> None:
+    manifest = CleansingManifest.load(
+        release_path=Path("config/releases/2026-04-11-annuity-performance-baseline.json"),
+        domain_path=Path("config/domains/annuity_performance/cleansing.json"),
+    )
+    processor = AnnuityPerformanceProcessor(manifest)
+    record = InputRecord(
+        run_id="run-001",
+        record_id="record-002",
+        batch_id="annuity_performance:2026-03",
+        anchor_row_no=2,
+        origin_row_nos=[2],
+        parent_record_ids=[],
+        stage_row_no=2,
+        raw_payload={
+            "company_name": "  Acme  ",
+            "plan_code": "plan-a",
+            "period": "2026-03",
+        },
+    )
+
+    result = processor.process(record)
+
+    assert result.fact.fields["company_name"] == "ACME"
+    assert result.fact.fields["plan_code"] == "PLAN-A"
+    assert "sales_amount" not in result.fact.fields
+    assert result.trace_events[-1].field_name == "sales_amount"
+    assert result.trace_events[-1].success is False
+    assert result.trace_events[-1].error_message == "missing field: sales_amount"

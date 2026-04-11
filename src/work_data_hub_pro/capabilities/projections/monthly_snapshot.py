@@ -13,16 +13,19 @@ class MonthlySnapshotProjection:
         contract_state_rows = [
             row for row in self._storage.read("contract_state") if row["period"] == period
         ]
+        contracts_with_award_fixture = sum(
+            1 for row in contract_state_rows if row["has_annual_award_fixture"]
+        )
+        contracts_with_loss_fixture = sum(
+            1 for row in contract_state_rows if row["has_annual_loss_fixture"]
+        )
         rows = [
             {
                 "period": period,
                 "contract_state_rows": len(contract_state_rows),
-                "award_fixture_rows": sum(
-                    1 for row in contract_state_rows if row["has_annual_award_fixture"]
-                ),
-                "loss_fixture_rows": sum(
-                    1 for row in contract_state_rows if row["has_annual_loss_fixture"]
-                ),
+                # Keep output keys stable for accepted replay baselines.
+                "award_fixture_rows": contracts_with_award_fixture,
+                "loss_fixture_rows": contracts_with_loss_fixture,
             }
         ]
         return ProjectionRows(
