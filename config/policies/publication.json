@@ -1,0 +1,24 @@
+{
+  "annuity_performance": {
+    "fact_annuity_performance": {
+      "mode": "REFRESH",
+      "transaction_group": "fact-publication",
+      "idempotency_scope": "batch"
+    },
+    "company_reference": {
+      "mode": "UPSERT",
+      "transaction_group": "reference-publication",
+      "idempotency_scope": "company_id"
+    },
+    "contract_state": {
+      "mode": "REFRESH",
+      "transaction_group": "projection-publication",
+      "idempotency_scope": "period"
+    },
+    "monthly_snapshot": {
+      "mode": "APPEND_ONLY",
+      "transaction_group": "projection-publication",
+      "idempotency_scope": "run"
+    }
+  }
+}
