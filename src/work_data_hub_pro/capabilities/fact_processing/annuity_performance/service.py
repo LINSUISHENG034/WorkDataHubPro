@@ -30,9 +30,18 @@ class AnnuityPerformanceProcessor:
         trace_events: list[FieldTraceEvent] = []
 
         for event_seq, active_rule in enumerate(self._manifest.active_rules, start=1):
-            before = cleaned_fields[active_rule.field_name]
-            after = active_rule.rule.transform(before)
-            cleaned_fields[active_rule.field_name] = after
+            before = cleaned_fields.get(active_rule.field_name)
+            error_message: str | None = None
+            success = True
+
+            if active_rule.field_name not in cleaned_fields:
+                after = None
+                success = False
+                error_message = f"missing field: {active_rule.field_name}"
+            else:
+                after = active_rule.rule.transform(before)
+                cleaned_fields[active_rule.field_name] = after
+
             trace_events.append(
                 FieldTraceEvent(
                     trace_id=f"trace:{record.record_id}",
@@ -51,7 +60,8 @@ class AnnuityPerformanceProcessor:
                     config_release_id=self._manifest.release_id,
                     action_type="cleanse",
                     timestamp=datetime.now(UTC).isoformat(),
-                    success=True,
+                    success=success,
+                    error_message=error_message,
                 )
             )
 

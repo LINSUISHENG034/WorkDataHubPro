@@ -39,48 +39,51 @@ class AnnuityPerformanceIntakeService:
 
         for source_file in source_files:
             workbook = load_workbook(source_file, read_only=True, data_only=True)
-            sheet = workbook[self.sheet_name]
-            headers = [cell.value for cell in next(sheet.iter_rows(min_row=1, max_row=1))]
+            try:
+                sheet = workbook[self.sheet_name]
+                headers = [cell.value for cell in next(sheet.iter_rows(min_row=1, max_row=1))]
 
-            for row_no, row in enumerate(
-                sheet.iter_rows(min_row=2, values_only=True),
-                start=2,
-            ):
-                payload = dict(zip(headers, row, strict=True))
-                snapshot_hash.update(repr((source_file.name, row_no, payload)).encode("utf-8"))
-                record_id = f"{run_id}:{source_file.stem}:{row_no}"
-                record = InputRecord(
-                    run_id=run_id,
-                    record_id=record_id,
-                    batch_id=f"{self.domain}:{period}",
-                    anchor_row_no=row_no,
-                    origin_row_nos=[row_no],
-                    parent_record_ids=[],
-                    stage_row_no=row_no,
-                    raw_payload=payload,
-                )
-                records.append(record)
-                trace_events.append(
-                    FieldTraceEvent(
-                        trace_id=f"trace:{record_id}",
-                        event_id=f"{record_id}:intake",
-                        event_seq=0,
+                for row_no, row in enumerate(
+                    sheet.iter_rows(min_row=2, values_only=True),
+                    start=2,
+                ):
+                    payload = dict(zip(headers, row, strict=True))
+                    snapshot_hash.update(repr((source_file.name, row_no, payload)).encode("utf-8"))
+                    record_id = f"{run_id}:{source_file.stem}:{row_no}"
+                    record = InputRecord(
                         run_id=run_id,
-                        batch_id=record.batch_id,
-                        record_id=record.record_id,
-                        anchor_row_no=record.anchor_row_no,
-                        stage_id=self.stage_id,
-                        field_name="raw_payload",
-                        value_before=None,
-                        value_after=payload,
-                        rule_id="capture-input",
-                        rule_version="1",
-                        config_release_id="system:source-intake",
-                        action_type="snapshot",
-                        timestamp=datetime.now(UTC).isoformat(),
-                        success=True,
+                        record_id=record_id,
+                        batch_id=f"{self.domain}:{period}",
+                        anchor_row_no=row_no,
+                        origin_row_nos=[row_no],
+                        parent_record_ids=[],
+                        stage_row_no=row_no,
+                        raw_payload=payload,
                     )
-                )
+                    records.append(record)
+                    trace_events.append(
+                        FieldTraceEvent(
+                            trace_id=f"trace:{record_id}",
+                            event_id=f"{record_id}:intake",
+                            event_seq=0,
+                            run_id=run_id,
+                            batch_id=record.batch_id,
+                            record_id=record.record_id,
+                            anchor_row_no=record.anchor_row_no,
+                            stage_id=self.stage_id,
+                            field_name="raw_payload",
+                            value_before=None,
+                            value_after=payload,
+                            rule_id="capture-input",
+                            rule_version="1",
+                            config_release_id="system:source-intake",
+                            action_type="snapshot",
+                            timestamp=datetime.now(UTC).isoformat(),
+                            success=True,
+                        )
+                    )
+            finally:
+                workbook.close()
 
         batch = InputBatch(
             batch_id=f"{self.domain}:{period}",

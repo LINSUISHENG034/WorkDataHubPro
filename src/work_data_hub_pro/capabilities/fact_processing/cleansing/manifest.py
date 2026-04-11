@@ -11,6 +11,9 @@ from work_data_hub_pro.capabilities.fact_processing.cleansing.rules import (
     strip_and_uppercase,
 )
 
+# Rule-pack semantics remain code-owned by design.
+# Config selects enablement, ordering, and release binding; it does not define
+# new transformation logic at runtime.
 
 RULE_PACKS: dict[tuple[str, str], dict[str, CleansingRule]] = {
     ("annuity-performance-core", "2026.04.11"): {
