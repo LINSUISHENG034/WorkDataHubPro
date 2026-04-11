@@ -301,6 +301,7 @@ Governance control plane consumes runtime evidence:
 - `sample_locator`
 - `legacy_result`
 - `pro_result`
+- `involved_anchor_row_nos`
 - `decision_status`
 - `business_rationale`
 - `approved_by`

@@ -257,10 +257,14 @@ def run_annual_award_slice(
     expected_snapshot = _load_rows(replay_root / "legacy_monthly_snapshot_2026_03.json")
     compatibility_case = None
     if monthly_snapshot.rows != expected_snapshot:
+        involved_anchor_row_nos = sorted(
+            {link.anchor_row_no for link in lineage_registry.all()}
+        )
         compatibility_case = AdjudicationService(evidence_index).create_case(
             sample_locator=str(replay_root / "legacy_monthly_snapshot_2026_03.json"),
             legacy_result={"rows": expected_snapshot},
             pro_result={"rows": monthly_snapshot.rows},
+            involved_anchor_row_nos=involved_anchor_row_nos,
             rationale="Monthly snapshot replay differs from accepted legacy baseline",
             affected_rule_version="annual-award-core:1",
         )

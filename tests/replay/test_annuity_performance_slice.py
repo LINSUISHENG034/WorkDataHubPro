@@ -136,6 +136,7 @@ def test_full_slice_replay_creates_compatibility_case_when_snapshot_differs(tmp_
     )
 
     assert outcome.compatibility_case is not None
+    assert outcome.compatibility_case.involved_anchor_row_nos == [2]
     case_path = (
         replay_root
         / "evidence"

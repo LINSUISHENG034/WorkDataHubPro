@@ -16,6 +16,7 @@ class AdjudicationService:
         sample_locator: str,
         legacy_result: dict[str, object],
         pro_result: dict[str, object],
+        involved_anchor_row_nos: list[int] | None = None,
         rationale: str,
         affected_rule_version: str,
     ) -> CompatibilityCase:
@@ -24,6 +25,7 @@ class AdjudicationService:
             sample_locator=sample_locator,
             legacy_result=legacy_result,
             pro_result=pro_result,
+            involved_anchor_row_nos=sorted(set(involved_anchor_row_nos or [])),
             decision_status="pending_human_review",
             business_rationale=rationale,
             approved_by=None,
