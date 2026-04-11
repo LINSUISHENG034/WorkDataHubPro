@@ -33,6 +33,8 @@ from work_data_hub_pro.governance.compatibility.models import CompatibilityCase
 from work_data_hub_pro.governance.evidence_index.file_store import FileEvidenceIndex
 from work_data_hub_pro.platform.contracts.models import ProjectionResult
 from work_data_hub_pro.platform.contracts.publication import PublicationResult
+from work_data_hub_pro.platform.lineage.models import LineageLink
+from work_data_hub_pro.platform.lineage.registry import LineageRegistry
 from work_data_hub_pro.platform.publication.service import (
     PublicationBundle,
     PublicationService,
@@ -49,6 +51,7 @@ class SliceRunOutcome:
     projection_results: list[ProjectionResult]
     compatibility_case: CompatibilityCase | None
     trace_store: InMemoryTraceStore
+    lineage_registry: LineageRegistry
 
 
 def _load_rows(path: Path) -> list[dict[str, object]]:
@@ -63,6 +66,7 @@ def run_annuity_performance_slice(
 ) -> SliceRunOutcome:
     run_id = f"run-{uuid4().hex[:8]}"
     trace_store = InMemoryTraceStore()
+    lineage_registry = LineageRegistry()
     evidence_index = FileEvidenceIndex(replay_root / "evidence")
     intake = AnnuityPerformanceIntakeService()
     intake_result = intake.read_batch(
@@ -125,6 +129,14 @@ def run_annuity_performance_slice(
             batch_id=batch.batch_id,
             anchor_row_no=record.anchor_row_no,
             events=row_trace_events,
+        )
+        lineage_registry.register(
+            LineageLink(
+                record_id=resolved.fact.record_id,
+                parent_record_ids=[record.record_id],
+                origin_row_nos=record.origin_row_nos,
+                anchor_row_no=record.anchor_row_no,
+            )
         )
         resolved_facts.append(resolved.fact)
 
@@ -227,4 +239,5 @@ def run_annuity_performance_slice(
         projection_results=[contract_state.result, monthly_snapshot.result],
         compatibility_case=compatibility_case,
         trace_store=trace_store,
+        lineage_registry=lineage_registry,
     )

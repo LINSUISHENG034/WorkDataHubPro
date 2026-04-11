@@ -100,6 +100,11 @@ def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) ->
         "fact_processing",
         "identity_resolution",
     }
+    lineage_links = outcome.lineage_registry.all()
+    assert len(lineage_links) == 1
+    assert lineage_links[0].origin_row_nos == [2]
+    assert lineage_links[0].anchor_row_no == 2
+    assert lineage_links[0].parent_record_ids == [row_events[0].record_id]
 
 
 def test_full_slice_replay_creates_compatibility_case_when_snapshot_differs(tmp_path) -> None:
