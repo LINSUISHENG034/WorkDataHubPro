@@ -1,5 +1,23 @@
 # Serena MCP Usage Discipline
 
+## Read This When
+
+- the task involves Serena activation or onboarding
+- the task involves symbol-aware source exploration or semantic source edits
+- the task involves reference tracing, rename safety, or bounded source inspection
+
+## Do Not Read This When
+
+- the task is docs-only and does not require source-code symbol work
+- the task is primarily about git workflow
+- the task is a simple shell or asset operation with no code-structure question
+
+## Hard Gates
+
+- complete the Serena startup sequence before Serena-assisted code work
+- restrict Serena exploration to the smallest relevant architectural boundary first
+- do not bulk-read source files when a bounded Serena query is sufficient
+
 This document defines how Serena MCP should be used in `WorkDataHubPro`.
 It is aligned with:
 
@@ -8,26 +26,46 @@ It is aligned with:
 
 ## 1. Purpose
 
-Serena is the preferred semantic exploration and symbol-aware editing tool for
-this project when the task involves source code structure, code relationships,
-or targeted code changes.
+Serena is an auxiliary MCP tool for source-code precision in this project.
+It is useful when the current task involves source code structure, code
+relationships, or targeted code changes.
 
-Serena is not a license to explore the repository indiscriminately. Its purpose
-in this project is to improve precision, reduce blind whole-file reading, and
-keep changes aligned with the capability-first rebuild architecture.
+Serena is not:
 
-## 2. Mandatory Startup Sequence
+- a task category
+- a workflow phase that every task must go through
+- a replacement for implementation, verification, or git workflow disciplines
 
-At the beginning of work in this repository, follow this sequence:
+Its purpose in this project is to improve precision, reduce blind whole-file
+reading, and keep source edits aligned with the capability-first rebuild
+architecture.
+
+## 2. Value Model
+
+Serena adds value when it helps answer one of these questions more cheaply than
+raw file reading:
+
+- which symbol actually owns this behavior
+- which references will be affected by this change
+- what is the smallest code boundary I need to inspect or edit
+
+If the task does not involve one of those precision problems, Serena usually
+should not be loaded.
+
+## 3. Startup Sequence For Serena-Assisted Code Work
+
+Only when the current task actually requires Serena-assisted code work, follow
+this sequence:
 
 1. `activate_project`
 2. `check_onboarding_performed`
 3. If onboarding is missing, complete `onboarding` and write the required memories
 4. Read Serena's manual via `initial_instructions` if it has not already been read in the session
 
-This is the minimum project-safe Serena setup. Do not skip it.
+This is the minimum project-safe Serena setup. Do not skip it once Serena is in
+use, but do not force it onto non-Serena tasks.
 
-## 3. When Serena Must Be Preferred
+## 4. When Serena Adds Value
 
 Prefer Serena over generic file scanning when the task involves:
 
@@ -47,7 +85,7 @@ Preferred Serena tools by intent:
 - project-local file discovery: `find_file`, `list_dir`
 - stable project context: `read_memory`, `write_memory`
 
-## 4. When Serena Should Not Be Forced
+## 5. When Serena Should Not Be Used By Default
 
 Do not force Serena into tasks where it is a bad fit.
 
@@ -62,15 +100,15 @@ Use normal repository tools instead when the task is primarily:
 
 Current project note:
 
-- `WorkDataHubPro` is still in a bootstrap stage and currently contains mainly documentation.
-- In the current state, Serena is most valuable for project activation, memory management, and future source exploration.
-- Do not fabricate code exploration rituals when the repository only contains documents.
+- `WorkDataHubPro` now has an executable first slice under `src/work_data_hub_pro/`.
+- Serena is useful for symbol-aware work inside that source tree, but it is still not the default tool for markdown discipline documents or git-only tasks.
+- Do not fabricate Serena-heavy rituals for tasks that are fundamentally document editing or repository administration.
 
-## 5. Blueprint-Aligned Usage Rules
+## 6. Blueprint-Aligned Usage Rules
 
 Serena usage in this repository must reinforce the rebuild blueprint, not work against it.
 
-### 5.1 Boundary-First Rule
+### 6.1 Boundary-First Rule
 
 Before using Serena to explore or edit code, identify the change boundary:
 
@@ -83,7 +121,7 @@ Before using Serena to explore or edit code, identify the change boundary:
 Serena exploration should be restricted to the smallest relevant boundary first.
 Do not start with codebase-wide searches unless the task genuinely crosses boundaries.
 
-### 5.2 Capability-First Rule
+### 6.2 Capability-First Rule
 
 When code exists, Serena-assisted edits must preserve these architectural rules:
 
@@ -96,7 +134,7 @@ When code exists, Serena-assisted edits must preserve these architectural rules:
 If Serena exploration reveals a change would cross these boundaries, the task
 must be reframed as an explicit slice-closure task or split into multiple changes.
 
-### 5.3 Explainability Rule
+### 6.3 Explainability Rule
 
 For changes related to tracing, lineage, compatibility, publication, identity
 resolution, or projection behavior, Serena should be used to inspect the exact
@@ -105,7 +143,7 @@ symbols and references involved before editing.
 This is required because the rebuild blueprint treats explainability and
 boundary clarity as first-class constraints, not afterthoughts.
 
-### 5.4 Slice Rule
+### 6.4 Slice Rule
 
 For first-slice work such as `annuity_performance`, Serena usage should follow
 the slice chain defined by the blueprint:
@@ -115,7 +153,7 @@ the slice chain defined by the blueprint:
 Do not use Serena to patch one node in isolation if the task actually affects
 the chain contract across multiple stages.
 
-## 6. Efficient Exploration Rules
+## 7. Efficient Exploration Rules
 
 Serena should be used economically.
 
@@ -129,7 +167,7 @@ Serena should be used economically.
 If the needed information has already been obtained from a full-file read, do
 not redundantly repeat the same exploration with Serena symbol tools.
 
-## 7. Editing Rules
+## 8. Editing Rules
 
 When editing source code with Serena:
 
@@ -141,7 +179,7 @@ When editing source code with Serena:
 When editing non-code files such as architecture docs, discipline docs, or
 specifications, Serena is optional and usually not the primary editing tool.
 
-## 8. Memory Rules
+## 9. Memory Rules
 
 Serena memories should contain stable, reusable project knowledge.
 
@@ -163,7 +201,7 @@ Do not store transient noise such as:
 If a discipline document becomes the accepted source of truth, memory may
 contain a short pointer to it, not a competing parallel version.
 
-## 9. Review And Verification Rules
+## 10. Review And Verification Rules
 
 Before claiming a Serena-assisted task is complete:
 
@@ -175,10 +213,11 @@ Before claiming a Serena-assisted task is complete:
 For docs-only Serena work, verification means consistency with the active
 blueprint and existing discipline documents.
 
-## 10. Anti-Patterns
+## 11. Anti-Patterns
 
 The following Serena usage is prohibited in this project:
 
+- treating Serena as a task flow instead of an auxiliary tool
 - using Serena as a justification for unfocused repository-wide exploration
 - reading whole source trees when a bounded symbol query would be enough
 - editing across `capabilities/`, `platform/`, and `governance/` without an explicit slice reason
@@ -186,14 +225,14 @@ The following Serena usage is prohibited in this project:
 - writing volatile task chatter into Serena memories
 - treating Serena memory as a replacement for committed project documentation
 
-## 11. Current Practical Guidance
+## 12. Current Practical Guidance
 
 Given the current repository state:
 
-- use Serena to activate the project and maintain project memories
-- use Serena memories to preserve blueprint-level context
+- use Serena only when source-code precision is needed
+- use Serena to activate the project and maintain project memories when Serena is actually in play
+- use Serena memories to preserve blueprint-level context, not task-by-task scratch state
 - use normal document editing tools for `docs/disciplines/` and blueprint docs
-- expand Serena-heavy workflows after `src/work_data_hub_pro/` becomes real code instead of only planned structure
 
 Serena is a precision tool. In `WorkDataHubPro`, precision means serving the
 capability-first rebuild, preserving explainability, and avoiding another

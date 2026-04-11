@@ -1,5 +1,23 @@
 # Git Workflow
 
+## Read This When
+
+- creating a branch or choosing a branch name
+- setting up or cleaning up a worktree
+- committing, merging, rebasing, or preparing a PR
+- deciding how to close implementation work after verification
+
+## Do Not Read This When
+
+- the task is only about implementation ordering, toolchain, or runtime validation
+- the task is docs-only and does not involve git workflow decisions
+
+## Hard Gates
+
+- do not start implementation on `main`
+- do not merge cross-boundary work without a named slice-closure reason
+- verify the merged result before deleting feature branches or worktrees
+
 This workflow is for the `WorkDataHubPro` rebuild.
 It is aligned with the capability-first rebuild blueprint in
 `docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md`.
@@ -214,6 +232,7 @@ clear slice-closure reason should be split before review.
 - Rebase onto latest `main` before merge when needed to keep diffs understandable.
 - Squash merge is the default for short-lived topic branches.
 - Rebase merge is allowed when preserving a small sequence of intentionally structured commits adds architectural clarity.
+- Prefer merging from a clean checkout or temporary clean worktree when the original workspace contains unrelated local state.
 - Delete the branch after merge.
 - Do not merge spike branches directly to `main`.
 
