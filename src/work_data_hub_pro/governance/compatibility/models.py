@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -14,3 +14,4 @@ class CompatibilityCase:
     business_rationale: str
     approved_by: str | None
     affected_rule_version: str
+    involved_anchor_row_nos: list[int] = field(default_factory=list)

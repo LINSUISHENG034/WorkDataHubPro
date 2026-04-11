@@ -38,6 +38,7 @@ def test_adjudication_persists_pending_case_and_indexes_trace_events(tmp_path) -
         pro_result={"period": "2026-03", "contract_state_rows": 2},
         rationale="Replay differs from accepted baseline",
         affected_rule_version="annuity-performance-core:1",
+        involved_anchor_row_nos=[2],
     )
 
     stored = evidence_index.load_case(case.case_id)
@@ -46,3 +47,4 @@ def test_adjudication_persists_pending_case_and_indexes_trace_events(tmp_path) -
     assert stored.decision_status == "pending_human_review"
     assert stored.business_rationale == "Replay differs from accepted baseline"
     assert stored.approved_by is None
+    assert stored.involved_anchor_row_nos == [2]
