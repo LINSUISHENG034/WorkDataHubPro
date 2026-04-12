@@ -22,3 +22,8 @@ uv run python -m work_data_hub_pro.apps.etl_cli.main replay-annual-loss data/ann
 - `publication_results=5`
 - `projection_results=2`
 - `compatibility_case=False`
+
+## Evidence Paths
+
+- `reference/historical_replays/annual_loss/evidence/trace/`
+- `reference/historical_replays/annual_loss/evidence/compatibility_cases/`

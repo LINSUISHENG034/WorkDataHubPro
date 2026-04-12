@@ -1,4 +1,5 @@
 import json
+import shutil
 from pathlib import Path
 from time import perf_counter
 
@@ -9,81 +10,16 @@ from work_data_hub_pro.apps.orchestration.replay.annual_loss_slice import (
 )
 
 
-def _write_replay_assets(replay_root: Path) -> None:
+def _copy_committed_replay_assets(replay_root: Path) -> None:
     replay_root.mkdir(parents=True, exist_ok=True)
-    (replay_root / "annuity_performance_fixture_2026_03.json").write_text(
-        json.dumps(
-            [
-                {
-                    "record_id": "perf-001",
-                    "company_id": "company-001",
-                    "plan_code": "P9001",
-                    "period": "2026-03",
-                    "source_record_id": "perf-001",
-                }
-            ],
-            indent=2,
-        ),
-        encoding="utf-8",
-    )
-    (replay_root / "annual_award_fixture_2026_03.json").write_text(
-        json.dumps(
-            [
-                {
-                    "company_id": "company-001",
-                    "plan_code": "P9001",
-                    "period": "2026-03",
-                    "award_code": "AWARD-01",
-                    "source_record_id": "award-001",
-                }
-            ],
-            indent=2,
-        ),
-        encoding="utf-8",
-    )
-    (replay_root / "customer_plan_history_2026_03.json").write_text(
-        json.dumps(
-            [
-                {
-                    "company_id": "company-001",
-                    "product_line_code": "PL202",
-                    "plan_code": "P9001",
-                    "effective_period": "2025-12",
-                    "valid_to": "9999-12-31",
-                },
-                {
-                    "company_id": "company-002",
-                    "product_line_code": "PL201",
-                    "plan_code": "S9009",
-                    "effective_period": "2025-12",
-                    "valid_to": "9999-12-31",
-                },
-                {
-                    "company_id": "company-001",
-                    "product_line_code": "PL202",
-                    "plan_code": "P7000",
-                    "effective_period": "2024-12",
-                    "valid_to": "2025-12-31",
-                },
-            ],
-            indent=2,
-        ),
-        encoding="utf-8",
-    )
-    (replay_root / "legacy_monthly_snapshot_2026_03.json").write_text(
-        json.dumps(
-            [
-                {
-                    "period": "2026-03",
-                    "contract_state_rows": 1,
-                    "award_fixture_rows": 1,
-                    "loss_fixture_rows": 1,
-                }
-            ],
-            indent=2,
-        ),
-        encoding="utf-8",
-    )
+    committed_root = Path("reference/historical_replays/annual_loss")
+    for asset_name in (
+        "annuity_performance_fixture_2026_03.json",
+        "annual_award_fixture_2026_03.json",
+        "customer_plan_history_2026_03.json",
+        "legacy_monthly_snapshot_2026_03.json",
+    ):
+        shutil.copy2(committed_root / asset_name, replay_root / asset_name)
 
 
 def test_annual_loss_replay_keeps_primary_evidence_retrieval_inside_five_minutes(
@@ -151,7 +87,7 @@ def test_annual_loss_replay_keeps_primary_evidence_retrieval_inside_five_minutes
     workbook.save(workbook_path)
 
     replay_root = tmp_path / "reference" / "historical_replays" / "annual_loss"
-    _write_replay_assets(replay_root)
+    _copy_committed_replay_assets(replay_root)
 
     started = perf_counter()
     run_annual_loss_slice(
