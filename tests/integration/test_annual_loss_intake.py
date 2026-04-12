@@ -105,8 +105,6 @@ def test_annual_loss_intake_merges_trustee_and_investee_sheets_into_stable_ancho
         "共享客户（流失）",
         "新客流失",
     ]
-
-
 def test_annual_loss_intake_skips_trailing_empty_rows(tmp_path) -> None:
     workbook_path = tmp_path / "annual_loss_2026_04.xlsx"
     workbook = Workbook()
