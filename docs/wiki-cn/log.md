@@ -53,3 +53,10 @@
 - 在 `governance/legacy-audit-baseline.md` 增加“开发速记”，把最常用的治理约束前置
 - 在 `roadmap/overview.md` 增加“当前开发必记”，减少 roadmap、governance、audit 之间的查阅跳转
 - 明确 first-wave 未闭合面不只包括 `annuity_income`，还包括显式登记的 cross-cutting runtime / operator surfaces
+
+## [2026-04-13] lessons | 沉淀 Phase 2 完成审查经验
+
+- 新增 `lessons/phase-2-governance-review-lessons.md`
+- 抽象出 5 条可复用经验：checkpoint 真实性、baseline 资产强依赖、实现完成与治理签收分层、evidence diff 准确性、planning/code/wiki 冲突显式记录
+- 更新 `index.md`，把新的 lesson 接入中文 wiki 根索引
+- 更新 `roadmap/overview.md`，补记 2026-04-13 的治理审查状态差异

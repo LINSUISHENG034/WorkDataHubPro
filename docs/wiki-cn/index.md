@@ -27,6 +27,8 @@
 
 - [GSD Lesson: 计划与证据要同样可执行](./lessons/planning-and-evidence.md)
   关于 phase 计划、验证文档与证据文档管理的抽象经验。
+- [Phase 2 审核经验：测试全绿不等于治理闭环](./lessons/phase-2-governance-review-lessons.md)
+  关于 checkpoint 真实性、baseline 资产强依赖、evidence 准确性与签收分层的复用经验。
 
 ## Wiki 维护文件
 

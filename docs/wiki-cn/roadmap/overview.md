@@ -90,6 +90,23 @@
 - Phase 1 已经完成 acceptance baseline、mapping、rule classification 和首个离线 parity checkpoint
 - 下一步的主要价值不再是继续补 Phase 1 文档，而是把 parity 与可解释性推进到显式 stage contract 和 deterministic gate
 
+### 2026-04-13 审核补记
+
+2026-04-13 的治理审查补充了一个需要显式记住的状态差异：
+
+- `.planning/` 当前将 Phase 2 标记为完成
+- 当前仓库代码与自动化测试说明 Phase 2 的实现面已经基本闭合
+- 但治理签收层面仍存在补口需求，尤其是中间 checkpoint 的真实 compare 语义，以及 `reference_derivation` repo-native baseline 的强制性
+
+因此更准确的当前表述应是：
+
+- Phase 2 implementation：已完成
+- Phase 2 governance sign-off：待补齐 checkpoint truthfulness 与 baseline enforcement 后再正式闭合
+
+相关经验已沉淀到：
+
+- [Phase 2 审核经验：测试全绿不等于治理闭环](../lessons/phase-2-governance-review-lessons.md)
+
 ## 当前开发必记
 
 为了减少在 roadmap、governance、audit 之间来回跳转，当前开发至少先记住下面几条：
