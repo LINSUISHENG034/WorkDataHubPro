@@ -66,6 +66,32 @@ def _fingerprint(payload: Any) -> str:
     return sha256(normalized.encode("utf-8")).hexdigest()
 
 
+def load_required_checkpoint_baseline(
+    path: Path, checkpoint_name: str
+) -> list[dict[str, object]]:
+    """Load an accepted checkpoint baseline from disk.
+
+    Fail-closed: raises FileNotFoundError when the baseline file is absent.
+    This enforces explicit bootstrap over silent fallback-to-self behavior.
+
+    Args:
+        path: Path to the JSON baseline file.
+        checkpoint_name: Human-readable name for error messages.
+
+    Returns:
+        The parsed JSON content as a list of dicts.
+
+    Raises:
+        FileNotFoundError: When the baseline file does not exist.
+    """
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Missing accepted baseline for checkpoint '{checkpoint_name}': {path}"
+        )
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
 def _build_diff(legacy_payload: Any, pro_payload: Any) -> CheckpointDiff:
     if legacy_payload == pro_payload:
         return CheckpointDiff()
@@ -79,20 +105,29 @@ def _build_diff(legacy_payload: Any, pro_payload: Any) -> CheckpointDiff:
             json.dumps(_to_jsonable(item), sort_keys=True, ensure_ascii=False)
             for item in pro_payload
         )
+        # Multiset subtraction: only count items that are TRUE excess
+        # Counter subtraction gives us (legacy - pro) counts
+        missing_diff = legacy_counter - pro_counter
+        extra_diff = pro_counter - legacy_counter
         missing_rows: list[dict[str, Any]] = []
         extra_rows: list[dict[str, Any]] = []
+        # Track how many of each serialized key we've already added to missing/extra
+        missing_added: dict[str, int] = {}
+        extra_added: dict[str, int] = {}
         for item in legacy_payload:
             serialized = json.dumps(_to_jsonable(item), sort_keys=True, ensure_ascii=False)
-            if legacy_counter[serialized] > pro_counter[serialized]:
+            already_added = missing_added.get(serialized, 0)
+            total_missing = missing_diff.get(serialized, 0)
+            if already_added < total_missing:
                 missing_rows.append(item)
-                pro_counter[serialized] = 0
-                legacy_counter[serialized] -= 1
+                missing_added[serialized] = already_added + 1
         for item in pro_payload:
             serialized = json.dumps(_to_jsonable(item), sort_keys=True, ensure_ascii=False)
-            if pro_counter[serialized] > legacy_counter[serialized]:
+            already_added = extra_added.get(serialized, 0)
+            total_extra = extra_diff.get(serialized, 0)
+            if already_added < total_extra:
                 extra_rows.append(item)
-                legacy_counter[serialized] = 0
-                pro_counter[serialized] -= 1
+                extra_added[serialized] = already_added + 1
         changed_rows = []
         if not missing_rows and not extra_rows:
             changed_rows = [
