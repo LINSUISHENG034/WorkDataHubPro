@@ -38,13 +38,20 @@ def test_adjudication_persists_pending_case_and_indexes_trace_events(tmp_path) -
         pro_result={"period": "2026-03", "contract_state_rows": 2},
         rationale="Replay differs from accepted baseline",
         affected_rule_version="annuity-performance-core:1",
+        checkpoint_name="monthly_snapshot",
+        comparison_run_id="comparison-001",
         involved_anchor_row_nos=[2],
     )
 
     stored = evidence_index.load_case(case.case_id)
 
     assert evidence_path.exists()
-    assert stored.decision_status == "pending_human_review"
+    assert stored.severity == "block"
+    assert stored.decision_status == "pending_review"
+    assert stored.precedent_status == "none"
+    assert stored.precedent_key is None
+    assert stored.checkpoint_name == "monthly_snapshot"
+    assert stored.comparison_run_id == "comparison-001"
     assert stored.business_rationale == "Replay differs from accepted baseline"
     assert stored.approved_by is None
     assert stored.involved_anchor_row_nos == [2]

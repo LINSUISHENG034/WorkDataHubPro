@@ -3,6 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+JsonObject = dict[str, Any]
+JsonList = list[JsonObject]
+
 
 @dataclass(frozen=True)
 class InputBatch:

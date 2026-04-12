@@ -3,6 +3,7 @@ from work_data_hub_pro.platform.contracts.models import (
     FieldTraceEvent,
     InputBatch,
     InputRecord,
+    JsonObject,
 )
 from work_data_hub_pro.platform.contracts.publication import (
     PublicationMode,
@@ -13,6 +14,7 @@ from work_data_hub_pro.platform.execution.run_context import RunContext
 
 
 def test_input_record_preserves_trace_and_anchor_fields() -> None:
+    raw_payload: JsonObject = {"company_name": "Acme"}
     batch = InputBatch(
         batch_id="annuity_performance:2026-03",
         domain="annuity_performance",
@@ -29,7 +31,7 @@ def test_input_record_preserves_trace_and_anchor_fields() -> None:
         origin_row_nos=[12],
         parent_record_ids=[],
         stage_row_no=12,
-        raw_payload={"company_name": "Acme"},
+        raw_payload=raw_payload,
     )
     fact = CanonicalFactRecord(
         run_id="run-001",
@@ -93,3 +95,4 @@ def test_input_record_preserves_trace_and_anchor_fields() -> None:
     assert plan.mode is PublicationMode.REFRESH
     assert plan.transaction_group == "fact-publication"
     assert context.config_release_id == "2026-04-11-annuity-performance-baseline"
+    assert record.raw_payload == raw_payload
