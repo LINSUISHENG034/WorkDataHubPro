@@ -7,6 +7,9 @@ COVERAGE_MATRIX = Path(
 REFACTOR_PROGRAM = Path(
     "docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md"
 )
+RISK_REGISTER = Path(
+    "docs/superpowers/reviews/2026-04-11-legacy-risk-analysis-for-rebuild.md"
+)
 
 
 def test_annual_loss_acceptance_updates_coverage_matrix_without_dropping_runtime_surfaces() -> None:
@@ -72,3 +75,14 @@ def test_annual_loss_acceptance_updates_refactor_program_but_keeps_phase_e_track
     assert "| reference bootstrap / reference-sync runtime | legacy uses an explicit `reference_sync` orchestration surface plus incremental state | deferred | separate reference bootstrap/runtime plan |" in refactor_program
     assert "| enterprise identity / EQC persistence surfaces | legacy persists cache, queue, and raw/cleansed EQC data beyond fact-domain outputs | deferred | separate identity persistence plan |" in refactor_program
     assert "| manual customer-status command surfaces and shared operator artifacts | legacy supports `customer-mdm` manual commands and cross-domain unresolved-name / failed-record artifacts | deferred | separate operator-tools / artifact-governance plan |" in refactor_program
+
+
+def test_annual_loss_acceptance_syncs_risk_register_without_retiring_open_runtime_gaps() -> None:
+    risk_register = RISK_REGISTER.read_text(encoding="utf-8")
+
+    assert "- `annual_loss` remains an accepted breadth-closure slice." in risk_register
+    assert "- `annuity_income` remains the only unclosed first-wave executable slice." in risk_register
+    assert "Current accepted event-domain slices prove:" in risk_register
+    assert "| `CR-008` | history-aware event-domain lookup and temporal enrichment semantics | supplemental `SFR-004` | `pending first-wave gap` | `AA-004`, `AL-003`, `CT-005`, `XD-005` |" in risk_register
+    assert "| `CR-014` | deferred-lookup queue runtime, retry semantics, and special orchestration domain closure | `2026-04-12 legacy audit` | `deferred runtime/operator gap` | `CT-011`, `XD-003` |" in risk_register
+    assert "| `CR-019` | shared unresolved-name and failed-record operator artifact parity across first-wave runs | `2026-04-12 legacy audit` | `pending first-wave gap` | `CT-016` |" in risk_register

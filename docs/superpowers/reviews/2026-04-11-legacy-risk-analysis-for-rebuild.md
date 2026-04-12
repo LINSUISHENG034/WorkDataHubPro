@@ -10,7 +10,8 @@
 
 - `annuity_performance` remains an accepted validation slice.
 - `annual_award` remains an accepted multi-sheet validation slice.
-- `annual_loss` and `annuity_income` remain unclosed first-wave executable slices.
+- `annual_loss` remains an accepted breadth-closure slice.
+- `annuity_income` remains the only unclosed first-wave executable slice.
 - the first-wave matrix now also tracks newly registered runtime/operator
   surfaces beyond the four primary domain rows
 - This register does **not** roll back accepted validation evidence by itself.
@@ -219,7 +220,7 @@ Governance action:
 
 ### `CR-008` History-Aware Event-Domain Lookup And Temporal Enrichment Semantics
 
-Current event-domain slices prove:
+Current accepted event-domain slices prove:
 
 - source-aware identity handling
 - replay-backed contract-history lookup
