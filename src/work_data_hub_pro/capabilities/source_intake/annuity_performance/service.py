@@ -182,7 +182,7 @@ class AnnuityPerformanceIntakeService:
             "missing_non_golden_columns": [
                 field_name
                 for field_name in self._non_golden_optional_fields
-                if field_name not in normalized
+                if not normalized.get(field_name)
             ],
             "derived_fields": derived_fields,
         }

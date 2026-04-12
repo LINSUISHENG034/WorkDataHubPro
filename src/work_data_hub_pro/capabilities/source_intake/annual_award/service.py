@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from hashlib import sha256
 from pathlib import Path
+from typing import Any
 
 from openpyxl import load_workbook
 
@@ -11,6 +12,10 @@ from work_data_hub_pro.platform.contracts.models import (
     FieldTraceEvent,
     InputBatch,
     InputRecord,
+)
+from work_data_hub_pro.platform.contracts.validators import (
+    validate_input_batch,
+    validate_input_record,
 )
 
 
@@ -25,6 +30,28 @@ class AnnualAwardIntakeService:
     domain = "annual_award"
     sheet_names = ("TrusteeAwards", "InvesteeAwards")
     stage_id = "source_intake"
+    _field_aliases = {
+        "上报月份": "period",
+        "period": "period",
+        "客户全称": "company_name",
+        "上报客户名称": "company_name",
+        "company_name": "company_name",
+        "company_id": "source_company_id",
+        "source_company_id": "source_company_id",
+        "年金计划号": "plan_code",
+        "plan_code": "plan_code",
+        "计划类型": "plan_type",
+        "plan_type": "plan_type",
+        "产品线代码": "product_line_code",
+        "product_line_code": "product_line_code",
+        "奖励金额": "award_amount",
+        "award_amount": "award_amount",
+    }
+    _non_golden_optional_fields = (
+        "plan_code",
+        "source_company_id",
+        "product_line_code",
+    )
 
     def read_batch(
         self,
@@ -51,10 +78,12 @@ class AnnualAwardIntakeService:
                         sheet.iter_rows(min_row=2, values_only=True),
                         start=2,
                     ):
-                        payload = dict(zip(headers, row, strict=True)) | {
-                            "source_sheet": sheet_name,
-                            "source_row_no": source_row_no,
-                        }
+                        payload = self._normalize_payload(
+                            headers=headers,
+                            row=row,
+                            sheet_name=sheet_name,
+                            source_row_no=source_row_no,
+                        )
                         snapshot_hash.update(
                             repr(
                                 (
@@ -77,6 +106,11 @@ class AnnualAwardIntakeService:
                             parent_record_ids=[],
                             stage_row_no=merged_anchor_row_no,
                             raw_payload=payload,
+                        )
+                        validate_input_record(
+                            record,
+                            required_fields=("period", "company_name", "source_sheet"),
+                            alternative_field_groups=(("plan_code", "plan_type"),),
                         )
                         records.append(record)
                         trace_events.append(
@@ -112,4 +146,43 @@ class AnnualAwardIntakeService:
             input_snapshot_id=snapshot_hash.hexdigest(),
             row_count=len(records),
         )
+        validate_input_batch(batch)
         return IntakeResult(batch=batch, records=records, trace_events=trace_events)
+
+    def _normalize_payload(
+        self,
+        *,
+        headers: list[object],
+        row: tuple[object, ...],
+        sheet_name: str,
+        source_row_no: int,
+    ) -> dict[str, Any]:
+        aliases_applied: dict[str, str] = {}
+        ignored_columns: list[str] = []
+        normalized: dict[str, Any] = {
+            "source_sheet": sheet_name,
+            "source_row_no": source_row_no,
+        }
+
+        for header, value in zip(headers, row, strict=True):
+            header_name = str(header)
+            canonical_name = self._field_aliases.get(header_name)
+            if canonical_name is None:
+                ignored_columns.append(header_name)
+                continue
+            if header_name != canonical_name:
+                aliases_applied[header_name] = canonical_name
+            normalized[canonical_name] = value
+
+        normalized["source_intake_adaptation"] = {
+            "source_headers": [str(header) for header in headers],
+            "aliases_applied": aliases_applied,
+            "ignored_columns": ignored_columns,
+            "missing_non_golden_columns": [
+                field_name
+                for field_name in self._non_golden_optional_fields
+                if not normalized.get(field_name)
+            ],
+            "derived_fields": {},
+        }
+        return normalized

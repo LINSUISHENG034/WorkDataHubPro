@@ -186,6 +186,14 @@ def test_annual_loss_slice_replay_closes_chain_and_matches_legacy_snapshot(
         "contract_state",
         "monthly_snapshot",
     ]
+    assert outcome.gate_summary.overall_outcome == "passed"
+    assert [result.checkpoint_name for result in outcome.checkpoint_results] == [
+        "source_intake",
+        "fact_processing",
+        "identity_resolution",
+        "contract_state",
+        "monthly_snapshot",
+    ]
     assert outcome.compatibility_case is None
     assert [result.affected_rows for result in outcome.publication_results] == [
         2,
@@ -232,6 +240,8 @@ def test_annual_loss_slice_replay_creates_compatibility_case_when_snapshot_diffe
     )
 
     assert outcome.compatibility_case is not None
+    assert outcome.compatibility_case.checkpoint_name == "monthly_snapshot"
+    assert outcome.compatibility_case.comparison_run_id == outcome.comparison_run_id
     assert outcome.compatibility_case.involved_anchor_row_nos == [2, 3]
     case_path = (
         replay_root
