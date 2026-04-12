@@ -15,6 +15,7 @@
 ## Hard Gates
 
 - do not start implementation on `main`
+- do not keep accumulating unrelated work in one dirty worktree once it is clear the work belongs on its own topic branch
 - do not merge cross-boundary work without a named slice-closure reason
 - verify the merged result before deleting feature branches or worktrees
 
@@ -45,11 +46,13 @@ Git history should make it easy to answer:
 - `main` is the only long-lived branch.
 - Do not use a permanent `develop` branch.
 - Each branch should map to one architectural boundary or one explicit slice-closure task.
+- The repository root worktree should remain the clean integration worktree for `main`, not the default place for parallel topic work.
 - Business capability changes, platform runtime changes, and governance/control-plane changes should not be mixed casually.
 - Config changes that alter semantics are release-affecting changes, not harmless housekeeping.
 - Replay or parity differences must be explained before merge, not after merge.
 - All commit messages must be written in English.
 - Spikes are allowed, but spike branches do not merge to `main` without cleanup or a replacement implementation branch.
+- If branch isolation is discovered late, isolate the work first and only then continue implementation, merge preparation, or cleanup.
 
 ## 3. Branch Strategy
 
@@ -101,6 +104,27 @@ Rules for slice branches:
 - must link the governing blueprint/spec/ADR
 - must state which boundaries are intentionally crossed
 - must close back down after merge; do not keep slice branches alive as shadow integration branches
+
+### 3.4 Worktree Strategy
+
+Use linked git worktrees under `.worktrees/` as the default isolation model for
+non-trivial topic work.
+
+Default expectations:
+
+- keep the repository root worktree on `main` as the clean integration and merge context
+- create a linked worktree for topic branches that are expected to last more than one commit, more than one session, or run in parallel with other work
+- treat each worktree as the owner of its own untracked files, generated artifacts, and temporary state
+- prefer validating and merging from a clean `main` worktree or an explicit temporary merge worktree when the original topic worktree contains unrelated local state
+
+Recommended examples:
+
+- `.worktrees/docs-wiki-governance-audit-sync`
+- `.worktrees/cap-reference-derivation-plan-code-fix`
+- `.worktrees/slice-annuity-income-closure`
+
+Worktrees are preferred because they prevent repeated `git switch` cycles from
+mixing unrelated untracked files and unstaged edits in one physical directory.
 
 ## 4. Branch Sizing Rules
 
@@ -236,6 +260,66 @@ clear slice-closure reason should be split before review.
 - Delete the branch after merge.
 - Do not merge spike branches directly to `main`.
 
+### 9.1 Dirty-Worktree Merge Guard
+
+Do not perform a topic merge in a `main` worktree that already contains
+unrelated local changes.
+
+Allowed responses:
+
+- protect the unrelated local state first, then merge
+- create a temporary clean merge worktree from the current `main` HEAD and perform the merge there
+
+Not allowed:
+
+- merging in a dirty `main` worktree and hoping unrelated local state will stay out of the result
+- treating repeated `stash` / `unstash` cycles as the normal long-term substitute for worktree isolation
+
+### 9.2 Recovery When Branch Isolation Starts Late
+
+If you realize only after starting work that the change should have been in its
+own branch or worktree, stop expanding the mixed state and recover deliberately.
+
+#### Case A: Uncommitted Changes Only
+
+Use this when the work exists only as unstaged, staged, or untracked files.
+
+1. stop adding more edits until the scope is understood
+2. decide whether the current worktree state is one topic or a mix of topics
+3. if it is one topic, create the topic branch, create a linked worktree for it, and move the working state there using a protected transfer method such as a verified stash restore or an intentional temporary commit
+4. if it is mixed, split the state first; do not move the entire dirty worktree wholesale into one branch
+
+Rule:
+
+- a dirty `main` worktree is a staging problem to solve, not a valid merge context
+
+#### Case B: Committed Locally But Not Pushed
+
+Use this when the relevant work already exists as local commits but has not been
+shared.
+
+1. create or update a topic branch that points at the relevant local commits before more cleanup
+2. decide whether those commits are allowed to remain on `main`
+3. if `main` can be rewritten safely because the commits are local-only and not depended on elsewhere, clean it deliberately
+4. if rewriting `main` is not clearly safe, create a clean topic branch from the correct base and move the topic commits there with `cherry-pick`
+
+Rule:
+
+- preserve recoverability first; only rewrite `main` when the safety conditions are explicit
+
+#### Case C: Already Mixed With Other Commits
+
+Use this when topic commits and unrelated commits are already interleaved.
+
+1. identify the exact commit set or file set that belongs to the target topic
+2. create a clean topic branch from the proper base commit
+3. move only the relevant work by `cherry-pick`, selective re-apply, or another explicit extraction path
+4. leave unrelated commits on their own path; do not paper over mixed history by merging directly from dirty `main`
+
+Rule:
+
+- once unrelated history is mixed in, extraction is safer than pretending the current `main` state is reviewable as one change
+
 ## 10. Tags And Baselines
 
 Use tags for milestones that matter to the rebuild, not for every merge.
@@ -259,15 +343,18 @@ Git tags should point to the commit that produced the accepted artifact set.
 Avoid these patterns:
 
 - reintroducing `develop` as a permanent dumping ground
+- using one physical worktree as the default workspace for multiple parallel topics
 - one PR that touches capabilities, platform publication, projections, and governance without a named slice-closure goal
 - config-only commits that actually change semantics but are described as cleanup
 - merging replay differences without a compatibility decision
 - placing business logic into CLI, Dagster wiring, hooks, or generic helpers
+- continuing implementation in a mixed or dirty `main` worktree after you already know the work should be isolated
 - allowing `spike/*` branches to become unofficial long-lived feature branches
 
 ## 12. Minimum Ready-To-Merge Checklist
 
 - branch name matches the actual architectural boundary or slice
+- topic work happened in an isolated branch context, and the merge is being performed from a clean `main` worktree or explicit clean merge worktree
 - commit messages identify the real scope
 - PR explains boundary, change type, validation, and compatibility impact
 - validation evidence exists for the touched change class
