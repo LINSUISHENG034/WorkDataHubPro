@@ -23,6 +23,8 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - ✓ Deterministic replay checkpoints and comparison-run evidence packages for the accepted slices — validated in Phase 2
 - ✓ Explicit compatibility adjudication semantics for severity, precedent, exception scope, and checkpoint identity — validated in Phase 2
 - ✓ Repository-native PR / protected-branch / nightly parity gate tiers — validated in Phase 2
+- ✓ Phase 6 governance remediation: fail-closed baseline loading (`load_required_checkpoint_baseline`), multiset duplicate-row diff accuracy (`_build_diff`), and explicit bootstrap entrypoint (`scripts/bootstrap_phase2_checkpoint_baselines.py`) — validated in Phase 6
+- ✓ Phase 6 governance status sync: PROJECT.md, ROADMAP.md, and wiki-cn docs now distinguish Phase 2 implementation-complete from governance sign-off-pending — validated in Phase 6
 
 ### Active
 
@@ -35,7 +37,7 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - Phase 1 complete: authoritative mapping, rule-classification, parity-baseline, and offline checkpoint artifacts are in place
 - Phase 2 implementation complete: explicit stage contracts, deterministic parity gates, derivation checkpoint governance, and CI-ready gate tiers are in place
 - Phase 2 governance sign-off pending: Phase 6 remediation (truthful intermediate gates via accepted baseline comparisons, and diff accuracy via multiset-subtraction correction) is required before Phase 2 governance sign-off closes
-- Current focus: Phase 6 execution — Phase 2 governance remediation for truthful intermediate gates and status synchronization
+- Phase 6 complete: truthful gates remediation and governance status sync done — Phase 2 governance sign-off can now proceed
 - Deferred carry-forward from Phase 2: verification-asset rows for `golden_set`, `golden_baseline`, `real_data_sample`, and dedicated error-case fixtures remain explicitly deferred
 
 ### Out of Scope
