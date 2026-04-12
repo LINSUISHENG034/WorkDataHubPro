@@ -1,0 +1,23 @@
+[
+  {
+    "company_id": "company-001",
+    "product_line_code": "PL202",
+    "plan_code": "P9001",
+    "effective_period": "2025-12",
+    "valid_to": "9999-12-31"
+  },
+  {
+    "company_id": "company-002",
+    "product_line_code": "PL201",
+    "plan_code": "S9009",
+    "effective_period": "2025-12",
+    "valid_to": "9999-12-31"
+  },
+  {
+    "company_id": "company-001",
+    "product_line_code": "PL202",
+    "plan_code": "P7000",
+    "effective_period": "2024-12",
+    "valid_to": "2025-12-31"
+  }
+]

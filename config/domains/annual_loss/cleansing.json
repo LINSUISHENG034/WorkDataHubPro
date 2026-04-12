@@ -1,0 +1,21 @@
+{
+  "domain": "annual_loss",
+  "rule_pack_id": "annual-loss-core",
+  "rule_pack_version": "2026.04.12",
+  "activation_order": [
+    "company_name",
+    "plan_code",
+    "plan_type",
+    "business_type",
+    "period",
+    "loss_date"
+  ],
+  "enabled_fields": [
+    "company_name",
+    "plan_code",
+    "plan_type",
+    "business_type",
+    "period",
+    "loss_date"
+  ]
+}

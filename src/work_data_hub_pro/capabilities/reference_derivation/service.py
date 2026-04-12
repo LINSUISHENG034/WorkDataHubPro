@@ -42,4 +42,22 @@ class ReferenceDerivationService:
                         derivation_rule_version="1",
                     )
                 )
+            if fact.domain == "annual_loss":
+                period = str(fact.fields["period"])
+                candidates.append(
+                    DerivationCandidate(
+                        target_object="customer_loss_signal",
+                        candidate_payload={
+                            "company_id": fact.fields["company_id"],
+                            "period": period,
+                            "plan_code": fact.fields["plan_code"],
+                            "customer_type": "LOSS_CUSTOMER",
+                            "loss_tag": f"{period[2:4]}{period[5:7]}-LOSS",
+                            "source_fact_id": fact.record_id,
+                        },
+                        source_record_ids=[fact.record_id],
+                        derivation_rule_id="customer-loss-from-annual-loss",
+                        derivation_rule_version="1",
+                    )
+                )
         return candidates

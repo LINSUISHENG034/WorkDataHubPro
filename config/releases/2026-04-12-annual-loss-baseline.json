@@ -1,0 +1,9 @@
+{
+  "release_id": "2026-04-12-annual-loss-baseline",
+  "rule_pack_versions": {
+    "annual_loss": "2026.04.12"
+  },
+  "domains": {
+    "annual_loss": "config/domains/annual_loss/cleansing.json"
+  }
+}

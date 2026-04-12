@@ -56,3 +56,31 @@ def test_reference_derivation_adds_customer_master_signal_for_annual_award() -> 
     ]
     assert candidates[1].candidate_payload["customer_type"] == "WINNING_CUSTOMER"
     assert candidates[1].candidate_payload["award_tag"] == "2603-AWARD"
+
+
+def test_reference_derivation_adds_customer_loss_signal_for_annual_loss() -> None:
+    service = ReferenceDerivationService()
+    fact = CanonicalFactRecord(
+        run_id="run-001",
+        record_id="fact-001",
+        batch_id="annual_loss:2026-03",
+        domain="annual_loss",
+        fact_type="annual_loss",
+        fields={
+            "company_name": "共享客户（流失）",
+            "company_id": "company-001",
+            "plan_code": "P9001",
+            "period": "2026-03",
+        },
+        lineage_ref="record-001",
+        trace_ref="trace:record-001",
+    )
+
+    candidates = service.derive([fact])
+
+    assert [candidate.target_object for candidate in candidates] == [
+        "company_reference",
+        "customer_loss_signal",
+    ]
+    assert candidates[1].candidate_payload["customer_type"] == "LOSS_CUSTOMER"
+    assert candidates[1].candidate_payload["loss_tag"] == "2603-LOSS"

@@ -51,6 +51,12 @@ class AnnualLossIntakeService:
                         sheet.iter_rows(min_row=2, values_only=True),
                         start=2,
                     ):
+                        if all(
+                            value is None
+                            or (isinstance(value, str) and value.strip() == "")
+                            for value in row
+                        ):
+                            continue
                         payload = dict(zip(headers, row, strict=True)) | {
                             "source_sheet": sheet_name,
                             "source_row_no": source_row_no,

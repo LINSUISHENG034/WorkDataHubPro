@@ -57,9 +57,9 @@ asset, or operational responsibility that can be judged independently.
 | Domain | Current Position | Highest-Risk Gap |
 |------|-------------------|------------------|
 | `annuity_performance` | first executable slice accepted | production runtime and operator follow-on work still deferred |
-| `annual_award` | accepted multi-sheet slice | `annual_loss` and `annuity_income` remain unclosed first-wave breadth work |
-| `annual_loss` | next recommended event-domain slice | no accepted executable slice yet |
-| `annuity_income` | identified first-wave single-sheet domain | no accepted executable slice yet |
+| `annual_award` | accepted multi-sheet slice | `annuity_income` remains the only unclosed first-wave breadth work |
+| `annual_loss` | accepted breadth-closure slice | `annuity_income` remains the only unclosed first-wave domain |
+| `annuity_income` | next recommended single-sheet breadth slice | no accepted executable slice yet |
 
 ## 6. Domain Coverage
 
@@ -91,10 +91,10 @@ asset, or operational responsibility that can be judged independently.
 
 | Row ID | Behavior / Asset | Category | Legacy Source | Rebuild Target | Target Boundary | Owning Spec / Plan | Status | Validation Evidence | Retirement Decision | Notes / Risks |
 |------|-------------------|----------|---------------|----------------|-----------------|--------------------|--------|---------------------|--------------------|---------------|
-| AL-001 | multi-sheet loss-domain intake contract | capability | legacy migration workflow and paired event-domain references | future `capabilities/source_intake/annual_loss/` | `capabilities` | follow-on multi-sheet validation plan after annual_award | `pending` | future intake tests and replay evidence | N/A | should reuse archetype lessons from accepted award slice |
-| AL-002 | canonical loss event transformation | capability | legacy domain behavior and capability-map-equivalent references | future `capabilities/fact_processing/annual_loss/` | `capabilities` | future annual loss slice plan | `pending` | future transform tests and replay evidence | N/A | not yet designed in detail |
-| AL-003 | identity / plan-code handling for loss rows | mechanism | legacy event-domain behavior | shared contracts plus domain-specific wiring | `capabilities` | future annual loss slice plan | `pending` | future replay evidence | N/A | exact priority chain to be documented before implementation |
-| AL-004 | loss fact publication consumed by downstream status rules | projection | downstream snapshot dependency implied by current fixtures and blueprint | explicit publication plus projection evidence | `platform` + `capabilities` | future annual loss slice plan | `pending` | future replay and projection evidence | N/A | currently represented only as fixture dependency |
+| AL-001 | multi-sheet loss-domain intake contract | capability | legacy migration workflow and paired event-domain references | `capabilities/source_intake/annual_loss/service.py` | `capabilities` | architecture blueprint + annual loss slice plan | `accepted` | `tests/integration/test_annual_loss_intake.py`, `tests/replay/test_annual_loss_slice.py` | N/A | merged anchors stay queryable by batch + anchor row |
+| AL-002 | canonical loss event transformation | capability | legacy domain behavior and capability-map-equivalent references | `capabilities/fact_processing/annual_loss/` | `capabilities` | architecture blueprint + annual loss slice plan | `accepted` | `tests/integration/test_annual_loss_processing.py`, `tests/replay/test_annual_loss_slice.py` | N/A | governed rule-pack binding and date parsing are explicit |
+| AL-003 | identity / plan-code handling for loss rows | mechanism | legacy event-domain behavior | shared identity contract plus loss-specific current-contract lookup | `capabilities` | annual loss slice plan | `accepted` | `tests/integration/test_identity_resolution.py`, `tests/integration/test_annual_loss_plan_code_enrichment.py`, replay evidence | N/A | source company id now wins before cache/provider fallback and current-row lookup keeps `valid_to` filtering explicit |
+| AL-004 | loss fact publication consumed by downstream status rules | projection | downstream snapshot dependency implied by current fixtures and blueprint | explicit publication plus projection evidence | `platform` + `capabilities` | annual loss slice plan | `accepted` | `tests/integration/test_projection_outputs.py`, `tests/replay/test_annual_loss_slice.py`, `tests/replay/test_annual_loss_explainability_slo.py` | N/A | the slice replaces fixture-only loss dependency with published fact coverage |
 
 ### 6.4 `annuity_income`
 
@@ -126,7 +126,7 @@ asset, or operational responsibility that can be judged independently.
 | Row ID | Dependency | Why It Matters | Governing Status | Notes |
 |------|------------|----------------|------------------|-------|
 | XD-001 | `annual_award` facts influence downstream snapshot status triggered by `annuity_performance` | first-wave slices are not fully independent at projection level | active dependency | already represented as fixture dependency in the accepted first slice |
-| XD-002 | `annual_loss` facts influence downstream snapshot status triggered by `annuity_performance` | event-domain closure matters for customer status correctness | active dependency | still fixture-only in current accepted slice |
+| XD-002 | `annual_loss` facts influence downstream snapshot status triggered by `annuity_performance` | event-domain closure matters for customer status correctness | active dependency | closed by the accepted `annual_loss` slice with published-fact projection coverage |
 | XD-003 | shared identity/provider integration affects all first-wave domains | domain rollout may outrun runtime/provider readiness | deferred cross-cutting track | governed by refactor program, not a single domain slice |
 | XD-004 | production publication/storage decisions affect all first-wave domains | validation runtime is not the final production runtime | deferred cross-cutting track | governed by follow-on production storage/publication plan |
 

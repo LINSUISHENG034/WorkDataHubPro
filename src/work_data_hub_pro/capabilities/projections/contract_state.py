@@ -39,7 +39,8 @@ class ContractStateProjection:
         ]
         award_fact_rows = self._storage.read("fact_annual_award")
         award_fixture_rows = self._storage.read("fixture_annual_award")
-        loss_rows = self._storage.read("fixture_annual_loss")
+        loss_fact_rows = self._storage.read("fact_annual_loss")
+        loss_fixture_rows = self._storage.read("fixture_annual_loss")
 
         rows: list[dict[str, object]] = []
         for row in performance_rows:
@@ -57,6 +58,18 @@ class ContractStateProjection:
                 plan_code=plan_code,
                 period=period,
             )
+            has_loss_fact = self._has_match(
+                loss_fact_rows,
+                company_id=company_id,
+                plan_code=plan_code,
+                period=period,
+            )
+            has_loss_fixture = has_loss_fact or self._has_match(
+                loss_fixture_rows,
+                company_id=company_id,
+                plan_code=plan_code,
+                period=period,
+            )
             rows.append(
                 {
                     "company_id": company_id,
@@ -65,12 +78,8 @@ class ContractStateProjection:
                     "has_annuity_performance": True,
                     "has_annual_award_fact": has_award_fact,
                     "has_annual_award_fixture": has_award_fixture,
-                    "has_annual_loss_fixture": self._has_match(
-                        loss_rows,
-                        company_id=company_id,
-                        plan_code=plan_code,
-                        period=period,
-                    ),
+                    "has_annual_loss_fact": has_loss_fact,
+                    "has_annual_loss_fixture": has_loss_fixture,
                 }
             )
 

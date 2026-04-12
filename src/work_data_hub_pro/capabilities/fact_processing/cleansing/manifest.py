@@ -6,6 +6,10 @@ from pathlib import Path
 
 from work_data_hub_pro.capabilities.fact_processing.cleansing.rules import (
     CleansingRule,
+    normalize_event_business_type,
+    normalize_event_date,
+    normalize_event_plan_type,
+    normalize_period,
     normalize_plan_code,
     parse_decimal,
     strip_and_uppercase,
@@ -66,6 +70,44 @@ RULE_PACKS: dict[tuple[str, str], dict[str, CleansingRule]] = {
             version="1",
             field_name="award_amount",
             transform=parse_decimal,
+        ),
+    },
+    ("annual-loss-core", "2026.04.12"): {
+        "company_name": CleansingRule(
+            rule_id="normalize-company-name",
+            version="1",
+            field_name="company_name",
+            transform=lambda value: str(value or "").strip(),
+        ),
+        "plan_code": CleansingRule(
+            rule_id="normalize-plan-code",
+            version="1",
+            field_name="plan_code",
+            transform=normalize_plan_code,
+        ),
+        "plan_type": CleansingRule(
+            rule_id="normalize-plan-type",
+            version="1",
+            field_name="plan_type",
+            transform=normalize_event_plan_type,
+        ),
+        "business_type": CleansingRule(
+            rule_id="normalize-business-type",
+            version="1",
+            field_name="business_type",
+            transform=normalize_event_business_type,
+        ),
+        "period": CleansingRule(
+            rule_id="normalize-period",
+            version="1",
+            field_name="period",
+            transform=normalize_period,
+        ),
+        "loss_date": CleansingRule(
+            rule_id="normalize-loss-date",
+            version="1",
+            field_name="loss_date",
+            transform=normalize_event_date,
         ),
     },
 }
