@@ -131,3 +131,63 @@ def test_publication_service_supports_annual_award_fact_and_signal_targets() -> 
         "customer_master_signal",
     ]
     assert storage.read("customer_master_signal")[0]["customer_type"] == "WINNING_CUSTOMER"
+
+
+def test_publication_service_supports_annual_loss_fact_and_signal_targets() -> None:
+    storage = InMemoryTableStore()
+    service = PublicationService(storage)
+    policy = load_publication_policy(
+        Path("config/policies/publication.json"),
+        domain="annual_loss",
+    )
+
+    results = service.execute(
+        [
+            PublicationBundle(
+                plan=build_publication_plan(
+                    policy=policy,
+                    publication_id="publication-loss-facts",
+                    target_name="fact_annual_loss",
+                    target_kind="fact",
+                    refresh_keys=["batch_id"],
+                    upsert_keys=[],
+                    source_batch_id="annual_loss:2026-03",
+                    source_run_id="run-001",
+                ),
+                rows=[
+                    {
+                        "record_id": "fact-001",
+                        "batch_id": "annual_loss:2026-03",
+                        "company_id": "company-001",
+                        "plan_code": "P9001",
+                        "period": "2026-03",
+                    }
+                ],
+            ),
+            PublicationBundle(
+                plan=build_publication_plan(
+                    policy=policy,
+                    publication_id="publication-loss-signal",
+                    target_name="customer_loss_signal",
+                    target_kind="reference",
+                    refresh_keys=[],
+                    upsert_keys=["company_id", "period"],
+                    source_batch_id="annual_loss:2026-03",
+                    source_run_id="run-001",
+                ),
+                rows=[
+                    {
+                        "company_id": "company-001",
+                        "period": "2026-03",
+                        "customer_type": "LOSS_CUSTOMER",
+                    }
+                ],
+            ),
+        ]
+    )
+
+    assert [result.target_name for result in results] == [
+        "fact_annual_loss",
+        "customer_loss_signal",
+    ]
+    assert storage.read("customer_loss_signal")[0]["customer_type"] == "LOSS_CUSTOMER"
