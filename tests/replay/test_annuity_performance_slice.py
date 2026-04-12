@@ -95,6 +95,7 @@ def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) ->
         "source_intake",
         "fact_processing",
         "identity_resolution",
+        "reference_derivation",
         "contract_state",
         "monthly_snapshot",
     ]

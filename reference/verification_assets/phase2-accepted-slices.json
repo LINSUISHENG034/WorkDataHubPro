@@ -1,0 +1,190 @@
+{
+  "phase": "02",
+  "accepted_slices": [
+    "annuity_performance",
+    "annual_award",
+    "annual_loss"
+  ],
+  "assets": [
+    {
+      "asset_id": "phase2-annuity-performance-replay-baseline",
+      "asset_kind": "replay_baseline",
+      "slice": "annuity_performance",
+      "status": "accepted",
+      "purpose": "Legacy monthly snapshot baseline for the accepted annuity replay slice.",
+      "refresh_trigger": "Update when accepted annuity replay semantics or baseline period changes.",
+      "reference_location": "reference/historical_replays/annuity_performance/legacy_monthly_snapshot_2026_03.json",
+      "notes": "Primary parity compare input for the deep-sample slice."
+    },
+    {
+      "asset_id": "phase2-annuity-performance-synthetic-fixture",
+      "asset_kind": "synthetic_fixture",
+      "slice": "annuity_performance",
+      "status": "accepted",
+      "purpose": "Deterministic workbook fixture for fast annuity replay and gate tests.",
+      "refresh_trigger": "Update when intake normalization or checkpoint expectations for annuity replay change.",
+      "reference_location": "tests/replay/test_annuity_performance_slice.py",
+      "notes": "Accepted as a synthetic fixture only, not a real-data intake baseline."
+    },
+    {
+      "asset_id": "phase2-annuity-performance-golden-set",
+      "asset_kind": "golden_set",
+      "slice": "annuity_performance",
+      "status": "deferred",
+      "purpose": "Curated high-value annuity scenarios beyond the single replay baseline.",
+      "refresh_trigger": "Create when Phase 2 or later governance promotes annuity golden-set coverage into a dedicated asset pack.",
+      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "notes": "Tracked explicitly so it is not forgotten."
+    },
+    {
+      "asset_id": "phase2-annuity-performance-golden-baseline",
+      "asset_kind": "golden_baseline",
+      "slice": "annuity_performance",
+      "status": "deferred",
+      "purpose": "Result baseline separate from the accepted replay snapshot.",
+      "refresh_trigger": "Create when annuity replay grows beyond the single accepted monthly snapshot baseline.",
+      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "notes": "Not materialized yet as a separate artifact."
+    },
+    {
+      "asset_id": "phase2-annuity-performance-error-case-fixture",
+      "asset_kind": "error_case_fixture",
+      "slice": "annuity_performance",
+      "status": "deferred",
+      "purpose": "Standalone malformed annuity inputs for contract-failure coverage.",
+      "refresh_trigger": "Create when error-path fixtures move from inline tests into repository-native assets.",
+      "reference_location": "tests/integration/test_phase2_intake_validation.py",
+      "notes": "Current failure cases are generated inline in tests."
+    },
+    {
+      "asset_id": "phase2-annuity-performance-real-data-sample",
+      "asset_kind": "real_data_sample",
+      "slice": "annuity_performance",
+      "status": "deferred",
+      "purpose": "Real-data-style annuity workbook sample for source-intake governance.",
+      "refresh_trigger": "Register when a committed or governed external sample becomes available.",
+      "reference_location": "docs/wiki-cn/governance/phase-2-decisions.md",
+      "notes": "Phase 2 confirms this is the target baseline, but the sample is not yet repo-native."
+    },
+    {
+      "asset_id": "phase2-annual-award-replay-baseline",
+      "asset_kind": "replay_baseline",
+      "slice": "annual_award",
+      "status": "accepted",
+      "purpose": "Legacy monthly snapshot baseline for the accepted annual-award replay slice.",
+      "refresh_trigger": "Update when accepted award replay semantics or baseline period changes.",
+      "reference_location": "reference/historical_replays/annual_award/legacy_monthly_snapshot_2026_03.json",
+      "notes": "Shared Wave 1 gate runtime now validates this slice explicitly."
+    },
+    {
+      "asset_id": "phase2-annual-award-synthetic-fixture",
+      "asset_kind": "synthetic_fixture",
+      "slice": "annual_award",
+      "status": "accepted",
+      "purpose": "Deterministic multi-sheet workbook fixture for annual-award replay and parity-gate tests.",
+      "refresh_trigger": "Update when annual-award intake mapping or checkpoint expectations change.",
+      "reference_location": "tests/replay/test_annual_award_slice.py",
+      "notes": "Remains synthetic and intentionally distinct from the real-data intake target."
+    },
+    {
+      "asset_id": "phase2-annual-award-golden-set",
+      "asset_kind": "golden_set",
+      "slice": "annual_award",
+      "status": "deferred",
+      "purpose": "Curated high-value event-domain award scenarios beyond the replay baseline.",
+      "refresh_trigger": "Create when the annual-award domain gets explicit golden-set governance.",
+      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "notes": "Explicitly deferred instead of omitted."
+    },
+    {
+      "asset_id": "phase2-annual-award-golden-baseline",
+      "asset_kind": "golden_baseline",
+      "slice": "annual_award",
+      "status": "deferred",
+      "purpose": "Result baseline distinct from the accepted replay snapshot for annual-award.",
+      "refresh_trigger": "Create when annual-award parity uses a broader baseline corpus than the accepted replay snapshot.",
+      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "notes": "Not a separate repository artifact yet."
+    },
+    {
+      "asset_id": "phase2-annual-award-error-case-fixture",
+      "asset_kind": "error_case_fixture",
+      "slice": "annual_award",
+      "status": "deferred",
+      "purpose": "Standalone malformed annual-award inputs for contract and tolerance-failure coverage.",
+      "refresh_trigger": "Create when inline event-domain error-path cases are promoted into repository-native fixtures.",
+      "reference_location": "tests/integration/test_phase2_event_intake_validation.py",
+      "notes": "Current error cases are generated inline by tests."
+    },
+    {
+      "asset_id": "phase2-annual-award-real-data-sample",
+      "asset_kind": "real_data_sample",
+      "slice": "annual_award",
+      "status": "deferred",
+      "purpose": "Real-data-style annual-award workbook sample for source-intake governance.",
+      "refresh_trigger": "Register when a governed repository-native or externally governed sample is admitted.",
+      "reference_location": "docs/wiki-cn/governance/phase-2-decisions.md",
+      "notes": "Target baseline confirmed, artifact still missing."
+    },
+    {
+      "asset_id": "phase2-annual-loss-replay-baseline",
+      "asset_kind": "replay_baseline",
+      "slice": "annual_loss",
+      "status": "accepted",
+      "purpose": "Legacy monthly snapshot baseline for the accepted annual-loss replay slice.",
+      "refresh_trigger": "Update when accepted loss replay semantics or baseline period changes.",
+      "reference_location": "reference/historical_replays/annual_loss/legacy_monthly_snapshot_2026_03.json",
+      "notes": "Accepted event-domain parity baseline."
+    },
+    {
+      "asset_id": "phase2-annual-loss-synthetic-fixture",
+      "asset_kind": "synthetic_fixture",
+      "slice": "annual_loss",
+      "status": "accepted",
+      "purpose": "Deterministic multi-sheet workbook fixture for annual-loss replay and parity-gate tests.",
+      "refresh_trigger": "Update when annual-loss intake mapping or checkpoint expectations change.",
+      "reference_location": "tests/replay/test_annual_loss_slice.py",
+      "notes": "Synthetic fixture retained for stable coverage."
+    },
+    {
+      "asset_id": "phase2-annual-loss-golden-set",
+      "asset_kind": "golden_set",
+      "slice": "annual_loss",
+      "status": "deferred",
+      "purpose": "Curated high-value loss scenarios beyond the accepted replay baseline.",
+      "refresh_trigger": "Create when annual-loss gets explicit golden-set governance.",
+      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "notes": "Deferred explicitly per Phase 2 asset-governance rules."
+    },
+    {
+      "asset_id": "phase2-annual-loss-golden-baseline",
+      "asset_kind": "golden_baseline",
+      "slice": "annual_loss",
+      "status": "deferred",
+      "purpose": "Result baseline distinct from the accepted annual-loss replay snapshot.",
+      "refresh_trigger": "Create when annual-loss parity expands beyond the accepted replay baseline.",
+      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "notes": "Not yet materialized."
+    },
+    {
+      "asset_id": "phase2-annual-loss-error-case-fixture",
+      "asset_kind": "error_case_fixture",
+      "slice": "annual_loss",
+      "status": "deferred",
+      "purpose": "Standalone malformed annual-loss inputs for contract and tolerance-failure coverage.",
+      "refresh_trigger": "Create when inline loss-domain failure cases move into dedicated fixtures.",
+      "reference_location": "tests/integration/test_phase2_event_intake_validation.py",
+      "notes": "Current error cases remain inline."
+    },
+    {
+      "asset_id": "phase2-annual-loss-real-data-sample",
+      "asset_kind": "real_data_sample",
+      "slice": "annual_loss",
+      "status": "deferred",
+      "purpose": "Real-data-style annual-loss workbook sample for source-intake governance.",
+      "refresh_trigger": "Register when a governed repository-native or externally governed sample is admitted.",
+      "reference_location": "docs/wiki-cn/governance/phase-2-decisions.md",
+      "notes": "Phase 2 confirms the target baseline, but the sample is not yet present in-repo."
+    }
+  ]
+}

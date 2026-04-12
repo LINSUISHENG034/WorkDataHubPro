@@ -86,7 +86,7 @@ def test_annuity_gate_passes(tmp_path) -> None:
     )
 
     assert outcome.gate_summary.overall_outcome == "passed"
-    assert outcome.gate_summary.status_counts["passed"] == 5
+    assert outcome.gate_summary.status_counts["passed"] == 6
     assert outcome.compatibility_case is None
 
 

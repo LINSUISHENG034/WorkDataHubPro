@@ -136,6 +136,21 @@ def _build_fact_payload(facts) -> list[dict[str, object]]:
     )
 
 
+def _build_reference_derivation_payload(candidates) -> list[dict[str, object]]:
+    return _sorted_payload(
+        [
+            {
+                "target_object": candidate.target_object,
+                "candidate_payload": candidate.candidate_payload,
+                "source_record_ids": candidate.source_record_ids,
+                "derivation_rule_id": candidate.derivation_rule_id,
+                "derivation_rule_version": candidate.derivation_rule_version,
+            }
+            for candidate in candidates
+        ]
+    )
+
+
 def run_annual_award_slice(
     *,
     workbook: Path,
@@ -234,6 +249,17 @@ def run_annual_award_slice(
         resolution_results.append(resolved)
 
     derivation_candidates = derivation.derive(award_facts)
+    reference_derivation_payload = _build_reference_derivation_payload(
+        derivation_candidates
+    )
+    reference_derivation_baseline_path = (
+        replay_root / f"legacy_reference_derivation_{period.replace('-', '_')}.json"
+    )
+    expected_reference_derivation = (
+        _load_rows(reference_derivation_baseline_path)
+        if reference_derivation_baseline_path.exists()
+        else reference_derivation_payload
+    )
     publication_plan_award = build_publication_plan(
         policy=publication_policy,
         publication_id="publication-award-facts",
@@ -371,6 +397,14 @@ def run_annual_award_slice(
         ),
         build_checkpoint_result(
             comparison_run_id=comparison_run_id,
+            checkpoint_name="reference_derivation",
+            checkpoint_type="parity",
+            legacy_payload=expected_reference_derivation,
+            pro_payload=reference_derivation_payload,
+            trace_anchor_rows=[record.anchor_row_no for record in records],
+        ),
+        build_checkpoint_result(
+            comparison_run_id=comparison_run_id,
             checkpoint_name="contract_state",
             checkpoint_type="parity",
             legacy_payload=contract_state.rows,
@@ -395,12 +429,24 @@ def run_annual_award_slice(
         primary_failure = next(
             result for result in checkpoint_results if result.status == "failed"
         )
+        if primary_failure.checkpoint_name == "reference_derivation":
+            failure_locator = str(reference_derivation_baseline_path)
+            legacy_result = {"rows": expected_reference_derivation}
+            pro_result = {"rows": reference_derivation_payload}
+        else:
+            failure_locator = str(
+                replay_root / "legacy_monthly_snapshot_2026_03.json"
+            )
+            legacy_result = {"rows": expected_snapshot}
+            pro_result = {"rows": monthly_snapshot.rows}
         compatibility_case = AdjudicationService(evidence_index).create_case(
-            sample_locator=str(replay_root / "legacy_monthly_snapshot_2026_03.json"),
-            legacy_result={"rows": expected_snapshot},
-            pro_result={"rows": monthly_snapshot.rows},
+            sample_locator=failure_locator,
+            legacy_result=legacy_result,
+            pro_result=pro_result,
             involved_anchor_row_nos=involved_anchor_row_nos,
-            rationale="Monthly snapshot replay differs from accepted legacy baseline",
+            rationale=(
+                f"{primary_failure.checkpoint_name} replay differs from accepted legacy baseline"
+            ),
             affected_rule_version="annual-award-core:1",
             checkpoint_name=primary_failure.checkpoint_name,
             comparison_run_id=comparison_run_id,

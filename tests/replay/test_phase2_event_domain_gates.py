@@ -268,6 +268,7 @@ def test_event_domain_gates_use_same_checkpoint_names(tmp_path) -> None:
         "source_intake",
         "fact_processing",
         "identity_resolution",
+        "reference_derivation",
         "contract_state",
         "monthly_snapshot",
     ]

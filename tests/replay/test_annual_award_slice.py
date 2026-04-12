@@ -145,6 +145,7 @@ def test_annual_award_slice_replay_closes_chain_and_matches_legacy_snapshot(
         "source_intake",
         "fact_processing",
         "identity_resolution",
+        "reference_derivation",
         "contract_state",
         "monthly_snapshot",
     ]
