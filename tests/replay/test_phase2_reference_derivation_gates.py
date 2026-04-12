@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
 from openpyxl import Workbook
 
 from work_data_hub_pro.apps.orchestration.replay.annuity_performance_slice import (
@@ -25,11 +26,13 @@ def write_annuity_workbook(path: Path) -> None:
     workbook.save(path)
 
 
-def write_annuity_assets(
+def _write_annuity_replay_assets(
     replay_root: Path,
     *,
     legacy_snapshot_rows: list[dict[str, object]],
+    include_intermediate_baselines: bool = False,
 ) -> None:
+    """Write annuity replay root assets."""
     replay_root.mkdir(parents=True, exist_ok=True)
     (replay_root / "annual_award_fixture_2026_03.json").write_text(
         json.dumps(
@@ -67,6 +70,70 @@ def write_annuity_assets(
         json.dumps(legacy_snapshot_rows, indent=2),
         encoding="utf-8",
     )
+    if include_intermediate_baselines:
+        (replay_root / "legacy_reference_derivation_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "target_object": "company_reference",
+                        "candidate_payload": {
+                            "company_id": "company-001",
+                            "company_name": "Acme",
+                            "period": "2026-03",
+                        },
+                        "source_record_ids": ["perf-001"],
+                        "derivation_rule_id": "annuity-performance-company-reference",
+                        "derivation_rule_version": "1",
+                    }
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "perf-001",
+                        "company_id": "company-001",
+                        "plan_code": "PLAN-A",
+                        "period": "2026-03",
+                        "ending_assets": 1200.5,
+                    }
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "perf-001",
+                        "resolved_identity": "company-001",
+                        "resolution_method": "static",
+                        "fallback_level": "none",
+                        "evidence_refs": [],
+                    }
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_contract_state_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "period": "2026-03",
+                        "contract_state_rows": 1,
+                        "award_fixture_rows": 1,
+                        "loss_fixture_rows": 0,
+                    }
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
 
 
 def write_award_workbook(path: Path) -> None:
@@ -101,11 +168,13 @@ def write_award_workbook(path: Path) -> None:
     workbook.save(path)
 
 
-def write_award_assets(
+def _write_award_replay_assets(
     replay_root: Path,
     *,
     legacy_snapshot_rows: list[dict[str, object]],
+    include_intermediate_baselines: bool = False,
 ) -> None:
+    """Write award replay root assets."""
     replay_root.mkdir(parents=True, exist_ok=True)
     (replay_root / "annuity_performance_fixture_2026_03.json").write_text(
         json.dumps(
@@ -156,6 +225,98 @@ def write_award_assets(
         json.dumps(legacy_snapshot_rows, indent=2),
         encoding="utf-8",
     )
+    if include_intermediate_baselines:
+        (replay_root / "legacy_reference_derivation_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "target_object": "company_reference",
+                        "candidate_payload": {
+                            "company_id": "company-001",
+                            "company_name": "Acme",
+                            "period": "2026-03",
+                        },
+                        "source_record_ids": ["award-001"],
+                        "derivation_rule_id": "annual-award-company-reference",
+                        "derivation_rule_version": "1",
+                    },
+                    {
+                        "target_object": "customer_master_signal",
+                        "candidate_payload": {
+                            "company_id": "company-001",
+                            "plan_code": "P9001",
+                            "period": "2026-03",
+                            "signal_type": "annual_award",
+                        },
+                        "source_record_ids": ["award-001"],
+                        "derivation_rule_id": "annual-award-customer-signal",
+                        "derivation_rule_version": "1",
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "award-001",
+                        "company_id": "company-001",
+                        "plan_code": "P9001",
+                        "period": "2026-03",
+                        "award_amount": 5000,
+                        "source_sheet": "TrusteeAwards",
+                    },
+                    {
+                        "record_id": "award-002",
+                        "company_id": "company-002",
+                        "plan_code": "S9009",
+                        "period": "2026-03",
+                        "award_amount": 1000,
+                        "source_sheet": "InvesteeAwards",
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "award-001",
+                        "resolved_identity": "company-001",
+                        "resolution_method": "static",
+                        "fallback_level": "none",
+                        "evidence_refs": [],
+                    },
+                    {
+                        "record_id": "award-002",
+                        "resolved_identity": "company-002",
+                        "resolution_method": "static",
+                        "fallback_level": "none",
+                        "evidence_refs": [],
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_contract_state_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "period": "2026-03",
+                        "contract_state_rows": 1,
+                        "award_fixture_rows": 1,
+                        "loss_fixture_rows": 0,
+                    }
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
 
 
 def write_loss_workbook(path: Path) -> None:
@@ -222,11 +383,13 @@ def write_loss_workbook(path: Path) -> None:
     workbook.save(path)
 
 
-def write_loss_assets(
+def _write_loss_replay_assets(
     replay_root: Path,
     *,
     legacy_snapshot_rows: list[dict[str, object]],
+    include_intermediate_baselines: bool = False,
 ) -> None:
+    """Write loss replay root assets."""
     replay_root.mkdir(parents=True, exist_ok=True)
     (replay_root / "annuity_performance_fixture_2026_03.json").write_text(
         json.dumps(
@@ -277,9 +440,107 @@ def write_loss_assets(
         json.dumps(legacy_snapshot_rows, indent=2),
         encoding="utf-8",
     )
+    if include_intermediate_baselines:
+        (replay_root / "legacy_reference_derivation_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "target_object": "company_reference",
+                        "candidate_payload": {
+                            "company_id": "company-001",
+                            "company_name": "共享客户（流失）",
+                            "period": "2026-03",
+                        },
+                        "source_record_ids": ["loss-001"],
+                        "derivation_rule_id": "annual-loss-company-reference",
+                        "derivation_rule_version": "1",
+                    },
+                    {
+                        "target_object": "customer_loss_signal",
+                        "candidate_payload": {
+                            "company_id": "company-002",
+                            "plan_code": "S9009",
+                            "period": "2026-03",
+                            "signal_type": "annual_loss",
+                        },
+                        "source_record_ids": ["loss-002"],
+                        "derivation_rule_id": "annual-loss-customer-signal",
+                        "derivation_rule_version": "1",
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "loss-001",
+                        "company_id": "company-001",
+                        "plan_code": "P9001",
+                        "period": "2026-03",
+                        "loss_amount": 80,
+                        "source_sheet": "企年受托流失(解约)",
+                    },
+                    {
+                        "record_id": "loss-002",
+                        "company_id": "company-002",
+                        "plan_code": "S9009",
+                        "period": "2026-03",
+                        "loss_amount": 60,
+                        "source_sheet": "企年投资流失(解约)",
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "loss-001",
+                        "resolved_identity": "company-001",
+                        "resolution_method": "static",
+                        "fallback_level": "none",
+                        "evidence_refs": [],
+                    },
+                    {
+                        "record_id": "loss-002",
+                        "resolved_identity": "company-002",
+                        "resolution_method": "static",
+                        "fallback_level": "none",
+                        "evidence_refs": [],
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_contract_state_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "period": "2026-03",
+                        "contract_state_rows": 1,
+                        "award_fixture_rows": 1,
+                        "loss_fixture_rows": 1,
+                    }
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+
+
+# ---------------------------------------------------------------------------
+# Tests
+# ---------------------------------------------------------------------------
 
 
 def test_reference_derivation_checkpoint_present(tmp_path) -> None:
+    """reference_derivation is present in checkpoint list (existing behavior)."""
     annuity_workbook = tmp_path / "annuity.xlsx"
     award_workbook = tmp_path / "annual_award.xlsx"
     loss_workbook = tmp_path / "annual_loss.xlsx"
@@ -291,77 +552,108 @@ def test_reference_derivation_checkpoint_present(tmp_path) -> None:
     award_root = tmp_path / "reference" / "historical_replays" / "annual_award"
     loss_root = tmp_path / "reference" / "historical_replays" / "annual_loss"
 
-    write_annuity_assets(
+    _write_annuity_replay_assets(
         annuity_root,
-        legacy_snapshot_rows=[
-            {
-                "period": "2026-03",
-                "contract_state_rows": 1,
-                "award_fixture_rows": 1,
-                "loss_fixture_rows": 0,
-            }
-        ],
+        legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
+        include_intermediate_baselines=True,
     )
-    write_award_assets(
+    _write_award_replay_assets(
         award_root,
-        legacy_snapshot_rows=[
-            {
-                "period": "2026-03",
-                "contract_state_rows": 1,
-                "award_fixture_rows": 1,
-                "loss_fixture_rows": 0,
-            }
-        ],
+        legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
+        include_intermediate_baselines=True,
     )
-    write_loss_assets(
+    _write_loss_replay_assets(
         loss_root,
-        legacy_snapshot_rows=[
-            {
-                "period": "2026-03",
-                "contract_state_rows": 1,
-                "award_fixture_rows": 1,
-                "loss_fixture_rows": 1,
-            }
-        ],
+        legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 1}],
+        include_intermediate_baselines=True,
     )
 
     annuity_outcome = run_annuity_performance_slice(
-        workbook=annuity_workbook,
-        period="2026-03",
-        replay_root=annuity_root,
+        workbook=annuity_workbook, period="2026-03", replay_root=annuity_root,
     )
     award_outcome = run_annual_award_slice(
-        workbook=award_workbook,
-        period="2026-03",
-        replay_root=award_root,
+        workbook=award_workbook, period="2026-03", replay_root=award_root,
     )
     loss_outcome = run_annual_loss_slice(
-        workbook=loss_workbook,
-        period="2026-03",
-        replay_root=loss_root,
+        workbook=loss_workbook, period="2026-03", replay_root=loss_root,
     )
 
     for outcome in (annuity_outcome, award_outcome, loss_outcome):
         assert "reference_derivation" in [
-            result.checkpoint_name for result in outcome.checkpoint_results
+            r.checkpoint_name for r in outcome.checkpoint_results
         ]
 
 
-def test_reference_derivation_failed_run_writes_diff(tmp_path) -> None:
+def test_reference_derivation_requires_baseline_annuity(tmp_path) -> None:
+    """Missing reference_derivation baseline raises FileNotFoundError (T-06-04 fail-closed)."""
     workbook_path = tmp_path / "annuity.xlsx"
     write_annuity_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
-    write_annuity_assets(
+
+    _write_annuity_replay_assets(
         replay_root,
-        legacy_snapshot_rows=[
-            {
-                "period": "2026-03",
-                "contract_state_rows": 1,
-                "award_fixture_rows": 1,
-                "loss_fixture_rows": 0,
-            }
-        ],
+        legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
+        include_intermediate_baselines=True,
     )
+    # Remove reference_derivation baseline to trigger fail-closed
+    (replay_root / "legacy_reference_derivation_2026_03.json").unlink(missing_ok=True)
+
+    with pytest.raises(FileNotFoundError, match="reference_derivation"):
+        run_annuity_performance_slice(
+            workbook=workbook_path, period="2026-03", replay_root=replay_root,
+        )
+
+
+def test_reference_derivation_requires_baseline_award(tmp_path) -> None:
+    """Missing reference_derivation baseline raises FileNotFoundError for award (T-06-04)."""
+    workbook_path = tmp_path / "annual_award.xlsx"
+    write_award_workbook(workbook_path)
+    replay_root = tmp_path / "reference" / "historical_replays" / "annual_award"
+
+    _write_award_replay_assets(
+        replay_root,
+        legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
+        include_intermediate_baselines=True,
+    )
+    (replay_root / "legacy_reference_derivation_2026_03.json").unlink(missing_ok=True)
+
+    with pytest.raises(FileNotFoundError, match="reference_derivation"):
+        run_annual_award_slice(
+            workbook=workbook_path, period="2026-03", replay_root=replay_root,
+        )
+
+
+def test_reference_derivation_requires_baseline_loss(tmp_path) -> None:
+    """Missing reference_derivation baseline raises FileNotFoundError for loss (T-06-04)."""
+    workbook_path = tmp_path / "annual_loss.xlsx"
+    write_loss_workbook(workbook_path)
+    replay_root = tmp_path / "reference" / "historical_replays" / "annual_loss"
+
+    _write_loss_replay_assets(
+        replay_root,
+        legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 1}],
+        include_intermediate_baselines=True,
+    )
+    (replay_root / "legacy_reference_derivation_2026_03.json").unlink(missing_ok=True)
+
+    with pytest.raises(FileNotFoundError, match="reference_derivation"):
+        run_annual_loss_slice(
+            workbook=workbook_path, period="2026-03", replay_root=replay_root,
+        )
+
+
+def test_reference_derivation_failed_run_writes_diff(tmp_path) -> None:
+    """Failed reference_derivation run writes compatibility diff (existing behavior)."""
+    workbook_path = tmp_path / "annuity.xlsx"
+    write_annuity_workbook(workbook_path)
+    replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
+
+    _write_annuity_replay_assets(
+        replay_root,
+        legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
+        include_intermediate_baselines=True,
+    )
+    # Overwrite reference_derivation baseline with mismatching value
     (replay_root / "legacy_reference_derivation_2026_03.json").write_text(
         json.dumps(
             [
@@ -383,15 +675,10 @@ def test_reference_derivation_failed_run_writes_diff(tmp_path) -> None:
     )
 
     outcome = run_annuity_performance_slice(
-        workbook=workbook_path,
-        period="2026-03",
-        replay_root=replay_root,
+        workbook=workbook_path, period="2026-03", replay_root=replay_root,
     )
 
-    package_root = (
-        replay_root / "evidence" / "comparison_runs" / outcome.comparison_run_id
-    )
-
+    package_root = replay_root / "evidence" / "comparison_runs" / outcome.comparison_run_id
     assert outcome.compatibility_case is not None
     assert outcome.compatibility_case.checkpoint_name == "reference_derivation"
     assert (package_root / "diffs" / "reference_derivation.json").exists()

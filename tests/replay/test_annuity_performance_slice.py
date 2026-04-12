@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+import pytest
 from openpyxl import Workbook
 
 from work_data_hub_pro.apps.orchestration.replay.annuity_performance_slice import (
@@ -12,7 +13,17 @@ def _write_replay_assets(
     replay_root: Path,
     *,
     legacy_snapshot_rows: list[dict[str, object]],
+    legacy_reference_derivation_rows: list[dict[str, object]] | None = None,
+    legacy_fact_processing_rows: list[dict[str, object]] | None = None,
+    legacy_identity_resolution_rows: list[dict[str, object]] | None = None,
+    legacy_contract_state_rows: list[dict[str, object]] | None = None,
 ) -> None:
+    """Write annuity replay root assets.
+
+    Pass intermediate baseline rows to embed them in the replay root so the slice
+    runner's truthful checkpoints pass. If not provided, those baselines are absent
+    and the runner fails closed at the corresponding checkpoint.
+    """
     replay_root.mkdir(parents=True, exist_ok=True)
     (replay_root / "annual_award_fixture_2026_03.json").write_text(
         json.dumps(
@@ -50,10 +61,30 @@ def _write_replay_assets(
         json.dumps(legacy_snapshot_rows, indent=2),
         encoding="utf-8",
     )
+    # Intermediate checkpoint baselines (required for truthful gate passes)
+    if legacy_reference_derivation_rows is not None:
+        (replay_root / "legacy_reference_derivation_2026_03.json").write_text(
+            json.dumps(legacy_reference_derivation_rows, indent=2),
+            encoding="utf-8",
+        )
+    if legacy_fact_processing_rows is not None:
+        (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+            json.dumps(legacy_fact_processing_rows, indent=2),
+            encoding="utf-8",
+        )
+    if legacy_identity_resolution_rows is not None:
+        (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+            json.dumps(legacy_identity_resolution_rows, indent=2),
+            encoding="utf-8",
+        )
+    if legacy_contract_state_rows is not None:
+        (replay_root / "legacy_contract_state_2026_03.json").write_text(
+            json.dumps(legacy_contract_state_rows, indent=2),
+            encoding="utf-8",
+        )
 
 
-def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) -> None:
-    workbook_path = tmp_path / "annuity_performance_2026_03.xlsx"
+def _write_workbook(workbook_path: Path) -> None:
     workbook = Workbook()
     sheet = workbook.active
     sheet.title = "AnnuityPerformance"
@@ -61,10 +92,54 @@ def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) ->
     sheet.append(["Acme", "PLAN-A", "2026-03", "1200.50"])
     workbook.save(workbook_path)
 
+
+def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) -> None:
+    """Test 4: successful replay produces full checkpoint list and passes all gates."""
+    workbook_path = tmp_path / "annuity_performance_2026_03.xlsx"
+    _write_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
     _write_replay_assets(
         replay_root,
         legacy_snapshot_rows=[
+            {
+                "period": "2026-03",
+                "contract_state_rows": 1,
+                "award_fixture_rows": 1,
+                "loss_fixture_rows": 0,
+            }
+        ],
+        legacy_reference_derivation_rows=[
+            {
+                "target_object": "company_reference",
+                "candidate_payload": {
+                    "company_id": "company-001",
+                    "company_name": "Acme",
+                    "period": "2026-03",
+                },
+                "source_record_ids": ["perf-001"],
+                "derivation_rule_id": "annuity-performance-company-reference",
+                "derivation_rule_version": "1",
+            }
+        ],
+        legacy_fact_processing_rows=[
+            {
+                "record_id": "perf-001",
+                "company_id": "company-001",
+                "plan_code": "PLAN-A",
+                "period": "2026-03",
+                "ending_assets": 1200.5,
+            }
+        ],
+        legacy_identity_resolution_rows=[
+            {
+                "record_id": "perf-001",
+                "resolved_identity": "company-001",
+                "resolution_method": "static",
+                "fallback_level": "none",
+                "evidence_refs": [],
+            }
+        ],
+        legacy_contract_state_rows=[
             {
                 "period": "2026-03",
                 "contract_state_rows": 1,
@@ -99,6 +174,16 @@ def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) ->
         "contract_state",
         "monthly_snapshot",
     ]
+    # Verify source_intake uses explicit contract model (not self-compare)
+    source_intake_result = next(
+        r for r in outcome.checkpoint_results if r.checkpoint_name == "source_intake"
+    )
+    assert source_intake_result.checkpoint_type == "contract"
+    assert source_intake_result.severity == "warn"
+    # Contract payloads should have record_count and required_fields keys
+    assert "record_count" in source_intake_result.legacy_payload
+    assert "required_fields" in source_intake_result.legacy_payload
+    assert "allowed_adaptations" in source_intake_result.legacy_payload
     assert outcome.compatibility_case is None
     row_events = outcome.trace_store.find(
         batch_id="annuity_performance:2026-03",
@@ -117,23 +202,58 @@ def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) ->
 
 
 def test_full_slice_replay_creates_compatibility_case_when_snapshot_differs(tmp_path) -> None:
+    """Test 3: source_intake can surface warning/failed status from contract assertions."""
     workbook_path = tmp_path / "annuity_performance_2026_03.xlsx"
-    workbook = Workbook()
-    sheet = workbook.active
-    sheet.title = "AnnuityPerformance"
-    sheet.append(["company_name", "plan_code", "period", "sales_amount"])
-    sheet.append(["Acme", "PLAN-A", "2026-03", "1200.50"])
-    workbook.save(workbook_path)
-
+    _write_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
+    # Include all intermediate baselines so failure is at monthly_snapshot
     _write_replay_assets(
         replay_root,
         legacy_snapshot_rows=[
             {
                 "period": "2026-03",
-                "contract_state_rows": 99,
+                "contract_state_rows": 99,  # Deliberately mismatched
                 "award_fixture_rows": 99,
                 "loss_fixture_rows": 99,
+            }
+        ],
+        legacy_reference_derivation_rows=[
+            {
+                "target_object": "company_reference",
+                "candidate_payload": {
+                    "company_id": "company-001",
+                    "company_name": "Acme",
+                    "period": "2026-03",
+                },
+                "source_record_ids": ["perf-001"],
+                "derivation_rule_id": "annuity-performance-company-reference",
+                "derivation_rule_version": "1",
+            }
+        ],
+        legacy_fact_processing_rows=[
+            {
+                "record_id": "perf-001",
+                "company_id": "company-001",
+                "plan_code": "PLAN-A",
+                "period": "2026-03",
+                "ending_assets": 1200.5,
+            }
+        ],
+        legacy_identity_resolution_rows=[
+            {
+                "record_id": "perf-001",
+                "resolved_identity": "company-001",
+                "resolution_method": "static",
+                "fallback_level": "none",
+                "evidence_refs": [],
+            }
+        ],
+        legacy_contract_state_rows=[
+            {
+                "period": "2026-03",
+                "contract_state_rows": 1,
+                "award_fixture_rows": 1,
+                "loss_fixture_rows": 0,
             }
         ],
     )

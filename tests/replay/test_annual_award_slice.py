@@ -12,7 +12,12 @@ def _write_replay_assets(
     replay_root: Path,
     *,
     legacy_snapshot_rows: list[dict[str, object]],
+    legacy_reference_derivation_rows: list[dict[str, object]] | None = None,
+    legacy_fact_processing_rows: list[dict[str, object]] | None = None,
+    legacy_identity_resolution_rows: list[dict[str, object]] | None = None,
+    legacy_contract_state_rows: list[dict[str, object]] | None = None,
 ) -> None:
+    """Write award replay root assets with optional intermediate baselines."""
     replay_root.mkdir(parents=True, exist_ok=True)
     (replay_root / "annuity_performance_fixture_2026_03.json").write_text(
         json.dumps(
@@ -69,6 +74,26 @@ def _write_replay_assets(
         json.dumps(legacy_snapshot_rows, indent=2),
         encoding="utf-8",
     )
+    if legacy_reference_derivation_rows is not None:
+        (replay_root / "legacy_reference_derivation_2026_03.json").write_text(
+            json.dumps(legacy_reference_derivation_rows, indent=2),
+            encoding="utf-8",
+        )
+    if legacy_fact_processing_rows is not None:
+        (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+            json.dumps(legacy_fact_processing_rows, indent=2),
+            encoding="utf-8",
+        )
+    if legacy_identity_resolution_rows is not None:
+        (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+            json.dumps(legacy_identity_resolution_rows, indent=2),
+            encoding="utf-8",
+        )
+    if legacy_contract_state_rows is not None:
+        (replay_root / "legacy_contract_state_2026_03.json").write_text(
+            json.dumps(legacy_contract_state_rows, indent=2),
+            encoding="utf-8",
+        )
 
 
 def _write_workbook(workbook_path: Path) -> None:
@@ -108,12 +133,80 @@ def _write_workbook(workbook_path: Path) -> None:
 def test_annual_award_slice_replay_closes_chain_and_matches_legacy_snapshot(
     tmp_path,
 ) -> None:
+    """Test 4: successful replay produces full checkpoint list and passes all gates."""
     workbook_path = tmp_path / "annual_award_2026_03.xlsx"
     _write_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annual_award"
     _write_replay_assets(
         replay_root,
         legacy_snapshot_rows=[
+            {
+                "period": "2026-03",
+                "contract_state_rows": 1,
+                "award_fixture_rows": 1,
+                "loss_fixture_rows": 0,
+            }
+        ],
+        legacy_reference_derivation_rows=[
+            {
+                "target_object": "company_reference",
+                "candidate_payload": {
+                    "company_id": "company-001",
+                    "company_name": "Acme",
+                    "period": "2026-03",
+                },
+                "source_record_ids": ["award-001"],
+                "derivation_rule_id": "annual-award-company-reference",
+                "derivation_rule_version": "1",
+            },
+            {
+                "target_object": "customer_master_signal",
+                "candidate_payload": {
+                    "company_id": "company-001",
+                    "plan_code": "P9001",
+                    "period": "2026-03",
+                    "signal_type": "annual_award",
+                },
+                "source_record_ids": ["award-001"],
+                "derivation_rule_id": "annual-award-customer-signal",
+                "derivation_rule_version": "1",
+            },
+        ],
+        legacy_fact_processing_rows=[
+            {
+                "record_id": "award-001",
+                "company_id": "company-001",
+                "plan_code": "P9001",
+                "period": "2026-03",
+                "award_amount": 5000,
+                "source_sheet": "TrusteeAwards",
+            },
+            {
+                "record_id": "award-002",
+                "company_id": "company-002",
+                "plan_code": "S9009",
+                "period": "2026-03",
+                "award_amount": 1000,
+                "source_sheet": "InvesteeAwards",
+            },
+        ],
+        legacy_identity_resolution_rows=[
+            {
+                "record_id": "award-001",
+                "resolved_identity": "company-001",
+                "resolution_method": "static",
+                "fallback_level": "none",
+                "evidence_refs": [],
+            },
+            {
+                "record_id": "award-002",
+                "resolved_identity": "company-002",
+                "resolution_method": "static",
+                "fallback_level": "none",
+                "evidence_refs": [],
+            },
+        ],
+        legacy_contract_state_rows=[
             {
                 "period": "2026-03",
                 "contract_state_rows": 1,
@@ -149,6 +242,14 @@ def test_annual_award_slice_replay_closes_chain_and_matches_legacy_snapshot(
         "contract_state",
         "monthly_snapshot",
     ]
+    # Verify source_intake uses explicit contract model (not self-compare)
+    source_intake_result = next(
+        r for r in outcome.checkpoint_results if r.checkpoint_name == "source_intake"
+    )
+    assert source_intake_result.checkpoint_type == "contract"
+    assert source_intake_result.severity == "warn"
+    assert "record_count" in source_intake_result.legacy_payload
+    assert "required_fields" in source_intake_result.legacy_payload
     assert outcome.compatibility_case is None
     row_events = outcome.trace_store.find(
         batch_id="annual_award:2026-03",
@@ -166,6 +267,7 @@ def test_annual_award_slice_replay_closes_chain_and_matches_legacy_snapshot(
 def test_annual_award_slice_replay_creates_compatibility_case_when_snapshot_differs(
     tmp_path,
 ) -> None:
+    """Test 3: source_intake contract assertions surface non-pass status through explicit expectations."""
     workbook_path = tmp_path / "annual_award_2026_03.xlsx"
     _write_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annual_award"
@@ -177,6 +279,73 @@ def test_annual_award_slice_replay_creates_compatibility_case_when_snapshot_diff
                 "contract_state_rows": 99,
                 "award_fixture_rows": 99,
                 "loss_fixture_rows": 99,
+            }
+        ],
+        legacy_reference_derivation_rows=[
+            {
+                "target_object": "company_reference",
+                "candidate_payload": {
+                    "company_id": "company-001",
+                    "company_name": "Acme",
+                    "period": "2026-03",
+                },
+                "source_record_ids": ["award-001"],
+                "derivation_rule_id": "annual-award-company-reference",
+                "derivation_rule_version": "1",
+            },
+            {
+                "target_object": "customer_master_signal",
+                "candidate_payload": {
+                    "company_id": "company-001",
+                    "plan_code": "P9001",
+                    "period": "2026-03",
+                    "signal_type": "annual_award",
+                },
+                "source_record_ids": ["award-001"],
+                "derivation_rule_id": "annual-award-customer-signal",
+                "derivation_rule_version": "1",
+            },
+        ],
+        legacy_fact_processing_rows=[
+            {
+                "record_id": "award-001",
+                "company_id": "company-001",
+                "plan_code": "P9001",
+                "period": "2026-03",
+                "award_amount": 5000,
+                "source_sheet": "TrusteeAwards",
+            },
+            {
+                "record_id": "award-002",
+                "company_id": "company-002",
+                "plan_code": "S9009",
+                "period": "2026-03",
+                "award_amount": 1000,
+                "source_sheet": "InvesteeAwards",
+            },
+        ],
+        legacy_identity_resolution_rows=[
+            {
+                "record_id": "award-001",
+                "resolved_identity": "company-001",
+                "resolution_method": "static",
+                "fallback_level": "none",
+                "evidence_refs": [],
+            },
+            {
+                "record_id": "award-002",
+                "resolved_identity": "company-002",
+                "resolution_method": "static",
+                "fallback_level": "none",
+                "evidence_refs": [],
+            },
+        ],
+        legacy_contract_state_rows=[
+            {
+                "period": "2026-03",
+                "contract_state_rows": 1,
+                "award_fixture_rows": 1,
+                "loss_fixture_rows": 0,
             }
         ],
     )

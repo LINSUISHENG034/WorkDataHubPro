@@ -80,6 +80,19 @@ _SOURCE_INTAKE_CONTRACT = {
 }
 
 
+@dataclass(frozen=True)
+class SliceRunOutcome:
+    comparison_run_id: str
+    checkpoint_results: list[CheckpointResult]
+    gate_summary: GateSummary
+    publication_results: list[PublicationResult]
+    projection_results: list[ProjectionResult]
+    compatibility_case: CompatibilityCase | None
+    trace_store: InMemoryTraceStore
+    lineage_registry: LineageRegistry
+    intermediate_payloads: dict[str, list[dict[str, object]]] | None = None
+
+
 def _load_rows(path: Path) -> list[dict[str, object]]:
     return json.loads(path.read_text(encoding="utf-8"))
 

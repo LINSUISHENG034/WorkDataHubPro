@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
 from openpyxl import Workbook
 
 from work_data_hub_pro.apps.orchestration.replay.annual_award_slice import (
@@ -13,11 +14,13 @@ from work_data_hub_pro.apps.orchestration.replay.annual_loss_slice import (
 )
 
 
-def _write_award_assets(
+def _write_award_replay_assets(
     replay_root: Path,
     *,
     legacy_snapshot_rows: list[dict[str, object]],
+    include_intermediate_baselines: bool = False,
 ) -> None:
+    """Write award replay root assets."""
     replay_root.mkdir(parents=True, exist_ok=True)
     (replay_root / "annuity_performance_fixture_2026_03.json").write_text(
         json.dumps(
@@ -68,13 +71,107 @@ def _write_award_assets(
         json.dumps(legacy_snapshot_rows, indent=2),
         encoding="utf-8",
     )
+    if include_intermediate_baselines:
+        (replay_root / "legacy_reference_derivation_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "target_object": "company_reference",
+                        "candidate_payload": {
+                            "company_id": "company-001",
+                            "company_name": "Acme",
+                            "period": "2026-03",
+                        },
+                        "source_record_ids": ["award-001"],
+                        "derivation_rule_id": "annual-award-company-reference",
+                        "derivation_rule_version": "1",
+                    },
+                    {
+                        "target_object": "customer_master_signal",
+                        "candidate_payload": {
+                            "company_id": "company-001",
+                            "plan_code": "P9001",
+                            "period": "2026-03",
+                            "signal_type": "annual_award",
+                        },
+                        "source_record_ids": ["award-001"],
+                        "derivation_rule_id": "annual-award-customer-signal",
+                        "derivation_rule_version": "1",
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "award-001",
+                        "company_id": "company-001",
+                        "plan_code": "P9001",
+                        "period": "2026-03",
+                        "award_amount": 5000,
+                        "source_sheet": "TrusteeAwards",
+                    },
+                    {
+                        "record_id": "award-002",
+                        "company_id": "company-002",
+                        "plan_code": "S9009",
+                        "period": "2026-03",
+                        "award_amount": 1000,
+                        "source_sheet": "InvesteeAwards",
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "award-001",
+                        "resolved_identity": "company-001",
+                        "resolution_method": "static",
+                        "fallback_level": "none",
+                        "evidence_refs": [],
+                    },
+                    {
+                        "record_id": "award-002",
+                        "resolved_identity": "company-002",
+                        "resolution_method": "static",
+                        "fallback_level": "none",
+                        "evidence_refs": [],
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_contract_state_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "period": "2026-03",
+                        "contract_state_rows": 1,
+                        "award_fixture_rows": 1,
+                        "loss_fixture_rows": 0,
+                    }
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
 
 
-def _write_loss_assets(
+def _write_loss_replay_assets(
     replay_root: Path,
     *,
     legacy_snapshot_rows: list[dict[str, object]],
+    include_intermediate_baselines: bool = False,
 ) -> None:
+    """Write loss replay root assets."""
     replay_root.mkdir(parents=True, exist_ok=True)
     (replay_root / "annuity_performance_fixture_2026_03.json").write_text(
         json.dumps(
@@ -125,6 +222,98 @@ def _write_loss_assets(
         json.dumps(legacy_snapshot_rows, indent=2),
         encoding="utf-8",
     )
+    if include_intermediate_baselines:
+        (replay_root / "legacy_reference_derivation_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "target_object": "company_reference",
+                        "candidate_payload": {
+                            "company_id": "company-001",
+                            "company_name": "共享客户（流失）",
+                            "period": "2026-03",
+                        },
+                        "source_record_ids": ["loss-001"],
+                        "derivation_rule_id": "annual-loss-company-reference",
+                        "derivation_rule_version": "1",
+                    },
+                    {
+                        "target_object": "customer_loss_signal",
+                        "candidate_payload": {
+                            "company_id": "company-002",
+                            "plan_code": "S9009",
+                            "period": "2026-03",
+                            "signal_type": "annual_loss",
+                        },
+                        "source_record_ids": ["loss-002"],
+                        "derivation_rule_id": "annual-loss-customer-signal",
+                        "derivation_rule_version": "1",
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "loss-001",
+                        "company_id": "company-001",
+                        "plan_code": "P9001",
+                        "period": "2026-03",
+                        "loss_amount": 80,
+                        "source_sheet": "企年受托流失(解约)",
+                    },
+                    {
+                        "record_id": "loss-002",
+                        "company_id": "company-002",
+                        "plan_code": "S9009",
+                        "period": "2026-03",
+                        "loss_amount": 60,
+                        "source_sheet": "企年投资流失(解约)",
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "record_id": "loss-001",
+                        "resolved_identity": "company-001",
+                        "resolution_method": "static",
+                        "fallback_level": "none",
+                        "evidence_refs": [],
+                    },
+                    {
+                        "record_id": "loss-002",
+                        "resolved_identity": "company-002",
+                        "resolution_method": "static",
+                        "fallback_level": "none",
+                        "evidence_refs": [],
+                    },
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        (replay_root / "legacy_contract_state_2026_03.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "period": "2026-03",
+                        "contract_state_rows": 1,
+                        "award_fixture_rows": 1,
+                        "loss_fixture_rows": 1,
+                    }
+                ],
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
 
 
 def _write_award_workbook(path: Path) -> None:
@@ -223,14 +412,21 @@ def _write_loss_workbook(path: Path) -> None:
     workbook.save(path)
 
 
+# ---------------------------------------------------------------------------
+# Tests for truthful intermediate gates
+# ---------------------------------------------------------------------------
+
+
 def test_event_domain_gates_use_same_checkpoint_names(tmp_path) -> None:
+    """Existing test: award and loss slices produce the same checkpoint names."""
     award_workbook = tmp_path / "annual_award.xlsx"
     loss_workbook = tmp_path / "annual_loss.xlsx"
     _write_award_workbook(award_workbook)
     _write_loss_workbook(loss_workbook)
     award_replay_root = tmp_path / "reference" / "historical_replays" / "annual_award"
     loss_replay_root = tmp_path / "reference" / "historical_replays" / "annual_loss"
-    _write_award_assets(
+
+    _write_award_replay_assets(
         award_replay_root,
         legacy_snapshot_rows=[
             {
@@ -240,8 +436,9 @@ def test_event_domain_gates_use_same_checkpoint_names(tmp_path) -> None:
                 "loss_fixture_rows": 0,
             }
         ],
+        include_intermediate_baselines=True,
     )
-    _write_loss_assets(
+    _write_loss_replay_assets(
         loss_replay_root,
         legacy_snapshot_rows=[
             {
@@ -251,6 +448,7 @@ def test_event_domain_gates_use_same_checkpoint_names(tmp_path) -> None:
                 "loss_fixture_rows": 1,
             }
         ],
+        include_intermediate_baselines=True,
     )
 
     award_outcome = run_annual_award_slice(
@@ -277,23 +475,326 @@ def test_event_domain_gates_use_same_checkpoint_names(tmp_path) -> None:
     assert [result.checkpoint_name for result in loss_outcome.checkpoint_results] == expected_checkpoints
 
 
+def test_event_domain_intermediate_checkpoint_uses_baseline_award(tmp_path) -> None:
+    """Test 2 (TDD RED): award fact_processing, identity_resolution, and contract_state
+    each fail independently when the corresponding baseline file is edited to a mismatching value."""
+    workbook_path = tmp_path / "annual_award.xlsx"
+    _write_award_workbook(workbook_path)
+    replay_root = tmp_path / "reference" / "historical_replays" / "annual_award"
+
+    _write_award_replay_assets(
+        replay_root,
+        legacy_snapshot_rows=[
+            {
+                "period": "2026-03",
+                "contract_state_rows": 1,
+                "award_fixture_rows": 1,
+                "loss_fixture_rows": 0,
+            }
+        ],
+        include_intermediate_baselines=True,
+    )
+
+    # --- Step 1: Verify passing with matching baselines ---
+    outcome_pass = run_annual_award_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    for ckpt in ("fact_processing", "identity_resolution", "contract_state"):
+        result = next(r for r in outcome_pass.checkpoint_results if r.checkpoint_name == ckpt)
+        assert result.status == "passed", f"{ckpt} should pass with matching baseline"
+
+    # --- Step 2: fact_processing can fail independently ---
+    (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "record_id": "award-001",
+                    "company_id": "company-999",  # Deliberately wrong
+                    "plan_code": "WRONG",
+                    "period": "2026-03",
+                    "award_amount": 0,
+                    "source_sheet": "TrusteeAwards",
+                },
+                {
+                    "record_id": "award-002",
+                    "company_id": "company-999",
+                    "plan_code": "WRONG",
+                    "period": "2026-03",
+                    "award_amount": 0,
+                    "source_sheet": "InvesteeAwards",
+                },
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    outcome_fp_fail = run_annual_award_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    fp_result = next(
+        r for r in outcome_fp_fail.checkpoint_results if r.checkpoint_name == "fact_processing"
+    )
+    assert fp_result.status == "failed", (
+        "fact_processing should fail with mismatched baseline"
+    )
+    # identity_resolution and contract_state still pass (independent failure)
+    for ckpt in ("identity_resolution", "contract_state"):
+        result = next(r for r in outcome_fp_fail.checkpoint_results if r.checkpoint_name == ckpt)
+        assert result.status == "passed", f"{ckpt} should still pass"
+
+    # Restore fact_processing baseline
+    (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "record_id": "award-001",
+                    "company_id": "company-001",
+                    "plan_code": "P9001",
+                    "period": "2026-03",
+                    "award_amount": 5000,
+                    "source_sheet": "TrusteeAwards",
+                },
+                {
+                    "record_id": "award-002",
+                    "company_id": "company-002",
+                    "plan_code": "S9009",
+                    "period": "2026-03",
+                    "award_amount": 1000,
+                    "source_sheet": "InvesteeAwards",
+                },
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    # --- Step 3: identity_resolution can fail independently ---
+    (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "record_id": "award-001",
+                    "resolved_identity": "company-999",  # Deliberately wrong
+                    "resolution_method": "static",
+                    "fallback_level": "none",
+                    "evidence_refs": [],
+                },
+                {
+                    "record_id": "award-002",
+                    "resolved_identity": "company-999",
+                    "resolution_method": "static",
+                    "fallback_level": "none",
+                    "evidence_refs": [],
+                },
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    outcome_ir_fail = run_annual_award_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    ir_result = next(
+        r for r in outcome_ir_fail.checkpoint_results if r.checkpoint_name == "identity_resolution"
+    )
+    assert ir_result.status == "failed", (
+        "identity_resolution should fail with mismatched baseline"
+    )
+
+    # Restore identity_resolution baseline
+    (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "record_id": "award-001",
+                    "resolved_identity": "company-001",
+                    "resolution_method": "static",
+                    "fallback_level": "none",
+                    "evidence_refs": [],
+                },
+                {
+                    "record_id": "award-002",
+                    "resolved_identity": "company-002",
+                    "resolution_method": "static",
+                    "fallback_level": "none",
+                    "evidence_refs": [],
+                },
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    # --- Step 4: contract_state can fail independently ---
+    (replay_root / "legacy_contract_state_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "period": "2026-03",
+                    "contract_state_rows": 99,  # Deliberately wrong
+                    "award_fixture_rows": 99,
+                    "loss_fixture_rows": 99,
+                }
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    outcome_cs_fail = run_annual_award_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    cs_result = next(
+        r for r in outcome_cs_fail.checkpoint_results if r.checkpoint_name == "contract_state"
+    )
+    assert cs_result.status == "failed", (
+        "contract_state should fail with mismatched baseline"
+    )
+
+
+def test_event_domain_intermediate_checkpoint_uses_baseline_loss(tmp_path) -> None:
+    """Test 2 (TDD RED): loss fact_processing, identity_resolution, and contract_state
+    each fail independently when the corresponding baseline file is edited."""
+    workbook_path = tmp_path / "annual_loss.xlsx"
+    _write_loss_workbook(workbook_path)
+    replay_root = tmp_path / "reference" / "historical_replays" / "annual_loss"
+
+    _write_loss_replay_assets(
+        replay_root,
+        legacy_snapshot_rows=[
+            {
+                "period": "2026-03",
+                "contract_state_rows": 1,
+                "award_fixture_rows": 1,
+                "loss_fixture_rows": 1,
+            }
+        ],
+        include_intermediate_baselines=True,
+    )
+
+    # --- Step 1: Verify passing with matching baselines ---
+    outcome_pass = run_annual_loss_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    for ckpt in ("fact_processing", "identity_resolution", "contract_state"):
+        result = next(r for r in outcome_pass.checkpoint_results if r.checkpoint_name == ckpt)
+        assert result.status == "passed", f"{ckpt} should pass with matching baseline"
+
+    # --- Step 2: fact_processing fails independently ---
+    (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "record_id": "loss-001",
+                    "company_id": "company-999",  # Wrong
+                    "plan_code": "WRONG",
+                    "period": "2026-03",
+                    "loss_amount": 0,
+                    "source_sheet": "企年受托流失(解约)",
+                },
+                {
+                    "record_id": "loss-002",
+                    "company_id": "company-999",
+                    "plan_code": "WRONG",
+                    "period": "2026-03",
+                    "loss_amount": 0,
+                    "source_sheet": "企年投资流失(解约)",
+                },
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    outcome_fp_fail = run_annual_loss_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    fp_result = next(
+        r for r in outcome_fp_fail.checkpoint_results if r.checkpoint_name == "fact_processing"
+    )
+    assert fp_result.status == "failed", (
+        "fact_processing should fail with mismatched baseline"
+    )
+    for ckpt in ("identity_resolution", "contract_state"):
+        result = next(r for r in outcome_fp_fail.checkpoint_results if r.checkpoint_name == ckpt)
+        assert result.status == "passed", f"{ckpt} should still pass"
+
+    # Restore
+    (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "record_id": "loss-001",
+                    "company_id": "company-001",
+                    "plan_code": "P9001",
+                    "period": "2026-03",
+                    "loss_amount": 80,
+                    "source_sheet": "企年受托流失(解约)",
+                },
+                {
+                    "record_id": "loss-002",
+                    "company_id": "company-002",
+                    "plan_code": "S9009",
+                    "period": "2026-03",
+                    "loss_amount": 60,
+                    "source_sheet": "企年投资流失(解约)",
+                },
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    # --- Step 3: contract_state fails independently ---
+    (replay_root / "legacy_contract_state_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "period": "2026-03",
+                    "contract_state_rows": 99,
+                    "award_fixture_rows": 99,
+                    "loss_fixture_rows": 99,
+                }
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    outcome_cs_fail = run_annual_loss_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    cs_result = next(
+        r for r in outcome_cs_fail.checkpoint_results if r.checkpoint_name == "contract_state"
+    )
+    assert cs_result.status == "failed", (
+        "contract_state should fail with mismatched baseline"
+    )
+
+
 def test_event_domain_failed_runs_write_same_package(tmp_path) -> None:
+    """Existing test: failed runs write the same package structure."""
     award_workbook = tmp_path / "annual_award.xlsx"
     loss_workbook = tmp_path / "annual_loss.xlsx"
     _write_award_workbook(award_workbook)
     _write_loss_workbook(loss_workbook)
     award_replay_root = tmp_path / "reference" / "historical_replays" / "annual_award"
     loss_replay_root = tmp_path / "reference" / "historical_replays" / "annual_loss"
-    failing_snapshot = [
-        {
-            "period": "2026-03",
-            "contract_state_rows": 99,
-            "award_fixture_rows": 99,
-            "loss_fixture_rows": 99,
-        }
-    ]
-    _write_award_assets(award_replay_root, legacy_snapshot_rows=failing_snapshot)
-    _write_loss_assets(loss_replay_root, legacy_snapshot_rows=failing_snapshot)
+
+    # Use intermediate baselines with mismatching monthly_snapshot
+    _write_award_replay_assets(award_replay_root, legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 99, "award_fixture_rows": 99, "loss_fixture_rows": 99}], include_intermediate_baselines=True)
+    _write_loss_replay_assets(loss_replay_root, legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 99, "award_fixture_rows": 99, "loss_fixture_rows": 99}], include_intermediate_baselines=True)
 
     award_outcome = run_annual_award_slice(
         workbook=award_workbook,
