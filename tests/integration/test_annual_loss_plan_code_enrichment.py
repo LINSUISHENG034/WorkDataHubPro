@@ -222,3 +222,61 @@ def test_annual_loss_plan_code_enrichment_falls_back_to_collective_default_plan_
     assert event.rule_id == "domain_default_plan_code"
     assert event.value_before == ""
     assert event.value_after == "AN001"
+
+
+def test_annual_loss_plan_code_enrichment_ignores_blank_and_noneish_lookup_plan_codes() -> None:
+    service = AnnualLossPlanCodeEnrichmentService(
+        CustomerPlanHistoryLookup(
+            [
+                {
+                    "company_id": "company-020",
+                    "product_line_code": "PL201",
+                    "plan_code": None,
+                    "effective_period": "2026-02",
+                    "valid_to": "9999-12-31",
+                },
+                {
+                    "company_id": "company-020",
+                    "product_line_code": "PL201",
+                    "plan_code": "   ",
+                    "effective_period": "2026-01",
+                    "valid_to": "9999-12-31",
+                },
+                {
+                    "company_id": "company-020",
+                    "product_line_code": "PL201",
+                    "plan_code": "None",
+                    "effective_period": "2025-12",
+                    "valid_to": "9999-12-31",
+                },
+            ]
+        )
+    )
+    fact = CanonicalFactRecord(
+        run_id="run-001",
+        record_id="fact-020",
+        batch_id="annual_loss:2026-03",
+        domain="annual_loss",
+        fact_type="annual_loss",
+        fields={
+            "company_id": "company-020",
+            "product_line_code": "PL201",
+            "plan_type": "单一计划",
+            "plan_code": "",
+            "period": "2026-03",
+        },
+        lineage_ref="record-020",
+        trace_ref="trace:record-020",
+    )
+
+    enriched = service.enrich(
+        fact,
+        anchor_row_no=20,
+        config_release_id="2026-04-12-annual-loss-baseline",
+    )
+
+    assert enriched.fact.fields["plan_code"] == "AN002"
+    event = enriched.trace_events[0]
+    assert event.rule_id == "domain_default_plan_code"
+    assert event.value_before == ""
+    assert event.value_after == "AN002"

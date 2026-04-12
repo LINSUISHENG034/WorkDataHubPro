@@ -38,11 +38,24 @@ class CustomerPlanHistoryLookup:
             reverse=True,
         )
         preferred_prefix = "P" if plan_type == "集合计划" else "S"
+        valid_plan_codes: list[str] = []
         for row in candidates:
-            plan_code = str(row["plan_code"])
+            plan_code = self._normalize_plan_code(row.get("plan_code"))
+            if plan_code is None:
+                continue
+            valid_plan_codes.append(plan_code)
             if plan_code.startswith(preferred_prefix):
                 return plan_code
-        return str(candidates[0]["plan_code"]) if candidates else None
+        return valid_plan_codes[0] if valid_plan_codes else None
+
+    @staticmethod
+    def _normalize_plan_code(value: object) -> str | None:
+        plan_code = str(value or "").strip()
+        if not plan_code:
+            return None
+        if plan_code.lower() in {"none", "null"}:
+            return None
+        return plan_code
 
 
 class AnnualLossPlanCodeEnrichmentService:
