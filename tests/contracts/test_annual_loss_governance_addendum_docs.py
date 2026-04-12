@@ -50,13 +50,64 @@ def test_annual_loss_acceptance_updates_coverage_matrix_without_dropping_runtime
         " `tests/replay/test_annual_loss_explainability_slo.py` |"
         " N/A | the slice replaces fixture-only loss dependency with published fact coverage |"
     ) in coverage_matrix
-    assert "| CT-011 | `company_lookup_queue` special orchestration domain and async retry/runtime contract |" in coverage_matrix
-    assert "| CT-012 | `reference_sync` special orchestration domain, daily schedule, and sync-state persistence for authoritative business-schema targets |" in coverage_matrix
-    assert "| CT-013 | enterprise identity cache and queue persistence surfaces (`enrichment_requests`, `enrichment_index`, `company_name_index`) |" in coverage_matrix
-    assert "| CT-014 | enterprise EQC raw and cleansed persistence surfaces (`base_info`, `business_info`, `biz_label`) |" in coverage_matrix
-    assert "| CT-015 | manual `customer-mdm` operator command surface outside ETL hook execution (`sync`, `snapshot`, `init-year`, `validate`, `cutover`) |" in coverage_matrix
-    assert "| CT-016 | shared unresolved-name and failed-record operator artifact parity across first-wave runs |" in coverage_matrix
-    assert "current accepted event-domain slices prove replay-backed and current-row lookup behavior" in coverage_matrix
+    assert (
+        "| CT-011 | `company_lookup_queue` special orchestration domain and async retry/runtime contract |"
+        " operator |"
+        " `src/work_data_hub/cli/etl/domain_validation.py`, `src/work_data_hub/cli/etl/executors.py`, `src/work_data_hub/domain/company_enrichment/lookup_queue.py`, `src/work_data_hub/orchestration/schedules.py`, `src/work_data_hub/orchestration/sensors.py` |"
+        " future deferred-lookup runtime and operator flow with explicit queue evidence |"
+        " `apps` + `capabilities` + `platform` |"
+        " 2026-04-12 legacy audit + follow-on operator tooling/runtime plan |"
+        " `deferred` |"
+    ) in coverage_matrix
+    assert (
+        "| CT-012 | `reference_sync` special orchestration domain, daily schedule, and sync-state persistence for authoritative business-schema targets |"
+        " operator |"
+        " `src/work_data_hub/cli/etl/domain_validation.py`, `src/work_data_hub/cli/etl/executors.py`, `src/work_data_hub/orchestration/reference_sync_ops.py`, `src/work_data_hub/io/repositories/sync_state_repository.py`, `config/reference_sync.yml` |"
+        " future explicit bootstrap/publication operator flow or retained reference-sync runtime |"
+        " `apps` + `platform` + `capabilities` |"
+        " 2026-04-12 legacy audit + future reference bootstrap/runtime plan |"
+        " `deferred` |"
+    ) in coverage_matrix
+    assert (
+        "| CT-013 | enterprise identity cache and queue persistence surfaces (`enrichment_requests`, `enrichment_index`, `company_name_index`) |"
+        " integration |"
+        " `src/work_data_hub/domain/company_enrichment/lookup_queue.py`, `src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py`, `src/work_data_hub/infrastructure/enrichment/repository/other_ops.py` |"
+        " future identity-runtime persistence design with explicit retain/defer/retire decisions for cache and queue tables |"
+        " `capabilities` + `platform` |"
+        " 2026-04-12 legacy audit + future identity runtime/persistence plan |"
+        " `deferred` |"
+    ) in coverage_matrix
+    assert (
+        "| CT-014 | enterprise EQC raw and cleansed persistence surfaces (`base_info`, `business_info`, `biz_label`) |"
+        " integration |"
+        " `src/work_data_hub/infrastructure/enrichment/repository/other_ops.py`, `src/work_data_hub/infrastructure/enrichment/business_info_repository.py`, `src/work_data_hub/infrastructure/enrichment/biz_label_repository.py`, `src/work_data_hub/infrastructure/enrichment/data_refresh_service.py` |"
+        " future provider-persistence design or explicit retirement decision for raw/cleansed EQC storage |"
+        " `capabilities` + `platform` |"
+        " 2026-04-12 legacy audit + future identity runtime/persistence plan |"
+        " `deferred` |"
+    ) in coverage_matrix
+    assert (
+        "| CT-015 | manual `customer-mdm` operator command surface outside ETL hook execution (`sync`, `snapshot`, `init-year`, `validate`, `cutover`) |"
+        " operator |"
+        " `src/work_data_hub/cli/__main__.py`, `src/work_data_hub/cli/customer_mdm/*`, `src/work_data_hub/customer_mdm/*` |"
+        " future operator-tools / runbook coverage for manual projection lifecycle management |"
+        " `apps` + `capabilities` + `docs` |"
+        " 2026-04-12 legacy audit + follow-on operator tooling/runtime plan |"
+        " `deferred` |"
+    ) in coverage_matrix
+    assert (
+        "| CT-016 | shared unresolved-name and failed-record operator artifact parity across first-wave runs |"
+        " operator |"
+        " `src/work_data_hub/domain/annuity_performance/service.py`, `src/work_data_hub/domain/annuity_income/service.py`, `src/work_data_hub/infrastructure/validation/*` |"
+        " future cross-domain operator artifact contract and runbook coverage |"
+        " `capabilities` + `apps` + `docs` |"
+        " 2026-04-12 legacy audit + future operator artifact follow-on plan |"
+        " `pending` |"
+    ) in coverage_matrix
+    assert (
+        "current accepted event-domain slices prove replay-backed and current-row lookup behavior,"
+        " not a full repository-wide temporal selection contract for historical/current contract rows"
+    ) in coverage_matrix
     assert "| XD-005 | contract-state output (`customer.客户年金计划`) influences `annual_award` and `annual_loss` plan-code enrichment behavior |" in coverage_matrix
     assert "annual_loss acceptance now proves this dependency explicitly while it remains active for both event-domain slices" in coverage_matrix
 
