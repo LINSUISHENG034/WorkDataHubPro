@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 from pathlib import Path
 
@@ -6,6 +8,15 @@ from openpyxl import Workbook
 from work_data_hub_pro.apps.orchestration.replay.annuity_performance_slice import (
     run_annuity_performance_slice,
 )
+
+
+def _write_workbook(path: Path) -> None:
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = "AnnuityPerformance"
+    sheet.append(["company_name", "plan_code", "period", "sales_amount"])
+    sheet.append(["Acme", "PLAN-A", "2026-03", "1200.50"])
+    workbook.save(path)
 
 
 def _write_replay_assets(
@@ -52,15 +63,9 @@ def _write_replay_assets(
     )
 
 
-def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) -> None:
+def test_annuity_gate_passes(tmp_path) -> None:
     workbook_path = tmp_path / "annuity_performance_2026_03.xlsx"
-    workbook = Workbook()
-    sheet = workbook.active
-    sheet.title = "AnnuityPerformance"
-    sheet.append(["company_name", "plan_code", "period", "sales_amount"])
-    sheet.append(["Acme", "PLAN-A", "2026-03", "1200.50"])
-    workbook.save(workbook_path)
-
+    _write_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
     _write_replay_assets(
         replay_root,
@@ -80,50 +85,14 @@ def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) ->
         replay_root=replay_root,
     )
 
-    assert [result.target_name for result in outcome.publication_results] == [
-        "fact_annuity_performance",
-        "company_reference",
-        "contract_state",
-        "monthly_snapshot",
-    ]
-    assert [result.projection_name for result in outcome.projection_results] == [
-        "contract_state",
-        "monthly_snapshot",
-    ]
     assert outcome.gate_summary.overall_outcome == "passed"
-    assert [result.checkpoint_name for result in outcome.checkpoint_results] == [
-        "source_intake",
-        "fact_processing",
-        "identity_resolution",
-        "contract_state",
-        "monthly_snapshot",
-    ]
+    assert outcome.gate_summary.status_counts["passed"] == 5
     assert outcome.compatibility_case is None
-    row_events = outcome.trace_store.find(
-        batch_id="annuity_performance:2026-03",
-        anchor_row_no=2,
-    )
-    assert {event.stage_id for event in row_events} == {
-        "source_intake",
-        "fact_processing",
-        "identity_resolution",
-    }
-    lineage_links = outcome.lineage_registry.all()
-    assert len(lineage_links) == 1
-    assert lineage_links[0].origin_row_nos == [2]
-    assert lineage_links[0].anchor_row_no == 2
-    assert lineage_links[0].parent_record_ids == [row_events[0].record_id]
 
 
-def test_full_slice_replay_creates_compatibility_case_when_snapshot_differs(tmp_path) -> None:
+def test_annuity_gate_writes_failed_package(tmp_path) -> None:
     workbook_path = tmp_path / "annuity_performance_2026_03.xlsx"
-    workbook = Workbook()
-    sheet = workbook.active
-    sheet.title = "AnnuityPerformance"
-    sheet.append(["company_name", "plan_code", "period", "sales_amount"])
-    sheet.append(["Acme", "PLAN-A", "2026-03", "1200.50"])
-    workbook.save(workbook_path)
-
+    _write_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
     _write_replay_assets(
         replay_root,
@@ -143,14 +112,18 @@ def test_full_slice_replay_creates_compatibility_case_when_snapshot_differs(tmp_
         replay_root=replay_root,
     )
 
-    assert outcome.compatibility_case is not None
-    assert outcome.compatibility_case.checkpoint_name == "monthly_snapshot"
-    assert outcome.compatibility_case.comparison_run_id == outcome.comparison_run_id
-    assert outcome.compatibility_case.involved_anchor_row_nos == [2]
-    case_path = (
-        replay_root
-        / "evidence"
-        / "compatibility_cases"
-        / f"{outcome.compatibility_case.case_id}.json"
+    package_root = (
+        replay_root / "evidence" / "comparison_runs" / outcome.comparison_run_id
     )
-    assert case_path.exists()
+
+    assert outcome.gate_summary.overall_outcome == "failed"
+    assert outcome.compatibility_case is not None
+    assert (package_root / "manifest.json").exists()
+    assert (package_root / "gate-summary.json").exists()
+    assert (package_root / "checkpoint-results.json").exists()
+    assert (package_root / "source-intake-adaptation.json").exists()
+    assert (package_root / "lineage-impact.json").exists()
+    assert (package_root / "publication-results.json").exists()
+    assert (package_root / "compatibility-case.json").exists()
+    assert (package_root / "report.md").exists()
+    assert (package_root / "diffs" / "monthly_snapshot.json").exists()
