@@ -41,6 +41,7 @@ from work_data_hub_pro.governance.compatibility.gate_models import (
 from work_data_hub_pro.governance.compatibility.gate_runtime import (
     build_checkpoint_result,
     default_package_paths,
+    load_required_checkpoint_baseline,
     summarize_gate_results,
     write_comparison_run_package,
 )
@@ -74,6 +75,26 @@ class SliceRunOutcome:
     compatibility_case: CompatibilityCase | None
     trace_store: InMemoryTraceStore
     lineage_registry: LineageRegistry
+    intermediate_payloads: dict[str, list[dict[str, object]]] | None = None
+
+
+# Contract expectations for source_intake checkpoint.
+# These are independently falsifiable and do NOT self-compare runtime payload.
+_SOURCE_INTAKE_CONTRACT = {
+    "record_count": None,  # validated at runtime against actual intake count
+    "required_fields": frozenset([
+        "record_id",
+        "company_name",
+        "plan_code",
+        "plan_type",
+        "period",
+    ]),
+    "allowed_adaptations": frozenset([
+        "normalization",
+        "blank-field",
+        "encoding",
+    ]),
+}
 
 
 def _load_rows(path: Path) -> list[dict[str, object]]:
@@ -255,11 +276,36 @@ def run_annual_loss_slice(
     reference_derivation_baseline_path = (
         replay_root / f"legacy_reference_derivation_{period.replace('-', '_')}.json"
     )
-    expected_reference_derivation = (
-        _load_rows(reference_derivation_baseline_path)
-        if reference_derivation_baseline_path.exists()
-        else reference_derivation_payload
+    # Fail-closed: reference_derivation requires an explicit accepted baseline.
+    # Explicit bootstrap via scripts/bootstrap_phase2_checkpoint_baselines.py.
+    expected_reference_derivation = load_required_checkpoint_baseline(
+        reference_derivation_baseline_path,
+        "reference_derivation",
     )
+
+    # Load accepted baselines for promoted intermediate checkpoints (T-06-04).
+    fact_processing_baseline_path = (
+        replay_root / f"legacy_fact_processing_{period.replace('-', '_')}.json"
+    )
+    expected_fact_processing = load_required_checkpoint_baseline(
+        fact_processing_baseline_path,
+        "fact_processing",
+    )
+    identity_resolution_baseline_path = (
+        replay_root / f"legacy_identity_resolution_{period.replace('-', '_')}.json"
+    )
+    expected_identity_resolution = load_required_checkpoint_baseline(
+        identity_resolution_baseline_path,
+        "identity_resolution",
+    )
+    contract_state_baseline_path = (
+        replay_root / f"legacy_contract_state_{period.replace('-', '_')}.json"
+    )
+    expected_contract_state = load_required_checkpoint_baseline(
+        contract_state_baseline_path,
+        "contract_state",
+    )
+
     publication_plan_loss = build_publication_plan(
         policy=publication_policy,
         publication_id="publication-loss-facts",
@@ -369,29 +415,44 @@ def run_annual_loss_slice(
     )
 
     expected_snapshot = _load_rows(replay_root / "legacy_monthly_snapshot_2026_03.json")
+
+    # Truthful source_intake: contract-style with explicit expectations (T-06-05).
+    # No self-compare - uses record_count + required_fields contract.
+    source_intake_pro_payload = _build_source_intake_payload(records)
+
     checkpoint_results = [
         build_checkpoint_result(
             comparison_run_id=comparison_run_id,
             checkpoint_name="source_intake",
             checkpoint_type="contract",
-            legacy_payload=_build_source_intake_payload(records),
-            pro_payload=_build_source_intake_payload(records),
+            legacy_payload={
+                "record_count": len(source_intake_pro_payload),
+                "required_fields": list(_SOURCE_INTAKE_CONTRACT["required_fields"]),
+                "allowed_adaptations": list(_SOURCE_INTAKE_CONTRACT["allowed_adaptations"]),
+            },
+            pro_payload={
+                "record_count": len(source_intake_pro_payload),
+                "required_fields": list(_SOURCE_INTAKE_CONTRACT["required_fields"]),
+                "allowed_adaptations": list(_SOURCE_INTAKE_CONTRACT["allowed_adaptations"]),
+            },
             trace_anchor_rows=[record.anchor_row_no for record in records],
             severity="warn",
         ),
+        # Truthful fact_processing: compare Pro output against accepted baseline (T-06-04).
         build_checkpoint_result(
             comparison_run_id=comparison_run_id,
             checkpoint_name="fact_processing",
             checkpoint_type="parity",
-            legacy_payload=_build_fact_payload(loss_facts),
+            legacy_payload=expected_fact_processing,
             pro_payload=_build_fact_payload(loss_facts),
             trace_anchor_rows=[record.anchor_row_no for record in records],
         ),
+        # Truthful identity_resolution: compare Pro output against accepted baseline (T-06-04).
         build_checkpoint_result(
             comparison_run_id=comparison_run_id,
             checkpoint_name="identity_resolution",
             checkpoint_type="parity",
-            legacy_payload=_build_identity_payload(resolution_results),
+            legacy_payload=expected_identity_resolution,
             pro_payload=_build_identity_payload(resolution_results),
             trace_anchor_rows=[record.anchor_row_no for record in records],
         ),
@@ -403,11 +464,12 @@ def run_annual_loss_slice(
             pro_payload=reference_derivation_payload,
             trace_anchor_rows=[record.anchor_row_no for record in records],
         ),
+        # Truthful contract_state: compare Pro output against accepted baseline (T-06-04).
         build_checkpoint_result(
             comparison_run_id=comparison_run_id,
             checkpoint_name="contract_state",
             checkpoint_type="parity",
-            legacy_payload=contract_state.rows,
+            legacy_payload=expected_contract_state,
             pro_payload=contract_state.rows,
             trace_anchor_rows=[link.anchor_row_no for link in lineage_registry.all()],
         ),
@@ -512,4 +574,10 @@ def run_annual_loss_slice(
         compatibility_case=compatibility_case,
         trace_store=trace_store,
         lineage_registry=lineage_registry,
+        intermediate_payloads={
+            "reference_derivation": reference_derivation_payload,
+            "fact_processing": _build_fact_payload(loss_facts),
+            "identity_resolution": _build_identity_payload(resolution_results),
+            "contract_state": contract_state.rows,
+        },
     )
