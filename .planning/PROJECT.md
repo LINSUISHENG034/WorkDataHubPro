@@ -33,8 +33,9 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 ## Current State
 
 - Phase 1 complete: authoritative mapping, rule-classification, parity-baseline, and offline checkpoint artifacts are in place
-- Phase 2 complete: explicit stage contracts, deterministic parity gates, derivation checkpoint governance, and CI-ready gate tiers are in place
-- Current focus has shifted to Phase 3: orchestration refactor, reusable pipeline composition, and typed failure explainability
+- Phase 2 implementation complete: explicit stage contracts, deterministic parity gates, derivation checkpoint governance, and CI-ready gate tiers are in place
+- Phase 2 governance sign-off pending: Phase 6 remediation (truthful intermediate gates via accepted baseline comparisons, and diff accuracy via multiset-subtraction correction) is required before Phase 2 governance sign-off closes
+- Current focus: Phase 6 execution — Phase 2 governance remediation for truthful intermediate gates and status synchronization
 - Deferred carry-forward from Phase 2: verification-asset rows for `golden_set`, `golden_baseline`, `real_data_sample`, and dedicated error-case fixtures remain explicitly deferred
 
 ### Out of Scope
