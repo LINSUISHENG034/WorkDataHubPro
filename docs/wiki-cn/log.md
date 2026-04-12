@@ -60,3 +60,10 @@
 - 抽象出 5 条可复用经验：checkpoint 真实性、baseline 资产强依赖、实现完成与治理签收分层、evidence diff 准确性、planning/code/wiki 冲突显式记录
 - 更新 `index.md`，把新的 lesson 接入中文 wiki 根索引
 - 更新 `roadmap/overview.md`，补记 2026-04-13 的治理审查状态差异
+
+## [2026-04-13] sync | Phase 6 治理状态同步 — Phase 2 governance sign-off 待闭合
+
+- Phase 2 实现已完成：显式 stage contracts、确定性 parity gates、derivation checkpoint governance、CI-ready gate tiers 均已到位
+- Phase 2 governance sign-off 待补齐：Phase 6 需完成 truthful intermediate gates（基于 accepted baseline 比较的 checkpoint）和 diff accuracy remediation（multiset 减法修正），然后 Phase 2 governance sign-off 才能正式闭合
+- Phase 6 包含 3 个 plan：06-01（fail-closed baseline + bootstrap + diff 修正）、06-02（truthful intermediate checkpoint wiring）、06-03（governance 状态同步 + contract coverage）
+- 验证命令：`uv run pytest tests/contracts/test_phase2_governance_status_sync.py -v`

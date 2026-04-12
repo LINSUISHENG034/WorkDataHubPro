@@ -101,7 +101,12 @@
 因此更准确的当前表述应是：
 
 - Phase 2 implementation：已完成
-- Phase 2 governance sign-off：待补齐 checkpoint truthfulness 与 baseline enforcement 后再正式闭合
+- Phase 2 governance sign-off：待补齐 truthful intermediate gates（基于 accepted baseline 的 checkpoint 比较）和 diff accuracy remediation（multiset 减法修正）后，Phase 6 正式闭合，Phase 2 governance sign-off 才能正式闭合
+
+Phase 6 remediation 已完成项目（2026-04-13）：
+- truthfulness: 共享 fail-closed baseline 加载、explicit bootstrap 路径、fact/identity/contract_state 中间 checkpoint 基于 accepted baseline 比较而非自比较
+- accuracy: `_build_diff` duplicate-row 计数修正为正确的 multiset 减法语义
+- coverage: contract 测试 `tests/contracts/test_phase2_governance_status_sync.py` 守护 planning/wiki 状态同步
 
 相关经验已沉淀到：
 
