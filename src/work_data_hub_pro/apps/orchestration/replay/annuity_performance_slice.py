@@ -390,35 +390,24 @@ def run_annuity_performance_slice(
 
     expected_snapshot = _load_rows(replay_root / "legacy_monthly_snapshot_2026_03.json")
 
-    # Truthful source_intake: contract-style with explicit expectations (T-06-05).
-    # No self-compare - uses record_count + required_fields contract.
+    # Truthful source_intake: load accepted baseline, compare against current intake (T-06-05).
+    # Fails closed if baseline is absent (load_required_checkpoint_baseline raises).
+    source_intake_baseline_path = (
+        replay_root / f"legacy_source_intake_{period.replace('-', '_')}.json"
+    )
+    expected_source_intake = load_required_checkpoint_baseline(
+        source_intake_baseline_path,
+        "source_intake",
+    )
     source_intake_pro_payload = _build_source_intake_payload(records)
-    source_intake_status = "passed"
-    if len(source_intake_pro_payload) == 0:
-        source_intake_status = "failed"
-    elif not all(
-        _SOURCE_INTAKE_CONTRACT["required_fields"].issubset(
-            frozenset(record.keys())
-        )
-        for record in source_intake_pro_payload
-    ):
-        source_intake_status = "warning"
 
     checkpoint_results = [
         build_checkpoint_result(
             comparison_run_id=comparison_run_id,
             checkpoint_name="source_intake",
-            checkpoint_type="contract",
-            legacy_payload={
-                "record_count": len(source_intake_pro_payload),
-                "required_fields": list(_SOURCE_INTAKE_CONTRACT["required_fields"]),
-                "allowed_adaptations": list(_SOURCE_INTAKE_CONTRACT["allowed_adaptations"]),
-            },
-            pro_payload={
-                "record_count": len(source_intake_pro_payload),
-                "required_fields": list(_SOURCE_INTAKE_CONTRACT["required_fields"]),
-                "allowed_adaptations": list(_SOURCE_INTAKE_CONTRACT["allowed_adaptations"]),
-            },
+            checkpoint_type="parity",
+            legacy_payload=expected_source_intake,
+            pro_payload=source_intake_pro_payload,
             trace_anchor_rows=[record.anchor_row_no for record in records],
             severity="warn",
         ),
@@ -564,5 +553,6 @@ def run_annuity_performance_slice(
             "fact_processing": _build_fact_payload(resolved_facts),
             "identity_resolution": _build_identity_payload(resolution_results),
             "contract_state": contract_state.rows,
+            "source_intake": source_intake_pro_payload,
         },
     )

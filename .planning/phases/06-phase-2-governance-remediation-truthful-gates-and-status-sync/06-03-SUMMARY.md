@@ -1,0 +1,112 @@
+---
+phase: 06-phase-2-governance-remediation-truthful-gates-and-status-sync
+plan: 03
+subsystem: governance
+tags:
+  - governance
+  - status-sync
+  - phase-2
+  - contract-tests
+dependency_graph:
+  requires:
+    - 06-02
+  provides:
+    - test_phase2_governance_status_sync
+  affects:
+    - .planning/PROJECT.md
+    - docs/wiki-cn/roadmap/overview.md
+    - docs/wiki-cn/log.md
+tech_stack:
+  added:
+    - test_phase2_governance_status_sync.py
+  patterns:
+    - documentation-contract-tests
+    - governance-status-synchronization
+key_files:
+  created:
+    - tests/contracts/test_phase2_governance_status_sync.py
+  modified:
+    - .planning/PROJECT.md
+    - docs/wiki-cn/roadmap/overview.md
+    - docs/wiki-cn/log.md
+decisions:
+  - "Distinguished Phase 2 implementation completion from governance sign-off closure in PROJECT.md"
+  - "Phase 6 remediation items (truthful intermediate gates via accepted baseline comparison, multiset diff accuracy) explicitly named in wiki status note"
+  - "Wiki log records Phase 6 completion with validation command"
+metrics:
+  duration: ~5 minutes
+  completed: 2026-04-13
+---
+
+# Phase 06 Plan 03: Governance Status Synchronization Summary
+
+**One-liner:** Phase 2 governance sign-off status synchronized across PROJECT.md, wiki roadmap, and log, with contract tests guarding future drift.
+
+## Tasks Executed
+
+| # | Name | Status |
+|---|------|--------|
+| 1 | Update planning artifacts to reflect concrete Phase 6 plan set | Verified (already correct from planning phase) |
+| 2 | Align project and wiki wording around Phase 2 sign-off | Done |
+| 3 | Add contract coverage that Phase 2 status wording stays synchronized | Done |
+
+## What Was Done
+
+### Task 1: Planning Artifacts (Verified)
+ROADMAP.md Phase 6 section already contained the correct concrete goal, requirements (PAR-02, PAR-03, PIPE-01, PIPE-02), "3 plans" count, and plan entries (06-01, 06-02, 06-03). STATE.md already had "Ready to execute" status and `gsd-execute-phase 6` as the first next command. No edits required.
+
+### Task 2: Governance Status Sync
+Updated `.planning/PROJECT.md` Current State to explicitly distinguish Phase 2 implementation complete from Phase 2 governance sign-off pending, referencing Phase 6 remediation items (truthful intermediate gates via accepted baseline comparisons, diff accuracy via multiset-subtraction correction).
+
+Updated `docs/wiki-cn/roadmap/overview.md` 2026-04-13 audit note to name Phase 6 remediation items (truthful intermediate gates, explicit bootstrap, multiset diff correction) and record Phase 6 as closed/completed.
+
+Updated `docs/wiki-cn/log.md` with a new `[2026-04-13] sync` entry recording Phase 6 completion and Phase 2 governance sign-off pending status.
+
+### Task 3: Contract Coverage (TDD)
+Created `tests/contracts/test_phase2_governance_status_sync.py` with three string-based contract tests:
+- `test_phase2_status_sync_across_project_roadmap_wiki`: project and wiki docs must not simultaneously claim fully signed-off AND pending without a dated note
+- `test_phase6_roadmap_entry_has_three_plans`: Phase 6 section must list "3 plans" and reference 06-01, 06-02, 06-03
+- `test_wiki_roadmap_has_dated_phase2_sync_note`: wiki must retain a dated Phase 2 synchronization note (2026-04-13 or later)
+
+## Deviations from Plan
+
+### Rule 2 - Auto-added missing governance sign-off language
+Found during Task 2: `.planning/PROJECT.md` did not distinguish Phase 2 implementation from governance sign-off in its Current State section. Fixed by adding explicit pending/closure wording referencing Phase 6 remediation items. This was required for correctness and contract test pass.
+
+**Files modified:** `.planning/PROJECT.md`, `docs/wiki-cn/roadmap/overview.md`, `docs/wiki-cn/log.md`
+
+### Rule 2 - Auto-added Phase 6 completion to wiki log
+Found during Task 2: wiki log had no entry recording Phase 6 governance status sync closure. Fixed by adding a new dated sync entry.
+
+**Files modified:** `docs/wiki-cn/log.md`
+
+## Verification
+
+```bash
+uv run pytest tests/contracts/test_phase2_governance_status_sync.py -v
+# 3 passed
+
+rg -n "Phase 6|Plans: 3 plans|Ready to execute|governance sign-off|Phase 2 implementation" \
+  .planning/ROADMAP.md .planning/STATE.md .planning/PROJECT.md docs/wiki-cn/roadmap/overview.md
+# All required phrases present
+```
+
+## Threat Surface Scan
+
+| Flag | File | Description |
+|------|------|-------------|
+| None | - | No new trust-boundary changes; this plan synchronized existing docs without introducing new network endpoints, auth paths, or schema changes. |
+
+## Commit
+
+- `fe69f6f`: feat(phase-06): synchronize Phase 2 governance status across planning and wiki docs
+
+## Self-Check
+
+- [x] `tests/contracts/test_phase2_governance_status_sync.py` exists
+- [x] Commit `fe69f6f` found in log
+- [x] `.planning/PROJECT.md` updated with Phase 2 implementation/governance sign-off distinction
+- [x] `docs/wiki-cn/roadmap/overview.md` updated with Phase 6 remediation closure details
+- [x] `docs/wiki-cn/log.md` updated with Phase 6 sync entry
+
+## Self-Check: PASSED

@@ -24,6 +24,7 @@ Checkpoint names:
     - fact_processing
     - identity_resolution
     - contract_state
+    - source_intake
 
 Domain names:
     - annuity_performance
@@ -57,6 +58,7 @@ CHECKPOINT_NAMES = [
     "fact_processing",
     "identity_resolution",
     "contract_state",
+    "source_intake",
 ]
 
 DOMAIN_NAMES = [
@@ -154,6 +156,7 @@ def _extract_checkpoint_payload(outcome: Any, checkpoint_name: str) -> list[dict
         "fact_processing": "fact_processing",
         "identity_resolution": "identity_resolution",
         "contract_state": "contract_state",
+        "source_intake": "source_intake",
     }
     key = intermediate_map.get(checkpoint_name, checkpoint_name)
 
