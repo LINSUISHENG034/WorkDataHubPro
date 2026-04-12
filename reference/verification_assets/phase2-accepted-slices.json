@@ -67,6 +67,50 @@
       "notes": "Phase 2 confirms this is the target baseline, but the sample is not yet repo-native."
     },
     {
+      "asset_id": "phase2-annuity-performance-checkpoint-baseline-reference-derivation",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annuity_performance",
+      "checkpoint": "reference_derivation",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the reference_derivation intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when reference-derivation semantics change.",
+      "reference_location": "reference/historical_replays/annuity_performance/legacy_reference_derivation_2026_03.json",
+      "notes": "Fail-closed baseline loaded by load_required_checkpoint_baseline."
+    },
+    {
+      "asset_id": "phase2-annuity-performance-checkpoint-baseline-fact-processing",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annuity_performance",
+      "checkpoint": "fact_processing",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the fact_processing intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when fact-processing semantics change.",
+      "reference_location": "reference/historical_replays/annuity_performance/legacy_fact_processing_2026_03.json",
+      "notes": "Replaces prior self-compare placeholder."
+    },
+    {
+      "asset_id": "phase2-annuity-performance-checkpoint-baseline-identity-resolution",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annuity_performance",
+      "checkpoint": "identity_resolution",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the identity_resolution intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when identity-resolution semantics change.",
+      "reference_location": "reference/historical_replays/annuity_performance/legacy_identity_resolution_2026_03.json",
+      "notes": "Replaces prior self-compare placeholder."
+    },
+    {
+      "asset_id": "phase2-annuity-performance-checkpoint-baseline-contract-state",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annuity_performance",
+      "checkpoint": "contract_state",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the contract_state intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when contract-state projection semantics change.",
+      "reference_location": "reference/historical_replays/annuity_performance/legacy_contract_state_2026_03.json",
+      "notes": "Replaces prior self-compare placeholder."
+    },
+    {
       "asset_id": "phase2-annual-award-replay-baseline",
       "asset_kind": "replay_baseline",
       "slice": "annual_award",
@@ -127,6 +171,50 @@
       "notes": "Target baseline confirmed, artifact still missing."
     },
     {
+      "asset_id": "phase2-annual-award-checkpoint-baseline-reference-derivation",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annual_award",
+      "checkpoint": "reference_derivation",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the reference_derivation intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when reference-derivation semantics change.",
+      "reference_location": "reference/historical_replays/annual_award/legacy_reference_derivation_2026_03.json",
+      "notes": "Fail-closed baseline loaded by load_required_checkpoint_baseline."
+    },
+    {
+      "asset_id": "phase2-annual-award-checkpoint-baseline-fact-processing",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annual_award",
+      "checkpoint": "fact_processing",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the fact_processing intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when fact-processing semantics change.",
+      "reference_location": "reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json",
+      "notes": "Replaces prior self-compare placeholder."
+    },
+    {
+      "asset_id": "phase2-annual-award-checkpoint-baseline-identity-resolution",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annual_award",
+      "checkpoint": "identity_resolution",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the identity_resolution intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when identity-resolution semantics change.",
+      "reference_location": "reference/historical_replays/annual_award/legacy_identity_resolution_2026_03.json",
+      "notes": "Replaces prior self-compare placeholder."
+    },
+    {
+      "asset_id": "phase2-annual-award-checkpoint-baseline-contract-state",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annual_award",
+      "checkpoint": "contract_state",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the contract_state intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when contract-state projection semantics change.",
+      "reference_location": "reference/historical_replays/annual_award/legacy_contract_state_2026_03.json",
+      "notes": "Replaces prior self-compare placeholder."
+    },
+    {
       "asset_id": "phase2-annual-loss-replay-baseline",
       "asset_kind": "replay_baseline",
       "slice": "annual_loss",
@@ -185,6 +273,50 @@
       "refresh_trigger": "Register when a governed repository-native or externally governed sample is admitted.",
       "reference_location": "docs/wiki-cn/governance/phase-2-decisions.md",
       "notes": "Phase 2 confirms the target baseline, but the sample is not yet present in-repo."
+    },
+    {
+      "asset_id": "phase2-annual-loss-checkpoint-baseline-reference-derivation",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annual_loss",
+      "checkpoint": "reference_derivation",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the reference_derivation intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when reference-derivation semantics change.",
+      "reference_location": "reference/historical_replays/annual_loss/legacy_reference_derivation_2026_03.json",
+      "notes": "Fail-closed baseline loaded by load_required_checkpoint_baseline."
+    },
+    {
+      "asset_id": "phase2-annual-loss-checkpoint-baseline-fact-processing",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annual_loss",
+      "checkpoint": "fact_processing",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the fact_processing intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when fact-processing semantics change.",
+      "reference_location": "reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json",
+      "notes": "Replaces prior self-compare placeholder."
+    },
+    {
+      "asset_id": "phase2-annual-loss-checkpoint-baseline-identity-resolution",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annual_loss",
+      "checkpoint": "identity_resolution",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the identity_resolution intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when identity-resolution semantics change.",
+      "reference_location": "reference/historical_replays/annual_loss/legacy_identity_resolution_2026_03.json",
+      "notes": "Replaces prior self-compare placeholder."
+    },
+    {
+      "asset_id": "phase2-annual-loss-checkpoint-baseline-contract-state",
+      "asset_kind": "checkpoint_baseline",
+      "slice": "annual_loss",
+      "checkpoint": "contract_state",
+      "status": "accepted",
+      "purpose": "Accepted baseline for the contract_state intermediate checkpoint.",
+      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when contract-state projection semantics change.",
+      "reference_location": "reference/historical_replays/annual_loss/legacy_contract_state_2026_03.json",
+      "notes": "Replaces prior self-compare placeholder."
     }
   ]
 }

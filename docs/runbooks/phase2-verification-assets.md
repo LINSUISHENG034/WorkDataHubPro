@@ -45,6 +45,37 @@ For each slice, the manifest now tracks the following asset kinds explicitly:
 - `golden_baseline`
 - `error_case_fixture`
 - `real_data_sample`
+- `checkpoint_baseline`
+
+## Checkpoint Baseline Assets
+
+In addition to the primary replay baselines (`legacy_monthly_snapshot_2026_03.json`), each accepted
+slice now also carries **accepted checkpoint baseline assets** for the intermediate pipeline
+checkpoints that were promoted from self-compare placeholders to independently falsifiable
+comparisons:
+
+| Slice | Checkpoint | Baseline File |
+|-------|-----------|---------------|
+| `annuity_performance` | `reference_derivation` | `reference/historical_replays/annuity_performance/legacy_reference_derivation_2026_03.json` |
+| `annuity_performance` | `fact_processing` | `reference/historical_replays/annuity_performance/legacy_fact_processing_2026_03.json` |
+| `annuity_performance` | `identity_resolution` | `reference/historical_replays/annuity_performance/legacy_identity_resolution_2026_03.json` |
+| `annuity_performance` | `contract_state` | `reference/historical_replays/annuity_performance/legacy_contract_state_2026_03.json` |
+| `annual_award` | `reference_derivation` | `reference/historical_replays/annual_award/legacy_reference_derivation_2026_03.json` |
+| `annual_award` | `fact_processing` | `reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json` |
+| `annual_award` | `identity_resolution` | `reference/historical_replays/annual_award/legacy_identity_resolution_2026_03.json` |
+| `annual_award` | `contract_state` | `reference/historical_replays/annual_award/legacy_contract_state_2026_03.json` |
+| `annual_loss` | `reference_derivation` | `reference/historical_replays/annual_loss/legacy_reference_derivation_2026_03.json` |
+| `annual_loss` | `fact_processing` | `reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json` |
+| `annual_loss` | `identity_resolution` | `reference/historical_replays/annual_loss/legacy_identity_resolution_2026_03.json` |
+| `annual_loss` | `contract_state` | `reference/historical_replays/annual_loss/legacy_contract_state_2026_03.json` |
+
+These checkpoint baseline assets are of kind `checkpoint_baseline` in the registry and are
+registered as `accepted`. They are loaded at replay time by `load_required_checkpoint_baseline`
+from `gate_runtime.py`.
+
+**Refresh trigger for checkpoint baselines:** Run
+`scripts/bootstrap_phase2_checkpoint_baselines.py --checkpoint <name> --domain <domain> --period 2026-03 --workbook <path>`
+when the corresponding checkpoint's processing semantics change.
 
 ## Current Position
 
@@ -52,6 +83,10 @@ For each slice, the manifest now tracks the following asset kinds explicitly:
 
 - `replay_baseline`: `accepted`
 - `synthetic_fixture`: `accepted`
+- `checkpoint_baseline (reference_derivation)`: `accepted`
+- `checkpoint_baseline (fact_processing)`: `accepted`
+- `checkpoint_baseline (identity_resolution)`: `accepted`
+- `checkpoint_baseline (contract_state)`: `accepted`
 - `golden_set`: `deferred`
 - `golden_baseline`: `deferred`
 - `error_case_fixture`: `deferred`
@@ -61,6 +96,10 @@ For each slice, the manifest now tracks the following asset kinds explicitly:
 
 - `replay_baseline`: `accepted`
 - `synthetic_fixture`: `accepted`
+- `checkpoint_baseline (reference_derivation)`: `accepted`
+- `checkpoint_baseline (fact_processing)`: `accepted`
+- `checkpoint_baseline (identity_resolution)`: `accepted`
+- `checkpoint_baseline (contract_state)`: `accepted`
 - `golden_set`: `deferred`
 - `golden_baseline`: `deferred`
 - `error_case_fixture`: `deferred`
@@ -70,6 +109,10 @@ For each slice, the manifest now tracks the following asset kinds explicitly:
 
 - `replay_baseline`: `accepted`
 - `synthetic_fixture`: `accepted`
+- `checkpoint_baseline (reference_derivation)`: `accepted`
+- `checkpoint_baseline (fact_processing)`: `accepted`
+- `checkpoint_baseline (identity_resolution)`: `accepted`
+- `checkpoint_baseline (contract_state)`: `accepted`
 - `golden_set`: `deferred`
 - `golden_baseline`: `deferred`
 - `error_case_fixture`: `deferred`
@@ -87,6 +130,6 @@ Refresh the manifest when:
 
 - a new accepted replay slice is added
 - a deferred asset becomes repository-native
-- a replay baseline changes
+- a replay baseline or checkpoint baseline changes
 - an error-case fixture or real-data sample is introduced
 - a later phase retires or replaces a protection mechanism
