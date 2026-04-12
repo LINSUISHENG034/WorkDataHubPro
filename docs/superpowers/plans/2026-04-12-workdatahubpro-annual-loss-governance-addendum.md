@@ -1,5 +1,9 @@
 # Annual Loss Governance Addendum Implementation Plan
 
+**Date:** 2026-04-12
+**Status:** Done
+**Target Repository:** `E:\Projects\WorkDataHubPro`
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Add the minimum governance-only follow-on work that the active `annual_loss` slice needs so acceptance updates remain consistent across the coverage matrix, refactor program, and canonical risk register without editing the original implementation plan.

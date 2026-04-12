@@ -61,9 +61,10 @@ The skill should cover:
 - reviewing staged and unstaged changes on the current branch
 - grouping changed files into recommended commit batches
 - explaining each batch by boundary, change type, and validation story
-- generating commit message drafts that match `git-workflow.md`
+- generating full commit message drafts that match `git-workflow.md`
 - executing `git add <files>` and `git commit` after explicit user confirmation
-- reporting whether the branch looks merge-ready and what validation is still missing
+- reporting whether the branch appears merge-ready against explicit repository
+  checks and what validation is still missing
 
 The skill should not cover:
 
@@ -125,6 +126,8 @@ The skill should classify each change batch by:
 - `Change Type`
 - file set
 - whether the batch is behavior-changing or docs-only
+- config posture: `not-applicable`, `behavior-preserving`, or
+  `semantics-changing`
 - minimum validation requirement
 - recommended commit message
 
@@ -152,7 +155,7 @@ The skill should only execute after explicit user confirmation.
 For each approved batch, it should:
 
 1. stage only the approved files
-2. state the intended commit message
+2. state the full intended commit message
 3. run or reference the required validation command
 4. commit with a governed message
 
@@ -163,6 +166,25 @@ After execution, it may report:
 - whether the branch appears ready for PR / merge review
 
 It should not merge or push automatically.
+
+### 4.4 Merge-Readiness Assessment
+
+If the skill reports on merge readiness, it must do so through an explicit
+checklist derived from `git-workflow.md`, not intuition.
+
+The skill should check, and render as `yes`, `no`, or `unverified`:
+
+- branch name matches the actual architectural boundary or explicit slice
+- cross-boundary work has a named slice-closure reason
+- proposed commit message uses an English subject and a real repository scope
+- the PR story can be stated as `Boundary`, `Change Type`, `Why`,
+  `Validation`, and `Compatibility Impact`
+- validation evidence exists for the touched change class
+- config-only edits are classified as behavior-preserving or semantics-changing
+- unresolved checks remain unresolved instead of being reported as ready
+
+The skill may say `appears merge-ready` only when no checklist item is `no` and
+none remain `unverified`.
 
 ---
 
@@ -214,6 +236,11 @@ It must not:
 - merge
 - rebase
 - push
+
+It must also not claim merge readiness from partial evidence. If the repository
+checklist cannot be satisfied from the available worktree state, branch
+metadata, and validation evidence, the result must stay `not yet merge-ready`
+or `unverified`.
 
 ### 5.5 Preserve Untracked Work Explicitly
 
@@ -276,12 +303,17 @@ The skill should not apply one global validation rule to all commit types.
 Instead it should map validation to change class:
 
 - docs-only:
-  - path consistency
-  - cross-document alignment with blueprint / discipline docs
-- code or config semantic change:
-  - relevant tests and evidence from the touched boundary
+  path consistency plus cross-document alignment with blueprint / discipline
+  docs
+- code semantic change:
+  relevant tests and evidence from the touched boundary
+- config-only change with no semantic impact:
+  config validation plus proof that runtime outputs are unchanged
+- config change with semantic impact:
+  treat as release-affecting, pair with rule/version update, and include
+  validation evidence for the affected boundary
 - slice-closure change:
-  - explicit slice verification path
+  explicit slice verification path
 
 The skill may recommend final merge-ready validation, but should not pretend
 that every intermediate commit must run full-suite verification.
@@ -311,6 +343,7 @@ Each proposed batch should be rendered in a compact structure like:
 Batch 1
 Boundary: docs
 Change Type: docs
+Config Posture: not-applicable
 Files:
 - docs/superpowers/specs/...
 - docs/superpowers/reviews/...
@@ -323,7 +356,24 @@ Validation:
 - any targeted docs contract test
 
 Commit Message:
-- docs(docs.governance): align annual_loss governance assets
+docs(docs.discipline): align annual_loss governance assets
+
+Clarify the governance-facing commit batching guidance so commit preparation
+stays aligned with repository merge and validation rules.
+
+Validation:
+- link/path consistency check
+- blueprint and discipline alignment review
+
+Refs:
+- Spec: docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+- Spec: docs/disciplines/git-workflow.md
+
+Merge Readiness:
+- branch naming: yes
+- slice-closure reason needed: no
+- validation evidence complete: yes
+- unresolved checks: no
 ```
 
 If there are additional batches, repeat the same structure.

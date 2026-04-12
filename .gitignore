@@ -30,3 +30,6 @@ Thumbs.db
 *.temp
 **/promt_hub.md
 .claude/
+.codex/
+.planning/
+docs/gsd/
