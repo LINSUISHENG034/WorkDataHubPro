@@ -32,7 +32,7 @@ class CustomerPlanHistoryLookup:
                 for row in self._rows
                 if row["company_id"] == company_id
                 and row["product_line_code"] == product_line_code
-                and row.get("valid_to") == "9999-12-31"
+                and str(row.get("valid_to", "9999-12-31")) == "9999-12-31"
             ],
             key=lambda row: str(row["effective_period"]),
             reverse=True,
