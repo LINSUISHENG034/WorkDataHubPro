@@ -90,6 +90,22 @@
 - Phase 1 已经完成 acceptance baseline、mapping、rule classification 和首个离线 parity checkpoint
 - 下一步的主要价值不再是继续补 Phase 1 文档，而是把 parity 与可解释性推进到显式 stage contract 和 deterministic gate
 
+## 当前开发必记
+
+为了减少在 roadmap、governance、audit 之间来回跳转，当前开发至少先记住下面几条：
+
+- accepted 的三个 slice 只说明验证态 closure 已经建立，不代表 first-wave 已整体完成。
+- 当前最明确的未闭合业务域仍是 `annuity_income`；除非出现新的治理决策，后续 breadth work 默认应优先考虑它。
+- special orchestration / operator surface 仍是显式治理对象，尤其是 `company_lookup_queue`、`reference_sync`、manual `customer-mdm` commands、shared operator artifacts。
+- verification asset 不能混用：`synthetic fixture` 不是 `real-data sample`，历史 parity 结果也不是当前 accepted replay baseline。
+- 如果 wiki、audit、legacy 文档与当前规划不一致，legacy behavior 看旧项目代码；rebuild current state 看当前代码、coverage matrix 与 refactor program。
+
+需要展开时，优先看：
+
+- [旧项目审计基线](../governance/legacy-audit-baseline.md)
+- [Phase 2 决策基线](../governance/phase-2-decisions.md)
+- [Verification Assets](../governance/verification-assets.md)
+
 ## Phase 1 已沉淀策略
 
 Phase 1 已经沉淀出几条可继续复用的策略：

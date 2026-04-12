@@ -191,6 +191,21 @@
 - `annual_award` 与 `annual_loss` 是否需要独立的 domain-level `golden set`，还未形成显式治理结论
 - verification asset manifest 还没有独立落地为项目内固定文档或 registry
 
+## 审计补充
+
+2026-04-12 的 legacy audit 与 verification-asset sweep 进一步确认，除了本页定义的 taxonomy 之外，项目还存在一批需要显式治理、但不适合直接写成当前 accepted baseline 的 legacy-only 资产与 operator artifact。
+
+应特别记住：
+
+- legacy `dataset_requirements.md` 是高价值治理资产，不应被当成普通测试附件遗忘
+- 文档里提到但未找到实体文件的 error-case fixtures，应按 `planned but not created` 管理
+- `verification_guide_real_data.md` 与历史 `validation_results` 更接近 operator / adjudication reference，而不是当前 replay baseline
+- `annuity_income` 相关 legacy 资产与 ID5 retirement decision 仍需保留为制度记忆，避免后续 slice admission 时丢失关键上下文
+
+相关稳定结论已另外沉淀到：
+
+- [旧项目审计基线](./legacy-audit-baseline.md)
+
 ---
 
 ## 推荐清单结构
