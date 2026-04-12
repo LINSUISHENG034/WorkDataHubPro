@@ -80,16 +80,43 @@ bootstrap.
 - prefer the local `serena` command for client wiring so Codex and Claude Code
   use the same installed Serena version
 
-Current client wiring:
+Current client wiring for subagent-heavy Codex work:
 
+- start one shared Serena MCP service for this project:
+  `serena start-mcp-server --transport streamable-http --port 9121 --project E:\\Projects\\WorkDataHubPro --context codex --open-web-dashboard false`
 - Codex user config: `%USERPROFILE%\\.codex\\config.toml`
-- Codex server command: `serena start-mcp-server --project-from-cwd --context codex`
+- Codex server URL: `http://127.0.0.1:9121/mcp`
 - Claude Code user MCP config: `%USERPROFILE%\\.claude.json`
-- Claude Code server command: `serena start-mcp-server --context claude-code --project-from-cwd`
+- Claude Code may keep its own stdio registration:
+  `serena start-mcp-server --context claude-code --project-from-cwd`
 - Claude Code Serena hooks remain separate from MCP registration and live in
   `%USERPROFILE%\\.claude\\settings.json`
 
-### 3.2 Update And Repair Flow
+### 3.2 Shared-Server Rules For Codex
+
+- use `streamable-http` when the main Codex agent and its subagents must share
+  one Serena process and one set of language servers
+- keep the shared service bound to `127.0.0.1`
+- run one Serena instance per active project; do not share one stateful Serena
+  service across unrelated projects
+- do not use Codex stdio wiring for Serena when subagent fan-out matters;
+  stdio starts a separate Serena process per client
+- disable dashboard auto-open for the shared service to avoid repeated browser
+  launches from restarts
+
+### 3.3 Codex Client Limitation
+
+- Codex MCP registration is exclusive: each `mcp_servers.<name>` entry is
+  either a stdio `command`/`args` server or a URL-based server
+- Codex does not provide a native fallback that means "connect to this URL, but
+  if it is down, run a local startup command and then retry the same URL"
+- if on-demand startup is required, manage the shared Serena process outside
+  Codex itself with workstation-local automation such as Windows Task
+  Scheduler, NSSM, or a user-launched bootstrap script
+- do not document local supervisor state as committed repository source of
+  truth; only document the supported wiring pattern and required commands
+
+### 3.4 Update And Repair Flow
 
 For this workstation, Serena updates should happen through `uv tool`, not by
 editing the client configs.
@@ -103,6 +130,7 @@ Required post-upgrade checks:
 - `uv tool list`
 - `codex mcp get serena`
 - `claude mcp get serena`
+- `Test-NetConnection 127.0.0.1 -Port 9121`
 
 If the local tool installation is broken or the entrypoints drift, reinstall the
 same tool package and preserve the current local install policy:
@@ -111,9 +139,11 @@ same tool package and preserve the current local install policy:
 
 After upgrade or reinstall:
 
+- restart the shared Serena HTTP service if the installed Serena version changed
 - restart active Codex and Claude Code sessions
 - confirm the local `serena` command still resolves before troubleshooting MCP
   client config
+- confirm Codex still points at `http://127.0.0.1:9121/mcp`
 - only fall back to `uvx`-based client bootstrapping if the local tool install
   strategy is intentionally abandoned
 
@@ -274,6 +304,8 @@ The following Serena usage is prohibited in this project:
 - reading whole source trees when a bounded symbol query would be enough
 - editing across `capabilities/`, `platform/`, and `governance/` without an explicit slice reason
 - letting Serena-assisted edits hide publication, tracing, or compatibility behavior inside generic helpers
+- expecting a URL-based Codex MCP entry to auto-start Serena when no external
+  process manager is in place
 - writing volatile task chatter into Serena memories
 - treating Serena memory as a replacement for committed project documentation
 
@@ -284,6 +316,10 @@ Given the current repository state:
 - use Serena only when source-code precision is needed
 - use Serena to activate the project and maintain project memories when Serena is actually in play
 - use Serena memories to preserve blueprint-level context, not task-by-task scratch state
+- for Codex sessions that dispatch subagents, prefer one project-scoped
+  `streamable-http` Serena service plus URL-based registration
+- do not assume Codex will auto-maintain a shared URL-based Serena service
+  without separate workstation-local process supervision
 - use normal document editing tools for `docs/disciplines/` and blueprint docs
 
 Serena is a precision tool. In `WorkDataHubPro`, precision means serving the
