@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
+from datetime import date, datetime
 from typing import Any, Callable
 
 
@@ -64,9 +66,41 @@ def normalize_period(value: Any) -> str:
 
 
 def normalize_event_date(value: Any) -> str | None:
-    digits = "".join(character for character in str(value or "") if character.isdigit())
-    if not digits:
+    if value is None:
         return None
+    if isinstance(value, datetime):
+        return value.date().isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
+
+    text = str(value).strip()
+    if text == "":
+        return None
+
+    groups = re.findall(r"\d+", text)
+    if len(groups) in {2, 3} and len(groups[0]) == 4:
+        year = int(groups[0])
+        month = int(groups[1])
+        day = int(groups[2]) if len(groups) == 3 else 1
+        try:
+            return date(year, month, day).isoformat()
+        except ValueError:
+            return None
+
+    digits = "".join(character for character in text if character.isdigit())
+    if len(digits) == 8:
+        year = int(digits[:4])
+        month = int(digits[4:6])
+        day = int(digits[6:8])
+        try:
+            return date(year, month, day).isoformat()
+        except ValueError:
+            return None
     if len(digits) == 6:
-        return f"{digits[:4]}-{digits[4:6]}-01"
-    return f"{digits[:4]}-{digits[4:6]}-{digits[6:8]}"
+        year = int(digits[:4])
+        month = int(digits[4:6])
+        try:
+            return date(year, month, 1).isoformat()
+        except ValueError:
+            return None
+    return None
