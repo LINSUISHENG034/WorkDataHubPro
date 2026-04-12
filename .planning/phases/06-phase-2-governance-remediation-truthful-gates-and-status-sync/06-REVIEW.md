@@ -1,0 +1,281 @@
+---
+phase: 06-phase-2-governance-remediation-truthful-gates-and-status-sync
+reviewed: 2026-04-13T00:00:00Z
+depth: standard
+files_reviewed: 14
+files_reviewed_list:
+  - src/work_data_hub_pro/governance/compatibility/gate_runtime.py
+  - src/work_data_hub_pro/governance/compatibility/gate_models.py
+  - scripts/bootstrap_phase2_checkpoint_baselines.py
+  - tests/contracts/test_phase6_gate_runtime.py
+  - src/work_data_hub_pro/apps/orchestration/replay/annuity_performance_slice.py
+  - src/work_data_hub_pro/apps/orchestration/replay/annual_award_slice.py
+  - src/work_data_hub_pro/apps/orchestration/replay/annual_loss_slice.py
+  - tests/replay/test_annuity_performance_slice.py
+  - tests/replay/test_annual_award_slice.py
+  - tests/replay/test_annual_loss_slice.py
+  - tests/replay/test_phase2_reference_derivation_gates.py
+  - tests/replay/test_phase2_event_domain_gates.py
+  - tests/contracts/test_phase2_governance_status_sync.py
+  - .planning/PROJECT.md
+findings:
+  critical: 1
+  warning: 5
+  info: 4
+  total: 10
+status: issues_found
+---
+
+# Phase 06: Code Review Report
+
+**Reviewed:** 2026-04-13T00:00:00Z
+**Depth:** standard
+**Files Reviewed:** 14
+**Status:** issues_found
+
+## Summary
+
+Fourteen source files were reviewed against the phase 6 threat model, which targeted four areas: `_build_diff` multiset subtraction correctness, `load_required_checkpoint_baseline` fail-closed behavior, bootstrap script argument handling, and replay slice checkpoint wiring.
+
+The fail-closed baseline loading in `gate_runtime.py` and the `_build_diff` multiset subtraction logic are both implemented correctly. The bootstrap script declares all required CLI arguments with argparse. However, one crash-class defect was found: `annual_award_slice.py` references `SliceRunOutcome` without ever defining or importing it, causing a guaranteed `NameError` at runtime for every call to `run_annual_award_slice`. Five additional warning-class issues were found: a silent empty-baseline fallback in the bootstrap extraction helper, missing type validation in the baseline loader, variable shadowing of `manifest` in the annuity performance slice, dead code in the `source_intake` contract assertion path, and a structural self-compare in the `source_intake` checkpoint across all three slices that prevents the gate from ever being able to fail or warn.
+
+---
+
+## Critical Issues
+
+### CR-01: `SliceRunOutcome` used but never defined or imported in `annual_award_slice.py`
+
+**File:** `src/work_data_hub_pro/apps/orchestration/replay/annual_award_slice.py:549`
+
+**Issue:** The function `run_annual_award_slice` returns `SliceRunOutcome(...)` at line 549, but `SliceRunOutcome` is neither defined in this file nor imported from anywhere. Both sibling files define the class locally: `annuity_performance_slice.py` at lines 84-93 and `annual_loss_slice.py` at lines 69-78. The `from dataclasses import dataclass` import at line 4 of `annual_award_slice.py` is present but unused because the class body it was intended for is missing. Every call to `run_annual_award_slice` will raise `NameError: name 'SliceRunOutcome' is not defined` at runtime, and all tests in `test_annual_award_slice.py` and `test_phase2_reference_derivation_gates.py` that exercise this runner will also fail.
+
+**Fix:** Add the `SliceRunOutcome` dataclass definition to `annual_award_slice.py` (mirroring the canonical form from `annuity_performance_slice.py`):
+
+```python
+# Add after the imports, before _SOURCE_INTAKE_CONTRACT
+
+from work_data_hub_pro.governance.compatibility.gate_models import (
+    CheckpointResult,
+    ComparisonRunManifest,
+    GateSummary,
+)
+from work_data_hub_pro.platform.contracts.models import ProjectionResult
+from work_data_hub_pro.platform.contracts.publication import PublicationResult
+from work_data_hub_pro.governance.compatibility.models import CompatibilityCase
+from work_data_hub_pro.platform.storage.in_memory_tables import InMemoryTableStore
+from work_data_hub_pro.platform.tracing.in_memory_trace_store import InMemoryTraceStore
+from work_data_hub_pro.platform.lineage.registry import LineageRegistry
+
+
+@dataclass(frozen=True)
+class SliceRunOutcome:
+    comparison_run_id: str
+    checkpoint_results: list[CheckpointResult]
+    gate_summary: GateSummary
+    publication_results: list[PublicationResult]
+    projection_results: list[ProjectionResult]
+    compatibility_case: CompatibilityCase | None
+    trace_store: InMemoryTraceStore
+    lineage_registry: LineageRegistry
+    intermediate_payloads: dict[str, list[dict[str, object]]] | None = None
+```
+
+Note: All of the types listed above are already imported in `annual_award_slice.py`. Only the `@dataclass` definition itself is missing.
+
+---
+
+## Warnings
+
+### WR-01: Silent empty-list fallback in `_extract_checkpoint_payload` creates silent corrupt baselines
+
+**File:** `scripts/bootstrap_phase2_checkpoint_baselines.py:166-168`
+
+**Issue:** When `outcome.intermediate_payloads` does not contain the requested checkpoint key, `_extract_checkpoint_payload` silently returns `[]`. The caller (`bootstrap_checkpoint_baseline`) then writes this empty list to the baseline JSON file without raising any error. An empty baseline written to disk will cause every subsequent parity gate run to see a "extra rows" diff for all Pro output, which is misleading. The comment "should not reach here with truthful slices" documents the assumption but does not enforce it — a new checkpoint added without a matching `intermediate_payloads` key, or an unexpected `None` return from the slice runner, will silently bootstrap a useless baseline.
+
+**Fix:** Raise explicitly instead of returning `[]`:
+
+```python
+def _extract_checkpoint_payload(outcome: Any, checkpoint_name: str) -> list[dict[str, Any]]:
+    key = checkpoint_name  # identity mapping; keep map if divergence is needed later
+    if (
+        hasattr(outcome, "intermediate_payloads")
+        and outcome.intermediate_payloads is not None
+        and key in outcome.intermediate_payloads
+    ):
+        return outcome.intermediate_payloads[key]
+
+    raise RuntimeError(
+        f"Slice outcome does not expose intermediate payload for checkpoint "
+        f"'{checkpoint_name}'. Available keys: "
+        f"{list(outcome.intermediate_payloads or {})}"
+    )
+```
+
+---
+
+### WR-02: `load_required_checkpoint_baseline` does not validate that the returned JSON is a list
+
+**File:** `src/work_data_hub_pro/governance/compatibility/gate_runtime.py:91-92`
+
+**Issue:** The function signature declares a return type of `list[dict[str, object]]`, but the implementation performs no runtime validation of the parsed JSON. If a baseline file contains a JSON object (`{}`), a scalar, or `null`, the function returns that value unchecked. Downstream callers pass the result directly to `_build_diff` as `legacy_payload`. When `_build_diff` receives a dict as `legacy_payload` and a list as `pro_payload`, it falls through to the scalar fallback branch (line 156) and generates a full `changed_rows` diff rather than a proper list diff, making the diff output uninterpretable.
+
+**Fix:** Add a type guard after `json.load`:
+
+```python
+with open(path, encoding="utf-8") as f:
+    content = json.load(f)
+if not isinstance(content, list):
+    raise TypeError(
+        f"Baseline file for checkpoint '{checkpoint_name}' must contain a JSON array. "
+        f"Got {type(content).__name__}: {path}"
+    )
+return content
+```
+
+---
+
+### WR-03: `manifest` variable shadowed inside the failure branch of `run_annuity_performance_slice`
+
+**File:** `src/work_data_hub_pro/apps/orchestration/replay/annuity_performance_slice.py:501`
+
+**Issue:** At line 210, `manifest` is assigned a `CleansingManifest` instance. Inside the `if gate_summary.overall_outcome == "failed":` block at line 501, `manifest` is reassigned to a `ComparisonRunManifest`. The right-hand side of the assignment correctly reads `manifest.release_id` and `manifest.rule_pack_version` from the `CleansingManifest` before the rebinding, so no crash occurs on the failing path. However, after the `if` block exits, `manifest` refers to a `ComparisonRunManifest` when the gate failed and to a `CleansingManifest` when the gate passed. Any future code added after the block that needs `CleansingManifest.release_id` on the failing path would silently get `AttributeError`. Both sibling slices (`annual_award_slice.py`, `annual_loss_slice.py`) avoid this by using a distinct variable name `comparison_manifest` for the `ComparisonRunManifest`.
+
+**Fix:** Use a distinct variable name, mirroring the sibling slices:
+
+```python
+# Replace at line 501:
+comparison_manifest = ComparisonRunManifest(
+    comparison_run_id=comparison_run_id,
+    domain=batch.domain,
+    period=batch.period,
+    baseline_version=f"legacy-monthly-snapshot:{period}",
+    config_release_id=manifest.release_id,
+    rule_pack_version=manifest.rule_pack_version,
+    decision_owner="compatibility-review",
+    package_root=f"comparison_runs/{comparison_run_id}",
+    package_paths=default_package_paths(comparison_run_id),
+)
+write_comparison_run_package(
+    evidence_index=evidence_index,
+    manifest=comparison_manifest,
+    ...
+)
+```
+
+---
+
+### WR-04: `source_intake_status` computed but never used — contract assertions are dead code
+
+**File:** `src/work_data_hub_pro/apps/orchestration/replay/annuity_performance_slice.py:396-405`
+
+**Issue:** Lines 396-405 compute `source_intake_status` by checking whether the record list is empty and whether required fields are present in each record. This value is never passed to `build_checkpoint_result` or used anywhere else. The `build_checkpoint_result` call at lines 408-424 determines status purely by fingerprint comparison and diff, meaning the contract assertions computed at lines 396-405 have zero effect on the gate outcome.
+
+**Fix:** Either pass the precomputed status through to `build_checkpoint_result` (which would require an override parameter) or remove the dead block entirely if the contract model is sufficient:
+
+```python
+# Option A — remove dead code (lines 396-405) since the self-compare always passes:
+# (See also WR-05 for the deeper structural issue.)
+
+# Option B — add an override path to build_checkpoint_result to accept
+# an explicit status when contract-style assertions are used, and pass
+# source_intake_status as the forced outcome.
+```
+
+---
+
+### WR-05: `source_intake` checkpoint is a self-compare across all three slice runners — the gate can never fail or warn
+
+**File:** `src/work_data_hub_pro/apps/orchestration/replay/annuity_performance_slice.py:408-424`
+**File:** `src/work_data_hub_pro/apps/orchestration/replay/annual_award_slice.py:409-425`
+**File:** `src/work_data_hub_pro/apps/orchestration/replay/annual_loss_slice.py:424-440`
+
+**Issue:** In all three slices, `build_checkpoint_result` is called for the `source_intake` checkpoint with `legacy_payload` and `pro_payload` constructed from the same runtime data (both derive `record_count` from `len(source_intake_pro_payload)` and both use the same frozen `_SOURCE_INTAKE_CONTRACT` constants). Because `legacy_payload == pro_payload` is always true, `_build_diff` returns an empty `CheckpointDiff` immediately (line 97 of `gate_runtime.py`), and the fingerprints always match. The checkpoint status is always `"passed"`. No intake failure, missing field, or empty-batch condition can ever surface as a `"failed"` or `"warning"` gate result through this checkpoint.
+
+**Fix:** Replace the self-compare with a genuine contract-mode check. Either introduce an explicit `status` override parameter in `build_checkpoint_result` for contract-type checkpoints, or build the `legacy_payload` from the declared contract constants and the `pro_payload` from observed runtime values so a mismatch produces a real diff:
+
+```python
+# legacy_payload = the declared contract (what we expect)
+legacy_payload = {
+    "minimum_record_count": 1,
+    "required_fields": sorted(_SOURCE_INTAKE_CONTRACT["required_fields"]),
+    "allowed_adaptations": sorted(_SOURCE_INTAKE_CONTRACT["allowed_adaptations"]),
+}
+# pro_payload = what was actually observed at runtime
+observed_fields = sorted(
+    set().union(*(set(r.keys()) for r in source_intake_pro_payload))
+    if source_intake_pro_payload else set()
+)
+pro_payload = {
+    "minimum_record_count": len(source_intake_pro_payload),
+    "required_fields": observed_fields,
+    "allowed_adaptations": sorted(_SOURCE_INTAKE_CONTRACT["allowed_adaptations"]),
+}
+```
+
+---
+
+## Info
+
+### IN-01: Typo "Annity" in report markdown string
+
+**File:** `src/work_data_hub_pro/apps/orchestration/replay/annuity_performance_slice.py:542`
+
+**Issue:** The report header string reads `"# Phase 2 Annity Performance Gate Report\n\n"`. "Annity" should be "Annuity".
+
+**Fix:**
+```python
+"# Phase 2 Annuity Performance Gate Report\n\n"
+```
+
+---
+
+### IN-02: Unused `dataclass` import in `annual_award_slice.py`
+
+**File:** `src/work_data_hub_pro/apps/orchestration/replay/annual_award_slice.py:4`
+
+**Issue:** `from dataclasses import dataclass` is imported but unused because the `SliceRunOutcome` class body that would have used it is absent (see CR-01). Once `SliceRunOutcome` is added back, this import becomes necessary and should be retained. No action needed beyond resolving CR-01.
+
+---
+
+### IN-03: Bootstrap script test path is cwd-sensitive — may silently skip
+
+**File:** `tests/contracts/test_phase6_gate_runtime.py:122`
+
+**Issue:** `script_path = Path("scripts/bootstrap_phase2_checkpoint_baselines.py")` is a relative path. If tests are run from any directory other than the project root, `script_path.exists()` returns `False` and the test silently skips via `pytest.skip(...)`. A skipped test produces no failure signal, which could mask a missing or misplaced script in CI.
+
+**Fix:** Use an absolute path anchored to the test file location:
+```python
+project_root = Path(__file__).parent.parent.parent
+script_path = project_root / "scripts" / "bootstrap_phase2_checkpoint_baselines.py"
+
+if not script_path.exists():
+    pytest.fail(f"Bootstrap script missing at expected location: {script_path}")
+```
+
+---
+
+### IN-04: `_build_diff` embeds full list payloads in `changed_rows` for same-multiset / different-order lists
+
+**File:** `src/work_data_hub_pro/governance/compatibility/gate_runtime.py:131-138`
+
+**Issue:** When two lists have the same multiset (no missing or extra items) but are not identical (e.g., differ in ordering), `_build_diff` sets `changed_rows = [{"legacy": legacy_payload, "pro": pro_payload}]`, embedding the entire input lists inside a single `changed_rows` entry. This produces a very large and opaque diff for any size payload. In practice this edge case should not arise because all payload builders call `_sorted_payload`, but the code path is structurally reachable and the resulting diff is uninterpretable (a single "changed row" that contains all rows).
+
+**Fix:** Add a comment to document the edge case and consider emitting an `ordering_note` field instead of full lists:
+```python
+if not missing_rows and not extra_rows:
+    # Lists share the same multiset but differ (e.g., ordering divergence).
+    # _sorted_payload should prevent this in normal operation.
+    changed_rows = [
+        {
+            "note": "same-multiset ordering divergence",
+            "legacy_row_count": len(legacy_payload),
+            "pro_row_count": len(pro_payload),
+        }
+    ]
+```
+
+---
+
+_Reviewed: 2026-04-13T00:00:00Z_
+_Reviewer: Claude (gsd-code-reviewer)_
+_Depth: standard_

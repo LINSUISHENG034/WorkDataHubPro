@@ -195,9 +195,9 @@ Each phase completion requires:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 06-01 - shared fail-closed baseline runtime, explicit bootstrap path, and duplicate-row diff fix
-- [ ] 06-02 - truthful intermediate checkpoint wiring and accepted replay baseline assets for all accepted slices
-- [ ] 06-03 - governance and planning status synchronization plus contract coverage
+- [x] 06-01 - shared fail-closed baseline runtime, explicit bootstrap path, and duplicate-row diff fix
+- [x] 06-02 - truthful intermediate checkpoint wiring and accepted replay baseline assets for all accepted slices
+- [x] 06-03 - governance and planning status synchronization plus contract coverage
 
 ---
 *Roadmap created: 2026-04-12*
