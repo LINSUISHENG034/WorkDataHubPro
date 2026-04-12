@@ -77,6 +77,13 @@ def normalize_event_date(value: Any) -> str | None:
     if text == "":
         return None
 
+    date_with_time_match = re.match(
+        r"^\s*(\d{4}\D\d{1,2}\D\d{1,2})[T\s]+\d{1,2}:\d{1,2}(?::\d{1,2})?\s*$",
+        text,
+    )
+    if date_with_time_match:
+        text = date_with_time_match.group(1)
+
     groups = re.findall(r"\d+", text)
     if len(groups) in {2, 3} and len(groups[0]) == 4:
         year = int(groups[0])
