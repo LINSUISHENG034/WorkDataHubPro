@@ -15,7 +15,7 @@
 | T-06-02 | I | mitigate | CLOSED | `_build_diff()` uses Counter-based multiset subtraction (gate_runtime.py:100-130); tests `test_build_diff_counts_duplicate_rows_correctly`, `test_build_diff_counts_extra_rows_correctly`, `test_build_diff_counts_mixed_duplicate_rows_correctly` exist (test_phase6_gate_runtime.py:28-82) |
 | T-06-03 | R | mitigate | CLOSED | Bootstrap script `scripts/bootstrap_phase2_checkpoint_baselines.py` uses argparse with explicit `--checkpoint`, `--domain`, `--period`, `--output` flags; no automatic fallback path; test `test_bootstrap_script_declares_explicit_cli` exists (test_phase6_gate_runtime.py:117-161) |
 | T-06-04 | T | mitigate | CLOSED | All three slices call `load_required_checkpoint_baseline()` for `fact_processing`, `identity_resolution`, `contract_state`: annuity_performance_slice.py:287-304, annual_award_slice.py:276-290, annual_loss_slice.py:290-304 |
-| T-06-05 | R | mitigate | **OPEN** | `source_intake` checkpoint still uses self-compare: both `legacy_payload` and `pro_payload` are built from the same runtime values (`source_intake_pro_payload` and `_SOURCE_INTAKE_CONTRACT`) in annuity_performance_slice.py:412-421 |
+| T-06-05 | R | mitigate | CLOSED | `source_intake` now loads `legacy_source_intake_<period>.json` via `load_required_checkpoint_baseline()` (fail-closed if absent); all three slices updated; bootstrap script updated; baseline files registered in phase2-accepted-slices.json |
 | T-06-06 | D | mitigate | CLOSED | Tests `test_event_domain_intermediate_checkpoint_uses_baseline_award` (test_phase2_event_domain_gates.py:478-659) and `test_event_domain_intermediate_checkpoint_uses_baseline_loss` (test_phase2_event_domain_gates.py:662-783) force intermediate failures; `test_reference_derivation_requires_baseline_*` tests assert missing-baseline failures (test_phase2_reference_derivation_gates.py:587-642) |
 | T-06-07 | R | mitigate | CLOSED | PROJECT.md (lines 38-40) and docs/wiki-cn/roadmap/overview.md (line 27) contain synchronized Phase 2 status wording distinguishing implementation-complete from governance sign-off-pending |
 | T-06-08 | D | mitigate | CLOSED | ROADMAP.md line 195: "Plans: 3 plans" with 06-01/06-02/06-03 entries; STATE.md line 21: "Current command focus: `gsd-execute-phase 6`" |
@@ -23,6 +23,13 @@
 | T-06-10 | R | mitigate | CLOSED | `reference/verification_assets/phase2-accepted-slices.json` registers all checkpoint baselines (reference_derivation, fact_processing, identity_resolution, contract_state) for all three slices with status "accepted" and proper `asset_kind: "checkpoint_baseline"` entries (lines 69-320) |
 
 ---
+
+## Security Audit Trail
+
+| Audit Date | Auditor | Result | Threats Open |
+|------------|---------|--------|--------------|
+| 2026-04-13 | gsd-security-auditor (initial) | OPEN_THREATS | 1 (T-06-05) |
+| 2026-04-13 | gsd-security-auditor (closure) | SECURED | 0 |
 
 ## Accepted Risks Log
 
