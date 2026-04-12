@@ -1,0 +1,9 @@
+[
+  {
+    "record_id": "perf-001",
+    "resolved_identity": "company-001",
+    "resolution_method": "static",
+    "fallback_level": "none",
+    "evidence_refs": []
+  }
+]

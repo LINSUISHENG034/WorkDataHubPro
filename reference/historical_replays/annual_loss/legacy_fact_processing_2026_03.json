@@ -1,0 +1,18 @@
+[
+  {
+    "record_id": "loss-001",
+    "company_id": "company-001",
+    "plan_code": "P9001",
+    "period": "2026-03",
+    "loss_amount": 80,
+    "source_sheet": "企年受托流失(解约)"
+  },
+  {
+    "record_id": "loss-002",
+    "company_id": "company-002",
+    "plan_code": "S9009",
+    "period": "2026-03",
+    "loss_amount": 60,
+    "source_sheet": "企年投资流失(解约)"
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "target_object": "company_reference",
+    "candidate_payload": {
+      "company_id": "company-001",
+      "company_name": "共享客户（流失）",
+      "period": "2026-03"
+    },
+    "source_record_ids": ["loss-001"],
+    "derivation_rule_id": "annual-loss-company-reference",
+    "derivation_rule_version": "1"
+  },
+  {
+    "target_object": "customer_loss_signal",
+    "candidate_payload": {
+      "company_id": "company-002",
+      "plan_code": "S9009",
+      "period": "2026-03",
+      "signal_type": "annual_loss"
+    },
+    "source_record_ids": ["loss-002"],
+    "derivation_rule_id": "annual-loss-customer-signal",
+    "derivation_rule_version": "1"
+  }
+]

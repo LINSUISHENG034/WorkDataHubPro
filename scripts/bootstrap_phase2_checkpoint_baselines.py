@@ -39,7 +39,7 @@ from pathlib import Path
 from typing import Any
 
 # Add project root to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from work_data_hub_pro.apps.orchestration.replay.annuity_performance_slice import (
     run_annuity_performance_slice,
@@ -119,19 +119,9 @@ def bootstrap_checkpoint_baseline(
     # Ensure output directory exists
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Map checkpoint name to the intermediate payload key we need to extract
-    checkpoint_to_payload_key = {
-        "reference_derivation": "reference_derivation",
-        "fact_processing": "fact_processed",
-        "identity_resolution": "resolved_identity",
-        "contract_state": "contract_state",
-    }
-    payload_key = checkpoint_to_payload_key[checkpoint_name]
-
     # Run the slice to derive the checkpoint payload
     # We use a temporary replay root to avoid creating compatibility artifacts
     import tempfile
-    from uuid import uuid4
 
     with tempfile.TemporaryDirectory() as temp_replay_root:
         temp_path = Path(temp_replay_root)
@@ -143,9 +133,8 @@ def bootstrap_checkpoint_baseline(
             replay_root=temp_path,
         )
 
-        # Extract the checkpoint payload from the outcome
-        # The outcome structure varies by slice; extract the relevant intermediate result
-        checkpoint_payload = _extract_checkpoint_payload(outcome, payload_key)
+        # Extract the checkpoint payload from the outcome via intermediate_payloads
+        checkpoint_payload = _extract_checkpoint_payload(outcome, checkpoint_name)
 
         # Write the baseline file
         with open(output_path, "w", encoding="utf-8") as f:
@@ -154,27 +143,28 @@ def bootstrap_checkpoint_baseline(
     return output_path
 
 
-def _extract_checkpoint_payload(outcome: Any, payload_key: str) -> list[dict[str, Any]]:
+def _extract_checkpoint_payload(outcome: Any, checkpoint_name: str) -> list[dict[str, Any]]:
     """Extract checkpoint payload from slice outcome.
 
-    The outcome structure depends on the slice. This helper handles the
-    common patterns. If the payload cannot be extracted, returns empty list.
+    The outcome carries intermediate payloads in outcome.intermediate_payloads dict.
+    Maps the bootstrap checkpoint name to the key used in intermediate_payloads.
     """
-    # Common pattern: outcome has an intermediate_results or similar dict
-    if hasattr(outcome, "intermediate_results"):
-        intermediate = outcome.intermediate_results
-        if isinstance(intermediate, dict) and payload_key in intermediate:
-            return intermediate[payload_key]
+    intermediate_map = {
+        "reference_derivation": "reference_derivation",
+        "fact_processing": "fact_processing",
+        "identity_resolution": "identity_resolution",
+        "contract_state": "contract_state",
+    }
+    key = intermediate_map.get(checkpoint_name, checkpoint_name)
 
-    # Pattern: outcome has a data or payload attribute
-    if hasattr(outcome, payload_key):
-        return getattr(outcome, payload_key)
+    if (
+        hasattr(outcome, "intermediate_payloads")
+        and outcome.intermediate_payloads is not None
+        and key in outcome.intermediate_payloads
+    ):
+        return outcome.intermediate_payloads[key]
 
-    # Pattern: outcome is a dict-like
-    if isinstance(outcome, dict) and payload_key in outcome:
-        return outcome[payload_key]
-
-    # Fallback: return empty list (bootstrap creates empty baseline)
+    # Fallback: empty list (should not reach here with truthful slices)
     return []
 
 

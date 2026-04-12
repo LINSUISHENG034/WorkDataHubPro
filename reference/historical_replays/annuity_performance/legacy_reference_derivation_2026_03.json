@@ -1,0 +1,13 @@
+[
+  {
+    "target_object": "company_reference",
+    "candidate_payload": {
+      "company_id": "company-001",
+      "company_name": "Acme",
+      "period": "2026-03"
+    },
+    "source_record_ids": ["perf-001"],
+    "derivation_rule_id": "annuity-performance-company-reference",
+    "derivation_rule_version": "1"
+  }
+]

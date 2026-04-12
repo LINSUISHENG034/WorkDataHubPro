@@ -1,0 +1,18 @@
+[
+  {
+    "record_id": "award-001",
+    "company_id": "company-001",
+    "plan_code": "P9001",
+    "period": "2026-03",
+    "award_amount": 5000,
+    "source_sheet": "TrusteeAwards"
+  },
+  {
+    "record_id": "award-002",
+    "company_id": "company-002",
+    "plan_code": "S9009",
+    "period": "2026-03",
+    "award_amount": 1000,
+    "source_sheet": "InvesteeAwards"
+  }
+]

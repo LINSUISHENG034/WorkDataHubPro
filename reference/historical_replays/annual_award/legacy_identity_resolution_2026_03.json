@@ -1,0 +1,16 @@
+[
+  {
+    "record_id": "award-001",
+    "resolved_identity": "company-001",
+    "resolution_method": "static",
+    "fallback_level": "none",
+    "evidence_refs": []
+  },
+  {
+    "record_id": "award-002",
+    "resolved_identity": "company-002",
+    "resolution_method": "static",
+    "fallback_level": "none",
+    "evidence_refs": []
+  }
+]

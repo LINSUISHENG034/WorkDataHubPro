@@ -1,0 +1,9 @@
+[
+  {
+    "record_id": "perf-001",
+    "company_id": "company-001",
+    "plan_code": "PLAN-A",
+    "period": "2026-03",
+    "ending_assets": 1200.5
+  }
+]
