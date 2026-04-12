@@ -1,0 +1,141 @@
+{
+  "report_date": "2026-04-12",
+  "report_source": "docs/superpowers/audits/2026-04-12-verification-assets-search-findings.md",
+  "collection_summary": {
+    "total_candidates": 96,
+    "by_domain": {
+      "annuity_performance": 20,
+      "annual_award": 17,
+      "annual_loss": 20,
+      "annuity_income": 15,
+      "shared_cross_domain": 24
+    },
+    "by_item_class": {
+      "verification_asset": 52,
+      "runtime_mechanism": 22,
+      "operator_artifact": 6,
+      "config_contract": 10,
+      "parity_script": 6
+    },
+    "by_coverage_state": {
+      "explicitly_tracked": 40,
+      "implicitly_present": 11,
+      "legacy_only": 45
+    }
+  },
+  "domains": ["annuity_performance", "annual_award", "annual_loss", "annuity_income", "shared"],
+  "item_classes": ["verification_asset", "runtime_mechanism", "operator_artifact", "config_contract", "parity_script", "baseline_generator"],
+  "scope_classes": ["domain_specific", "shared_cross_domain"],
+  "asset_types": [
+    "golden_set", "golden_baseline", "real_data_sample", "synthetic_fixture",
+    "error_case_fixture", "replay_baseline", "runbook_evidence", "sheet_merge_contract",
+    "field_alias_mapping", "identity_fallback_chain", "plan_code_defaulting",
+    "plan_code_enrichment_lookup", "delete_scope_contract", "publication_write_contract",
+    "manual_checkpoint", "operator_query_path"
+  ],
+  "critical_gaps": [
+    {
+      "id": "GAP-001",
+      "title": "Legacy golden dataset requirements document not ported",
+      "legacy_ref": "E:\\Projects\\WorkDataHub\\tests\\fixtures\\golden_dataset\\curated\\dataset_requirements.md (737 lines, v3.0)",
+      "impact": "23+ scenarios, enrichment_index schema, YAML overrides schema, and full parity strategy absent from WorkDataHubPro"
+    },
+    {
+      "id": "GAP-002",
+      "title": "Error-case fixtures (threshold_exceeded.xlsx, missing_column.xlsx, empty_sheet.xlsx) never created",
+      "legacy_ref": "E:\\Projects\\WorkDataHub\\tests\\fixtures\\golden_dataset\\curated\\dataset_requirements.md:418-430",
+      "impact": "Bronze-layer validation ERR-001 through ERR-004 cannot be regression-tested"
+    },
+    {
+      "id": "GAP-003",
+      "title": "Real-data verification guide (verification_guide_real_data.md) not ported",
+      "legacy_ref": "E:\\Projects\\WorkDataHub\\docs\\verification_guide_real_data.md",
+      "impact": "Operators have no guidance for verifying fact loads, MDM sync, and snapshots against real data"
+    },
+    {
+      "id": "GAP-004",
+      "title": "Failed-record export to CSV mechanism missing in current project",
+      "legacy_ref": "E:\\Projects\\WorkDataHub\\src\\domain\\annual_loss\\helpers.py:156-180",
+      "impact": "Debugging artifact when rows fail validation is absent; flagged in coverage matrix AI-004"
+    },
+    {
+      "id": "GAP-005",
+      "title": "annual_award parity validation script does not exist in legacy",
+      "legacy_ref": "Only validate_annuity_performance_parity.py and validate_annuity_income_parity.py found",
+      "impact": "PAR-01 marked validated but annual_award parity comparison mechanism is missing"
+    },
+    {
+      "id": "GAP-006",
+      "title": "Company ID mapping files (ID1-ID5) not tracked in WorkDataHubPro",
+      "legacy_ref": "E:\\Projects\\WorkDataHub\\tests\\fixtures\\mappings\\company_id1_mapping.json through company_id5_mapping.json",
+      "impact": "Legacy overrides for company_id resolution not ported; ID5 explicitly dropped but ID1-ID4 unclear"
+    },
+    {
+      "id": "GAP-007",
+      "title": "Validation result parity history not ported",
+      "legacy_ref": "E:\\Projects\\WorkDataHub\\tests\\fixtures\\validation_results\\ (12 timestamped result sets)",
+      "impact": "Historical parity decisions and mismatch classifications unavailable for adjudication reference"
+    },
+    {
+      "id": "GAP-008",
+      "title": "annuity_income has zero presence in WorkDataHubPro — 15 legacy items all legacy_only",
+      "legacy_ref": "All VA-AI-001 through VA-AI-015 items are legacy_only; WorkDataHubPro has no annuity_income source code, fixtures, replay baselines, or capability decomposition",
+      "impact": "annuity_income is the only unclosed first-wave domain; AI-001 through AI-005 coverage matrix rows are pending; ID5 retirement decision and 6 COMPANY_BRANCH_MAPPING overrides gap (VA-AI-015) risk being forgotten"
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "Q-001",
+      "question": "What is the decision criteria for when a domain needs an independent golden set vs. relying on replay baselines?",
+      "source": "verification-assets.md:191 states annual_award/annual_loss golden set need is unresolved"
+    },
+    {
+      "id": "Q-002",
+      "question": "What is the intake contract gap for the supplemental real-structure workbook and when will it be resolved?",
+      "source": "parity-baseline.json mismatch-report.json:77"
+    },
+    {
+      "id": "Q-003",
+      "question": "What is the timeline for CT-003 (publication/delete scope parity) which is explicitly deferred?",
+      "source": "coverage matrix CT-003"
+    },
+    {
+      "id": "Q-004",
+      "question": "What are the concrete implementation requirements for GOV-02 (Temp ID leakage prevention)?",
+      "source": "GOV-02 is Phase 3 pending"
+    },
+    {
+      "id": "Q-005",
+      "question": "When will annuity_income planning proceed and will it re-use annual_award/annual_loss patterns?",
+      "source": "AI-001 through AI-005 show annuity_income as only unclosed first-wave domain"
+    },
+    {
+      "id": "Q-006",
+      "question": "Should the verification asset manifest be a physical document or a registry?",
+      "source": "verification-assets.md notes manifest '还没有独立落地为项目内固定文档或registry'"
+    },
+    {
+      "id": "Q-007",
+      "question": "Should a parity script be created for annual_award or is the replay baseline sufficient?",
+      "source": "Legacy only has parity scripts for annuity_performance and annuity_income"
+    },
+    {
+      "id": "Q-008",
+      "question": "What is the intended relationship between cross-domain fixture copies (e.g., annual_award/annuity_performance_fixture)?",
+      "source": "Multiple references to cross-domain fixture duplication found"
+    }
+  ],
+  "hints_for_integration": {
+    "verification_assets_md": [
+      "VA-AP-011 (legacy golden dataset requirements) should be added to verification-assets.md as legacy-only asset",
+      "VA-AL-002 (error-case fixtures) should be flagged as 'planned but not created'",
+      "MECH-SHARED-014 (real-data verification guide) should be added as migration priority",
+      "MECH-SHARED-022 (validation results parity history) should be referenced in adjudication section"
+    ],
+    "phase_2_decisions_md": [
+      "Q-001: Decision needed on annual_award/annual_loss golden set requirement",
+      "Q-003: CT-003 publication contract testing should be scheduled",
+      "Q-004: GOV-02 implementation requirements should be elaborated"
+    ]
+  }
+}

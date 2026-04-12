@@ -1,0 +1,86 @@
+{
+  "artifact_name": "phase-01-mismatch-report",
+  "comparison_run_id": "phase1-parity-offline-2026-04-12-run-001",
+  "baseline_version": "phase1-par-01-v1",
+  "scope": "PAR-01 offline checkpoint",
+  "mapping completeness status": {
+    "annuity_performance": "deep-sample mapped and ready for offline review",
+    "annual_award": "breadth registration recorded",
+    "annual_loss": "breadth registration recorded"
+  },
+  "baseline dataset identity": {
+    "deep_sample_domain": "annuity_performance",
+    "sample_batches": {
+      "annuity_performance": "annuity-performance-2026-03-deep-sample",
+      "annual_award": "annual-award-2026-03-breadth-registration",
+      "annual_loss": "annual-loss-2026-03-breadth-registration"
+    }
+  },
+  "sample_strategy": {
+    "review_ref": "docs/gsd/reviews/2026-04-12-phase1-sample-strategy-review.md",
+    "must_pass_input": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/annuity_performance_2026_03.xlsx",
+    "supplemental_real_sample": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/【年金规模收入】26年2月年金业务规模明细(手工汇总)_sample.xlsx",
+    "supplemental_real_sample_status": "not executed in must-pass parity run",
+    "supplemental_real_sample_note": "The real workbook sample is retained as contract-gap evidence and intake-review material. It does not replace the deterministic deep-sample replay input in Phase 1."
+  },
+  "parity_summary": {
+    "overall_status": "executed-awaiting-human-review",
+    "comparison_basis": "final output plus parity-critical intermediate checkpoints",
+    "domains_reviewed": [
+      "annuity_performance"
+    ],
+    "registered_scope_only": [
+      "annual_award",
+      "annual_loss"
+    ],
+    "severity_rollup": {
+      "block": 0,
+      "warn": 0
+    },
+    "comparison_outcome": {
+      "matched": 1,
+      "mismatched": 0
+    },
+    "human_gate_required": true
+  },
+  "mismatch_table": {
+    "title": "mismatch severity table",
+    "columns": [
+      "domain",
+      "checkpoint",
+      "severity",
+      "classification_reason",
+      "status",
+      "evidence_ref"
+    ],
+    "rows": [
+      {
+        "domain": "annuity_performance",
+        "checkpoint": "monthly_snapshot",
+        "severity": "none",
+        "classification_reason": "A real annuity_performance replay execution matched the legacy monthly snapshot baseline, so no compatibility case was created for comparison_run_id=phase1-parity-offline-2026-04-12-run-001.",
+        "status": "matched",
+        "evidence_ref": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/annuity_performance_parity_evidence.json"
+      }
+    ]
+  },
+  "execution_evidence": {
+    "executed_domain": "annuity_performance",
+    "period": "2026-03",
+    "comparison_run_id": "phase1-parity-offline-2026-04-12-run-001",
+    "must_pass_input": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/annuity_performance_2026_03.xlsx",
+    "evidence_ref": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/annuity_performance_parity_evidence.json",
+    "trace_evidence_ref": "reference/historical_replays/annuity_performance/evidence/trace/annuity_performance_2026-03__row_2.json",
+    "compatibility_case_ref": null,
+    "result": "matched",
+    "supplemental_real_sample": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/【年金规模收入】26年2月年金业务规模明细(手工汇总)_sample.xlsx",
+    "supplemental_real_sample_status": "tracked-as-contract-gap"
+  },
+  "minimum_evidence_set": {
+    "mapping_matrix": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/capability-map.csv",
+    "baseline_set": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/parity-baseline.json",
+    "mismatch_report": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/mismatch-report.json",
+    "severity_decision_log": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/decision-log.md"
+  },
+  "deferred_scope": "Phase 1 fixes the minimum evidence set only; the full evidence taxonomy remains deferred."
+}

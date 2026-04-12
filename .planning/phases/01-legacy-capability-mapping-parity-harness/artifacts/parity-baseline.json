@@ -1,0 +1,116 @@
+{
+  "artifact_name": "phase-01-parity-baseline",
+  "baseline_dataset_identity": {
+    "baseline_version": "phase1-par-01-v1",
+    "comparison_run_id": "phase1-parity-offline-2026-04-12-run-001",
+    "phase_scope": "PAR-01",
+    "deep_sample_domain": "annuity_performance",
+    "sample_batch_id_index": {
+      "annuity_performance": "annuity-performance-2026-03-deep-sample",
+      "annual_award": "annual-award-2026-03-breadth-registration",
+      "annual_loss": "annual-loss-2026-03-breadth-registration"
+    },
+    "registered_breadth_domains": [
+      "annual_award",
+      "annual_loss"
+    ]
+  },
+  "checkpoint_outputs": [
+    "mapping completeness status",
+    "baseline dataset identity",
+    "parity summary",
+    "mismatch severity table",
+    "human decision log"
+  ],
+  "required_intermediate_checkpoints": [
+    "source_recognition",
+    "canonical_fact_shape",
+    "identity_resolution_category",
+    "publication_key_fields"
+  ],
+  "sample_strategy": {
+    "review_ref": "docs/gsd/reviews/2026-04-12-phase1-sample-strategy-review.md",
+    "must_pass_deep_sample": {
+      "path": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/annuity_performance_2026_03.xlsx",
+      "role": "deterministic replay input",
+      "reason": "Matches the current annuity_performance replay intake contract and remains the required deep-sample parity input for Phase 1."
+    },
+    "supplemental_real_sample": {
+      "path": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/【年金规模收入】26年2月年金业务规模明细(手工汇总)_sample.xlsx",
+      "role": "real-structure reference sample",
+      "status": "supplemental-contract-gap",
+      "reason": "Useful for intake realism and mapping review, but not yet supported by the current replay intake contract because the workbook shape differs from the required AnnuityPerformance sheet and fixed column schema."
+    }
+  },
+  "minimum_evidence_set": {
+    "mapping_matrix": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/capability-map.csv",
+    "baseline_set": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/parity-baseline.json",
+    "mismatch_report": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/mismatch-report.json",
+    "severity_decision_log": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/decision-log.md"
+  },
+  "domains": [
+    {
+      "domain": "annuity_performance",
+      "sample_batch_id": "annuity-performance-2026-03-deep-sample",
+      "baseline_version": "phase1-par-01-v1",
+      "comparison_run_id": "phase1-parity-offline-2026-04-12-run-001",
+      "mapping completeness status": "deep-sample mapped and baseline anchored",
+      "reference_assets": [
+        "reference/historical_replays/annuity_performance/legacy_monthly_snapshot_2026_03.json",
+        "reference/historical_replays/annuity_performance/annual_award_fixture_2026_03.json",
+        "reference/historical_replays/annuity_performance/annual_loss_fixture_2026_03.json"
+      ],
+      "sample_inputs": {
+        "must_pass_deep_sample": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/annuity_performance_2026_03.xlsx",
+        "supplemental_real_sample": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/【年金规模收入】26年2月年金业务规模明细(手工汇总)_sample.xlsx"
+      },
+      "expected_output_anchor": "reference/historical_replays/annuity_performance/legacy_monthly_snapshot_2026_03.json",
+      "checkpoint_expectations": {
+        "source_recognition": "must preserve annuity performance routing for the deep sample workbook",
+        "canonical_fact_shape": "must preserve the canonical annuity fact row shape used by replay validation",
+        "identity_resolution_category": "must classify cache-hit, governed fallback, or unresolved identity outcomes without silent drift",
+        "publication_key_fields": "must preserve the contract_state and monthly snapshot identity keys consumed by replay outputs"
+      }
+    },
+    {
+      "domain": "annual_award",
+      "sample_batch_id": "annual-award-2026-03-breadth-registration",
+      "baseline_version": "phase1-par-01-v1",
+      "comparison_run_id": "phase1-parity-offline-2026-04-12-run-001",
+      "mapping completeness status": "breadth registration only for Phase 1",
+      "reference_assets": [
+        "reference/historical_replays/annual_award/customer_plan_history_2026_03.json",
+        "reference/historical_replays/annual_award/legacy_monthly_snapshot_2026_03.json"
+      ],
+      "expected_output_anchor": "reference/historical_replays/annual_award/legacy_monthly_snapshot_2026_03.json",
+      "checkpoint_expectations": {
+        "source_recognition": "must keep annual award intake identified as a registered breadth domain",
+        "canonical_fact_shape": "must preserve the event-domain fact contract used by downstream snapshot fixtures",
+        "identity_resolution_category": "must record whether breadth evidence depends on identity enrichment without deep-sample adjudication",
+        "publication_key_fields": "must keep award fixture linkage stable for downstream replay references"
+      }
+    },
+    {
+      "domain": "annual_loss",
+      "sample_batch_id": "annual-loss-2026-03-breadth-registration",
+      "baseline_version": "phase1-par-01-v1",
+      "comparison_run_id": "phase1-parity-offline-2026-04-12-run-001",
+      "mapping completeness status": "breadth registration only for Phase 1",
+      "reference_assets": [
+        "reference/historical_replays/annual_loss/customer_plan_history_2026_03.json",
+        "reference/historical_replays/annual_loss/legacy_monthly_snapshot_2026_03.json"
+      ],
+      "expected_output_anchor": "reference/historical_replays/annual_loss/legacy_monthly_snapshot_2026_03.json",
+      "checkpoint_expectations": {
+        "source_recognition": "must keep annual loss intake identified as a registered breadth domain",
+        "canonical_fact_shape": "must preserve the event-domain fact contract used by downstream snapshot fixtures",
+        "identity_resolution_category": "must record whether breadth evidence depends on identity enrichment without deep-sample adjudication",
+        "publication_key_fields": "must keep loss fixture linkage stable for downstream replay references"
+      }
+    }
+  ],
+  "deferred_scope": [
+    "full evidence directory taxonomy remains deferred after mismatch patterns stabilize",
+    "CI hard-fail promotion is deferred beyond the Phase 1 offline checkpoint"
+  ]
+}

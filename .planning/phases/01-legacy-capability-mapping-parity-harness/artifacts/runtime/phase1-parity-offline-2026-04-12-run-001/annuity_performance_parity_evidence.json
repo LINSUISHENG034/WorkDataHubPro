@@ -1,0 +1,48 @@
+{
+  "comparison_run_id": "phase1-parity-offline-2026-04-12-run-001",
+  "period": "2026-03",
+  "executed_domain": "annuity_performance",
+  "input_workbook": ".planning/phases/01-legacy-capability-mapping-parity-harness/artifacts/runtime/phase1-parity-offline-2026-04-12-run-001/annuity_performance_2026_03.xlsx",
+  "input_rows": [
+    {
+      "company_name": "Acme",
+      "plan_code": "PLAN-A",
+      "period": "2026-03",
+      "sales_amount": "1200.50"
+    }
+  ],
+  "reference_snapshot": "reference/historical_replays/annuity_performance/legacy_monthly_snapshot_2026_03.json",
+  "publication_targets": [
+    "fact_annuity_performance",
+    "company_reference",
+    "contract_state",
+    "monthly_snapshot"
+  ],
+  "projection_results": [
+    {
+      "projection_name": "contract_state",
+      "affected_rows": 1,
+      "success": true,
+      "error_message": null
+    },
+    {
+      "projection_name": "monthly_snapshot",
+      "affected_rows": 1,
+      "success": true,
+      "error_message": null
+    }
+  ],
+  "compatibility_case_created": false,
+  "compatibility_case_path": null,
+  "compatibility_case": null,
+  "trace_evidence_path": "reference/historical_replays/annuity_performance/evidence/trace/annuity_performance_2026-03__row_2.json",
+  "trace_evidence_exists": true,
+  "legacy_snapshot_rows": [
+    {
+      "period": "2026-03",
+      "contract_state_rows": 1,
+      "award_fixture_rows": 1,
+      "loss_fixture_rows": 0
+    }
+  ]
+}
