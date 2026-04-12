@@ -57,6 +57,17 @@ def test_capability_map_includes_all_phase1_domains() -> None:
     assert {row["domain"] for row in rows} == PHASE1_DOMAINS
 
 
+def test_annuity_performance_rows_have_stage_chains() -> None:
+    _, rows = _read_csv_rows(CAPABILITY_MAP)
+
+    annuity_rows = [row for row in rows if row["domain"] == "annuity_performance"]
+
+    assert annuity_rows
+    for row in annuity_rows:
+        assert row["legacy_stage_chain"].strip()
+        assert row["pro_stage_chain"].strip()
+
+
 def test_intake_map_required_columns() -> None:
     fieldnames, rows = _read_csv_rows(INTAKE_PATH_MAP)
 

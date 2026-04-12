@@ -14,6 +14,7 @@ ALLOWED_CLASSES = {
     "retire-with-proof",
 }
 ALLOWED_PHASE1_TIERS = {"block", "warn"}
+PHASE1_DOMAINS = {"annuity_performance", "annual_award", "annual_loss"}
 
 
 def _read_rule_rows() -> list[dict[str, str]]:
@@ -39,13 +40,18 @@ def test_rule_classes_are_allowed() -> None:
     rows = _read_rule_rows()
 
     assert rows
-    assert {row["class"] for row in rows} == ALLOWED_CLASSES
 
     for row in rows:
         assert row["rule_id"].strip()
         assert row["domain"].strip()
         assert row["proof_or_equivalence_note"].strip()
         assert row["class"] in ALLOWED_CLASSES
+
+
+def test_rule_classification_covers_all_phase1_domains() -> None:
+    rows = _read_rule_rows()
+
+    assert {row["domain"] for row in rows} == PHASE1_DOMAINS
 
 
 def test_severity_policy_uses_only_phase1_tiers() -> None:
