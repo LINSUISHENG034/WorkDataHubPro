@@ -4,6 +4,9 @@ from pathlib import Path
 COVERAGE_MATRIX = Path(
     "docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md"
 )
+REFACTOR_PROGRAM = Path(
+    "docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md"
+)
 
 
 def test_annual_loss_acceptance_updates_coverage_matrix_without_dropping_runtime_surfaces() -> None:
@@ -53,3 +56,19 @@ def test_annual_loss_acceptance_updates_coverage_matrix_without_dropping_runtime
     assert "current accepted event-domain slices prove replay-backed and current-row lookup behavior" in coverage_matrix
     assert "| XD-005 | contract-state output (`customer.客户年金计划`) influences `annual_award` and `annual_loss` plan-code enrichment behavior |" in coverage_matrix
     assert "annual_loss acceptance now proves this dependency explicitly while it remains active for both event-domain slices" in coverage_matrix
+
+
+def test_annual_loss_acceptance_updates_refactor_program_but_keeps_phase_e_tracks() -> None:
+    refactor_program = REFACTOR_PROGRAM.read_text(encoding="utf-8")
+
+    assert "- the first Phase D breadth slice for `annual_loss`" in refactor_program
+    assert "- compatibility adjudication and evidence indexing exist for the first three accepted slices" in refactor_program
+    assert "- replay assets and runbooks exist for `annuity_performance`, `annual_award`, and `annual_loss`" in refactor_program
+    assert "- the paired event-domain dependency path is accepted with committed coverage updates" in refactor_program
+    assert "- `annuity_income` does not have an accepted executable slice yet" in refactor_program
+    assert "| 3 | `annual_loss` | accepted breadth-closure slice | closes the paired event-domain dependency path before the final single-sheet breadth slice |" in refactor_program
+    assert "| 4 | `annuity_income` | next recommended single-sheet breadth slice | extends first-wave coverage after event-domain breadth risk is reduced |" in refactor_program
+    assert "| deferred lookup queue runtime | legacy supports queued provider processing, retries, and recovery outside the main fact run | deferred | separate queue/runtime plan |" in refactor_program
+    assert "| reference bootstrap / reference-sync runtime | legacy uses an explicit `reference_sync` orchestration surface plus incremental state | deferred | separate reference bootstrap/runtime plan |" in refactor_program
+    assert "| enterprise identity / EQC persistence surfaces | legacy persists cache, queue, and raw/cleansed EQC data beyond fact-domain outputs | deferred | separate identity persistence plan |" in refactor_program
+    assert "| manual customer-status command surfaces and shared operator artifacts | legacy supports `customer-mdm` manual commands and cross-domain unresolved-name / failed-record artifacts | deferred | separate operator-tools / artifact-governance plan |" in refactor_program
