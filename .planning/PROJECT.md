@@ -20,10 +20,12 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - ✓ Legacy-to-Pro capability and intake-path mapping artifacts for `annuity_performance`, `annual_award`, and `annual_loss` — validated in Phase 1
 - ✓ Phase 1 rule-classification inventory and default-block severity policy for parity-critical legacy behavior — validated in Phase 1
 - ✓ Phase 1 parity baseline, executed annuity deep-sample comparison, and approved offline checkpoint for `PAR-01` — validated in Phase 1
+- ✓ Deterministic replay checkpoints and comparison-run evidence packages for the accepted slices — validated in Phase 2
+- ✓ Explicit compatibility adjudication semantics for severity, precedent, exception scope, and checkpoint identity — validated in Phase 2
+- ✓ Repository-native PR / protected-branch / nightly parity gate tiers — validated in Phase 2
 
 ### Active
 
-- [ ] Remove black-box behavior by making each processing stage, rule decision, and failure path explicit
 - [ ] Upgrade agent-operable project surfaces (entrypoints, diagnostics, config contracts, runbooks)
 - [ ] Reduce orchestration duplication and high-coupling hotspots across replay slices
 - [ ] Improve runtime efficiency without introducing behavior drift
@@ -31,8 +33,9 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 ## Current State
 
 - Phase 1 complete: authoritative mapping, rule-classification, parity-baseline, and offline checkpoint artifacts are in place
-- Current focus has shifted to Phase 2: explicit pipeline contracts, deterministic parity gates, and adjudication behavior
-- Deferred carry-forward from Phase 1: runtime compatibility models still do not persist mismatch severity as a first-class field
+- Phase 2 complete: explicit stage contracts, deterministic parity gates, derivation checkpoint governance, and CI-ready gate tiers are in place
+- Current focus has shifted to Phase 3: orchestration refactor, reusable pipeline composition, and typed failure explainability
+- Deferred carry-forward from Phase 2: verification-asset rows for `golden_set`, `golden_baseline`, `real_data_sample`, and dedicated error-case fixtures remain explicitly deferred
 
 ### Out of Scope
 
@@ -68,7 +71,7 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 | Treat output parity as primary acceptance gate, not optional QA | Prevents architectural improvements from breaking business semantics | ✓ Good |
 | Prioritize non-black-box pipeline contracts and observability early | Enables maintainability and agent diagnostics from first delivery phases | ✓ Good |
 | Make high-risk migration areas explicit in roadmap and phase verification | Incomplete rule migration and source-recognition drift must be surfaced early | ✓ Good |
-| Keep planning artifacts local-only by default (`commit_docs=false`) | Repo currently treats `.planning/` as local workflow state | — Pending |
+| Commit `.planning/` artifacts as repository workflow state | `.planning` is now part of the governed project record, not ignored local scratch space | ✓ Good |
 
 ## Evolution
 
@@ -88,4 +91,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-12 after Phase 1 completion*
+*Last updated: 2026-04-12 after Phase 2 completion*

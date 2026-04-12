@@ -14,14 +14,14 @@
 ### Result Parity Validation
 
 - [x] **PAR-01**: Team can define domain-specific parity datasets and golden outputs for annuity performance, annual award, and annual loss
-- [ ] **PAR-02**: Replay verification can compare Pro outputs against legacy baselines with deterministic pass/fail evidence
-- [ ] **PAR-03**: Team can distinguish acceptable structural differences from unacceptable business-semantic mismatches using explicit adjudication rules
-- [ ] **PAR-04**: CI can block phase completion when parity-critical checks fail
+- [x] **PAR-02**: Replay verification can compare Pro outputs against legacy baselines with deterministic pass/fail evidence
+- [x] **PAR-03**: Team can distinguish acceptable structural differences from unacceptable business-semantic mismatches using explicit adjudication rules
+- [x] **PAR-04**: CI can block phase completion when parity-critical checks fail
 
 ### Non-Black-Box Processing Architecture
 
-- [ ] **PIPE-01**: System can express processing lifecycle as explicit stage contracts (input -> stage transform -> intermediate product -> output)
-- [ ] **PIPE-02**: System can expose per-stage rule application evidence and decision rationale for debugging
+- [x] **PIPE-01**: System can express processing lifecycle as explicit stage contracts (input -> stage transform -> intermediate product -> output)
+- [x] **PIPE-02**: System can expose per-stage rule application evidence and decision rationale for debugging
 - [ ] **PIPE-03**: System can surface failure paths with typed error categories and actionable diagnostics
 - [ ] **PIPE-04**: System can reduce duplicated replay orchestration by extracting reusable pipeline composition primitives
 
@@ -74,11 +74,11 @@
 | MAP-02 | Phase 1 | Validated |
 | MAP-03 | Phase 1 | Validated |
 | PAR-01 | Phase 1 | Validated |
-| PAR-02 | Phase 2 | Pending |
-| PAR-03 | Phase 2 | Pending |
-| PAR-04 | Phase 2 | Pending |
-| PIPE-01 | Phase 2 | Pending |
-| PIPE-02 | Phase 2 | Pending |
+| PAR-02 | Phase 2 | Validated |
+| PAR-03 | Phase 2 | Validated |
+| PAR-04 | Phase 2 | Validated |
+| PIPE-01 | Phase 2 | Validated |
+| PIPE-02 | Phase 2 | Validated |
 | PIPE-03 | Phase 3 | Pending |
 | PIPE-04 | Phase 3 | Pending |
 | OPS-01 | Phase 3 | Pending |
@@ -99,4 +99,4 @@
 
 ---
 *Requirements defined: 2026-04-12*
-*Last updated: 2026-04-12 after Phase 1 completion*
+*Last updated: 2026-04-12 after Phase 2 completion*
