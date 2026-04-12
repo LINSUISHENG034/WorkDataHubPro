@@ -3,12 +3,13 @@
 ## Read This When
 
 - the task involves Serena activation or onboarding
+- the task involves Serena local deployment, client wiring, or upgrade procedure
 - the task involves symbol-aware source exploration or semantic source edits
 - the task involves reference tracing, rename safety, or bounded source inspection
 
 ## Do Not Read This When
 
-- the task is docs-only and does not require source-code symbol work
+- the task is docs-only and unrelated to Serena client setup or source-code symbol work
 - the task is primarily about git workflow
 - the task is a simple shell or asset operation with no code-structure question
 
@@ -64,6 +65,57 @@ this sequence:
 
 This is the minimum project-safe Serena setup. Do not skip it once Serena is in
 use, but do not force it onto non-Serena tasks.
+
+### 3.1 Current Local Deployment Baseline
+
+The current Windows workstation baseline uses a locally installed Serena tool,
+not a per-session `uvx --from git+https://github.com/oraios/serena ...`
+bootstrap.
+
+- install Serena as a `uv tool` package: `serena-agent`
+- executable shims should resolve from `%USERPROFILE%\\.local\\bin\\`
+- the current command entrypoints are `serena.exe` and `serena-hooks.exe`
+- the `uv tool` environment lives under `%APPDATA%\\uv\\tools\\serena-agent\\`
+- the global Serena configuration lives in `%USERPROFILE%\\.serena\\serena_config.yml`
+- prefer the local `serena` command for client wiring so Codex and Claude Code
+  use the same installed Serena version
+
+Current client wiring:
+
+- Codex user config: `%USERPROFILE%\\.codex\\config.toml`
+- Codex server command: `serena start-mcp-server --project-from-cwd --context codex`
+- Claude Code user MCP config: `%USERPROFILE%\\.claude.json`
+- Claude Code server command: `serena start-mcp-server --context claude-code --project-from-cwd`
+- Claude Code Serena hooks remain separate from MCP registration and live in
+  `%USERPROFILE%\\.claude\\settings.json`
+
+### 3.2 Update And Repair Flow
+
+For this workstation, Serena updates should happen through `uv tool`, not by
+editing the client configs.
+
+Standard upgrade:
+
+- `uv tool upgrade serena-agent`
+
+Required post-upgrade checks:
+
+- `uv tool list`
+- `codex mcp get serena`
+- `claude mcp get serena`
+
+If the local tool installation is broken or the entrypoints drift, reinstall the
+same tool package and preserve the current local install policy:
+
+- `uv tool install --reinstall --prerelease allow --index-url https://mirrors.aliyun.com/pypi/simple serena-agent`
+
+After upgrade or reinstall:
+
+- restart active Codex and Claude Code sessions
+- confirm the local `serena` command still resolves before troubleshooting MCP
+  client config
+- only fall back to `uvx`-based client bootstrapping if the local tool install
+  strategy is intentionally abandoned
 
 ## 4. When Serena Adds Value
 
