@@ -67,18 +67,19 @@ The program has completed:
 
 - the first executable validation slice for `annuity_performance`
 - the default Phase C multi-sheet slice for `annual_award`
+- the first Phase D breadth slice for `annual_loss`
 
 What is already true:
 
 - a capability-first package exists under `src/work_data_hub_pro/`
 - explicit platform contracts, tracing, lineage, publication, and replay flow exist
-- compatibility adjudication and evidence indexing exist for the first two accepted slices
-- replay assets and runbooks exist for `annuity_performance` and `annual_award`
-- one multi-sheet executable slice is now accepted with committed coverage updates
+- compatibility adjudication and evidence indexing exist for the first three accepted slices
+- replay assets and runbooks exist for `annuity_performance`, `annual_award`, and `annual_loss`
+- the paired event-domain dependency path is accepted with committed coverage updates
 
 What is not yet true:
 
-- `annual_loss` and `annuity_income` do not have accepted executable slices yet
+- `annuity_income` does not have an accepted executable slice yet
 - production storage/publication and operator tooling remain deferred
 - first-wave legacy retirement decisions are not yet recorded
 
@@ -216,8 +217,11 @@ Exit gate:
 |------|--------|----------------|-----------|
 | 1 | `annuity_performance` | accepted baseline slice | proves the corrected architecture in code |
 | 2 | `annual_award` | accepted multi-sheet slice | closes the second intake archetype and downstream award-status dependency |
+| 3 | `annual_loss` | accepted breadth-closure slice | closes the paired event-domain dependency path before the final single-sheet breadth slice |
+| 4 | `annuity_income` | next recommended single-sheet breadth slice | extends first-wave coverage after event-domain breadth risk is reduced |
+
+Historical pre-closure sequence reference:
 | 3 | `annual_loss` | next recommended slice | validates the paired event-domain dependency path |
-| 4 | `annuity_income` | follow-on single-sheet breadth slice | extends first-wave coverage after archetype risks are reduced |
 
 This order may only change if the program governance review writes down:
 
