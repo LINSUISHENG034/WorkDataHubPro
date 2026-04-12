@@ -22,3 +22,20 @@
 - 将经验页移入 `lessons/planning-and-evidence.md`
 - 新增 `phases/index.md` 与 `governance/index.md` 作为后续扩展入口
 - 更新根索引以反映新的两层语义结构
+
+## [2026-04-12] governance | 沉淀 Phase 2 决策基线
+
+- 新增 `governance/phase-2-decisions.md`
+- 记录 Phase 2 的五项已确认决策：checkpoint、adjudication、contract strictness、CI、evidence shape
+- 明确 `source_intake` 采用 `real-data-style` 目标基线
+- 明确当前简化 workbook 输入仅作为 deterministic test fixture
+- 补充三个 accepted slice 的 intake baseline 口径
+- 更新治理索引与路线图页面以指向该决策页
+
+## [2026-04-12] governance | 增补 verification assets 与防遗漏规则
+
+- 扩写 `governance/phase-2-decisions.md`，新增 verification asset governance 与 `forgotten mechanism sweep`
+- 新增 `governance/verification-assets.md`
+- 明确 `golden set` 是一等 verification asset，而不是测试附件
+- 明确新 phase / 新 slice 进入规划前必须做一次防遗漏扫描
+- 更新治理索引与路线图页面，接入 verification assets 入口

@@ -120,6 +120,24 @@ Phase 1 完成后，已沉淀的关键产物包括：
 - 逐步减少 orchestration duplication
 - 强化 agent 入口、诊断与治理能力
 
+## Phase 2 已确认决策
+
+截至 2026-04-12，Phase 2 已确认的关键治理方向包括：
+
+- checkpoint 采用分层策略，`reference_derivation` 作为 Wave 2 收口项
+- adjudication 采用 `severity + decision_status + precedent_status` 三层模型
+- contract strictness 采用“双层策略”：对源数据入口受控宽容，对内部 contract 严格校验
+- `source_intake` 的目标基线是 `real-data-style`，当前简化 workbook 只保留为 deterministic test fixture
+- CI 采用 PR / merge / nightly 三层 gate
+- failed parity gate 采用 comparison-run evidence package，而不是只保留 trace 与单个 case
+- `golden set`、`real-data sample`、`synthetic fixture`、`replay baseline` 被明确提升为 verification assets
+- 新 phase / 新 slice 进入规划前，需要做一次 `forgotten mechanism sweep`
+
+更详细的治理说明见：
+
+- [Phase 2 决策基线](../governance/phase-2-decisions.md)
+- [Verification Assets](../governance/verification-assets.md)
+
 ## 后续推进原则
 
 后续各 phase 建议持续遵守下面几条原则：
