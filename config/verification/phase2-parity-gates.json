@@ -1,0 +1,22 @@
+{
+  "tiers": {
+    "pr": {
+      "description": "Fast parity-critical checks for pull requests: intake tolerance, annuity replay gates, and explainability retrieval.",
+      "commands": [
+        "uv run pytest tests/integration/test_phase2_intake_validation.py tests/replay/test_annuity_performance_slice.py tests/replay/test_phase2_annuity_performance_gates.py tests/replay/test_annuity_performance_explainability_slo.py -v"
+      ]
+    },
+    "protected_branch": {
+      "description": "Accepted-slice replay matrix with explicit reference-derivation checkpoint coverage before merge.",
+      "commands": [
+        "uv run pytest tests/replay/test_annuity_performance_slice.py tests/replay/test_annual_award_slice.py tests/replay/test_annual_loss_slice.py tests/replay/test_phase2_reference_derivation_gates.py -v"
+      ]
+    },
+    "nightly": {
+      "description": "Full repository verification for nightly or release cadence.",
+      "commands": [
+        "uv run pytest -v"
+      ]
+    }
+  }
+}
