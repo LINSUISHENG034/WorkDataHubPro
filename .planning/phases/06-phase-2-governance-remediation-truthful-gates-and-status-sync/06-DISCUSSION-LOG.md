@@ -1,0 +1,58 @@
+# Phase 6: Phase 2 governance remediation - truthful gates and status sync - Discussion Log
+
+> **Audit trail only.** Do not use as input to planning, research, or execution agents.
+> Decisions are captured in CONTEXT.md — this log preserves the alternatives considered.
+
+**Date:** 2026-04-13T00:38:21.0850568+08:00
+**Phase:** 06-phase-2-governance-remediation-truthful-gates-and-status-sync
+**Areas discussed:** missing reference derivation baseline behavior, intermediate checkpoint truthfulness, phase closure scope
+
+---
+
+## Missing reference derivation baseline behavior
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Fail the replay gate immediately | `legacy_reference_derivation_<period>.json` is required; missing file fails closed. | |
+| Auto-generate the missing baseline | Generate from current Pro output automatically, then require it later. | |
+| Fail closed + explicit bootstrap | Normal replay fails closed; baseline creation must happen through an explicit bootstrap path. | ✓ |
+
+**User's choice:** Fail closed + explicit bootstrap.
+**Notes:** The baseline must never be created as a silent side effect of normal replay execution.
+
+---
+
+## Intermediate checkpoint truthfulness
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| All accepted baselines | `source_intake`, `fact_processing`, `identity_resolution`, and `contract_state` all use repo-native accepted baseline payloads. | |
+| All contract assertions | Keep all intermediate checkpoints as independently falsifiable contract checks. | |
+| Mixed model | `source_intake` remains contract-based; the other intermediate checkpoints move to accepted baseline comparison. | ✓ |
+
+**User's choice:** Mixed model.
+**Notes:** `source_intake` should remain a contract checkpoint. The other intermediate checkpoints should become real baseline comparisons rather than self-compare placeholders.
+
+---
+
+## Phase closure scope
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Code + tests only | Fix runtime truthfulness and diff accuracy without reopening governance/planning docs. | |
+| Code + tests + governance sync | Fix runtime/tests and synchronize governance/planning status in the same phase. | ✓ |
+| Other | Alternative scope definition. | |
+
+**User's choice:** Code + tests + governance sync.
+**Notes:** Repository governance signals should match the real sign-off status while remediation is outstanding.
+
+---
+
+## the agent's Discretion
+
+- Exact bootstrap command and helper structure for accepted baseline creation.
+- Exact contract assertion mechanics for the `source_intake` checkpoint.
+
+## Deferred Ideas
+
+None.

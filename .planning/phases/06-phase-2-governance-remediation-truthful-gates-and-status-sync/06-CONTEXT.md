@@ -1,0 +1,122 @@
+# Phase 6: Phase 2 Governance Remediation - Truthful Gates and Status Sync - Context
+
+**Gathered:** 2026-04-13
+**Status:** Ready for planning
+
+<domain>
+## Phase Boundary
+
+Phase 6 closes the governance follow-up left open after Phase 2 by making the replay gates truthful instead of merely present. Scope is limited to three remediations identified in the 2026-04-13 governance audit outcome now reflected in committed planning and wiki artifacts: fail-closed handling plus explicit bootstrap for checkpoint baselines, independently falsifiable intermediate checkpoints, and duplicate-row diff accuracy in compatibility output. This phase also includes synchronization of governance/planning status plus verification-asset registration so repository docs stop implying full Phase 2 sign-off before those remediations are complete.
+
+</domain>
+
+<decisions>
+## Implementation Decisions
+
+### Reference derivation baseline policy
+- **D-01:** `reference_derivation` must use fail-closed behavior when an accepted baseline is required and the baseline file is absent; self-compare fallback is not allowed.
+- **D-02:** The remediation must also support an explicit bootstrap path for creating the accepted `reference_derivation` baseline intentionally, rather than through silent runtime fallback.
+- **D-03:** Baseline bootstrap must be visible and governed, not an automatic side effect of replay execution.
+
+### Intermediate checkpoint truthfulness
+- **D-04:** Use a mixed checkpoint model for the intermediate stations called out by the review.
+- **D-05:** `source_intake` remains a contract-style checkpoint rather than a repo-native payload-baseline parity checkpoint.
+- **D-06:** `fact_processing`, `identity_resolution`, and `contract_state` must stop comparing Pro output to itself and instead compare against independent accepted baseline payloads.
+- **D-07:** The resulting intermediate checkpoints must be independently falsifiable in tests so semantic drift can fail at the first divergent stage instead of only at `monthly_snapshot`.
+
+### Governance closure and status sync
+- **D-08:** Phase 6 scope includes both code/test remediation and governance-state synchronization.
+- **D-09:** Planning/governance artifacts must explicitly reflect that Phase 2 implementation exists but governance sign-off remains pending until this remediation closes.
+- **D-10:** The remediation should preserve the existing Phase 2 checkpoint taxonomy rather than redesigning the broader gate architecture.
+
+### Diff accuracy
+- **D-11:** `_build_diff()` must count duplicate-row mismatches using correct multiset subtraction semantics.
+- **D-12:** Focused regression tests must cover duplicate-row overcounting so compatibility evidence remains trustworthy on repeated-row datasets.
+
+### Verification-asset registration
+- **D-13:** New repo-native checkpoint baselines introduced by this remediation must be registered in committed verification-asset artifacts instead of remaining implicit in replay roots.
+- **D-14:** Canonical planning and status sync must rely only on committed repository docs, not on ignored local working material such as `docs/gsd/`.
+
+### the agent's Discretion
+- Exact file layout and helper naming for baseline bootstrap commands, fixtures, or utilities, provided the bootstrap path is explicit and cannot be confused with normal replay execution.
+- Exact representation of the `source_intake` contract assertions, provided they remain independently falsifiable and do not regress into self-compare semantics.
+
+</decisions>
+
+<canonical_refs>
+## Canonical References
+
+**Downstream agents MUST read these before planning or implementing.**
+
+### Phase scope and accepted remediation direction
+- `.planning/ROADMAP.md` — Phase 6 entry and current milestone context.
+- `.planning/PROJECT.md` — parity-first and transparency-first rebuild constraints.
+- `.planning/REQUIREMENTS.md` — current requirement mapping and Phase 2 / governance traceability backdrop.
+- `.planning/STATE.md` — current project status and roadmap evolution state.
+- `.planning/phases/02-transparent-pipeline-contracts-parity-gates/02-CONTEXT.md` — locked Phase 2 checkpoint and adjudication decisions that this remediation must preserve unless explicitly overridden here.
+- `docs/wiki-cn/roadmap/overview.md` — committed human-facing record of the current “implementation complete vs governance sign-off pending” Phase 2 status split.
+- `docs/wiki-cn/lessons/phase-2-governance-review-lessons.md` — committed summary of the governance findings that motivated this remediation.
+
+### Governance and program constraints
+- `docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md` — slice admission, governance baseline, and program-level completion semantics.
+- `docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md` — accepted/deferred coverage model and cross-cutting governance expectations.
+- `docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md` — architecture baseline for explicit stage contracts, compatibility, and evidence behavior.
+- `reference/verification_assets/phase2-accepted-slices.json` — committed registry for accepted/deferred Phase 2 verification assets.
+- `docs/runbooks/phase2-verification-assets.md` — operator-facing rules for when the verification-asset registry must be refreshed.
+
+### Code and test anchors for this remediation
+- `src/work_data_hub_pro/apps/orchestration/replay/annuity_performance_slice.py` — current replay checkpoint behavior, including `reference_derivation` baseline fallback and self-compare checkpoints.
+- `src/work_data_hub_pro/apps/orchestration/replay/annual_award_slice.py` — same replay checkpoint pattern for the award slice.
+- `src/work_data_hub_pro/apps/orchestration/replay/annual_loss_slice.py` — same replay checkpoint pattern for the loss slice.
+- `src/work_data_hub_pro/governance/compatibility/gate_runtime.py` — current checkpoint diff construction and package writing.
+- `tests/replay/test_phase2_reference_derivation_gates.py` — existing `reference_derivation` gate coverage and likely insertion point for fail-closed/bootstrap tests.
+- `tests/replay/test_phase2_event_domain_gates.py` — existing shared event-domain checkpoint/package coverage.
+- `tests/contracts/test_phase2_verification_assets.py` — existing contract coverage for the committed Phase 2 verification-asset registry.
+- `.planning/codebase/ARCHITECTURE.md` — current replay/evidence structure.
+- `.planning/codebase/CONCERNS.md` — existing governance and runtime risk framing.
+- `.planning/codebase/TESTING.md` — current test-boundary expectations.
+
+</canonical_refs>
+
+<code_context>
+## Existing Code Insights
+
+### Reusable Assets
+- `src/work_data_hub_pro/apps/orchestration/replay/*_slice.py`: all three accepted replay slices share nearly identical checkpoint construction, so the remediation can likely be applied as one repeated pattern across all slices.
+- `src/work_data_hub_pro/governance/compatibility/gate_runtime.py`: existing `build_checkpoint_result()` and `_build_diff()` already centralize comparison behavior, so diff correctness belongs here rather than in slice-specific code.
+- `tests/replay/test_phase2_reference_derivation_gates.py`: already creates replay assets and fixtures for `reference_derivation`, making it a natural place to codify explicit bootstrap/missing-baseline behavior.
+- `tests/replay/test_phase2_event_domain_gates.py`: already asserts consistent checkpoint names and package shape across event-domain slices, so it can absorb cross-slice truthfulness assertions.
+
+### Established Patterns
+- Replay evidence is file-backed under `reference/historical_replays/<domain>/evidence`, so accepted checkpoint baselines should remain repo-native and reviewable.
+- Current replay slices assemble intermediate payloads inline and immediately feed them to `build_checkpoint_result()`, which is why self-compare drift exists today.
+- Phase 2 already treats `source_intake` differently from the full parity gates, so keeping it contract-based is consistent with prior accepted decisions.
+
+### Integration Points
+- Replay slice runners are the insertion point for baseline loading, missing-baseline failure, and non-self-compare intermediate checkpoint wiring.
+- Compatibility runtime tests and replay tests are the main enforcement points for diff accuracy and checkpoint falsifiability.
+- `reference/verification_assets/phase2-accepted-slices.json` and `docs/runbooks/phase2-verification-assets.md` are the committed governance surfaces that must absorb any new accepted checkpoint baseline assets.
+- Planning and governance docs under `.planning/` plus committed wiki status pages are in scope for status synchronization once the remediation path is defined.
+
+</code_context>
+
+<specifics>
+## Specific Ideas
+
+- The preferred behavior is “fail closed + explicit bootstrap,” not “fallback silently and keep the run green.”
+- The preferred mixed checkpoint model is: `source_intake` as contract assertions; `fact_processing`, `identity_resolution`, and `contract_state` as accepted-baseline comparisons.
+- This phase should end with repository signals aligned: code, tests, and governance/planning status should tell the same story about Phase 2 sign-off.
+
+</specifics>
+
+<deferred>
+## Deferred Ideas
+
+None — discussion stayed within the remediation phase boundary.
+
+</deferred>
+
+---
+
+*Phase: 06-phase-2-governance-remediation-truthful-gates-and-status-sync*
+*Context gathered: 2026-04-13*
