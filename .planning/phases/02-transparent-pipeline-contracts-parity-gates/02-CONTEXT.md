@@ -76,6 +76,8 @@ Phase 2 turns the current replay harness into an explicit deterministic gate sys
 - `.planning/PROJECT.md` — parity-first, transparent, incremental rebuild principles.
 - `.planning/phases/01-legacy-capability-mapping-parity-harness/01-CONTEXT.md` — locked Phase 1 decisions that Phase 2 must carry forward.
 - `docs/gsd/reviews/2026-04-12-phase2-gray-area-review.md` — user-approved decision baseline for all Phase 2 gray areas.
+- `docs/wiki-cn/governance/phase-2-decisions.md` — current governance baseline for checkpoint layering, evidence shape, intake strictness, and CI scope.
+- `docs/wiki-cn/governance/verification-assets.md` — current asset classes, intended usage, and unresolved registration gaps that Phase 2 must not omit.
 
 ### Architecture and governance anchors
 - `docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md` — explicit stage contracts, publication boundary, trace requirements, and compatibility-case intent.
@@ -118,6 +120,8 @@ Phase 2 turns the current replay harness into an explicit deterministic gate sys
 - The accepted target is a true Phase 2 gate system, not a heavier version of the Phase 1 snapshot-only replay harness.
 - The accepted order is: checkpoint taxonomy first, adjudication semantics second, failed-gate evidence package third, boundary validators fourth, and tiered CI wiring last.
 - `source_intake` should be tolerant only long enough to normalize real-data-style input into stable internal contracts; tolerance must not leak beyond that boundary.
+- A narrative note about deferred `reference_derivation` closure is not enough; Phase 2 must carry an explicit execute plan for that checkpoint before the phase can be considered closed.
+- Verification-asset registration and forgotten-mechanism sweep output are part of the Phase 2 governance surface and must not remain implicit in tests, old-project memory, or ad hoc runbooks.
 
 </specifics>
 

@@ -76,3 +76,9 @@
 ## Deferred Ideas
 
 - None added during discussion beyond the review's already-scoped deferrals for Wave 2 `reference_derivation` gating and broader runtime/storage questions.
+
+## Post-Discussion Planning Corrections
+
+- A later governance review found that Wave 2 `reference_derivation` closure needed its own explicit execute plan instead of remaining only a contextual defer.
+- The same review required Phase 2 planning to make shared gate runtime ownership, verification-asset registration, and forgotten-mechanism sweep output explicit.
+- These corrections change planning structure, not the user-approved Phase 2 decision baseline captured in `02-CONTEXT.md`.

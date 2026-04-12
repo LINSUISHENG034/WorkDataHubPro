@@ -14,12 +14,15 @@ Determine the best execution decomposition for Phase 2 so the current replay har
 - Attach stage-level rule and rationale evidence to parity review.
 - Replace snapshot-only mismatch handling with deterministic compare plus adjudication semantics.
 - Add CI gate hooks that reflect the now-shared replay runtime.
+- Register accepted-slice verification assets so missing `golden set`, `real-data sample`, or `error-case fixture` coverage is explicit instead of merely absent.
+- Produce a forgotten-mechanism sweep output for Phase 2 so phase-critical mechanisms land in `accepted`, `deferred`, or `retired`, rather than remaining undocumented.
 
 ### Must Not Expand In Phase 2
 - No production storage redesign.
 - No operator-tooling closure.
 - No queue/runtime closure.
 - No broad governance or retention platform beyond the failed-gate evidence package.
+- No broad legacy-program archaeology beyond the phase-critical mechanisms and assets that the sweep must classify explicitly.
 
 ## Current Runtime Baseline
 
@@ -98,25 +101,26 @@ Reason:
 
 ## Recommended Plan Decomposition
 
-### Plan 02-01: Gate Contracts, Adjudication Semantics, And Evidence Package Foundation
+### Plan 02-01: Gate Contracts, Shared Runtime, Adjudication Semantics, And Evidence Package Foundation
 
 Purpose:
-- establish the shared models and persistence primitives that every later plan depends on
+- establish the shared models, runtime helpers, and persistence primitives that every later plan depends on
 
 Key outputs:
 - checkpoint and gate result contracts
+- a reusable shared gate runtime for checkpoint comparison, gate summaries, and failed-package writing
 - expanded compatibility/adjudication models
 - comparison-run evidence writer and manifest structure
-- contract tests for model shape and file output
+- contract tests for model shape, runtime helper entrypoints, and file output
 
 Why first:
-- downstream slice integration should not invent its own result structures
-- CI wiring should depend on stable gate outputs, not the other way around
+- downstream slice integration should not invent its own result structures or package-writing logic
+- CI wiring should depend on stable gate outputs and runtime entrypoints, not the other way around
 
 ### Plan 02-02: Intake Adaptation And Deterministic Gate Execution For `annuity_performance`
 
 Purpose:
-- implement the first full Wave 1 gate path on the canonical deep-sample slice
+- implement the first full Wave 1 gate path on the canonical deep-sample slice while keeping orchestration thin
 
 Key outputs:
 - real-data-style intake adaptation recording
@@ -127,6 +131,7 @@ Key outputs:
   - `identity_resolution`
   - `contract_state`
   - `monthly_snapshot`
+- annuity slice integration with the shared gate runtime from Plan 02-01
 - replay and integration tests covering pass/fail outcomes and evidence package shape
 
 Why second:
@@ -140,16 +145,32 @@ Purpose:
 Key outputs:
 - event-domain intake adaptation handling
 - parity gate coverage for event-domain slices
+- shared-runtime integration in both event-domain slices
 - tests ensuring cross-slice consistency in gate results, adjudication semantics, and evidence outputs
 
 Why separate from Plan 02-02:
 - it preserves the deep-sample-first strategy from Phase 1
 - it reduces blast radius if the checkpoint contract needs one more iteration after the first slice
 
-### Plan 02-04: Tiered CI Gate Wiring And Planning/Runbook Surface Updates
+### Plan 02-04: `reference_derivation` Gate Closure And Verification-Asset Governance
 
 Purpose:
-- connect the new gate system to PR, protected-branch, and nightly verification paths
+- close the remaining in-phase checkpoint gap and make Phase 2 governance artifacts explicit before CI hardening
+
+Key outputs:
+- deterministic `reference_derivation` checkpoint coverage for accepted replay slices
+- accepted-slice verification-asset manifest with explicit `accepted`/`deferred` status for missing assets
+- forgotten-mechanism sweep output with `accepted`, `deferred`, and `retired` classifications
+- replay/contract tests covering the new checkpoint and governance artifacts
+
+Why before CI wiring:
+- the phase should not harden PR and protected-branch gates while an approved in-phase checkpoint remains unplanned
+- verification-asset and sweep outputs are part of phase closure, not post-closure documentation cleanup
+
+### Plan 02-05: Tiered CI Gate Wiring And Planning/Runbook Surface Updates
+
+Purpose:
+- connect the now-complete gate system to PR, protected-branch, and nightly verification paths
 
 Key outputs:
 - documented gate commands
@@ -158,16 +179,17 @@ Key outputs:
 - contract/docs coverage proving Phase 2 gate semantics are now part of the project workflow
 
 Why last:
-- CI wiring should stabilize around the actual gate runtime, not lead it
+- CI wiring should stabilize around the actual checkpoint set, shared runtime, and registered governance artifacts, not lead them
 
 ## File Targets By Plan
 
 ### Plan 02-01 Likely Touches
 - `src/work_data_hub_pro/governance/compatibility/models.py`
+- `src/work_data_hub_pro/governance/compatibility/gate_models.py`
+- `src/work_data_hub_pro/governance/compatibility/gate_runtime.py`
 - `src/work_data_hub_pro/governance/adjudication/service.py`
 - `src/work_data_hub_pro/governance/evidence_index/file_store.py`
 - `src/work_data_hub_pro/platform/contracts/models.py`
-- new shared gate runtime modules under `src/work_data_hub_pro/platform/` or `src/work_data_hub_pro/governance/compatibility/`
 - `tests/contracts/test_system_contracts.py`
 - new contract/integration tests for evidence package and adjudication semantics
 
@@ -186,10 +208,20 @@ Why last:
 - replay and integration tests for event-domain parity gates
 
 ### Plan 02-04 Likely Touches
-- `tests/replay/`
-- `tests/contracts/`
-- `docs/runbooks/` if Phase 2 execution needs replay-gate instructions
-- possibly `pyproject.toml` only if command grouping or test markers are needed
+- `src/work_data_hub_pro/governance/compatibility/gate_runtime.py`
+- `src/work_data_hub_pro/apps/orchestration/replay/annuity_performance_slice.py`
+- `src/work_data_hub_pro/apps/orchestration/replay/annual_award_slice.py`
+- `src/work_data_hub_pro/apps/orchestration/replay/annual_loss_slice.py`
+- `reference/verification_assets/`
+- `docs/runbooks/`
+- `.planning/phases/02-transparent-pipeline-contracts-parity-gates/`
+- replay and contract tests for reference-derivation gates and asset registration
+
+### Plan 02-05 Likely Touches
+- `config/verification/phase2-parity-gates.json`
+- `scripts/run_phase2_parity_gates.py`
+- `docs/runbooks/phase2-parity-gates.md`
+- `tests/contracts/test_phase2_ci_gate_matrix.py`
 
 ## Key Risks And How Plans Should Address Them
 
@@ -208,6 +240,10 @@ Why last:
 ### Evidence Explosion Without Structure
 - Risk: more files, but less diagnosability
 - Plan response: comparison-run root with predictable filenames and manifest cross-links
+
+### False Closure From Unregistered Assets Or Forgotten Mechanisms
+- Risk: Phase 2 looks complete while required protection mechanisms remain undocumented or only implicit in legacy memory
+- Plan response: add an explicit verification-asset manifest and forgotten-mechanism sweep deliverable before CI hardening
 
 ## Verification Strategy
 
@@ -240,17 +276,18 @@ Recommended command tiers:
 
 ## Planning Notes
 
-- Do not let Phase 2 absorb `reference_derivation` parity closure beyond the agreed Wave 2 placeholder.
+- Do not let Phase 2 absorb `reference_derivation` parity closure beyond the agreed in-phase closure for accepted slices.
 - Do not solve production storage location for compatibility/evidence artifacts in this phase.
 - Treat `publication` as an operational gate with explicit target/mode/transaction validation, not as a business-data parity comparator.
 - Make `comparison_run_id` the stable root key for failed-gate artifacts and adjudication linkage.
 
 ## Recommended Outcome
 
-Phase 2 should produce four executable plans in three waves:
+Phase 2 should produce five executable plans in four waves:
 - Wave 1: foundation
 - Wave 2: deep-sample gate path plus event-domain extension
-- Wave 3: CI and workflow wiring
+- Wave 3: `reference_derivation` closure plus verification-asset governance
+- Wave 4: CI and workflow wiring
 
 This keeps the work aligned to the user-approved decision order, respects current architecture boundaries, and avoids forcing Phase 3 refactor work into Phase 2.
 
