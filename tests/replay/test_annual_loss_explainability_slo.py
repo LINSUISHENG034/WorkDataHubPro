@@ -5,27 +5,25 @@ from time import perf_counter
 
 from openpyxl import Workbook
 
-from work_data_hub_pro.apps.orchestration.replay.annual_loss_slice import (
-    run_annual_loss_slice,
-)
+from work_data_hub_pro.apps.etl_cli.main import replay_annual_loss
 
 
 def _copy_committed_replay_assets(replay_root: Path) -> None:
-    replay_root.mkdir(parents=True, exist_ok=True)
-    committed_root = Path("reference/historical_replays/annual_loss")
-    for asset_name in (
-        "annuity_performance_fixture_2026_03.json",
-        "annual_award_fixture_2026_03.json",
-        "customer_plan_history_2026_03.json",
-        "legacy_monthly_snapshot_2026_03.json",
-    ):
-        shutil.copy2(committed_root / asset_name, replay_root / asset_name)
+    repo_root = Path(__file__).resolve().parents[2]
+    replay_root.parent.mkdir(parents=True, exist_ok=True)
+    committed_root = repo_root / "reference" / "historical_replays" / "annual_loss"
+    shutil.copytree(committed_root, replay_root)
+    shutil.copytree(repo_root / "config", replay_root.parents[2] / "config")
 
 
 def test_annual_loss_replay_keeps_primary_evidence_retrieval_inside_five_minutes(
-    tmp_path,
+    tmp_path, monkeypatch
 ) -> None:
-    workbook_path = tmp_path / "annual_loss_2026_03.xlsx"
+    workspace_root = tmp_path / "workspace"
+    workspace_root.mkdir(parents=True, exist_ok=True)
+    monkeypatch.chdir(workspace_root)
+
+    workbook_path = workspace_root / "annual_loss_2026_03.xlsx"
     workbook = Workbook()
     trustee = workbook.active
     trustee.title = "企年受托流失(解约)"
@@ -86,14 +84,13 @@ def test_annual_loss_replay_keeps_primary_evidence_retrieval_inside_five_minutes
     )
     workbook.save(workbook_path)
 
-    replay_root = tmp_path / "reference" / "historical_replays" / "annual_loss"
+    replay_root = workspace_root / "reference" / "historical_replays" / "annual_loss"
     _copy_committed_replay_assets(replay_root)
 
     started = perf_counter()
-    run_annual_loss_slice(
+    replay_annual_loss(
         workbook=workbook_path,
         period="2026-03",
-        replay_root=replay_root,
     )
     evidence_path = replay_root / "evidence" / "trace" / "annual_loss_2026-03__row_2.json"
     payload = json.loads(evidence_path.read_text(encoding="utf-8"))
