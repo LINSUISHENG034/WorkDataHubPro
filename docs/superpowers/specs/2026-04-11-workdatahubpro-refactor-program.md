@@ -36,6 +36,10 @@ operationally credible in `WorkDataHubPro`:
 - compatibility and evidence handling
 - operator entrypoints and replay tooling
 - external identity/provider integration strategy
+- deferred lookup queue and special orchestration runtime surfaces
+- reference bootstrap / reference-sync runtime decisions
+- enterprise persistence surfaces used by identity and EQC integration
+- cross-domain operator artifacts and manual customer-status command surfaces
 
 ### 1.2 Out Of Scope
 
@@ -81,6 +85,8 @@ What is not yet true:
 
 - `annuity_income` does not have an accepted executable slice yet
 - production storage/publication and operator tooling remain deferred
+- special orchestration surfaces such as `company_lookup_queue` and `reference_sync` are now explicitly registered, but not yet closed
+- enterprise persistence surfaces and manual `customer-mdm` operator paths are now explicitly registered, but not yet closed
 - first-wave legacy retirement decisions are not yet recorded
 
 ## 4. Success Definition
@@ -194,8 +200,12 @@ Cross-cutting areas:
 
 - production storage and deferred publication design
 - physical location for compatibility/evidence storage
-- operator tooling and Dagster wiring
+- operator tooling, Dagster wiring, and manual command-surface decisions
 - live identity/provider integration strategy
+- deferred lookup queue runtime and retry orchestration
+- reference bootstrap / reference-sync runtime design
+- enterprise identity/EQC persistence-surface retention or retirement decisions
+- shared operator artifact retention or retirement decisions
 
 Exit gate:
 
@@ -269,6 +279,10 @@ vocabulary where it fits:
 |------|----------------|----------------|----------------|
 | production storage and publication runtime | current slice uses in-memory and file-backed validation adapters | deferred | separate production storage/publication plan |
 | external identity/provider integration | first slice runs cache-first with provider-disabled behavior | deferred | separate provider-integration plan |
+| deferred lookup queue runtime | legacy supports queued provider processing, retries, and recovery outside the main fact run | deferred | separate queue/runtime plan |
+| reference bootstrap / reference-sync runtime | legacy uses an explicit `reference_sync` orchestration surface plus incremental state | deferred | separate reference bootstrap/runtime plan |
+| enterprise identity / EQC persistence surfaces | legacy persists cache, queue, and raw/cleansed EQC data beyond fact-domain outputs | deferred | separate identity persistence plan |
+| manual customer-status command surfaces and shared operator artifacts | legacy supports `customer-mdm` manual commands and cross-domain unresolved-name / failed-record artifacts | deferred | separate operator-tools / artifact-governance plan |
 | evidence and compatibility storage location | current artifacts are repository/file-backed in validation mode | planned | physical storage decision |
 | operator tooling and Dagster | replay CLI exists; broader operator flow does not | deferred | separate operator-tools and Dagster plan |
 
@@ -317,7 +331,12 @@ The following decisions still block broad first-wave rollout:
 1. physical storage location for `CompatibilityCase` and evidence index
 2. whether publication remains fully synchronous or gains deferred execution groups
 3. exact production design for external identity/provider integration
-4. operator-tooling and Dagster rollout order after replay-only validation
+4. whether queued provider processing via `company_lookup_queue` is retained, replaced, or retired for first-wave production closure
+5. whether `reference_sync` remains a retained runtime surface or is replaced by an explicit bootstrap/publication flow
+6. which enterprise persistence surfaces remain in scope for retained runtime behavior: queue/cache only, raw EQC persistence, cleansed EQC persistence, or none
+7. which manual `customer-mdm` commands remain supported in the rebuild and in what form
+8. whether unresolved-name and failed-record artifacts remain mandatory operator outputs across first-wave runs
+9. operator-tooling and Dagster rollout order after replay-only validation
 
 ## 14. Final Program Position
 

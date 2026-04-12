@@ -11,6 +11,8 @@
 - `annuity_performance` remains an accepted validation slice.
 - `annual_award` remains an accepted multi-sheet validation slice.
 - `annual_loss` and `annuity_income` remain unclosed first-wave executable slices.
+- the first-wave matrix now also tracks newly registered runtime/operator
+  surfaces beyond the four primary domain rows
 - This register does **not** roll back accepted validation evidence by itself.
 - This register exists to prevent first-wave legacy behavior from remaining implicit, overstated, or split across competing review documents.
 
@@ -39,12 +41,18 @@ Each risk uses one governance-aligned position:
 | `CR-005` | publication key/delete-scope and sink write-contract parity | supplemental `SFR-002` | `planned follow-on` | `AP-005`, `CT-003` |
 | `CR-006` | customer-contract and snapshot projection semantic-width parity | supplemental `SFR-003`, original risk 5 | `pending first-wave gap` | `AP-006`, `CT-004` |
 | `CR-007` | governed string normalization and plan-code correction parity across first-wave domains | original risks 6, 7 | `pending first-wave gap` | `AP-002`, `AI-002`, `CT-008` |
-| `CR-008` | history-aware event-domain lookup and temporal enrichment semantics | supplemental `SFR-004` | `pending first-wave gap` | `AA-004`, `AL-003`, `CT-005` |
+| `CR-008` | history-aware event-domain lookup and temporal enrichment semantics | supplemental `SFR-004` | `pending first-wave gap` | `AA-004`, `AL-003`, `CT-005`, `XD-005` |
 | `CR-009` | `annuity_income` operator-facing artifact contract | supplemental `SFR-005` | `pending first-wave gap` | `AI-004` |
 | `CR-010` | `annuity_income` service-delegation and explicit no-hook runtime contract | supplemental `SFR-006` | `pending first-wave gap` | `AI-005` |
 | `CR-011` | directory-based discovery and workbook version arbitration beyond replay-only CLI input | supplemental `SFR-007` | `deferred runtime/operator gap` | `CT-001` |
 | `CR-012` | annual lifecycle and January-only status initialization semantics | original risk 10 | `pending first-wave gap` | `CT-009` |
 | `CR-013` | dynamic FK creation as a legacy operational mechanism | original risk 8 | `invalid or outdated claim` | no new row; covered indirectly by production storage/publication design follow-on |
+| `CR-014` | deferred-lookup queue runtime, retry semantics, and special orchestration domain closure | `2026-04-12 legacy audit` | `deferred runtime/operator gap` | `CT-011`, `XD-003` |
+| `CR-015` | reference-sync operator runtime, sync-state persistence, and authoritative-target closure | `2026-04-12 legacy audit` | `deferred runtime/operator gap` | `CT-012` |
+| `CR-016` | enterprise identity cache and queue persistence footprint | `2026-04-12 legacy audit` | `deferred runtime/operator gap` | `CT-013` |
+| `CR-017` | enterprise EQC raw and cleansed persistence footprint | `2026-04-12 legacy audit` | `deferred runtime/operator gap` | `CT-014` |
+| `CR-018` | manual `customer-mdm` operator command surface outside ETL hook execution | `2026-04-12 legacy audit` | `deferred runtime/operator gap` | `CT-015` |
+| `CR-019` | shared unresolved-name and failed-record operator artifact parity across first-wave runs | `2026-04-12 legacy audit` | `pending first-wave gap` | `CT-016` |
 
 ---
 
@@ -219,6 +227,10 @@ Current event-domain slices prove:
 
 They do **not** yet prove a full temporal contract for historical/current contract selection or broader event-domain replay semantics needed by `annual_loss`.
 
+They also do not yet close the cross-domain runtime dependency on current
+contract-state outputs from `customer.客户年金计划`, which legacy event-domain
+pipelines query when they need to enrich missing `年金计划号`.
+
 Repository evidence:
 
 - [plan_code_lookup.py](/E:/Projects/WorkDataHubPro/src/work_data_hub_pro/capabilities/fact_processing/annual_award/plan_code_lookup.py#L22)
@@ -227,6 +239,8 @@ Repository evidence:
 Governance action:
 
 - track through `CT-005`
+- preserve `XD-005` as an active dependency until event-domain slices no longer
+  depend on an implicit contract-state side path
 - use `AA-004` as accepted validation evidence, not as proof of full temporal parity
 
 ### `CR-009` `annuity_income` Operator-Facing Artifact Contract
@@ -292,6 +306,116 @@ Governance action:
 - no dedicated new matrix row
 - treat future physical FK enforcement as part of broader production storage/publication design
 
+### `CR-014` Deferred-Lookup Queue Runtime, Retry Semantics, And Special Orchestration Domain Closure
+
+Legacy runtime includes a distinct queue-processing surface:
+
+- `company_lookup_queue` is a special ETL-orchestration domain
+- queue rows are retried with bounded backoff
+- schedules and sensors can trigger queue processing outside the main fact run
+- stale processing rows can be reset for recovery
+
+Current `WorkDataHubPro` state:
+
+- accepted slices prove synchronous/cache-first identity behavior in validation mode
+- they do not yet close the queued runtime surface or its operator semantics
+
+Governance action:
+
+- track explicitly through `CT-011`
+- treat this as a deferred runtime/operator concern unless first-wave production
+  closure requires live queued provider processing
+
+### `CR-015` Reference-Sync Operator Runtime, Sync-State Persistence, And Authoritative-Target Closure
+
+Legacy runtime also includes a distinct `reference_sync` orchestration domain:
+
+- daily scheduled reference sync
+- sync-state persistence for incremental runs
+- authoritative-target writes into business-schema reference targets
+
+This is not the same concern as `CR-002`.
+
+- `CR-002` tracks semantic bootstrap/missing-code behavior
+- this risk tracks the retained operator/runtime surface itself
+
+Governance action:
+
+- track explicitly through `CT-012`
+- decide whether the rebuild retains this runtime surface or replaces it with a
+  cleaner explicit bootstrap/publication operator flow
+
+### `CR-016` Enterprise Identity Cache And Queue Persistence Footprint
+
+Legacy identity runtime persists more than a pure resolver outcome:
+
+- queue rows in `enterprise.enrichment_requests`
+- cache rows in `enterprise.enrichment_index`
+- auxiliary cache/index rows such as `enterprise.company_name_index`
+
+Current `WorkDataHubPro` proves the identity boundary and evidence discipline,
+but not whether these concrete persistence surfaces are retained, replaced, or
+retired.
+
+Governance action:
+
+- track explicitly through `CT-013`
+- require an explicit retain/defer/retire decision for each persistence surface
+  before first-wave runtime closure
+
+### `CR-017` Enterprise EQC Raw And Cleansed Persistence Footprint
+
+Legacy EQC integration persists both raw and transformed artifacts:
+
+- raw/provider-oriented storage such as `enterprise.base_info`
+- cleansed derivatives such as `enterprise.business_info`
+- flattened labels such as `enterprise.biz_label`
+
+These are not first-wave fact outputs, but they are durable legacy surfaces.
+
+Governance action:
+
+- track explicitly through `CT-014`
+- decide whether these tables remain part of the retained rebuild runtime or are
+  explicitly retired behind a different provider-persistence design
+
+### `CR-018` Manual `customer-mdm` Operator Command Surface Outside ETL Hook Execution
+
+Legacy customer-status behavior is not only embedded in post-ETL hooks.
+Operators can run:
+
+- `customer-mdm sync`
+- `customer-mdm snapshot`
+- `customer-mdm init-year`
+- `customer-mdm validate`
+- `customer-mdm cutover`
+
+Current `WorkDataHubPro` partially covers projection semantics, but it does not
+yet register the manual operator surface as a governed asset.
+
+Governance action:
+
+- track explicitly through `CT-015`
+- decide command-by-command whether the rebuild retains, replaces, or retires
+  each manual operator path
+
+### `CR-019` Shared Unresolved-Name And Failed-Record Operator Artifact Parity Across First-Wave Runs
+
+Legacy operator output includes more than `annuity_income`-specific files.
+Across first-wave runs, the system emits or may emit:
+
+- unresolved-name CSV artifacts
+- failed-record export artifacts
+- shared validation/export outputs used for operator diagnosis
+
+Current matrix coverage previously captured only the income-specific part of the
+story through `AI-004`.
+
+Governance action:
+
+- keep `AI-004` as the income-specific domain row
+- track the shared cross-domain artifact contract explicitly through `CT-016`
+
 ---
 
 ## Earlier Claims Retired Or Corrected During Merge
@@ -318,7 +442,7 @@ production storage concerns remain follow-on runtime work, not proof that the pr
 
 ## Coverage Matrix Registration Decision
 
-This merged register requires the active first-wave matrix to track:
+This merged register now maps to these tracked first-wave matrix rows:
 
 - `AI-004`
 - `AI-005`
@@ -332,6 +456,13 @@ This merged register requires the active first-wave matrix to track:
 - `CT-008`
 - `CT-009`
 - `CT-010`
+- `CT-011`
+- `CT-012`
+- `CT-013`
+- `CT-014`
+- `CT-015`
+- `CT-016`
+- `XD-005`
 
 These rows are intentionally additive. They make unclosed first-wave behavior explicit without invalidating already accepted validation-slice evidence.
 
