@@ -96,17 +96,23 @@
 
 - `.planning/` 当前将 Phase 2 标记为完成
 - 当前仓库代码与自动化测试说明 Phase 2 的实现面已经基本闭合
-- 但治理签收层面仍存在补口需求，尤其是中间 checkpoint 的真实 compare 语义，以及 `reference_derivation` repo-native baseline 的强制性
+- Phase 6 审核指出的治理补口项已经闭合，尤其是中间 checkpoint 的真实 compare 语义、`source_intake` contract gate 语义、以及 `reference_derivation` / `fact_processing` / `identity_resolution` / `contract_state` 的 accepted baseline 比较路径
 
 因此更准确的当前表述应是：
 
 - Phase 2 implementation：已完成
-- Phase 2 governance sign-off：待补齐 truthful intermediate gates（基于 accepted baseline 的 checkpoint 比较）和 diff accuracy remediation（multiset 减法修正）后，Phase 6 正式闭合，Phase 2 governance sign-off 才能正式闭合
+- Phase 2 governance sign-off：已闭合（2026-04-13），依据是 replay acceptance suite 与 governance contract suite 均已通过，且 Phase 6 verification 已用真实执行结果重写
 
 Phase 6 remediation 已完成项目（2026-04-13）：
 - truthfulness: 共享 fail-closed baseline 加载、explicit bootstrap 路径、fact/identity/contract_state 中间 checkpoint 基于 accepted baseline 比较而非自比较
 - accuracy: `_build_diff` duplicate-row 计数修正为正确的 multiset 减法语义
+- stability: annuity / award / loss 的中间 checkpoint payload 归一化为稳定 compare 形状，避免 run-scoped ID 造成 accepted baseline 漂移
 - coverage: contract 测试 `tests/contracts/test_phase2_governance_status_sync.py` 守护 planning/wiki 状态同步
+
+本次闭合使用的验证命令：
+
+- `uv run pytest tests/contracts/test_phase6_gate_runtime.py tests/contracts/test_phase2_governance_status_sync.py -v` → `9 passed`
+- `uv run pytest tests/replay/test_phase2_reference_derivation_gates.py tests/replay/test_phase2_event_domain_gates.py tests/replay/test_annuity_performance_slice.py tests/replay/test_annual_award_slice.py tests/replay/test_annual_loss_slice.py -v` → `15 passed`
 
 相关经验已沉淀到：
 

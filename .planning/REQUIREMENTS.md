@@ -97,6 +97,10 @@
 - Mapped to phases: 21
 - Unmapped: 0 ✓
 
+## Phase 6 Re-Verification Note
+
+- 2026-04-13: Phase 6 re-verified `PAR-02`, `PAR-03`, `PIPE-01`, and `PIPE-02` with the required replay acceptance suite and governance status-sync contract suite after the completion audit findings were fixed.
+
 ---
 *Requirements defined: 2026-04-12*
-*Last updated: 2026-04-12 after Phase 2 completion*
+*Last updated: 2026-04-13 after Phase 6 closure*

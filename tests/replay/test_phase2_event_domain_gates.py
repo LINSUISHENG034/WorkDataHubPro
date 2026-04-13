@@ -412,6 +412,39 @@ def _write_loss_workbook(path: Path) -> None:
     workbook.save(path)
 
 
+def _bootstrap_intermediate_baselines(runner, workbook_path: Path, replay_root: Path) -> dict[str, list[dict[str, object]]]:
+    for checkpoint_name in (
+        "reference_derivation",
+        "fact_processing",
+        "identity_resolution",
+        "contract_state",
+    ):
+        (replay_root / f"legacy_{checkpoint_name}_2026_03.json").write_text(
+            "[]",
+            encoding="utf-8",
+        )
+    outcome = runner(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    for checkpoint_name in (
+        "reference_derivation",
+        "fact_processing",
+        "identity_resolution",
+        "contract_state",
+    ):
+        (replay_root / f"legacy_{checkpoint_name}_2026_03.json").write_text(
+            json.dumps(
+                outcome.intermediate_payloads[checkpoint_name],
+                indent=2,
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+    return outcome.intermediate_payloads
+
+
 # ---------------------------------------------------------------------------
 # Tests for truthful intermediate gates
 # ---------------------------------------------------------------------------
@@ -436,7 +469,11 @@ def test_event_domain_gates_use_same_checkpoint_names(tmp_path) -> None:
                 "loss_fixture_rows": 0,
             }
         ],
-        include_intermediate_baselines=True,
+    )
+    _bootstrap_intermediate_baselines(
+        run_annual_award_slice,
+        award_workbook,
+        award_replay_root,
     )
     _write_loss_replay_assets(
         loss_replay_root,
@@ -448,7 +485,11 @@ def test_event_domain_gates_use_same_checkpoint_names(tmp_path) -> None:
                 "loss_fixture_rows": 1,
             }
         ],
-        include_intermediate_baselines=True,
+    )
+    _bootstrap_intermediate_baselines(
+        run_annual_loss_slice,
+        loss_workbook,
+        loss_replay_root,
     )
 
     award_outcome = run_annual_award_slice(
@@ -492,7 +533,11 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_award(tmp_path) -> N
                 "loss_fixture_rows": 0,
             }
         ],
-        include_intermediate_baselines=True,
+    )
+    baselines = _bootstrap_intermediate_baselines(
+        run_annual_award_slice,
+        workbook_path,
+        replay_root,
     )
 
     # --- Step 1: Verify passing with matching baselines ---
@@ -548,27 +593,7 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_award(tmp_path) -> N
 
     # Restore fact_processing baseline
     (replay_root / "legacy_fact_processing_2026_03.json").write_text(
-        json.dumps(
-            [
-                {
-                    "record_id": "award-001",
-                    "company_id": "company-001",
-                    "plan_code": "P9001",
-                    "period": "2026-03",
-                    "award_amount": 5000,
-                    "source_sheet": "TrusteeAwards",
-                },
-                {
-                    "record_id": "award-002",
-                    "company_id": "company-002",
-                    "plan_code": "S9009",
-                    "period": "2026-03",
-                    "award_amount": 1000,
-                    "source_sheet": "InvesteeAwards",
-                },
-            ],
-            indent=2,
-        ),
+        json.dumps(baselines["fact_processing"], indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
 
@@ -610,23 +635,9 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_award(tmp_path) -> N
     # Restore identity_resolution baseline
     (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
         json.dumps(
-            [
-                {
-                    "record_id": "award-001",
-                    "resolved_identity": "company-001",
-                    "resolution_method": "static",
-                    "fallback_level": "none",
-                    "evidence_refs": [],
-                },
-                {
-                    "record_id": "award-002",
-                    "resolved_identity": "company-002",
-                    "resolution_method": "static",
-                    "fallback_level": "none",
-                    "evidence_refs": [],
-                },
-            ],
+            baselines["identity_resolution"],
             indent=2,
+            ensure_ascii=False,
         ),
         encoding="utf-8",
     )
@@ -676,7 +687,11 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_loss(tmp_path) -> No
                 "loss_fixture_rows": 1,
             }
         ],
-        include_intermediate_baselines=True,
+    )
+    baselines = _bootstrap_intermediate_baselines(
+        run_annual_loss_slice,
+        workbook_path,
+        replay_root,
     )
 
     # --- Step 1: Verify passing with matching baselines ---
@@ -731,27 +746,7 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_loss(tmp_path) -> No
 
     # Restore
     (replay_root / "legacy_fact_processing_2026_03.json").write_text(
-        json.dumps(
-            [
-                {
-                    "record_id": "loss-001",
-                    "company_id": "company-001",
-                    "plan_code": "P9001",
-                    "period": "2026-03",
-                    "loss_amount": 80,
-                    "source_sheet": "企年受托流失(解约)",
-                },
-                {
-                    "record_id": "loss-002",
-                    "company_id": "company-002",
-                    "plan_code": "S9009",
-                    "period": "2026-03",
-                    "loss_amount": 60,
-                    "source_sheet": "企年投资流失(解约)",
-                },
-            ],
-            indent=2,
-        ),
+        json.dumps(baselines["fact_processing"], indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
 
@@ -794,7 +789,17 @@ def test_event_domain_failed_runs_write_same_package(tmp_path) -> None:
 
     # Use intermediate baselines with mismatching monthly_snapshot
     _write_award_replay_assets(award_replay_root, legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 99, "award_fixture_rows": 99, "loss_fixture_rows": 99}], include_intermediate_baselines=True)
+    _bootstrap_intermediate_baselines(
+        run_annual_award_slice,
+        award_workbook,
+        award_replay_root,
+    )
     _write_loss_replay_assets(loss_replay_root, legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 99, "award_fixture_rows": 99, "loss_fixture_rows": 99}], include_intermediate_baselines=True)
+    _bootstrap_intermediate_baselines(
+        run_annual_loss_slice,
+        loss_workbook,
+        loss_replay_root,
+    )
 
     award_outcome = run_annual_award_slice(
         workbook=award_workbook,

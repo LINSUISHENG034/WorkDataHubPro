@@ -31,6 +31,8 @@ class CheckpointResult:
     diff_path: str | None
     trace_anchor_rows: list[int]
     diff: CheckpointDiff | None = None
+    legacy_payload: Any | None = None
+    pro_payload: Any | None = None
 
 
 @dataclass(frozen=True)

@@ -77,6 +77,10 @@ from `gate_runtime.py`.
 `scripts/bootstrap_phase2_checkpoint_baselines.py --checkpoint <name> --domain <domain> --period 2026-03 --workbook <path>`
 when the corresponding checkpoint's processing semantics change.
 
+`source_intake` is intentionally not listed above. After Phase 6 closure it is a fixed
+`contract` checkpoint with explicit expectations, not a repo-native `checkpoint_baseline`
+asset and not a `legacy_source_intake_*.json` file.
+
 ## Current Position
 
 ### `annuity_performance`

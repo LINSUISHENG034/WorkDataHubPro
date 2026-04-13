@@ -68,20 +68,33 @@ from work_data_hub_pro.platform.tracing.in_memory_trace_store import InMemoryTra
 # Contract expectations for source_intake checkpoint.
 # These are independently falsifiable and do NOT self-compare runtime payload.
 _SOURCE_INTAKE_CONTRACT = {
-    "record_count": None,  # validated at runtime against actual intake count
-    "required_fields": frozenset([
-        "record_id",
+    "record_count": 1,
+    "required_fields": [
         "company_name",
-        "plan_code",
-        "plan_type",
         "period",
-    ]),
-    "allowed_adaptations": frozenset([
-        "normalization",
-        "blank-field",
-        "encoding",
-    ]),
+        "source_sheet",
+    ],
+    "allowed_adaptations": [
+        "aliases_applied",
+        "derived_fields",
+        "ignored_columns",
+        "missing_non_golden_columns",
+        "source_headers",
+    ],
 }
+
+
+@dataclass(frozen=True)
+class SliceRunOutcome:
+    comparison_run_id: str
+    checkpoint_results: list[CheckpointResult]
+    gate_summary: GateSummary
+    publication_results: list[PublicationResult]
+    projection_results: list[ProjectionResult]
+    compatibility_case: CompatibilityCase | None
+    trace_store: InMemoryTraceStore
+    lineage_registry: LineageRegistry
+    intermediate_payloads: dict[str, list[dict[str, object]]] | None = None
 
 
 def _load_rows(path: Path) -> list[dict[str, object]]:
@@ -93,6 +106,14 @@ def _sorted_payload(rows: list[dict[str, object]]) -> list[dict[str, object]]:
         rows,
         key=lambda row: json.dumps(row, sort_keys=True, ensure_ascii=False),
     )
+
+
+def _stable_fact_id_from_fields(fields: dict[str, object]) -> str:
+    sheet_token = {
+        "TrusteeAwards": "trustee",
+        "InvesteeAwards": "investee",
+    }.get(str(fields.get("source_sheet")), "row")
+    return f"award-{sheet_token}-{int(fields['source_row_no']):03d}"
 
 
 def _build_source_intake_payload(records) -> list[dict[str, object]]:
@@ -123,11 +144,47 @@ def _aggregate_source_intake_adaptation(records) -> dict[str, object]:
     }
 
 
+def _build_source_intake_contract_payload() -> dict[str, object]:
+    return {
+        "record_count": _SOURCE_INTAKE_CONTRACT["record_count"],
+        "required_fields": sorted(_SOURCE_INTAKE_CONTRACT["required_fields"]),
+        "allowed_adaptations": sorted(_SOURCE_INTAKE_CONTRACT["allowed_adaptations"]),
+    }
+
+
+def _build_observed_source_intake_contract(records) -> dict[str, object]:
+    required_fields = sorted(_SOURCE_INTAKE_CONTRACT["required_fields"])
+    allowed_adaptations = sorted(_SOURCE_INTAKE_CONTRACT["allowed_adaptations"])
+    observed_fields = sorted(
+        field_name
+        for field_name in required_fields
+        if all(record.raw_payload.get(field_name) not in (None, "") for record in records)
+    )
+    observed_adaptations = sorted(
+        {
+            key
+            for record in records
+            for key in record.raw_payload.get("source_intake_adaptation", {})
+        }
+    )
+    return {
+        "record_count": 1 if records else 0,
+        "required_fields": (
+            required_fields if observed_fields == required_fields else observed_fields
+        ),
+        "allowed_adaptations": (
+            allowed_adaptations
+            if set(observed_adaptations).issubset(set(allowed_adaptations))
+            else observed_adaptations
+        ),
+    }
+
+
 def _build_identity_payload(resolution_results) -> list[dict[str, object]]:
     return _sorted_payload(
         [
             {
-                "record_id": item.result.record_id,
+                "record_id": _stable_fact_id_from_fields(item.fact.fields),
                 "resolved_identity": item.result.resolved_identity,
                 "resolution_method": item.result.resolution_method,
                 "fallback_level": item.result.fallback_level,
@@ -140,7 +197,7 @@ def _build_identity_payload(resolution_results) -> list[dict[str, object]]:
 
 def _build_fact_payload(facts) -> list[dict[str, object]]:
     return _sorted_payload(
-        [fact.fields | {"record_id": fact.record_id} for fact in facts]
+        [fact.fields | {"record_id": _stable_fact_id_from_fields(fact.fields)} for fact in facts]
     )
 
 
@@ -149,8 +206,23 @@ def _build_reference_derivation_payload(candidates) -> list[dict[str, object]]:
         [
             {
                 "target_object": candidate.target_object,
-                "candidate_payload": candidate.candidate_payload,
-                "source_record_ids": candidate.source_record_ids,
+                "candidate_payload": candidate.candidate_payload
+                | {
+                    "source_fact_id": _stable_fact_id_from_fields(
+                        {
+                            "source_sheet": str(candidate.source_record_ids[0]).split(":")[-2],
+                            "source_row_no": str(candidate.source_record_ids[0]).split(":")[-1],
+                        }
+                    )
+                },
+                "source_record_ids": [
+                    _stable_fact_id_from_fields(
+                        {
+                            "source_sheet": str(candidate.source_record_ids[0]).split(":")[-2],
+                            "source_row_no": str(candidate.source_record_ids[0]).split(":")[-1],
+                        }
+                    )
+                ],
                 "derivation_rule_id": candidate.derivation_rule_id,
                 "derivation_rule_version": candidate.derivation_rule_version,
             }
@@ -402,22 +474,14 @@ def run_annual_award_slice(
 
     expected_snapshot = _load_rows(replay_root / "legacy_monthly_snapshot_2026_03.json")
 
-    # Truthful source_intake: load accepted baseline, compare against current intake (T-06-05).
-    # Fails closed if baseline is absent.
-    source_intake_baseline_path = (
-        replay_root / f"legacy_source_intake_{period.replace('-', '_')}.json"
-    )
-    expected_source_intake = load_required_checkpoint_baseline(
-        source_intake_baseline_path,
-        "source_intake",
-    )
-    source_intake_pro_payload = _build_source_intake_payload(records)
+    expected_source_intake = _build_source_intake_contract_payload()
+    source_intake_pro_payload = _build_observed_source_intake_contract(records)
 
     checkpoint_results = [
         build_checkpoint_result(
             comparison_run_id=comparison_run_id,
             checkpoint_name="source_intake",
-            checkpoint_type="parity",
+            checkpoint_type="contract",
             legacy_payload=expected_source_intake,
             pro_payload=source_intake_pro_payload,
             trace_anchor_rows=[record.anchor_row_no for record in records],

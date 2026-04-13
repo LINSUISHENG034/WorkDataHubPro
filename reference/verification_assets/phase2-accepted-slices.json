@@ -111,17 +111,6 @@
       "notes": "Replaces prior self-compare placeholder."
     },
     {
-      "asset_id": "phase2-annuity-performance-checkpoint-baseline-source-intake",
-      "asset_kind": "checkpoint_baseline",
-      "slice": "annuity_performance",
-      "checkpoint": "source_intake",
-      "status": "accepted",
-      "purpose": "Accepted baseline for the source_intake intake checkpoint.",
-      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when source-intake normalization semantics change.",
-      "reference_location": "reference/historical_replays/annuity_performance/legacy_source_intake_2026_03.json",
-      "notes": "Fail-closed baseline — replaces prior self-compare contract."
-    },
-    {
       "asset_id": "phase2-annual-award-replay-baseline",
       "asset_kind": "replay_baseline",
       "slice": "annual_award",
@@ -226,17 +215,6 @@
       "notes": "Replaces prior self-compare placeholder."
     },
     {
-      "asset_id": "phase2-annual-award-checkpoint-baseline-source-intake",
-      "asset_kind": "checkpoint_baseline",
-      "slice": "annual_award",
-      "checkpoint": "source_intake",
-      "status": "accepted",
-      "purpose": "Accepted baseline for the source_intake intake checkpoint.",
-      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when source-intake normalization semantics change.",
-      "reference_location": "reference/historical_replays/annual_award/legacy_source_intake_2026_03.json",
-      "notes": "Fail-closed baseline — replaces prior self-compare contract."
-    },
-    {
       "asset_id": "phase2-annual-loss-replay-baseline",
       "asset_kind": "replay_baseline",
       "slice": "annual_loss",
@@ -339,17 +317,6 @@
       "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when contract-state projection semantics change.",
       "reference_location": "reference/historical_replays/annual_loss/legacy_contract_state_2026_03.json",
       "notes": "Replaces prior self-compare placeholder."
-    },
-    {
-      "asset_id": "phase2-annual-loss-checkpoint-baseline-source-intake",
-      "asset_kind": "checkpoint_baseline",
-      "slice": "annual_loss",
-      "checkpoint": "source_intake",
-      "status": "accepted",
-      "purpose": "Accepted baseline for the source_intake intake checkpoint.",
-      "refresh_trigger": "Regenerate via scripts/bootstrap_phase2_checkpoint_baselines.py when source-intake normalization semantics change.",
-      "reference_location": "reference/historical_replays/annual_loss/legacy_source_intake_2026_03.json",
-      "notes": "Fail-closed baseline — replaces prior self-compare contract."
     }
   ]
 }

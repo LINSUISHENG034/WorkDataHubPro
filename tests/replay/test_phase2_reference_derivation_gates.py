@@ -383,6 +383,39 @@ def write_loss_workbook(path: Path) -> None:
     workbook.save(path)
 
 
+def _bootstrap_intermediate_baselines(runner, workbook_path: Path, replay_root: Path) -> dict[str, list[dict[str, object]]]:
+    for checkpoint_name in (
+        "reference_derivation",
+        "fact_processing",
+        "identity_resolution",
+        "contract_state",
+    ):
+        (replay_root / f"legacy_{checkpoint_name}_2026_03.json").write_text(
+            "[]",
+            encoding="utf-8",
+        )
+    outcome = runner(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    for checkpoint_name in (
+        "reference_derivation",
+        "fact_processing",
+        "identity_resolution",
+        "contract_state",
+    ):
+        (replay_root / f"legacy_{checkpoint_name}_2026_03.json").write_text(
+            json.dumps(
+                outcome.intermediate_payloads[checkpoint_name],
+                indent=2,
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+    return outcome.intermediate_payloads
+
+
 def _write_loss_replay_assets(
     replay_root: Path,
     *,
@@ -555,17 +588,29 @@ def test_reference_derivation_checkpoint_present(tmp_path) -> None:
     _write_annuity_replay_assets(
         annuity_root,
         legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
-        include_intermediate_baselines=True,
+    )
+    _bootstrap_intermediate_baselines(
+        run_annuity_performance_slice,
+        annuity_workbook,
+        annuity_root,
     )
     _write_award_replay_assets(
         award_root,
         legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
-        include_intermediate_baselines=True,
+    )
+    _bootstrap_intermediate_baselines(
+        run_annual_award_slice,
+        award_workbook,
+        award_root,
     )
     _write_loss_replay_assets(
         loss_root,
         legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 1}],
-        include_intermediate_baselines=True,
+    )
+    _bootstrap_intermediate_baselines(
+        run_annual_loss_slice,
+        loss_workbook,
+        loss_root,
     )
 
     annuity_outcome = run_annuity_performance_slice(
@@ -593,7 +638,11 @@ def test_reference_derivation_requires_baseline_annuity(tmp_path) -> None:
     _write_annuity_replay_assets(
         replay_root,
         legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
-        include_intermediate_baselines=True,
+    )
+    _bootstrap_intermediate_baselines(
+        run_annuity_performance_slice,
+        workbook_path,
+        replay_root,
     )
     # Remove reference_derivation baseline to trigger fail-closed
     (replay_root / "legacy_reference_derivation_2026_03.json").unlink(missing_ok=True)
@@ -613,7 +662,11 @@ def test_reference_derivation_requires_baseline_award(tmp_path) -> None:
     _write_award_replay_assets(
         replay_root,
         legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
-        include_intermediate_baselines=True,
+    )
+    _bootstrap_intermediate_baselines(
+        run_annual_award_slice,
+        workbook_path,
+        replay_root,
     )
     (replay_root / "legacy_reference_derivation_2026_03.json").unlink(missing_ok=True)
 
@@ -632,7 +685,11 @@ def test_reference_derivation_requires_baseline_loss(tmp_path) -> None:
     _write_loss_replay_assets(
         replay_root,
         legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 1}],
-        include_intermediate_baselines=True,
+    )
+    _bootstrap_intermediate_baselines(
+        run_annual_loss_slice,
+        workbook_path,
+        replay_root,
     )
     (replay_root / "legacy_reference_derivation_2026_03.json").unlink(missing_ok=True)
 
@@ -651,7 +708,11 @@ def test_reference_derivation_failed_run_writes_diff(tmp_path) -> None:
     _write_annuity_replay_assets(
         replay_root,
         legacy_snapshot_rows=[{"period": "2026-03", "contract_state_rows": 1, "award_fixture_rows": 1, "loss_fixture_rows": 0}],
-        include_intermediate_baselines=True,
+    )
+    _bootstrap_intermediate_baselines(
+        run_annuity_performance_slice,
+        workbook_path,
+        replay_root,
     )
     # Overwrite reference_derivation baseline with mismatching value
     (replay_root / "legacy_reference_derivation_2026_03.json").write_text(

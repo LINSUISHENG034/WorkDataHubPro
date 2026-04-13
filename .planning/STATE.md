@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Milestone complete
-last_updated: "2026-04-12T18:44:10.935Z"
+status: Phase 6 complete
+last_updated: "2026-04-13T01:30:45.321Z"
 progress:
   total_phases: 6
   completed_phases: 3
@@ -16,17 +16,17 @@ progress:
 
 ## Status
 
-- Workflow: initialized
-- Current phase: Phase 6 - Phase 2 governance remediation - truthful gates and status sync
-- Current command focus: `gsd-execute-phase 6`
+- Workflow: phase complete
+- Current phase: Phase 6 complete - Phase 2 governance remediation - truthful gates and status sync
+- Current command focus: `gsd-progress`
 - Last action date: 2026-04-13
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-04-12)
+See: `.planning/PROJECT.md` (updated 2026-04-13)
 
 **Core value:** 在不牺牲旧项目业务结果一致性的前提下，把数据处理流程重构为可解释、可验证、可维护、可由 agent 接管的系统。
-**Current focus:** Phase 06 — phase-2-governance-remediation-truthful-gates-and-status-sync
+**Current focus:** Phase 06 closed on 2026-04-13 after replay acceptance and governance status synchronization both passed.
 
 ## Artifacts
 
@@ -38,16 +38,14 @@ See: `.planning/PROJECT.md` (updated 2026-04-12)
 
 ## Risks In Focus
 
-- 数据源识别偏差导致 intake 语义偏移
-- 规则迁移不完整导致 parity 误差
-- 中间处理流程不可验证导致定位困难
-- 输出结果与旧项目不一致
-- 性能优化引入行为偏差
+- accepted checkpoint baselines must stay aligned with deterministic comparison payloads
+- future replay changes must keep `source_intake` as a truthful contract checkpoint
+- planning/wiki/verification artifacts must be regenerated from executed evidence after behavioral changes
 
 ## Next Commands
 
-1. `/gsd-execute-phase 6`
-2. `/gsd-review --phase 6 --all`
+1. `/gsd-progress`
+2. `/gsd-complete-milestone`
 
 ## Notes
 
@@ -64,6 +62,7 @@ See: `.planning/PROJECT.md` (updated 2026-04-12)
 
 - 2026-04-13: Phase 6 context captured in `.planning/phases/06-phase-2-governance-remediation-truthful-gates-and-status-sync/06-CONTEXT.md`
 - 2026-04-13: Phase 6 planned with `06-01`, `06-02`, and `06-03`
+- 2026-04-13: Phase 6 replay acceptance suite passed (`15 passed`) and governance contract suite passed (`9 passed`)
 
 ---
-*Last updated: 2026-04-13 after Phase 6 planning*
+*Last updated: 2026-04-13 after Phase 6 closure verification*

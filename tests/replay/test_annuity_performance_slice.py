@@ -93,6 +93,38 @@ def _write_workbook(workbook_path: Path) -> None:
     workbook.save(workbook_path)
 
 
+def _bootstrap_intermediate_baselines(workbook_path: Path, replay_root: Path) -> None:
+    for checkpoint_name in (
+        "reference_derivation",
+        "fact_processing",
+        "identity_resolution",
+        "contract_state",
+    ):
+        (replay_root / f"legacy_{checkpoint_name}_2026_03.json").write_text(
+            "[]",
+            encoding="utf-8",
+        )
+    outcome = run_annuity_performance_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    for checkpoint_name in (
+        "reference_derivation",
+        "fact_processing",
+        "identity_resolution",
+        "contract_state",
+    ):
+        (replay_root / f"legacy_{checkpoint_name}_2026_03.json").write_text(
+            json.dumps(
+                outcome.intermediate_payloads[checkpoint_name],
+                indent=2,
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+
+
 def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) -> None:
     """Test 4: successful replay produces full checkpoint list and passes all gates."""
     workbook_path = tmp_path / "annuity_performance_2026_03.xlsx"
@@ -108,46 +140,8 @@ def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) ->
                 "loss_fixture_rows": 0,
             }
         ],
-        legacy_reference_derivation_rows=[
-            {
-                "target_object": "company_reference",
-                "candidate_payload": {
-                    "company_id": "company-001",
-                    "company_name": "Acme",
-                    "period": "2026-03",
-                },
-                "source_record_ids": ["perf-001"],
-                "derivation_rule_id": "annuity-performance-company-reference",
-                "derivation_rule_version": "1",
-            }
-        ],
-        legacy_fact_processing_rows=[
-            {
-                "record_id": "perf-001",
-                "company_id": "company-001",
-                "plan_code": "PLAN-A",
-                "period": "2026-03",
-                "ending_assets": 1200.5,
-            }
-        ],
-        legacy_identity_resolution_rows=[
-            {
-                "record_id": "perf-001",
-                "resolved_identity": "company-001",
-                "resolution_method": "static",
-                "fallback_level": "none",
-                "evidence_refs": [],
-            }
-        ],
-        legacy_contract_state_rows=[
-            {
-                "period": "2026-03",
-                "contract_state_rows": 1,
-                "award_fixture_rows": 1,
-                "loss_fixture_rows": 0,
-            }
-        ],
     )
+    _bootstrap_intermediate_baselines(workbook_path, replay_root)
 
     outcome = run_annuity_performance_slice(
         workbook=workbook_path,
@@ -217,46 +211,8 @@ def test_full_slice_replay_creates_compatibility_case_when_snapshot_differs(tmp_
                 "loss_fixture_rows": 99,
             }
         ],
-        legacy_reference_derivation_rows=[
-            {
-                "target_object": "company_reference",
-                "candidate_payload": {
-                    "company_id": "company-001",
-                    "company_name": "Acme",
-                    "period": "2026-03",
-                },
-                "source_record_ids": ["perf-001"],
-                "derivation_rule_id": "annuity-performance-company-reference",
-                "derivation_rule_version": "1",
-            }
-        ],
-        legacy_fact_processing_rows=[
-            {
-                "record_id": "perf-001",
-                "company_id": "company-001",
-                "plan_code": "PLAN-A",
-                "period": "2026-03",
-                "ending_assets": 1200.5,
-            }
-        ],
-        legacy_identity_resolution_rows=[
-            {
-                "record_id": "perf-001",
-                "resolved_identity": "company-001",
-                "resolution_method": "static",
-                "fallback_level": "none",
-                "evidence_refs": [],
-            }
-        ],
-        legacy_contract_state_rows=[
-            {
-                "period": "2026-03",
-                "contract_state_rows": 1,
-                "award_fixture_rows": 1,
-                "loss_fixture_rows": 0,
-            }
-        ],
     )
+    _bootstrap_intermediate_baselines(workbook_path, replay_root)
 
     outcome = run_annuity_performance_slice(
         workbook=workbook_path,

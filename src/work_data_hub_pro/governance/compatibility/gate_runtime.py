@@ -214,6 +214,8 @@ def build_checkpoint_result(
         diff_path=diff_path,
         trace_anchor_rows=sorted(set(trace_anchor_rows)),
         diff=None if status == "passed" else diff,
+        legacy_payload=legacy_payload,
+        pro_payload=pro_payload,
     )
 
 

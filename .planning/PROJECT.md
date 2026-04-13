@@ -23,8 +23,8 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - ✓ Deterministic replay checkpoints and comparison-run evidence packages for the accepted slices — validated in Phase 2
 - ✓ Explicit compatibility adjudication semantics for severity, precedent, exception scope, and checkpoint identity — validated in Phase 2
 - ✓ Repository-native PR / protected-branch / nightly parity gate tiers — validated in Phase 2
-- ✓ Phase 6 governance remediation: fail-closed baseline loading (`load_required_checkpoint_baseline`), multiset duplicate-row diff accuracy (`_build_diff`), and explicit bootstrap entrypoint (`scripts/bootstrap_phase2_checkpoint_baselines.py`) — validated in Phase 6
-- ✓ Phase 6 governance status sync: PROJECT.md, ROADMAP.md, and wiki-cn docs now distinguish Phase 2 implementation-complete from governance sign-off-pending — validated in Phase 6
+- ✓ Phase 6 governance remediation: fail-closed baseline loading (`load_required_checkpoint_baseline`), multiset duplicate-row diff accuracy (`_build_diff`), stable intermediate checkpoint payload normalization, and explicit bootstrap entrypoint (`scripts/bootstrap_phase2_checkpoint_baselines.py`) — validated in Phase 6
+- ✓ Phase 6 governance status sync: PROJECT.md, ROADMAP.md, STATE.md, `06-VERIFICATION.md`, and wiki-cn docs now record Phase 2 implementation complete and governance sign-off closed from executed evidence — validated in Phase 6
 
 ### Active
 
@@ -36,8 +36,8 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 
 - Phase 1 complete: authoritative mapping, rule-classification, parity-baseline, and offline checkpoint artifacts are in place
 - Phase 2 implementation complete: explicit stage contracts, deterministic parity gates, derivation checkpoint governance, and CI-ready gate tiers are in place
-- Phase 2 governance sign-off pending: Phase 6 remediation (truthful intermediate gates via accepted baseline comparisons, and diff accuracy via multiset-subtraction correction) is required before Phase 2 governance sign-off closes
-- Phase 6 complete: truthful gates remediation and governance status sync done — Phase 2 governance sign-off can now proceed
+- Phase 2 governance sign-off closed: Phase 6 remediation and re-verification completed on 2026-04-13 with the exact replay acceptance suite and governance contract suite both passing
+- Phase 6 complete: truthful `source_intake` contract semantics, stable intermediate checkpoint payloads, annual-award outcome repair, and governance status synchronization are all in place
 - Deferred carry-forward from Phase 2: verification-asset rows for `golden_set`, `golden_baseline`, `real_data_sample`, and dedicated error-case fixtures remain explicitly deferred
 
 ### Out of Scope
@@ -94,4 +94,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-12 after Phase 2 completion*
+*Last updated: 2026-04-13 after Phase 6 closure*
