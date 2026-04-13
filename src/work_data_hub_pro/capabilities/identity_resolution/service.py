@@ -132,7 +132,7 @@ class CacheFirstIdentityResolutionService:
             resolved_identity=company_id,
             resolution_method=method,
             fallback_level=fallback_level,
-            evidence_refs=[f"identity:{method}:{fact.record_id}"],
+            evidence_refs=[_opaque_evidence_ref(method, fact)],
             evidence_details=evidence_details,
         )
         trace_event = FieldTraceEvent(
@@ -159,3 +159,13 @@ class CacheFirstIdentityResolutionService:
             result=result,
             trace_events=[trace_event],
         )
+
+
+def _opaque_evidence_ref(method: str, fact: CanonicalFactRecord) -> str:
+    source_row_no = fact.fields.get("source_row_no")
+    source_sheet = fact.fields.get("source_sheet")
+    if source_sheet is not None and source_row_no is not None:
+        return f"identity:{method}:{source_sheet}:{int(source_row_no)}"
+    if source_row_no is not None:
+        return f"identity:{method}:row:{int(source_row_no)}"
+    return f"identity:{method}:{fact.record_id}"

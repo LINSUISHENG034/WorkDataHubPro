@@ -7,6 +7,15 @@ from openpyxl import Workbook
 from work_data_hub_pro.apps.orchestration.replay.annual_loss_slice import (
     run_annual_loss_slice,
 )
+from work_data_hub_pro.capabilities.identity_resolution.temp_identity import (
+    generate_temp_identity,
+)
+
+_OPAQUE_TEMP_ID = generate_temp_identity(
+    "共享客户（流失）",
+    salt="phase3-test-temp-identity-salt",
+    prefix="IN",
+)
 
 
 def _write_workbook(workbook_path: Path) -> None:
@@ -327,7 +336,7 @@ def test_annual_loss_slice_replay_creates_compatibility_case_when_snapshot_diffe
             {
                 "target_object": "company_reference",
                 "candidate_payload": {
-                    "company_id": "TEMP-\u5171\u4eab\u5ba2\u6237\uff08\u6d41\u5931\uff09",
+                    "company_id": _OPAQUE_TEMP_ID,
                     "company_name": "\u5171\u4eab\u5ba2\u6237\uff08\u6d41\u5931\uff09",
                     "period": "2026-03",
                     "source_fact_id": "fact:run-placeholder:loss:\u4f01\u5e74\u53d7\u6258\u6d41\u5931(\u89e3\u7ea6):2",
@@ -339,7 +348,7 @@ def test_annual_loss_slice_replay_creates_compatibility_case_when_snapshot_diffe
             {
                 "target_object": "customer_loss_signal",
                 "candidate_payload": {
-                    "company_id": "TEMP-\u5171\u4eab\u5ba2\u6237\uff08\u6d41\u5931\uff09",
+                    "company_id": _OPAQUE_TEMP_ID,
                     "period": "2026-03",
                     "plan_code": "AN001",
                     "customer_type": "LOSS_CUSTOMER",
@@ -392,7 +401,7 @@ def test_annual_loss_slice_replay_creates_compatibility_case_when_snapshot_diffe
                 "source_row_no": 2,
                 "product_line_code": "PL202",
                 "institution_code": "G00",
-                "company_id": "TEMP-\u5171\u4eab\u5ba2\u6237\uff08\u6d41\u5931\uff09",
+                "company_id": _OPAQUE_TEMP_ID,
                 "record_id": "placeholder-loss-001",
             },
             {
@@ -416,7 +425,7 @@ def test_annual_loss_slice_replay_creates_compatibility_case_when_snapshot_diffe
         legacy_identity_resolution_rows=[
             {
                 "record_id": "placeholder-loss-001",
-                "resolved_identity": "TEMP-\u5171\u4eab\u5ba2\u6237\uff08\u6d41\u5931\uff09",
+                "resolved_identity": _OPAQUE_TEMP_ID,
                 "resolution_method": "temp_id_fallback",
                 "fallback_level": "temporary",
                 "evidence_refs": [],
