@@ -210,10 +210,10 @@ Plans:
 **Requirements**: PAR-02, PIPE-03, OPS-01
 **Depends on:** 03.1-01, 03.1-02
 **Status:** Gap closure in progress (verified 2026-04-13)
-**Plans:** 4 plans (3 complete, 1 gap-closure)
+**Plans:** 5/5 plans complete
 
 Plans:
 - [x] 03.1-01 - truthful failed-checkpoint compatibility-case payload selection across all replay slices
 - [x] 03.1-02 - fail-closed diagnose package-path enforcement and typed invalid-id CLI handling
 - [x] 03.1-03 - governance and planning artifact synchronization plus Phase 3 governance-status contract coverage
-- [ ] 03.1-05 - use outcome.intermediate_payloads for compatibility-case legacy_payloads (gap-closure)
+- [x] 03.1-05 - use outcome.intermediate_payloads for compatibility-case legacy_payloads (gap-closure)
