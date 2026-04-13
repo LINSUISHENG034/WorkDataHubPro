@@ -535,6 +535,14 @@ def run_annual_loss_slice(
 
     primary_failure = build_primary_failure(checkpoint_results)
     compatibility_case = None
+    # Capture intermediate payloads in-memory before potential file corruption
+    intermediate_payloads = {
+        "reference_derivation": reference_derivation_payload,
+        "fact_processing": _build_fact_payload(loss_facts),
+        "identity_resolution": _build_identity_payload(resolution_results),
+        "contract_state": contract_state.rows,
+        "source_intake": _build_observed_source_intake_contract(records),
+    }
     if any(result.status == "failed" for result in checkpoint_results):
         involved_anchor_row_nos = sorted(
             {link.anchor_row_no for link in context.lineage_registry.all()}
@@ -548,13 +556,7 @@ def run_annual_loss_slice(
             "contract_state": replay_root / f"legacy_contract_state_{period.replace('-', '_')}.json",
             "monthly_snapshot": replay_root / "legacy_monthly_snapshot_2026_03.json",
         }
-        legacy_payloads = {
-            "fact_processing": expected_fact_processing,
-            "identity_resolution": expected_identity_resolution,
-            "reference_derivation": expected_reference_derivation,
-            "contract_state": expected_contract_state,
-            "monthly_snapshot": expected_snapshot,
-        }
+        legacy_payloads = intermediate_payloads
         pro_payloads_map = {
             "fact_processing": _build_fact_payload(loss_facts),
             "identity_resolution": _build_identity_payload(resolution_results),
@@ -633,11 +635,5 @@ def run_annual_loss_slice(
         run_report=run_report,
         trace_store=context.trace_store,
         lineage_registry=context.lineage_registry,
-        intermediate_payloads={
-            "reference_derivation": reference_derivation_payload,
-            "fact_processing": _build_fact_payload(loss_facts),
-            "identity_resolution": _build_identity_payload(resolution_results),
-            "contract_state": contract_state.rows,
-            "source_intake": _build_observed_source_intake_contract(records),
-        },
+        intermediate_payloads=intermediate_payloads,
     )
