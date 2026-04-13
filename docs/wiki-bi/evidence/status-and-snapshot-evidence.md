@@ -37,3 +37,4 @@
 
 - 还未把 `is_winning_this_year`、`is_loss_reported`、`is_churned_this_year` 拆成对象级 evidence pages
 - `verification_guide_real_data.md` 的更多 operator query path 仍待后续吸收
+- `is_new` 已经满足对象级 evidence 拆分条件，可作为后续对象级拆分样板

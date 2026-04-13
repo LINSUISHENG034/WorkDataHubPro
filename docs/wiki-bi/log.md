@@ -56,3 +56,10 @@
 - 更新 `domains/annuity-income.md`，把 annuity_income 从“未实现 domain”进一步写实为一组必须保留的制度记忆簇
 - 更新 `evidence/identity-and-lookup-evidence.md`、`evidence/verification-assets-evidence.md`、`evidence/operator-and-surface-evidence.md`，把 annuity_income 的 identity / verification / operator gap 接回现有主题页
 - 新增 `_meta/absorption-rounds/round-06-annuity-income.md`，把本轮作为当前路线图的第六轮闭环完成记录
+
+## [2026-04-14] absorb | Round 07 follow-on 闭环吸收 `is_new` 对象级证据拆分
+
+- 新增 `evidence/is-new-evidence.md`，把 `is_new` 的公式、粒度边界、非例与验证路径从主题型 evidence page 中拆成对象级 evidence page
+- 更新 `concepts/is-new.md`、`concepts/customer-status.md`、`standards/semantic-correctness/customer-status-semantics.md`，把新对象级证据页接入主结论层
+- 更新 `evidence/status-and-snapshot-evidence.md`，把 `is_new` 对象级拆分标记为可复用样板
+- 新增 `_meta/absorption-rounds/round-07-is-new-evidence-split.md`，把本轮作为 follow-on work 的首个对象级拆分页记录

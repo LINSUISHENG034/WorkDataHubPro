@@ -62,3 +62,4 @@
 ## 相关证据
 
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
+- [`is_new` 对象级证据](../evidence/is-new-evidence.md)

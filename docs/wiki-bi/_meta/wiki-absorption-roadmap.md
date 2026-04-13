@@ -114,3 +114,19 @@
 - 继续把高频 open questions 发展成新的轮次
 - 将厚主题拆成对象级 evidence pages
 - 继续补强 annuity_income 的 branch mapping / artifact / validation detail
+
+## Follow-on Round 07：`is_new` 对象级证据拆分
+
+目标：
+
+- 验证对象级 evidence page 拆分机制是否有效
+
+主入口页：
+
+- `evidence/is-new-evidence.md`
+- `concepts/is-new.md`
+- `concepts/customer-status.md`
+
+状态：
+
+- completed on 2026-04-14
