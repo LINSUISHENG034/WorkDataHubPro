@@ -354,3 +354,153 @@ def test_annual_loss_slice_replay_creates_compatibility_case_when_snapshot_diffe
         / f"{outcome.compatibility_case.case_id}.json"
     )
     assert case_path.exists()
+
+
+def test_annual_loss_slice_replay_uses_failed_checkpoint_payloads(tmp_path) -> None:
+    """Test: when an intermediate checkpoint fails, the compatibility case truthfully
+    points to that checkpoint's payload rather than monthly_snapshot."""
+    workbook_path = tmp_path / "annual_loss_2026_03.xlsx"
+    _write_workbook(workbook_path)
+    replay_root = tmp_path / "reference" / "historical_replays" / "annual_loss"
+
+    _write_replay_assets(
+        replay_root,
+        legacy_snapshot_rows=[
+            {
+                "period": "2026-03",
+                "contract_state_rows": 1,
+                "award_fixture_rows": 1,
+                "loss_fixture_rows": 1,
+            }
+        ],
+    )
+    baselines = _bootstrap_intermediate_baselines(workbook_path, replay_root)
+
+    # --- Verify passing with correct baselines ---
+    outcome_pass = run_annual_loss_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    assert outcome_pass.run_report.primary_failure is None
+    assert outcome_pass.compatibility_case is None
+
+    # --- Test fact_processing failure ---
+    (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "record_id": "loss-001",
+                    "company_id": "company-FORCED-FAIL",
+                    "plan_code": "WRONG",
+                    "period": "2026-03",
+                    "loss_amount": 0,
+                    "source_sheet": "企年受托流失(解约)",
+                },
+                {
+                    "record_id": "loss-002",
+                    "company_id": "company-FORCED-FAIL",
+                    "plan_code": "WRONG",
+                    "period": "2026-03",
+                    "loss_amount": 0,
+                    "source_sheet": "企年投资流失(解约)",
+                },
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    outcome_fp = run_annual_loss_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    assert outcome_fp.compatibility_case is not None
+    assert outcome_fp.run_report.primary_failure is not None
+    assert outcome_fp.run_report.primary_failure.checkpoint_name == "fact_processing"
+    assert outcome_fp.compatibility_case.checkpoint_name == "fact_processing"
+    assert outcome_fp.compatibility_case.sample_locator.endswith(
+        "legacy_fact_processing_2026_03.json"
+    )
+    assert outcome_fp.compatibility_case.legacy_result["rows"] == baselines["fact_processing"]
+    assert outcome_fp.compatibility_case.pro_result["rows"] is not None
+
+    # Restore
+    (replay_root / "legacy_fact_processing_2026_03.json").write_text(
+        json.dumps(baselines["fact_processing"], indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    # --- Test identity_resolution failure ---
+    (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "record_id": "loss-001",
+                    "resolved_identity": "company-IR-FAIL",
+                    "resolution_method": "static",
+                    "fallback_level": "none",
+                    "evidence_refs": [],
+                },
+                {
+                    "record_id": "loss-002",
+                    "resolved_identity": "company-IR-FAIL",
+                    "resolution_method": "static",
+                    "fallback_level": "none",
+                    "evidence_refs": [],
+                },
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    outcome_ir = run_annual_loss_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    assert outcome_ir.compatibility_case is not None
+    assert outcome_ir.run_report.primary_failure is not None
+    assert outcome_ir.run_report.primary_failure.checkpoint_name == "identity_resolution"
+    assert outcome_ir.compatibility_case.checkpoint_name == "identity_resolution"
+    assert outcome_ir.compatibility_case.sample_locator.endswith(
+        "legacy_identity_resolution_2026_03.json"
+    )
+    assert outcome_ir.compatibility_case.legacy_result["rows"] == baselines["identity_resolution"]
+    assert outcome_ir.compatibility_case.pro_result["rows"] is not None
+
+    # Restore
+    (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
+        json.dumps(baselines["identity_resolution"], indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    # --- Test contract_state failure ---
+    (replay_root / "legacy_contract_state_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "period": "2026-03",
+                    "contract_state_rows": 99,
+                    "award_fixture_rows": 99,
+                    "loss_fixture_rows": 99,
+                }
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    outcome_cs = run_annual_loss_slice(
+        workbook=workbook_path,
+        period="2026-03",
+        replay_root=replay_root,
+    )
+    assert outcome_cs.compatibility_case is not None
+    assert outcome_cs.run_report.primary_failure is not None
+    assert outcome_cs.run_report.primary_failure.checkpoint_name == "contract_state"
+    assert outcome_cs.compatibility_case.checkpoint_name == "contract_state"
+    assert outcome_cs.compatibility_case.sample_locator.endswith(
+        "legacy_contract_state_2026_03.json"
+    )
+    assert outcome_cs.compatibility_case.legacy_result["rows"] == baselines["contract_state"]
+    assert outcome_cs.compatibility_case.pro_result["rows"] is not None
