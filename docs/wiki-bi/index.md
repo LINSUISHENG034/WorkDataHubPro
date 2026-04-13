@@ -90,5 +90,9 @@
 
 - [设计草案](./_meta/wiki-design.md) : `wiki-bi` 的顶层 schema、规则与运营模型。
 - [轻量实施计划](./_meta/wiki-implementation-plan.md) : 首批 seed scaffold 的实施范围、顺序与完成定义。
+- [吸收工作流](./_meta/wiki-absorption-workflow.md) : 定义主题簇吸收、分类 gate、每轮输出与验收清单。
+- [吸收路线图](./_meta/wiki-absorption-roadmap.md) : 定义主题簇整体顺序与每轮主入口页。
+- [吸收轮次索引](./_meta/absorption-rounds/index.md) : 记录每轮闭环的经验沉淀与下一轮入口。
+- [Round 01：状态与快照](./_meta/absorption-rounds/round-01-status-and-snapshot.md) : 首轮闭环沉淀，记录状态与快照主题簇的稳定结论、可复用经验与下一轮目标。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。

@@ -24,6 +24,7 @@
 - 规模事实输出
 - 客户 / 参考对象回填
 - customer contract 与快照相关输出
+- 作为 `annual_award` / `annual_loss` 状态落地的关键承接域
 
 ## 适用标准
 

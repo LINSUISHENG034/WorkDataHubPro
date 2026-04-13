@@ -21,9 +21,28 @@
 - 执行年初初始化与年度 cutover
 - 做状态分布验证
 
+## 手工命令分工
+
+- `sync`
+  - 重新计算 / 写入 `customer.客户年金计划`
+- `snapshot`
+  - 重新生成月度快照输出
+- `init-year`
+  - 承担年度初始化语义
+- `cutover`
+  - 承担年度切断语义
+- `validate`
+  - 提供状态分布验证入口
+
 ## 为什么它是独立 surface
 
 这些命令不只是实现细节，而是明确暴露给 operator 的操作面。
+
+它们也不应被简单折叠进“ETL hook 自动会做”的说法里，因为：
+
+- 它们可以被手工重跑
+- 它们暴露的是独立操作能力
+- 它们影响 contract / snapshot / annual lifecycle 的治理边界
 
 ## 相关概念
 
