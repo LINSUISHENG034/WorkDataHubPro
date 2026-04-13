@@ -15,6 +15,9 @@ from work_data_hub_pro.apps.orchestration.replay.annual_award_slice import (
 from work_data_hub_pro.apps.orchestration.replay.annual_loss_slice import (
     run_annual_loss_slice,
 )
+from work_data_hub_pro.apps.orchestration.replay.errors import (
+    ReplayAssetNotFoundError,
+)
 
 
 def write_annuity_workbook(path: Path) -> None:
@@ -630,7 +633,7 @@ def test_reference_derivation_checkpoint_present(tmp_path) -> None:
 
 
 def test_reference_derivation_requires_baseline_annuity(tmp_path) -> None:
-    """Missing reference_derivation baseline raises FileNotFoundError (T-06-04 fail-closed)."""
+    """Missing reference_derivation baseline raises a typed setup error."""
     workbook_path = tmp_path / "annuity.xlsx"
     write_annuity_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
@@ -647,14 +650,16 @@ def test_reference_derivation_requires_baseline_annuity(tmp_path) -> None:
     # Remove reference_derivation baseline to trigger fail-closed
     (replay_root / "legacy_reference_derivation_2026_03.json").unlink(missing_ok=True)
 
-    with pytest.raises(FileNotFoundError, match="reference_derivation"):
+    with pytest.raises(ReplayAssetNotFoundError, match="reference_derivation") as excinfo:
         run_annuity_performance_slice(
             workbook=workbook_path, period="2026-03", replay_root=replay_root,
         )
+    assert excinfo.value.stage == "baseline_load"
+    assert excinfo.value.context["checkpoint_name"] == "reference_derivation"
 
 
 def test_reference_derivation_requires_baseline_award(tmp_path) -> None:
-    """Missing reference_derivation baseline raises FileNotFoundError for award (T-06-04)."""
+    """Missing reference_derivation baseline raises a typed setup error for award."""
     workbook_path = tmp_path / "annual_award.xlsx"
     write_award_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annual_award"
@@ -670,14 +675,16 @@ def test_reference_derivation_requires_baseline_award(tmp_path) -> None:
     )
     (replay_root / "legacy_reference_derivation_2026_03.json").unlink(missing_ok=True)
 
-    with pytest.raises(FileNotFoundError, match="reference_derivation"):
+    with pytest.raises(ReplayAssetNotFoundError, match="reference_derivation") as excinfo:
         run_annual_award_slice(
             workbook=workbook_path, period="2026-03", replay_root=replay_root,
         )
+    assert excinfo.value.stage == "baseline_load"
+    assert excinfo.value.context["checkpoint_name"] == "reference_derivation"
 
 
 def test_reference_derivation_requires_baseline_loss(tmp_path) -> None:
-    """Missing reference_derivation baseline raises FileNotFoundError for loss (T-06-04)."""
+    """Missing reference_derivation baseline raises a typed setup error for loss."""
     workbook_path = tmp_path / "annual_loss.xlsx"
     write_loss_workbook(workbook_path)
     replay_root = tmp_path / "reference" / "historical_replays" / "annual_loss"
@@ -693,10 +700,12 @@ def test_reference_derivation_requires_baseline_loss(tmp_path) -> None:
     )
     (replay_root / "legacy_reference_derivation_2026_03.json").unlink(missing_ok=True)
 
-    with pytest.raises(FileNotFoundError, match="reference_derivation"):
+    with pytest.raises(ReplayAssetNotFoundError, match="reference_derivation") as excinfo:
         run_annual_loss_slice(
             workbook=workbook_path, period="2026-03", replay_root=replay_root,
         )
+    assert excinfo.value.stage == "baseline_load"
+    assert excinfo.value.context["checkpoint_name"] == "reference_derivation"
 
 
 def test_reference_derivation_failed_run_writes_diff(tmp_path) -> None:

@@ -546,6 +546,7 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_award(tmp_path) -> N
         period="2026-03",
         replay_root=replay_root,
     )
+    assert outcome_pass.run_report.primary_failure is None
     for ckpt in ("fact_processing", "identity_resolution", "contract_state"):
         result = next(r for r in outcome_pass.checkpoint_results if r.checkpoint_name == ckpt)
         assert result.status == "passed", f"{ckpt} should pass with matching baseline"
@@ -586,6 +587,8 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_award(tmp_path) -> N
     assert fp_result.status == "failed", (
         "fact_processing should fail with mismatched baseline"
     )
+    assert outcome_fp_fail.run_report.primary_failure is not None
+    assert outcome_fp_fail.run_report.primary_failure.checkpoint_name == "fact_processing"
     # identity_resolution and contract_state still pass (independent failure)
     for ckpt in ("identity_resolution", "contract_state"):
         result = next(r for r in outcome_fp_fail.checkpoint_results if r.checkpoint_name == ckpt)
@@ -631,6 +634,8 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_award(tmp_path) -> N
     assert ir_result.status == "failed", (
         "identity_resolution should fail with mismatched baseline"
     )
+    assert outcome_ir_fail.run_report.primary_failure is not None
+    assert outcome_ir_fail.run_report.primary_failure.checkpoint_name == "identity_resolution"
 
     # Restore identity_resolution baseline
     (replay_root / "legacy_identity_resolution_2026_03.json").write_text(
@@ -668,6 +673,8 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_award(tmp_path) -> N
     assert cs_result.status == "failed", (
         "contract_state should fail with mismatched baseline"
     )
+    assert outcome_cs_fail.run_report.primary_failure is not None
+    assert outcome_cs_fail.run_report.primary_failure.checkpoint_name == "contract_state"
 
 
 def test_event_domain_intermediate_checkpoint_uses_baseline_loss(tmp_path) -> None:
@@ -700,6 +707,7 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_loss(tmp_path) -> No
         period="2026-03",
         replay_root=replay_root,
     )
+    assert outcome_pass.run_report.primary_failure is None
     for ckpt in ("fact_processing", "identity_resolution", "contract_state"):
         result = next(r for r in outcome_pass.checkpoint_results if r.checkpoint_name == ckpt)
         assert result.status == "passed", f"{ckpt} should pass with matching baseline"
@@ -740,6 +748,8 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_loss(tmp_path) -> No
     assert fp_result.status == "failed", (
         "fact_processing should fail with mismatched baseline"
     )
+    assert outcome_fp_fail.run_report.primary_failure is not None
+    assert outcome_fp_fail.run_report.primary_failure.checkpoint_name == "fact_processing"
     for ckpt in ("identity_resolution", "contract_state"):
         result = next(r for r in outcome_fp_fail.checkpoint_results if r.checkpoint_name == ckpt)
         assert result.status == "passed", f"{ckpt} should still pass"
@@ -776,6 +786,8 @@ def test_event_domain_intermediate_checkpoint_uses_baseline_loss(tmp_path) -> No
     assert cs_result.status == "failed", (
         "contract_state should fail with mismatched baseline"
     )
+    assert outcome_cs_fail.run_report.primary_failure is not None
+    assert outcome_cs_fail.run_report.primary_failure.checkpoint_name == "contract_state"
 
 
 def test_event_domain_failed_runs_write_same_package(tmp_path) -> None:
@@ -818,6 +830,13 @@ def test_event_domain_failed_runs_write_same_package(tmp_path) -> None:
     loss_package_root = (
         loss_replay_root / "evidence" / "comparison_runs" / loss_outcome.comparison_run_id
     )
+
+    assert award_outcome.run_report.primary_failure is not None
+    assert award_outcome.run_report.primary_failure.checkpoint_name == "monthly_snapshot"
+    assert loss_outcome.run_report.primary_failure is not None
+    assert loss_outcome.run_report.primary_failure.checkpoint_name == "monthly_snapshot"
+    assert Path(award_outcome.run_report.evidence_paths.comparison_run_root) == award_package_root
+    assert Path(loss_outcome.run_report.evidence_paths.comparison_run_root) == loss_package_root
 
     for package_root in (award_package_root, loss_package_root):
         assert (package_root / "manifest.json").exists()

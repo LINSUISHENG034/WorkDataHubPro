@@ -208,6 +208,29 @@ def build_validated_publication_bundle(
     return PublicationBundle(plan=plan, rows=rows)
 
 
+def append_replay_trace_events(
+    *,
+    context: ReplayExecutionContext,
+    batch_id: str,
+    anchor_row_no: int,
+    trace_events: list[Any],
+) -> list[Any]:
+    existing_events = context.trace_store.find(
+        batch_id=batch_id,
+        anchor_row_no=anchor_row_no,
+    )
+    full_trace = existing_events + trace_events
+    validate_trace_sequence(full_trace)
+    for event in trace_events:
+        context.trace_store.record(event)
+    context.evidence_index.index_trace_events(
+        batch_id=batch_id,
+        anchor_row_no=anchor_row_no,
+        events=full_trace,
+    )
+    return full_trace
+
+
 def build_primary_failure(
     checkpoint_results: list[CheckpointResult],
     *,
@@ -336,6 +359,7 @@ def _path_string(path: Path) -> str:
 
 
 __all__ = [
+    "append_replay_trace_events",
     "ReplayExecutionContext",
     "ReplayExecutionResult",
     "build_primary_failure",
