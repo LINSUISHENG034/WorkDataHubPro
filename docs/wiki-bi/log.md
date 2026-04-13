@@ -33,3 +33,11 @@
 - 更新 `concepts/plan-type.md`，把 plan type 与输入现实、多线索识别、event domain sheet contract 的关系写实
 - 更新 `domains/annual-award.md`、`domains/annual-loss.md`、`domains/annuity-income.md`，把 multi-sheet 输入现实与未实现 domain 的制度记忆显式化
 - 新增 `_meta/absorption-rounds/round-03-input-reality.md`，沉淀本轮经验并把下一轮切到 `verification-assets`
+
+## [2026-04-14] absorb | Round 04 闭环吸收 `verification-assets`
+
+- 更新 `evidence/verification-assets-evidence.md`，把 legacy 高价值资产、current replay registry、error-case fixtures 与 annuity_income 资产缺口聚合为稳定证据簇
+- 更新 `standards/verification-method/real-data-validation.md`，把 verification asset 组合作为 real-data validation 的组成部分写实
+- 更新 `standards/verification-method/golden-scenarios.md`，把 asset taxonomy、open questions 和 legacy-only memory 边界写实
+- 更新 `domains/annuity-income.md`，明确 annuity_income 的验证资产制度记忆不能因未实现而消失
+- 新增 `_meta/absorption-rounds/round-04-verification-assets.md`，沉淀本轮经验并把下一轮切到 `operator-and-surfaces`

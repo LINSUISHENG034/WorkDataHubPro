@@ -8,3 +8,5 @@
   - 第二轮闭环，强化 `company_id`、temp-id、lookup runtime、operator artifact 与相关验证边界。
 - [Round 03：输入现实](./round-03-input-reality.md)
   - 第三轮闭环，强化真实输入形态、版本策略、sheet contract 与 fixture 边界。
+- [Round 04：验证资产](./round-04-verification-assets.md)
+  - 第四轮闭环，强化 golden set、replay baseline、real-data sample、error-case fixture 与验证资产治理边界。

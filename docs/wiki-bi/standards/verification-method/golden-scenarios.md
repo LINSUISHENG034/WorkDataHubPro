@@ -30,6 +30,31 @@
 - replay baseline 不等于 real-data sample
 - error-case fixture 不应被假装存在
 - identity fallback chain 不能只依赖注释或口头记忆
+- legacy-only asset 不应因为 current project 尚未吸收就失去制度记忆
+
+## 当前资产角色边界
+
+- `golden set`
+  - 高价值、刻意挑选的标准样本集
+- `golden baseline`
+  - 稳定结果基线
+- `replay baseline`
+  - accepted slice 的回放参考资产
+- `real-data sample`
+  - 贴近真实世界输入形态的样本
+- `synthetic fixture`
+  - 稳定、可控、可快速执行的夹具
+- `error-case fixture`
+  - 显式保护错误路径的输入样本
+
+这些资产之间不能互相冒充。
+
+## 当前已知治理结论
+
+- 当前 current project 已明确 accepted replay baselines
+- `annual_award` / `annual_loss` 是否需要独立 domain-level golden set 仍是 open question
+- error-case fixtures 目前更准确的状态是 `planned but not created`
+- `annuity_income` 仍保留大量 legacy-only verification assets 和 parity memory
 
 ## 身份相关场景
 
@@ -50,6 +75,7 @@
 - 用 replay baseline 代替 golden scenario taxonomy
 - 用 synthetic fixture 声称覆盖真实输入边界
 - 用一个“能跑通的 company_id happy path”代替整条身份解析链的验证
+- 因为 current project 还没吸收某项 asset，就假定这项 asset 不再重要
 
 ## 相关概念
 

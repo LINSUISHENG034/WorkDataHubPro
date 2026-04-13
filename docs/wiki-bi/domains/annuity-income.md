@@ -47,3 +47,7 @@
 - 具体规划步骤
 
 本页更适合作为后续把 `annuity_income` 的稳定语义、验证资产与遗留约束吸收进 wiki 的导航入口。
+
+当前尤其要避免的是：
+
+- 因为 `annuity_income` 尚未落地，就把其 golden / parity / identity 制度记忆从 wiki 中删除

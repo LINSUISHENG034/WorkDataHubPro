@@ -71,7 +71,7 @@
 
 状态：
 
-- next
+- completed on 2026-04-14
 
 ## Round 5：operator 与 surfaces
 
@@ -87,7 +87,7 @@
 
 状态：
 
-- pending
+- next
 
 ## Round 6：`annuity_income` 专题补强
 
