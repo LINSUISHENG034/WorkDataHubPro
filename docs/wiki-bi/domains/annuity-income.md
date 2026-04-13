@@ -10,6 +10,10 @@
 
 因为它是 first-wave 中最需要避免“被遗忘”的 domain 之一。
 
+在输入现实上，它还意味着：
+
+- 不能因为当前 rebuild 未实现，就丢失其 source workbook、sheet 和 branch mapping 等制度记忆
+
 ## 核心概念入口
 
 - [企业身份标识：`company_id`](../concepts/company-id.md)

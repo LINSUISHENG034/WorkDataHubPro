@@ -25,3 +25,11 @@
 - 更新 `surfaces/company-lookup-queue.md` 与 `surfaces/unknown-names-csv.md`，把 runtime surface 与 operator artifact 的独立性写实
 - 更新 `standards/verification-method/golden-scenarios.md`，把 identity fallback chain 和 temp-id 场景纳入 golden scenario 视野
 - 更新 `domains/annual-award.md`、`domains/annual-loss.md`、`domains/annuity-performance.md`、`domains/annuity-income.md`，明确身份解析和 plan-code 补齐对各域的重要性
+
+## [2026-04-14] absorb | Round 03 闭环吸收 `input-reality`
+
+- 更新 `evidence/input-reality-evidence.md`，将 real-data sample、version strategy、sheet contract、多 sheet 事件域与 annuity_income 制度记忆聚合为输入现实证据簇
+- 更新 `standards/input-reality/input-reality-contracts.md`，补入输入现实检查表、关键输入现实与非例
+- 更新 `concepts/plan-type.md`，把 plan type 与输入现实、多线索识别、event domain sheet contract 的关系写实
+- 更新 `domains/annual-award.md`、`domains/annual-loss.md`、`domains/annuity-income.md`，把 multi-sheet 输入现实与未实现 domain 的制度记忆显式化
+- 新增 `_meta/absorption-rounds/round-03-input-reality.md`，沉淀本轮经验并把下一轮切到 `verification-assets`

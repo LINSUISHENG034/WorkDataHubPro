@@ -10,6 +10,7 @@
 - `company_id` 识别
 - 缺失计划号的补全
 - 对客户状态判断的下游影响
+- 与 `annual_loss` 共同证明 event domain 不是“单 sheet 边缘例外”
 
 ## 核心概念入口
 

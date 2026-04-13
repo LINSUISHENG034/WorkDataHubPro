@@ -55,7 +55,7 @@
 
 状态：
 
-- next
+- completed on 2026-04-14
 
 ## Round 4：验证资产
 
@@ -71,7 +71,7 @@
 
 状态：
 
-- pending
+- next
 
 ## Round 5：operator 与 surfaces
 

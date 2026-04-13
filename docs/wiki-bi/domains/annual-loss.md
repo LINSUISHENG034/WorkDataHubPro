@@ -4,6 +4,8 @@
 
 `annual_loss` 处理年度流失申报事实，与 `annual_award` 一样属于 event-style domain，但在业务含义上对应流失而不是中标。
 
+它同样证明 multi-sheet event intake 不是单个 domain 的偶发特殊情况，而是输入现实的一部分。
+
 ## 核心概念入口
 
 - [企业身份标识：`company_id`](../concepts/company-id.md)

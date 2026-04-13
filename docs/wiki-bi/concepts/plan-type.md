@@ -28,12 +28,15 @@
 
 - 真实输入里，集合计划经常不直接对应一个企业主体
 - 某些记录会依赖多线索识别，而不是单字段兜底
+- event domain 往往通过 multi-sheet 输入携带不同业务语境
+- `annuity_performance` 与 `annuity_income` 虽共用目录结构，但面向不同 sheet
 
 ## 对输出与下游的影响
 
 - 影响 `company_id` 识别
 - 影响 event domain 的计划号补全
 - 影响主数据与快照解释
+- 影响输入合同设计：不能把所有域统一写成“单 sheet + 单字段识别”
 
 ## 常见误解 / 非例
 
@@ -48,6 +51,7 @@
 ## 相关标准
 
 - [输入现实合同](../standards/input-reality/input-reality-contracts.md)
+- [real-data validation](../standards/verification-method/real-data-validation.md)
 
 ## 相关证据
 
