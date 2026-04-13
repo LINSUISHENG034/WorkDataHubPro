@@ -93,3 +93,10 @@
 - Phase 03.1 包含 3 个 plan：03.1-01（truthful failed-checkpoint compatibility-case payload selection）、03.1-02（fail-closed diagnose package-path enforcement + typed invalid-id CLI）、03.1-03（governance artifact 同步 + Phase 3 governance-status contract coverage）
 - 验证命令：`uv run pytest tests/contracts/test_phase3_governance_status_sync.py -v`
 - 状态文档同步：`.planning/STATE.md`、`.planning/ROADMAP.md`、`.planning/PROJECT.md`、`03-VERIFICATION.md`、`docs/wiki-cn/roadmap/overview.md` 均已更新为"Phase 3 governance sign-off closed"表述
+
+## [2026-04-13] lint | 按 `LLM Wiki` 模式重整中文 wiki 编目与维护约定
+
+- 更新 `index.md`，把根索引从最小入口页整理为全量 durable page catalog，并为每页补一句 summary
+- 新增 `_meta/wiki-maintenance.md`，把 `LLM Wiki` 的 source / wiki / schema / lint 模式实例化到当前仓库
+- 更新 `phases/index.md`，把占位页改为按 Phase 聚合的导航页
+- 更新 `roadmap/overview.md`，补回 Phase 3 审核经验的交叉引用，消除当前 orphan lesson

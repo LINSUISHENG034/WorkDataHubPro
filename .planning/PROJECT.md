@@ -28,6 +28,7 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - ✓ Shared replay orchestration primitives now power annuity, annual-award, and annual-loss slices with typed run reports and typed setup-failure paths — validated in Phase 3
 - ✓ Registry-backed replay CLI entrypoints (`replay list-domains`, `replay run`, `replay diagnose`) and updated replay runbooks are available for agents and humans — validated in Phase 3
 - ✓ Governed temp-id fallback avoids raw identifier leakage in replay-facing loss-domain assertions and identity-resolution contracts — validated in Phase 3
+- ✓ Phase 03.1 governance remediation: truthful failure evidence for all 5 checkpoint types (fact_processing, identity_resolution, reference_derivation, contract_state, monthly_snapshot) using in-memory intermediate_payloads; `_bootstrap_intermediate_baselines` returns intermediate_payloads; fail-closed path guards in diagnostics and file_store — validated in Phase 03.1
 
 ### Active
 
