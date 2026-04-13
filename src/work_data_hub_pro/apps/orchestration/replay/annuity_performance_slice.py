@@ -487,7 +487,7 @@ def run_annuity_performance_slice(
             checkpoint_name=primary_failure.checkpoint_name,
             comparison_run_id=comparison_run_id,
         )
-        manifest = ComparisonRunManifest(
+        comparison_manifest = ComparisonRunManifest(
             comparison_run_id=comparison_run_id,
             domain=batch.domain,
             period=batch.period,
@@ -500,7 +500,7 @@ def run_annuity_performance_slice(
         )
         write_comparison_run_package(
             evidence_index=evidence_index,
-            manifest=manifest,
+            manifest=comparison_manifest,
             gate_summary=gate_summary,
             checkpoint_results=checkpoint_results,
             checkpoint_diffs={
