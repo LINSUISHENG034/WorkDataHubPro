@@ -15,10 +15,25 @@
 - 承接异步补查请求
 - 驱动企业补查重试与状态更新
 - 与 enrichment persistence surfaces 协同工作
+- 通过独立 operator entrypoint 暴露给运行面
+
+## 关键运行面对象
+
+- `enterprise.enrichment_requests`
+- `enterprise.enrichment_index`
+- 相关 provider / refresh persistence
+
+这说明它不是“一个函数名”，而是一整块 identity runtime surface。
 
 ## 为什么它是独立 surface
 
 它不是普通 business domain，因为它处理的不是业务事实表，而是 identity lookup 的运行面与操作面。
+
+它也不能被简化成“某个 domain 内部的 fallback 细节”，因为：
+
+- 它有独立 CLI / orchestration 入口
+- 它有独立 persistence footprint
+- 它承担 queue、retry、status update 语义
 
 ## 相关概念
 
@@ -38,6 +53,7 @@
 
 - 当前应视为显式治理对象
 - retain / replace / retire 结论仍需后续稳定决策页明确
+- 当前至少不应再被当作“隐含存在，不必登记”的对象
 
 ## 仍未决的问题
 

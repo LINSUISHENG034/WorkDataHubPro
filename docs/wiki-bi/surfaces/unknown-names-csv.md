@@ -15,13 +15,26 @@
 - 支持人工排查与后续字典/映射补强
 - 让 unresolved identity 不只是静默落入临时 fallback
 
+在 legacy 中，它至少与：
+
+- `annuity_performance`
+- `annuity_income`
+
+这两个域直接相关。
+
 ## 为什么它是独立 surface
 
 它不仅是调试文件，更是一种 operator-facing 的反馈路径。
 
+它代表了一条明确原则：
+
+- unresolved identity 需要被显式暴露给 operator
+- 不能只依赖日志或临时推理
+
 ## 相关概念
 
 - [企业身份标识：`company_id`](../concepts/company-id.md)
+- [临时身份：`temp_id`](../concepts/temp-id.md)
 
 ## 相关标准
 
@@ -35,6 +48,7 @@
 ## 当前重构处理状态
 
 - 当前应被视为需要显式治理的 operator artifact
+- 不能因为 replay 路径暂时不产出该 artifact，就假定它没有长期价值
 
 ## 仍未决的问题
 

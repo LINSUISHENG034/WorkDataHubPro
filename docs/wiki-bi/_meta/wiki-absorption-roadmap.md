@@ -39,7 +39,7 @@
 
 状态：
 
-- next
+- completed on 2026-04-14
 
 ## Round 3：输入现实
 
@@ -55,7 +55,7 @@
 
 状态：
 
-- pending
+- next
 
 ## Round 4：验证资产
 

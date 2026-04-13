@@ -13,6 +13,7 @@
 ## 核心概念入口
 
 - [企业身份标识：`company_id`](../concepts/company-id.md)
+- [临时身份：`temp_id`](../concepts/temp-id.md)
 - [年金计划类型：`plan_type`](../concepts/plan-type.md)
 - [回填：`backfill`](../concepts/backfill.md)
 
@@ -21,6 +22,7 @@
 - 收入事实输出
 - customer / mapping 相关回填信号
 - identity / branch mapping 相关遗留约束
+- identity fallback retirement decisions 与 unresolved-name artifacts 的制度记忆
 
 ## 适用标准
 

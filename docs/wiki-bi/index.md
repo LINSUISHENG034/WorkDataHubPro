@@ -37,6 +37,7 @@
 ### Concepts
 
 - [企业身份标识：`company_id`](./concepts/company-id.md) : 定义企业身份标识的业务意义、边界和验证约束。
+- [临时身份：`temp_id`](./concepts/temp-id.md) : 定义 temp-id 的语义、边界及其与正式身份的区别。
 - [客户状态总览](./concepts/customer-status.md) : 汇总客户状态相关概念、判定边界与下游影响。
 - [`is_new`：新到账客户状态](./concepts/is-new.md) : 解释新到账状态与中标、存量、客户分类的关系。
 - [年金客户类型：`customer_type`](./concepts/customer-type.md) : 说明客户分类标签与状态字段的区别。
@@ -94,5 +95,6 @@
 - [吸收路线图](./_meta/wiki-absorption-roadmap.md) : 定义主题簇整体顺序与每轮主入口页。
 - [吸收轮次索引](./_meta/absorption-rounds/index.md) : 记录每轮闭环的经验沉淀与下一轮入口。
 - [Round 01：状态与快照](./_meta/absorption-rounds/round-01-status-and-snapshot.md) : 首轮闭环沉淀，记录状态与快照主题簇的稳定结论、可复用经验与下一轮目标。
+- [Round 02：身份与补查](./_meta/absorption-rounds/round-02-identity-and-lookup.md) : 第二轮闭环沉淀，记录 `company_id`、temp-id、lookup surface 与下一轮目标。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。

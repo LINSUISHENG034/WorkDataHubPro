@@ -14,6 +14,7 @@
 ## 核心概念入口
 
 - [企业身份标识：`company_id`](../concepts/company-id.md)
+- [临时身份：`temp_id`](../concepts/temp-id.md)
 - [年金计划类型：`plan_type`](../concepts/plan-type.md)
 - [客户状态总览](../concepts/customer-status.md)
 - [快照粒度：`snapshot_granularity`](../concepts/snapshot-granularity.md)
@@ -24,6 +25,7 @@
 - 客户标签与回填信号
 - 对 `is_winning_this_year` / `is_new` 的上游支撑
 - 为客户 / 产品线粒度状态判断提供年度中标事实来源
+- 对缺失计划号和身份识别形成 event-domain 级别的补齐压力
 
 ## 适用标准
 

@@ -14,6 +14,7 @@
 ## 核心概念入口
 
 - [企业身份标识：`company_id`](../concepts/company-id.md)
+- [临时身份：`temp_id`](../concepts/temp-id.md)
 - [客户状态总览](../concepts/customer-status.md)
 - [年金计划类型：`plan_type`](../concepts/plan-type.md)
 - [回填：`backfill`](../concepts/backfill.md)
