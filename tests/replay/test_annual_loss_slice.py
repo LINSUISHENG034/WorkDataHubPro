@@ -185,7 +185,7 @@ def _write_replay_assets(
         )
 
 
-def _bootstrap_intermediate_baselines(workbook_path: Path, replay_root: Path) -> None:
+def _bootstrap_intermediate_baselines(workbook_path: Path, replay_root: Path) -> dict[str, list[dict[str, object]]]:
     for checkpoint_name in (
         "reference_derivation",
         "fact_processing",
@@ -215,6 +215,7 @@ def _bootstrap_intermediate_baselines(workbook_path: Path, replay_root: Path) ->
             ),
             encoding="utf-8",
         )
+    return outcome.intermediate_payloads
 
 
 def test_annual_loss_slice_replay_closes_chain_and_matches_legacy_snapshot(
