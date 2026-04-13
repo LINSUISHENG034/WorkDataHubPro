@@ -4,7 +4,12 @@ import json
 from pathlib import Path
 
 import pytest
+from openpyxl import Workbook
 
+import work_data_hub_pro.apps.orchestration.replay.runtime as replay_runtime
+from work_data_hub_pro.apps.orchestration.replay.annuity_performance_slice import (
+    run_annuity_performance_slice,
+)
 from work_data_hub_pro.apps.orchestration.replay.errors import (
     ReplayAssetNotFoundError,
     ReplayConfigurationError,
@@ -27,6 +32,82 @@ from work_data_hub_pro.platform.publication.service import (
     build_publication_plan,
     load_publication_policy,
 )
+
+
+def _write_annuity_workbook(workbook_path: Path) -> None:
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = "AnnuityPerformance"
+    sheet.append(["company_name", "plan_code", "period", "sales_amount"])
+    sheet.append(["Acme", "PLAN-A", "2026-03", "1200.50"])
+    workbook.save(workbook_path)
+
+
+def _write_annuity_replay_assets(
+    replay_root: Path,
+    *,
+    include_intermediate_baselines: bool,
+) -> None:
+    replay_root.mkdir(parents=True, exist_ok=True)
+    (replay_root / "annual_award_fixture_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "company_id": "company-001",
+                    "plan_code": "PLAN-A",
+                    "period": "2026-03",
+                    "award_code": "AWARD-01",
+                    "source_sheet": "AwardRegister",
+                    "source_record_id": "award-001",
+                }
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    (replay_root / "annual_loss_fixture_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "company_id": "company-001",
+                    "plan_code": "PLAN-Z",
+                    "period": "2026-03",
+                    "loss_code": "LOSS-99",
+                    "source_sheet": "LossRegister",
+                    "source_record_id": "loss-001",
+                }
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    (replay_root / "legacy_monthly_snapshot_2026_03.json").write_text(
+        json.dumps(
+            [
+                {
+                    "period": "2026-03",
+                    "contract_state_rows": 1,
+                    "award_fixture_rows": 1,
+                    "loss_fixture_rows": 0,
+                }
+            ],
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    if not include_intermediate_baselines:
+        return
+
+    for checkpoint_name in (
+        "reference_derivation",
+        "fact_processing",
+        "identity_resolution",
+        "contract_state",
+    ):
+        (replay_root / f"legacy_{checkpoint_name}_2026_03.json").write_text(
+            "[]",
+            encoding="utf-8",
+        )
 
 
 def test_translate_replay_setup_error_maps_missing_baseline() -> None:
@@ -215,3 +296,80 @@ def test_replay_diagnostics_not_found_error_is_typed_setup_error() -> None:
 
     assert isinstance(error, ReplaySetupError)
     assert error.context["comparison_run_id"] == "missing-run"
+
+
+def test_annuity_runner_raises_typed_missing_baseline(tmp_path: Path) -> None:
+    workbook_path = tmp_path / "annuity_performance_2026_03.xlsx"
+    replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
+    _write_annuity_workbook(workbook_path)
+    _write_annuity_replay_assets(
+        replay_root,
+        include_intermediate_baselines=False,
+    )
+
+    with pytest.raises(ReplayAssetNotFoundError) as excinfo:
+        run_annuity_performance_slice(
+            workbook=workbook_path,
+            period="2026-03",
+            replay_root=replay_root,
+        )
+
+    assert excinfo.value.stage == "baseline_load"
+    assert excinfo.value.context["checkpoint_name"] == "reference_derivation"
+
+
+def test_annuity_runner_raises_typed_publication_policy_error(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    workbook_path = tmp_path / "annuity_performance_2026_03.xlsx"
+    replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
+    _write_annuity_workbook(workbook_path)
+    _write_annuity_replay_assets(
+        replay_root,
+        include_intermediate_baselines=False,
+    )
+
+    def _raise_missing_domain(*args, **kwargs):
+        raise KeyError("annuity_performance")
+
+    monkeypatch.setattr(
+        "work_data_hub_pro.apps.orchestration.replay.annuity_performance_slice.load_publication_policy",
+        _raise_missing_domain,
+    )
+
+    with pytest.raises(ReplayConfigurationError) as excinfo:
+        run_annuity_performance_slice(
+            workbook=workbook_path,
+            period="2026-03",
+            replay_root=replay_root,
+        )
+
+    assert excinfo.value.stage == "publication_policy_domain"
+
+
+def test_annuity_runner_raises_typed_publication_plan_validation_error(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    workbook_path = tmp_path / "annuity_performance_2026_03.xlsx"
+    replay_root = tmp_path / "reference" / "historical_replays" / "annuity_performance"
+    _write_annuity_workbook(workbook_path)
+    _write_annuity_replay_assets(
+        replay_root,
+        include_intermediate_baselines=True,
+    )
+
+    def _raise_invalid_plan(*args, **kwargs) -> None:
+        raise ValueError("invalid publication plan")
+
+    monkeypatch.setattr(replay_runtime, "validate_publication_plan", _raise_invalid_plan)
+
+    with pytest.raises(ReplayContractSetupError) as excinfo:
+        run_annuity_performance_slice(
+            workbook=workbook_path,
+            period="2026-03",
+            replay_root=replay_root,
+        )
+
+    assert excinfo.value.stage == "publication_plan_validation"

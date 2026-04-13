@@ -160,6 +160,19 @@ def test_full_slice_replay_closes_chain_and_matches_legacy_snapshot(tmp_path) ->
         "monthly_snapshot",
     ]
     assert outcome.gate_summary.overall_outcome == "passed"
+    assert outcome.run_report.comparison_run_id == outcome.comparison_run_id
+    assert outcome.run_report.overall_outcome == "passed"
+    assert outcome.run_report.primary_failure is None
+    package_root = (
+        replay_root / "evidence" / "comparison_runs" / outcome.comparison_run_id
+    )
+    assert package_root.exists()
+    assert Path(outcome.run_report.evidence_paths.comparison_run_root) == package_root
+    assert Path(outcome.run_report.evidence_paths.manifest).exists()
+    assert Path(outcome.run_report.evidence_paths.gate_summary).exists()
+    assert Path(outcome.run_report.evidence_paths.checkpoint_results).exists()
+    assert Path(outcome.run_report.evidence_paths.publication_results).exists()
+    assert Path(outcome.run_report.evidence_paths.report).exists()
     assert [result.checkpoint_name for result in outcome.checkpoint_results] == [
         "source_intake",
         "fact_processing",
@@ -224,6 +237,9 @@ def test_full_slice_replay_creates_compatibility_case_when_snapshot_differs(tmp_
     assert outcome.compatibility_case.checkpoint_name == "monthly_snapshot"
     assert outcome.compatibility_case.comparison_run_id == outcome.comparison_run_id
     assert outcome.compatibility_case.involved_anchor_row_nos == [2]
+    assert outcome.run_report.primary_failure is not None
+    assert outcome.run_report.primary_failure.checkpoint_name == "monthly_snapshot"
+    assert outcome.run_report.compatibility_case == outcome.compatibility_case
     case_path = (
         replay_root
         / "evidence"

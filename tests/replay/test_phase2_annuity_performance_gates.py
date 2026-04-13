@@ -87,9 +87,15 @@ def test_annuity_gate_passes(tmp_path) -> None:
         replay_root=replay_root,
     )
 
+    package_root = (
+        replay_root / "evidence" / "comparison_runs" / outcome.comparison_run_id
+    )
     assert outcome.gate_summary.overall_outcome == "passed"
     assert outcome.gate_summary.status_counts["passed"] == 6
     assert outcome.compatibility_case is None
+    assert outcome.run_report.primary_failure is None
+    assert Path(outcome.run_report.evidence_paths.comparison_run_root) == package_root
+    assert (package_root / "manifest.json").exists()
 
 
 def test_annuity_gate_writes_failed_package(tmp_path) -> None:
@@ -121,6 +127,8 @@ def test_annuity_gate_writes_failed_package(tmp_path) -> None:
 
     assert outcome.gate_summary.overall_outcome == "failed"
     assert outcome.compatibility_case is not None
+    assert outcome.run_report.primary_failure is not None
+    assert outcome.run_report.primary_failure.checkpoint_name == "monthly_snapshot"
     assert (package_root / "manifest.json").exists()
     assert (package_root / "gate-summary.json").exists()
     assert (package_root / "checkpoint-results.json").exists()
