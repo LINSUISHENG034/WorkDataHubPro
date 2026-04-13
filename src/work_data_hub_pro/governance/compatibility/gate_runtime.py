@@ -89,7 +89,13 @@ def load_required_checkpoint_baseline(
             f"Missing accepted baseline for checkpoint '{checkpoint_name}': {path}"
         )
     with open(path, encoding="utf-8") as f:
-        return json.load(f)
+        content = json.load(f)
+    if not isinstance(content, list):
+        raise TypeError(
+            f"Baseline file for checkpoint '{checkpoint_name}' must contain a JSON array. "
+            f"Got {type(content).__name__}: {path}"
+        )
+    return content
 
 
 def _build_diff(legacy_payload: Any, pro_payload: Any) -> CheckpointDiff:
