@@ -484,6 +484,7 @@ def run_annuity_performance_slice(
         "identity_resolution": _build_identity_payload(resolution_results),
         "contract_state": contract_state.rows,
         "source_intake": _build_observed_source_intake_contract(records),
+        "monthly_snapshot": monthly_snapshot.rows,
     }
     if any(result.status == "failed" for result in checkpoint_results):
         involved_anchor_row_nos = sorted(
