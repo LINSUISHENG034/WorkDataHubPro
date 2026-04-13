@@ -9,6 +9,7 @@ from work_data_hub_pro.apps.orchestration.replay.errors import (
     translate_replay_setup_error,
 )
 from work_data_hub_pro.apps.orchestration.replay.runtime import (
+    build_failure_compatibility_case_payload,
     build_primary_failure,
     build_validated_publication_bundle,
     execute_replay_run,
@@ -482,16 +483,35 @@ def run_annuity_performance_slice(
         )
         if primary_failure is None:
             raise AssertionError("Expected a primary failure for failed replay results.")
-        if primary_failure.checkpoint_name == "reference_derivation":
-            failure_locator = str(reference_derivation_baseline_path)
-            legacy_result = {"rows": expected_reference_derivation}
-            pro_result = {"rows": reference_derivation_payload}
-        else:
-            failure_locator = str(
-                replay_root / "legacy_monthly_snapshot_2026_03.json"
+        baseline_paths = {
+            "fact_processing": fact_processing_baseline_path,
+            "identity_resolution": identity_resolution_baseline_path,
+            "reference_derivation": reference_derivation_baseline_path,
+            "contract_state": contract_state_baseline_path,
+            "monthly_snapshot": replay_root / "legacy_monthly_snapshot_2026_03.json",
+        }
+        legacy_payloads = {
+            "fact_processing": expected_fact_processing,
+            "identity_resolution": expected_identity_resolution,
+            "reference_derivation": expected_reference_derivation,
+            "contract_state": expected_contract_state,
+            "monthly_snapshot": expected_snapshot,
+        }
+        pro_payloads_map = {
+            "fact_processing": _build_fact_payload(resolved_facts),
+            "identity_resolution": _build_identity_payload(resolution_results),
+            "reference_derivation": reference_derivation_payload,
+            "contract_state": contract_state.rows,
+            "monthly_snapshot": monthly_snapshot.rows,
+        }
+        failure_locator, legacy_result, pro_result = (
+            build_failure_compatibility_case_payload(
+                primary_failure.checkpoint_name,
+                baseline_paths=baseline_paths,
+                legacy_payloads=legacy_payloads,
+                pro_payloads=pro_payloads_map,
             )
-            legacy_result = {"rows": expected_snapshot}
-            pro_result = {"rows": monthly_snapshot.rows}
+        )
         compatibility_case = AdjudicationService(context.evidence_index).create_case(
             sample_locator=failure_locator,
             legacy_result=legacy_result,

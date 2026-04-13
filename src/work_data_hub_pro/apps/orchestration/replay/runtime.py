@@ -358,10 +358,47 @@ def _path_string(path: Path) -> str:
     return path.as_posix()
 
 
+def build_failure_compatibility_case_payload(
+    checkpoint_name: str,
+    *,
+    baseline_paths: dict[str, Path],
+    legacy_payloads: dict[str, list[dict[str, object]]],
+    pro_payloads: dict[str, list[dict[str, object]]],
+) -> tuple[str, dict[str, object], dict[str, object]]:
+    """Build truthful failure-case compatibility-case payload for the given checkpoint.
+
+    Returns (sample_locator, legacy_result, pro_result) where:
+    - sample_locator: path to the correct intermediate baseline file
+    - legacy_result: wrapped legacy baseline rows for the failed checkpoint
+    - pro_result: wrapped pro payload rows for the failed checkpoint
+
+    Supported checkpoints: fact_processing, identity_resolution, reference_derivation,
+    contract_state, monthly_snapshot.
+    Raises ValueError for unsupported checkpoint names.
+    """
+    supported = {
+        "fact_processing",
+        "identity_resolution",
+        "reference_derivation",
+        "contract_state",
+        "monthly_snapshot",
+    }
+    if checkpoint_name not in supported:
+        raise ValueError(
+            f"Unsupported checkpoint for compatibility-case payload: {checkpoint_name!r}. "
+            f"Supported: {sorted(supported)}"
+        )
+    sample_locator = str(baseline_paths[checkpoint_name])
+    legacy_result = {"rows": legacy_payloads[checkpoint_name]}
+    pro_result = {"rows": pro_payloads[checkpoint_name]}
+    return sample_locator, legacy_result, pro_result
+
+
 __all__ = [
     "append_replay_trace_events",
     "ReplayExecutionContext",
     "ReplayExecutionResult",
+    "build_failure_compatibility_case_payload",
     "build_primary_failure",
     "build_validated_publication_bundle",
     "execute_replay_run",
