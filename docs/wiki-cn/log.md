@@ -75,3 +75,13 @@
 - 更新 `roadmap/overview.md`，补充 verification-asset contract suite，并明确当前不应继续把 Phase 2 补口叙述视为 active target
 - 更新 `governance/verification-assets.md`，明确 `source_intake` 是 contract checkpoint，不是 `checkpoint_baseline` 文件资产
 - 更新 `governance/phase-2-decisions.md`，补记当前稳定口径：accepted checkpoint baseline 仅覆盖 `reference_derivation`、`fact_processing`、`identity_resolution`、`contract_state`
+
+## [2026-04-13] governance | 沉淀 Phase 3 灰区拍板决策
+
+- 新增 `governance/phase-3-decisions.md`
+- 把 Phase 3 的四项灰区结论沉淀为稳定治理页：replay 共享边界、failure contract、agent 入口、temp-id policy
+- 明确 Phase 3 不采用 fully generic replay runner，而采用 `shared primitives + explicit per-domain runners`
+- 明确 failure contract 采用 `typed run report + typed exceptions`
+- 明确 replay 入口采用“保留 domain wrapper + 新增 unified replay surface”
+- 明确 temp-id 采用 legacy-backed 的确定性 opaque 规则，prefix 默认 `IN`
+- 更新 `governance/index.md` 与 `roadmap/overview.md`，把新决策页接入当前路线图语境

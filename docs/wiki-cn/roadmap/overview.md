@@ -53,6 +53,17 @@
 - 标准化 error taxonomy
 - 改善 agent 入口与诊断体验
 
+当前已确认的治理基线：
+
+- replay 共享边界采用 `shared primitives + explicit per-domain runners`
+- failure contract 采用 `typed run report + typed exceptions`
+- 入口采用“保留 domain wrapper + 新增 unified replay surface”
+- temp-id 采用 legacy-backed 的确定性 opaque 规则，前缀默认 `IN`
+
+详见：
+
+- [Phase 3 决策基线](../governance/phase-3-decisions.md)
+
 ### Phase 4：Agent Operations & Governance Hardening
 
 目标：
@@ -120,6 +131,7 @@ Phase 6 remediation 已完成项目（2026-04-13）：
 
 - 如果目标是治理闭环：Phase 2 已完成，不应继续把“补口叙述”当成当前主线
 - 如果目标是实现推进：后续注意力应回到 Phase 3 之后的 replay orchestration、failure explainability、agent operability 与运行时治理
+- 进入 Phase 3 前，应先把 replay contract、failure contract、CLI contract、temp-id contract 作为实现 admission 前置条件写清楚
 
 相关经验已沉淀到：
 
