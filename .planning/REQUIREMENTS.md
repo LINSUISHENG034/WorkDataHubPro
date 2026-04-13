@@ -22,12 +22,12 @@
 
 - [x] **PIPE-01**: System can express processing lifecycle as explicit stage contracts (input -> stage transform -> intermediate product -> output)
 - [x] **PIPE-02**: System can expose per-stage rule application evidence and decision rationale for debugging
-- [ ] **PIPE-03**: System can surface failure paths with typed error categories and actionable diagnostics
-- [ ] **PIPE-04**: System can reduce duplicated replay orchestration by extracting reusable pipeline composition primitives
+- [x] **PIPE-03**: System can surface failure paths with typed error categories and actionable diagnostics
+- [x] **PIPE-04**: System can reduce duplicated replay orchestration by extracting reusable pipeline composition primitives
 
 ### Agent-Friendly Operability
 
-- [ ] **OPS-01**: Agent can discover stable task entrypoints for replay execution, diagnostics, and rule updates without relying on hidden context
+- [x] **OPS-01**: Agent can discover stable task entrypoints for replay execution, diagnostics, and rule updates without relying on hidden context
 - [ ] **OPS-02**: Agent can use standardized runbook + config contracts to add a new data source with bounded change surface
 - [ ] **OPS-03**: Agent can trace a produced output row back to its source and stage decisions through queryable lineage/evidence references
 - [ ] **OPS-04**: Project can provide explicit observability contracts (logs/traces/evidence structure) that support operations and incident response
@@ -41,7 +41,7 @@
 ### Governance and Security
 
 - [ ] **GOV-01**: Evidence artifacts can apply redaction policy for sensitive fields before persistence
-- [ ] **GOV-02**: Identity fallback behavior can avoid leaking raw business identifiers in generated temporary IDs
+- [x] **GOV-02**: Identity fallback behavior can avoid leaking raw business identifiers in generated temporary IDs
 - [ ] **GOV-03**: Compatibility adjudication can record mismatch severity, decision owner, and closure evidence for auditability
 
 ## v2 Requirements
@@ -79,9 +79,9 @@
 | PAR-04 | Phase 2 | Validated |
 | PIPE-01 | Phase 2 | Validated |
 | PIPE-02 | Phase 2 | Validated |
-| PIPE-03 | Phase 3 | Pending |
-| PIPE-04 | Phase 3 | Pending |
-| OPS-01 | Phase 3 | Pending |
+| PIPE-03 | Phase 3 | Validated |
+| PIPE-04 | Phase 3 | Validated |
+| OPS-01 | Phase 3 | Validated |
 | OPS-02 | Phase 4 | Pending |
 | OPS-03 | Phase 4 | Pending |
 | OPS-04 | Phase 4 | Pending |
@@ -89,7 +89,7 @@
 | PERF-02 | Phase 5 | Pending |
 | PERF-03 | Phase 5 | Pending |
 | GOV-01 | Phase 4 | Pending |
-| GOV-02 | Phase 3 | Pending |
+| GOV-02 | Phase 3 | Validated |
 | GOV-03 | Phase 4 | Pending |
 
 **Coverage:**
@@ -103,4 +103,4 @@
 
 ---
 *Requirements defined: 2026-04-12*
-*Last updated: 2026-04-13 after Phase 6 closure*
+*Last updated: 2026-04-13 after Phase 3 closure*

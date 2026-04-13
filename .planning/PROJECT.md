@@ -25,11 +25,12 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - ✓ Repository-native PR / protected-branch / nightly parity gate tiers — validated in Phase 2
 - ✓ Phase 6 governance remediation: fail-closed baseline loading (`load_required_checkpoint_baseline`), multiset duplicate-row diff accuracy (`_build_diff`), stable intermediate checkpoint payload normalization, and explicit bootstrap entrypoint (`scripts/bootstrap_phase2_checkpoint_baselines.py`) — validated in Phase 6
 - ✓ Phase 6 governance status sync: PROJECT.md, ROADMAP.md, STATE.md, `06-VERIFICATION.md`, and wiki-cn docs now record Phase 2 implementation complete and governance sign-off closed from executed evidence — validated in Phase 6
+- ✓ Shared replay orchestration primitives now power annuity, annual-award, and annual-loss slices with typed run reports and typed setup-failure paths — validated in Phase 3
+- ✓ Registry-backed replay CLI entrypoints (`replay list-domains`, `replay run`, `replay diagnose`) and updated replay runbooks are available for agents and humans — validated in Phase 3
+- ✓ Governed temp-id fallback avoids raw identifier leakage in replay-facing loss-domain assertions and identity-resolution contracts — validated in Phase 3
 
 ### Active
 
-- [ ] Upgrade agent-operable project surfaces (entrypoints, diagnostics, config contracts, runbooks)
-- [ ] Reduce orchestration duplication and high-coupling hotspots across replay slices
 - [ ] Improve runtime efficiency without introducing behavior drift
 
 ## Current State
@@ -37,6 +38,7 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - Phase 1 complete: authoritative mapping, rule-classification, parity-baseline, and offline checkpoint artifacts are in place
 - Phase 2 implementation complete: explicit stage contracts, deterministic parity gates, derivation checkpoint governance, and CI-ready gate tiers are in place
 - Phase 2 governance sign-off closed: Phase 6 remediation and re-verification completed on 2026-04-13 with the exact replay acceptance suite and governance contract suite both passing
+- Phase 3 complete: all three replay slices use shared orchestration primitives, typed diagnostics are stable, and replay execution/diagnostics have agent- and human-facing CLI entrypoints
 - Phase 6 complete: truthful `source_intake` contract semantics, stable intermediate checkpoint payloads, annual-award outcome repair, and governance status synchronization are all in place
 - Deferred carry-forward from Phase 2: verification-asset rows for `golden_set`, `golden_baseline`, `real_data_sample`, and dedicated error-case fixtures remain explicitly deferred
 
@@ -94,4 +96,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-13 after Phase 6 closure*
+*Last updated: 2026-04-13 after Phase 3 closure*
