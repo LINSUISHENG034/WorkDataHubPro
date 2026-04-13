@@ -1,13 +1,19 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
+from typer.testing import CliRunner
 
+from work_data_hub_pro.apps.etl_cli import main as cli_main
 from work_data_hub_pro.apps.orchestration.replay.contracts import ReplayDomainSpec
 from work_data_hub_pro.apps.orchestration.replay.diagnostics import (
     find_comparison_run_root,
     load_replay_diagnostics,
+)
+from work_data_hub_pro.apps.orchestration.replay.errors import (
+    ReplayDiagnosticsNotFoundError,
 )
 from work_data_hub_pro.governance.compatibility.gate_models import (
     CheckpointFingerprint,
@@ -240,3 +246,61 @@ def test_load_replay_diagnostics_raises_for_missing_run(tmp_path: Path) -> None:
 
     with pytest.raises(FileNotFoundError, match="missing-run"):
         load_replay_diagnostics("missing-run", registry=registry)
+
+
+def test_replay_diagnose_cli_returns_machine_readable_output(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner = CliRunner()
+    registry = _registry_for(tmp_path)
+    comparison_run_id = "annual-award-2026-03-warning"
+    _write_package(
+        replay_root=registry["annual_award"].replay_root,
+        comparison_run_id=comparison_run_id,
+        status="warning",
+        severity="warn",
+        compatibility_case=None,
+    )
+
+    monkeypatch.setattr(
+        cli_main,
+        "load_replay_diagnostics",
+        lambda run_id: load_replay_diagnostics(run_id, registry=registry),
+    )
+
+    result = runner.invoke(
+        cli_main.app,
+        ["replay", "diagnose", "--comparison-run-id", comparison_run_id],
+    )
+
+    assert result.exit_code == 0
+    payload = json.loads(result.stdout)
+    assert payload["comparison_run_id"] == comparison_run_id
+    assert payload["overall_outcome"] == "warning"
+    assert payload["primary_failed_checkpoint"] == "monthly_snapshot"
+    assert payload["compatibility_case_id"] is None
+    assert payload["checkpoint_statuses"]["monthly_snapshot"] == "warning"
+    assert payload["package_paths"]["manifest"].endswith("manifest.json")
+
+
+def test_replay_diagnose_cli_returns_typed_missing_run_error(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner = CliRunner()
+    registry = _registry_for(tmp_path)
+
+    monkeypatch.setattr(
+        cli_main,
+        "load_replay_diagnostics",
+        lambda run_id: load_replay_diagnostics(run_id, registry=registry),
+    )
+
+    result = runner.invoke(
+        cli_main.app,
+        ["replay", "diagnose", "--comparison-run-id", "missing-run"],
+    )
+
+    assert result.exit_code == 1
+    assert "Replay diagnostics package was not found for missing-run." in result.stderr
