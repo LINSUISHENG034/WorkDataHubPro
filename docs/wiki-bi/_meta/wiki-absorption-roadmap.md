@@ -103,4 +103,14 @@
 
 状态：
 
-- next
+- completed on 2026-04-14
+
+## 当前位置
+
+首批六轮吸收已经完成。
+
+后续如需继续推进，应从下面几类 follow-on work 中选择：
+
+- 继续把高频 open questions 发展成新的轮次
+- 将厚主题拆成对象级 evidence pages
+- 继续补强 annuity_income 的 branch mapping / artifact / validation detail

@@ -12,3 +12,5 @@
   - 第四轮闭环，强化 golden set、replay baseline、real-data sample、error-case fixture 与验证资产治理边界。
 - [Round 05：operator 与 surfaces](./round-05-operator-and-surfaces.md)
   - 第五轮闭环，强化 reference sync、manual commands、failed-record export 与 enterprise persistence 的治理识别。
+- [Round 06：`annuity_income`](./round-06-annuity-income.md)
+  - 第六轮闭环，集中保留 annuity_income 的 identity、validation 与 operator 制度记忆。

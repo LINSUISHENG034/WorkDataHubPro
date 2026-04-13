@@ -11,8 +11,9 @@
 | E-ID-001 | legacy_doc | strong | absorbed | `company-id`, `plan-type`, `annuity-performance`, `annuity-income` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\business-background\年金计划类型与客户名称业务背景.md` 明确“客户名称为空不等于无法识别客户”，并强调多线索识别。 |
 | E-ID-002 | legacy_doc | strong | absorbed | `company-id`, `temp-id`, `golden-scenarios` | 2026-04-14 | `dataset_requirements.md` 定义 5-step identity fallback chain、temp-id 格式、determinism 与 lookup 场景。 |
 | E-ID-003 | audit | strong | absorbed | `company-lookup-queue`, `unknown-names-csv`, `company-id` | 2026-04-14 | `2026-04-12-legacy-code-audit.md` 明确 queue、enterprise persistence、`unknown_names_csv`、manual operator surfaces 都是真实存在的治理对象。 |
-| E-ID-004 | audit | supporting | absorbed | `company-id`, `golden-scenarios`, `annuity-income` | 2026-04-14 | `2026-04-12-verification-assets-search-findings.md` 总结 identity fallback chain、mapping files、annuity_income 身份缺口与 missing artifacts。 |
+| E-ID-004 | audit | supporting | absorbed | `company-id`, `golden-scenarios`, `annuity-income`, `temp-id` | 2026-04-14 | `2026-04-12-verification-assets-search-findings.md` 总结 identity fallback chain、mapping files、annuity_income 身份缺口与 missing artifacts。 |
 | E-ID-005 | current_test | supporting | explicitly_tracked | `company-id`, `annual_award`, `annual_loss` | 2026-04-14 | WorkDataHubPro 已有 identity / plan-code enrichment 相关集成测试，说明 rebuild 已显式保护其中一部分。 |
+| E-ID-006 | legacy_doc | strong | absorbed | `annuity-income`, `company-id`, `temp-id` | 2026-04-14 | `annuity-income` cleansing rules 明确 ID5 fallback retirement，不应在 rebuild 中无意恢复。 |
 
 ## 本轮已吸收的稳定结论
 
@@ -37,3 +38,4 @@
 
 - temp-id、ID1-ID5 mapping files 与 annuity_income 相关身份差异仍未形成对象级 evidence page
 - current project 中 identity governance 仍未形成独立标准页
+- annuity_income 的 COMPANY_BRANCH_MAPPING gap 仍未被单独吸收

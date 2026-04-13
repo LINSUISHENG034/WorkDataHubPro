@@ -14,6 +14,11 @@
 
 - 不能因为当前 rebuild 未实现，就丢失其 source workbook、sheet 和 branch mapping 等制度记忆
 
+在身份与验证上，它还意味着：
+
+- 不能忘记 ID5 fallback 已被显式 retirement
+- 不能忘记它有自己的 parity validation memory 与 operator artifacts
+
 ## 核心概念入口
 
 - [企业身份标识：`company_id`](../concepts/company-id.md)
@@ -27,6 +32,7 @@
 - customer / mapping 相关回填信号
 - identity / branch mapping 相关遗留约束
 - identity fallback retirement decisions 与 unresolved-name artifacts 的制度记忆
+- legacy parity validation 与 validation result history 的制度记忆
 
 ## 适用标准
 
@@ -40,6 +46,7 @@
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
+- [`annuity_income` 专题证据](../evidence/annuity-income-gap-evidence.md)
 
 ## 明确不在本页描述的内容
 
@@ -51,3 +58,4 @@
 当前尤其要避免的是：
 
 - 因为 `annuity_income` 尚未落地，就把其 golden / parity / identity 制度记忆从 wiki 中删除
+- 因为当前 project 只覆盖 accepted slices，就误以为 annuity_income 不再属于问题空间

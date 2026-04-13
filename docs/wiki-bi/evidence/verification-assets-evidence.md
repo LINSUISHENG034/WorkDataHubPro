@@ -16,7 +16,7 @@
 | E-VA-006 | current_reference_asset | supporting | explicitly_tracked | `golden-scenarios` | 2026-04-14 | current replay runbooks 与 phase parity artifacts 说明 rebuild 已有部分验证资产治理，但不足以覆盖 legacy 全部 richness。 |
 | E-VA-007 | legacy_only | supporting | open_question | `golden-scenarios`, `annuity-income` | 2026-04-14 | `annual_award` / `annual_loss` 是否需要独立 domain-level golden set 仍未形成显式治理结论。 |
 | E-VA-008 | legacy_only | strong | open_question | `golden-scenarios`, `real-data-validation` | 2026-04-14 | error-case fixtures 在 legacy 文档中被明确规划，但实体文件并未创建，应视为 `planned but not created`。 |
-| E-VA-009 | legacy_only | strong | open_question | `annuity-income`, `golden-scenarios` | 2026-04-14 | `annuity_income` 的 capability map、parity history、ID5 retirement decision 与 COMPANY_BRANCH_MAPPING 缺口应作为制度记忆保留。 |
+| E-VA-009 | legacy_only | strong | absorbed | `annuity-income`, `golden-scenarios` | 2026-04-14 | `annuity_income` 的 capability map、parity history、ID5 retirement decision 与 COMPANY_BRANCH_MAPPING 缺口应作为制度记忆保留。 |
 
 ## 本轮已吸收的稳定结论
 

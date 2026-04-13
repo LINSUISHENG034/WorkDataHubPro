@@ -49,3 +49,10 @@
 - 更新 `surfaces/failed-record-export.md`，明确其作为 operator artifact 的制度价值
 - 更新 `surfaces/customer-mdm-commands.md` 与 `surfaces/company-lookup-queue.md`，把独立 operator/runtime surface 语义继续收紧
 - 新增 `_meta/absorption-rounds/round-05-operator-and-surfaces.md`，沉淀本轮经验并把下一轮切到 `annuity_income`
+
+## [2026-04-14] absorb | Round 06 闭环吸收 `annuity_income`
+
+- 新增 `evidence/annuity-income-gap-evidence.md`，把 annuity_income 的 capability map、ID5 retirement、parity validation memory、operator artifact gap 收束成专题证据页
+- 更新 `domains/annuity-income.md`，把 annuity_income 从“未实现 domain”进一步写实为一组必须保留的制度记忆簇
+- 更新 `evidence/identity-and-lookup-evidence.md`、`evidence/verification-assets-evidence.md`、`evidence/operator-and-surface-evidence.md`，把 annuity_income 的 identity / verification / operator gap 接回现有主题页
+- 新增 `_meta/absorption-rounds/round-06-annuity-income.md`，把本轮作为当前路线图的第六轮闭环完成记录

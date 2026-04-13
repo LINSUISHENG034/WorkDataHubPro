@@ -86,6 +86,7 @@
 - [状态与快照证据](./evidence/status-and-snapshot-evidence.md) : 聚合客户状态、快照、customer MDM 相关证据。
 - [验证资产证据](./evidence/verification-assets-evidence.md) : 聚合 golden set、replay baseline、validation guide、error fixtures 等证据。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
+- [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的 legacy-only 制度记忆、身份差异、验证资产缺口与 operator artifact 缺口。
 
 ### Meta
 
@@ -99,5 +100,6 @@
 - [Round 03：输入现实](./_meta/absorption-rounds/round-03-input-reality.md) : 第三轮闭环沉淀，记录真实输入形态、版本策略、sheet contract 与下一轮目标。
 - [Round 04：验证资产](./_meta/absorption-rounds/round-04-verification-assets.md) : 第四轮闭环沉淀，记录 golden set、replay baseline、error-case fixture 与下一轮目标。
 - [Round 05：operator 与 surfaces](./_meta/absorption-rounds/round-05-operator-and-surfaces.md) : 第五轮闭环沉淀，记录 reference sync、manual commands、failed-record export 与下一轮目标。
+- [Round 06：`annuity_income` 专题补强](./_meta/absorption-rounds/round-06-annuity-income.md) : 第六轮闭环沉淀，记录 annuity_income 的制度记忆、身份差异、验证资产与 operator artifact 缺口。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。
