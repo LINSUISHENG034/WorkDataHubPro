@@ -98,5 +98,6 @@
 - [Round 02：身份与补查](./_meta/absorption-rounds/round-02-identity-and-lookup.md) : 第二轮闭环沉淀，记录 `company_id`、temp-id、lookup surface 与下一轮目标。
 - [Round 03：输入现实](./_meta/absorption-rounds/round-03-input-reality.md) : 第三轮闭环沉淀，记录真实输入形态、版本策略、sheet contract 与下一轮目标。
 - [Round 04：验证资产](./_meta/absorption-rounds/round-04-verification-assets.md) : 第四轮闭环沉淀，记录 golden set、replay baseline、error-case fixture 与下一轮目标。
+- [Round 05：operator 与 surfaces](./_meta/absorption-rounds/round-05-operator-and-surfaces.md) : 第五轮闭环沉淀，记录 reference sync、manual commands、failed-record export 与下一轮目标。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。

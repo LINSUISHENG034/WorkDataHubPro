@@ -19,6 +19,12 @@ failed-record export 指在验证或处理失败时，把失败记录导出为 o
 
 它不是普通 debug 输出，而是失败处理与可观测性的一部分。
 
+如果只保留日志而不保留失败记录导出：
+
+- operator 很难做行级排查
+- failure path 的制度记忆会被削弱
+- 一些 domain-specific artifact gap 会长期不可见
+
 ## 相关概念
 
 - [回填：`backfill`](../concepts/backfill.md)
@@ -36,6 +42,7 @@ failed-record export 指在验证或处理失败时，把失败记录导出为 o
 ## 当前重构处理状态
 
 - 当前应视为需要显式判断是否保留的 operator artifact
+- 当前至少应继续在 wiki 中维持其制度记忆，不能因未实现而从治理视野中消失
 
 ## 仍未决的问题
 

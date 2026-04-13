@@ -10,3 +10,5 @@
   - 第三轮闭环，强化真实输入形态、版本策略、sheet contract 与 fixture 边界。
 - [Round 04：验证资产](./round-04-verification-assets.md)
   - 第四轮闭环，强化 golden set、replay baseline、real-data sample、error-case fixture 与验证资产治理边界。
+- [Round 05：operator 与 surfaces](./round-05-operator-and-surfaces.md)
+  - 第五轮闭环，强化 reference sync、manual commands、failed-record export 与 enterprise persistence 的治理识别。

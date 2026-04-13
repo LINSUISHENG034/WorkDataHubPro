@@ -41,3 +41,11 @@
 - 更新 `standards/verification-method/golden-scenarios.md`，把 asset taxonomy、open questions 和 legacy-only memory 边界写实
 - 更新 `domains/annuity-income.md`，明确 annuity_income 的验证资产制度记忆不能因未实现而消失
 - 新增 `_meta/absorption-rounds/round-04-verification-assets.md`，沉淀本轮经验并把下一轮切到 `operator-and-surfaces`
+
+## [2026-04-14] absorb | Round 05 闭环吸收 `operator-and-surfaces`
+
+- 更新 `evidence/operator-and-surface-evidence.md`，把 queue、reference sync、manual commands、failed-record export、enterprise persistence 的治理边界写实
+- 更新 `surfaces/reference-sync.md`，明确其 target tables、integration 语义与非隐含性
+- 更新 `surfaces/failed-record-export.md`，明确其作为 operator artifact 的制度价值
+- 更新 `surfaces/customer-mdm-commands.md` 与 `surfaces/company-lookup-queue.md`，把独立 operator/runtime surface 语义继续收紧
+- 新增 `_meta/absorption-rounds/round-05-operator-and-surfaces.md`，沉淀本轮经验并把下一轮切到 `annuity_income`

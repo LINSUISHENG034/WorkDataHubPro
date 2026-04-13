@@ -63,6 +63,7 @@
 
 - 当前应被视为需要显式治理的 operator surface
 - 具体哪些命令必须保留，仍待后续稳定决策
+- 在做 state / snapshot / annual lifecycle 相关判断时，不应假设只有自动 hook 路径存在
 
 ## 仍未决的问题
 

@@ -54,6 +54,7 @@
 - 当前应视为显式治理对象
 - retain / replace / retire 结论仍需后续稳定决策页明确
 - 当前至少不应再被当作“隐含存在，不必登记”的对象
+- enterprise persistence breadth 仍需后续拆分和澄清
 
 ## 仍未决的问题
 
