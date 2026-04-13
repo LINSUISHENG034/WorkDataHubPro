@@ -26,7 +26,7 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-04-13)
 
 **Core value:** 在不牺牲旧项目业务结果一致性的前提下，把数据处理流程重构为可解释、可验证、可维护、可由 agent 接管的系统。
-**Current focus:** Phase 3 closed on 2026-04-13 after shared replay runtime adoption, typed replay diagnostics, and the replay CLI surface all passed verification.
+**Current focus:** Phase 4 context gathered on 2026-04-13; next step is planning the agent operations and governance hardening slice.
 
 ## Artifacts
 
@@ -44,8 +44,8 @@ See: `.planning/PROJECT.md` (updated 2026-04-13)
 
 ## Next Commands
 
-1. `/gsd-progress`
-2. `/gsd-complete-milestone`
+1. `/gsd-plan-phase 4`
+2. `/gsd-progress`
 
 ## Notes
 
@@ -65,6 +65,7 @@ See: `.planning/PROJECT.md` (updated 2026-04-13)
 - 2026-04-13: Phase 6 replay acceptance suite passed (`15 passed`) and governance contract suite passed (`9 passed`)
 - 2026-04-13: Phase 3 plans updated to require completed-run comparison packages, frozen registry dispatch metadata, event-domain setup-failure coverage, and explicit diagnose/null-case CLI contracts
 - 2026-04-13: Phase 3 verification passed with the full suite green (`140 passed`) after the replay CLI, shared runtime adoption, and typed failure-path work landed on `main`
+- 2026-04-13: Phase 4 context captured in `.planning/phases/04-agent-operations-governance-hardening/04-CONTEXT.md` with auto-selected decisions around operator workflow, lineage lookup, evidence redaction, and adjudication lifecycle
 
 ---
 *Last updated: 2026-04-13 after Phase 3 closure*
