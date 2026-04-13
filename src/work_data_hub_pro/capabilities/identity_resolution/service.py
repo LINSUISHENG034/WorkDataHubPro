@@ -2,10 +2,17 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import UTC, datetime
+import os
 
 from work_data_hub_pro.capabilities.identity_resolution.interfaces import (
     IdentityCache,
     IdentityProvider,
+)
+from work_data_hub_pro.capabilities.identity_resolution.temp_identity import (
+    generate_temp_identity,
+    load_temp_identity_policy,
+    normalize_identity_fallback_input,
+    temp_identity_prefix,
 )
 from work_data_hub_pro.platform.contracts.models import (
     CanonicalFactRecord,
@@ -54,10 +61,12 @@ class CacheFirstIdentityResolutionService:
         anchor_row_no: int,
         config_release_id: str,
     ) -> ResolvedFact:
-        company_name = str(fact.fields["company_name"])
+        raw_company_name = fact.fields.get("company_name")
+        company_name = "" if raw_company_name is None else str(raw_company_name)
         source_company_id = str(
             fact.fields.get("company_id") or fact.fields.get("source_company_id") or ""
         )
+        evidence_details: dict[str, str | None] = {}
 
         if source_company_id:
             company_id = source_company_id
@@ -78,7 +87,31 @@ class CacheFirstIdentityResolutionService:
                     method = "provider_lookup"
                     fallback_level = "none"
                 else:
-                    company_id = f"TEMP-{company_name}"
+                    normalized_company_name = normalize_identity_fallback_input(
+                        raw_company_name if raw_company_name is None else str(raw_company_name)
+                    )
+                    evidence_details = {
+                        "raw_company_name": (
+                            None if raw_company_name is None else str(raw_company_name)
+                        ),
+                        "normalized_company_name": normalized_company_name,
+                    }
+                    if normalized_company_name is None:
+                        company_id = None
+                    else:
+                        policy = load_temp_identity_policy()
+                        salt_env_var = str(policy["salt_env_var"])
+                        salt = os.getenv(salt_env_var)
+                        if not salt:
+                            raise ValueError(
+                                "Temp identity salt environment variable "
+                                f"{salt_env_var} is not configured"
+                            )
+                        company_id = generate_temp_identity(
+                            normalized_company_name,
+                            salt=salt,
+                            prefix=temp_identity_prefix(),
+                        )
                     method = "temp_id_fallback"
                     fallback_level = "temporary"
 
@@ -99,7 +132,8 @@ class CacheFirstIdentityResolutionService:
             resolved_identity=company_id,
             resolution_method=method,
             fallback_level=fallback_level,
-            evidence_refs=[f"identity:{method}:{company_name}"],
+            evidence_refs=[_opaque_evidence_ref(method, fact)],
+            evidence_details=evidence_details,
         )
         trace_event = FieldTraceEvent(
             trace_id=fact.trace_ref,
@@ -125,3 +159,13 @@ class CacheFirstIdentityResolutionService:
             result=result,
             trace_events=[trace_event],
         )
+
+
+def _opaque_evidence_ref(method: str, fact: CanonicalFactRecord) -> str:
+    source_row_no = fact.fields.get("source_row_no")
+    source_sheet = fact.fields.get("source_sheet")
+    if source_sheet is not None and source_row_no is not None:
+        return f"identity:{method}:{source_sheet}:{int(source_row_no)}"
+    if source_row_no is not None:
+        return f"identity:{method}:row:{int(source_row_no)}"
+    return f"identity:{method}:{fact.record_id}"

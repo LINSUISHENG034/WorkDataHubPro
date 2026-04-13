@@ -8,6 +8,7 @@ from openpyxl import Workbook
 from work_data_hub_pro.apps.orchestration.replay.annuity_performance_slice import (
     run_annuity_performance_slice,
 )
+from tests.replay.test_annuity_performance_slice import _bootstrap_intermediate_baselines
 
 
 def _write_workbook(path: Path) -> None:
@@ -78,6 +79,7 @@ def test_annuity_gate_passes(tmp_path) -> None:
             }
         ],
     )
+    _bootstrap_intermediate_baselines(workbook_path, replay_root)
 
     outcome = run_annuity_performance_slice(
         workbook=workbook_path,
@@ -105,6 +107,7 @@ def test_annuity_gate_writes_failed_package(tmp_path) -> None:
             }
         ],
     )
+    _bootstrap_intermediate_baselines(workbook_path, replay_root)
 
     outcome = run_annuity_performance_slice(
         workbook=workbook_path,

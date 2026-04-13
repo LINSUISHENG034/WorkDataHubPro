@@ -7,6 +7,7 @@ from openpyxl import Workbook
 from work_data_hub_pro.apps.orchestration.replay.annual_award_slice import (
     run_annual_award_slice,
 )
+from tests.replay.test_annual_award_slice import _bootstrap_intermediate_baselines
 
 
 def _write_replay_assets(replay_root: Path) -> None:
@@ -95,6 +96,7 @@ def test_annual_award_replay_keeps_primary_evidence_retrieval_inside_five_minute
 
     replay_root = tmp_path / "reference" / "historical_replays" / "annual_award"
     _write_replay_assets(replay_root)
+    _bootstrap_intermediate_baselines(workbook_path, replay_root)
 
     started = perf_counter()
     run_annual_award_slice(

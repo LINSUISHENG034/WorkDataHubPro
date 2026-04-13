@@ -1,0 +1,6 @@
+{
+  "policy_release_id": "2026-04-13-temp-identity-v1",
+  "prefix": "IN",
+  "salt_env_var": "WDHP_TEMP_ID_SALT",
+  "placeholder_values": ["0", "空白"]
+}
