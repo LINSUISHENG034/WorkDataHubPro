@@ -68,3 +68,10 @@
 - Phase 6 包含 3 个 plan：06-01（fail-closed baseline + bootstrap + diff 修正）、06-02（truthful intermediate checkpoint wiring）、06-03（governance 状态同步 + contract coverage）
 - 验证命令：`uv run pytest tests/contracts/test_phase6_gate_runtime.py tests/contracts/test_phase2_governance_status_sync.py -v`（`9 passed`）
 - 验证命令：`uv run pytest tests/replay/test_phase2_reference_derivation_gates.py tests/replay/test_phase2_event_domain_gates.py tests/replay/test_annuity_performance_slice.py tests/replay/test_annual_award_slice.py tests/replay/test_annual_loss_slice.py -v`（`15 passed`）
+
+## [2026-04-13] governance | 基于 Phase 6 闭合结果更新中文 wiki
+
+- 更新 `project/background.md`，把当前状态从“转向 Phase 2”改为“Phase 2 已闭环，后续应转回 post-Phase-2 主线”
+- 更新 `roadmap/overview.md`，补充 verification-asset contract suite，并明确当前不应继续把 Phase 2 补口叙述视为 active target
+- 更新 `governance/verification-assets.md`，明确 `source_intake` 是 contract checkpoint，不是 `checkpoint_baseline` 文件资产
+- 更新 `governance/phase-2-decisions.md`，补记当前稳定口径：accepted checkpoint baseline 仅覆盖 `reference_derivation`、`fact_processing`、`identity_resolution`、`contract_state`

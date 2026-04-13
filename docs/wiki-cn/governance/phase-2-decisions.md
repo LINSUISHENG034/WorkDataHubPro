@@ -44,6 +44,12 @@ Phase 2 采用分层 checkpoint taxonomy。
 - Wave 2：补齐 `reference_derivation`
 - `publication` 在两个 wave 中都保持为运行时行为 gate，不做 legacy 内容 parity
 
+2026-04-13 Phase 6 闭合后，还需要补一句当前稳定口径：
+
+- `source_intake` 仍然是 `contract gate`
+- 它没有被提升成 `legacy_source_intake_*.json` 这类 repo-native baseline file
+- 当前 accepted `checkpoint_baseline` 只覆盖 `reference_derivation`、`fact_processing`、`identity_resolution`、`contract_state`
+
 ---
 
 ## 2. Adjudication Behavior
@@ -248,6 +254,7 @@ Phase 2 起，下面这些对象都应按 verification asset 管理：
 - `real-data-style` 是 `source_intake` 的目标基线
 - 当前简化 workbook 输入继续保留，但只作为 `synthetic deterministic fixture`
 - `golden set` 是需要显式治理的一等机制，不能只散落在 requirements、tests 或旧项目记忆中
+- `source_intake` 的 truthful gate 语义已经在 Phase 6 中闭合，但闭合方式是固定 contract compare，不是新增 baseline 文件资产
 
 当前仍需后续补齐的点：
 

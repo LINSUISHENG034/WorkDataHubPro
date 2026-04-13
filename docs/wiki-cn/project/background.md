@@ -44,15 +44,17 @@
 截至当前主线状态：
 
 - Phase 1 已完成
+- Phase 2 implementation 已完成
+- Phase 2 governance sign-off 已于 2026-04-13 随 Phase 6 remediation 闭合
 - 已建立 legacy-to-pro capability mapping 与 intake-path mapping 基线
 - 已完成 parity-critical rule classification 与默认 `block / warn` 严重性策略
 - 已完成 `PAR-01` 的 baseline、真实 deep-sample 回放比对与离线人工 checkpoint
-- 当前工作重点已转向 Phase 2：显式 pipeline contract、deterministic parity gate 与 adjudication 行为
+- 已完成 Phase 6：truthful intermediate gates、stable intermediate payload normalization、governance status sync
+- 当前主线不应继续把 Phase 2 收口当成 active 目标；后续应转向 post-Phase-2 的 roadmap 决策与后续 phase admission
 
 仍需继续推进的事项包括：
 
-- 更显式的阶段契约与中间产物契约
-- parity 差异的机器可判定 gate
+- Phase 3 对 replay orchestration duplication 和 failure explainability 的收口
 - 更强的 agent-operable 入口、诊断和 runbook
 - 运行时与治理面的后续闭环
 
@@ -85,3 +87,8 @@
 
 - `.planning/` 更偏“当前怎么做”
 - `wiki-cn/` 更偏“这个项目是什么、为什么这么做、主计划是什么、学到了什么”
+
+当前这两类资产的关系也进一步明确了：
+
+- `.planning/` 记录当前 Phase 6 已闭合、对应验证命令已通过
+- `docs/wiki-cn/` 负责把这一状态沉淀成可复用的中文治理知识，而不是继续保留“Phase 2 尚待闭合”的旧叙述

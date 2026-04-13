@@ -174,6 +174,8 @@
 - `source_intake` 的外部目标基线是 `real-data-style`
 - 当前简化 workbook 输入仍保留，但它们只是 `synthetic fixture`
 - `golden set` 是显式治理对象，不允许继续作为隐含机制存在
+- `reference/verification_assets/phase2-accepted-slices.json` 已成为 accepted slice 资产 registry
+- Phase 6 闭合后，`source_intake` 仍然是 `contract checkpoint`，而不是 `checkpoint_baseline` 文件资产
 
 ### 已明确存在或应被登记的资产
 
@@ -181,15 +183,24 @@
   旧项目已有明确痕迹，应在后续治理资产清单中显式登记
 - accepted slices 的 `replay baseline`
   当前已经存在于 `reference/historical_replays/*`
+- accepted slices 的中间 `checkpoint_baseline`
+  当前仅包括 `reference_derivation`、`fact_processing`、`identity_resolution`、`contract_state`
 - 当前 Pro 仓库中的简化 workbook 输入
   应登记为 `synthetic fixture`
 - 后续 `source_intake` 真实样本
   应登记为 `real-data sample`
 
+这里需要特别避免一个语义混淆：
+
+- `source_intake` 的长期目标仍是 `real-data-style` 外部 intake baseline
+- 但在当前 replay gate 模型里，`source_intake` 不对应 `legacy_source_intake_*.json`
+- 它通过固定 contract expectation + runtime observation 的方式做 truthful contract compare
+- 因此它应被视为 checkpoint semantics，而不是 repo-native baseline file
+
 ### 当前已知缺口
 
 - `annual_award` 与 `annual_loss` 是否需要独立的 domain-level `golden set`，还未形成显式治理结论
-- verification asset manifest 还没有独立落地为项目内固定文档或 registry
+- verification asset manifest 已落地，但后续仍需继续扩展到更多 deferred 资产
 
 ## 审计补充
 
@@ -223,3 +234,7 @@
 - `notes`
 
 这份清单可以后续挂到治理页、coverage matrix，或单独形成 registry。
+
+当前项目里，这个 registry 已经落在：
+
+- `reference/verification_assets/phase2-accepted-slices.json`

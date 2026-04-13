@@ -80,15 +80,16 @@
 
 ## 当前阶段位置
 
-当前主线状态已经不再是“准备开始 Phase 1”，而是：
+当前主线状态已经不再是“准备开始 Phase 1”，也不再是“继续收口 Phase 2”，而是：
 
 - Phase 1 已完成
-- 当前推荐推进目标为 Phase 2
+- Phase 2 implementation 已完成
+- Phase 6 已完成，Phase 2 governance sign-off 已闭合
 
-原因是：
+这意味着：
 
-- Phase 1 已经完成 acceptance baseline、mapping、rule classification 和首个离线 parity checkpoint
-- 下一步的主要价值不再是继续补 Phase 1 文档，而是把 parity 与可解释性推进到显式 stage contract 和 deterministic gate
+- Phase 2 的治理补口已经不是当前 active implementation target
+- 当前 wiki 叙述必须从“Phase 2 还在补口”切换到“Phase 2 已闭环，后续关注应转回 Phase 3 及之后的主线问题”
 
 ### 2026-04-13 审核补记
 
@@ -112,7 +113,13 @@ Phase 6 remediation 已完成项目（2026-04-13）：
 本次闭合使用的验证命令：
 
 - `uv run pytest tests/contracts/test_phase6_gate_runtime.py tests/contracts/test_phase2_governance_status_sync.py -v` → `9 passed`
+- `uv run pytest tests/contracts/test_phase2_verification_assets.py -v` → `4 passed`
 - `uv run pytest tests/replay/test_phase2_reference_derivation_gates.py tests/replay/test_phase2_event_domain_gates.py tests/replay/test_annuity_performance_slice.py tests/replay/test_annual_award_slice.py tests/replay/test_annual_loss_slice.py -v` → `15 passed`
+
+因此当前更合理的推进判断是：
+
+- 如果目标是治理闭环：Phase 2 已完成，不应继续把“补口叙述”当成当前主线
+- 如果目标是实现推进：后续注意力应回到 Phase 3 之后的 replay orchestration、failure explainability、agent operability 与运行时治理
 
 相关经验已沉淀到：
 
