@@ -17,7 +17,7 @@ progress:
 ## Status
 
 - Workflow: phase complete
-- Current phase: Phase 3 complete - orchestration refactor and failure explainability
+- Current phase: Phase 03.1 closure complete — Phase 3 governance sign-off closed (2026-04-13)
 - Current command focus: `gsd-progress`
 - Last action date: 2026-04-13
 
@@ -60,6 +60,8 @@ See: `.planning/PROJECT.md` (updated 2026-04-13)
 
 ### Session Notes
 
+- 2026-04-13: Phase 03.1 remediation executed (Plans 01 and 02 passed) — Phase 3 truthful failure evidence, fail-closed diagnose package loading, and typed invalid-id CLI behavior all verified
+- 2026-04-13: Phase 03.1 governance sign-off closed: 03-VERIFICATION.md now cites Phase 03.1 remediation evidence; project/roadmap/wiki wording synchronized to distinguish Phase 3 implementation completeness from Phase 3 governance sign-off closure
 - 2026-04-13: Phase 6 context captured in `.planning/phases/06-phase-2-governance-remediation-truthful-gates-and-status-sync/06-CONTEXT.md`
 - 2026-04-13: Phase 6 planned with `06-01`, `06-02`, and `06-03`
 - 2026-04-13: Phase 6 replay acceptance suite passed (`15 passed`) and governance contract suite passed (`9 passed`)

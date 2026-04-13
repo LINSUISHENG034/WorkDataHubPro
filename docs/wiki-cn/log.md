@@ -85,3 +85,11 @@
 - 明确 replay 入口采用“保留 domain wrapper + 新增 unified replay surface”
 - 明确 temp-id 采用 legacy-backed 的确定性 opaque 规则，prefix 默认 `IN`
 - 更新 `governance/index.md` 与 `roadmap/overview.md`，把新决策页接入当前路线图语境
+
+## [2026-04-13] sync | Phase 03.1 治理状态同步 — Phase 3 governance sign-off 已闭合
+
+- Phase 3 实现已完成：shared replay primitives、typed diagnostics、replay CLI entrypoints 均已到位
+- Phase 3 governance sign-off 已闭合（2026-04-13）：Phase 03.1 remediation 解决了 2026-04-13 Phase 3 审核中发现的三个问题
+- Phase 03.1 包含 3 个 plan：03.1-01（truthful failed-checkpoint compatibility-case payload selection）、03.1-02（fail-closed diagnose package-path enforcement + typed invalid-id CLI）、03.1-03（governance artifact 同步 + Phase 3 governance-status contract coverage）
+- 验证命令：`uv run pytest tests/contracts/test_phase3_governance_status_sync.py -v`
+- 状态文档同步：`.planning/STATE.md`、`.planning/ROADMAP.md`、`.planning/PROJECT.md`、`03-VERIFICATION.md`、`docs/wiki-cn/roadmap/overview.md` 均已更新为"Phase 3 governance sign-off closed"表述

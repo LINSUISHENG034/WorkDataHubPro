@@ -57,12 +57,28 @@
 
 - replay 共享边界采用 `shared primitives + explicit per-domain runners`
 - failure contract 采用 `typed run report + typed exceptions`
-- 入口采用“保留 domain wrapper + 新增 unified replay surface”
+- 入口采用”保留 domain wrapper + 新增 unified replay surface”
 - temp-id 采用 legacy-backed 的确定性 opaque 规则，前缀默认 `IN`
 
 详见：
 
 - [Phase 3 决策基线](../governance/phase-3-decisions.md)
+
+### Phase 03.1：Phase 3 治理补口 — truthful failure evidence and diagnose hardening
+
+**状态：** 已完成 (2026-04-13)
+
+Phase 03.1 治理补口解决了 2026-04-13 Phase 3 审核中发现的三个问题：
+
+1. **Truthful failure evidence（已修复）：** 修复了 `build_failure_compatibility_case_payload` helper，替换了旧的 two-branch fallback，使 compatibility-case evidence 与第一个 failed checkpoint 正确对应，涵盖 `fact_processing`、`identity_resolution`、`contract_state` 等所有 checkpoint 类型
+2. **Diagnose hardening（已修复）：** 实现了 fail-closed package-path  enforcement（`_resolve_package_path_for_run`），拒绝 manifest 中声明的 escape path 和绝对路径
+3. **Typed CLI boundary（已修复）：** 修复了 invalid `comparison_run_id` 的 CLI 处理，现在返回 typed stderr message 和 exit code 1，不再暴露 Python traceback
+
+验证命令：
+- `uv run pytest tests/contracts/test_phase3_governance_status_sync.py -v` → `Phase 3 governance status sync contract 验证通过`
+- `uv run pytest tests/contracts/test_replay_diagnose_contracts.py -v` → `Diagnose contract 验证通过`
+
+**Phase 3 governance sign-off 已于 2026-04-13 正式闭合。**
 
 ### Phase 4：Agent Operations & Governance Hardening
 

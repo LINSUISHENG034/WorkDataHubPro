@@ -202,4 +202,17 @@ Plans:
 
 ---
 *Roadmap created: 2026-04-12*
-*Last updated: 2026-04-13 after Phase 6 closure*
+*Last updated: 2026-04-13 after Phase 03.1 closure*
+
+### Phase 03.1: Phase 3 governance remediation - truthful failure evidence and diagnose hardening
+
+**Goal:** Remove stale Phase 3 closure wording and ensure repository-facing status docs reflect executed remediation evidence before treating Phase 3 governance sign-off as closed.
+**Requirements**: PAR-02, PIPE-03, OPS-01
+**Depends on:** 03.1-01, 03.1-02
+**Status:** Complete (verified 2026-04-13)
+**Plans:** 3 plans
+
+Plans:
+- [x] 03.1-01 - truthful failed-checkpoint compatibility-case payload selection across all replay slices
+- [x] 03.1-02 - fail-closed diagnose package-path enforcement and typed invalid-id CLI handling
+- [x] 03.1-03 - governance and planning artifact synchronization plus Phase 3 governance-status contract coverage

@@ -65,9 +65,21 @@ None.
 
 ### Gaps Summary
 
-No blocking gaps remain for Phase 3 goal achievement.
+Phase 3 implementation is complete and all must-haves are verified as of 2026-04-13T09:45:00Z.
+
+Phase 3 governance sign-off was initially pending due to three findings from the 2026-04-13 Phase 3 completion audit review:
+1. Compatibility-case evidence was incorrect for non-reference checkpoint failures (truthful failure evidence gap)
+2. `replay diagnose` trusted manifest-declared package paths outside the run evidence root (diagnose hardening gap)
+3. Invalid `comparison_run_id` values surfaced as raw Python tracebacks in the CLI (typed CLI boundary gap)
+
+**Phase 03.1 remediation (2026-04-13) addressed all three findings:**
+- Plan 01 (03.1-01): Truthful failed-checkpoint compatibility-case payload selection across all replay slices (`build_failure_compatibility_case_payload` shared helper replacing two-branch fallback)
+- Plan 02 (03.1-02): Fail-closed diagnose package-path enforcement (`_resolve_package_path_for_run`) and typed invalid-id CLI handling (`Invalid comparison_run_id: {id}` to stderr with exit code 1)
+
+Phase 3 governance sign-off is now closed as of 2026-04-13, evidenced by the Phase 03.1 execution and contract coverage in `tests/contracts/test_phase3_governance_status_sync.py`.
 
 ---
 
 _Verified: 2026-04-13T09:45:00Z_
+_Updated with Phase 03.1 closure: 2026-04-13_
 _Verifier: Codex_
