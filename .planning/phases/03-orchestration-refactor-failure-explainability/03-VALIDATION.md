@@ -1,9 +1,9 @@
 ---
 phase: 03
 slug: orchestration-refactor-failure-explainability
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: ready
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-04-13
 ---
 
@@ -19,9 +19,9 @@ created: 2026-04-13
 |----------|-------|
 | **Framework** | `pytest 8.4.2` via `uv run pytest` |
 | **Config file** | `pyproject.toml` (`addopts = "--basetemp=.pytest_tmp"`) |
-| **Quick run command** | `uv run pytest tests/contracts/test_phase2_gate_contracts.py tests/integration/test_identity_resolution.py tests/integration/test_publication_service.py -v` |
+| **Quick run command** | `uv run pytest tests/contracts/test_replay_run_report.py tests/contracts/test_replay_diagnose_contracts.py tests/integration/test_temp_identity_policy.py -v` |
 | **Full suite command** | `uv run pytest -v` |
-| **Estimated runtime** | ~30 seconds for quick runs; full suite varies by replay fixture load |
+| **Estimated runtime** | ~30 seconds for targeted checks; full suite varies by replay fixture load |
 
 ---
 
@@ -38,10 +38,18 @@ created: 2026-04-13
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| 03-01-01 | 01 | 1 | PIPE-03 | T-03-01 | Replay setup/config/path failures return typed replay-specific exceptions instead of raw `FileNotFoundError`, `ValueError`, or `KeyError` leakage | contract + integration | `uv run pytest tests/contracts/test_replay_run_report.py tests/integration/test_replay_setup_failures.py -v` | ❌ W0 | ⬜ pending |
-| 03-01-02 | 01 | 1 | PIPE-04 | T-03-02 | Shared replay primitives preserve parity-stable behavior across all three accepted slice runners | replay | `uv run pytest tests/replay/test_annuity_performance_slice.py tests/replay/test_annual_award_slice.py tests/replay/test_annual_loss_slice.py -v` | ✅ / ✅ / ✅ | ⬜ pending |
-| 03-02-01 | 02 | 1 | GOV-02 | T-03-03 | Temp IDs are deterministic opaque `IN...` values, placeholder names return `None`, and raw business names never appear in `company_id` | integration | `uv run pytest tests/integration/test_temp_identity_policy.py tests/integration/test_identity_resolution.py -v` | ❌ W0 / ✅ | ⬜ pending |
-| 03-03-01 | 03 | 2 | OPS-01 | T-03-04 | `replay run`, `replay diagnose`, and `replay list-domains` expose stable machine-readable outputs and do not rely on hidden working-directory context | CLI contract | `uv run pytest tests/contracts/test_replay_cli_contracts.py tests/contracts/test_replay_diagnose_contracts.py -v` | ❌ W0 | ⬜ pending |
+| 03-01-01 | 01 | 1 | PIPE-03, OPS-01 | T-03-01 / T-03-03 | Replay contracts and domain metadata expose the typed run-report fields plus stable registry metadata for all three wrapper commands | contract | `uv run pytest tests/contracts/test_replay_run_report.py -v` | ❌ W0 | ⬜ pending |
+| 03-01-02 | 01 | 1 | OPS-01 | T-03-01 | `comparison_run_id` resolves through governed replay roots into structured diagnostics without hidden CWD context | contract | `uv run pytest tests/contracts/test_replay_diagnose_contracts.py -v` | ❌ W0 | ⬜ pending |
+| 03-01-03 | 01 | 1 | PIPE-03 | T-03-02 | Replay setup, config, and baseline failures raise typed replay setup exceptions instead of leaking raw runtime exceptions | integration | `uv run pytest tests/integration/test_replay_setup_failures.py -v` | ❌ W0 | ⬜ pending |
+| 03-02-01 | 02 | 1 | GOV-02 | T-03-04 / T-03-05 | Temp-id generation is deterministic, opaque, HMAC-based, prefix-governed, and placeholder-aware | integration | `uv run pytest tests/integration/test_temp_identity_policy.py -v` | ❌ W0 | ⬜ pending |
+| 03-02-02 | 02 | 1 | GOV-02 | T-03-04 / T-03-06 | Identity resolution preserves precedence rules while preventing raw-name leakage in `company_id` and `evidence_refs` | integration | `uv run pytest tests/integration/test_temp_identity_policy.py tests/integration/test_identity_resolution.py -v` | ❌ W0 / ✅ | ⬜ pending |
+| 03-03-01 | 03 | 2 | PIPE-04 | T-03-07 | The annuity slice adopts shared replay primitives while keeping annuity-specific services, assets, and publication wiring explicit | replay | `uv run pytest tests/replay/test_annuity_performance_slice.py -v` | ✅ | ⬜ pending |
+| 03-03-02 | 03 | 2 | PIPE-03 | T-03-08 / T-03-09 | The annuity slice proves typed setup failures and typed `primary_failure` behavior under real replay execution | integration + replay | `uv run pytest tests/integration/test_replay_setup_failures.py tests/replay/test_phase2_annuity_performance_gates.py -v` | ❌ W0 / ✅ | ⬜ pending |
+| 03-04-01 | 04 | 3 | PIPE-04 | T-03-10 | The annual-award slice adopts the shared runtime without hiding event-domain enrichment or publication semantics | replay | `uv run pytest tests/replay/test_annual_award_slice.py tests/replay/test_phase2_event_domain_gates.py -k award -v` | ✅ / ✅ | ⬜ pending |
+| 03-04-02 | 04 | 3 | GOV-02, PIPE-04 | T-03-11 / T-03-12 | The annual-loss slice adopts the shared runtime and all replay expectations move from `TEMP-*` to governed opaque `IN...` identifiers | replay | `uv run pytest tests/replay/test_annual_loss_slice.py tests/replay/test_phase2_event_domain_gates.py tests/replay/test_phase2_reference_derivation_gates.py -k loss -v` | ✅ / ✅ / ✅ | ⬜ pending |
+| 03-05-01 | 05 | 4 | OPS-01 | T-03-13 / T-03-14 | `replay run` and `replay list-domains` expose stable machine-readable output while preserving the three human wrapper commands | CLI contract | `uv run pytest tests/contracts/test_replay_cli_contracts.py -v` | ❌ W0 | ⬜ pending |
+| 03-05-02 | 05 | 4 | OPS-01, PIPE-03 | T-03-14 | `replay diagnose` exposes typed machine-readable diagnostics and missing-run behavior through the same governed report contract | CLI contract | `uv run pytest tests/contracts/test_replay_diagnose_contracts.py -v` | ❌ W0 → ✅ after 03-01 | ⬜ pending |
+| 03-05-03 | 05 | 4 | OPS-01 | T-03-15 | The three replay runbooks document the preserved wrappers, the new replay CLI, and the `WDHP_TEMP_ID_SALT` prerequisite without drifting into deferred command surfaces | docs contract | `rg -n "replay-annuity-performance|replay-annual-award|replay-annual-loss|replay run --domain|replay diagnose --comparison-run-id|replay list-domains|WDHP_TEMP_ID_SALT" docs/runbooks/annuity-performance-replay.md docs/runbooks/annual-award-replay.md docs/runbooks/annual-loss-replay.md` | ✅ / ✅ / ✅ | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -59,19 +67,17 @@ created: 2026-04-13
 
 ## Manual-Only Verifications
 
-| Behavior | Requirement | Why Manual | Test Instructions |
-|----------|-------------|------------|-------------------|
-| Phase 3 runbook wording and examples remain aligned with the new dual CLI surface | OPS-01 | The repo has runbook contract tests, but wording quality and command discoverability still need a human pass after command additions | Read `docs/runbooks/annuity-performance-replay.md`, `docs/runbooks/annual-award-replay.md`, and `docs/runbooks/annual-loss-replay.md`; confirm each still exposes a stable human-facing command and points to the same evidence roots after the new `replay` subcommands are introduced |
+All phase behaviors have automated verification. Human review of runbook clarity remains useful, but Phase 3 does not depend on any manual-only acceptance gate.
 
 ---
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 30s for targeted checks
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 30s for targeted checks
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** approved 2026-04-13
