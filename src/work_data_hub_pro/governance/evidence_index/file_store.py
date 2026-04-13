@@ -8,13 +8,17 @@ from typing import Any
 
 from work_data_hub_pro.governance.compatibility.gate_models import (
     CheckpointDiff,
+    CheckpointFingerprint,
     CheckpointResult,
     ComparisonRunManifest,
     GateSummary,
 )
 from work_data_hub_pro.governance.compatibility.models import CompatibilityCase
 from work_data_hub_pro.platform.contracts.models import FieldTraceEvent
-from work_data_hub_pro.platform.contracts.publication import PublicationResult
+from work_data_hub_pro.platform.contracts.publication import (
+    PublicationMode,
+    PublicationResult,
+)
 
 
 def _to_jsonable(value: Any) -> Any:
@@ -31,6 +35,35 @@ def _to_jsonable(value: Any) -> Any:
     return value
 
 
+def _checkpoint_result_from_payload(payload: dict[str, Any]) -> CheckpointResult:
+    return CheckpointResult(
+        comparison_run_id=payload["comparison_run_id"],
+        checkpoint_name=payload["checkpoint_name"],
+        checkpoint_type=payload["checkpoint_type"],
+        status=payload["status"],
+        severity=payload["severity"],
+        legacy_fingerprint=CheckpointFingerprint(**payload["legacy_fingerprint"]),
+        pro_fingerprint=CheckpointFingerprint(**payload["pro_fingerprint"]),
+        diff_path=payload.get("diff_path"),
+        trace_anchor_rows=payload["trace_anchor_rows"],
+        diff=CheckpointDiff(**payload["diff"]) if payload.get("diff") is not None else None,
+        legacy_payload=payload.get("legacy_payload"),
+        pro_payload=payload.get("pro_payload"),
+    )
+
+
+def _publication_result_from_payload(payload: dict[str, Any]) -> PublicationResult:
+    return PublicationResult(
+        publication_id=payload["publication_id"],
+        target_name=payload["target_name"],
+        mode=PublicationMode(payload["mode"]),
+        affected_rows=payload["affected_rows"],
+        transaction_group=payload["transaction_group"],
+        success=payload["success"],
+        error_message=payload.get("error_message"),
+    )
+
+
 class FileEvidenceIndex:
     def __init__(self, root: Path) -> None:
         self._root = root
@@ -42,6 +75,9 @@ class FileEvidenceIndex:
         root = self._root / "comparison_runs" / comparison_run_id
         (root / "diffs").mkdir(parents=True, exist_ok=True)
         return root
+
+    def _comparison_run_root_path(self, comparison_run_id: str) -> Path:
+        return self._root / "comparison_runs" / comparison_run_id
 
     def _write_json(self, path: Path, payload: Any) -> Path:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -55,6 +91,23 @@ class FileEvidenceIndex:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(contents, encoding="utf-8")
         return path
+
+    def _read_json(self, path: Path) -> Any:
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    def _resolve_package_path(
+        self,
+        comparison_run_id: str,
+        package_key: str,
+        default_filename: str,
+    ) -> Path:
+        manifest = self.load_comparison_run_manifest(comparison_run_id)
+        relative_path = manifest.package_paths.get(
+            package_key,
+            f"comparison_runs/{comparison_run_id}/{default_filename}",
+        )
+        path = Path(relative_path)
+        return path if path.is_absolute() else self._root / path
 
     def index_trace_events(
         self,
@@ -134,3 +187,58 @@ class FileEvidenceIndex:
     ) -> Path:
         root = self.comparison_run_root(comparison_run_id)
         return self._write_json(root / "diffs" / f"{checkpoint_name}.json", diff)
+
+    def load_comparison_run_manifest(self, comparison_run_id: str) -> ComparisonRunManifest:
+        path = self._comparison_run_root_path(comparison_run_id) / "manifest.json"
+        return ComparisonRunManifest(**self._read_json(path))
+
+    def load_gate_summary(self, comparison_run_id: str) -> GateSummary:
+        path = self._resolve_package_path(
+            comparison_run_id,
+            "gate_summary",
+            "gate-summary.json",
+        )
+        return GateSummary(**self._read_json(path))
+
+    def load_checkpoint_results(
+        self,
+        comparison_run_id: str,
+    ) -> list[CheckpointResult]:
+        path = self._resolve_package_path(
+            comparison_run_id,
+            "checkpoint_results",
+            "checkpoint-results.json",
+        )
+        payload = self._read_json(path)
+        return [_checkpoint_result_from_payload(item) for item in payload]
+
+    def load_publication_results(
+        self,
+        comparison_run_id: str,
+    ) -> list[PublicationResult]:
+        path = self._resolve_package_path(
+            comparison_run_id,
+            "publication_results",
+            "publication-results.json",
+        )
+        payload = self._read_json(path)
+        return [_publication_result_from_payload(item) for item in payload]
+
+    def load_comparison_case_for_run(
+        self,
+        comparison_run_id: str,
+    ) -> CompatibilityCase:
+        path = self._resolve_package_path(
+            comparison_run_id,
+            "compatibility_case",
+            "compatibility-case.json",
+        )
+        return CompatibilityCase(**self._read_json(path))
+
+    def load_report_markdown(self, comparison_run_id: str) -> str:
+        path = self._resolve_package_path(
+            comparison_run_id,
+            "report",
+            "report.md",
+        )
+        return path.read_text(encoding="utf-8")
