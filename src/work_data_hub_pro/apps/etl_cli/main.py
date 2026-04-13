@@ -150,6 +150,9 @@ def replay_diagnose(
 ) -> None:
     try:
         diagnostics = load_replay_diagnostics(comparison_run_id)
+    except ValueError as exc:
+        typer.echo(f"Invalid comparison_run_id: {comparison_run_id}", err=True)
+        raise typer.Exit(code=1) from exc
     except FileNotFoundError as exc:
         error = ReplayDiagnosticsNotFoundError(
             domain="unknown",

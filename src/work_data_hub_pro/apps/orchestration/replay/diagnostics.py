@@ -44,13 +44,25 @@ def _resolve_package_path(
     manifest: ComparisonRunManifest,
     package_key: str,
     default_filename: str,
+    run_root: Path,
 ) -> Path:
     relative_path = manifest.package_paths.get(
         package_key,
         f"comparison_runs/{manifest.comparison_run_id}/{default_filename}",
     )
     path = Path(relative_path)
-    return path if path.is_absolute() else (evidence_root / path).resolve()
+    if path.is_absolute():
+        raise ValueError(
+            f"package_paths['{package_key}'] is absolute: {path}; "
+            "all package files must be relative to the evidence root"
+        )
+    resolved = (evidence_root / path).resolve()
+    if not resolved.is_relative_to(run_root):
+        raise ValueError(
+            f"package_paths['{package_key}'] escapes comparison run package: "
+            f"{resolved} is not inside {run_root}"
+        )
+    return resolved
 
 
 def _normalize_compatibility_case(
@@ -150,6 +162,7 @@ def load_replay_diagnostics(
                     manifest,
                     "manifest",
                     "manifest.json",
+                    comparison_run_root,
                 )
             ),
             gate_summary=str(
@@ -158,6 +171,7 @@ def load_replay_diagnostics(
                     manifest,
                     "gate_summary",
                     "gate-summary.json",
+                    comparison_run_root,
                 )
             ),
             checkpoint_results=str(
@@ -166,6 +180,7 @@ def load_replay_diagnostics(
                     manifest,
                     "checkpoint_results",
                     "checkpoint-results.json",
+                    comparison_run_root,
                 )
             ),
             publication_results=str(
@@ -174,6 +189,7 @@ def load_replay_diagnostics(
                     manifest,
                     "publication_results",
                     "publication-results.json",
+                    comparison_run_root,
                 )
             ),
             report=str(
@@ -182,6 +198,7 @@ def load_replay_diagnostics(
                     manifest,
                     "report",
                     "report.md",
+                    comparison_run_root,
                 )
             ),
             compatibility_case=(
@@ -191,6 +208,7 @@ def load_replay_diagnostics(
                         manifest,
                         "compatibility_case",
                         "compatibility-case.json",
+                        comparison_run_root,
                     )
                 )
                 if compatibility_case is not None

@@ -95,19 +95,42 @@ class FileEvidenceIndex:
     def _read_json(self, path: Path) -> Any:
         return json.loads(path.read_text(encoding="utf-8"))
 
-    def _resolve_package_path(
+    def _resolve_package_path_for_run(
         self,
         comparison_run_id: str,
         package_key: str,
         default_filename: str,
     ) -> Path:
+        """Resolve a manifest package_path, rejecting absolute and escaping paths."""
         manifest = self.load_comparison_run_manifest(comparison_run_id)
         relative_path = manifest.package_paths.get(
             package_key,
             f"comparison_runs/{comparison_run_id}/{default_filename}",
         )
         path = Path(relative_path)
-        return path if path.is_absolute() else self._root / path
+        if path.is_absolute():
+            raise ValueError(
+                f"package_paths['{package_key}'] is absolute: {path}; "
+                "all package files must be relative to the evidence root"
+            )
+        resolved = (self._root / path).resolve()
+        run_root = self._comparison_run_root_path(comparison_run_id).resolve()
+        if not resolved.is_relative_to(run_root):
+            raise ValueError(
+                f"package_paths['{package_key}'] escapes comparison run package: "
+                f"{resolved} is not inside {run_root}"
+            )
+        return resolved
+
+    def _resolve_package_path(
+        self,
+        comparison_run_id: str,
+        package_key: str,
+        default_filename: str,
+    ) -> Path:
+        return self._resolve_package_path_for_run(
+            comparison_run_id, package_key, default_filename
+        )
 
     def index_trace_events(
         self,
