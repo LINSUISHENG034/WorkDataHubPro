@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 JsonObject = dict[str, Any]
@@ -66,10 +66,11 @@ class FieldTraceEvent:
 @dataclass(frozen=True)
 class IdentityResolutionResult:
     record_id: str
-    resolved_identity: str
+    resolved_identity: str | None
     resolution_method: str
     fallback_level: str
     evidence_refs: list[str]
+    evidence_details: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
