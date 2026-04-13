@@ -167,8 +167,11 @@ def _extract_checkpoint_payload(outcome: Any, checkpoint_name: str) -> list[dict
     ):
         return outcome.intermediate_payloads[key]
 
-    # Fallback: empty list (should not reach here with truthful slices)
-    return []
+    raise RuntimeError(
+        f"Slice outcome does not expose intermediate payload for checkpoint "
+        f"'{checkpoint_name}'. Available keys: "
+        f"{list(outcome.intermediate_payloads or {})}"
+    )
 
 
 def main() -> int:
