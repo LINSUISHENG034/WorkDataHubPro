@@ -172,7 +172,7 @@ def replay_diagnose(
 def replay_annuity_performance(
     workbook: Path,
     period: str,
-    replay_root: Path = REPLAY_DOMAINS["annuity_performance"].replay_root,
+    replay_root: Path = Path("reference/historical_replays/annuity_performance"),
 ) -> None:
     outcome = _execute_replay(
         domain="annuity_performance",
@@ -187,7 +187,7 @@ def replay_annuity_performance(
 def replay_annual_award(
     workbook: Path,
     period: str,
-    replay_root: Path = REPLAY_DOMAINS["annual_award"].replay_root,
+    replay_root: Path = Path("reference/historical_replays/annual_award"),
 ) -> None:
     outcome = _execute_replay(
         domain="annual_award",
@@ -202,7 +202,7 @@ def replay_annual_award(
 def replay_annual_loss(
     workbook: Path,
     period: str,
-    replay_root: Path = REPLAY_DOMAINS["annual_loss"].replay_root,
+    replay_root: Path = Path("reference/historical_replays/annual_loss"),
 ) -> None:
     outcome = _execute_replay(
         domain="annual_loss",
