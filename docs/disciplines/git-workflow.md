@@ -18,6 +18,7 @@
 - do not keep accumulating unrelated work in one dirty worktree once it is clear the work belongs on its own topic branch
 - do not merge cross-boundary work without a named slice-closure reason
 - verify the merged result before deleting feature branches or worktrees
+- do not create topic branches or worktrees by reflex for docs-only work; choose the path after classifying the task
 
 This workflow is for the `WorkDataHubPro` rebuild.
 It is aligned with the capability-first rebuild blueprint in
@@ -56,6 +57,39 @@ Git history should make it easy to answer:
 
 ## 3. Branch Strategy
 
+Before creating a branch or worktree, first classify the task:
+
+- `docs-only fast path`
+- `isolated implementation path`
+
+Use the fast path only when all of the following are true:
+
+- the change is limited to documentation
+- no files under `src/`, `tests/`, or `config/` will change
+- the change does not alter runtime behavior
+- the work does not need parallel isolation from other ongoing implementation
+
+If any of those conditions stop being true during execution, immediately leave the
+docs-only path and switch to the isolated implementation path.
+
+### 3.0 Docs-Only Fast Path
+
+Docs-only changes may be committed directly on `main`.
+
+For docs-only work:
+
+- do not create a topic branch by default
+- do not create a worktree by default
+- keep the change narrow and documentation-scoped
+- validate links, filenames, and document alignment before commit
+
+This path exists to avoid unnecessary branch and worktree churn for small,
+bounded documentation updates.
+
+If the task later expands into code, tests, config, verification assets, or any
+runtime-affecting behavior, stop using the docs-only path and move to an
+isolated branch/worktree before continuing.
+
 ### 3.1 Long-Lived Branches
 
 - `main` - protected integration branch; always expected to be coherent and reviewable
@@ -65,6 +99,9 @@ No `develop`, `release`, or other permanent integration branches should be intro
 ### 3.2 Short-Lived Branches
 
 Use short-lived topic branches merged into `main` through pull requests.
+
+Topic branches are the default for implementation work, but not for docs-only
+fast-path work.
 
 Recommended branch prefixes:
 
@@ -117,6 +154,9 @@ Default expectations:
 - treat each worktree as the owner of its own untracked files, generated artifacts, and temporary state
 - prefer validating and merging from a clean `main` worktree or an explicit temporary merge worktree when the original topic worktree contains unrelated local state
 
+Do not use worktrees for docs-only fast-path work unless the user explicitly
+asks for isolation or there is a concrete parallel-work reason.
+
 Recommended examples:
 
 - `.worktrees/docs-wiki-governance-audit-sync`
@@ -125,6 +165,23 @@ Recommended examples:
 
 Worktrees are preferred because they prevent repeated `git switch` cycles from
 mixing unrelated untracked files and unstaged edits in one physical directory.
+
+### 3.5 Avoiding Unnecessary Isolation
+
+Do not create a branch or worktree unless the task actually needs isolation.
+
+Examples of unnecessary isolation:
+
+- creating a docs branch for a bounded wiki-only update that can safely commit on `main`
+- creating a worktree for a small docs-only sync with no runtime changes
+- creating a branch, then deciding to commit the same docs-only change on `main`
+
+If a branch or worktree was created but the task is now clearly docs-only and is
+being committed through the fast path:
+
+- stop using the extra branch/worktree
+- commit the docs-only change once through the chosen path
+- clean up the unused branch/worktree after confirming it contains no unique commits
 
 ## 4. Branch Sizing Rules
 
@@ -237,6 +294,23 @@ PR description should contain:
 | config-only change with no semantic change | config validation plus proof that runtime outputs are unchanged |
 | config change with semantic impact | treat as release-affecting; pair with rule/version update and validation evidence |
 | docs-only change | link/path consistency and document alignment with active blueprint/ADR |
+
+## 7.1 Path Selection Checklist
+
+Before commit, confirm which path applies:
+
+### `docs-only fast path`
+
+- current work is documentation-only
+- no runtime/config/test behavior is being changed
+- commit may happen directly on `main`
+- no extra topic branch or worktree should remain active without need
+
+### `isolated implementation path`
+
+- code, tests, config, verification assets, or runtime behavior changed or may change
+- commit should not happen directly on `main`
+- use a topic branch, and use a worktree when the task is non-trivial or parallel
 
 ## 8. Review Routing
 
