@@ -41,6 +41,7 @@
 
 - [输入现实证据](../evidence/input-reality-evidence.md)
 - [`annuity_performance` 字段处理证据](../evidence/annuity-performance-field-processing-evidence.md)
+- [`annuity_performance` implementation gap 证据](../evidence/annuity-performance-implementation-gap-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)

@@ -32,3 +32,5 @@
   - follow-on 轮次，只把 `is_winning_this_year` 与 `is_loss_reported` 拆成对象级证据，并明确 `is_churned_this_year` 继续留在主题页。
 - [Round 15：`annuity_performance` I/O contracts](./round-15-annuity-performance-io-contracts.md)
   - follow-on 轮次，把 annuity-performance 的输入合同、输出合同与字段处理语义固化为可直接问答的 durable page。
+- [Round 16：`annuity_performance` implementation gap audit](./round-16-annuity-performance-gap-audit.md)
+  - maintenance 轮次，对照 legacy 代码审计 annuity-performance 的 wiki 合同与实现差距。

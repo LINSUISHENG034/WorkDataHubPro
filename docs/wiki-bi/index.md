@@ -33,6 +33,8 @@
   - current registry 已显式登记很多尚未物化的 asset kinds，问题是治理状态，而不是是否被看见。
 - [`annuity_performance` 的输入、输出和处理到底是什么](./standards/input-reality/annuity-performance-input-contract.md)
   - 先看输入合同，再看输出合同和字段处理证据，可以直接回答 annuity-performance 的 I/O 问题。
+- [`annuity_performance` 的 wiki 知识和原实现有哪些差距](./evidence/annuity-performance-implementation-gap-evidence.md)
+  - 合同页补齐后，应先看 gap evidence，再决定是修 wiki 还是修实现。
 - [哪些 system surfaces 不能被隐含忽略](./surfaces/company-lookup-queue.md)
   - queue、reference sync、manual commands、operator artifacts 都是显式治理对象。
 - [哪些 legacy tools 属于相邻 operator tooling，而不是业务主路径](./surfaces/standalone-tooling.md)
@@ -98,6 +100,7 @@
 
 - [输入现实证据](./evidence/input-reality-evidence.md) : 聚合输入形态、sheet、fixture 与 real-data 相关证据。
 - [`annuity_performance` 字段处理证据](./evidence/annuity-performance-field-processing-evidence.md) : 将 annuity-performance 的字段处理分成工程性质量提升与业务语义处理两类。
+- [`annuity_performance` implementation gap 证据](./evidence/annuity-performance-implementation-gap-evidence.md) : 记录 annuity-performance 的 wiki 合同与 legacy 实现之间的差距项。
 - [身份与补查证据](./evidence/identity-and-lookup-evidence.md) : 聚合 `company_id`、temp-id、lookup、plan-code enrichment 相关证据。
 - [状态与快照证据](./evidence/status-and-snapshot-evidence.md) : 聚合客户状态、快照、customer MDM 相关证据。
 - [`is_new` 对象级证据](./evidence/is-new-evidence.md) : 聚合 `is_new` 的公式、粒度边界、非例与验证路径。
@@ -133,5 +136,6 @@
 - [Round 13：identity governance deepening](./_meta/absorption-rounds/round-13-identity-governance-deepening.md) : follow-on 轮次，把 identity governance 从概念/证据碎片推进到独立标准层。
 - [Round 14：status family selective evidence split](./_meta/absorption-rounds/round-14-status-family-selective-evidence-split.md) : follow-on 轮次，只拆出真正满足阈值的状态对象，并明确哪些状态继续留在主题页。
 - [Round 15：`annuity_performance` I/O contracts](./_meta/absorption-rounds/round-15-annuity-performance-io-contracts.md) : follow-on 轮次，把 annuity-performance 的输入、输出与字段处理提升为合同级 wiki 页面。
+- [Round 16：`annuity_performance` implementation gap audit](./_meta/absorption-rounds/round-16-annuity-performance-gap-audit.md) : maintenance 轮次，对照 legacy 代码审计 annuity-performance wiki 合同与实现差距。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。

@@ -35,6 +35,19 @@
 | `customer."客户年金计划".contract_status` | 业务语义处理 | 从 fact + contract sync 规则派生 | 直接影响 contract 状态与后续 snapshot |
 | `customer."客户业务月度快照"` / `customer."客户计划月度快照"` | 业务语义处理 | 基于 fact、contract 与状态规则生成 | 是 annuity-performance 最重要的下游派生输出之一 |
 
+## 显式空值 / 默认值规则
+
+| 字段 | 空值 / 默认规则 | 说明 |
+|---|---|---|
+| `计划代码` | 空值按 `计划类型` 补默认 | `集合计划 -> AN001`，`单一计划 -> AN002` |
+| `机构代码` | 映射缺失或映射结果为 `null` 时补 `G00` | 代表总部默认代码 |
+| `组合代码` | 空值先看 `业务类型`，再看 `计划类型` | `职年受托/职年投资 -> QTAN003`；否则按 `计划类型` 补 `QTAN001/QTAN002` |
+| `客户名称` | 空值不自动补业务默认值 | 只做 trim / normalize；其缺失会削弱 identity 解释能力 |
+| `集团企业客户号` | 清洗时去掉前缀 `C` | 作为派生 `年金账户号` 的输入线索 |
+| `年金账户号` | 来自清洗后的 `集团企业客户号` | 属于派生线索，不是源字段直接照搬 |
+| 数值字段 | 多种空值占位符清洗为 `None` | 包括 `""`、`-`、`N/A`、`无`、`暂无`、`null`、`NULL`、`None` |
+| 百分比字段 | `%` 形式转成小数 | 例如收益率类字段按比例归一 |
+
 ## 稳定结论
 
 - 列重命名、日期标准化、prefix 清理、null/default 处理这类动作主要属于工程性数据质量提升
@@ -55,3 +68,4 @@
 
 - current `wiki-bi` 仍未把 annuity-performance 的 source workbook shape 拆成更细对象级输入证据
 - 还没有为 annuity-performance 的每个 downstream sink 建独立 evidence page；当前阶段不需要机械拆分
+- 代码审计发现的 wiki-vs-implementation 差距已单独记录在 implementation gap evidence page 中

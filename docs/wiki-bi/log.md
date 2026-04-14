@@ -138,3 +138,9 @@
 - 新增 `annuity-performance-field-processing-evidence.md`，把字段处理区分为工程性质量提升与业务语义处理
 - 更新 `annuity-performance.md`、`input-reality-contracts.md`、`output-correctness.md`、`input-reality-evidence.md`、`backfill.md` 与 `index.md`，把 annuity-performance 的 I/O 问答入口接回主 wiki
 - 更新 `_meta/absorption-rounds/index.md`，把本轮沉淀纳入正式轮次索引
+
+## [2026-04-14] audit | Round 16 闭环吸收 `annuity_performance` implementation gaps
+
+- 更新 `annuity-performance-field-processing-evidence.md`，补入显式空值 / 默认值规则，避免 annuity-performance 只停留在处理分类层
+- 新增 `annuity-performance-implementation-gap-evidence.md`，把 annuity-performance wiki 合同与 legacy 代码实现之间的差距项正式沉淀
+- 更新 `annuity-performance.md`、`index.md`、`_meta/absorption-rounds/index.md` 与 `wiki-absorption-roadmap.md`，把 gap audit 作为持续维护轮次显式登记
