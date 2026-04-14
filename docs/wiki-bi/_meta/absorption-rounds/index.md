@@ -28,3 +28,5 @@
   - follow-on 轮次，把 validation result history、deferred asset 状态与 error-case fixture 治理边界收束成正式 evidence object。
 - [Round 13：identity governance deepening](./round-13-identity-governance-deepening.md)
   - follow-on 轮次，把 identity governance 从概念/证据碎片提升为独立标准层，并接回 branch mapping / ID5 专题记忆。
+- [Round 14：status family selective evidence split](./round-14-status-family-selective-evidence-split.md)
+  - follow-on 轮次，只把 `is_winning_this_year` 与 `is_loss_reported` 拆成对象级证据，并明确 `is_churned_this_year` 继续留在主题页。

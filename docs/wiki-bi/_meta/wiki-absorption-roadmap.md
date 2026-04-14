@@ -166,6 +166,7 @@ Round 10 已完成当前 wiki 的导航收紧与低入链维护。
 Round 11 已完成 Phase E operator/runtime surfaces decision package。
 Round 12 已完成 verification result history and fixture governance。
 Round 13 已完成 identity governance deepening。
+Round 14 已完成 status family selective evidence split。
 
 后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应按预估收益大小推进。
 
@@ -274,25 +275,23 @@ Round 13 已完成 identity governance deepening。
 
 状态：
 
-- deferred until higher-yield rounds complete
+- completed on 2026-04-14
 
 ## 下一阶段执行顺序
 
-建议按下面顺序推进：
-
-1. Round 14：selective object-level evidence split for status family
+当前没有新的高收益预设 round 必须继续执行。
 
 ## 当前推荐入口
 
-当前最推荐的下一轮入口是 Round 14。
+当前最推荐的后续动作不是新增一轮大主题吸收，而是机会式增量维护。
 
-Round 13 已经把 identity governance 从概念/证据碎片推进成了独立标准层。
+Round 14 已经把 status family 中真正满足阈值的对象拆出，并明确 `is_churned_this_year` 继续留在主题页。
 
-下一步如果继续推进，更适合只做 selective object-level evidence split，而不是再横向扩张新主题。
+下一步只有在实现、验证或治理决策形成新的稳定结论时，才值得继续回写 durable page。
 
 后续如需继续推进，应从下面几类 follow-on work 中选择：
 
 - 把 `annuity_income` slice 执行过程中形成的新稳定结论继续回写到 wiki
 - 以已完成的 Round 11 为基础，继续判断 `CT-016` 与 Phase E operator/runtime surfaces 的 retain / replace / retire 边界
-- 当前优先进入 Round 14，继续评估哪些状态对象真的值得拆成独立 evidence page
+- 不再预设新的大轮次；优先做实现驱动或验证驱动的增量 write-back
 - 旧 wiki 层的物理删除已于 2026-04-14 完成；后续只需在发现新的历史硬引用时继续回修

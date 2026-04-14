@@ -22,6 +22,8 @@
 - `is_new` 只存在于客户 / 产品线粒度，不存在计划层版本
 - `customer.客户年金计划` 是 strategic / existing / contract_status / status_year 的关键锚点
 - `customer-mdm` 手工命令面是独立 operator surface，不应被“自动 hook 已覆盖”吞掉
+- `is_winning_this_year` 与 `is_loss_reported` 已满足对象级 evidence 拆分阈值
+- `is_churned_this_year` 当前仍更适合留在主题页，因为它同时牵涉 product-line / plan 双粒度与 AUM 汇总语义
 
 ## 哪些来源是强证
 
@@ -39,8 +41,14 @@
 - [`annual_loss`](../domains/annual-loss.md)
 - [`annuity_performance`](../domains/annuity-performance.md)
 
+## 对象级补强页
+
+- [`is_new` 对象级证据](./is-new-evidence.md)
+- [`is_winning_this_year` 对象级证据](./is-winning-this-year-evidence.md)
+- [`is_loss_reported` 对象级证据](./is-loss-reported-evidence.md)
+
 ## 当前证据缺口
 
-- 还未把 `is_winning_this_year`、`is_loss_reported`、`is_churned_this_year` 拆成对象级 evidence pages
+- `is_churned_this_year` 仍未拆成对象级 evidence page
 - `verification_guide_real_data.md` 的更多 operator query path 仍待后续吸收
-- `is_new` 已经满足对象级 evidence 拆分条件，可作为后续对象级拆分样板
+- `is_new` 已经满足对象级 evidence 拆分条件，并已作为后续对象级拆分样板落地

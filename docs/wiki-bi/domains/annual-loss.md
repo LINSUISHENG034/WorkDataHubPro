@@ -35,6 +35,7 @@
 - [输入现实证据](../evidence/input-reality-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
+- [`is_loss_reported` 对象级证据](../evidence/is-loss-reported-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [validation result history 证据](../evidence/validation-result-history-evidence.md)
 

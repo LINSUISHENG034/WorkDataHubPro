@@ -96,6 +96,8 @@
 - [身份与补查证据](./evidence/identity-and-lookup-evidence.md) : 聚合 `company_id`、temp-id、lookup、plan-code enrichment 相关证据。
 - [状态与快照证据](./evidence/status-and-snapshot-evidence.md) : 聚合客户状态、快照、customer MDM 相关证据。
 - [`is_new` 对象级证据](./evidence/is-new-evidence.md) : 聚合 `is_new` 的公式、粒度边界、非例与验证路径。
+- [`is_winning_this_year` 对象级证据](./evidence/is-winning-this-year-evidence.md) : 聚合年度中标状态的事实来源、粒度边界与验证路径。
+- [`is_loss_reported` 对象级证据](./evidence/is-loss-reported-evidence.md) : 聚合年度流失申报状态的事实来源、粒度边界与验证路径。
 - [验证资产证据](./evidence/verification-assets-evidence.md) : 聚合 golden set、replay baseline、validation guide、error fixtures 等证据。
 - [validation result history 证据](./evidence/validation-result-history-evidence.md) : 聚合 legacy parity result 目录、current asset registry 与 validation history 的治理结论。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
@@ -124,5 +126,6 @@
 - [Round 11：Phase E operator/runtime surfaces decision package](./_meta/absorption-rounds/round-11-phase-e-surface-decision-package.md) : follow-on 轮次，把 surface open questions 收束成 enterprise persistence、standalone tooling 与 operator/runtime decision package。
 - [Round 12：verification result history and fixture governance](./_meta/absorption-rounds/round-12-verification-result-history-and-fixture-governance.md) : follow-on 轮次，把 validation result history、error-case fixtures 与 deferred asset 状态收束成正式治理对象。
 - [Round 13：identity governance deepening](./_meta/absorption-rounds/round-13-identity-governance-deepening.md) : follow-on 轮次，把 identity governance 从概念/证据碎片推进到独立标准层。
+- [Round 14：status family selective evidence split](./_meta/absorption-rounds/round-14-status-family-selective-evidence-split.md) : follow-on 轮次，只拆出真正满足阈值的状态对象，并明确哪些状态继续留在主题页。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。
