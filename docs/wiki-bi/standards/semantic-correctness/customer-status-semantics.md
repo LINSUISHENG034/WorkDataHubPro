@@ -39,11 +39,11 @@
 ## 关键状态口径
 
 - `is_winning_this_year`
-  - 年度中标事实
+  - 由 [`annual_award`](../../domains/annual-award.md) 提供的年度中标事实
 - `is_loss_reported`
-  - 年度流失申报事实
+  - 由 [`annual_loss`](../../domains/annual-loss.md) 提供的年度流失申报事实
 - `is_churned_this_year`
-  - 基于规模表现的已流失判断
+  - 由 [`annuity_performance`](../../domains/annuity-performance.md) 承接规模表现后的已流失判断
 - `is_new`
   - 当年中标且非 existing
 - `is_strategic` / `is_existing` / `contract_status`
@@ -68,6 +68,12 @@
 - [新到账客户状态：`is_new`](../../concepts/is-new.md)
 - [年金客户类型：`customer_type`](../../concepts/customer-type.md)
 - [快照粒度：`snapshot_granularity`](../../concepts/snapshot-granularity.md)
+
+## 相关 domains
+
+- [`annual_award`](../../domains/annual-award.md)
+- [`annual_loss`](../../domains/annual-loss.md)
+- [`annuity_performance`](../../domains/annuity-performance.md)
 
 ## 相关证据
 

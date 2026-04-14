@@ -52,9 +52,9 @@
 ## 当前已知治理结论
 
 - 当前 current project 已明确 accepted replay baselines
-- `annual_award` / `annual_loss` 是否需要独立 domain-level golden set 仍是 open question
+- [`annual_award`](../../domains/annual-award.md) / [`annual_loss`](../../domains/annual-loss.md) 是否需要独立 domain-level golden set 仍是 open question
 - error-case fixtures 目前更准确的状态是 `planned but not created`
-- `annuity_income` 仍保留大量 legacy-only verification assets 和 parity memory
+- [`annuity_income`](../../domains/annuity-income.md) 仍保留大量 legacy-only verification assets 和 parity memory
 
 ## 身份相关场景
 

@@ -10,7 +10,7 @@
 |---|---|---|---|---|---|---|
 | E-ST-001 | legacy_doc | strong | absorbed | `customer-status`, `is-new`, `customer-type`, `customer-status-semantics` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\business-background\客户主数据回填与状态来源分析.md` 明确区分回填、状态、快照，并给出 `is_new` 语义与粒度边界。 |
 | E-ST-002 | legacy_doc | strong | absorbed | `customer-status`, `snapshot-granularity`, `customer-mdm-commands` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\business-background\战客身份定义与更新逻辑.md` 明确 `customer.客户年金计划` 的状态锚点、SCD2 与快照关系。 |
-| E-ST-003 | legacy_config | strong | absorbed | `customer-status-semantics`, `output-correctness`, `is-new` | 2026-04-14 | `E:\Projects\WorkDataHub\config\customer_status_rules.yml` 直接定义 `is_winning_this_year`、`is_loss_reported`、`is_churned_this_year`、`is_new` 的来源与表达。 |
+| E-ST-003 | legacy_config | strong | absorbed | `customer-status-semantics`, `output-correctness`, `is-new`, `annual-award`, `annual-loss`, `annuity-performance` | 2026-04-14 | `E:\Projects\WorkDataHub\config\customer_status_rules.yml` 直接定义 `is_winning_this_year`、`is_loss_reported`、`is_churned_this_year`、`is_new` 的来源与表达。 |
 | E-ST-004 | legacy_doc | supporting | legacy_only | `real-data-validation`, `output-correctness`, `customer-mdm-commands` | 2026-04-14 | `verification_guide_real_data.md` 提供 snapshot / contract 输出的 operator 验证路径，但尚未被 `wiki-bi` 完全吸收。 |
 | E-ST-005 | audit | supporting | absorbed | `customer-mdm-commands`, `snapshot-granularity`, `annuity_performance` | 2026-04-14 | `2026-04-12-legacy-code-audit.md` 识别 manual command surface 与 hook-linked outputs，适合作为 surface 级旁证。 |
 | E-ST-006 | audit | supporting | absorbed | `customer-status`, `output-correctness` | 2026-04-14 | `2026-04-12-verification-assets-search-findings.md` 说明状态与 snapshot 相关验证资产仍存在显式缺口。 |
@@ -32,6 +32,12 @@
 
 - audit synthesis
 - verification guide 中的操作说明
+
+## 相关 domains
+
+- [`annual_award`](../domains/annual-award.md)
+- [`annual_loss`](../domains/annual-loss.md)
+- [`annuity_performance`](../domains/annuity-performance.md)
 
 ## 当前证据缺口
 

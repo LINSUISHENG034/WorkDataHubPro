@@ -31,6 +31,8 @@
   - queue、reference sync、manual commands、operator artifacts 都是显式治理对象。
 - [为什么旧项目不能直接作为新架构模板](./_meta/wiki-design.md)
   - wiki 借鉴 legacy 的稳定语义与标准，而不是复制其实现结构。
+- [event-style domains 如何接回状态判断与输入现实](./domains/annual-award.md)
+  - 从 `annual_award` 进入，再串到 `annual_loss`、`annuity_performance` 与相关标准页，看 event domain 如何进入状态语义与输入现实。
 
 ## 全量 Catalog
 
@@ -48,8 +50,8 @@
 ### Domains
 
 - [`annuity_performance`](./domains/annuity-performance.md) : 导航规模域相关概念、输出和关键证据。
-- [`annual_award`](./domains/annual-award.md) : 导航中标域相关概念、输出和关键证据。
-- [`annual_loss`](./domains/annual-loss.md) : 导航流失域相关概念、输出和关键证据。
+- [`annual_award`](./domains/annual-award.md) : 导航中标域如何接入客户状态、multi-sheet 输入现实与关键证据。
+- [`annual_loss`](./domains/annual-loss.md) : 导航流失域如何接入客户状态、multi-sheet 输入现实与关键证据。
 - [`annuity_income`](./domains/annuity-income.md) : 导航收入域相关概念、输出以及 slice admission 相关证据入口。
 
 ### Surfaces
@@ -108,5 +110,6 @@
 - [Round 07：`is_new` 对象级证据拆分](./_meta/absorption-rounds/round-07-is-new-evidence-split.md) : follow-on 轮次，验证厚主题拆分为对象级 evidence page 的可行性。
 - [Round 08：`annuity_income` slice admission package](./_meta/absorption-rounds/round-08-annuity-income-slice-admission.md) : follow-on 轮次，把 annuity_income 的专题 gap 转成可直接支撑 slice admission 的对象级 evidence。
 - [Round 09：legacy wiki 退役收口](./_meta/absorption-rounds/round-09-legacy-wiki-retirement.md) : follow-on 轮次，记录旧 wiki 层的退役收口与 durable 归宿。
+- [Round 10：domain 导航与 cross-reference 收紧](./_meta/absorption-rounds/round-10-domain-navigation-tightening.md) : maintenance 轮次，记录低入链 durable pages 的 lint 结果与导航收紧经验。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。

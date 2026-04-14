@@ -20,3 +20,5 @@
   - follow-on 轮次，把 `annuity_income` 的专题 gap 拆成 slice-admission-ready evidence，并接到专门的 slice plan。
 - [Round 09：legacy wiki 退役收口](./round-09-legacy-wiki-retirement.md)
   - follow-on 轮次，记录旧 wiki 层的退役收口与 durable 归宿。
+- [Round 10：domain 导航与 cross-reference 收紧](./round-10-domain-navigation-tightening.md)
+  - maintenance 轮次，针对低入链 durable pages 补齐概念、标准、证据与 domain 之间的显式导航。

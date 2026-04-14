@@ -25,7 +25,7 @@
 - 规模事实输出
 - 客户 / 参考对象回填
 - customer contract 与快照相关输出
-- 作为 `annual_award` / `annual_loss` 状态落地的关键承接域
+- 作为 [`annual_award`](./annual-award.md) / [`annual_loss`](./annual-loss.md) 状态落地的关键承接域
 
 ## 适用标准
 
@@ -42,6 +42,11 @@
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
+
+## 相关 domains
+
+- [`annual_award`](./annual-award.md)
+- [`annual_loss`](./annual-loss.md)
 
 ## 明确不在本页描述的内容
 

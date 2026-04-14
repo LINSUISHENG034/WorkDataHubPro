@@ -40,11 +40,11 @@
 
 ## 当前关键输入现实
 
-- `annuity_performance` 与 `annuity_income`
+- [`annuity_performance`](../../domains/annuity-performance.md) 与 [`annuity_income`](../../domains/annuity-income.md)
   - 共用 `data/real_data/{YYYYMM}/收集数据/数据采集`
   - 共用 `highest_number` 版本策略
   - 但使用不同 sheet
-- `annual_award` 与 `annual_loss`
+- [`annual_award`](../../domains/annual-award.md) 与 [`annual_loss`](../../domains/annual-loss.md)
   - 使用 `data/real_data/{YYYYMM}/收集数据/业务收集`
   - 是 multi-sheet 事件域
   - 不能被简化为单 sheet 输入假设
@@ -61,6 +61,13 @@
 
 - [年金计划类型：`plan_type`](../../concepts/plan-type.md)
 - [企业身份标识：`company_id`](../../concepts/company-id.md)
+
+## 相关 domains
+
+- [`annual_award`](../../domains/annual-award.md)
+- [`annual_loss`](../../domains/annual-loss.md)
+- [`annuity_performance`](../../domains/annuity-performance.md)
+- [`annuity_income`](../../domains/annuity-income.md)
 
 ## 相关证据
 

@@ -37,6 +37,11 @@
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 
+## 相关 domains
+
+- [`annual_award`](./annual-award.md)
+- [`annuity_performance`](./annuity-performance.md)
+
 ## 明确不在本页描述的内容
 
 - event pipeline 代码流程

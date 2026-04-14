@@ -89,3 +89,9 @@
 
 - `COMPANY_BRANCH_MAPPING`、ID5 retirement、operator artifacts 这三组 wiki 结论都直接转化成了 current project 的实现、测试与 replay assets
 - 更新 `annuity_income` 相关 evidence pages，把 current_test / current_reference_asset / current_runbook 证据接回 wiki，验证这些页面对实际开发工作具有指导意义
+
+## [2026-04-14] maintain | 收紧 domain 导航与 cross-reference
+
+- 对 `annual_award`、`annual_loss`、`annuity_performance` 的主链路页面补入显式 cross-reference，避免 event-style domains 只由首页单点可达
+- 更新 `customer-status`、`customer-status-semantics`、`input-reality-contracts`、`golden-scenarios` 与 `status-and-snapshot-evidence`，把 domain 导航重新接回概念、标准与证据层
+- 更新 `index.md` FAQ / catalog 入口，并新增 Round 10 轮次沉淀，记录本次 wiki lint 与导航收紧经验

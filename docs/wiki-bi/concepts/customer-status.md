@@ -21,7 +21,7 @@
 从业务角度，客户状态至少要分成三层来看：
 
 - 事实层
-  - `annuity_performance`、`annual_award`、`annual_loss` 提供原始事实
+  - [`annuity_performance`](../domains/annuity-performance.md)、[`annual_award`](../domains/annual-award.md)、[`annual_loss`](../domains/annual-loss.md) 提供原始事实
 - 主数据 / contract 层
   - `customer.客户年金计划` 承载 contract、existing、strategic、status_year 等状态锚点
 - 快照层
@@ -41,11 +41,11 @@
 ## 状态来源映射
 
 - `is_winning_this_year`
-  - 来源于 `annual_award`
+  - 来源于 [`annual_award`](../domains/annual-award.md)
 - `is_loss_reported`
-  - 来源于 `annual_loss`
+  - 来源于 [`annual_loss`](../domains/annual-loss.md)
 - `is_churned_this_year`
-  - 来源于 `annuity_performance`
+  - 来源于 [`annuity_performance`](../domains/annuity-performance.md)
 - `is_new`
   - 来源于派生判断：当年中标且非 existing
 - `is_strategic` / `is_existing` / `contract_status` / `status_year`
@@ -79,6 +79,12 @@
 ## 相关 atomic concepts
 
 - [新到账客户状态：`is_new`](./is-new.md)
+
+## 相关 domains
+
+- [`annual_award`](../domains/annual-award.md)
+- [`annual_loss`](../domains/annual-loss.md)
+- [`annuity_performance`](../domains/annuity-performance.md)
 
 ## 相关标准
 
