@@ -95,3 +95,9 @@
 - 对 `annual_award`、`annual_loss`、`annuity_performance` 的主链路页面补入显式 cross-reference，避免 event-style domains 只由首页单点可达
 - 更新 `customer-status`、`customer-status-semantics`、`input-reality-contracts`、`golden-scenarios` 与 `status-and-snapshot-evidence`，把 domain 导航重新接回概念、标准与证据层
 - 更新 `index.md` FAQ / catalog 入口，并新增 Round 10 轮次沉淀，记录本次 wiki lint 与导航收紧经验
+
+## [2026-04-14] plan | 更新下一阶段吸收轮次排序
+
+- 基于当前 evidence pages 中的 open question 与缺口，重新给下一阶段 round 做收益排序
+- 将 Round 11 定位为 `Phase E operator/runtime surfaces decision package`
+- 将 validation result history / fixture governance、identity governance deepening、status family selective split 排到后续轮次
