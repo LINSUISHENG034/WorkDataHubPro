@@ -22,12 +22,14 @@
 - 它必须是受治理的，而不是随手拼接出来的字符串
 - 同一输入在同一规则下应得到稳定结果
 - 不应泄露原始业务标识
+- placeholder / 空白值不应被硬生生变成伪造身份
 
 ## 输入现实与边界情况
 
 - 真实输入里会出现无法通过 YAML、DB cache、passthrough、EQC 等路径稳定解析的企业
 - 这类记录不能简单当成错误行直接丢弃
 - unknown / unresolved 状态应能被 operator 看见
+- 预算耗尽、provider miss、DB failure 等情况都可能把记录推到 temp-id fallback
 
 ## 对输出与下游的影响
 
@@ -48,6 +50,7 @@
 
 ## 相关标准
 
+- [身份治理语义正确性](../standards/semantic-correctness/identity-governance.md)
 - [输出正确性标准](../standards/output-correctness/output-correctness.md)
 - [golden scenarios](../standards/verification-method/golden-scenarios.md)
 

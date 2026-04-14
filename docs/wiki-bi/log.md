@@ -115,3 +115,11 @@
 - 新增 `validation-result-history-evidence.md`，把 parity result 目录、current asset registry 与 validation history 变成独立 evidence object
 - 更新 `golden-scenarios.md` 与 `real-data-validation.md`，明确 `deferred` 不等于“没有资产”，并把 validation result history 接入验证方法层
 - 更新 `annual-award.md`、`annual-loss.md`、`index.md`、`_meta/absorption-rounds/index.md` 与 `wiki-absorption-roadmap.md`，将 Round 12 标记为已完成，并把推荐入口推进到 Round 13
+
+## [2026-04-14] absorb | Round 13 闭环吸收 `identity governance`
+
+- 新增 `standards/semantic-correctness/identity-governance.md`，把 `company_id`、`temp_id`、mapping / cache / provider / queue 边界提升为独立标准层
+- 更新 `identity-and-lookup-evidence.md`，补入 mapping override configs、current identity tests 与 current identity service 的实现证据
+- 更新 `company-id.md`、`temp-id.md` 与 `company-lookup-queue.md`，把治理链、fallback 边界与相关标准接回概念 / surface 层
+- 更新 `annuity-income-branch-mapping-evidence.md` 与 `annuity-income-id5-retirement-evidence.md`，把这两组 annuity_income 专题记忆明确接回 broader identity governance
+- 更新 `index.md`、`_meta/absorption-rounds/index.md` 与 `wiki-absorption-roadmap.md`，将 Round 13 标记为已完成，并把推荐入口推进到 Round 14

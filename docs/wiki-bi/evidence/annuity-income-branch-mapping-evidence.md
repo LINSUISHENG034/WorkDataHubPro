@@ -8,7 +8,7 @@
 
 | evidence_id | source_type | evidence_strength | coverage_state | supported_pages | last_verified | notes |
 |---|---|---|---|---|---|---|
-| E-AI-BM-001 | legacy_doc | strong | absorbed | `annuity-income`, `company-id`, `plan-type`, `annuity-income-gap-evidence` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\cleansing-rules\annuity-income.md` 明确 `机构名称 -> 机构代码` 使用 `COMPANY_BRANCH_MAPPING`，并把 6 个 manual overrides 标记为 `Critical`，要求新实现必须保留。 |
+| E-AI-BM-001 | legacy_doc | strong | absorbed | `annuity-income`, `company-id`, `identity-governance`, `plan-type`, `annuity-income-gap-evidence` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\cleansing-rules\annuity-income.md` 明确 `机构名称 -> 机构代码` 使用 `COMPANY_BRANCH_MAPPING`，并把 6 个 manual overrides 标记为 `Critical`，要求新实现必须保留。 |
 | E-AI-BM-002 | audit | supporting | absorbed | `annuity-income`, `identity-and-lookup-evidence` | 2026-04-14 | `docs/superpowers/audits/2026-04-12-verification-assets-search-findings.md` 把这组 branch mapping gap 提升为 annuity_income 的 first-wave 风险。 |
 | E-AI-BM-003 | current_test | strong | explicitly_tracked | `annuity-income`, `annuity-income-gap-evidence` | 2026-04-14 | `config/domains/annuity_income/cleansing.json`、`src/work_data_hub_pro/capabilities/fact_processing/annuity_income/service.py` 与 `tests/integration/test_annuity_income_processing.py` 共同证明 current project 已显式实现并保护 branch mapping overrides。 |
 

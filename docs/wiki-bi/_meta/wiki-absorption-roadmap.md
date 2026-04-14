@@ -165,6 +165,7 @@
 Round 10 已完成当前 wiki 的导航收紧与低入链维护。
 Round 11 已完成 Phase E operator/runtime surfaces decision package。
 Round 12 已完成 verification result history and fixture governance。
+Round 13 已完成 identity governance deepening。
 
 后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应按预估收益大小推进。
 
@@ -249,7 +250,7 @@ Round 12 已完成 verification result history and fixture governance。
 
 状态：
 
-- proposed
+- completed on 2026-04-14
 
 ### 4. Round 14：selective object-level evidence split for status family
 
@@ -279,20 +280,19 @@ Round 12 已完成 verification result history and fixture governance。
 
 建议按下面顺序推进：
 
-1. Round 13：identity governance deepening
-2. Round 14：selective object-level evidence split for status family
+1. Round 14：selective object-level evidence split for status family
 
 ## 当前推荐入口
 
-当前最推荐的下一轮入口是 Round 13。
+当前最推荐的下一轮入口是 Round 14。
 
-Round 12 已经把 validation result history、error-case fixtures 与 deferred asset 状态从“模糊缺口”推进成了正式治理对象。
+Round 13 已经把 identity governance 从概念/证据碎片推进成了独立标准层。
 
-下一步更值得推进的是 identity governance，也就是 `temp-id`、mapping files、fallback chain 与 queue / cache / provider 边界的收口。
+下一步如果继续推进，更适合只做 selective object-level evidence split，而不是再横向扩张新主题。
 
 后续如需继续推进，应从下面几类 follow-on work 中选择：
 
 - 把 `annuity_income` slice 执行过程中形成的新稳定结论继续回写到 wiki
 - 以已完成的 Round 11 为基础，继续判断 `CT-016` 与 Phase E operator/runtime surfaces 的 retain / replace / retire 边界
-- 当前优先进入 Round 13，其后再进入 selective split 这类 follow-on round
+- 当前优先进入 Round 14，继续评估哪些状态对象真的值得拆成独立 evidence page
 - 旧 wiki 层的物理删除已于 2026-04-14 完成；后续只需在发现新的历史硬引用时继续回修

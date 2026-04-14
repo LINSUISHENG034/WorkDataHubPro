@@ -8,8 +8,8 @@
 
 | evidence_id | source_type | evidence_strength | coverage_state | supported_pages | last_verified | notes |
 |---|---|---|---|---|---|---|
-| E-AI-ID5-001 | legacy_doc | strong | absorbed | `annuity-income`, `company-id`, `temp-id`, `annuity-income-gap-evidence` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\cleansing-rules\annuity-income.md` 明确 `CR-011` 属于 legacy-only fallback，迁移中已 dropped，并要求新 pipeline 不得实现。 |
-| E-AI-ID5-002 | legacy_doc | supporting | absorbed | `golden-scenarios`, `real-data-validation`, `annuity-income` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\guides\validation\legacy-parity-validation.md` 说明 annuity_income parity 要把 ID5 去除视为 intentional difference，而不是 parity failure。 |
+| E-AI-ID5-001 | legacy_doc | strong | absorbed | `annuity-income`, `company-id`, `temp-id`, `identity-governance`, `annuity-income-gap-evidence` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\cleansing-rules\annuity-income.md` 明确 `CR-011` 属于 legacy-only fallback，迁移中已 dropped，并要求新 pipeline 不得实现。 |
+| E-AI-ID5-002 | legacy_doc | supporting | absorbed | `golden-scenarios`, `real-data-validation`, `identity-governance`, `annuity-income` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\guides\validation\legacy-parity-validation.md` 说明 annuity_income parity 要把 ID5 去除视为 intentional difference，而不是 parity failure。 |
 | E-AI-ID5-003 | audit | supporting | absorbed | `verification-assets-evidence`, `annuity-income` | 2026-04-14 | `docs/superpowers/audits/2026-04-12-verification-assets-search-findings.md` 把 ID5 retirement 列为 annuity_income 必须保留的 institutional memory。 |
 | E-AI-ID5-004 | current_test | strong | explicitly_tracked | `annuity-income`, `verification-assets-evidence`, `golden-scenarios` | 2026-04-14 | `tests/integration/test_annuity_income_operator_artifacts.py` 与 `reference/historical_replays/annuity_income/legacy_identity_resolution_2026_03.json` 共同证明 current project 已把 “不恢复 ID5，只走 temp-id fallback” 变成显式受测行为。 |
 

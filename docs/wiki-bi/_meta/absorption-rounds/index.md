@@ -26,3 +26,5 @@
   - follow-on 轮次，把 enterprise persistence、standalone tooling 与 operator/runtime surface 的治理问题收束成可引用对象簇。
 - [Round 12：verification result history and fixture governance](./round-12-verification-result-history-and-fixture-governance.md)
   - follow-on 轮次，把 validation result history、deferred asset 状态与 error-case fixture 治理边界收束成正式 evidence object。
+- [Round 13：identity governance deepening](./round-13-identity-governance-deepening.md)
+  - follow-on 轮次，把 identity governance 从概念/证据碎片提升为独立标准层，并接回 branch mapping / ID5 专题记忆。

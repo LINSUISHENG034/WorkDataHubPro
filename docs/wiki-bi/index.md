@@ -23,6 +23,8 @@
   - 新到账状态与客户分类标签不是同一层语义。
 - [`company_id` 在业务上到底是什么](./concepts/company-id.md)
   - 企业身份标识是跨 domain 连接事实、主数据、快照和验证的核心对象。
+- [什么算受治理的身份 fallback](./standards/semantic-correctness/identity-governance.md)
+  - temp-id、mapping files、cache、provider、queue 的边界需要作为 identity governance 统一理解。
 - [什么算 real-data validation](./standards/verification-method/real-data-validation.md)
   - 真实数据验证不是“拿真实文件跑一下”，而是有边界和目标的验证方法。
 - [什么样的输出才算“正确”](./standards/output-correctness/output-correctness.md)
@@ -77,6 +79,7 @@
 #### Semantic Correctness
 
 - [客户状态语义正确性](./standards/semantic-correctness/customer-status-semantics.md) : 定义客户状态相关判断的稳定语义。
+- [身份治理语义正确性](./standards/semantic-correctness/identity-governance.md) : 定义 `company_id`、`temp_id`、mapping / cache / provider / queue 的治理边界。
 
 #### Output Correctness
 
@@ -120,5 +123,6 @@
 - [Round 10：domain 导航与 cross-reference 收紧](./_meta/absorption-rounds/round-10-domain-navigation-tightening.md) : maintenance 轮次，记录低入链 durable pages 的 lint 结果与导航收紧经验。
 - [Round 11：Phase E operator/runtime surfaces decision package](./_meta/absorption-rounds/round-11-phase-e-surface-decision-package.md) : follow-on 轮次，把 surface open questions 收束成 enterprise persistence、standalone tooling 与 operator/runtime decision package。
 - [Round 12：verification result history and fixture governance](./_meta/absorption-rounds/round-12-verification-result-history-and-fixture-governance.md) : follow-on 轮次，把 validation result history、error-case fixtures 与 deferred asset 状态收束成正式治理对象。
+- [Round 13：identity governance deepening](./_meta/absorption-rounds/round-13-identity-governance-deepening.md) : follow-on 轮次，把 identity governance 从概念/证据碎片推进到独立标准层。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。

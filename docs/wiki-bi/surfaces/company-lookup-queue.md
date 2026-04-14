@@ -54,6 +54,7 @@ legacy code 进一步说明：
 
 ## 相关标准
 
+- [身份治理语义正确性](../standards/semantic-correctness/identity-governance.md)
 - [输出正确性标准](../standards/output-correctness/output-correctness.md)
 - [real-data validation](../standards/verification-method/real-data-validation.md)
 
