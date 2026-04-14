@@ -1,5 +1,18 @@
 # Wiki BI Log
 
+## [2026-04-14] remove | 物理删除 legacy wiki layer
+
+- 在删除前已将活跃测试、verification-asset `reference_location`、以及 active skill/docs 中的旧 wiki 路径迁移到 `docs/wiki-bi/`、`docs/system/` 或 `.planning/`
+- 旧 wiki 目录已从当前仓库树中移除
+- 其历史 provenance 由 git history、`.planning/` 历史材料以及 `docs/wiki-bi/_meta/absorption-rounds/round-09-legacy-wiki-retirement.md` 承接
+
+## [2026-04-14] retire | 收口 legacy wiki layer
+
+- 将旧 wiki 层先改写为 retired stub，再完成物理移除
+- `project/`、`roadmap/`、`phases/` 路径统一改指 `docs/system/`、`docs/superpowers/specs/` 与 `.planning/`
+- `governance/`、`lessons/`、`_meta/` 路径统一改指 `docs/wiki-bi/`、`docs/disciplines/` 与 `docs/system/`
+- 新增 `round-09-legacy-wiki-retirement.md`，把这次退役动作沉淀为正式 absorption round
+
 ## [2026-04-14] scaffold | 初始化 `wiki-bi` 首批可用结构
 
 - 新增 `_meta/wiki-implementation-plan.md`，将设计文档转为首批实施顺序与完成定义

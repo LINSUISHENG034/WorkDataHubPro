@@ -1,0 +1,6 @@
+interface:
+  display_name: "WDHP Wiki Maintenance"
+  short_description: "Wiki-bi maintenance and legacy absorption"
+  default_prompt: "Use $wdhp-wiki-maintenance to maintain docs/wiki-bi, absorb former legacy-wiki material, or turn legacy WorkDataHub sources into durable wiki knowledge."
+policy:
+  allow_implicit_invocation: false

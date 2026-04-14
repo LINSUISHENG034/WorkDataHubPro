@@ -186,7 +186,7 @@ Project skills should follow this default reference pattern:
 Skills should not default to:
 
 - `.planning/` as the product architecture source
-- `docs/wiki-cn/` as the default durable knowledge layer
+- historical legacy-wiki material as the default durable knowledge layer
 - one framework's spec directory as if it were the product itself
 
 ## 6. Rules For New Frameworks

@@ -18,3 +18,5 @@
   - follow-on 轮次，验证厚主题拆分为对象级 evidence page 的可行性。
 - [Round 08：`annuity_income` slice admission package](./round-08-annuity-income-slice-admission.md)
   - follow-on 轮次，把 `annuity_income` 的专题 gap 拆成 slice-admission-ready evidence，并接到专门的 slice plan。
+- [Round 09：legacy wiki 退役收口](./round-09-legacy-wiki-retirement.md)
+  - follow-on 轮次，记录旧 wiki 层的退役收口与 durable 归宿。

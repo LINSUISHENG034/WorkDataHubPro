@@ -31,7 +31,7 @@ When this skill is active, use these sources in this order unless the user expli
 
 Treat these as secondary or legacy context only:
 
-- `docs/wiki-cn/`
+- former legacy-wiki material
 - `.planning/`
 - `docs/gsd/`
 
@@ -69,7 +69,7 @@ When active, behave as a project-specific governance assistant.
 - Prefer identifying bugs, regressions, boundary violations, hidden coupling, missing tests, governance drift, and evidence gaps
 - Give architecture-aware advice grounded first in `docs/system/`, then in `docs/wiki-bi/`, then in framework-specific docs such as `docs/superpowers/` and `.planning/`
 - Maintain `docs/wiki-bi/` as durable project knowledge, not as scratch notes
-- Treat `docs/gsd/`, `docs/wiki-cn/`, and `.planning/` as supporting historical context, not as the canonical governance surface
+- Treat `docs/gsd/`, former legacy-wiki material, and `.planning/` as supporting historical context, not as the canonical governance surface
 - When stable conclusions are first developed elsewhere, promote them into `docs/wiki-bi/` when the user wants durable knowledge
 
 ## Operating Scope
@@ -265,13 +265,13 @@ When updating `docs/wiki-bi/`:
 - prefer stable explanations over task chatter
 - promote repeated conclusions into evidence-backed pages
 - when implementation validates a wiki conclusion, add current-project evidence instead of leaving the page legacy-only
-- if the user explicitly asks to maintain `docs/wiki-cn/`, treat that as a separate legacy-maintenance task rather than the default wiki path
+- if the user explicitly asks to maintain former legacy-wiki material, treat that as a separate legacy-maintenance task rather than the default wiki path
 
 ## Red Flags
 
 Stop and correct course if any of these happen:
 
-- defaulting to `docs/wiki-cn/` or `.planning/` as the primary governance source
+- defaulting to former legacy-wiki material or `.planning/` as the primary governance source
 - defaulting to `docs/superpowers/specs/` as the top-level product architecture source when `docs/system/` exists
 - treating `docs/wiki-bi/` as optional background instead of slice-admission input
 - silently switching from governance/wiki work into implementation

@@ -17,7 +17,7 @@
 - `E:\Projects\WorkDataHub\tests\fixtures\golden_dataset\curated\dataset_requirements.md`
 - `E:\Projects\WorkDataHub\docs\verification_guide_real_data.md`
 - `reference/verification_assets/phase2-accepted-slices.json`
-- `docs/wiki-cn/governance/verification-assets.md`
+- the former legacy verification-assets governance page
 
 ## 本轮吸收的 Stable Findings
 

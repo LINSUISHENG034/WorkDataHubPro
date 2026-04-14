@@ -24,7 +24,7 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - ✓ Explicit compatibility adjudication semantics for severity, precedent, exception scope, and checkpoint identity — validated in Phase 2
 - ✓ Repository-native PR / protected-branch / nightly parity gate tiers — validated in Phase 2
 - ✓ Phase 6 governance remediation: fail-closed baseline loading (`load_required_checkpoint_baseline`), multiset duplicate-row diff accuracy (`_build_diff`), stable intermediate checkpoint payload normalization, and explicit bootstrap entrypoint (`scripts/bootstrap_phase2_checkpoint_baselines.py`) — validated in Phase 6
-- ✓ Phase 6 governance status sync: PROJECT.md, ROADMAP.md, STATE.md, `06-VERIFICATION.md`, and wiki-cn docs now record Phase 2 implementation complete and governance sign-off closed from executed evidence — validated in Phase 6
+- ✓ Phase 6 governance status sync: PROJECT.md, ROADMAP.md, STATE.md, and `06-VERIFICATION.md` record Phase 2 implementation complete and governance sign-off closed from executed evidence — validated in Phase 6
 - ✓ Shared replay orchestration primitives now power annuity, annual-award, and annual-loss slices with typed run reports and typed setup-failure paths — validated in Phase 3
 - ✓ Registry-backed replay CLI entrypoints (`replay list-domains`, `replay run`, `replay diagnose`) and updated replay runbooks are available for agents and humans — validated in Phase 3
 - ✓ Governed temp-id fallback avoids raw identifier leakage in replay-facing loss-domain assertions and identity-resolution contracts — validated in Phase 3

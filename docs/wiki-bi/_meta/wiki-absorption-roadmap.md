@@ -140,12 +140,31 @@
 
 - completed on 2026-04-14
 
+## Follow-on Round 09：legacy wiki 退役收口
+
+目标：
+
+- 把旧 wiki 层从并行知识层收口并移除
+- 明确 `project/`、`roadmap/`、`phases/`、`governance/`、`lessons/`、`_meta/` 的 durable 去向
+- 在保留 provenance 的前提下，停止让旧 wiki 层出现在当前权威文档里
+
+主入口页：
+
+- `docs/system/index.md`
+- `docs/wiki-bi/index.md`
+- `docs/wiki-bi/_meta/absorption-rounds/round-09-legacy-wiki-retirement.md`
+
+状态：
+
+- completed on 2026-04-14
+
 ## 当前位置
 
-首批六轮吸收已经完成，follow-on Round 07 与 Round 08 也已经完成。
+首批六轮吸收已经完成，follow-on Round 07、Round 08 与 Round 09 也已经完成。
 
 后续如需继续推进，应从下面几类 follow-on work 中选择：
 
 - 把 `annuity_income` slice 执行过程中形成的新稳定结论继续回写到 wiki
 - 继续判断 `CT-016` 与 Phase E operator/runtime surfaces 的 retain / replace / retire 边界
 - 只在确有复用价值时继续做新的对象级 evidence 拆分
+- 旧 wiki 层的物理删除已于 2026-04-14 完成；后续只需在发现新的历史硬引用时继续回修

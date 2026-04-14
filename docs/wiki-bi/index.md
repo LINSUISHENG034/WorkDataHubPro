@@ -107,5 +107,6 @@
 - [Round 06：`annuity_income` 专题补强](./_meta/absorption-rounds/round-06-annuity-income.md) : 第六轮闭环沉淀，记录 annuity_income 的制度记忆、身份差异、验证资产与 operator artifact 缺口。
 - [Round 07：`is_new` 对象级证据拆分](./_meta/absorption-rounds/round-07-is-new-evidence-split.md) : follow-on 轮次，验证厚主题拆分为对象级 evidence page 的可行性。
 - [Round 08：`annuity_income` slice admission package](./_meta/absorption-rounds/round-08-annuity-income-slice-admission.md) : follow-on 轮次，把 annuity_income 的专题 gap 转成可直接支撑 slice admission 的对象级 evidence。
+- [Round 09：legacy wiki 退役收口](./_meta/absorption-rounds/round-09-legacy-wiki-retirement.md) : follow-on 轮次，记录旧 wiki 层的退役收口与 durable 归宿。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。

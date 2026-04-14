@@ -33,7 +33,7 @@
       "status": "deferred",
       "purpose": "Curated high-value annuity scenarios beyond the single replay baseline.",
       "refresh_trigger": "Create when Phase 2 or later governance promotes annuity golden-set coverage into a dedicated asset pack.",
-      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "reference_location": "docs/wiki-bi/evidence/verification-assets-evidence.md",
       "notes": "Tracked explicitly so it is not forgotten."
     },
     {
@@ -43,7 +43,7 @@
       "status": "deferred",
       "purpose": "Result baseline separate from the accepted replay snapshot.",
       "refresh_trigger": "Create when annuity replay grows beyond the single accepted monthly snapshot baseline.",
-      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "reference_location": "docs/wiki-bi/evidence/verification-assets-evidence.md",
       "notes": "Not materialized yet as a separate artifact."
     },
     {
@@ -63,7 +63,7 @@
       "status": "deferred",
       "purpose": "Real-data-style annuity workbook sample for source-intake governance.",
       "refresh_trigger": "Register when a committed or governed external sample becomes available.",
-      "reference_location": "docs/wiki-cn/governance/phase-2-decisions.md",
+      "reference_location": "docs/wiki-bi/standards/verification-method/real-data-validation.md",
       "notes": "Phase 2 confirms this is the target baseline, but the sample is not yet repo-native."
     },
     {
@@ -137,7 +137,7 @@
       "status": "deferred",
       "purpose": "Curated high-value event-domain award scenarios beyond the replay baseline.",
       "refresh_trigger": "Create when the annual-award domain gets explicit golden-set governance.",
-      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "reference_location": "docs/wiki-bi/evidence/verification-assets-evidence.md",
       "notes": "Explicitly deferred instead of omitted."
     },
     {
@@ -147,7 +147,7 @@
       "status": "deferred",
       "purpose": "Result baseline distinct from the accepted replay snapshot for annual-award.",
       "refresh_trigger": "Create when annual-award parity uses a broader baseline corpus than the accepted replay snapshot.",
-      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "reference_location": "docs/wiki-bi/evidence/verification-assets-evidence.md",
       "notes": "Not a separate repository artifact yet."
     },
     {
@@ -167,7 +167,7 @@
       "status": "deferred",
       "purpose": "Real-data-style annual-award workbook sample for source-intake governance.",
       "refresh_trigger": "Register when a governed repository-native or externally governed sample is admitted.",
-      "reference_location": "docs/wiki-cn/governance/phase-2-decisions.md",
+      "reference_location": "docs/wiki-bi/standards/verification-method/real-data-validation.md",
       "notes": "Target baseline confirmed, artifact still missing."
     },
     {
@@ -241,7 +241,7 @@
       "status": "deferred",
       "purpose": "Curated high-value loss scenarios beyond the accepted replay baseline.",
       "refresh_trigger": "Create when annual-loss gets explicit golden-set governance.",
-      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "reference_location": "docs/wiki-bi/evidence/verification-assets-evidence.md",
       "notes": "Deferred explicitly per Phase 2 asset-governance rules."
     },
     {
@@ -251,7 +251,7 @@
       "status": "deferred",
       "purpose": "Result baseline distinct from the accepted annual-loss replay snapshot.",
       "refresh_trigger": "Create when annual-loss parity expands beyond the accepted replay baseline.",
-      "reference_location": "docs/wiki-cn/governance/verification-assets.md",
+      "reference_location": "docs/wiki-bi/evidence/verification-assets-evidence.md",
       "notes": "Not yet materialized."
     },
     {
@@ -271,7 +271,7 @@
       "status": "deferred",
       "purpose": "Real-data-style annual-loss workbook sample for source-intake governance.",
       "refresh_trigger": "Register when a governed repository-native or externally governed sample is admitted.",
-      "reference_location": "docs/wiki-cn/governance/phase-2-decisions.md",
+      "reference_location": "docs/wiki-bi/standards/verification-method/real-data-validation.md",
       "notes": "Phase 2 confirms the target baseline, but the sample is not yet present in-repo."
     },
     {
