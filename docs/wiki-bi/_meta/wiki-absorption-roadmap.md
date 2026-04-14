@@ -163,6 +163,7 @@
 首批六轮吸收已经完成，follow-on Round 07、Round 08 与 Round 09 也已经完成。
 
 Round 10 已完成当前 wiki 的导航收紧与低入链维护。
+Round 11 已完成 Phase E operator/runtime surfaces decision package。
 
 后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应按预估收益大小推进。
 
@@ -194,7 +195,7 @@ Round 10 已完成当前 wiki 的导航收紧与低入链维护。
 
 状态：
 
-- proposed
+- completed on 2026-04-14
 
 ### 2. Round 12：verification result history and fixture governance
 
@@ -277,20 +278,21 @@ Round 10 已完成当前 wiki 的导航收紧与低入链维护。
 
 建议按下面顺序推进：
 
-1. Round 11：Phase E operator/runtime surfaces decision package
-2. Round 12：verification result history and fixture governance
-3. Round 13：identity governance deepening
-4. Round 14：selective object-level evidence split for status family
+1. Round 12：verification result history and fixture governance
+2. Round 13：identity governance deepening
+3. Round 14：selective object-level evidence split for status family
 
 ## 当前推荐入口
 
-当前最推荐的下一轮入口是 Round 11。
+当前最推荐的下一轮入口是 Round 12。
 
-它的价值不在于“再补几页 surface 文档”，而在于把 current wiki 已知但尚未收口的治理难题，转成一组可直接被后续架构/切片决策引用的 durable evidence package。
+Round 11 已经把 current wiki 已知但尚未收口的 surface 治理难题，收束成 enterprise persistence、standalone tooling 与 operator/runtime decision package。
+
+下一步更值得推进的是 validation result history、error-case fixtures 与 domain-level golden set 的治理收口。
 
 后续如需继续推进，应从下面几类 follow-on work 中选择：
 
 - 把 `annuity_income` slice 执行过程中形成的新稳定结论继续回写到 wiki
-- 以 Round 11 为主线，继续判断 `CT-016` 与 Phase E operator/runtime surfaces 的 retain / replace / retire 边界
-- 完成 Round 11 后，再进入 validation / identity / selective split 这三类 follow-on round
+- 以已完成的 Round 11 为基础，继续判断 `CT-016` 与 Phase E operator/runtime surfaces 的 retain / replace / retire 边界
+- 当前优先进入 Round 12，其后再进入 identity / selective split 这两类 follow-on round
 - 旧 wiki 层的物理删除已于 2026-04-14 完成；后续只需在发现新的历史硬引用时继续回修

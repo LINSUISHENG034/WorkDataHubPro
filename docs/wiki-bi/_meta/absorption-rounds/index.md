@@ -22,3 +22,5 @@
   - follow-on 轮次，记录旧 wiki 层的退役收口与 durable 归宿。
 - [Round 10：domain 导航与 cross-reference 收紧](./round-10-domain-navigation-tightening.md)
   - maintenance 轮次，针对低入链 durable pages 补齐概念、标准、证据与 domain 之间的显式导航。
+- [Round 11：Phase E operator/runtime surfaces decision package](./round-11-phase-e-surface-decision-package.md)
+  - follow-on 轮次，把 enterprise persistence、standalone tooling 与 operator/runtime surface 的治理问题收束成可引用对象簇。

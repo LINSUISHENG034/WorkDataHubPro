@@ -17,6 +17,14 @@
 - 与 enrichment persistence surfaces 协同工作
 - 通过独立 operator entrypoint 暴露给运行面
 
+## 关键运行语义
+
+legacy code 进一步说明：
+
+- queue 写入发生在 temp-id 生成之后，而不是任意时刻都可触发
+- queue 去重依赖 `normalized_name` 与 `pending` / `processing` 状态
+- enqueue 失败采用 graceful degradation，不阻断主处理链路
+
 ## 关键运行面对象
 
 - `enterprise.enrichment_requests`
@@ -34,6 +42,11 @@
 - 它有独立 CLI / orchestration 入口
 - 它有独立 persistence footprint
 - 它承担 queue、retry、status update 语义
+
+## 相关 surfaces
+
+- [enterprise enrichment persistence](./enterprise-enrichment-persistence.md)
+- [`unknown_names_csv`](./unknown-names-csv.md)
 
 ## 相关概念
 
@@ -55,8 +68,10 @@
 - retain / replace / retire 结论仍需后续稳定决策页明确
 - 当前至少不应再被当作“隐含存在，不必登记”的对象
 - enterprise persistence breadth 仍需后续拆分和澄清
+- 当前更合理的理解是：它代表 async lookup runtime，而不是 identity fallback chain 的一个可省略细节
 
 ## 仍未决的问题
 
 - queue 运行面是否会在 rebuild 中保留
 - 与 live provider mode 的边界如何定义
+- 若 queue 被替代，哪些 dedup / status / retry 语义必须等价保留

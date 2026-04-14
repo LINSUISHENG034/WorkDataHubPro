@@ -21,6 +21,18 @@
 - 执行年初初始化与年度 cutover
 - 做状态分布验证
 
+## 显式入口
+
+legacy unified CLI 与 deployment guide 都把这组命令当作独立 operator entrypoint 暴露：
+
+- `customer-mdm sync`
+- `customer-mdm snapshot --period <YYYYMM>`
+- `customer-mdm init-year`
+- `customer-mdm validate`
+- `customer-mdm cutover`
+
+其中 deployment guide 还明确给出在 `annuity_performance` 成功执行后手工补跑 `sync` 与 `snapshot` 的路径。
+
 ## 手工命令分工
 
 - `sync`
@@ -44,6 +56,10 @@
 - 它们暴露的是独立操作能力
 - 它们影响 contract / snapshot / annual lifecycle 的治理边界
 
+## 相关 surfaces
+
+- [standalone tooling](./standalone-tooling.md)
+
 ## 相关概念
 
 - [客户状态总览](../concepts/customer-status.md)
@@ -64,9 +80,11 @@
 - 当前应被视为需要显式治理的 operator surface
 - 具体哪些命令必须保留，仍待后续稳定决策
 - 在做 state / snapshot / annual lifecycle 相关判断时，不应假设只有自动 hook 路径存在
+- 当前至少应保留“手工 recovery / recompute controls 曾经是正式操作面”的制度记忆
 
 ## 仍未决的问题
 
 - 哪些命令要 retain
 - 哪些命令要 replace
 - 哪些命令可以 retire
+- 手工命令与自动 hook 的职责边界在 rebuild 中如何重组

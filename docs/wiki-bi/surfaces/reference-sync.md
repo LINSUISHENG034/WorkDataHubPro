@@ -16,6 +16,15 @@
 - 管理 reference target 的刷新/更新
 - 形成普通 fact domain 之外的独立操作路径
 
+## 配置化合同
+
+legacy `reference_sync.yml` 说明这个 surface 不是抽象概念，而是显式配置治理对象：
+
+- 有独立启停、schedule、concurrency 与 batch size
+- 明确 target schema / table
+- 同时覆盖 `postgres` authoritative source 与 `config_file` source
+- 对不同目标使用 `upsert` / `delete_insert` 等不同 sync 语义
+
 ## 关键目标表面
 
 legacy 审计明确指出，这个 surface 至少涉及：
@@ -36,6 +45,10 @@ legacy 审计明确指出，这个 surface 至少涉及：
 - reference data 不是只靠 fact domain 自然长出来
 - sync / bootstrap / authoritative target 更新需要被单独治理
 
+## 相关 surfaces
+
+- [enterprise enrichment persistence](./enterprise-enrichment-persistence.md)
+
 ## 相关概念
 
 - [回填：`backfill`](../concepts/backfill.md)
@@ -54,7 +67,9 @@ legacy 审计明确指出，这个 surface 至少涉及：
 - 当前应作为显式治理 surface 保留在 wiki 中
 - retain / replace / retire 仍需独立决策
 - 目前至少不能再把它当成“跟随 domain 一起自然覆盖”的隐含对象
+- 即使未来不保留 legacy-like sync 机制，也应保留其 target inventory、source-of-truth 映射与 sync contract
 
 ## 仍未决的问题
 
 - 是保留 legacy-like reference sync，还是被新的 bootstrap/publication 模式替代
+- 如果被替代，最小需要保留哪些 target inventory 与 contract guarantees

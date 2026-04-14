@@ -101,3 +101,10 @@
 - 基于当前 evidence pages 中的 open question 与缺口，重新给下一阶段 round 做收益排序
 - 将 Round 11 定位为 `Phase E operator/runtime surfaces decision package`
 - 将 validation result history / fixture governance、identity governance deepening、status family selective split 排到后续轮次
+
+## [2026-04-14] absorb | Round 11 闭环吸收 `Phase E operator/runtime surfaces`
+
+- 更新 `operator-and-surface-evidence.md`，把 CLI / GUI entrypoints、reference sync config、async queue persistence、provider persistence 与 standalone tooling 的 raw-source 证据写成正式 decision package
+- 新增 `enterprise-enrichment-persistence.md` 与 `standalone-tooling.md`，把先前只在缺口清单里出现的对象簇提升为独立治理对象
+- 更新 `reference-sync.md`、`company-lookup-queue.md`、`customer-mdm-commands.md`，把 target inventory、queue semantics、manual recovery path 与相邻 tooling 边界收紧
+- 更新 `index.md`、`_meta/absorption-rounds/index.md` 与 `wiki-absorption-roadmap.md`，将 Round 11 标记为已完成，并把推荐入口推进到 Round 12

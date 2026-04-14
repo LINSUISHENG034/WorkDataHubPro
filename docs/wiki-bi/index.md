@@ -29,6 +29,8 @@
   - 正确输出应满足语义、粒度、关系和验收资产多重约束。
 - [哪些 system surfaces 不能被隐含忽略](./surfaces/company-lookup-queue.md)
   - queue、reference sync、manual commands、operator artifacts 都是显式治理对象。
+- [哪些 legacy tools 属于相邻 operator tooling，而不是业务主路径](./surfaces/standalone-tooling.md)
+  - `cleanse`、EQC GUI、deployment GUI 需要显式登记，但不能自动等同于 rebuild 核心边界。
 - [为什么旧项目不能直接作为新架构模板](./_meta/wiki-design.md)
   - wiki 借鉴 legacy 的稳定语义与标准，而不是复制其实现结构。
 - [event-style domains 如何接回状态判断与输入现实](./domains/annual-award.md)
@@ -57,9 +59,11 @@
 ### Surfaces
 
 - [`company_lookup_queue`](./surfaces/company-lookup-queue.md) : 识别异步企业补查队列这一独立治理 surface。
+- [enterprise enrichment persistence](./surfaces/enterprise-enrichment-persistence.md) : 识别 `enrichment_index`、`enrichment_requests`、`base_info` 组成的 identity persistence surface。
 - [`reference_sync`](./surfaces/reference-sync.md) : 识别 authoritative reference sync 这一独立治理 surface。
 - [`customer-mdm` 手工命令面](./surfaces/customer-mdm-commands.md) : 识别 contract/snapshot/init-year/cutover 等 operator surface。
 - [failed-record export](./surfaces/failed-record-export.md) : 识别失败记录导出这一 operator artifact surface。
+- [standalone tooling](./surfaces/standalone-tooling.md) : 识别 `cleanse`、EQC GUI 与 deployment GUI 这类相邻 operator tooling family。
 - [`unknown_names_csv`](./surfaces/unknown-names-csv.md) : 识别 unresolved names 导出这一 operator artifact surface。
 
 ### Standards
@@ -111,5 +115,6 @@
 - [Round 08：`annuity_income` slice admission package](./_meta/absorption-rounds/round-08-annuity-income-slice-admission.md) : follow-on 轮次，把 annuity_income 的专题 gap 转成可直接支撑 slice admission 的对象级 evidence。
 - [Round 09：legacy wiki 退役收口](./_meta/absorption-rounds/round-09-legacy-wiki-retirement.md) : follow-on 轮次，记录旧 wiki 层的退役收口与 durable 归宿。
 - [Round 10：domain 导航与 cross-reference 收紧](./_meta/absorption-rounds/round-10-domain-navigation-tightening.md) : maintenance 轮次，记录低入链 durable pages 的 lint 结果与导航收紧经验。
+- [Round 11：Phase E operator/runtime surfaces decision package](./_meta/absorption-rounds/round-11-phase-e-surface-decision-package.md) : follow-on 轮次，把 surface open questions 收束成 enterprise persistence、standalone tooling 与 operator/runtime decision package。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。
