@@ -30,14 +30,17 @@
 ## 适用标准
 
 - [输入现实合同](../standards/input-reality/input-reality-contracts.md)
+- [`annuity_performance` 输入合同](../standards/input-reality/annuity-performance-input-contract.md)
 - [客户状态语义正确性](../standards/semantic-correctness/customer-status-semantics.md)
 - [输出正确性标准](../standards/output-correctness/output-correctness.md)
+- [`annuity_performance` 输出合同](../standards/output-correctness/annuity-performance-output-contract.md)
 - [real-data validation](../standards/verification-method/real-data-validation.md)
 - [golden scenarios](../standards/verification-method/golden-scenarios.md)
 
 ## 关键证据来源
 
 - [输入现实证据](../evidence/input-reality-evidence.md)
+- [`annuity_performance` 字段处理证据](../evidence/annuity-performance-field-processing-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)

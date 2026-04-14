@@ -30,3 +30,5 @@
   - follow-on 轮次，把 identity governance 从概念/证据碎片提升为独立标准层，并接回 branch mapping / ID5 专题记忆。
 - [Round 14：status family selective evidence split](./round-14-status-family-selective-evidence-split.md)
   - follow-on 轮次，只把 `is_winning_this_year` 与 `is_loss_reported` 拆成对象级证据，并明确 `is_churned_this_year` 继续留在主题页。
+- [Round 15：`annuity_performance` I/O contracts](./round-15-annuity-performance-io-contracts.md)
+  - follow-on 轮次，把 annuity-performance 的输入合同、输出合同与字段处理语义固化为可直接问答的 durable page。

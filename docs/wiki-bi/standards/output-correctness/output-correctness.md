@@ -51,6 +51,8 @@
 
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
+- [`annuity_performance` 输出合同](./annuity-performance-output-contract.md)
+- [`annuity_performance` 字段处理证据](../../evidence/annuity-performance-field-processing-evidence.md)
 
 ## 相关验证方法
 

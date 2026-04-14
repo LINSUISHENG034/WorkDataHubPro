@@ -55,3 +55,5 @@
 
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
+- [`annuity_performance` 输出合同](../standards/output-correctness/annuity-performance-output-contract.md)
+- [`annuity_performance` 字段处理证据](../evidence/annuity-performance-field-processing-evidence.md)

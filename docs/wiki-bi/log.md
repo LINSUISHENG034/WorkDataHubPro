@@ -130,3 +130,11 @@
 - 更新 `status-and-snapshot-evidence.md`、`customer-status.md`、`customer-status-semantics.md`、`annual-award.md` 与 `annual-loss.md`，把新对象级证据页接回概念、标准与 domain 层
 - 在 Round 14 中显式判定 `is_churned_this_year` 继续留在主题页，因为它当前仍夹着 product-line / plan 双粒度与 AUM 汇总语义
 - 更新 `index.md`、`_meta/absorption-rounds/index.md` 与 `wiki-absorption-roadmap.md`，将 Round 14 标记为已完成，并把后续入口切到机会式增量维护
+
+## [2026-04-14] absorb | Round 15 闭环吸收 `annuity_performance` I/O contracts
+
+- 新增 `annuity-performance-input-contract.md`，把 annuity-performance 的 workbook、file pattern、sheet、版本策略与最小字段骨架写成专门输入合同
+- 新增 `annuity-performance-output-contract.md`，把 direct fact sink、backfill targets 与 derived downstream tables 写成专门输出合同
+- 新增 `annuity-performance-field-processing-evidence.md`，把字段处理区分为工程性质量提升与业务语义处理
+- 更新 `annuity-performance.md`、`input-reality-contracts.md`、`output-correctness.md`、`input-reality-evidence.md`、`backfill.md` 与 `index.md`，把 annuity-performance 的 I/O 问答入口接回主 wiki
+- 更新 `_meta/absorption-rounds/index.md`，把本轮沉淀纳入正式轮次索引

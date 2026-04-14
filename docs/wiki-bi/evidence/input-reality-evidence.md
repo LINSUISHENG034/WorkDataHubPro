@@ -21,6 +21,7 @@
 - `annual_award` / `annual_loss` 的 multi-sheet intake 不是边缘案例，而是系统级现实
 - `verification_guide_real_data.md` 不只是 runbook，而是输入现实和验证方法之间的桥梁
 - `annuity_income` 即便尚未在 current project 实现，其输入现实仍属于应保留的制度记忆
+- `annuity_performance` 已具备专门 input contract，可直接回答 workbook / sheet / skeleton 问题
 
 ## 哪些来源是强证
 

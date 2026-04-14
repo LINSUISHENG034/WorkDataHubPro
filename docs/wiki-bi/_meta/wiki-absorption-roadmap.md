@@ -167,6 +167,7 @@ Round 11 已完成 Phase E operator/runtime surfaces decision package。
 Round 12 已完成 verification result history and fixture governance。
 Round 13 已完成 identity governance deepening。
 Round 14 已完成 status family selective evidence split。
+Round 15 已完成 `annuity_performance` I/O contracts。
 
 后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应按预估收益大小推进。
 
@@ -286,6 +287,7 @@ Round 14 已完成 status family selective evidence split。
 当前最推荐的后续动作不是新增一轮大主题吸收，而是机会式增量维护。
 
 Round 14 已经把 status family 中真正满足阈值的对象拆出，并明确 `is_churned_this_year` 继续留在主题页。
+Round 15 已经把 `annuity_performance` 提升到可直接回答输入-输出-处理问题的合同级页面。
 
 下一步只有在实现、验证或治理决策形成新的稳定结论时，才值得继续回写 durable page。
 
