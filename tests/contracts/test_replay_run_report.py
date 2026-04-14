@@ -129,6 +129,17 @@ def test_replay_domain_registry_exposes_stable_metadata() -> None:
                 "annual_loss_slice:run_annual_loss_slice"
             ),
         },
+        "annuity_income": {
+            "wrapper_command": "replay-annuity-income",
+            "replay_root": Path("reference/historical_replays/annuity_income"),
+            "runbook_path": Path("docs/runbooks/annuity-income-replay.md"),
+            "release_path": Path("config/releases/2026-04-14-annuity-income-baseline.json"),
+            "domain_config_path": Path("config/domains/annuity_income/cleansing.json"),
+            "runner_import": (
+                "work_data_hub_pro.apps.orchestration.replay."
+                "annuity_income_slice:run_annuity_income_slice"
+            ),
+        },
     }
 
     assert set(REPLAY_DOMAINS) == set(expected)

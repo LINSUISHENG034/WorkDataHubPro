@@ -216,5 +216,20 @@ def replay_annual_loss(
     _emit_wrapper_summary(outcome)
 
 
+@app.command("replay-annuity-income")
+def replay_annuity_income(
+    workbook: Path,
+    period: str,
+    replay_root: Path = Path("reference/historical_replays/annuity_income"),
+) -> None:
+    outcome = _execute_replay(
+        domain="annuity_income",
+        workbook=workbook,
+        period=period,
+        replay_root=replay_root,
+    )
+    _emit_wrapper_summary(outcome)
+
+
 if __name__ == "__main__":
     app()

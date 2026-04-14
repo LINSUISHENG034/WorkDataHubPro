@@ -70,6 +70,12 @@
 
 这些场景不只是“实现分支”，而是直接定义身份正确性的验证边界。
 
+对 `annuity_income` 来说，还应额外显式保护：
+
+- post-ID5 行为，而不是把 legacy ID5 fallback 悄悄恢复
+- unresolved-name artifact visibility
+- failed-record artifact visibility
+
 ## 非例
 
 - 用 replay baseline 代替 golden scenario taxonomy

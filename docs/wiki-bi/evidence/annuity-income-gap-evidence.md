@@ -2,7 +2,7 @@
 
 ## 结论主题
 
-本页聚合 `annuity_income` 的 legacy-only 制度记忆、身份差异、验证资产缺口与 operator artifact 缺口。
+本页聚合 `annuity_income` 的专题差异，并把 admission-critical 细节分发到对象级 evidence page。
 
 ## 证据记录
 
@@ -26,6 +26,12 @@
 
 - audits 对缺口的综合总结
 
+## 对象级补强页
+
+- [`annuity_income` branch mapping 证据](./annuity-income-branch-mapping-evidence.md)
+- [`annuity_income` ID5 retirement 证据](./annuity-income-id5-retirement-evidence.md)
+- [`annuity_income` operator artifacts 证据](./annuity-income-operator-artifacts-evidence.md)
+
 ## 本轮已吸收的稳定结论
 
 - `annuity_income` 不能因为 current project 尚未实现就从 wiki 视野中消失
@@ -35,5 +41,5 @@
 
 ## 当前证据缺口
 
-- annuity_income 仍缺少 current project 内部的显式承接页面与 evidence beyond institutional memory
-- COMPANY_BRANCH_MAPPING overrides gap 仍未形成更细对象级 evidence page
+- current project 虽然已有显式 slice admission 入口，但仍缺少代码、测试与 replay 级承接
+- `COMPANY_BRANCH_MAPPING` 的 owner 与最终落点仍待 slice 实施阶段收敛

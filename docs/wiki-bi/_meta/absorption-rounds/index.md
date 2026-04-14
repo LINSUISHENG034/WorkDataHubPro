@@ -16,3 +16,5 @@
   - 第六轮闭环，集中保留 annuity_income 的 identity、validation 与 operator 制度记忆。
 - [Round 07：`is_new` 对象级证据拆分](./round-07-is-new-evidence-split.md)
   - follow-on 轮次，验证厚主题拆分为对象级 evidence page 的可行性。
+- [Round 08：`annuity_income` slice admission package](./round-08-annuity-income-slice-admission.md)
+  - follow-on 轮次，把 `annuity_income` 的专题 gap 拆成 slice-admission-ready evidence，并接到专门的 slice plan。

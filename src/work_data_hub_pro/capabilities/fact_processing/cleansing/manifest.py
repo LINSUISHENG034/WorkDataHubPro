@@ -110,6 +110,50 @@ RULE_PACKS: dict[tuple[str, str], dict[str, CleansingRule]] = {
             transform=normalize_event_date,
         ),
     },
+    ("annuity-income-core", "2026.04.14"): {
+        "company_name": CleansingRule(
+            rule_id="normalize-company-name",
+            version="1",
+            field_name="company_name",
+            transform=lambda value: str(value or "").strip(),
+        ),
+        "plan_code": CleansingRule(
+            rule_id="normalize-plan-code",
+            version="1",
+            field_name="plan_code",
+            transform=normalize_plan_code,
+        ),
+        "plan_type": CleansingRule(
+            rule_id="normalize-plan-type",
+            version="1",
+            field_name="plan_type",
+            transform=lambda value: str(value or "").strip(),
+        ),
+        "business_type": CleansingRule(
+            rule_id="normalize-business-type",
+            version="1",
+            field_name="business_type",
+            transform=lambda value: str(value or "").strip(),
+        ),
+        "period": CleansingRule(
+            rule_id="normalize-period",
+            version="1",
+            field_name="period",
+            transform=normalize_period,
+        ),
+        "institution_name": CleansingRule(
+            rule_id="normalize-institution-name",
+            version="1",
+            field_name="institution_name",
+            transform=lambda value: str(value or "").strip(),
+        ),
+        "fixed_fee": CleansingRule(
+            rule_id="parse-fixed-fee",
+            version="1",
+            field_name="fixed_fee",
+            transform=parse_decimal,
+        ),
+    },
 }
 
 

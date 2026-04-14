@@ -105,16 +105,6 @@
 
 - completed on 2026-04-14
 
-## 当前位置
-
-首批六轮吸收已经完成。
-
-后续如需继续推进，应从下面几类 follow-on work 中选择：
-
-- 继续把高频 open questions 发展成新的轮次
-- 将厚主题拆成对象级 evidence pages
-- 继续补强 annuity_income 的 branch mapping / artifact / validation detail
-
 ## Follow-on Round 07：`is_new` 对象级证据拆分
 
 目标：
@@ -130,3 +120,32 @@
 状态：
 
 - completed on 2026-04-14
+
+## Follow-on Round 08：`annuity_income` slice admission package
+
+目标：
+
+- 把 `annuity_income` 的制度记忆转成 slice-admission-ready evidence
+- 把 branch mapping、ID5 retirement、operator artifacts 从专题 gap 页拆成对象级 evidence
+- 在不提前卷入 Phase E surface 决策的前提下，为下一份可执行 slice plan 建立稳定入口
+
+主入口页：
+
+- `evidence/annuity-income-gap-evidence.md`
+- `evidence/annuity-income-branch-mapping-evidence.md`
+- `evidence/annuity-income-id5-retirement-evidence.md`
+- `evidence/annuity-income-operator-artifacts-evidence.md`
+
+状态：
+
+- completed on 2026-04-14
+
+## 当前位置
+
+首批六轮吸收已经完成，follow-on Round 07 与 Round 08 也已经完成。
+
+后续如需继续推进，应从下面几类 follow-on work 中选择：
+
+- 把 `annuity_income` slice 执行过程中形成的新稳定结论继续回写到 wiki
+- 继续判断 `CT-016` 与 Phase E operator/runtime surfaces 的 retain / replace / retire 边界
+- 只在确有复用价值时继续做新的对象级 evidence 拆分

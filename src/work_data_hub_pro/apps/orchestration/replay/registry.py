@@ -41,6 +41,17 @@ REPLAY_DOMAINS: dict[str, ReplayDomainSpec] = {
             "annual_loss_slice:run_annual_loss_slice"
         ),
     ),
+    "annuity_income": ReplayDomainSpec(
+        wrapper_command="replay-annuity-income",
+        replay_root=REPO_ROOT / "reference/historical_replays/annuity_income",
+        runbook_path=REPO_ROOT / "docs/runbooks/annuity-income-replay.md",
+        release_path=REPO_ROOT / "config/releases/2026-04-14-annuity-income-baseline.json",
+        domain_config_path=REPO_ROOT / "config/domains/annuity_income/cleansing.json",
+        runner_import=(
+            "work_data_hub_pro.apps.orchestration.replay."
+            "annuity_income_slice:run_annuity_income_slice"
+        ),
+    ),
 }
 
 

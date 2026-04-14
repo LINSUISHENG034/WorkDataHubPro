@@ -74,5 +74,22 @@
       "transaction_group": "projection-publication",
       "idempotency_scope": "run"
     }
+  },
+  "annuity_income": {
+    "fact_annuity_income": {
+      "mode": "REFRESH",
+      "transaction_group": "fact-publication",
+      "idempotency_scope": "batch"
+    },
+    "company_reference": {
+      "mode": "UPSERT",
+      "transaction_group": "reference-publication",
+      "idempotency_scope": "company_id"
+    },
+    "customer_master_signal": {
+      "mode": "UPSERT",
+      "transaction_group": "reference-publication",
+      "idempotency_scope": "company_id+period"
+    }
   }
 }

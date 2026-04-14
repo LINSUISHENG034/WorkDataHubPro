@@ -1,0 +1,32 @@
+[
+  {
+    "target_object": "company_reference",
+    "candidate_payload": {
+      "company_id": "INCWUIHKQ4VG7HF523",
+      "company_name": "未知客户",
+      "period": "2026-03",
+      "source_fact_id": "income-002"
+    },
+    "source_record_ids": [
+      "income-002"
+    ],
+    "derivation_rule_id": "company-reference-from-annuity-income",
+    "derivation_rule_version": "1"
+  },
+  {
+    "target_object": "customer_master_signal",
+    "candidate_payload": {
+      "company_id": "INCWUIHKQ4VG7HF523",
+      "period": "2026-03",
+      "plan_code": "",
+      "customer_type": "INCOME_CUSTOMER",
+      "income_tag": "2603-INCOME",
+      "source_fact_id": "income-002"
+    },
+    "source_record_ids": [
+      "income-002"
+    ],
+    "derivation_rule_id": "customer-master-from-annuity-income",
+    "derivation_rule_version": "1"
+  }
+]

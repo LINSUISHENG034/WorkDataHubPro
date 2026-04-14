@@ -1,0 +1,11 @@
+[
+  {
+    "record_id": "income-002",
+    "resolved_identity": "INCWUIHKQ4VG7HF523",
+    "resolution_method": "temp_id_fallback",
+    "fallback_level": "temporary",
+    "evidence_refs": [
+      "identity:temp_id_fallback:收入明细:2"
+    ]
+  }
+]
