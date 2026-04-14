@@ -191,3 +191,68 @@ def test_publication_service_supports_annual_loss_fact_and_signal_targets() -> N
         "customer_loss_signal",
     ]
     assert storage.read("customer_loss_signal")[0]["customer_type"] == "LOSS_CUSTOMER"
+
+
+def test_publication_service_supports_annuity_income_fact_and_signal_targets_without_projection_hooks() -> None:
+    storage = InMemoryTableStore()
+    service = PublicationService(storage)
+    policy = load_publication_policy(
+        Path("config/policies/publication.json"),
+        domain="annuity_income",
+    )
+
+    results = service.execute(
+        [
+            PublicationBundle(
+                plan=build_publication_plan(
+                    policy=policy,
+                    publication_id="publication-income-facts",
+                    target_name="fact_annuity_income",
+                    target_kind="fact",
+                    refresh_keys=["batch_id"],
+                    upsert_keys=[],
+                    source_batch_id="annuity_income:2026-03",
+                    source_run_id="run-001",
+                ),
+                rows=[
+                    {
+                        "record_id": "fact-001",
+                        "batch_id": "annuity_income:2026-03",
+                        "company_id": "company-001",
+                        "plan_code": "PLAN-A",
+                        "period": "2026-03",
+                    }
+                ],
+            ),
+            PublicationBundle(
+                plan=build_publication_plan(
+                    policy=policy,
+                    publication_id="publication-income-signal",
+                    target_name="customer_master_signal",
+                    target_kind="reference",
+                    refresh_keys=[],
+                    upsert_keys=["company_id", "period"],
+                    source_batch_id="annuity_income:2026-03",
+                    source_run_id="run-001",
+                ),
+                rows=[
+                    {
+                        "company_id": "company-001",
+                        "period": "2026-03",
+                        "customer_type": "INCOME_CUSTOMER",
+                    }
+                ],
+            ),
+        ]
+    )
+
+    assert sorted(policy.targets.keys()) == [
+        "company_reference",
+        "customer_master_signal",
+        "fact_annuity_income",
+    ]
+    assert [result.target_name for result in results] == [
+        "fact_annuity_income",
+        "customer_master_signal",
+    ]
+    assert storage.read("customer_master_signal")[0]["customer_type"] == "INCOME_CUSTOMER"

@@ -44,6 +44,7 @@
 
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
+- [`annuity_income` operator artifacts 证据](../evidence/annuity-income-operator-artifacts-evidence.md)
 
 ## 当前重构处理状态
 

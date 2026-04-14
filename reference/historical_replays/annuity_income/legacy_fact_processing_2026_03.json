@@ -1,0 +1,17 @@
+[
+  {
+    "record_id": "income-002",
+    "company_name": "未知客户",
+    "account_name": "未知客户",
+    "plan_code": "",
+    "plan_type": "单一计划",
+    "business_type": "职年受托",
+    "period": "2026-03",
+    "institution_name": "北京其他",
+    "fixed_fee": 0.0,
+    "source_sheet": "收入明细",
+    "source_row_no": 2,
+    "institution_code": "G37",
+    "company_id": "INCWUIHKQ4VG7HF523"
+  }
+]

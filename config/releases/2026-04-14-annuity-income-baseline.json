@@ -1,0 +1,9 @@
+{
+  "release_id": "2026-04-14-annuity-income-baseline",
+  "rule_pack_versions": {
+    "annuity_income": "2026.04.14"
+  },
+  "domains": {
+    "annuity_income": "config/domains/annuity_income/cleansing.json"
+  }
+}

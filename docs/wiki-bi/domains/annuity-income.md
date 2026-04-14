@@ -47,13 +47,18 @@
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
 - [`annuity_income` 专题证据](../evidence/annuity-income-gap-evidence.md)
+- [`annuity_income` branch mapping 证据](../evidence/annuity-income-branch-mapping-evidence.md)
+- [`annuity_income` ID5 retirement 证据](../evidence/annuity-income-id5-retirement-evidence.md)
+- [`annuity_income` operator artifacts 证据](../evidence/annuity-income-operator-artifacts-evidence.md)
 
 ## 明确不在本页描述的内容
 
 - 当前 rebuild 是否已实现该 domain 的执行态结论
 - 具体规划步骤
 
-本页更适合作为后续把 `annuity_income` 的稳定语义、验证资产与遗留约束吸收进 wiki 的导航入口。
+本页现在既是问题空间导航入口，也是 current project 回写 implementation evidence 的入口。
+
+当前 current project 已有显式 validation slice、runbook、replay assets 与 targeted tests，说明这些先前由 wiki 保留的 institutional memory 已经成功转化为实际开发任务。
 
 当前尤其要避免的是：
 

@@ -60,4 +60,22 @@ class ReferenceDerivationService:
                         derivation_rule_version="1",
                     )
                 )
+            if fact.domain == "annuity_income":
+                period = str(fact.fields["period"])
+                candidates.append(
+                    DerivationCandidate(
+                        target_object="customer_master_signal",
+                        candidate_payload={
+                            "company_id": fact.fields["company_id"],
+                            "period": period,
+                            "plan_code": fact.fields["plan_code"],
+                            "customer_type": "INCOME_CUSTOMER",
+                            "income_tag": f"{period[2:4]}{period[5:7]}-INCOME",
+                            "source_fact_id": fact.record_id,
+                        },
+                        source_record_ids=[fact.record_id],
+                        derivation_rule_id="customer-master-from-annuity-income",
+                        derivation_rule_version="1",
+                    )
+                )
         return candidates

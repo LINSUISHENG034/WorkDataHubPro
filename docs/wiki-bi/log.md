@@ -63,3 +63,16 @@
 - 更新 `concepts/is-new.md`、`concepts/customer-status.md`、`standards/semantic-correctness/customer-status-semantics.md`，把新对象级证据页接入主结论层
 - 更新 `evidence/status-and-snapshot-evidence.md`，把 `is_new` 对象级拆分标记为可复用样板
 - 新增 `_meta/absorption-rounds/round-07-is-new-evidence-split.md`，把本轮作为 follow-on work 的首个对象级拆分页记录
+
+## [2026-04-14] absorb | Round 08 闭环吸收 `annuity_income` slice admission package
+
+- 新增 `_meta/absorption-rounds/round-08-annuity-income-slice-admission.md`，把 `annuity_income` 的专题 gap 转成可直接支撑 slice admission 的轮次沉淀
+- 新增 `evidence/annuity-income-branch-mapping-evidence.md`、`evidence/annuity-income-id5-retirement-evidence.md`、`evidence/annuity-income-operator-artifacts-evidence.md`，把 branch mapping、ID5 retirement、operator artifacts 拆成对象级 evidence page
+- 更新 `evidence/annuity-income-gap-evidence.md`、`evidence/identity-and-lookup-evidence.md`、`evidence/operator-and-surface-evidence.md`、`evidence/verification-assets-evidence.md`，把 `annuity_income` 的 admission-critical 细节从专题页接回对象级 evidence page
+- 更新 `domains/annuity-income.md`、`standards/verification-method/golden-scenarios.md`、`surfaces/unknown-names-csv.md`、`surfaces/failed-record-export.md`，把 slice-admission-ready evidence 接入 domain、standard 与 surface 入口
+- 新增 `docs/superpowers/plans/2026-04-14-workdatahubpro-annuity-income-validation-slice.md` 并更新 first-wave coverage matrix，把 `annuity_income` 从“只有制度记忆”推进到显式 admitted slice 入口
+
+## [2026-04-14] validate | annuity_income wiki-guided implementation loop
+
+- `COMPANY_BRANCH_MAPPING`、ID5 retirement、operator artifacts 这三组 wiki 结论都直接转化成了 current project 的实现、测试与 replay assets
+- 更新 `annuity_income` 相关 evidence pages，把 current_test / current_reference_asset / current_runbook 证据接回 wiki，验证这些页面对实际开发工作具有指导意义

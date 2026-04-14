@@ -72,18 +72,19 @@ The program has completed:
 - the first executable validation slice for `annuity_performance`
 - the default Phase C multi-sheet slice for `annual_award`
 - the first Phase D breadth slice for `annual_loss`
+- the final Phase D breadth slice for `annuity_income`
 
 What is already true:
 
 - a capability-first package exists under `src/work_data_hub_pro/`
 - explicit platform contracts, tracing, lineage, publication, and replay flow exist
-- compatibility adjudication and evidence indexing exist for the first three accepted slices
-- replay assets and runbooks exist for `annuity_performance`, `annual_award`, and `annual_loss`
+- compatibility adjudication and evidence indexing exist for all four accepted slices
+- replay assets and runbooks exist for all four first-wave domains
 - the paired event-domain dependency path is accepted with committed coverage updates
+- first-wave domain coverage is now accepted across Sections 6.1 through 6.4 of the matrix
 
 What is not yet true:
 
-- `annuity_income` does not have an accepted executable slice yet
 - production storage/publication and operator tooling remain deferred
 - special orchestration surfaces such as `company_lookup_queue` and `reference_sync` are now explicitly registered, but not yet closed
 - enterprise persistence surfaces and manual `customer-mdm` operator paths are now explicitly registered, but not yet closed
@@ -228,7 +229,7 @@ Exit gate:
 | 1 | `annuity_performance` | accepted baseline slice | proves the corrected architecture in code |
 | 2 | `annual_award` | accepted multi-sheet slice | closes the second intake archetype and downstream award-status dependency |
 | 3 | `annual_loss` | accepted breadth-closure slice | closes the paired event-domain dependency path before the final single-sheet breadth slice |
-| 4 | `annuity_income` | next recommended single-sheet breadth slice | extends first-wave coverage after event-domain breadth risk is reduced |
+| 4 | `annuity_income` | accepted final first-wave breadth slice | closes first-wave domain coverage while keeping Phase E runtime/operator work explicit |
 
 Historical pre-closure sequence reference:
 | 3 | `annual_loss` | next recommended slice | validates the paired event-domain dependency path |

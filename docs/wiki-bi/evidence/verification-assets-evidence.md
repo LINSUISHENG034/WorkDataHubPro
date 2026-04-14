@@ -39,8 +39,13 @@
 - phase artifacts summary
 - runbooks
 
+## `annuity_income` admission-critical detail
+
+- [`annuity_income` ID5 retirement 证据](./annuity-income-id5-retirement-evidence.md)
+- [`annuity_income` operator artifacts 证据](./annuity-income-operator-artifacts-evidence.md)
+
 ## 当前证据缺口
 
 - error-case fixtures 仍然是高优先级缺口
-- `annuity_income` 的验证资产仍主要停留在 legacy 侧
+- `annuity_income` 的验证资产虽然已有对象级 admission evidence，但 replay / result history 仍主要停留在 legacy 侧
 - current project 仍缺少对 validation result history 的制度化吸收

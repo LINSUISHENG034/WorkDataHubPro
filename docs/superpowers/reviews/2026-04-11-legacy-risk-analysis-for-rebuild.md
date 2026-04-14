@@ -11,7 +11,8 @@
 - `annuity_performance` remains an accepted validation slice.
 - `annual_award` remains an accepted multi-sheet validation slice.
 - `annual_loss` remains an accepted breadth-closure slice.
-- `annuity_income` remains the only unclosed first-wave executable slice.
+- `annuity_income` is now an accepted validation slice.
+- first-wave domain coverage is now accepted across all four primary domain rows.
 - the first-wave matrix now also tracks newly registered runtime/operator
   surfaces beyond the four primary domain rows
 - This register does **not** roll back accepted validation evidence by itself.
@@ -43,8 +44,8 @@ Each risk uses one governance-aligned position:
 | `CR-006` | customer-contract and snapshot projection semantic-width parity | supplemental `SFR-003`, original risk 5 | `pending first-wave gap` | `AP-006`, `CT-004` |
 | `CR-007` | governed string normalization and plan-code correction parity across first-wave domains | original risks 6, 7 | `pending first-wave gap` | `AP-002`, `AI-002`, `CT-008` |
 | `CR-008` | history-aware event-domain lookup and temporal enrichment semantics | supplemental `SFR-004` | `pending first-wave gap` | `AA-004`, `AL-003`, `CT-005`, `XD-005` |
-| `CR-009` | `annuity_income` operator-facing artifact contract | supplemental `SFR-005` | `pending first-wave gap` | `AI-004` |
-| `CR-010` | `annuity_income` service-delegation and explicit no-hook runtime contract | supplemental `SFR-006` | `pending first-wave gap` | `AI-005` |
+| `CR-009` | `annuity_income` operator-facing artifact contract | supplemental `SFR-005` | `accepted but narrowed` | `AI-004` |
+| `CR-010` | `annuity_income` service-delegation and explicit no-hook runtime contract | supplemental `SFR-006` | `accepted but narrowed` | `AI-005` |
 | `CR-011` | directory-based discovery and workbook version arbitration beyond replay-only CLI input | supplemental `SFR-007` | `deferred runtime/operator gap` | `CT-001` |
 | `CR-012` | annual lifecycle and January-only status initialization semantics | original risk 10 | `pending first-wave gap` | `CT-009` |
 | `CR-013` | dynamic FK creation as a legacy operational mechanism | original risk 8 | `invalid or outdated claim` | no new row; covered indirectly by production storage/publication design follow-on |
@@ -254,7 +255,8 @@ Repository evidence:
 
 Governance action:
 
-- track explicitly through `AI-004`
+- keep `AI-004` accepted for the income-specific validation slice
+- continue to track broader cross-domain artifact parity through `CT-016`
 
 ### `CR-010` `annuity_income` Service-Delegation And No-Hook Runtime Contract
 
@@ -270,7 +272,8 @@ Repository evidence:
 
 Governance action:
 
-- track explicitly through `AI-005`
+- keep `AI-005` accepted for the income-specific validation slice
+- keep broader operator/runtime rollout questions in Phase E governance instead of reopening this domain row
 
 ### `CR-011` Directory-Based Discovery And Workbook Version Arbitration Beyond Replay-Only CLI Input
 

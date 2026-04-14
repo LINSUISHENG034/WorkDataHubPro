@@ -50,7 +50,7 @@
 - [`annuity_performance`](./domains/annuity-performance.md) : 导航规模域相关概念、输出和关键证据。
 - [`annual_award`](./domains/annual-award.md) : 导航中标域相关概念、输出和关键证据。
 - [`annual_loss`](./domains/annual-loss.md) : 导航流失域相关概念、输出和关键证据。
-- [`annuity_income`](./domains/annuity-income.md) : 导航收入域相关概念、输出和当前关键证据缺口。
+- [`annuity_income`](./domains/annuity-income.md) : 导航收入域相关概念、输出以及 slice admission 相关证据入口。
 
 ### Surfaces
 
@@ -87,7 +87,10 @@
 - [`is_new` 对象级证据](./evidence/is-new-evidence.md) : 聚合 `is_new` 的公式、粒度边界、非例与验证路径。
 - [验证资产证据](./evidence/verification-assets-evidence.md) : 聚合 golden set、replay baseline、validation guide、error fixtures 等证据。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
-- [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的 legacy-only 制度记忆、身份差异、验证资产缺口与 operator artifact 缺口。
+- [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的专题差异，并把细节分发到对象级 evidence page。
+- [`annuity_income` branch mapping 证据](./evidence/annuity-income-branch-mapping-evidence.md) : 固化 `COMPANY_BRANCH_MAPPING` manual overrides 与 placement gap。
+- [`annuity_income` ID5 retirement 证据](./evidence/annuity-income-id5-retirement-evidence.md) : 固化 ID5 fallback retirement 的历史决策与验证边界。
+- [`annuity_income` operator artifacts 证据](./evidence/annuity-income-operator-artifacts-evidence.md) : 固化 `unknown_names_csv` 与 failed-record export 的 operator-facing 角色。
 
 ### Meta
 
@@ -103,5 +106,6 @@
 - [Round 05：operator 与 surfaces](./_meta/absorption-rounds/round-05-operator-and-surfaces.md) : 第五轮闭环沉淀，记录 reference sync、manual commands、failed-record export 与下一轮目标。
 - [Round 06：`annuity_income` 专题补强](./_meta/absorption-rounds/round-06-annuity-income.md) : 第六轮闭环沉淀，记录 annuity_income 的制度记忆、身份差异、验证资产与 operator artifact 缺口。
 - [Round 07：`is_new` 对象级证据拆分](./_meta/absorption-rounds/round-07-is-new-evidence-split.md) : follow-on 轮次，验证厚主题拆分为对象级 evidence page 的可行性。
+- [Round 08：`annuity_income` slice admission package](./_meta/absorption-rounds/round-08-annuity-income-slice-admission.md) : follow-on 轮次，把 annuity_income 的专题 gap 转成可直接支撑 slice admission 的对象级 evidence。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。

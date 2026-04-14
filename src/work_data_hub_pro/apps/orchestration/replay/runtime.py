@@ -373,13 +373,14 @@ def build_failure_compatibility_case_payload(
     - pro_result: wrapped pro payload rows for the failed checkpoint
 
     Supported checkpoints: fact_processing, identity_resolution, reference_derivation,
-    contract_state, monthly_snapshot.
+    operator_artifacts, contract_state, monthly_snapshot.
     Raises ValueError for unsupported checkpoint names.
     """
     supported = {
         "fact_processing",
         "identity_resolution",
         "reference_derivation",
+        "operator_artifacts",
         "contract_state",
         "monthly_snapshot",
     }

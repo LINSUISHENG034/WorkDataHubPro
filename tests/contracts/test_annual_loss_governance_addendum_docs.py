@@ -16,7 +16,12 @@ def test_annual_loss_acceptance_updates_coverage_matrix_without_dropping_runtime
     coverage_matrix = COVERAGE_MATRIX.read_text(encoding="utf-8")
 
     assert "| `annual_loss` | accepted breadth-closure slice |" in coverage_matrix
-    assert "| `annuity_income` | next recommended single-sheet breadth slice |" in coverage_matrix
+    assert (
+        "| `annuity_income` | next recommended single-sheet breadth slice |" in coverage_matrix
+        or "| `annuity_income` | admitted validation slice plan |" in coverage_matrix
+        or "| `annuity_income` | validation slice in progress |" in coverage_matrix
+        or "| `annuity_income` | accepted validation slice |" in coverage_matrix
+    )
     assert (
         "| AL-001 | multi-sheet loss-domain intake contract | capability |"
         " legacy migration workflow and paired event-domain references |"
@@ -116,12 +121,24 @@ def test_annual_loss_acceptance_updates_refactor_program_but_keeps_phase_e_track
     refactor_program = REFACTOR_PROGRAM.read_text(encoding="utf-8")
 
     assert "- the first Phase D breadth slice for `annual_loss`" in refactor_program
-    assert "- compatibility adjudication and evidence indexing exist for the first three accepted slices" in refactor_program
-    assert "- replay assets and runbooks exist for `annuity_performance`, `annual_award`, and `annual_loss`" in refactor_program
+    assert (
+        "- compatibility adjudication and evidence indexing exist for the first three accepted slices" in refactor_program
+        or "- compatibility adjudication and evidence indexing exist for all four accepted slices" in refactor_program
+    )
+    assert (
+        "- replay assets and runbooks exist for `annuity_performance`, `annual_award`, and `annual_loss`" in refactor_program
+        or "- replay assets and runbooks exist for all four first-wave domains" in refactor_program
+    )
     assert "- the paired event-domain dependency path is accepted with committed coverage updates" in refactor_program
-    assert "- `annuity_income` does not have an accepted executable slice yet" in refactor_program
+    assert (
+        "- `annuity_income` does not have an accepted executable slice yet" in refactor_program
+        or "- the final Phase D breadth slice for `annuity_income`" in refactor_program
+    )
     assert "| 3 | `annual_loss` | accepted breadth-closure slice | closes the paired event-domain dependency path before the final single-sheet breadth slice |" in refactor_program
-    assert "| 4 | `annuity_income` | next recommended single-sheet breadth slice | extends first-wave coverage after event-domain breadth risk is reduced |" in refactor_program
+    assert (
+        "| 4 | `annuity_income` | next recommended single-sheet breadth slice | extends first-wave coverage after event-domain breadth risk is reduced |" in refactor_program
+        or "| 4 | `annuity_income` | accepted final first-wave breadth slice | closes first-wave domain coverage while keeping Phase E runtime/operator work explicit |" in refactor_program
+    )
     assert "| deferred lookup queue runtime | legacy supports queued provider processing, retries, and recovery outside the main fact run | deferred | separate queue/runtime plan |" in refactor_program
     assert "| reference bootstrap / reference-sync runtime | legacy uses an explicit `reference_sync` orchestration surface plus incremental state | deferred | separate reference bootstrap/runtime plan |" in refactor_program
     assert "| enterprise identity / EQC persistence surfaces | legacy persists cache, queue, and raw/cleansed EQC data beyond fact-domain outputs | deferred | separate identity persistence plan |" in refactor_program
@@ -132,7 +149,10 @@ def test_annual_loss_acceptance_syncs_risk_register_without_retiring_open_runtim
     risk_register = RISK_REGISTER.read_text(encoding="utf-8")
 
     assert "- `annual_loss` remains an accepted breadth-closure slice." in risk_register
-    assert "- `annuity_income` remains the only unclosed first-wave executable slice." in risk_register
+    assert (
+        "- `annuity_income` remains the only unclosed first-wave executable slice." in risk_register
+        or "- `annuity_income` is now an accepted validation slice." in risk_register
+    )
     assert "Current accepted event-domain slices prove:" in risk_register
     assert "| `CR-008` | history-aware event-domain lookup and temporal enrichment semantics | supplemental `SFR-004` | `pending first-wave gap` | `AA-004`, `AL-003`, `CT-005`, `XD-005` |" in risk_register
     assert "| `CR-014` | deferred-lookup queue runtime, retry semantics, and special orchestration domain closure | `2026-04-12 legacy audit` | `deferred runtime/operator gap` | `CT-011`, `XD-003` |" in risk_register

@@ -33,9 +33,13 @@
 - config summary
 - open-question level audit synthesis
 
+## `annuity_income` 对象级补强页
+
+- [`annuity_income` operator artifacts 证据](./annuity-income-operator-artifacts-evidence.md)
+
 ## 当前证据缺口
 
 - enterprise persistence surfaces 尚未拆成对象级 evidence page
 - GUI / standalone tools 仍未形成明确治理结论
 - standalone `cleanse` CLI 仍未形成明确治理结论
-- annuity_income 相关 operator artifacts 仍主要通过主题页而非对象级 evidence page 保留
+- `annuity_income` artifact detail 已拆出，但 cross-domain artifact parity 仍未闭合

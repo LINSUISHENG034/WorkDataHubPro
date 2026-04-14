@@ -20,6 +20,12 @@ def test_annual_loss_governance_docs_mark_slice_as_accepted_and_advance_annuity_
     assert (
         "| `annuity_income` | next recommended single-sheet breadth slice | no accepted executable slice yet |"
         in coverage_matrix
+        or "| `annuity_income` | admitted validation slice plan | no accepted executable slice yet |"
+        in coverage_matrix
+        or "| `annuity_income` | validation slice in progress | full slice acceptance and broader operator-artifact closure still pending |"
+        in coverage_matrix
+        or "| `annuity_income` | accepted validation slice | broader operator-artifact parity and Phase E runtime closure remain follow-on |"
+        in coverage_matrix
     )
 
     assert (
@@ -48,14 +54,19 @@ def test_annual_loss_governance_docs_mark_slice_as_accepted_and_advance_annuity_
     assert (
         "- compatibility adjudication and evidence indexing exist for the first three accepted slices"
         in refactor_program
+        or "- compatibility adjudication and evidence indexing exist for all four accepted slices"
+        in refactor_program
     )
     assert (
         "- replay assets and runbooks exist for `annuity_performance`, `annual_award`, and `annual_loss`"
+        in refactor_program
+        or "- replay assets and runbooks exist for all four first-wave domains"
         in refactor_program
     )
     assert (
         "- `annuity_income` does not have an accepted executable slice yet"
         in refactor_program
+        or "- the final Phase D breadth slice for `annuity_income`" in refactor_program
     )
     assert (
         "| 3 | `annual_loss` | accepted breadth-closure slice | closes the paired event-domain dependency path before the final single-sheet breadth slice |"
@@ -63,5 +74,7 @@ def test_annual_loss_governance_docs_mark_slice_as_accepted_and_advance_annuity_
     )
     assert (
         "| 4 | `annuity_income` | next recommended single-sheet breadth slice | extends first-wave coverage after event-domain breadth risk is reduced |"
+        in refactor_program
+        or "| 4 | `annuity_income` | accepted final first-wave breadth slice | closes first-wave domain coverage while keeping Phase E runtime/operator work explicit |"
         in refactor_program
     )

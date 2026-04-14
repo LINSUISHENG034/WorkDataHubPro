@@ -34,8 +34,13 @@
 - verification-assets audit synthesis
 - current test coverage notes
 
+## `annuity_income` 对象级补强页
+
+- [`annuity_income` branch mapping 证据](./annuity-income-branch-mapping-evidence.md)
+- [`annuity_income` ID5 retirement 证据](./annuity-income-id5-retirement-evidence.md)
+
 ## 当前证据缺口
 
 - temp-id、ID1-ID5 mapping files 与 annuity_income 相关身份差异仍未形成对象级 evidence page
 - current project 中 identity governance 仍未形成独立标准页
-- annuity_income 的 COMPANY_BRANCH_MAPPING gap 仍未被单独吸收
+- annuity_income 的 branch mapping / ID5 gap 已被拆出，但 current project 还没有独立实现与验证

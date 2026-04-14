@@ -35,7 +35,7 @@ from work_data_hub_pro.platform.contracts.publication import (
 
 def _registry_for(tmp_path: Path) -> dict[str, ReplayDomainSpec]:
     registry: dict[str, ReplayDomainSpec] = {}
-    for domain in ("annuity_performance", "annual_award", "annual_loss"):
+    for domain in ("annuity_performance", "annual_award", "annual_loss", "annuity_income"):
         replay_root = tmp_path / domain
         replay_root.mkdir(parents=True, exist_ok=True)
         registry[domain] = ReplayDomainSpec(
