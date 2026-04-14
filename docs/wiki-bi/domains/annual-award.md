@@ -42,6 +42,7 @@
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
+- [validation result history 证据](../evidence/validation-result-history-evidence.md)
 
 ## 相关 domains
 

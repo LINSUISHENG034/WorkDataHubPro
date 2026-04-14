@@ -108,3 +108,10 @@
 - 新增 `enterprise-enrichment-persistence.md` 与 `standalone-tooling.md`，把先前只在缺口清单里出现的对象簇提升为独立治理对象
 - 更新 `reference-sync.md`、`company-lookup-queue.md`、`customer-mdm-commands.md`，把 target inventory、queue semantics、manual recovery path 与相邻 tooling 边界收紧
 - 更新 `index.md`、`_meta/absorption-rounds/index.md` 与 `wiki-absorption-roadmap.md`，将 Round 11 标记为已完成，并把推荐入口推进到 Round 12
+
+## [2026-04-14] absorb | Round 12 闭环吸收 `verification result history`
+
+- 更新 `verification-assets-evidence.md`，把 current registry 的 `deferred` 状态、inline failure-path coverage 与 legacy result corpus 的角色写实
+- 新增 `validation-result-history-evidence.md`，把 parity result 目录、current asset registry 与 validation history 变成独立 evidence object
+- 更新 `golden-scenarios.md` 与 `real-data-validation.md`，明确 `deferred` 不等于“没有资产”，并把 validation result history 接入验证方法层
+- 更新 `annual-award.md`、`annual-loss.md`、`index.md`、`_meta/absorption-rounds/index.md` 与 `wiki-absorption-roadmap.md`，将 Round 12 标记为已完成，并把推荐入口推进到 Round 13

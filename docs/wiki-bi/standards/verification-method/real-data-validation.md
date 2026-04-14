@@ -39,6 +39,13 @@ real-data validation 至少应满足：
 - evidence package / comparison report
 - 明确的验证目标与检查口径
 
+## 当前治理边界
+
+- current project 已把 real-data sample 写成显式 asset kind，但对 accepted slices 仍保持 `deferred`
+- 这意味着 real-data sample 目前仍是治理目标，而不是已经存在的 repo-native asset
+- 如果当前只能用 synthetic fixture 或 replay baseline 支撑验证，必须明确说明它们没有替代 real-data sample
+- 历史 comparison report、JSON diff、parity result 目录属于 validation result history，应作为可复核资产保留
+
 ## 非例
 
 - 只用 programmatic workbook fixture 跑一次就宣称完成 real-data validation
@@ -54,3 +61,4 @@ real-data validation 至少应满足：
 
 - [输入现实证据](../../evidence/input-reality-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
+- [validation result history 证据](../../evidence/validation-result-history-evidence.md)

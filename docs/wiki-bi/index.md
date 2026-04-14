@@ -27,6 +27,8 @@
   - 真实数据验证不是“拿真实文件跑一下”，而是有边界和目标的验证方法。
 - [什么样的输出才算“正确”](./standards/output-correctness/output-correctness.md)
   - 正确输出应满足语义、粒度、关系和验收资产多重约束。
+- [为什么 `deferred` 不等于“没有验证资产”](./evidence/validation-result-history-evidence.md)
+  - current registry 已显式登记很多尚未物化的 asset kinds，问题是治理状态，而不是是否被看见。
 - [哪些 system surfaces 不能被隐含忽略](./surfaces/company-lookup-queue.md)
   - queue、reference sync、manual commands、operator artifacts 都是显式治理对象。
 - [哪些 legacy tools 属于相邻 operator tooling，而不是业务主路径](./surfaces/standalone-tooling.md)
@@ -92,6 +94,7 @@
 - [状态与快照证据](./evidence/status-and-snapshot-evidence.md) : 聚合客户状态、快照、customer MDM 相关证据。
 - [`is_new` 对象级证据](./evidence/is-new-evidence.md) : 聚合 `is_new` 的公式、粒度边界、非例与验证路径。
 - [验证资产证据](./evidence/verification-assets-evidence.md) : 聚合 golden set、replay baseline、validation guide、error fixtures 等证据。
+- [validation result history 证据](./evidence/validation-result-history-evidence.md) : 聚合 legacy parity result 目录、current asset registry 与 validation history 的治理结论。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
 - [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的专题差异，并把细节分发到对象级 evidence page。
 - [`annuity_income` branch mapping 证据](./evidence/annuity-income-branch-mapping-evidence.md) : 固化 `COMPANY_BRANCH_MAPPING` manual overrides 与 placement gap。
@@ -116,5 +119,6 @@
 - [Round 09：legacy wiki 退役收口](./_meta/absorption-rounds/round-09-legacy-wiki-retirement.md) : follow-on 轮次，记录旧 wiki 层的退役收口与 durable 归宿。
 - [Round 10：domain 导航与 cross-reference 收紧](./_meta/absorption-rounds/round-10-domain-navigation-tightening.md) : maintenance 轮次，记录低入链 durable pages 的 lint 结果与导航收紧经验。
 - [Round 11：Phase E operator/runtime surfaces decision package](./_meta/absorption-rounds/round-11-phase-e-surface-decision-package.md) : follow-on 轮次，把 surface open questions 收束成 enterprise persistence、standalone tooling 与 operator/runtime decision package。
+- [Round 12：verification result history and fixture governance](./_meta/absorption-rounds/round-12-verification-result-history-and-fixture-governance.md) : follow-on 轮次，把 validation result history、error-case fixtures 与 deferred asset 状态收束成正式治理对象。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。
