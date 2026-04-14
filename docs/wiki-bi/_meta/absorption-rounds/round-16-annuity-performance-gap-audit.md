@@ -30,6 +30,7 @@
   - output row 过滤口径
   - backfill source 字段一致性
   - 空值清洗后的派生字段语义
+- 审核 follow-up 进一步确认：其中有些是层级差异，不再视为 gap；另一些已经足够明确到可以认定为 wiki 过窄或高概率代码问题
 - 这些差距已经足够厚，值得单独立一页 implementation gap evidence
 
 ## 本轮更新的目标页
@@ -47,4 +48,7 @@
 
 ## 下一步建议
 
-- 若后续继续治理 annuity-performance，优先做 gap adjudication，而不是继续扩写更多说明页
+- 若后续继续治理 annuity-performance，优先把已确认的代码问题和 contract drift 再细分为：
+  - wiki 直接修正
+  - 代码修复候选
+  - intentional difference 记录

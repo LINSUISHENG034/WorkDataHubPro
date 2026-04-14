@@ -144,3 +144,10 @@
 - 更新 `annuity-performance-field-processing-evidence.md`，补入显式空值 / 默认值规则，避免 annuity-performance 只停留在处理分类层
 - 新增 `annuity-performance-implementation-gap-evidence.md`，把 annuity-performance wiki 合同与 legacy 代码实现之间的差距项正式沉淀
 - 更新 `annuity-performance.md`、`index.md`、`_meta/absorption-rounds/index.md` 与 `wiki-absorption-roadmap.md`，把 gap audit 作为持续维护轮次显式登记
+
+## [2026-04-14] adjudicate | annuity_performance gap review follow-up
+
+- 根据后续人工审核与再次代码核对，将 `GAP-AP-001`、`GAP-AP-006` 降级为已判定非 gap
+- 将 `GAP-AP-002` 收紧为“wiki 过窄已确认”，并把 `客户名称` 缺失从绝对无效源调整为降级输入语义
+- 将 `GAP-AP-003` 收紧为 active runtime path 与 schema-level contract 的代码漂移
+- 将 `GAP-AP-004`、`GAP-AP-005` 收紧为高概率代码问题，并新增 `GAP-AP-007` 记录 company_id YAML priority 的实现漂移
