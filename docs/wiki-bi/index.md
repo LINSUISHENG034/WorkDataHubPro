@@ -41,6 +41,8 @@
   - `cleanse`、EQC GUI、deployment GUI 需要显式登记，但不能自动等同于 rebuild 核心边界。
 - [为什么旧项目不能直接作为新架构模板](./_meta/wiki-design.md)
   - wiki 借鉴 legacy 的稳定语义与标准，而不是复制其实现结构。
+- [如何把某个 domain 从导航页升级成合同级 wiki](./_meta/wiki-domain-upgrade-framework.md)
+  - 先补输入/输出/处理合同，再按需做 code-gap audit，这是当前最可复用的 domain wiki 升级路径。
 - [event-style domains 如何接回状态判断与输入现实](./domains/annual-award.md)
   - 从 `annual_award` 进入，再串到 `annual_loss`、`annuity_performance` 与相关标准页，看 event domain 如何进入状态语义与输入现实。
 
@@ -117,6 +119,7 @@
 ### Meta
 
 - [设计草案](./_meta/wiki-design.md) : `wiki-bi` 的顶层 schema、规则与运营模型。
+- [domain wiki 升级框架](./_meta/wiki-domain-upgrade-framework.md) : 定义如何把某个高价值 domain 从导航页升级成可直接问答的合同级 wiki。
 - [轻量实施计划](./_meta/wiki-implementation-plan.md) : 首批 seed scaffold 的实施范围、顺序与完成定义。
 - [吸收工作流](./_meta/wiki-absorption-workflow.md) : 定义主题簇吸收、分类 gate、每轮输出与验收清单。
 - [吸收路线图](./_meta/wiki-absorption-roadmap.md) : 定义主题簇整体顺序与每轮主入口页。
@@ -137,5 +140,6 @@
 - [Round 14：status family selective evidence split](./_meta/absorption-rounds/round-14-status-family-selective-evidence-split.md) : follow-on 轮次，只拆出真正满足阈值的状态对象，并明确哪些状态继续留在主题页。
 - [Round 15：`annuity_performance` I/O contracts](./_meta/absorption-rounds/round-15-annuity-performance-io-contracts.md) : follow-on 轮次，把 annuity-performance 的输入、输出与字段处理提升为合同级 wiki 页面。
 - [Round 16：`annuity_performance` implementation gap audit](./_meta/absorption-rounds/round-16-annuity-performance-gap-audit.md) : maintenance 轮次，对照 legacy 代码审计 annuity-performance wiki 合同与实现差距。
+- [Round 17：domain upgrade workflow pattern](./_meta/absorption-rounds/round-17-domain-upgrade-workflow-pattern.md) : maintenance 轮次，把 annuity-performance 的有效升级路径提炼成可复用框架。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。

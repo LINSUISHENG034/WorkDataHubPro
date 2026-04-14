@@ -151,3 +151,9 @@
 - 将 `GAP-AP-002` 收紧为“wiki 过窄已确认”，并把 `客户名称` 缺失从绝对无效源调整为降级输入语义
 - 将 `GAP-AP-003` 收紧为 active runtime path 与 schema-level contract 的代码漂移
 - 将 `GAP-AP-004`、`GAP-AP-005` 收紧为高概率代码问题，并新增 `GAP-AP-007` 记录 company_id YAML priority 的实现漂移
+
+## [2026-04-14] maintain | 提炼 domain wiki 升级框架
+
+- 新增 `_meta/wiki-domain-upgrade-framework.md`，把高价值 domain 从导航页升级到合同级 wiki 的工作流沉淀为可复用框架
+- 新增 `round-17-domain-upgrade-workflow-pattern.md`，用 annuity-performance 的 Round 15 / 16 作为样板实例
+- 更新 `index.md` 与 `_meta/absorption-rounds/index.md`，把这套“通用框架 + 真实样板”接入主导航

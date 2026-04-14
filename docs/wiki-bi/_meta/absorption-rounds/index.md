@@ -34,3 +34,5 @@
   - follow-on 轮次，把 annuity-performance 的输入合同、输出合同与字段处理语义固化为可直接问答的 durable page。
 - [Round 16：`annuity_performance` implementation gap audit](./round-16-annuity-performance-gap-audit.md)
   - maintenance 轮次，对照 legacy 代码审计 annuity-performance 的 wiki 合同与实现差距。
+- [Round 17：domain upgrade workflow pattern](./round-17-domain-upgrade-workflow-pattern.md)
+  - maintenance 轮次，把 annuity-performance 的有效知识升级路径提炼成通用框架 + 样板实例。
