@@ -1,0 +1,6 @@
+interface:
+  display_name: "WDHP Governance"
+  short_description: "System-level governance, slice admission, and wiki-bi maintenance"
+  default_prompt: "Use $wdhp-governance to reason from docs/system + docs/wiki-bi, review implementation, analyze slice admission, or maintain durable WorkDataHubPro governance knowledge."
+policy:
+  allow_implicit_invocation: false

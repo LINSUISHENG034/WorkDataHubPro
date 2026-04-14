@@ -85,10 +85,12 @@
 
 这些内容分别由其他资产负责：
 
+- `docs/system/`
+  - 框架无关的顶层产品设计与文档权威模型
 - `.planning/`
-  - 当前执行态与推进状态
+  - 某一套 workflow framework 下的当前执行态与推进状态
 - `docs/superpowers/specs/`
-  - 当前项目的架构设计与重构方案
+  - 某一套 workflow framework 下的架构设计与重构方案
 - `docs/disciplines/`
   - 当前项目的执行规则
 - 旧项目代码与文档
@@ -1460,15 +1462,20 @@ lint 至少检查以下事项：
 
 ### 13.1 与 `.planning/` 的关系
 
-- `.planning/` 负责“当前做什么”
+- `.planning/` 负责某一套 framework 下“当前做什么”
 - `wiki-bi` 负责“为什么这样判断、什么算正确”
 
-### 13.2 与 `docs/superpowers/specs/` 的关系
+### 13.2 与 `docs/system/` 的关系
 
-- `specs/` 负责“新项目准备怎么设计”
+- `docs/system/` 负责框架无关的顶层系统设计与文档权威模型
+- `wiki-bi` 负责该系统必须保留的业务语义、验收标准与证据关系
+
+### 13.3 与 `docs/superpowers/specs/` 的关系
+
+- `specs/` 负责某一套 framework 下“新项目准备怎么设计”
 - `wiki-bi` 负责“设计时必须尊重哪些语义与标准”
 
-### 13.3 与旧项目代码和文档的关系
+### 13.4 与旧项目代码和文档的关系
 
 - 旧项目是证据来源
 - `wiki-bi` 是证据整理与知识抽象层
