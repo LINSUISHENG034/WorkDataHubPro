@@ -113,6 +113,13 @@ Current client wiring for subagent-heavy Codex work:
 - if on-demand startup is required, manage the shared Serena process outside
   Codex itself with workstation-local automation such as Windows Task
   Scheduler, NSSM, or a user-launched bootstrap script
+- for Windows-local supervision, prefer absolute paths or
+  `%USERPROFILE%`-derived paths for both the bootstrap script and
+  `serena.exe`; do not assume background launchers inherit
+  `%USERPROFILE%\\.local\\bin` on `PATH`
+- supervise the shared service by checking whether `127.0.0.1:9121` is
+  actually listening, not by assuming the first launcher PID returned from
+  `Start-Process` is the long-lived Serena server process
 - do not document local supervisor state as committed repository source of
   truth; only document the supported wiring pattern and required commands
 
