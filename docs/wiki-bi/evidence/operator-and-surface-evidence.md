@@ -19,6 +19,7 @@
 | E-SF-009 | current_test | strong | explicitly_tracked | `reference-sync`, `backfill` | 2026-04-15 | `tests/integration/test_reference_derivation.py` 与 `tests/integration/test_publication_service.py` 证明 current repo 已用显式 `reference_derivation -> publication` 链取代 accepted slices 中对 hidden reference-sync side effects 的依赖。 |
 | E-SF-010 | current_code | supporting | explicitly_tracked | `company-lookup-queue`, `enterprise-enrichment-persistence` | 2026-04-15 | `src/work_data_hub_pro/capabilities/identity_resolution/service.py` 当前采用 `source_value -> cache_hit -> provider_lookup -> temp_id_fallback` 的同步治理链，且 repo 中不存在 `enrichment_requests`、`enrichment_index`、`base_info` 等 repo-native runtime surface。 |
 | E-SF-011 | current_test | supporting | explicitly_tracked | `company-lookup-queue`, `unknown-names-csv`, `failed-record-export`, `annuity-income` | 2026-04-15 | `tests/integration/test_annuity_income_operator_artifacts.py` 证明 unresolved identity 当前会被外显到 `unknown_names_csv` 与 failed-record artifacts，而不是被当前 repo 的 async lookup queue 吞掉。 |
+| E-SF-012 | current_reference_asset | supporting | explicitly_tracked | `business-collection-ledger-workbook`, `business-collection-workbook-variants-evidence`, `annual-award`, `annual-loss` | 2026-04-15 | representative single-month production-sample validation 显示 business-collection ledger workbook 与相邻 summary workbook 共同构成 `业务收集` workbook family；写回内容仅限 workbook metadata 与 sheet names，raw workbook path 不作为 durable wiki 引用对象。 |
 
 ## 本轮已吸收的稳定结论
 
@@ -33,6 +34,8 @@
 - current accepted validation slices 没有 repo-native async lookup queue；被 accepted 的是同步 identity chain、temp-id fallback 与 operator-visible unresolved artifacts，而不是 legacy queue orchestration
 - enterprise persistence 不应再被当作一整团“identity 附属表”；更合理的 closure 方式是把 cache、queue persistence、provider raw/cleansed persistence 分别判断是否处于 active runtime
 - 对 first-wave validation runtime 来说，`reference_sync`、`company_lookup_queue` 与 enterprise persistence 的 runtime breadth 都不属于 active retained surface；它们要么已经被更显式的 flow 替代，要么仍保持 deferred
+- `业务收集` workbook reality 现在已从“聊天里提到过的文件夹记忆”升级为显式 surface/evidence topic
+- business collection ledger workbook 的 surface 宽度明显大于 `annual_award` / `annual_loss` 任一单独 accepted contract
 
 ## 哪些来源是强证
 
@@ -67,6 +70,8 @@
 - [standalone tooling](../surfaces/standalone-tooling.md)
 - [reference_sync](../surfaces/reference-sync.md)
 - [`company_lookup_queue`](../surfaces/company-lookup-queue.md)
+- [business collection ledger workbook](../surfaces/business-collection-ledger-workbook.md)
+- [business collection workbook variants 证据](./business-collection-workbook-variants-evidence.md)
 - [`annuity_income` operator artifacts 证据](./annuity-income-operator-artifacts-evidence.md)
 
 ## 当前证据缺口
@@ -74,3 +79,4 @@
 - shared unresolved-name / failed-record artifact parity 仍未完成 cross-domain closure；当前只有 `annuity_income` 获得 accepted artifact contract
 - standalone tooling family 已被显式登记，但 retain / retire / defer 边界仍待后续治理决策
 - manual `customer-mdm` commands 虽已显式登记，但每条命令的 retain / replace / retire 边界仍待后续治理决策
+- `业务收集` 目录下相邻 workbook variants 的多月稳定性与最终 surface catalog 仍待更多样本验证

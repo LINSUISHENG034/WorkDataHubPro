@@ -28,6 +28,8 @@
 - 多 sheet 事件域的输入现实不能被简化成单 sheet 假设
 - 目录、版本、命名策略属于输入现实的一部分，而不是无关噪音
 - `sheet_name` 与 `sheet_names` 这种配置差异本身就是输入合同
+- accepted contract 与 observed production variant 是不同 evidence layer
+- observed workbook variants can strengthen input reality understanding without automatically becoming accepted source contracts
 
 ## 输入现实检查表
 
@@ -44,11 +46,13 @@
   - 共用 `data/real_data/{YYYYMM}/收集数据/数据采集`
   - 共用 `highest_number` 版本策略
   - 但使用不同 sheet
+  - 当前还可由 [annuity workbook family 证据](../../evidence/annuity-workbook-family-evidence.md) 回答代表性生产样本中的物理 workbook 实际同时包含哪些 sheet
 - [`annual_award`](../../domains/annual-award.md) 与 [`annual_loss`](../../domains/annual-loss.md)
   - 使用 `data/real_data/{YYYYMM}/收集数据/业务收集`
   - 是 multi-sheet 事件域
   - 不能被简化为单 sheet 输入假设
   - 当前已分别补成 [`annual_award` 输入合同](./annual-award-input-contract.md) 与 [`annual_loss` 输入合同](./annual-loss-input-contract.md)
+  - 当前还可由 [business collection workbook variants 证据](../../evidence/business-collection-workbook-variants-evidence.md) 与 [business collection ledger workbook](../../surfaces/business-collection-ledger-workbook.md) 回答相邻 workbook / sheet 的 observed production reality
 - real-data validation
   - 依赖真实样本与真实结构，而不等于“把 synthetic workbook 换个名字”
 
@@ -73,6 +77,8 @@
 ## 相关证据
 
 - [输入现实证据](../../evidence/input-reality-evidence.md)
+- [annuity workbook family 证据](../../evidence/annuity-workbook-family-evidence.md)
+- [business collection workbook variants 证据](../../evidence/business-collection-workbook-variants-evidence.md)
 - [`annual_award` 输入合同](./annual-award-input-contract.md)
 - [`annual_loss` 输入合同](./annual-loss-input-contract.md)
 - [`annuity_performance` 输入合同](./annuity-performance-input-contract.md)

@@ -59,6 +59,7 @@ current project 已有：
 ## 关键证据来源
 
 - [`annuity_income` 字段处理证据](../evidence/annuity-income-field-processing-evidence.md)
+- [annuity workbook family 证据](../evidence/annuity-workbook-family-evidence.md)
 - [输入现实证据](../evidence/input-reality-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
@@ -67,6 +68,13 @@ current project 已有：
 - [`annuity_income` branch mapping 证据](../evidence/annuity-income-branch-mapping-evidence.md)
 - [`annuity_income` ID5 retirement 证据](../evidence/annuity-income-id5-retirement-evidence.md)
 - [`annuity_income` operator artifacts 证据](../evidence/annuity-income-operator-artifacts-evidence.md)
+
+## 当前 production reality 问答
+
+- accepted source contract：[`annuity_income` 输入合同](../standards/input-reality/annuity-income-input-contract.md) 中定义的 `收入明细` sheet contract。
+- observed production reality：代表性单月生产样本验证表明，annuity workbook family 在同一本物理 workbook 中同时出现 `规模明细` 与 `收入明细`。
+- stable contract：`annuity_income` 仍只认领 `收入明细`，shared workbook family 不会把收入域与规模域写成同一 accepted contract。
+- observed production variant：shared workbook family 属于 workbook-discovery 与 explainability 线索，不是把一个观测月份自动推广为 universal contract 的依据。
 
 ## 明确不在本页描述的内容
 

@@ -36,12 +36,21 @@
 ## 关键证据来源
 
 - [输入现实证据](../evidence/input-reality-evidence.md)
+- [business collection workbook variants 证据](../evidence/business-collection-workbook-variants-evidence.md)
 - [`annual_loss` 字段处理证据](../evidence/annual-loss-field-processing-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [`is_loss_reported` 对象级证据](../evidence/is-loss-reported-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [validation result history 证据](../evidence/validation-result-history-evidence.md)
+- [business collection ledger workbook](../surfaces/business-collection-ledger-workbook.md)
+
+## 当前 production reality 问答
+
+- accepted source contract：[`annual_loss` 输入合同](../standards/input-reality/annual-loss-input-contract.md) 中定义的 accepted contract，即台账 workbook 内的流失 sheet subset。
+- observed production reality：代表性单月生产样本验证表明，business-collection ledger workbook 当前承载 accepted loss sheets，同时同目录里还存在相邻 summary workbook。
+- stable contract：`annual_loss` 只认领自己的 event-domain sheets，不把整个 ledger workbook 或 summary workbook 写成 accepted contract。
+- observed production variant / adjacent operator reality：`业务收集` 目录中的相邻 summary / attachment workbook 先作为 observed production variant 或 surface 处理，再等待更强证据判断是否进入未来 contract。
 
 ## 当前验证资产姿态
 

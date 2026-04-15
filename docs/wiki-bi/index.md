@@ -36,6 +36,8 @@
   - temp-id、mapping files、cache、provider、queue 的边界需要作为 identity governance 统一理解。
 - [什么算 real-data validation](./standards/verification-method/real-data-validation.md)
   - 真实数据验证不是“拿真实文件跑一下”，而是有边界和目标的验证方法。
+- [当前生产 workbook 长什么样](./evidence/input-reality-evidence.md)
+  - 先看输入现实聚合页，再进入年金 workbook family 与业务收集 variants 的对象级 evidence page。
 - [什么样的输出才算“正确”](./standards/output-correctness/output-correctness.md)
   - 正确输出应满足语义、粒度、关系和验收资产多重约束。
 - [为什么 `deferred` 不等于“没有验证资产”](./evidence/validation-result-history-evidence.md)
@@ -83,6 +85,7 @@
 
 - [`company_lookup_queue`](./surfaces/company-lookup-queue.md) : 识别异步企业补查队列这一独立治理 surface。
 - [enterprise enrichment persistence](./surfaces/enterprise-enrichment-persistence.md) : 识别 `enrichment_index`、`enrichment_requests`、`base_info` 组成的 identity persistence surface。
+- [business collection ledger workbook](./surfaces/business-collection-ledger-workbook.md) : 识别 `业务收集` 下台账型 workbook 及其相邻 summary / attachment 现实属于显式治理 surface。
 - [`reference_sync`](./surfaces/reference-sync.md) : 识别 authoritative reference sync 这一独立治理 surface。
 - [`customer-mdm` 手工命令面](./surfaces/customer-mdm-commands.md) : 识别 contract/snapshot/init-year/cutover 等 operator surface。
 - [failed-record export](./surfaces/failed-record-export.md) : 识别失败记录导出这一 operator artifact surface。
@@ -120,6 +123,8 @@
 ### Evidence
 
 - [输入现实证据](./evidence/input-reality-evidence.md) : 聚合输入形态、sheet、fixture 与 real-data 相关证据。
+- [annuity workbook family 证据](./evidence/annuity-workbook-family-evidence.md) : 固化“代表性单月生产样本已验证”的年金 workbook family 同时承载 `规模明细` 与 `收入明细` 现实。
+- [business collection workbook variants 证据](./evidence/business-collection-workbook-variants-evidence.md) : 固化 `业务收集\V1` 下台账 workbook 与相邻 summary workbook 的观测现实。
 - [`annual_award` 字段处理证据](./evidence/annual-award-field-processing-evidence.md) : 把 annual_award 的 multi-sheet intake、business-type 派生与 plan-code enrichment 写成 contract-grade 证据页。
 - [`annual_loss` 字段处理证据](./evidence/annual-loss-field-processing-evidence.md) : 把 annual_loss 的 date normalization、product-line mapping、current-row lookup 与 temp-id 边界写成 contract-grade 证据页。
 - [`annuity_performance` 字段处理证据](./evidence/annuity-performance-field-processing-evidence.md) : 将 annuity-performance 的字段处理分成工程性质量提升与业务语义处理两类。
@@ -169,5 +174,6 @@
 - [Round 20：verification asset adjudication package](./_meta/absorption-rounds/round-20-verification-asset-adjudication-package.md) : maintenance 轮次，把 verification asset 的“状态 + 当前保护方式 + 裁决含义”收紧成 durable 表达，并明确 legacy result corpus 的承接边界。
 - [Round 21：Phase E surface decision closure](./_meta/absorption-rounds/round-21-phase-e-surface-decision-closure.md) : maintenance 轮次，把 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 收紧成 current accepted runtime 与 deferred runtime 分层的决策包。
 - [Round 22：high-traffic evidence normalization](./_meta/absorption-rounds/round-22-high-traffic-evidence-normalization.md) : maintenance 轮次，把高流量 aggregate evidence pages 收紧成一致的 dispatcher + object-page 分发骨架，提高 lint 友好度。
+- [Round 23：production-sample augmentation](./_meta/absorption-rounds/round-23-production-sample-augmentation.md) : maintenance 轮次，把代表性单月生产样本验证过的 workbook family、业务收集 variants 与 ledger surface 回写成 durable wiki 入口。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

@@ -3,6 +3,12 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-15 23:43] plan | Round 23 production-sample augmentation
+
+- planned a wiki maintenance round focused on legacy plus representative single-month production-sample reality
+- scoped the round around workbook-family evidence, workbook variants, and business-collection adjacent surfaces
+- executed the round by adding object-level evidence for annuity workbook family and business-collection variants, then registering the ledger workbook as an explicit surface
+
 ## [2026-04-14] remove | 物理删除 legacy wiki layer
 
 - 在删除前已将活跃测试、verification-asset `reference_location`、以及 active skill/docs 中的旧 wiki 路径迁移到 `docs/wiki-bi/`、`docs/system/` 或 `.planning/`

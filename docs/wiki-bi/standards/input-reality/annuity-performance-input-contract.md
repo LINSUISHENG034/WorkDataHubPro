@@ -37,6 +37,14 @@
   - 不应把 event domain 的 multi-sheet 经验套到 `annuity_performance`
   - 也不应因为测试夹具常常很小，就假定真实 workbook 没有额外列
 
+## observed production reality
+
+- representative single-month production-sample validation shows the current workbook family contains both `规模明细` and `收入明细` in one physical workbook
+- `annuity_performance` still owns the `规模明细` sheet contract
+- `annuity_income` still owns the `收入明细` sheet contract
+- the shared workbook family strengthens workbook-discovery and explainability understanding, not domain collapse
+- accepted contract 仍然是 `规模明细` sheet，而 shared workbook family 属于 observed production reality
+
 ## 最小字段骨架
 
 这里的“最小字段骨架”当前按 `wiki-bi` 的 golden-set / durable Q&A 视角表达，
@@ -105,6 +113,7 @@
 ## 相关证据
 
 - [输入现实证据](../../evidence/input-reality-evidence.md)
+- [annuity workbook family 证据](../../evidence/annuity-workbook-family-evidence.md)
 - [annuity_performance 字段处理证据](../../evidence/annuity-performance-field-processing-evidence.md)
 
 ## 相关验证方法

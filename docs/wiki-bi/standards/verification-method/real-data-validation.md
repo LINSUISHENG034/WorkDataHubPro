@@ -48,6 +48,13 @@ real-data validation 至少应满足：
 - legacy comparison report、JSON diff 与 validation result corpus 可以作为 adjudication input，但它们本身并不等于 current project 已拥有 governed real-data sample
 - 历史 comparison report、JSON diff、parity result 目录属于 validation result history，应作为可复核资产保留
 
+## production-sample writeback 规则
+
+- workbook metadata observed from real production samples may be written back as evidence even when raw files themselves are not repository assets
+- when a single month is used only as a representative validation sample, the durable wiki should record the validated production data shape rather than a month-specific raw path
+- such writeback must record whether the finding is accepted contract, observed production variant, or adjacent operator reality
+- one observed month may strengthen or falsify assumptions, but it does not by itself promote a variant into a universal contract
+
 ## 非例
 
 - 只用 programmatic workbook fixture 跑一次就宣称完成 real-data validation
@@ -62,5 +69,7 @@ real-data validation 至少应满足：
 ## 相关证据
 
 - [输入现实证据](../../evidence/input-reality-evidence.md)
+- [annuity workbook family 证据](../../evidence/annuity-workbook-family-evidence.md)
+- [business collection workbook variants 证据](../../evidence/business-collection-workbook-variants-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
 - [validation result history 证据](../../evidence/validation-result-history-evidence.md)

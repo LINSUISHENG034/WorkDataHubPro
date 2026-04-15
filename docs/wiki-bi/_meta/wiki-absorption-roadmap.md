@@ -169,7 +169,7 @@ Round 13 已完成 identity governance deepening。
 Round 14 已完成 status family selective evidence split。
 Round 15 已完成 `annuity_performance` I/O contracts。
 Round 16 已完成 `annuity_performance` implementation gap audit。
-Round 17、Round 18、Round 19、Round 20、Round 21 与 Round 22 已把 domain-upgrade workflow、`annuity_income` 合同入口、event-domain 对称升级、verification-asset adjudication、Phase E surface closure 与高流量 evidence normalization 进一步收口。
+Round 17、Round 18、Round 19、Round 20、Round 21、Round 22 与 Round 23 已把 domain-upgrade workflow、`annuity_income` 合同入口、event-domain 对称升级、verification-asset adjudication、Phase E surface closure、高流量 evidence normalization 与 production-sample augmentation 进一步收口。
 
 后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应继续按预估收益大小推进。
 
@@ -344,6 +344,25 @@ Round 22 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”
 - `evidence/operator-and-surface-evidence.md`
 
 状态：
+
+- completed on 2026-04-15
+
+## Round 23: production-sample augmentation
+
+Goal:
+
+- absorb concrete workbook-family and workbook-variant reality from the legacy project plus representative single-month production-sample validation
+- strengthen wiki answers about real production input without collapsing observed variants into accepted contracts
+- classify adjacent business-collection workbooks as explicit surfaces or evidence objects
+
+Entry pages:
+
+- `evidence/input-reality-evidence.md`
+- `standards/input-reality/input-reality-contracts.md`
+- `standards/verification-method/real-data-validation.md`
+- `evidence/operator-and-surface-evidence.md`
+
+Status:
 
 - completed on 2026-04-15
 

@@ -46,5 +46,9 @@
   - maintenance 轮次，把 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 收紧成 current accepted runtime 与 deferred runtime 分层的决策包。
 - [Round 22：high-traffic evidence normalization](./round-22-high-traffic-evidence-normalization.md)
   - maintenance 轮次，把高流量 aggregate evidence pages 收紧成一致的 dispatcher + object-page 分发骨架，提高 lint 友好度。
+- [Round 23：production-sample augmentation](./round-23-production-sample-augmentation.md)
+  - maintenance 轮次，把代表性单月生产样本验证过的 workbook family、业务收集 workbook variants 与 ledger surface 现实回写成受边界控制的对象级证据。
 
 ## 计划轮次
+
+- 当前无其他 planned round；如需继续推进，应先判断是否需要多月样本吸收或更多 workbook-variant object pages。

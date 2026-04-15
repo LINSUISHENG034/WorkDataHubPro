@@ -39,6 +39,14 @@
   - 不能把 `规模明细` 当作 `annuity_income` 的有效输入 sheet
   - 也不能把 multi-sheet event-domain 经验直接套到本域
 
+## observed production reality
+
+- representative single-month production-sample validation shows the current workbook family contains both `规模明细` and `收入明细` in one physical workbook
+- `annuity_performance` still owns the `规模明细` sheet contract
+- `annuity_income` still owns the `收入明细` sheet contract
+- the shared workbook family strengthens workbook-discovery and explainability understanding, not domain collapse
+- accepted contract 仍然是 `收入明细` sheet，而 shared workbook family 属于 observed production reality
+
 ## 最小字段骨架
 
 当前 raw sources 能稳定支撑的最小输入骨架是：
@@ -113,6 +121,7 @@
 ## 相关证据
 
 - [`annuity_income` 专题证据](../../evidence/annuity-income-gap-evidence.md)
+- [annuity workbook family 证据](../../evidence/annuity-workbook-family-evidence.md)
 - [`annuity_income` branch mapping 证据](../../evidence/annuity-income-branch-mapping-evidence.md)
 - [`annuity_income` ID5 retirement 证据](../../evidence/annuity-income-id5-retirement-evidence.md)
 - [输入现实证据](../../evidence/input-reality-evidence.md)

@@ -37,6 +37,13 @@
   - 双 sheet 合并进入同一个 `annual_loss:{period}` batch
   - trailing empty rows 会被跳过，不应污染 anchor row 序列
 
+## observed production reality
+
+- representative single-month production-sample validation shows the business-collection ledger workbook currently contains the accepted event-domain sheets
+- the same business-collection folder also contains adjacent summary and attachment-style workbooks
+- those adjacent workbooks should not be silently rewritten into the accepted event-domain contract without stronger source support
+- accepted contract 仍然是本页定义的 event-domain sheet subset，而不是把整个 ledger workbook 或 summary workbook 自动提升为 accepted contract
+
 ## 最小字段骨架
 
 当前 current intake / processing / replay evidence 能稳定支撑的最小输入骨架是：
@@ -112,6 +119,7 @@
 ## 相关证据
 
 - [输入现实证据](../../evidence/input-reality-evidence.md)
+- [business collection workbook variants 证据](../../evidence/business-collection-workbook-variants-evidence.md)
 - [`annual_loss` 字段处理证据](../../evidence/annual-loss-field-processing-evidence.md)
 - [身份与补查证据](../../evidence/identity-and-lookup-evidence.md)
 
