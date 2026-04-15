@@ -169,7 +169,7 @@ Round 13 已完成 identity governance deepening。
 Round 14 已完成 status family selective evidence split。
 Round 15 已完成 `annuity_performance` I/O contracts。
 Round 16 已完成 `annuity_performance` implementation gap audit。
-Round 17 Round 18 与 Round 19 已把 domain-upgrade workflow、`annuity_income` 合同入口以及 event-domain 对称升级与 evidence/lint 固定产物进一步收口。
+Round 17、Round 18、Round 19 与 Round 20 已把 domain-upgrade workflow、`annuity_income` 合同入口、event-domain 对称升级以及 verification-asset adjudication 进一步收口。
 
 后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应继续按预估收益大小推进。
 
@@ -282,13 +282,12 @@ Round 17 Round 18 与 Round 19 已把 domain-upgrade workflow、`annuity_income`
 
 ## 短期计划（2026-04-15）
 
-Round 19 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”，而是更缺：
+Round 20 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”，也不再缺 verification asset 的基础裁决表达，而是更缺：
 
-- verification asset 的裁决表达
 - Phase E surface 的边界关闭
 - 高流量 evidence 页的模板一致性
 
-因此短期内建议明确推进下面三轮，而不是继续只写“机会式维护”：
+因此这批短期计划里，Round 20 已完成，剩余重点应继续推进下面两轮，而不是回到“机会式维护”：
 
 ### Round 20：verification asset adjudication package
 
@@ -308,7 +307,7 @@ Round 19 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”
 
 状态：
 
-- planned on 2026-04-15
+- completed on 2026-04-15
 
 ### Round 21：Phase E surface decision closure
 
@@ -355,9 +354,8 @@ Round 19 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”
 
 建议按下面顺序推进：
 
-1. Round 20：verification asset adjudication package
-2. Round 21：Phase E surface decision closure
-3. Round 22：high-traffic evidence normalization
+1. Round 21：Phase E surface decision closure
+2. Round 22：high-traffic evidence normalization
 
 执行原则：
 
@@ -367,14 +365,14 @@ Round 19 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”
 
 ## 当前推荐入口
 
-当前最推荐的立即动作是从 Round 20 启动。
+当前最推荐的立即动作是从 Round 21 启动。
 
 原因不是它“最容易写”，而是：
 
-- 它最直接影响 future verification story
-- 它能为 `annual_award` / `annual_loss` 的 asset posture 给出更硬的治理表达
-- 它还能为后续 surface closure 提供更清楚的 adjudication context
+- Round 20 已把 verification asset 的裁决表达收口，后续最集中的未决问题重新回到了 surface closure
+- `reference_sync`、`company_lookup_queue` 与 enterprise persistence 都已经具备足够 raw-source 基底，不应继续长期维持“对象已识别但边界未闭合”的状态
+- Round 21 的结论会直接影响 future architecture / runtime governance，而不是重复对象识别
 
-如果当前工作流更偏 operator/runtime 决策，而不是 verification governance，则可改从 Round 21 启动。
+如果当前工作流仍更偏 verification lint，而不是 surface closure，则可改从 Round 22 启动。
 
-Round 22 不应抢在前两轮之前执行，除非本次任务本身就是 wiki lint / evidence 模板收紧。
+Round 22 仍不应抢在 Round 21 之前执行，除非本次任务本身就是 wiki lint / evidence 模板收紧。

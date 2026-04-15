@@ -51,11 +51,13 @@
 
 ## 当前已知治理结论
 
-- 当前 current project 已明确 accepted replay baselines
+- 当前 current project 的 active protection story 已明确为 `replay_baseline + synthetic_fixture + checkpoint_baseline`
 - `annuity_performance`、[`annual_award`](../../domains/annual-award.md)、[`annual_loss`](../../domains/annual-loss.md) 的 `golden_set` / `golden_baseline` 当前都已在 Phase 2 registry 中被显式标记为 `deferred`
-- error-case fixtures 目前更准确的状态是“治理上显式 deferred，且 accepted slices 仍主要以内联 failure cases 保护”
+- 对 [`annual_award`](../../domains/annual-award.md) / [`annual_loss`](../../domains/annual-loss.md) 而言，domain-level `golden_set` / `golden_baseline` 目前应继续维持显式 `deferred`，而不是升级成 `planned`
+- error-case fixture 目前更准确的状态是“治理上显式 deferred，且 accepted slices 仍主要以内联 failure cases 保护”
+- real-data sample 仍是独立治理目标；replay baseline 与 synthetic fixture 都不能代替它
 - [`annuity_income`](../../domains/annuity-income.md) 仍保留大量 legacy-only verification assets 和 parity memory
-- validation result history 是独立治理对象，不应被 replay baseline 或单次测试结果吞掉
+- validation result history 是独立治理对象，应作为 provenance 与 adjudication input 保留，但不应被 replay baseline 或单次测试结果吞掉
 
 ## 身份相关场景
 

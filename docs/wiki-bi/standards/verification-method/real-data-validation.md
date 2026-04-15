@@ -43,7 +43,9 @@ real-data validation 至少应满足：
 
 - current project 已把 real-data sample 写成显式 asset kind，但对 accepted slices 仍保持 `deferred`
 - 这意味着 real-data sample 目前仍是治理目标，而不是已经存在的 repo-native asset
+- accepted slices 当前虽已拥有 replay baseline 与 checkpoint baseline，但这些资产只足以支撑 replay-backed validation，不足以单独构成 full real-data validation
 - 如果当前只能用 synthetic fixture 或 replay baseline 支撑验证，必须明确说明它们没有替代 real-data sample
+- legacy comparison report、JSON diff 与 validation result corpus 可以作为 adjudication input，但它们本身并不等于 current project 已拥有 governed real-data sample
 - 历史 comparison report、JSON diff、parity result 目录属于 validation result history，应作为可复核资产保留
 
 ## 非例

@@ -207,3 +207,10 @@
 - 更新 `wiki-absorption-roadmap.md`，把“无预设新 round”收紧为 Round 20-22 的短期计划与明确执行顺序
 - 新增 Round 20、Round 21、Round 22 三个 planned round notes，分别对应 verification asset 裁决包、Phase E surface closure 与高流量 evidence 页模板归一
 - 更新 `_meta/absorption-rounds/index.md` 与 `index.md`，让新计划页进入主导航与全量 catalog
+
+## [2026-04-15 15:11] maintain | 完成 Round 20 verification asset 裁决包
+
+- 更新 `verification-assets-evidence.md` 与 `validation-result-history-evidence.md`，把 verification assets / result history 收紧为“manifest 状态 + 当前保护方式 + 裁决含义”的 durable 表达，并补入 contract test 与 gate runtime 证据
+- 更新 `golden-scenarios.md` 与 `real-data-validation.md`，明确 accepted slices 当前的 active protection story 是 `replay_baseline + synthetic_fixture + checkpoint_baseline`，而 `golden_set`、`golden_baseline`、`error_case_fixture`、`real_data_sample` 仍为显式 `deferred`
+- 更新 `annuity_performance`、`annual_award`、`annual_loss` 三个 domain 页，为读者直接暴露当前验证资产姿态，避免把 accepted replay protection 误读成更宽的 golden governance
+- 将 Round 20 从 planned 推进到 completed，并在 `wiki-absorption-roadmap.md`、`_meta/absorption-rounds/index.md` 与 `index.md` 中把下一推荐入口切到 Round 21

@@ -49,6 +49,12 @@
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [validation result history 证据](../evidence/validation-result-history-evidence.md)
 
+## 当前验证资产姿态
+
+- 当前 active protection 由 `replay_baseline`、`synthetic_fixture` 与四个 `checkpoint_baseline` 组成。
+- `golden_set`、`golden_baseline`、`error_case_fixture`、`real_data_sample` 仍是显式 `deferred`；其中 error path 当前主要由 inline event-intake tests 保护，而不是 repo-native fixture 文件。
+- 这意味着本域当前已被纳入 replay-grade parity protection，但尚未进入更宽的 domain-level golden-set governance；在更广的 curated scenario pack 被 admitted 前，不应把 `golden_set` / `golden_baseline` 升级成 `planned`。
+
 ## 相关 domains
 
 - [`annual_loss`](./annual-loss.md)
