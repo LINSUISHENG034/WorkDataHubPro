@@ -152,6 +152,13 @@
 - 将 `GAP-AP-003` 收紧为 active runtime path 与 schema-level contract 的代码漂移
 - 将 `GAP-AP-004`、`GAP-AP-005` 收紧为高概率代码问题，并新增 `GAP-AP-007` 记录 company_id YAML priority 的实现漂移
 
+## [2026-04-15] adjudicate | annuity_performance gap disposition split
+
+- 将 `GAP-AP-002` 进一步关闭为 `resolved_wiki_correction`
+- 将 `GAP-AP-003`、`GAP-AP-004`、`GAP-AP-005` 统一收敛为 `code_fix_candidate`
+- 将 `GAP-AP-007` 收敛为 `stale_documentation_drift`
+- 为剩余 active items 拆出代码修复候选计划与 contract drift 清理计划
+
 ## [2026-04-14] maintain | 提炼 domain wiki 升级框架
 
 - 新增 `_meta/wiki-domain-upgrade-framework.md`，把高价值 domain 从导航页升级到合同级 wiki 的工作流沉淀为可复用框架

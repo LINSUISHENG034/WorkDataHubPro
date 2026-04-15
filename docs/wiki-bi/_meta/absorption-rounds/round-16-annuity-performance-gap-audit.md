@@ -31,6 +31,9 @@
   - backfill source 字段一致性
   - 空值清洗后的派生字段语义
 - 审核 follow-up 进一步确认：其中有些是层级差异，不再视为 gap；另一些已经足够明确到可以认定为 wiki 过窄或高概率代码问题
+- 继续代码核对后，剩余 active gaps 已经可以分流成：
+  - code-fix candidates
+  - stale documentation drift
 - 这些差距已经足够厚，值得单独立一页 implementation gap evidence
 
 ## 本轮更新的目标页
@@ -38,6 +41,8 @@
 - `docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md`
 - `docs/wiki-bi/evidence/annuity-performance-implementation-gap-evidence.md`
 - `docs/wiki-bi/index.md`
+- `docs/superpowers/plans/2026-04-14-annuity-performance-code-gap-fixes.md`
+- `docs/superpowers/plans/2026-04-14-annuity-performance-contract-drift-adjudication.md`
 
 ## 可复用经验
 
@@ -48,7 +53,7 @@
 
 ## 下一步建议
 
-- 若后续继续治理 annuity-performance，优先把已确认的代码问题和 contract drift 再细分为：
-  - wiki 直接修正
-  - 代码修复候选
-  - intentional difference 记录
+- 若后续继续治理 annuity-performance，优先分别处理：
+  - code-fix candidates
+  - stale documentation drift
+  - 仍未出现的 intentional differences（如后续被确认，再单独登记）
