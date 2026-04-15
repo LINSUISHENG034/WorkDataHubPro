@@ -169,7 +169,7 @@ Round 13 已完成 identity governance deepening。
 Round 14 已完成 status family selective evidence split。
 Round 15 已完成 `annuity_performance` I/O contracts。
 Round 16 已完成 `annuity_performance` implementation gap audit。
-Round 17、Round 18、Round 19、Round 20 与 Round 21 已把 domain-upgrade workflow、`annuity_income` 合同入口、event-domain 对称升级、verification-asset adjudication 与 Phase E surface closure 进一步收口。
+Round 17、Round 18、Round 19、Round 20、Round 21 与 Round 22 已把 domain-upgrade workflow、`annuity_income` 合同入口、event-domain 对称升级、verification-asset adjudication、Phase E surface closure 与高流量 evidence normalization 进一步收口。
 
 后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应继续按预估收益大小推进。
 
@@ -282,11 +282,9 @@ Round 17、Round 18、Round 19、Round 20 与 Round 21 已把 domain-upgrade wor
 
 ## 短期计划（2026-04-15）
 
-Round 21 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”，也不再缺 verification asset 或核心 Phase E surfaces 的基础裁决表达，而是更缺：
+Round 22 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”、verification asset 的基础裁决表达，或核心 Phase E surfaces 的基础边界闭环。
 
-- 高流量 evidence 页的模板一致性
-
-因此这批短期计划里，Round 20 与 Round 21 已完成，剩余重点应继续推进下面一轮，而不是回到“机会式维护”：
+因此这批短期计划中的三轮都已完成；后续如需继续推进，应重新按收益排序选题，而不是机械延续本批短期计划：
 
 ### Round 20：verification asset adjudication package
 
@@ -347,28 +345,12 @@ Round 21 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”
 
 状态：
 
-- planned on 2026-04-15
+- completed on 2026-04-15
 
 ## 下一阶段执行顺序
 
-建议按下面顺序推进：
-
-1. Round 22：high-traffic evidence normalization
-
-执行原则：
-
-- 先收口影响 acceptance / governance 判断的高价值结论
-- 再处理模板一致性与 lint 友好性
-- 只有新的实现、验证或治理结论真正稳定后，才继续回写 durable page
-
 ## 当前推荐入口
 
-当前最推荐的立即动作是从 Round 22 启动。
+当前这批短期计划已经完成。
 
-原因不是它“最容易写”，而是：
-
-- Round 20 与 Round 21 已把最容易误读的 verification / surface 治理问题收口
-- 剩余的主要收益点已从“对象或边界判定”转向“高流量 evidence 页的模板一致性与 lint 友好度”
-- Round 22 可以在不改动已定结论的前提下，提高后续维护效率与 cross-page 一致性
-
-Round 22 现在就是默认推荐入口，除非本次任务突然转回新的 surface / runtime 决策。
+如果后续继续推进，推荐优先从“仍有厚 aggregate page 但尚未统一模板的 evidence family”或“仍停留在 shared page 的高频对象”重新做一轮收益排序，而不是默认再开新的 planned round。

@@ -221,3 +221,9 @@
 - 更新 `reference-sync.md`、`company-lookup-queue.md` 与 `enterprise-enrichment-persistence.md`，显式写清 current accepted runtime 中哪些 legacy surface 已被替代、哪些治理记忆需保留、哪些 runtime breadth 继续 deferred
 - 将 `reference_derivation + publication`、同步 identity chain、temp-id fallback 与 operator artifacts 写成 current-side replacement evidence，避免继续把 legacy special orchestration surfaces 误读成“当前已保留”
 - 将 Round 21 从 planned 推进到 completed，并在 `wiki-absorption-roadmap.md`、`_meta/absorption-rounds/index.md` 与 `index.md` 中把下一推荐入口切到 Round 22
+
+## [2026-04-15 15:32] maintain | 完成 Round 22 high-traffic evidence normalization
+
+- 更新 `status-and-snapshot-evidence.md`、`verification-assets-evidence.md` 与 `operator-and-surface-evidence.md`，把高流量 aggregate evidence page 收紧成更一致的骨架：证据表、强/旁证、dispatcher 边界、对象级补强页、当前证据缺口
+- 为状态与快照主题补入 current projection / replay evidence，并把三张 aggregate page 的“对象级细节”与“aggregate dispatcher 角色”分层写清
+- 将 Round 22 从 planned 推进到 completed，并在 `wiki-absorption-roadmap.md`、`_meta/absorption-rounds/index.md` 与 `index.md` 中收口本批短期治理计划

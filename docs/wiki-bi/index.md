@@ -168,6 +168,6 @@
 - [Round 19：event-domain contract upgrade and evidence governance tightening](./_meta/absorption-rounds/round-19-event-domain-contract-upgrade-and-evidence-governance.md) : maintenance 轮次，把 `annual_award` / `annual_loss` 升级到合同级入口，并把 evidence / lint 固定产物收紧成正式治理规则。
 - [Round 20：verification asset adjudication package](./_meta/absorption-rounds/round-20-verification-asset-adjudication-package.md) : maintenance 轮次，把 verification asset 的“状态 + 当前保护方式 + 裁决含义”收紧成 durable 表达，并明确 legacy result corpus 的承接边界。
 - [Round 21：Phase E surface decision closure](./_meta/absorption-rounds/round-21-phase-e-surface-decision-closure.md) : maintenance 轮次，把 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 收紧成 current accepted runtime 与 deferred runtime 分层的决策包。
-- [Round 22：high-traffic evidence normalization](./_meta/absorption-rounds/round-22-high-traffic-evidence-normalization.md) : planned 轮次，把高流量 evidence 页收紧到统一模板并提高 lint 一致性。
+- [Round 22：high-traffic evidence normalization](./_meta/absorption-rounds/round-22-high-traffic-evidence-normalization.md) : maintenance 轮次，把高流量 aggregate evidence pages 收紧成一致的 dispatcher + object-page 分发骨架，提高 lint 友好度。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

@@ -44,8 +44,7 @@
   - maintenance 轮次，把 verification asset 的“状态 + 当前保护方式 + 裁决含义”收紧成 durable 表达，并明确 legacy result corpus 的承接边界。
 - [Round 21：Phase E surface decision closure](./round-21-phase-e-surface-decision-closure.md)
   - maintenance 轮次，把 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 收紧成 current accepted runtime 与 deferred runtime 分层的决策包。
+- [Round 22：high-traffic evidence normalization](./round-22-high-traffic-evidence-normalization.md)
+  - maintenance 轮次，把高流量 aggregate evidence pages 收紧成一致的 dispatcher + object-page 分发骨架，提高 lint 友好度。
 
 ## 计划轮次
-
-- [Round 22：high-traffic evidence normalization](./round-22-high-traffic-evidence-normalization.md)
-  - planned 轮次，把高流量 aggregate evidence pages 收紧到 Round 19 确认的最小模板。

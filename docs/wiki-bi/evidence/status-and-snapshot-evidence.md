@@ -14,6 +14,7 @@
 | E-ST-004 | legacy_doc | supporting | legacy_only | `real-data-validation`, `output-correctness`, `customer-mdm-commands` | 2026-04-14 | `verification_guide_real_data.md` 提供 snapshot / contract 输出的 operator 验证路径，但尚未被 `wiki-bi` 完全吸收。 |
 | E-ST-005 | audit | supporting | absorbed | `customer-mdm-commands`, `snapshot-granularity`, `annuity_performance` | 2026-04-14 | `2026-04-12-legacy-code-audit.md` 识别 manual command surface 与 hook-linked outputs，适合作为 surface 级旁证。 |
 | E-ST-006 | audit | supporting | absorbed | `customer-status`, `output-correctness` | 2026-04-14 | `2026-04-12-verification-assets-search-findings.md` 说明状态与 snapshot 相关验证资产仍存在显式缺口。 |
+| E-ST-007 | current_test | supporting | explicitly_tracked | `customer-status`, `snapshot-granularity`, `annual-award`, `annual-loss`, `annuity_performance` | 2026-04-15 | `tests/integration/test_projection_outputs.py`、`tests/replay/test_annuity_performance_slice.py`、`tests/replay/test_annual_award_slice.py` 与 `tests/replay/test_annual_loss_slice.py` 说明 current repo 已把 published facts、`contract_state` 与 `monthly_snapshot` 的主链路变成显式受测行为。 |
 
 ## 本轮已吸收的稳定结论
 
@@ -24,6 +25,7 @@
 - `customer-mdm` 手工命令面是独立 operator surface，不应被“自动 hook 已覆盖”吞掉
 - `is_winning_this_year` 与 `is_loss_reported` 已满足对象级 evidence 拆分阈值
 - `is_churned_this_year` 当前仍更适合留在主题页，因为它同时牵涉 product-line / plan 双粒度与 AUM 汇总语义
+- current repo 已对 `contract_state -> monthly_snapshot` 形成显式 projection tests 与 replay evidence，但状态家族的对象级 current evidence 仍未完全拆开
 
 ## 哪些来源是强证
 
@@ -35,11 +37,11 @@
 - audit synthesis
 - verification guide 中的操作说明
 
-## 相关 domains
+## 聚合页 dispatcher 边界
 
-- [`annual_award`](../domains/annual-award.md)
-- [`annual_loss`](../domains/annual-loss.md)
-- [`annuity_performance`](../domains/annuity-performance.md)
+- 本页继续承载客户状态总览、快照粒度、customer-mdm surface 与未拆状态对象之间的共享语义。
+- 已形成独立对象且被高频单独引用的状态，应优先落到对象级 evidence page，而不是继续把细节堆回 aggregate page。
+- domain 入口仍主要通过 [`annual_award`](../domains/annual-award.md)、[`annual_loss`](../domains/annual-loss.md)、[`annuity_performance`](../domains/annuity-performance.md) 接入本页；本页不负责重复这些 domain 的合同级叙述。
 
 ## 对象级补强页
 
@@ -52,3 +54,4 @@
 - `is_churned_this_year` 仍未拆成对象级 evidence page
 - `verification_guide_real_data.md` 的更多 operator query path 仍待后续吸收
 - `is_new` 已经满足对象级 evidence 拆分条件，并已作为后续对象级拆分样板落地
+- current project 对 `is_new`、`is_winning_this_year`、`is_loss_reported` 的对象级 current evidence 仍主要通过 shared status / projection pages 承接

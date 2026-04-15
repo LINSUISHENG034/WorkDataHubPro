@@ -47,6 +47,12 @@
 - current identity-resolution code path
 - income-specific operator artifact tests
 
+## 聚合页 dispatcher 边界
+
+- 本页继续承载 surface family 的 shared decision package，尤其是 queue、reference sync、manual commands、operator artifacts 与 enterprise persistence 之间的边界关系。
+- 已经形成稳定独立对象的 surface，应优先分发到对应 surface page，而不是在本页重复承载完整对象叙述。
+- income-specific artifact contract 作为 accepted replacement evidence 保留摘要即可；若 future cross-domain artifact parity 闭环，再考虑独立提升 shared artifact object。
+
 ## Round 21 决策包
 
 | 对象 | retain | replace | defer | retire |
@@ -55,13 +61,12 @@
 | `company_lookup_queue` | 保留 async lookup / dedup / retry / graceful degradation 作为独立治理问题 | current validation runtime 以同步 identity chain + temp-id fallback + unresolved artifacts 替代 queue runtime | queue persistence、retry orchestration、schedule/sensor operator flow 继续 deferred | retire “当前 accepted runtime 已含 queue”的表述 |
 | enterprise cache / queue / provider persistence | 保留“这些对象曾是独立 persistence surface”的制度记忆 | current validation runtime 以 cache interface、evidence refs、artifact visibility 替代 legacy table footprint | durable cache、queue persistence、provider raw/cleansed persistence 继续 deferred | retire “identity 附属表默认属于当前 active runtime”的假设 |
 
-## Round 11 对象级补强页
+## 对象级补强页
 
 - [enterprise enrichment persistence](../surfaces/enterprise-enrichment-persistence.md)
 - [standalone tooling](../surfaces/standalone-tooling.md)
-
-## `annuity_income` 对象级补强页
-
+- [reference_sync](../surfaces/reference-sync.md)
+- [`company_lookup_queue`](../surfaces/company-lookup-queue.md)
 - [`annuity_income` operator artifacts 证据](./annuity-income-operator-artifacts-evidence.md)
 
 ## 当前证据缺口

@@ -49,6 +49,12 @@
 - runbooks
 - `gate_runtime.py` 的 package schema 与 fail-closed baseline loading
 
+## 聚合页 dispatcher 边界
+
+- 本页继续承载 verification asset taxonomy、asset state model 与 cross-slice adjudication memory。
+- 已经形成独立结果历史对象的内容，应优先分发到 [validation result history 证据](./validation-result-history-evidence.md)，而不是在本页重复维护整套 result-history 细节。
+- domain-specific validation memory 只在仍承担治理入口价值时保留摘要；细节应继续下沉到对象级 evidence page 或 slice-specific page。
+
 ## Round 20 裁决表达
 
 | 对象 | manifest 状态 | 当前保护方式 | 当前裁决含义 |
@@ -62,12 +68,9 @@
 | `real_data_sample` | `deferred` | legacy guide + verification standard 明确要求，但 repo 中无 governed sample | 继续作为治理目标保留；synthetic fixture 与 replay baseline 都不能替代它。 |
 | validation result history | 不适用 | legacy result corpus + current registry / runbook / package schema | 当前应被视为 adjudication input 与 provenance；尚未被 current repo 吸收成 repo-native comparison-run package。 |
 
-## 结果历史对象页
+## 对象级补强页
 
 - [validation result history 证据](./validation-result-history-evidence.md)
-
-## `annuity_income` admission-critical detail
-
 - [`annuity_income` ID5 retirement 证据](./annuity-income-id5-retirement-evidence.md)
 - [`annuity_income` operator artifacts 证据](./annuity-income-operator-artifacts-evidence.md)
 
