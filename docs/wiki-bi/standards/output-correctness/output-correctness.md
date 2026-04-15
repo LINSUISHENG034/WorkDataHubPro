@@ -53,6 +53,8 @@
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
 - [`annuity_performance` 输出合同](./annuity-performance-output-contract.md)
 - [`annuity_performance` 字段处理证据](../../evidence/annuity-performance-field-processing-evidence.md)
+- [`annuity_income` 输出合同](./annuity-income-output-contract.md)
+- [`annuity_income` 字段处理证据](../../evidence/annuity-income-field-processing-evidence.md)
 
 ## 相关验证方法
 

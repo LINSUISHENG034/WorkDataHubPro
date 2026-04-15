@@ -34,12 +34,15 @@
 
 ## 本轮已吸收的稳定结论
 
-- `annuity_income` 不能因为 current project 尚未实现就从 wiki 视野中消失
+- `annuity_income` 不能因为早期尚未实现就从 wiki 视野中消失
 - ID5 fallback retirement 是必须保留的制度记忆，不应在后续重构中被无意复活
 - `annuity_income` 既有验证资产记忆，也有 operator artifact 记忆
 - annuity_income 的差异不只是“少一个 domain”，还包括身份、artifact、validation 和 branch mapping 的特殊遗留
+- 当前 aggregate page 应主要承担 dispatcher 角色，而不是继续承载全部细节
 
 ## 当前证据缺口
 
-- current project 虽然已有显式 slice admission 入口，但仍缺少代码、测试与 replay 级承接
-- `COMPANY_BRANCH_MAPPING` 的 owner 与最终落点仍待 slice 实施阶段收敛
+- current project 已有显式 slice、测试、replay assets 与 runbook 承接
+- 当前真正需要继续收敛的是：
+  - contract-grade input / output / field-processing page set
+  - identity 叙述中 active path 与 compatibility inventory 的分层

@@ -29,6 +29,25 @@
 - `unknown_names_csv` 负责把 unresolved identity 显式暴露给人工治理
 - failed-record export 负责把 failure path 从日志层拉到可消费 artifact 层
 
+## 叙述分层
+
+- compatibility inventory / historical memory
+  - legacy docs 与 legacy audit 都把 artifacts 当作真实 operator-facing output
+- active runtime path
+  - current project 已把 artifact visibility 写进 tests、replay 与 runbook
+- operator-visible consequence
+  - unresolved identity 与 failed record 不再只是内部日志，而是显式消费面
+
+## 当前实现证据
+
+- `current_test`
+  - `tests/integration/test_annuity_income_operator_artifacts.py`
+  - `tests/replay/test_annuity_income_slice.py`
+- `current_reference_asset`
+  - `reference/historical_replays/annuity_income/`
+- `current_runbook`
+  - `docs/runbooks/annuity-income-replay.md`
+
 ## 当前证据缺口
 
 - current project 已有显式 runbook、replay assertion 与 targeted tests 来保护这些 artifact

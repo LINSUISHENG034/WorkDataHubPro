@@ -28,6 +28,26 @@
 - 后续 `annuity_income` slice 只能证明自己保护了 post-ID5 行为，不能把 ID5 作为“补兼容”的临时恢复路径
 - parity 验证里出现的 company_id 差异，需要优先按 “是否来自 ID5 removal” 来解释
 
+## 叙述分层
+
+- compatibility inventory / historical memory
+  - legacy docs 仍保留 ID5 fallback 曾经存在的痕迹
+- active runtime path
+  - current project 显式走 temp-id fallback，而不是 account-name ID5 fallback
+- retired behavior that must not be reintroduced
+  - ID5 recovery path
+- operator-visible consequence
+  - parity / replay 中的 identity 差异必须先按 ID5 retirement 解释
+
+## 当前实现证据
+
+- `current_test`
+  - `tests/integration/test_annuity_income_operator_artifacts.py`
+- `current_reference_asset`
+  - `reference/historical_replays/annuity_income/legacy_identity_resolution_2026_03.json`
+- `current_runbook`
+  - `docs/runbooks/annuity-income-replay.md`
+
 ## 当前证据缺口
 
 - current project 已有针对 ID5 retirement 的独立测试和 replay baseline

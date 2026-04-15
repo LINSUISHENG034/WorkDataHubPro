@@ -4,15 +4,23 @@
 
 `annuity_income` 处理收入相关事实。
 
-在当前 `wiki-bi` 里，这个 domain 还同时承担一个额外角色：
+在当前 `wiki-bi` 里，这个 domain 还承担两个额外角色：
 
-- 保留 legacy 证据簇与未闭合问题的入口
+- 保留 legacy 证据簇与 identity / artifact 制度记忆的入口
+- 作为已确认 confirmed domain 的合同级问答入口
 
-因为它是 first-wave 中最需要避免“被遗忘”的 domain 之一。
+它不再只是“等待以后实现”的占位对象。
+
+current project 已有：
+
+- accepted validation slice
+- targeted tests
+- replay assets
+- runbook
 
 在输入现实上，它还意味着：
 
-- 不能因为当前 rebuild 未实现，就丢失其 source workbook、sheet 和 branch mapping 等制度记忆
+- 不能因为它与 `annuity_performance` 共用 workbook family，就把 `收入明细` sheet 的独立合同写没
 
 在身份与验证上，它还意味着：
 
@@ -28,20 +36,29 @@
 
 ## 关键输出结果
 
-- 收入事实输出
-- customer / mapping 相关回填信号
-- identity / branch mapping 相关遗留约束
-- identity fallback retirement decisions 与 unresolved-name artifacts 的制度记忆
-- legacy parity validation 与 validation result history 的制度记忆
+- direct fact output
+- reference / customer signal
+- unresolved identity 的 operator-facing artifacts
+- post-ID5 identity governance 与 branch mapping 约束
+
+## 合同级入口
+
+- [`annuity_income` 输入合同](../standards/input-reality/annuity-income-input-contract.md)
+- [`annuity_income` 输出合同](../standards/output-correctness/annuity-income-output-contract.md)
+- [`annuity_income` 字段处理证据](../evidence/annuity-income-field-processing-evidence.md)
 
 ## 适用标准
 
 - [输入现实合同](../standards/input-reality/input-reality-contracts.md)
+- [`annuity_income` 输入合同](../standards/input-reality/annuity-income-input-contract.md)
 - [输出正确性标准](../standards/output-correctness/output-correctness.md)
+- [`annuity_income` 输出合同](../standards/output-correctness/annuity-income-output-contract.md)
 - [golden scenarios](../standards/verification-method/golden-scenarios.md)
+- [身份治理语义正确性](../standards/semantic-correctness/identity-governance.md)
 
 ## 关键证据来源
 
+- [`annuity_income` 字段处理证据](../evidence/annuity-income-field-processing-evidence.md)
 - [输入现实证据](../evidence/input-reality-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
@@ -53,14 +70,14 @@
 
 ## 明确不在本页描述的内容
 
-- 当前 rebuild 是否已实现该 domain 的执行态结论
+- 当前实现的完整代码 walkthrough
 - 具体规划步骤
 
-本页现在既是问题空间导航入口，也是 current project 回写 implementation evidence 的入口。
+本页现在既是问题空间导航入口，也是 contract page / object-level evidence 的分发入口。
 
 当前 current project 已有显式 validation slice、runbook、replay assets 与 targeted tests，说明这些先前由 wiki 保留的 institutional memory 已经成功转化为实际开发任务。
 
 当前尤其要避免的是：
 
-- 因为 `annuity_income` 尚未落地，就把其 golden / parity / identity 制度记忆从 wiki 中删除
-- 因为当前 project 只覆盖 accepted slices，就误以为 annuity_income 不再属于问题空间
+- 因为它最早以制度记忆方式进入 wiki，就让它长期停留在“只导航、不回答合同问题”的状态
+- 把 compatibility memory、active runtime path 与 retired behavior 混写成一段模糊的 identity 叙述

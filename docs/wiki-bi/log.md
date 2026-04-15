@@ -181,3 +181,16 @@
 - 修正 legacy `集团企业客户号` 清洗对 Python `None` 的串值物化，关闭 `GAP-AP-005`
 - 收紧 legacy resolver-facing 文档/注释，对齐 active annuity-performance YAML execution path，关闭 `GAP-AP-007`
 - 验证命令：`PYTHONPATH=src uv run pytest tests/unit/domain/annuity_performance/test_pipeline_builder.py tests/unit/domain/annuity_performance/test_failed_records_export.py tests/unit/domain/annuity_performance/test_schemas.py tests/unit/domain/reference_backfill/test_generic_backfill_service.py -q`
+
+## [2026-04-15 11:51] maintain | 收紧 wiki 发现路径并升级 annuity_income 合同入口
+
+- 在 `index.md` 中新增维护者入口，显式提示 canonical playbook、confirmed domain-upgrade set 与 lint checklist
+- 在 `wiki-domain-upgrade-framework.md` 中明确其为当前唯一 canonical maintenance playbook，并补入 implementation-evidence / identity narrative / lint gate 三个控制项
+- 为 `annuity_income` 新增输入合同、输出合同与字段处理证据页，使它不再只停留在专题 evidence + institutional memory 层
+- 更新 `annuity_income`、`company_id`、`identity-governance` 与相关 evidence pages，把 active runtime path、compatibility inventory、retired behavior 与 operator consequence 分层写清
+- 新增 Round 18，记录这次“发现路径优化 + annuity_income 对称升级”的 maintenance 闭环
+
+## [2026-04-15 13:03] maintain | 收紧 annuity_income 合同边界与字段处理证据形态
+
+- 将 `annuity_income` 输入合同中的硬门槛表述退回到更有 raw-source 支撑的边界，不再把 `计划类型`、`机构名称` 直接写成绝对门槛
+- 为 `annuity_income` 字段处理证据页补入显式 evidence records、强证 / 旁证划分与 supported pages 视角，使其更贴近标准 evidence page 形态

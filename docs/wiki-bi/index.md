@@ -4,6 +4,15 @@
 > 用途：连接 legacy evidence 与 rebuild design
 > 读取方式：先按阅读意图进入，再看常见问题卡片，最后使用全量 catalog 深入
 
+## 维护者入口
+
+- 我正在维护 wiki，本轮该先看哪里
+  - 先看 [domain wiki 升级框架](./_meta/wiki-domain-upgrade-framework.md)；它是当前 canonical maintenance playbook。
+- 我怀疑要新建一个新的维护流程
+  - 先看 [domain wiki 升级框架](./_meta/wiki-domain-upgrade-framework.md) 与 [wiki maintenance lint checklist](./_meta/wiki-maintenance-lint-checklist.md)，默认应优化既有 playbook，而不是创建平行流程。
+- 我想确认哪些 domain 已经是 confirmed upgrade targets
+  - 当前明确集合是 `annuity_performance`、`annual_award`、`annual_loss`、`annuity_income`。
+
 ## 阅读意图
 
 - 我想知道一个业务判断到底是什么意思
@@ -41,6 +50,8 @@
   - `cleanse`、EQC GUI、deployment GUI 需要显式登记，但不能自动等同于 rebuild 核心边界。
 - [为什么旧项目不能直接作为新架构模板](./_meta/wiki-design.md)
   - wiki 借鉴 legacy 的稳定语义与标准，而不是复制其实现结构。
+- [我在维护 wiki 时应该先走哪条 canonical 路径](./_meta/wiki-domain-upgrade-framework.md)
+  - 先确认现有 playbook 是否已覆盖，再决定是否需要新 round 或新页面。
 - [如何把某个 domain 从导航页升级成合同级 wiki](./_meta/wiki-domain-upgrade-framework.md)
   - 先补输入/输出/处理合同，再按需做 code-gap audit，这是当前最可复用的 domain wiki 升级路径。
 - [event-style domains 如何接回状态判断与输入现实](./domains/annual-award.md)
@@ -82,6 +93,7 @@
 
 - [输入现实合同](./standards/input-reality/input-reality-contracts.md) : 定义真实输入形态、sheet/目录/fixture 边界与约束。
 - [`annuity_performance` 输入合同](./standards/input-reality/annuity-performance-input-contract.md) : 明确 annuity-performance 的 workbook、file pattern、sheet、版本策略与最小字段骨架。
+- [`annuity_income` 输入合同](./standards/input-reality/annuity-income-input-contract.md) : 明确 annuity_income 的 workbook family、`收入明细` sheet、计划锚点与收入数值族输入边界。
 
 #### Semantic Correctness
 
@@ -92,6 +104,7 @@
 
 - [输出正确性标准](./standards/output-correctness/output-correctness.md) : 定义输出结果什么情况下才算正确。
 - [`annuity_performance` 输出合同](./standards/output-correctness/annuity-performance-output-contract.md) : 明确 annuity-performance 的 direct fact sink、backfill targets 与 derived outputs。
+- [`annuity_income` 输出合同](./standards/output-correctness/annuity-income-output-contract.md) : 明确 annuity_income 的 direct fact output、reference/customer signal 与当前 slice 的无-projection-hook 边界。
 
 #### Verification Method
 
@@ -112,6 +125,7 @@
 - [validation result history 证据](./evidence/validation-result-history-evidence.md) : 聚合 legacy parity result 目录、current asset registry 与 validation history 的治理结论。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
 - [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的专题差异，并把细节分发到对象级 evidence page。
+- [`annuity_income` 字段处理证据](./evidence/annuity-income-field-processing-evidence.md) : 把 annuity_income 的关键字段处理分成工程性质量提升与业务语义处理。
 - [`annuity_income` branch mapping 证据](./evidence/annuity-income-branch-mapping-evidence.md) : 固化 `COMPANY_BRANCH_MAPPING` manual overrides 与 placement gap。
 - [`annuity_income` ID5 retirement 证据](./evidence/annuity-income-id5-retirement-evidence.md) : 固化 ID5 fallback retirement 的历史决策与验证边界。
 - [`annuity_income` operator artifacts 证据](./evidence/annuity-income-operator-artifacts-evidence.md) : 固化 `unknown_names_csv` 与 failed-record export 的 operator-facing 角色。
@@ -120,6 +134,7 @@
 
 - [设计草案](./_meta/wiki-design.md) : `wiki-bi` 的顶层 schema、规则与运营模型。
 - [domain wiki 升级框架](./_meta/wiki-domain-upgrade-framework.md) : 定义如何把某个高价值 domain 从导航页升级成可直接问答的合同级 wiki。
+- [wiki maintenance lint checklist](./_meta/wiki-maintenance-lint-checklist.md) : 为 substantial wiki maintenance round 提供轻量完工 gate。
 - [轻量实施计划](./_meta/wiki-implementation-plan.md) : 首批 seed scaffold 的实施范围、顺序与完成定义。
 - [吸收工作流](./_meta/wiki-absorption-workflow.md) : 定义主题簇吸收、分类 gate、每轮输出与验收清单。
 - [吸收路线图](./_meta/wiki-absorption-roadmap.md) : 定义主题簇整体顺序与每轮主入口页。
@@ -141,5 +156,6 @@
 - [Round 15：`annuity_performance` I/O contracts](./_meta/absorption-rounds/round-15-annuity-performance-io-contracts.md) : follow-on 轮次，把 annuity-performance 的输入、输出与字段处理提升为合同级 wiki 页面。
 - [Round 16：`annuity_performance` implementation gap audit](./_meta/absorption-rounds/round-16-annuity-performance-gap-audit.md) : maintenance 轮次，对照 legacy 代码审计 annuity-performance wiki 合同与实现差距。
 - [Round 17：domain upgrade workflow pattern](./_meta/absorption-rounds/round-17-domain-upgrade-workflow-pattern.md) : maintenance 轮次，把 annuity-performance 的有效升级路径提炼成可复用框架。
+- [Round 18：`annuity_income` domain upgrade and maintenance controls](./_meta/absorption-rounds/round-18-annuity-income-domain-upgrade-and-maintenance-controls.md) : maintenance 轮次，收紧维护者发现路径，并把 annuity_income 升级到合同级问答入口。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

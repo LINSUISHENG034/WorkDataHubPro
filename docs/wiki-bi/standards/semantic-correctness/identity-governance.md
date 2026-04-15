@@ -51,12 +51,20 @@
 - async queue / operator artifact 是 unresolved identity 的外显治理面，而不是附属噪音
 - `annuity_income` 的 branch mapping 与 ID5 retirement 属于 identity governance 的专题决策，而不是孤立 domain 特例
 
+维护时尤其要把下面几层分开：
+
+- compatibility inventory / historical memory
+- active runtime path
+- retired behavior that must not be reintroduced
+- operator-visible consequence
+
 ## 非例
 
 - 因为 provider 命中率高，就把 temp-id 规则和 unresolved 可见性删掉
 - 因为 current project 简化了实现，就假定 legacy mapping / override memory 可以消失
 - 把 ID5 fallback 当作“必要时再开”的临时兼容开关
 - 生成了某个 `company_id` 就不再追问它来自 source、cache、provider 还是 temp-id fallback
+- 把 current project 里仍可见的 compatibility artifacts 写成 active runtime priority
 
 ## 相关概念
 
@@ -68,6 +76,7 @@
 - [身份与补查证据](../../evidence/identity-and-lookup-evidence.md)
 - [`annuity_income` branch mapping 证据](../../evidence/annuity-income-branch-mapping-evidence.md)
 - [`annuity_income` ID5 retirement 证据](../../evidence/annuity-income-id5-retirement-evidence.md)
+- [`annuity_income` operator artifacts 证据](../../evidence/annuity-income-operator-artifacts-evidence.md)
 
 ## 相关验证方法
 

@@ -73,6 +73,7 @@
 
 - [输入现实证据](../../evidence/input-reality-evidence.md)
 - [`annuity_performance` 输入合同](./annuity-performance-input-contract.md)
+- [`annuity_income` 输入合同](./annuity-income-input-contract.md)
 
 ## 相关验证方法
 

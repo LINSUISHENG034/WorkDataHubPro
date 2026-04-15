@@ -26,6 +26,24 @@
 - 这组 overrides 不能被“沿用共享 mapping 即可”之类的模糊说法吞掉
 - `annuity_income` slice planning 必须显式决定这些 overrides 落在 domain config、shared mapping 还是其他受治理位置
 
+## 叙述分层
+
+- compatibility inventory / historical memory
+  - legacy cleansing rules 把 6 个 manual overrides 明确标成 `Critical`
+- active runtime path
+  - current project 已在 domain-local cleansing config 与 processor 中显式落地
+- operator-visible consequence
+  - branch mapping 错误会直接改变 institution interpretation 与 reference/customer signal
+
+## 当前实现证据
+
+- `current_test`
+  - `tests/integration/test_annuity_income_processing.py`
+- `current_reference_asset`
+  - `reference/historical_replays/annuity_income/`
+- `current_runbook`
+  - `docs/runbooks/annuity-income-replay.md`
+
 ## 当前证据缺口
 
 - current project 已在 validation slice 中显式落地并测试保护这组 overrides

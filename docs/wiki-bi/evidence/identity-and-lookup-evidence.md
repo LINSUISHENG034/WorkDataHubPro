@@ -45,6 +45,7 @@
 
 - [`annuity_income` branch mapping 证据](./annuity-income-branch-mapping-evidence.md)
 - [`annuity_income` ID5 retirement 证据](./annuity-income-id5-retirement-evidence.md)
+- [`annuity_income` operator artifacts 证据](./annuity-income-operator-artifacts-evidence.md)
 
 ## 当前证据缺口
 

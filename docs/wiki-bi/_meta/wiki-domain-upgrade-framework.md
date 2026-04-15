@@ -2,9 +2,25 @@
 
 > 状态：Active
 > 日期：2026-04-14
-> 作用：把某个 domain 从“只能导航”升级到“能直接回答输入-输出-处理问题”的可复用工作流
+> 作用：当前 canonical maintenance playbook；把某个 domain 从“只能导航”升级到“能直接回答输入-输出-处理问题”的可复用工作流
 
 ---
+
+## 0. 维护者入口
+
+本文件是当前 `docs/wiki-bi/` 的 canonical domain-upgrade maintenance playbook。
+
+维护者在准备提出“下一步 wiki 维护建议”前，应先检查：
+
+1. 现有问题是否已经被本框架覆盖
+2. 是否真的需要新流程，而不是优化本文件
+3. 本轮是否需要同时运行 [`wiki maintenance lint checklist`](./wiki-maintenance-lint-checklist.md)
+
+默认原则：
+
+- 优先收紧这个框架
+- 不创建平行 playbook
+- 新 round 应把执行中学到的发现路径改进回写到这里
 
 ## 1. 适用场景
 
@@ -244,6 +260,23 @@
 - `annual_loss`
 - `annuity_income`
 
+其中当前已确认应视为同一组 confirmed domain-upgrade targets 的就是：
+
+- `annuity_performance`
+- `annual_award`
+- `annual_loss`
+- `annuity_income`
+
+`annuity_income` 不应继续被当作“以后再说的 future placeholder”。
+
+它已经有：
+
+- 对象级 evidence pages
+- slice admission package
+- current tests / replay assets / runbook
+
+因此后续只要其 answer surface 仍弱于 peer domains，就应优先按本框架继续升级。
+
 不推荐直接用于：
 
 - 过于小的原子 concept
@@ -252,7 +285,54 @@
 
 ---
 
-## 11. 当前样板
+## 11. Implementation Evidence Writeback
+
+当 wiki-guided 结论后续被 current project 落地时，维护工作不应停在 log 或聊天里。
+
+应优先把下列证据显式写回受影响页面：
+
+- `current_test`
+- `current_reference_asset`
+- `current_runbook`
+
+推荐落点：
+
+- contract page 的“当前实现证据”
+- object-level evidence page 的证据记录或稳定结论段
+
+这条规则的目的不是让 wiki 变成测试清单，而是让维护者一眼区分：
+
+- historical / legacy memory
+- current project 已显式承接的事实
+
+## 12. Identity Narrative Consolidation
+
+当 identity 相关主题跨越多个层次时，维护者必须把这些层次分开写：
+
+- compatibility inventory / historical memory
+- active runtime path
+- retired behavior that must not be reintroduced
+- operator-visible consequence
+
+尤其要避免：
+
+- 把“仍可在 compatibility loader 中看见”的历史 artifacts 写成当前仍执行的优先级
+- 把已 retirement 的 fallback 写成随时可恢复的临时兼容开关
+
+## 13. Maintenance Lint Gate
+
+每轮 substantial wiki maintenance 完成前，都应运行：
+
+- [`wiki maintenance lint checklist`](./wiki-maintenance-lint-checklist.md)
+
+最少要确认：
+
+- 新增 durable pages 已经在 `index.md` 中可达
+- `log.md` 已追加同轮时间戳记录
+- active gaps 都有 disposition
+- implementation-backed 结论没有只停留在聊天或计划文档里
+
+## 14. 当前样板
 
 当前最完整的样板是：
 
