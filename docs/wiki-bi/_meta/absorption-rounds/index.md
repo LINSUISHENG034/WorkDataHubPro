@@ -42,10 +42,10 @@
   - maintenance 轮次，把 `annual_award` / `annual_loss` 升级到合同级入口，并将 evidence 模板与 lint 固定产物收紧成正式维护规则。
 - [Round 20：verification asset adjudication package](./round-20-verification-asset-adjudication-package.md)
   - maintenance 轮次，把 verification asset 的“状态 + 当前保护方式 + 裁决含义”收紧成 durable 表达，并明确 legacy result corpus 的承接边界。
+- [Round 21：Phase E surface decision closure](./round-21-phase-e-surface-decision-closure.md)
+  - maintenance 轮次，把 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 收紧成 current accepted runtime 与 deferred runtime 分层的决策包。
 
 ## 计划轮次
 
-- [Round 21：Phase E surface decision closure](./round-21-phase-e-surface-decision-closure.md)
-  - planned 轮次，继续把 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 收口到 retain / replace / retire / defer 边界。
 - [Round 22：high-traffic evidence normalization](./round-22-high-traffic-evidence-normalization.md)
   - planned 轮次，把高流量 aggregate evidence pages 收紧到 Round 19 确认的最小模板。

@@ -214,3 +214,10 @@
 - 更新 `golden-scenarios.md` 与 `real-data-validation.md`，明确 accepted slices 当前的 active protection story 是 `replay_baseline + synthetic_fixture + checkpoint_baseline`，而 `golden_set`、`golden_baseline`、`error_case_fixture`、`real_data_sample` 仍为显式 `deferred`
 - 更新 `annuity_performance`、`annual_award`、`annual_loss` 三个 domain 页，为读者直接暴露当前验证资产姿态，避免把 accepted replay protection 误读成更宽的 golden governance
 - 将 Round 20 从 planned 推进到 completed，并在 `wiki-absorption-roadmap.md`、`_meta/absorption-rounds/index.md` 与 `index.md` 中把下一推荐入口切到 Round 21
+
+## [2026-04-15 15:24] maintain | 完成 Round 21 Phase E surface closure
+
+- 更新 `operator-and-surface-evidence.md`，把 surface 治理从“对象已识别”收紧成 `reference_sync`、`company_lookup_queue`、enterprise persistence 的 decision package，并补入 current spec / tests / code 证据
+- 更新 `reference-sync.md`、`company-lookup-queue.md` 与 `enterprise-enrichment-persistence.md`，显式写清 current accepted runtime 中哪些 legacy surface 已被替代、哪些治理记忆需保留、哪些 runtime breadth 继续 deferred
+- 将 `reference_derivation + publication`、同步 identity chain、temp-id fallback 与 operator artifacts 写成 current-side replacement evidence，避免继续把 legacy special orchestration surfaces 误读成“当前已保留”
+- 将 Round 21 从 planned 推进到 completed，并在 `wiki-absorption-roadmap.md`、`_meta/absorption-rounds/index.md` 与 `index.md` 中把下一推荐入口切到 Round 22

@@ -65,11 +65,23 @@ legacy 审计明确指出，这个 surface 至少涉及：
 ## 当前重构处理状态
 
 - 当前应作为显式治理 surface 保留在 wiki 中
-- retain / replace / retire 仍需独立决策
+- 对 current accepted validation slices 而言，legacy `reference_sync` runtime 已被显式 `reference_derivation -> publication` 链取代，而不是继续作为独立日常 sync runtime 存在
+- 被保留的是 target inventory、authoritative source-of-truth 映射与 sync contract 这层治理记忆，而不是 legacy daily schedule / sync-state persistence 本身
+- current repo 尚未保留 repo-native `reference_sync` runtime、schedule 或 sync-state persistence；这些 production/bootstrap concerns 继续保持 deferred
 - 目前至少不能再把它当成“跟随 domain 一起自然覆盖”的隐含对象
-- 即使未来不保留 legacy-like sync 机制，也应保留其 target inventory、source-of-truth 映射与 sync contract
 
-## 仍未决的问题
+## Round 21 决策边界
 
-- 是保留 legacy-like reference sync，还是被新的 bootstrap/publication 模式替代
-- 如果被替代，最小需要保留哪些 target inventory 与 contract guarantees
+- `retain`
+  - target inventory
+  - authoritative source-of-truth mapping
+  - `upsert` / `delete_insert` 这类 sync contract 语义
+- `replace`
+  - accepted slices 中的 hidden sync side effects
+  - 以显式 reference derivation 与 publication groups 取代 legacy-like orchestration surface
+- `defer`
+  - daily schedule
+  - sync-state persistence
+  - 独立 operator-facing reference bootstrap/runtime plan
+- `retire`
+  - “reference data 会在 fact domain 主链里自然长出来，不需要单独治理”这一假设

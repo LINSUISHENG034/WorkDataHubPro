@@ -169,7 +169,7 @@ Round 13 已完成 identity governance deepening。
 Round 14 已完成 status family selective evidence split。
 Round 15 已完成 `annuity_performance` I/O contracts。
 Round 16 已完成 `annuity_performance` implementation gap audit。
-Round 17、Round 18、Round 19 与 Round 20 已把 domain-upgrade workflow、`annuity_income` 合同入口、event-domain 对称升级以及 verification-asset adjudication 进一步收口。
+Round 17、Round 18、Round 19、Round 20 与 Round 21 已把 domain-upgrade workflow、`annuity_income` 合同入口、event-domain 对称升级、verification-asset adjudication 与 Phase E surface closure 进一步收口。
 
 后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应继续按预估收益大小推进。
 
@@ -282,12 +282,11 @@ Round 17、Round 18、Round 19 与 Round 20 已把 domain-upgrade workflow、`an
 
 ## 短期计划（2026-04-15）
 
-Round 20 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”，也不再缺 verification asset 的基础裁决表达，而是更缺：
+Round 21 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”，也不再缺 verification asset 或核心 Phase E surfaces 的基础裁决表达，而是更缺：
 
-- Phase E surface 的边界关闭
 - 高流量 evidence 页的模板一致性
 
-因此这批短期计划里，Round 20 已完成，剩余重点应继续推进下面两轮，而不是回到“机会式维护”：
+因此这批短期计划里，Round 20 与 Round 21 已完成，剩余重点应继续推进下面一轮，而不是回到“机会式维护”：
 
 ### Round 20：verification asset adjudication package
 
@@ -328,7 +327,7 @@ Round 20 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”
 
 状态：
 
-- planned on 2026-04-15
+- completed on 2026-04-15
 
 ### Round 22：high-traffic evidence normalization
 
@@ -354,8 +353,7 @@ Round 20 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”
 
 建议按下面顺序推进：
 
-1. Round 21：Phase E surface decision closure
-2. Round 22：high-traffic evidence normalization
+1. Round 22：high-traffic evidence normalization
 
 执行原则：
 
@@ -365,14 +363,12 @@ Round 20 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”
 
 ## 当前推荐入口
 
-当前最推荐的立即动作是从 Round 21 启动。
+当前最推荐的立即动作是从 Round 22 启动。
 
 原因不是它“最容易写”，而是：
 
-- Round 20 已把 verification asset 的裁决表达收口，后续最集中的未决问题重新回到了 surface closure
-- `reference_sync`、`company_lookup_queue` 与 enterprise persistence 都已经具备足够 raw-source 基底，不应继续长期维持“对象已识别但边界未闭合”的状态
-- Round 21 的结论会直接影响 future architecture / runtime governance，而不是重复对象识别
+- Round 20 与 Round 21 已把最容易误读的 verification / surface 治理问题收口
+- 剩余的主要收益点已从“对象或边界判定”转向“高流量 evidence 页的模板一致性与 lint 友好度”
+- Round 22 可以在不改动已定结论的前提下，提高后续维护效率与 cross-page 一致性
 
-如果当前工作流仍更偏 verification lint，而不是 surface closure，则可改从 Round 22 启动。
-
-Round 22 仍不应抢在 Round 21 之前执行，除非本次任务本身就是 wiki lint / evidence 模板收紧。
+Round 22 现在就是默认推荐入口，除非本次任务突然转回新的 surface / runtime 决策。

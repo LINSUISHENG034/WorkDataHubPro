@@ -66,13 +66,22 @@ legacy code 进一步说明：
 ## 当前重构处理状态
 
 - 当前应视为显式治理对象
-- retain / replace / retire 结论仍需后续稳定决策页明确
+- current accepted validation runtime 没有 repo-native `company_lookup_queue`；当前主链路已被同步 identity chain、temp-id fallback 与 operator-visible unresolved artifacts 替代
+- 被保留的是 async lookup runtime 这一治理对象与其 dedup / retry / graceful degradation 语义，而不是 legacy queue runtime 本身
+- `enterprise.enrichment_requests` 一类 queue persistence 仍随 broader queue/runtime plan 一并 deferred
 - 当前至少不应再被当作“隐含存在，不必登记”的对象
-- enterprise persistence breadth 仍需后续拆分和澄清
-- 当前更合理的理解是：它代表 async lookup runtime，而不是 identity fallback chain 的一个可省略细节
 
-## 仍未决的问题
+## Round 21 决策边界
 
-- queue 运行面是否会在 rebuild 中保留
-- 与 live provider mode 的边界如何定义
-- 若 queue 被替代，哪些 dedup / status / retry 语义必须等价保留
+- `retain`
+  - async lookup runtime 是独立 surface，不是 identity fallback chain 的一个可省略细节
+  - dedup、status update、retry、graceful degradation 这些运行语义需要作为 future design requirement 被记住
+- `replace`
+  - current validation runtime 以 `source_value -> cache_hit -> provider_lookup -> temp_id_fallback` 替代 queue 依赖
+  - unresolved names 以 operator artifacts 外显，而不是写入 current repo 的 queue persistence
+- `defer`
+  - queue persistence
+  - retry orchestration
+  - schedule / sensor / operator flow
+- `retire`
+  - “accepted slices 已经保留 queue runtime”这一说法

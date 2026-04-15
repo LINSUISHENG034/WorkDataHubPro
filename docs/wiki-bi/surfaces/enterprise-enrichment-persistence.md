@@ -64,10 +64,21 @@
 
 - 当前应被视为 Phase E governance 中的显式 persistence surface
 - 至少不能再把 `enrichment_index`、`enrichment_requests`、`base_info` 统称为“identity 附属表”后长期隐身
-- 当前更合理的处理方式是分别判断 cache、queue、provider persistence 哪些需要 retain，哪些应该 replace 或 defer
+- current accepted validation runtime 没有 repo-native `enrichment_requests`、`enrichment_index`、`company_name_index`、`base_info`、`business_info`、`biz_label` 等 surface；被保留的是 identity 行为链与 evidence contract，而不是 legacy 表面宽度
+- 因此更合理的 closure 方式不是整体 retain / retire，而是分别判断 cache、queue persistence、provider raw/cleansed persistence 的 active runtime status
 
-## 仍未决的问题
+## Round 21 决策边界
 
-- `enrichment_index` 是否属于 rebuild 必须保留的核心 cache surface
-- `enrichment_requests` 这类 queue persistence 是必须保留，还是可被其他异步机制替代
-- `base_info` 这类 provider-facing persistence 是核心运行面，还是 operator-adjacent support surface
+| 子对象 | 当前边界 | 说明 |
+|---|---|---|
+| `enrichment_index` / `company_name_index` | `replace + defer` | current validation runtime 以 cache interface / in-memory cache 替代 legacy DB cache footprint；durable cache persistence 继续 deferred。 |
+| `enrichment_requests` | `defer` | queue persistence 不属于 current active runtime；若 future async lookup runtime 被 admitted，再单独决定 retain / replace。 |
+| `base_info` / `business_info` / `biz_label` | `defer` | provider raw/cleansed persistence 不是 current accepted validation scope；若 future live provider operations 需要 durable persistence，应单独 re-admit。 |
+
+额外约束：
+
+- `retain`
+  - 这些对象作为独立 persistence family 的制度记忆
+  - cache / queue / provider persistence 三层分化本身
+- `retire`
+  - “identity 行为链只有在保留 legacy 表面宽度时才成立”这一假设
