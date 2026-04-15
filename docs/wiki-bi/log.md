@@ -201,3 +201,9 @@
 - 更新 `annual_award`、`annual_loss`、`input-reality-contracts`、`output-correctness` 与相关 evidence pages，把 event-domain contract-grade 入口接回主 wiki
 - 收紧 `wiki-design.md`、`wiki-domain-upgrade-framework.md` 与 `wiki-maintenance-lint-checklist.md`，将 evidence 最小模板与 substantial maintenance 的固定产物写成正式规则
 - 新增 Round 19，记录这次“event-domain 对称升级 + evidence/lint 制度化”的 maintenance 闭环
+
+## [2026-04-15 14:47] plan | 写入 Round 20-22 短期治理计划
+
+- 更新 `wiki-absorption-roadmap.md`，把“无预设新 round”收紧为 Round 20-22 的短期计划与明确执行顺序
+- 新增 Round 20、Round 21、Round 22 三个 planned round notes，分别对应 verification asset 裁决包、Phase E surface closure 与高流量 evidence 页模板归一
+- 更新 `_meta/absorption-rounds/index.md` 与 `index.md`，让新计划页进入主导航与全量 catalog

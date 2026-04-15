@@ -166,5 +166,8 @@
 - [Round 17：domain upgrade workflow pattern](./_meta/absorption-rounds/round-17-domain-upgrade-workflow-pattern.md) : maintenance 轮次，把 annuity-performance 的有效升级路径提炼成可复用框架。
 - [Round 18：`annuity_income` domain upgrade and maintenance controls](./_meta/absorption-rounds/round-18-annuity-income-domain-upgrade-and-maintenance-controls.md) : maintenance 轮次，收紧维护者发现路径，并把 annuity_income 升级到合同级问答入口。
 - [Round 19：event-domain contract upgrade and evidence governance tightening](./_meta/absorption-rounds/round-19-event-domain-contract-upgrade-and-evidence-governance.md) : maintenance 轮次，把 `annual_award` / `annual_loss` 升级到合同级入口，并把 evidence / lint 固定产物收紧成正式治理规则。
+- [Round 20：verification asset adjudication package](./_meta/absorption-rounds/round-20-verification-asset-adjudication-package.md) : planned 轮次，优先收紧 verification asset 状态词、domain-level golden-set 边界与 result-history 承接方式。
+- [Round 21：Phase E surface decision closure](./_meta/absorption-rounds/round-21-phase-e-surface-decision-closure.md) : planned 轮次，继续关闭 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 的治理边界。
+- [Round 22：high-traffic evidence normalization](./_meta/absorption-rounds/round-22-high-traffic-evidence-normalization.md) : planned 轮次，把高流量 evidence 页收紧到统一模板并提高 lint 一致性。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

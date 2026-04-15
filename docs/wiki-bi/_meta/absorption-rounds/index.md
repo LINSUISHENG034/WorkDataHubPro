@@ -40,3 +40,12 @@
   - maintenance 轮次，收紧维护者发现路径，并把 annuity_income 升级到合同级问答入口。
 - [Round 19：event-domain contract upgrade and evidence governance tightening](./round-19-event-domain-contract-upgrade-and-evidence-governance.md)
   - maintenance 轮次，把 `annual_award` / `annual_loss` 升级到合同级入口，并将 evidence 模板与 lint 固定产物收紧成正式维护规则。
+
+## 计划轮次
+
+- [Round 20：verification asset adjudication package](./round-20-verification-asset-adjudication-package.md)
+  - planned 轮次，优先收紧 verification asset 的裁决表达、domain-level golden-set 边界与 legacy result corpus 的承接方式。
+- [Round 21：Phase E surface decision closure](./round-21-phase-e-surface-decision-closure.md)
+  - planned 轮次，继续把 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 收口到 retain / replace / retire / defer 边界。
+- [Round 22：high-traffic evidence normalization](./round-22-high-traffic-evidence-normalization.md)
+  - planned 轮次，把高流量 aggregate evidence pages 收紧到 Round 19 确认的最小模板。

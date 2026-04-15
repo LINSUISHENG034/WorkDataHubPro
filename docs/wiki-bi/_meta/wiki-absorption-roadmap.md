@@ -1,7 +1,7 @@
 # `wiki-bi` 吸收路线图
 
 > 状态：Active
-> 日期：2026-04-14
+> 日期：2026-04-15
 > 作用：给 `wiki-bi` 的内容吸收提供整体顺序和每轮主题边界
 
 ---
@@ -169,8 +169,9 @@ Round 13 已完成 identity governance deepening。
 Round 14 已完成 status family selective evidence split。
 Round 15 已完成 `annuity_performance` I/O contracts。
 Round 16 已完成 `annuity_performance` implementation gap audit。
+Round 17 Round 18 与 Round 19 已把 domain-upgrade workflow、`annuity_income` 合同入口以及 event-domain 对称升级与 evidence/lint 固定产物进一步收口。
 
-后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应按预估收益大小推进。
+后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应继续按预估收益大小推进。
 
 ## 下一阶段收益排序
 
@@ -279,23 +280,101 @@ Round 16 已完成 `annuity_performance` implementation gap audit。
 
 - completed on 2026-04-14
 
+## 短期计划（2026-04-15）
+
+Round 19 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”，而是更缺：
+
+- verification asset 的裁决表达
+- Phase E surface 的边界关闭
+- 高流量 evidence 页的模板一致性
+
+因此短期内建议明确推进下面三轮，而不是继续只写“机会式维护”：
+
+### Round 20：verification asset adjudication package
+
+预估收益：最高
+
+原因：
+
+- [验证资产证据](../evidence/verification-assets-evidence.md) 与 [validation result history 证据](../evidence/validation-result-history-evidence.md) 已经把问题对象识别清楚，但状态词仍不够收束
+- 这组问题直接影响后续 acceptance story、adjudication memory 与 slice governance
+- 相比继续补 domain 页面，这一轮对未来决策的杠杆更高
+
+主入口页：
+
+- `evidence/verification-assets-evidence.md`
+- `evidence/validation-result-history-evidence.md`
+- `standards/verification-method/golden-scenarios.md`
+
+状态：
+
+- planned on 2026-04-15
+
+### Round 21：Phase E surface decision closure
+
+预估收益：高
+
+原因：
+
+- Round 11 已经把主要 surface 对象显式登记，但 retain / replace / retire / defer 仍未闭环
+- `reference_sync`、`company_lookup_queue` 与 enterprise persistence 都已经足够成熟，不应继续长期停留在“还需独立决策”的状态
+- 这轮直接服务 future architecture / runtime governance，而不是重复对象识别
+
+主入口页：
+
+- `evidence/operator-and-surface-evidence.md`
+- `surfaces/reference-sync.md`
+- `surfaces/company-lookup-queue.md`
+- `surfaces/enterprise-enrichment-persistence.md`
+
+状态：
+
+- planned on 2026-04-15
+
+### Round 22：high-traffic evidence normalization
+
+预估收益：中高
+
+原因：
+
+- Round 19 已经把 evidence 最小模板制度化
+- 但 [状态与快照证据](../evidence/status-and-snapshot-evidence.md)、[验证资产证据](../evidence/verification-assets-evidence.md)、[operator 与 surface 证据](../evidence/operator-and-surface-evidence.md) 仍未完全收紧到统一骨架
+- 这轮适合作为 Round 20 / 21 之后的维护收口，而不是抢在高价值结论之前做纯格式整理
+
+主入口页：
+
+- `evidence/status-and-snapshot-evidence.md`
+- `evidence/verification-assets-evidence.md`
+- `evidence/operator-and-surface-evidence.md`
+
+状态：
+
+- planned on 2026-04-15
+
 ## 下一阶段执行顺序
 
-当前没有新的高收益预设 round 必须继续执行。
+建议按下面顺序推进：
+
+1. Round 20：verification asset adjudication package
+2. Round 21：Phase E surface decision closure
+3. Round 22：high-traffic evidence normalization
+
+执行原则：
+
+- 先收口影响 acceptance / governance 判断的高价值结论
+- 再处理模板一致性与 lint 友好性
+- 只有新的实现、验证或治理结论真正稳定后，才继续回写 durable page
 
 ## 当前推荐入口
 
-当前最推荐的后续动作不是新增一轮大主题吸收，而是机会式增量维护。
+当前最推荐的立即动作是从 Round 20 启动。
 
-Round 14 已经把 status family 中真正满足阈值的对象拆出，并明确 `is_churned_this_year` 继续留在主题页。
-Round 15 已经把 `annuity_performance` 提升到可直接回答输入-输出-处理问题的合同级页面。
-Round 16 已经把 annuity-performance 的 wiki-vs-code 差距显式登记为 implementation gap evidence。
+原因不是它“最容易写”，而是：
 
-下一步只有在实现、验证或治理决策形成新的稳定结论时，才值得继续回写 durable page。
+- 它最直接影响 future verification story
+- 它能为 `annual_award` / `annual_loss` 的 asset posture 给出更硬的治理表达
+- 它还能为后续 surface closure 提供更清楚的 adjudication context
 
-后续如需继续推进，应从下面几类 follow-on work 中选择：
+如果当前工作流更偏 operator/runtime 决策，而不是 verification governance，则可改从 Round 21 启动。
 
-- 把 `annuity_income` slice 执行过程中形成的新稳定结论继续回写到 wiki
-- 以已完成的 Round 11 为基础，继续判断 `CT-016` 与 Phase E operator/runtime surfaces 的 retain / replace / retire 边界
-- 不再预设新的大轮次；优先做实现驱动或验证驱动的增量 write-back
-- 旧 wiki 层的物理删除已于 2026-04-14 完成；后续只需在发现新的历史硬引用时继续回修
+Round 22 不应抢在前两轮之前执行，除非本次任务本身就是 wiki lint / evidence 模板收紧。
