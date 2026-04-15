@@ -194,3 +194,10 @@
 
 - 将 `annuity_income` 输入合同中的硬门槛表述退回到更有 raw-source 支撑的边界，不再把 `计划类型`、`机构名称` 直接写成绝对门槛
 - 为 `annuity_income` 字段处理证据页补入显式 evidence records、强证 / 旁证划分与 supported pages 视角，使其更贴近标准 evidence page 形态
+
+## [2026-04-15 13:57] maintain | 升级 event domains 并制度化 evidence/lint writeback
+
+- 新增 `annual_award` / `annual_loss` 的输入合同、输出合同与字段处理证据页，使 confirmed event domains 不再只停留在薄导航层
+- 更新 `annual_award`、`annual_loss`、`input-reality-contracts`、`output-correctness` 与相关 evidence pages，把 event-domain contract-grade 入口接回主 wiki
+- 收紧 `wiki-design.md`、`wiki-domain-upgrade-framework.md` 与 `wiki-maintenance-lint-checklist.md`，将 evidence 最小模板与 substantial maintenance 的固定产物写成正式规则
+- 新增 Round 19，记录这次“event-domain 对称升级 + evidence/lint 制度化”的 maintenance 闭环

@@ -12,11 +12,12 @@
 | E-ID-002 | legacy_doc | strong | absorbed | `company-id`, `temp-id`, `golden-scenarios` | 2026-04-14 | `dataset_requirements.md` 定义 5-step identity fallback chain、temp-id 格式、determinism 与 lookup 场景。 |
 | E-ID-003 | audit | strong | absorbed | `company-lookup-queue`, `unknown-names-csv`, `company-id` | 2026-04-14 | `2026-04-12-legacy-code-audit.md` 明确 queue、enterprise persistence、`unknown_names_csv`、manual operator surfaces 都是真实存在的治理对象。 |
 | E-ID-004 | audit | supporting | absorbed | `company-id`, `golden-scenarios`, `annuity-income`, `temp-id` | 2026-04-14 | `2026-04-12-verification-assets-search-findings.md` 总结 identity fallback chain、mapping files、annuity_income 身份缺口与 missing artifacts。 |
-| E-ID-005 | current_test | supporting | explicitly_tracked | `company-id`, `annual_award`, `annual_loss` | 2026-04-14 | WorkDataHubPro 已有 identity / plan-code enrichment 相关集成测试，说明 rebuild 已显式保护其中一部分。 |
+| E-ID-005 | current_test | supporting | explicitly_tracked | `company-id`, `annual-award-input-contract`, `annual-loss-input-contract` | 2026-04-15 | `tests/integration/test_annual_award_plan_code_enrichment.py` 与 `tests/integration/test_annual_loss_plan_code_enrichment.py` 说明 current event-domain slices 已显式保护 source-value-preserving 与 history-aware plan-code enrichment。 |
 | E-ID-006 | legacy_doc | strong | absorbed | `annuity-income`, `company-id`, `temp-id` | 2026-04-14 | `annuity-income` cleansing rules 明确 ID5 fallback retirement，不应在 rebuild 中无意恢复。 |
 | E-ID-007 | legacy_config | strong | absorbed | `company-id`, `identity-governance` | 2026-04-14 | `config/mappings/company_id/company_id_overrides_plan.yml`、`company_id_overrides_hardcode.yml`、`company_id_overrides_name.yml` 说明 mapping / override family 本身就是 identity governance 的一部分，而不只是实现输入。 |
 | E-ID-008 | current_test | strong | explicitly_tracked | `temp-id`, `identity-governance` | 2026-04-14 | `tests/integration/test_temp_identity_policy.py` 与 `tests/integration/test_identity_resolution.py` 明确 current project 已显式保护 deterministic temp identity、opaque fallback、placeholder 归零与 source-value-first 行为。 |
 | E-ID-009 | current_code | supporting | explicitly_tracked | `identity-governance`, `company-id`, `temp-id` | 2026-04-14 | `src/work_data_hub_pro/capabilities/identity_resolution/service.py` 说明 current project 当前采用 `source_value -> cache_hit -> provider_lookup -> temp_id_fallback` 的治理链路，并为每次解析写 trace / evidence refs。 |
+| E-ID-010 | current_test | strong | explicitly_tracked | `identity-governance`, `annual-loss-output-contract`, `temp-id` | 2026-04-15 | `tests/replay/test_annual_loss_slice.py` 证明 event-domain replay 当前不会恢复 legacy `TE...` 风格临时身份，而是把 unresolved cases 收束到 opaque `IN...` fallback 与可定位的 evidence package。 |
 
 ## 本轮已吸收的稳定结论
 
@@ -27,6 +28,7 @@
 - `company_lookup_queue` 与 `unknown_names_csv` 都是 identity 主题中的独立 surface / artifact
 - mapping / override files、cache、provider、queue 与 temp-id 一起构成 identity governance，而不是彼此孤立的“小功能”
 - current project 已显式保护 deterministic / opaque temp identity 与 source-value-first 行为，Round 13 已把 broader identity governance 提升为独立标准层
+- `annual_award` 与 `annual_loss` 当前都已具备 contract-grade identity writeback 入口，不再只是状态语义的旁路来源
 
 ## 哪些来源是强证
 
@@ -34,6 +36,7 @@
 - `dataset_requirements.md`
 - mapping override configs
 - current temp-identity / identity-resolution tests
+- current event-domain plan-code enrichment / replay tests
 - legacy code audit 中对 operator/runtime surfaces 的识别
 
 ## 哪些来源只是旁证

@@ -51,6 +51,10 @@
 
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
+- [`annual_award` 输出合同](./annual-award-output-contract.md)
+- [`annual_award` 字段处理证据](../../evidence/annual-award-field-processing-evidence.md)
+- [`annual_loss` 输出合同](./annual-loss-output-contract.md)
+- [`annual_loss` 字段处理证据](../../evidence/annual-loss-field-processing-evidence.md)
 - [`annuity_performance` 输出合同](./annuity-performance-output-contract.md)
 - [`annuity_performance` 字段处理证据](../../evidence/annuity-performance-field-processing-evidence.md)
 - [`annuity_income` 输出合同](./annuity-income-output-contract.md)

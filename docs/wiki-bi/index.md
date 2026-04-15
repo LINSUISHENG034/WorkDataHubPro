@@ -42,6 +42,8 @@
   - current registry 已显式登记很多尚未物化的 asset kinds，问题是治理状态，而不是是否被看见。
 - [`annuity_performance` 的输入、输出和处理到底是什么](./standards/input-reality/annuity-performance-input-contract.md)
   - 先看输入合同，再看输出合同和字段处理证据，可以直接回答 annuity-performance 的 I/O 问题。
+- [`annual_award` / `annual_loss` 的输入、输出和处理到底是什么](./standards/input-reality/annual-award-input-contract.md)
+  - event-style domains 现在也有对称的输入合同、输出合同和字段处理证据，不必再只停在导航页。
 - [`annuity_performance` 的 wiki 知识和原实现有哪些差距](./evidence/annuity-performance-implementation-gap-evidence.md)
   - 合同页补齐后，应先看 gap evidence，再决定是修 wiki 还是修实现。
 - [哪些 system surfaces 不能被隐含忽略](./surfaces/company-lookup-queue.md)
@@ -92,6 +94,8 @@
 #### Input Reality
 
 - [输入现实合同](./standards/input-reality/input-reality-contracts.md) : 定义真实输入形态、sheet/目录/fixture 边界与约束。
+- [`annual_award` 输入合同](./standards/input-reality/annual-award-input-contract.md) : 明确 annual_award 的双 sheet workbook、最小字段骨架与 merged anchor intake 边界。
+- [`annual_loss` 输入合同](./standards/input-reality/annual-loss-input-contract.md) : 明确 annual_loss 的双 sheet workbook、空尾行处理与最小 loss-event 输入骨架。
 - [`annuity_performance` 输入合同](./standards/input-reality/annuity-performance-input-contract.md) : 明确 annuity-performance 的 workbook、file pattern、sheet、版本策略与最小字段骨架。
 - [`annuity_income` 输入合同](./standards/input-reality/annuity-income-input-contract.md) : 明确 annuity_income 的 workbook family、`收入明细` sheet、计划锚点与收入数值族输入边界。
 
@@ -103,6 +107,8 @@
 #### Output Correctness
 
 - [输出正确性标准](./standards/output-correctness/output-correctness.md) : 定义输出结果什么情况下才算正确。
+- [`annual_award` 输出合同](./standards/output-correctness/annual-award-output-contract.md) : 明确 annual_award 的 direct fact、customer/reference signal 与 projection 边界。
+- [`annual_loss` 输出合同](./standards/output-correctness/annual-loss-output-contract.md) : 明确 annual_loss 的 direct fact、customer loss signal 与 temp-id 治理边界。
 - [`annuity_performance` 输出合同](./standards/output-correctness/annuity-performance-output-contract.md) : 明确 annuity-performance 的 direct fact sink、backfill targets 与 derived outputs。
 - [`annuity_income` 输出合同](./standards/output-correctness/annuity-income-output-contract.md) : 明确 annuity_income 的 direct fact output、reference/customer signal 与当前 slice 的无-projection-hook 边界。
 
@@ -114,6 +120,8 @@
 ### Evidence
 
 - [输入现实证据](./evidence/input-reality-evidence.md) : 聚合输入形态、sheet、fixture 与 real-data 相关证据。
+- [`annual_award` 字段处理证据](./evidence/annual-award-field-processing-evidence.md) : 把 annual_award 的 multi-sheet intake、business-type 派生与 plan-code enrichment 写成 contract-grade 证据页。
+- [`annual_loss` 字段处理证据](./evidence/annual-loss-field-processing-evidence.md) : 把 annual_loss 的 date normalization、product-line mapping、current-row lookup 与 temp-id 边界写成 contract-grade 证据页。
 - [`annuity_performance` 字段处理证据](./evidence/annuity-performance-field-processing-evidence.md) : 将 annuity-performance 的字段处理分成工程性质量提升与业务语义处理两类。
 - [`annuity_performance` implementation gap 证据](./evidence/annuity-performance-implementation-gap-evidence.md) : 记录 annuity-performance 的 wiki 合同与 legacy 实现之间的差距项。
 - [身份与补查证据](./evidence/identity-and-lookup-evidence.md) : 聚合 `company_id`、temp-id、lookup、plan-code enrichment 相关证据。
@@ -157,5 +165,6 @@
 - [Round 16：`annuity_performance` implementation gap audit](./_meta/absorption-rounds/round-16-annuity-performance-gap-audit.md) : maintenance 轮次，对照 legacy 代码审计 annuity-performance wiki 合同与实现差距。
 - [Round 17：domain upgrade workflow pattern](./_meta/absorption-rounds/round-17-domain-upgrade-workflow-pattern.md) : maintenance 轮次，把 annuity-performance 的有效升级路径提炼成可复用框架。
 - [Round 18：`annuity_income` domain upgrade and maintenance controls](./_meta/absorption-rounds/round-18-annuity-income-domain-upgrade-and-maintenance-controls.md) : maintenance 轮次，收紧维护者发现路径，并把 annuity_income 升级到合同级问答入口。
+- [Round 19：event-domain contract upgrade and evidence governance tightening](./_meta/absorption-rounds/round-19-event-domain-contract-upgrade-and-evidence-governance.md) : maintenance 轮次，把 `annual_award` / `annual_loss` 升级到合同级入口，并把 evidence / lint 固定产物收紧成正式治理规则。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

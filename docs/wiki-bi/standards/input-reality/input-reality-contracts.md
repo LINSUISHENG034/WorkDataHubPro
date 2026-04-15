@@ -48,6 +48,7 @@
   - 使用 `data/real_data/{YYYYMM}/收集数据/业务收集`
   - 是 multi-sheet 事件域
   - 不能被简化为单 sheet 输入假设
+  - 当前已分别补成 [`annual_award` 输入合同](./annual-award-input-contract.md) 与 [`annual_loss` 输入合同](./annual-loss-input-contract.md)
 - real-data validation
   - 依赖真实样本与真实结构，而不等于“把 synthetic workbook 换个名字”
 
@@ -72,6 +73,8 @@
 ## 相关证据
 
 - [输入现实证据](../../evidence/input-reality-evidence.md)
+- [`annual_award` 输入合同](./annual-award-input-contract.md)
+- [`annual_loss` 输入合同](./annual-loss-input-contract.md)
 - [`annuity_performance` 输入合同](./annuity-performance-input-contract.md)
 - [`annuity_income` 输入合同](./annuity-income-input-contract.md)
 

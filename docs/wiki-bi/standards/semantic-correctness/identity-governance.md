@@ -51,12 +51,34 @@
 - async queue / operator artifact 是 unresolved identity 的外显治理面，而不是附属噪音
 - `annuity_income` 的 branch mapping 与 ID5 retirement 属于 identity governance 的专题决策，而不是孤立 domain 特例
 
+## narrative layering
+
 维护时尤其要把下面几层分开：
 
 - compatibility inventory / historical memory
 - active runtime path
 - retired behavior that must not be reintroduced
 - operator-visible consequence
+
+### compatibility inventory / historical memory
+
+- legacy 5-step fallback chain、mapping overrides、passthrough、EQC/provider 记忆都属于这一层
+- 这层回答“历史上有哪些受治理手段存在过”，不是直接宣布它们今天仍按原优先级执行
+
+### active runtime path
+
+- current project 当前显式受测的主链路仍是 `source_value -> cache -> provider -> temp_id_fallback`
+- `annual_award` / `annual_loss` 还显式保护 source-preserving plan-code enrichment，但这属于 event-domain contract 的当前行为，不等于重建了全部 legacy identity stack
+
+### retired behavior that must not be reintroduced
+
+- ID5 fallback retirement 不应被写成“必要时再开”的兼容开关
+- legacy `TE...` 风格 temp identity 不应在 current replay / publication path 中复活
+
+### operator-visible consequence
+
+- unresolved identity 必须能外显到 queue、artifact、signal 或 evidence package，而不是只留在内部 trace
+- `company_reference`、`customer_loss_signal`、`unknown_names_csv` 与 queue surface 都属于 operator 可见后果的一部分
 
 ## 非例
 

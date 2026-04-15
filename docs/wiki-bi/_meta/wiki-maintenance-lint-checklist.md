@@ -17,10 +17,12 @@
 
 - 本轮变更过的 durable pages 已在 `docs/wiki-bi/index.md` 中可达
 - `docs/wiki-bi/log.md` 已追加同轮日志，且标题使用 `YYYY-MM-DD HH:MM`
+- 本轮变更过的 evidence pages 仍保持最小模板：`结论主题` + `证据记录` + 强/旁证区分 + `当前证据缺口`
 - active gap 没有停留在“已讨论但无 disposition”的中间状态
 - implementation-backed 结论在可行处显式写入 `current_test`、`current_reference_asset`、`current_runbook`
 - domain page -> standards / evidence 与 evidence -> supported pages 的主链路仍然可追踪
 - 没有为了补信息而新建本可落到既有 object page 的宽泛 summary page
+- substantial round 已留下 round note，或至少有一段可回溯的 lint 结果摘要
 
 ## 推荐执行方式
 
@@ -30,3 +32,9 @@
 2. `git diff -- docs/wiki-bi docs/superpowers/plans`
 
 如果这两步暴露出页面不可达、日志缺失或结论漂移，应先修正再结束本轮。
+
+建议将本轮固定产物理解为：
+
+1. 更新后的 durable pages
+2. 一条带 `HH:MM` 的 `log.md` 记录
+3. 一个 round note，或至少一段 lint 结果摘要

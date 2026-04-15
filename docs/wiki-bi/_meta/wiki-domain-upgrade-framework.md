@@ -140,6 +140,15 @@
 - 处理是工程性还是业务性
 - 对下游 sink 的影响
 
+默认仍应采用当前 evidence 最小骨架：
+
+- `结论主题`
+- `证据记录`
+- `字段处理矩阵` 或等价稳定结论段
+- `哪些来源是强证`
+- `哪些来源只是旁证`
+- `当前证据缺口`
+
 ### 4.5 implementation-gap evidence page
 
 仅在确有 drift 风险时创建，放在：
@@ -331,6 +340,7 @@
 - `log.md` 已追加同轮时间戳记录
 - active gaps 都有 disposition
 - implementation-backed 结论没有只停留在聊天或计划文档里
+- substantial round 已留下 round note 或 lint summary
 
 ## 14. 当前样板
 

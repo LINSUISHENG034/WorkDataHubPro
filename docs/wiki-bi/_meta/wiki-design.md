@@ -553,27 +553,12 @@ docs/wiki-bi/standards/
 
 #### 最小证据元数据模型
 
-`evidence/` 中的每条证据记录，至少应显式包含以下字段：
+`evidence/` 中的每条证据记录，默认至少应显式包含以下字段：
 
 ##### `evidence_id`
 
 - 稳定标识符
 - 便于在 `concepts/`、`standards/`、`surfaces/`、`domains/` 中引用
-
-##### `title`
-
-- 证据名称
-
-##### `claim_scope`
-
-- 该证据主要支撑哪一类结论
-
-建议取值：
-
-- `concept`
-- `standard`
-- `surface`
-- `domain`
 
 ##### `source_type`
 
@@ -645,13 +630,15 @@ docs/wiki-bi/standards/
 
 - 最后一次核验日期
 
-##### `superseded_by`
-
-- 如果该证据已被更高质量来源替代，应显式标注替代来源
-
 ##### `notes`
 
 - 简短说明该证据的适用边界、局限或特别提醒
+
+下面这些字段不再要求每页默认都显式出现，但在需要时仍可追加：
+
+- `title`
+- `claim_scope`
+- `superseded_by`
 
 这个最小模型的目的不是把 `evidence/` 做成数据库，而是让证据层具备：
 
@@ -846,23 +833,23 @@ docs/wiki-bi/standards/
 建议固定包含以下章节：
 
 1. 结论主题
-2. 证据类型概览
-3. 关键来源列表
-4. 证据强度说明
-5. 哪些来源只是旁证，哪些来源是强证
-6. 当前仍需补强的证据缺口
+2. 证据记录
+3. 稳定结论或字段处理矩阵
+4. 哪些来源是强证
+5. 哪些来源只是旁证
+6. 当前证据缺口
 
-此外，每条 evidence record 至少应带上：
+其中第 2 节默认优先使用表格，最小列集合为：
 
 - `evidence_id`
-- `claim_scope`
 - `source_type`
 - `evidence_strength`
 - `coverage_state`
 - `supported_pages`
 - `last_verified`
-- `superseded_by`
 - `notes`
+
+如果页面涉及 supersession、claim-scope 裁决或对象级历史替代，再增补扩展列，而不是一开始为所有 evidence pages 预留空骨架。
 
 ### 9.6 页面命名规则
 
@@ -1113,6 +1100,11 @@ wiki 只需要说明：
 - 修订旧结论
 - 大规模重构页面结构
 
+对于 substantial maintenance round，除 `log.md` 外还应固定留下：
+
+- 更新后的 durable pages
+- 一份 round note，或至少一段可回溯的 lint summary
+
 ### 11.3 Ingest 工作流
 
 当新 source 进入时，建议工作流如下：
@@ -1123,6 +1115,7 @@ wiki 只需要说明：
 4. 如有必要，再新增 page
 5. 回写 `index.md`
 6. 追加 `log.md`
+7. 对 substantial round 追加 round note 或 lint summary
 
 一份 source 可能同时触发：
 
@@ -1151,6 +1144,8 @@ wiki 只需要说明：
 - 新增一个 durable synthesis page
 
 然后同步更新 `index.md` 与 `log.md`。
+
+如果这是 substantial maintenance，还应补 round note 或 lint summary，而不是让判断只停留在聊天记录。
 
 #### Query 回写阈值
 
@@ -1251,6 +1246,8 @@ lint 至少检查以下事项：
 - 是否存在 evidence gap
 - `index.md` 是否遗漏 durable page
 - `log.md` 是否缺失重要操作记录
+- 本轮变更过的 evidence page 是否仍符合最小模板
+- 是否已经留下 round note 或 lint summary
 
 ### 11.6 冲突与 supersession 处理
 

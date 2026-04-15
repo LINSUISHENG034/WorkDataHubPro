@@ -16,23 +16,27 @@
 
 ## 关键输出结果
 
-- 流失事实输出
-- 客户标签与回填信号
+- `fact_annual_loss` 直接事实输出
+- `company_reference` 与 `customer_loss_signal`
 - 对 `is_loss_reported` 的上游支撑
-- 为客户 / 产品线粒度状态判断提供年度流失申报事实来源
-- 对缺失计划号和身份识别形成 event-domain 级别的补齐压力
+- 为 `contract_state` / `monthly_snapshot` 提供年度流失申报事实来源
+- 对缺失计划号、身份识别与 temp-id 治理形成 event-domain 级别的补齐压力
 
 ## 适用标准
 
 - [输入现实合同](../standards/input-reality/input-reality-contracts.md)
+- [`annual_loss` 输入合同](../standards/input-reality/annual-loss-input-contract.md)
 - [客户状态语义正确性](../standards/semantic-correctness/customer-status-semantics.md)
+- [身份治理语义正确性](../standards/semantic-correctness/identity-governance.md)
 - [输出正确性标准](../standards/output-correctness/output-correctness.md)
+- [`annual_loss` 输出合同](../standards/output-correctness/annual-loss-output-contract.md)
 - [real-data validation](../standards/verification-method/real-data-validation.md)
 - [golden scenarios](../standards/verification-method/golden-scenarios.md)
 
 ## 关键证据来源
 
 - [输入现实证据](../evidence/input-reality-evidence.md)
+- [`annual_loss` 字段处理证据](../evidence/annual-loss-field-processing-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [`is_loss_reported` 对象级证据](../evidence/is-loss-reported-evidence.md)
@@ -46,5 +50,6 @@
 
 ## 明确不在本页描述的内容
 
-- event pipeline 代码流程
+- event pipeline walkthrough
+- 每个 compatibility case 的实现细节
 - 当前 rebuild coverage status

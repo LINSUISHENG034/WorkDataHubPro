@@ -38,3 +38,5 @@
   - maintenance 轮次，把 annuity-performance 的有效知识升级路径提炼成通用框架 + 样板实例。
 - [Round 18：`annuity_income` domain upgrade and maintenance controls](./round-18-annuity-income-domain-upgrade-and-maintenance-controls.md)
   - maintenance 轮次，收紧维护者发现路径，并把 annuity_income 升级到合同级问答入口。
+- [Round 19：event-domain contract upgrade and evidence governance tightening](./round-19-event-domain-contract-upgrade-and-evidence-governance.md)
+  - maintenance 轮次，把 `annual_award` / `annual_loss` 升级到合同级入口，并将 evidence 模板与 lint 固定产物收紧成正式维护规则。
