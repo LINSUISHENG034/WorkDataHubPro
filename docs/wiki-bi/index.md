@@ -142,4 +142,4 @@
 - [Round 16：`annuity_performance` implementation gap audit](./_meta/absorption-rounds/round-16-annuity-performance-gap-audit.md) : maintenance 轮次，对照 legacy 代码审计 annuity-performance wiki 合同与实现差距。
 - [Round 17：domain upgrade workflow pattern](./_meta/absorption-rounds/round-17-domain-upgrade-workflow-pattern.md) : maintenance 轮次，把 annuity-performance 的有效升级路径提炼成可复用框架。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
-- [变更日志](./log.md) : 按时间记录 `wiki-bi` 的搭建与后续增量维护。
+- [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

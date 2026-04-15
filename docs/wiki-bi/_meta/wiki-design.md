@@ -270,9 +270,15 @@ docs/wiki-bi/
 
 推荐标题格式：
 
-- `## [2026-04-13] ingest | customer status rules`
-- `## [2026-04-13] query | compare is_new vs 年金客户类型`
-- `## [2026-04-13] lint | detect orphan concept pages`
+- `## [2026-04-13 09:15] ingest | customer status rules`
+- `## [2026-04-13 11:40] query | compare is_new vs 年金客户类型`
+- `## [2026-04-13 16:05] lint | detect orphan concept pages`
+
+其中：
+
+- 时间戳默认精确到 `HH:MM`
+- 同一天内发生多次维护动作时，不应只写日期而省略时间
+- 历史条目如果仍是旧的仅日期格式，可保留 provenance，不要求追溯性重写
 
 `index.md` 解决“现在有什么”，`log.md` 解决“最近发生了什么”。两者不能互相替代。
 
@@ -1092,6 +1098,12 @@ wiki 只需要说明：
 - append-only
 - chronological
 - parseable
+
+日志标题默认格式应为：
+
+- `## [YYYY-MM-DD HH:MM] action | summary`
+
+这样可以在不引入秒级噪声的前提下，区分同一天内的多次维护动作。
 
 每次下面这些动作发生后，都应追加日志：
 

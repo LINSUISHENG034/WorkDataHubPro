@@ -1,5 +1,8 @@
 # Wiki BI Log
 
+> 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
+> 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
+
 ## [2026-04-14] remove | 物理删除 legacy wiki layer
 
 - 在删除前已将活跃测试、verification-asset `reference_location`、以及 active skill/docs 中的旧 wiki 路径迁移到 `docs/wiki-bi/`、`docs/system/` 或 `.planning/`
@@ -164,3 +167,9 @@
 - 新增 `_meta/wiki-domain-upgrade-framework.md`，把高价值 domain 从导航页升级到合同级 wiki 的工作流沉淀为可复用框架
 - 新增 `round-17-domain-upgrade-workflow-pattern.md`，用 annuity-performance 的 Round 15 / 16 作为样板实例
 - 更新 `index.md` 与 `_meta/absorption-rounds/index.md`，把这套“通用框架 + 真实样板”接入主导航
+
+## [2026-04-15 08:30] maintain | 为日志标题规则补入 `HH:MM`
+
+- 在 `log.md` 顶部显式规定新标题格式为 `## [YYYY-MM-DD HH:MM] action | summary`
+- 更新 `wiki-design.md` 的推荐示例与日志规则描述，使 schema 与实际执行页保持一致
+- 更新 `index.md` 对变更日志的说明，明确后续记录按“日期 + 时间”维护
