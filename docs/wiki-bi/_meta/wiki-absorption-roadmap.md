@@ -6,6 +6,18 @@
 
 ---
 
+## Subagent-Governed Legacy Semantic Absorption
+
+Goal:
+
+- absorb hidden legacy semantics through a coverage-first module map
+- validate the subagent workflow through three pilot modules before parallel scaling
+
+Primary references:
+
+- `docs/wiki-bi/_meta/wiki-legacy-semantic-absorption-module-map.md`
+- `docs/wiki-bi/_meta/wiki-subagent-worktree-playbook.md`
+
 ## Round 1：状态与快照
 
 目标：
@@ -365,8 +377,6 @@ Entry pages:
 Status:
 
 - completed on 2026-04-15
-
-## 下一阶段执行顺序
 
 ## 当前推荐入口
 

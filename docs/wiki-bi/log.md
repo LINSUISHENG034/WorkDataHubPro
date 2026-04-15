@@ -3,6 +3,18 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-16 01:08] plan | legacy semantic absorption module map and subagent playbook
+
+- established the eight-module coverage model to absorb hidden legacy semantics with reviewable module boundaries
+- fixed `.worktrees/` as the required isolation mode for all subagent execution
+- sequenced three single-module pilots before a parallel wave rollout
+
+## [2026-04-16 01:27] review | legacy semantic absorption coverage and governance
+
+- found coverage blind spots in discovery/input-contract, shared cleansing/transform substrate, load/write-contract schema, reference-sync state, enrichment-index learning/conflict semantics, and scheduled/operator runtime surfaces without needing to add `M9`
+- updated the module map to keep the exact eight-module model while assigning discovery/runtime plus cross-domain execution semantics to `M8`, schema and reference-sync state to `M6`, and enrichment-index semantics to `M5`; also clarified legacy-path relativity and `parallel-wave` as post-pilot admission only
+- added merge gates before pilot execution so primary-checkout review, same-change closure artifacts, evidence-template and stable-finding checks, write-set enforcement, thin domain pages, and controller-owned integration-file sequencing are all explicit
+
 ## [2026-04-15 23:43] plan | Round 23 production-sample augmentation
 
 - planned a wiki maintenance round focused on legacy plus representative single-month production-sample reality

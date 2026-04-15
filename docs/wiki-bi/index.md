@@ -151,6 +151,8 @@
 - [轻量实施计划](./_meta/wiki-implementation-plan.md) : 首批 seed scaffold 的实施范围、顺序与完成定义。
 - [吸收工作流](./_meta/wiki-absorption-workflow.md) : 定义主题簇吸收、分类 gate、每轮输出与验收清单。
 - [吸收路线图](./_meta/wiki-absorption-roadmap.md) : 定义主题簇整体顺序与每轮主入口页。
+- [legacy 语义吸收模块图](./_meta/wiki-legacy-semantic-absorption-module-map.md) : 固定 eight-module coverage 模型，用于并行吸收 hidden legacy semantics。
+- [subagent worktree 执行手册](./_meta/wiki-subagent-worktree-playbook.md) : 固定 one-module-one-write-set 的 subagent 执行与评审 gate。
 - [吸收轮次索引](./_meta/absorption-rounds/index.md) : 记录每轮闭环的经验沉淀与下一轮入口。
 - [Round 01：状态与快照](./_meta/absorption-rounds/round-01-status-and-snapshot.md) : 首轮闭环沉淀，记录状态与快照主题簇的稳定结论、可复用经验与下一轮目标。
 - [Round 02：身份与补查](./_meta/absorption-rounds/round-02-identity-and-lookup.md) : 第二轮闭环沉淀，记录 `company_id`、temp-id、lookup surface 与下一轮目标。
