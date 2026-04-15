@@ -34,6 +34,7 @@
 - 继续代码核对后，剩余 active gaps 已经可以分流成：
   - code-fix candidates
   - stale documentation drift
+- 后续执行阶段已在 legacy 仓库中关闭 `GAP-AP-003`、`GAP-AP-004`、`GAP-AP-005` 三个代码候选，并清理 `GAP-AP-007` 的 resolver-facing stale drift
 - 这些差距已经足够厚，值得单独立一页 implementation gap evidence
 
 ## 本轮更新的目标页
@@ -53,7 +54,5 @@
 
 ## 下一步建议
 
-- 若后续继续治理 annuity-performance，优先分别处理：
-  - code-fix candidates
-  - stale documentation drift
-  - 仍未出现的 intentional differences（如后续被确认，再单独登记）
+- 本轮原先登记的 active gaps 已完成收口；后续仅在出现新的 contract drift 时再开新条目
+- 如果未来再次出现“schema contract 与 active runtime path 脱节”，优先先补 targeted regression，再回写 gap register

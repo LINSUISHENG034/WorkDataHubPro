@@ -173,3 +173,11 @@
 - 在 `log.md` 顶部显式规定新标题格式为 `## [YYYY-MM-DD HH:MM] action | summary`
 - 更新 `wiki-design.md` 的推荐示例与日志规则描述，使 schema 与实际执行页保持一致
 - 更新 `index.md` 对变更日志的说明，明确后续记录按“日期 + 时间”维护
+
+## [2026-04-15 09:36] validate | 关闭 annuity_performance 剩余 active gaps
+
+- 在 legacy `E:\Projects\WorkDataHub` 中补上 annuity-performance active path 的 Gold validation，关闭 `GAP-AP-003`
+- 修正 legacy `foreign_keys.yml` 中 `fk_organization` 对 canonical `机构名称` 的回填来源，关闭 `GAP-AP-004`
+- 修正 legacy `集团企业客户号` 清洗对 Python `None` 的串值物化，关闭 `GAP-AP-005`
+- 收紧 legacy resolver-facing 文档/注释，对齐 active annuity-performance YAML execution path，关闭 `GAP-AP-007`
+- 验证命令：`PYTHONPATH=src uv run pytest tests/unit/domain/annuity_performance/test_pipeline_builder.py tests/unit/domain/annuity_performance/test_failed_records_export.py tests/unit/domain/annuity_performance/test_schemas.py tests/unit/domain/reference_backfill/test_generic_backfill_service.py -q`
