@@ -1,7 +1,18 @@
+from .claims import (
+    CLAIM_SCOPE_DIRECTORIES,
+    ClaimArtifact,
+    ClaimCandidateRecord,
+    ClaimDiscoveredObjectRecord,
+    ClaimEdgeRecord,
+    ClaimSourceRecord,
+    claim_relative_path,
+    write_claim_artifact,
+)
 from .models import (
     BOOTSTRAP_WAVE,
     CLAIM_TYPES,
     CANONICAL_SEED_SOURCES,
+    CONFIDENCE_LEVELS,
     COVERAGE_STATES,
     EVIDENCE_STRENGTHS,
     SEEDED_ENTRY_SURFACES,
@@ -17,8 +28,15 @@ from .models import (
 
 __all__ = [
     "BOOTSTRAP_WAVE",
+    "CLAIM_SCOPE_DIRECTORIES",
+    "ClaimArtifact",
+    "ClaimCandidateRecord",
+    "ClaimDiscoveredObjectRecord",
+    "ClaimEdgeRecord",
+    "ClaimSourceRecord",
     "CLAIM_TYPES",
     "CANONICAL_SEED_SOURCES",
+    "CONFIDENCE_LEVELS",
     "COVERAGE_STATES",
     "EVIDENCE_STRENGTHS",
     "SEEDED_ENTRY_SURFACES",
@@ -27,6 +45,8 @@ __all__ = [
     "STATUSES",
     "TRIAGE_STATUSES",
     "WAVE_ID_PATTERN",
+    "claim_relative_path",
+    "write_claim_artifact",
     "SeededEntrySurface",
     "SeededSourceFamily",
     "SeededWave",

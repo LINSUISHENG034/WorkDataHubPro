@@ -937,15 +937,35 @@ Success condition:
 
 ### 18.2 Slice 2: Claim Workflow And Canonical Compiler
 
+This original slice is intentionally split into two implementation plans.
+
+The split is required because claim artifact creation and canonical compilation
+touch different write surfaces, have different failure modes, and should be
+validated independently before reporting or wave-closeout logic is introduced.
+
+#### 18.2.1 Plan A: Claim Artifact Creation
+
 Scope:
 
-- implement claim-file creation rules
-- implement canonical compilation rules
-- enforce ownership boundaries between agent claims and main-thread registries
+- implement claim-file schema and creation rules
+- create wave-local claim directory structure under `claims/<wave_id>/`
+- enforce the write boundary that agents may write claim artifacts but may not write canonical registry files directly
 
 Success condition:
 
-- parallel claim artifacts can be produced without direct writes into canonical files
+- parallel claim artifacts can be created deterministically without direct writes into canonical files
+
+#### 18.2.2 Plan B: Canonical Compilation
+
+Scope:
+
+- implement main-thread canonical compilation from accepted claim artifacts
+- normalize canonical registry updates from claims while preserving claim provenance
+- regenerate canonical summaries touched by compilation without introducing integrity reporting or wave-closeout mechanics
+
+Success condition:
+
+- accepted claim artifacts can be compiled into canonical registry files through one main-thread path while keeping claim provenance visible
 
 ### 18.3 Slice 3: Reporting And Wave Closure
 
@@ -981,6 +1001,7 @@ Recommended branches:
 - `slice/semantic-map-integration`
 - `slice/semantic-map-registry-bootstrap`
 - `slice/semantic-map-claim-workflow`
+- `slice/semantic-map-canonical-compiler`
 - `slice/semantic-map-reporting-wave-closeout`
 - `slice/semantic-map-first-wave-pilot`
 
@@ -1000,12 +1021,14 @@ Branch responsibilities:
 The semantic-map plans should be executed in this order:
 
 1. implement the earliest required foundation slice on its own branch and verify that slice-specific contracts pass
-2. merge that completed slice branch into `slice/semantic-map-integration`, not `main`
-3. cut the next dependent slice branch from the current `slice/semantic-map-integration` head rather than from `main` or from another developer's in-flight slice branch
-4. complete and verify the next slice on its own branch, then merge it back into `slice/semantic-map-integration`
-5. repeat this pattern until all semantic-map plans and their cross-slice fixes are integrated
-6. run the full semantic-map acceptance review on `slice/semantic-map-integration`
-7. merge `slice/semantic-map-integration` to `main` only after the whole semantic-map package is accepted
+2. for the original Slice 2, execute `18.2.1 Plan A: Claim Artifact Creation` before `18.2.2 Plan B: Canonical Compilation`
+3. merge that completed slice branch into `slice/semantic-map-integration`, not `main`
+4. cut the next dependent slice branch from the current `slice/semantic-map-integration` head rather than from `main` or from another developer's in-flight slice branch
+5. complete and verify the next slice on its own branch, then merge it back into `slice/semantic-map-integration`
+6. after claim workflow is integrated, execute canonical compilation before reporting and wave-closeout work
+7. repeat this pattern until all semantic-map plans and their cross-slice fixes are integrated
+8. run the full semantic-map acceptance review on `slice/semantic-map-integration`
+9. merge `slice/semantic-map-integration` to `main` only after the whole semantic-map package is accepted
 
 Additional guards:
 
