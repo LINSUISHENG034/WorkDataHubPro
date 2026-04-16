@@ -28,6 +28,8 @@
 
 `docs/wiki-bi/_meta/legacy-semantic-map/` 不属于 durable wiki page family。
 
+This subtree is excluded from durable-page reachability and template checks.
+
 因此这棵子树：
 
 - 不参加 `docs/wiki-bi/index.md` 可达性检查
@@ -36,9 +38,9 @@
 
 如果本轮改动了 semantic map 子树，应该改查：
 
-- `docs/wiki-bi/index.md` 仍然没有收录 `legacy-semantic-map`
+- it still remains absent from `docs/wiki-bi/index.md`
 - `docs/wiki-bi/_meta/legacy-semantic-map/README.md` 仍明确写着 `not durable wiki content`
-- `README.md` 仍写着 active owner 与 archive trigger
+- maintainers must verify owner, archive trigger, and non-durable boundary remain visible in `README.md`
 
 ## 推荐执行方式
 

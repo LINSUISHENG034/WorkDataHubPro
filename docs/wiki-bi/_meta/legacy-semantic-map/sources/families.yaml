@@ -1,0 +1,25 @@
+seeded_high_priority_source_families:
+- family_id: legacy-domain-capability-maps
+  title: Legacy domain capability maps and migration workflow guides
+  status: seeded
+  coverage_state: seeded
+- family_id: legacy-operator-runtime-surfaces
+  title: Legacy operator CLI, schedules, sensors, and runtime entry surfaces
+  status: seeded
+  coverage_state: seeded
+- family_id: legacy-identity-and-reference-runtime
+  title: Legacy identity, queue, reference, and persistence runtime surfaces
+  status: seeded
+  coverage_state: seeded
+- family_id: current-first-wave-governance-specs
+  title: Current first-wave governance specs and coverage matrix inputs
+  status: seeded
+  coverage_state: seeded
+- family_id: current-wiki-bi-surfaces
+  title: Current wiki-bi durable surfaces and semantic governance pages
+  status: seeded
+  coverage_state: seeded
+- family_id: current-replay-and-reference-assets
+  title: Current replay assets, reference artifacts, and validation runbooks
+  status: seeded
+  coverage_state: seeded

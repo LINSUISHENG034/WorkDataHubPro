@@ -1,0 +1,8 @@
+{
+  "artifact": "legacy-semantic-map-bootstrap",
+  "canonical_seed_sources": [
+    "execution/entry-surfaces.yaml",
+    "sources/families.yaml",
+    "waves/index.yaml"
+  ]
+}
