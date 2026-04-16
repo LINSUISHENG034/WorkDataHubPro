@@ -30,6 +30,17 @@
 - current project 已显式保护 deterministic / opaque temp identity 与 source-value-first 行为，Round 13 已把 broader identity governance 提升为独立标准层
 - `annual_award` 与 `annual_loss` 当前都已具备 contract-grade identity writeback 入口，不再只是状态语义的旁路来源
 
+## 四层分离证据视图
+
+- active runtime path
+  - `E-ID-005`、`E-ID-008`、`E-ID-009`、`E-ID-010` 支撑 current 受测主链、temp-id 策略与 event-domain identity writeback
+- compatibility inventory / historical memory
+  - `E-ID-001`、`E-ID-002`、`E-ID-006`、`E-ID-007` 支撑 legacy 5-step chain、mapping family、ID5 历史决策与多线索识别背景
+- retired fallback behavior
+  - `E-ID-006`、`E-ID-010` 支撑 ID5 与 `TE...` 路径的退休边界
+- operator-visible consequence
+  - `E-ID-003`、`E-ID-004` 支撑 queue / artifact / operator entrypoint 的可见性要求与 runtime-surface 识别
+
 ## 哪些来源是强证
 
 - 业务背景文档
@@ -52,6 +63,6 @@
 
 ## 当前证据缺口
 
-- temp-id、ID1-ID5 mapping files 与 annuity_income 相关身份差异仍未形成对象级 evidence page
-- current project 已有 identity governance 的局部实现与测试，但 queue / cache / provider / mapping 的完整边界仍待持续收紧
-- annuity_income 的 branch mapping / ID5 gap 已被拆出，并且已经能接回 broader identity governance 视角
+- queue runtime 与 enterprise persistence 在 current runtime 中的替代承接（若存在）仍缺少对象级闭环证据，暂不应写成 active runtime path
+- cache / provider / mapping 的跨域一致性边界仍需更多 current-side evidence 才能从 compatibility memory 升级为 active conclusion
+- temp-id、ID1-ID5 mapping files 与 annuity_income 相关身份差异仍未形成完整对象级 evidence 套件

@@ -3,6 +3,12 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-16 08:08] absorb | Round 25 identity governance pilot
+
+- identity layering improvement
+- queue vs persistence split
+- prompt-design lesson
+
 ## [2026-04-16 01:36] absorb | Round 24 reference and backfill pilot
 
 - 新增 `reference-and-backfill-evidence.md`，把 authoritative `reference_sync`、fact-derived `backfill`、customer-master 衍生写入与 provenance / state 边界写成 durable evidence page

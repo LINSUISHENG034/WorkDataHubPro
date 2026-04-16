@@ -31,6 +31,28 @@
 - unknown / unresolved 状态应能被 operator 看见
 - 预算耗尽、provider miss、DB failure 等情况都可能把记录推到 temp-id fallback
 
+## 四层分离（Pilot 02 版本）
+
+### active runtime path
+
+- temp-id 仅在当前主链路前置路径未命中时生成（source/cache/provider 之后）
+- current tests 已显式保护 deterministic + opaque 行为，不依赖 legacy `TE...` 形态
+
+### compatibility inventory / historical memory
+
+- legacy resolver 文档与 queue/DAO 历史实现仍保留 temp identity 的制度记忆
+- 历史中出现过的 fallback 组合、queue 入队时机与重试语义属于 historical memory，不自动转译为 current runtime
+
+### retired fallback behavior
+
+- ID5 fallback 与 `TE...` temp identity 均属于 retired 路径
+- retired 行为只保留为证据与审计上下文，不应在 current 叙述中写成备用开关
+
+### operator-visible consequence
+
+- 生成 temp-id 代表“记录保留成功，但身份未决仍在”
+- unresolved 样本应通过 operator artifacts / signals 可见；若 queue/persistence 未承接，应登记为 evidence gap
+
 ## 对输出与下游的影响
 
 - 影响 `company_id` 的一致性判断
@@ -42,6 +64,7 @@
 - `temp_id` 不是“真正的 company_id”
 - `temp_id` 不是普通测试桩
 - 生成了 `temp_id` 不代表身份问题已经解决
+- `temp_id` 生成成功不等于 queue 或 enterprise persistence 一定已被 current runtime 承接
 
 ## 相关概念
 

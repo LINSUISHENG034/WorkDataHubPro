@@ -33,6 +33,28 @@ legacy code 进一步说明：
 
 这说明它不是“一个函数名”，而是一整块 identity runtime surface。
 
+## 四层分离（queue 专属）
+
+### active runtime path
+
+- current accepted runtime 中，queue 语义由同步身份主链与 operator-visible unresolved artifacts 替代承接
+- 因此 queue 在当前属于“治理对象已登记，但 runtime 未复刻”的状态
+
+### compatibility inventory / historical memory
+
+- legacy queue 的 `pending/processing` 去重、retry backoff、graceful degradation、stale-processing reset 均属于历史记忆
+- 这些语义来自 `lookup_queue.py` 与 `enrichment_requests` 持久化约束，应继续保留在 wiki memory 层
+
+### retired fallback behavior
+
+- “默认依赖 queue 才能完成身份治理”这一叙述应视为 retired 假设
+- queue retired 的是 runtime 依赖地位，不是其治理语义本身
+
+### operator-visible consequence
+
+- unresolved identity 仍需对 operator 可见；若不走 queue，需要 artifacts/signal/evidence 明确承接
+- 任何“queue 不在 current runtime，因此无需可见性外显”的写法都属于语义错误
+
 ## 为什么它是独立 surface
 
 它不是普通 business domain，因为它处理的不是业务事实表，而是 identity lookup 的运行面与操作面。
@@ -70,6 +92,7 @@ legacy code 进一步说明：
 - 被保留的是 async lookup runtime 这一治理对象与其 dedup / retry / graceful degradation 语义，而不是 legacy queue runtime 本身
 - `enterprise.enrichment_requests` 一类 queue persistence 仍随 broader queue/runtime plan 一并 deferred
 - 当前至少不应再被当作“隐含存在，不必登记”的对象
+- unresolved 的 operator consequence 要么进入 artifacts/signal，要么登记在 evidence gap；不能因 queue deferred 而静默消失
 
 ## Round 21 决策边界
 

@@ -32,6 +32,28 @@
 - `enterprise.base_info`
   - provider 结果与解析字段的持久化对象
 
+## 四层分离（persistence 专属）
+
+### active runtime path
+
+- current accepted runtime 只显式保护身份解析行为链与可见性证据，不等于保留了全量 enterprise persistence footprint
+- `enrichment_index`/`company_name_index`、`base_info`、`enrichment_requests` 的 durable persistence 当前仍未作为 active runtime 受测闭环
+
+### compatibility inventory / historical memory
+
+- legacy persistence family（cache/queue/provider）作为制度记忆必须保留
+- `company_id_overrides_*`、`company_branch.yml`、`eqc_confidence.yml` 仍是解释 persistence 决策来源的 memory 资产
+
+### retired fallback behavior
+
+- “只要保留 legacy 表面宽度，identity 才算正确”的叙述应视为 retired 假设
+- retired 的是把 persistence footprint 误当成唯一正确运行态，不是这些对象的治理价值
+
+### operator-visible consequence
+
+- persistence deferred 不等于后果消失；operator 仍需通过 artifacts/signal/evidence 观察 unresolved identity
+- 若 future 恢复 durable persistence，必须以对象级 evidence 明确 admission，而不是在语义页隐式复活
+
 ## 为什么它是独立 surface
 
 它不属于某个单独 domain 的内部表，而是一组被多条运行路径共同写入和读取的 persistence surface。
@@ -44,6 +66,11 @@
 - GUI 工具的可选持久化
 
 因此它不能被简化成“queue 的内部实现细节”或“某个 provider helper 的附属表”。
+
+并且它与 `company_lookup_queue` 是两个不同 surface：
+
+- `company_lookup_queue` 关注异步补查调度语义（enqueue/dequeue/retry/status）
+- `enterprise enrichment persistence` 关注 durable 数据对象族（cache/queue/provider persistence）
 
 ## 相关概念
 
@@ -82,3 +109,5 @@
   - cache / queue / provider persistence 三层分化本身
 - `retire`
   - “identity 行为链只有在保留 legacy 表面宽度时才成立”这一假设
+- `evidence_gap`
+  - current runtime 若未物化对应 persistence family，应在 evidence page 登记 gap，而不是在 surface 页暗示“已保留”

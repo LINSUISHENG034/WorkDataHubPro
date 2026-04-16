@@ -69,16 +69,26 @@
 
 - current project 当前显式受测的主链路仍是 `source_value -> cache -> provider -> temp_id_fallback`
 - `annual_award` / `annual_loss` 还显式保护 source-preserving plan-code enrichment，但这属于 event-domain contract 的当前行为，不等于重建了全部 legacy identity stack
+- current path 的语义只覆盖受测行为；queue persistence、provider raw/cleansed persistence 仍是 deferred runtime，不应写进 active runtime path
 
 ### retired behavior that must not be reintroduced
 
 - ID5 fallback retirement 不应被写成“必要时再开”的兼容开关
 - legacy `TE...` 风格 temp identity 不应在 current replay / publication path 中复活
+- retired fallback 一旦被误写进“当前可选路径”，会直接破坏语义正确性判定
 
 ### operator-visible consequence
 
 - unresolved identity 必须能外显到 queue、artifact、signal 或 evidence package，而不是只留在内部 trace
 - `company_reference`、`customer_loss_signal`、`unknown_names_csv` 与 queue surface 都属于 operator 可见后果的一部分
+- 当 queue / persistence 未在 current runtime 物化时，operator-visible consequence 仍需通过 artifacts/evidence 表达，未闭环项必须进入 evidence gaps
+
+## 分层检查问句（用于评审）
+
+1. 这条结论是在描述 active runtime path，还是只是在登记 historical memory？
+2. 这条 fallback 是否已退休（retired），如果是，是否被误写成“可随时恢复”？
+3. 这条 unresolved 后果是否 operator-visible，还是只停在内部 trace？
+4. 当前页面是否把 deferred runtime 混写为 active runtime？
 
 ## 非例
 

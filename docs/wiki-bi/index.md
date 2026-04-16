@@ -34,6 +34,8 @@
   - 企业身份标识是跨 domain 连接事实、主数据、快照和验证的核心对象。
 - [什么算受治理的身份 fallback](./standards/semantic-correctness/identity-governance.md)
   - temp-id、mapping files、cache、provider、queue 的边界需要作为 identity governance 统一理解。
+- [如何区分 active runtime、historical memory、retired 与 operator-visible consequence](./standards/semantic-correctness/identity-governance.md)
+  - 身份治理相关叙述必须四层分离；未闭环项进入 evidence gaps，不混写成 active runtime。
 - [什么算 real-data validation](./standards/verification-method/real-data-validation.md)
   - 真实数据验证不是“拿真实文件跑一下”，而是有边界和目标的验证方法。
 - [当前生产 workbook 长什么样](./evidence/input-reality-evidence.md)
@@ -181,5 +183,6 @@
 - [Round 22：high-traffic evidence normalization](./_meta/absorption-rounds/round-22-high-traffic-evidence-normalization.md) : maintenance 轮次，把高流量 aggregate evidence pages 收紧成一致的 dispatcher + object-page 分发骨架，提高 lint 友好度。
 - [Round 23：production-sample augmentation](./_meta/absorption-rounds/round-23-production-sample-augmentation.md) : maintenance 轮次，把代表性单月生产样本验证过的 workbook family、业务收集 variants 与 ledger surface 回写成 durable wiki 入口。
 - [Round 24：reference and backfill pilot](./_meta/absorption-rounds/round-24-reference-backfill-pilot.md) : pilot 轮次，用单一 subagent 验证 evidence-first 吸收 reference/backfill 模块并收紧下一轮 prompt / review gate。
+- [Round 25：identity governance pilot](./_meta/absorption-rounds/round-25-identity-governance-pilot.md) : pilot 轮次，验证 identity 语义页面的四层分离写法，并保持 queue surface 与 persistence surface 的明确拆分。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

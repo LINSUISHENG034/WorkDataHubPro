@@ -50,7 +50,9 @@
   - maintenance 轮次，把代表性单月生产样本验证过的 workbook family、业务收集 workbook variants 与 ledger surface 现实回写成受边界控制的对象级证据。
 - [Round 24：reference and backfill pilot](./round-24-reference-backfill-pilot.md)
   - pilot 轮次，用单一模块试跑 evidence-first 吸收 reference/backfill，并把 prompt / review gate 的收紧经验沉淀下来。
+- [Round 25：identity governance pilot](./round-25-identity-governance-pilot.md)
+  - pilot 轮次，验证 identity 语义页的四层分离写法，并明确 `company_lookup_queue` 与 enterprise persistence 作为两个独立 surface 的治理边界。
 
 ## 计划轮次
 
-- 当前无其他 planned round；如需继续推进，应先吸收 Round 24 的 pilot 经验，再判断是否需要更多 single-module pilots 或并行波次。
+- 当前无其他 planned round；如需继续推进，应先吸收 Round 24 与 Round 25 的 pilot 经验，再判断是否需要更多 single-module pilots 或并行波次。
