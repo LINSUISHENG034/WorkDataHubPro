@@ -49,6 +49,17 @@ replay evidence 表明，`annual_loss` 当前还会显式发布：
 - 下游 projection 把该事实接回 contract / snapshot 语义
 - 不能把 projection 表或 compatibility package 误写成 loss domain 本身的 direct fact output
 
+## temporal enrichment correctness
+
+对 `annual_loss` 来说，`plan_code` 不是简单字段搬运，而是带时间约束的输出语义：
+
+- 若源行已有 `plan_code`，保持 source value（`preserve_source_plan_code`）
+- 若源行为空，优先查 `customer_plan_history` 的 current contract rows（`valid_to=9999-12-31`）
+- current rows 内按 `effective_period` 倒序优先，并结合 `plan_type` 偏好前缀（集合 `P` / 单一 `S`）
+- 仍未命中时退回 domain default（集合 `AN001` / 单一 `AN002`）
+
+因此输出正确性必须覆盖“保留源值 -> temporal lookup -> default fallback”的顺序稳定性，而不只是检查是否最终有 `plan_code`。
+
 ## 正确性判断边界
 
 判断 `annual_loss` 输出是否正确时，至少要同时满足：
@@ -56,6 +67,7 @@ replay evidence 表明，`annual_loss` 当前还会显式发布：
 - 流失事实被稳定发布到 `fact_annual_loss`
 - `company_reference` 与 `customer_loss_signal` 能解释 loss event 的身份与客户侧后果
 - temp-id fallback 保持 opaque / governed，不恢复 legacy `TE...` 前缀式临时身份
+- `plan_code` enrichment 事件应可追溯到 `fact_processing.plan_code_enrichment`，且 rule_id 在 `preserve_source_plan_code`、`customer_plan_history_lookup`、`domain_default_plan_code` 中三选一
 - `contract_state` / `monthly_snapshot` 明确消费已发布 loss facts，而不是只依赖 fixture-only 路径
 - compatibility case 若出现，应能准确回指 `fact_processing`、`identity_resolution`、`contract_state` 或 `monthly_snapshot` 等真实失败 checkpoint
 
@@ -63,6 +75,7 @@ replay evidence 表明，`annual_loss` 当前还会显式发布：
 
 - `current_test`
   - `tests/replay/test_annual_loss_slice.py`
+  - `tests/integration/test_annual_loss_plan_code_enrichment.py`
   - `tests/integration/test_projection_outputs.py`
 - `current_reference_asset`
   - `reference/historical_replays/annual_loss/`

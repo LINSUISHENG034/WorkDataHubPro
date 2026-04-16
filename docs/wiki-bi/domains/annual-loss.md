@@ -21,6 +21,7 @@
 - 对 `is_loss_reported` 的上游支撑
 - 为 `contract_state` / `monthly_snapshot` 提供年度流失申报事实来源
 - 对缺失计划号、身份识别与 temp-id 治理形成 event-domain 级别的补齐压力
+- 对 `customer_plan_history` 的 temporal current-row lookup（`valid_to=9999-12-31` + `effective_period` 优先）形成稳定依赖
 
 ## 适用标准
 
@@ -52,6 +53,12 @@
 - observed production reality：代表性单月生产样本验证表明，business-collection ledger workbook 当前承载 accepted loss sheets，同时同目录里还存在相邻 summary workbook。
 - stable contract：`annual_loss` 只认领自己的 event-domain sheets，不把整个 ledger workbook 或 summary workbook 写成 accepted contract。
 - observed production variant / adjacent operator reality：`业务收集` 目录中的相邻 summary / attachment workbook 先作为 observed production variant 或 surface 处理，再等待更强证据判断是否进入未来 contract。
+
+## 隐藏语义导航
+
+- multi-sheet 读取、anchor 序列与 header alias 适配边界见 [`annual_loss` 输入合同](../standards/input-reality/annual-loss-input-contract.md)。
+- plan-code temporal lookup（current contract rows + prefix 偏好 + domain default）见 [`annual_loss` 输出合同](../standards/output-correctness/annual-loss-output-contract.md)。
+- legacy 与 current 实现对照证据见 [`annual_loss` 字段处理证据](../evidence/annual-loss-field-processing-evidence.md)。
 
 ## 当前验证资产姿态
 

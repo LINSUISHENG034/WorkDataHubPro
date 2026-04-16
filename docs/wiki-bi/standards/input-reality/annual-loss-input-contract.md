@@ -35,6 +35,7 @@
   - multi-sheet event domain
 - intake 结果
   - 双 sheet 合并进入同一个 `annual_loss:{period}` batch
+  - merged `anchor_row_no` 在双 sheet 间连续递增，不按 sheet 重置
   - trailing empty rows 会被跳过，不应污染 anchor row 序列
 
 ## observed production reality
@@ -62,6 +63,16 @@
 
 这些字段会影响 explainability、日期语义或 operator-facing 解释，但 current accepted slice 允许它们以降级方式进入后续处理。
 
+## temporal lookup 输入前提（非 intake gate）
+
+`annual_loss` 的 plan-code temporal lookup 发生在 fact-processing 阶段，不属于 intake gate 本身；但当前输入合同需要保留它的最小前提线索：
+
+- 计划锚点至少一项：`年金计划号` 或 `计划类型`
+- 身份线索可空但应可承载：`company_id` / `source_company_id`
+- multi-sheet 来源线索：`source_sheet`
+
+这组前提用于支撑后续 `customer_plan_history` 的 current-row lookup（仅当前有效行）与 domain default 回退，不应被误写成 intake 必须先完成 enrichment。
+
 ## 字段别名与适配边界
 
 当前 accepted slice 已显式支持下列归一：
@@ -84,6 +95,7 @@
 - `company_id` 可以为空，identity 解析可继续进行
 - `流失日期` 可以为空，也可能在歧义格式下被规范化为 `None`
 - `机构` 缺失或未知时，当前 processing 会退回到默认 `institution_code`
+- `company_id` / `source_company_id` 为空时，不阻断 intake，但会影响后续 temporal lookup 命中率
 
 因此更准确的理解是：
 
@@ -104,6 +116,7 @@
 
 - `current_test`
   - `tests/integration/test_annual_loss_intake.py`
+  - `tests/integration/test_annual_loss_plan_code_enrichment.py`
   - `tests/replay/test_annual_loss_slice.py`
 - `current_reference_asset`
   - `reference/historical_replays/annual_loss/`
