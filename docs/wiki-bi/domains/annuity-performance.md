@@ -22,9 +22,9 @@
 
 ## 关键输出结果
 
-- 规模事实输出
-- 客户 / 参考对象回填
-- customer contract 与快照相关输出
+- direct fact output（规模事实）
+- reference / customer object backfill
+- customer contract 与快照相关派生输出
 - 作为 [`annual_award`](./annual-award.md) / [`annual_loss`](./annual-loss.md) 状态落地的关键承接域
 
 ## 适用标准
@@ -61,6 +61,12 @@
 - 当前 active protection 由 `replay_baseline`、`synthetic_fixture` 与四个 `checkpoint_baseline` 组成。
 - `golden_set`、`golden_baseline`、`error_case_fixture`、`real_data_sample` 仍是显式 `deferred`；其中 error path 当前主要由 inline intake tests 保护，而不是 repo-native fixture 文件。
 - 这足以支撑 accepted slice parity gates，但不应被误写成已具备 repo-native golden set 或 real-data sample。
+
+## 隐藏字段语义入口（M1）
+
+- 输入侧关键语义（`客户名称` / `年金账户名`、`集团企业客户号` / `年金账户号`、row-level hard gate）见 [`annuity_performance` 输入合同](../standards/input-reality/annuity-performance-input-contract.md)。
+- 输出侧关键语义（`max_by` 主拓机构/关键计划、`tags=yyMM新建`、temp-id backfill 边界）见 [`annuity_performance` 输出合同](../standards/output-correctness/annuity-performance-output-contract.md)。
+- 字段级证据和证据强度分层见 [`annuity_performance` 字段处理证据](../evidence/annuity-performance-field-processing-evidence.md)。
 
 ## 相关 domains
 
