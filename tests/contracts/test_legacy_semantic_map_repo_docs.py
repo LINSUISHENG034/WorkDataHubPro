@@ -21,6 +21,21 @@ def test_semantic_map_repo_docs_are_governed() -> None:
         SEMANTIC_MAP_ROOT / "waves" / "index.yaml",
         SEMANTIC_MAP_ROOT / "subsystems" / ".gitkeep",
         SEMANTIC_MAP_ROOT / "objects" / ".gitkeep",
+        SEMANTIC_MAP_ROOT
+        / "claims"
+        / "wave-2026-04-16-registry-bootstrap"
+        / "execution"
+        / ".gitkeep",
+        SEMANTIC_MAP_ROOT
+        / "claims"
+        / "wave-2026-04-16-registry-bootstrap"
+        / "subsystems"
+        / ".gitkeep",
+        SEMANTIC_MAP_ROOT
+        / "claims"
+        / "wave-2026-04-16-registry-bootstrap"
+        / "objects"
+        / ".gitkeep",
     ]
     for path in expected_paths:
         assert path.exists(), f"Expected semantic-map bootstrap artifact at {path}"
@@ -37,6 +52,8 @@ def test_semantic_map_repo_docs_are_governed() -> None:
     assert "not durable wiki content" in readme_text
     assert "active owner:" in readme_text
     assert "archive trigger:" in readme_text
+    assert "distributed agents may write only under `claims/<wave_id>/`" in readme_text
+    assert "canonical registry files remain main-thread-managed" in readme_text
 
     wiki_index_text = (REPO_ROOT / "docs" / "wiki-bi" / "index.md").read_text(encoding="utf-8")
     assert "legacy-semantic-map" not in wiki_index_text

@@ -6,6 +6,7 @@ from pathlib import Path
 import yaml
 
 from .models import (
+    BOOTSTRAP_WAVE,
     CANONICAL_SEED_SOURCES,
     bootstrap_wave_payload,
     seeded_entry_surfaces_payload,
@@ -21,6 +22,9 @@ README_TEXT = """# Legacy Semantic Map
 This subtree is an internal discovery ledger for legacy semantic mapping work.
 It is not durable wiki content.
 It must never be added to `docs/wiki-bi/index.md`.
+
+distributed agents may write only under `claims/<wave_id>/`.
+canonical registry files remain main-thread-managed.
 
 active owner: the main-thread maintainer of the current semantic-map wave
 archive trigger: acceptance of the target durable wiki updates plus disposition of remaining findings for that wave
@@ -48,6 +52,9 @@ def bootstrap_semantic_map(registry_root: Path = DEFAULT_REGISTRY_ROOT) -> Path:
         "execution/stages",
         "subsystems",
         "objects",
+        f"claims/{BOOTSTRAP_WAVE.wave_id}/execution",
+        f"claims/{BOOTSTRAP_WAVE.wave_id}/subsystems",
+        f"claims/{BOOTSTRAP_WAVE.wave_id}/objects",
     ):
         directory = registry_root / relative_dir
         directory.mkdir(parents=True, exist_ok=True)

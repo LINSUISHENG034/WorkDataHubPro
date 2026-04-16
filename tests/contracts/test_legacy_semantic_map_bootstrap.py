@@ -84,6 +84,9 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
         "waves/index.yaml",
         "subsystems/.gitkeep",
         "objects/.gitkeep",
+        "claims/wave-2026-04-16-registry-bootstrap/execution/.gitkeep",
+        "claims/wave-2026-04-16-registry-bootstrap/subsystems/.gitkeep",
+        "claims/wave-2026-04-16-registry-bootstrap/objects/.gitkeep",
     }
     actual_files = {
         path.relative_to(registry_root).as_posix()
@@ -98,6 +101,8 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
     assert "active owner:" in readme_text
     assert "archive trigger:" in readme_text
     assert "must never be added to `docs/wiki-bi/index.md`" in readme_text
+    assert "distributed agents may write only under `claims/<wave_id>/`" in readme_text
+    assert "canonical registry files remain main-thread-managed" in readme_text
 
     manifest = json.loads((registry_root / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["canonical_seed_sources"] == [
