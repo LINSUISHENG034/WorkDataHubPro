@@ -21,6 +21,12 @@
 - 执行年初初始化与年度 cutover
 - 做状态分布验证
 
+## 页面边界
+
+- 本页只描述 operator command surface，不负责解释状态公式本身。
+- 年度生命周期语义与 `status_year` 口径以 evidence page 为准。
+- 未闭环的运行时保留策略进入 evidence gaps，不在本页写成稳定结论。
+
 ## 显式入口
 
 legacy unified CLI 与 deployment guide 都把这组命令当作独立 operator entrypoint 暴露：
@@ -73,6 +79,7 @@ legacy unified CLI 与 deployment guide 都把这组命令当作独立 operator 
 ## 关键证据来源
 
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
+- [customer MDM 生命周期证据](../evidence/customer-mdm-lifecycle-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
 
 ## 当前重构处理状态

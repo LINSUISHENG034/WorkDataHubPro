@@ -3,6 +3,12 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-16 08:14] absorb | Round 26 status and snapshot pilot
+
+- new lifecycle evidence page
+- clearer concept vs command/runtime split
+- prompt shape feels stable for this pilot, with unresolved runtime items kept in evidence gaps
+
 ## [2026-04-16 08:08] absorb | Round 25 identity governance pilot
 
 - identity layering improvement

@@ -22,7 +22,7 @@
 - 不把标签字段误写成状态字段
 - 不混淆不同事实来源
 - 不跨粒度滥用状态定义
-- 把 contract / status / snapshot 分层理解
+- 把 formula memory / yearly lifecycle semantics / operator surface 分层理解
 
 ## 状态语义检查表
 
@@ -33,8 +33,9 @@
    - fact source
    - contract / customer plan
    - snapshot
-3. 该状态适用于哪个粒度
-4. 它是否被错误地与标签字段混同
+3. 该状态是 yearly 还是 monthly 语义
+4. 该状态适用于哪个粒度
+5. 它是否被错误地与标签字段混同
 
 ## 关键状态口径
 
@@ -49,12 +50,19 @@
 - `is_strategic` / `is_existing` / `contract_status`
   - 以 `customer.客户年金计划` 为核心锚点的状态家族
 
+## `status_year` 语义口径
+
+- `status_year` 表达的是年度身份锚点，不应被误解为“所有状态字段唯一数据源”。
+- `status_year` 与 `snapshot_month` 不是可互换字段：一个是年度语义锚点，一个是月度快照锚点。
+- 若运行时来源仍未完全闭环，应登记为 evidence gap，不可写成稳定 runtime 结论。
+
 ## 关键约束
 
 - `is_new` 与 `年金客户类型` 必须分层理解
 - status source 可以不同，不能假设所有状态都来自同一事实表
 - 产品线粒度与计划粒度的状态集合不应被强行对齐
 - `customer.客户年金计划` 的状态锚点不应被误写为快照字段本身
+- 命令调用方式、hook 顺序、CLI 参数不属于语义标准正文
 
 ## 非例
 
@@ -78,6 +86,7 @@
 ## 相关证据
 
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
+- [customer MDM 生命周期证据](../../evidence/customer-mdm-lifecycle-evidence.md)
 - [`is_new` 对象级证据](../../evidence/is-new-evidence.md)
 - [`is_winning_this_year` 对象级证据](../../evidence/is-winning-this-year-evidence.md)
 - [`is_loss_reported` 对象级证据](../../evidence/is-loss-reported-evidence.md)

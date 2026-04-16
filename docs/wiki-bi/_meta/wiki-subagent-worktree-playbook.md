@@ -21,6 +21,19 @@ Worktree authoring happens in the module worktree, primary review happens from a
 - new pages are reachable from an owning page and from `index.md`
 - the subagent changed only its assigned file set
 
+## Stable Task Prompt Shape
+
+- raw sources
+  - list the concrete legacy/current inputs the subagent must use first (docs, runbooks, config, accepted evidence pages), and avoid starting from implementation code unless the module explicitly requires code-audit evidence.
+- exact write set
+  - name the allowed files explicitly and require write-set compliance as a hard gate; if integration files are needed (`index.md`, `log.md`, round note), state that assignment in the prompt.
+- forbidden page drift
+  - forbid edits outside the assigned set and forbid semantic drift where concept/standard pages absorb runtime command detail or unresolved items as stable conclusions.
+- evidence-first ordering
+  - require stable findings to land in evidence pages first, then link outward to concept/standard/surface pages; unresolved findings must be recorded under `当前证据缺口`.
+- merge gates
+  - restate closure gates in the task prompt: template preservation, concept-vs-runtime separation, reachability, and primary-checkout review before merge readiness.
+
 ## Pilot Exit Criteria
 
 - primary review and merge readiness are judged from the primary checkout, not from the module worktree

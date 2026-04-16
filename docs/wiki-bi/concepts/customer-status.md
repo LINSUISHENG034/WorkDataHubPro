@@ -2,7 +2,7 @@
 
 ## 定义
 
-客户状态是一组用于表达客户经营语义、业务变化与快照判断的状态对象。
+客户状态是一组用于表达客户经营语义、年度身份与快照判断的状态对象。
 
 它不是单一字段，也不应被混同为单一表结构。
 
@@ -15,6 +15,14 @@
 - 是否已经流失
 - 是否属于新到账
 - 在年度身份维度上是否 strategic / existing
+
+## 公式记忆（语义层）
+
+- `is_new = is_winning_this_year AND NOT is_existing`
+- `is_winning_this_year` / `is_loss_reported` 属于年度语义
+- `is_churned_this_year` 由月度规模事实承接
+
+这里保留的是语义与公式记忆，不承载命令触发、hook 顺序或运行时参数。
 
 ## 分层模型
 
@@ -49,14 +57,7 @@
 - `is_new`
   - 来源于派生判断：当年中标且非 existing
 - `is_strategic` / `is_existing` / `contract_status` / `status_year`
-  - 主要锚定在 `customer.客户年金计划` 及其生命周期逻辑
-
-## 输入现实与边界情况
-
-- `annual_award` 与 `annual_loss` 会影响部分状态判断
-- `annuity_performance` 提供规模与快照所需的关键事实
-- 有些状态只存在于客户/产品线粒度，不存在计划粒度
-- `year_init`、`contract_status_sync` 与 `snapshot_refresh` 代表不同阶段的状态维护职责
+  - 主要锚定在 `customer.客户年金计划` 的年度生命周期语义
 
 ## 主要状态
 
@@ -75,6 +76,11 @@
 - `中标客户` 标签不等于“当前快照中的新到账状态”
 - 状态不应被理解为 hook 顺序本身
 - `contract_status` 不等于“所有状态的总开关”
+
+## 生命周期证据入口
+
+- [customer MDM 生命周期证据](../evidence/customer-mdm-lifecycle-evidence.md)
+- [`customer-mdm` 手工命令面](../surfaces/customer-mdm-commands.md)
 
 ## 相关 atomic concepts
 
@@ -95,6 +101,7 @@
 ## 相关证据
 
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
+- [customer MDM 生命周期证据](../evidence/customer-mdm-lifecycle-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
 - [`is_new` 对象级证据](../evidence/is-new-evidence.md)
 - [`is_winning_this_year` 对象级证据](../evidence/is-winning-this-year-evidence.md)

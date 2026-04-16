@@ -64,6 +64,8 @@
   - 先补输入/输出/处理合同，再按需做 code-gap audit，这是当前最可复用的 domain wiki 升级路径。
 - [event-style domains 如何接回状态判断与输入现实](./domains/annual-award.md)
   - 从 `annual_award` 进入，再串到 `annual_loss`、`annuity_performance` 与相关标准页，看 event domain 如何进入状态语义与输入现实。
+- [如何区分状态公式记忆、年度生命周期语义与命令运行面](./evidence/customer-mdm-lifecycle-evidence.md)
+  - 先看生命周期证据页，再回到概念页和 surface 页，避免把语义定义与命令细节混写。
 
 ## 全量 Catalog
 
@@ -135,6 +137,7 @@
 - [`annuity_performance` implementation gap 证据](./evidence/annuity-performance-implementation-gap-evidence.md) : 记录 annuity-performance 的 wiki 合同与 legacy 实现之间的差距项。
 - [身份与补查证据](./evidence/identity-and-lookup-evidence.md) : 聚合 `company_id`、temp-id、lookup、plan-code enrichment 相关证据。
 - [状态与快照证据](./evidence/status-and-snapshot-evidence.md) : 聚合客户状态、快照、customer MDM 相关证据。
+- [customer MDM 生命周期证据](./evidence/customer-mdm-lifecycle-evidence.md) : 固化 `year_init`、`sync`、`snapshot`、ratchet-style 与 `status_year` 的年度生命周期证据边界。
 - [`is_new` 对象级证据](./evidence/is-new-evidence.md) : 聚合 `is_new` 的公式、粒度边界、非例与验证路径。
 - [`is_winning_this_year` 对象级证据](./evidence/is-winning-this-year-evidence.md) : 聚合年度中标状态的事实来源、粒度边界与验证路径。
 - [`is_loss_reported` 对象级证据](./evidence/is-loss-reported-evidence.md) : 聚合年度流失申报状态的事实来源、粒度边界与验证路径。
@@ -184,5 +187,6 @@
 - [Round 23：production-sample augmentation](./_meta/absorption-rounds/round-23-production-sample-augmentation.md) : maintenance 轮次，把代表性单月生产样本验证过的 workbook family、业务收集 variants 与 ledger surface 回写成 durable wiki 入口。
 - [Round 24：reference and backfill pilot](./_meta/absorption-rounds/round-24-reference-backfill-pilot.md) : pilot 轮次，用单一 subagent 验证 evidence-first 吸收 reference/backfill 模块并收紧下一轮 prompt / review gate。
 - [Round 25：identity governance pilot](./_meta/absorption-rounds/round-25-identity-governance-pilot.md) : pilot 轮次，验证 identity 语义页面的四层分离写法，并保持 queue surface 与 persistence surface 的明确拆分。
+- [Round 26：status and snapshot pilot](./_meta/absorption-rounds/round-26-status-snapshot-pilot.md) : pilot 轮次，验证状态公式、年度生命周期证据与命令运行面三层分离写法是否稳定。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

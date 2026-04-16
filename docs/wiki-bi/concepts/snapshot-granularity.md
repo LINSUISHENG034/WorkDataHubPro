@@ -11,19 +11,14 @@
 
 不同粒度承载不同判断：
 
-- 客户 / 产品线粒度更适合表达经营状态与年度状态
-- 客户 / 计划粒度更适合表达具体计划层 contract 与 churn 判断
+- 客户 / 产品线粒度承载年度状态与聚合经营语义
+- 客户 / 计划粒度承载计划级 contract 与 churn 语义
 
 ## 不应被改写的约束
 
 - 不同粒度不应被混成同一张“万能快照”
 - 某些状态只存在于产品线粒度，不存在计划粒度
 - 粒度变化会直接改变输出解释，不是普通实现细节
-
-## 输入现实与边界情况
-
-- 粒度依赖 fact、contract、award、loss 等多类输入
-- 计划层与产品线层的聚合路径不同
 
 ## 对输出与下游的影响
 
@@ -47,3 +42,4 @@
 ## 相关证据
 
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
+- [customer MDM 生命周期证据](../evidence/customer-mdm-lifecycle-evidence.md)
