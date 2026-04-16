@@ -1,3 +1,4 @@
+from .compiler import CompilationResult, compile_claim_artifacts
 from .claims import (
     CLAIM_SCOPE_DIRECTORIES,
     ClaimArtifact,
@@ -29,6 +30,7 @@ from .models import (
 __all__ = [
     "BOOTSTRAP_WAVE",
     "CLAIM_SCOPE_DIRECTORIES",
+    "CompilationResult",
     "ClaimArtifact",
     "ClaimCandidateRecord",
     "ClaimDiscoveredObjectRecord",
@@ -46,6 +48,7 @@ __all__ = [
     "TRIAGE_STATUSES",
     "WAVE_ID_PATTERN",
     "claim_relative_path",
+    "compile_claim_artifacts",
     "write_claim_artifact",
     "SeededEntrySurface",
     "SeededSourceFamily",

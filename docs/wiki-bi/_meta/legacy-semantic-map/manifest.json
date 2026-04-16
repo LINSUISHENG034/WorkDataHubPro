@@ -1,8 +1,10 @@
 {
-  "artifact": "legacy-semantic-map-bootstrap",
+  "artifact": "legacy-semantic-map-registry",
   "canonical_seed_sources": [
     "execution/entry-surfaces.yaml",
     "sources/families.yaml",
     "waves/index.yaml"
-  ]
+  ],
+  "generated_canonical_files": [],
+  "compiled_claim_ids": []
 }
