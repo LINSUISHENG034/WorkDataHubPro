@@ -1,5 +1,7 @@
 # WorkDataHubPro Wiki BI Legacy Semantic Absorption Implementation Plan
 
+> **Status:** Superseded
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Expand `docs/wiki-bi/` by mining hidden business semantics from `E:\Projects\WorkDataHub` and turn that mining into a repeatable, reviewable subagent workflow that starts with single-module pilots and ends with a parallel multi-module absorption wave.
