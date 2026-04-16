@@ -1,0 +1,341 @@
+from __future__ import annotations
+
+import argparse
+import json
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Iterable, Sequence
+
+import yaml
+
+from .claims import ClaimArtifact, ClaimCandidateRecord, ClaimEdgeRecord, ClaimSourceRecord
+from .models import CANONICAL_SEED_SOURCES
+
+
+@dataclass(frozen=True)
+class CompilationResult:
+    compiled_claim_ids: list[str]
+    written_files: list[str]
+
+
+def _load_claim(path: Path) -> ClaimArtifact:
+    return ClaimArtifact(**yaml.safe_load(path.read_text(encoding="utf-8")))
+
+
+def _assert_claim_path(registry_root: Path, claim_path: Path) -> Path:
+    resolved_root = registry_root.resolve()
+    resolved_path = claim_path.resolve()
+    claims_root = (registry_root / "claims").resolve()
+    if claims_root not in resolved_path.parents:
+        raise ValueError(f"Accepted claim path must live under claims/: {claim_path}")
+    return resolved_path.relative_to(resolved_root)
+
+
+def _write_yaml(path: Path, payload: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        yaml.safe_dump(payload, sort_keys=False, allow_unicode=False),
+        encoding="utf-8",
+    )
+
+
+def _sorted_unique(values: Iterable[str]) -> list[str]:
+    return sorted({value for value in values if value})
+
+
+def _title_from_id(identifier: str) -> str:
+    return identifier.split("-", 1)[1].replace("-", " ").title()
+
+
+def _path_entry_surface(path_id: str) -> str:
+    parts = path_id.split("-")
+    return "_".join(parts[1:4])
+
+
+def _path_domain_or_surface(path_id: str) -> str:
+    parts = path_id.split("-")
+    return "_".join(parts[4:-2])
+
+
+def _route_edge(edge: ClaimEdgeRecord) -> str | None:
+    if edge.from_id.startswith("ep-") and edge.to_id.startswith("ss-"):
+        return "execution-to-subsystem.yaml"
+    if edge.from_id.startswith("ep-") and edge.to_id.startswith("obj-"):
+        return "execution-to-object.yaml"
+    if edge.from_id.startswith("ss-") and edge.to_id.startswith("obj-"):
+        return "subsystem-to-object.yaml"
+    if edge.from_id.startswith("obj-") and edge.to_id.startswith("obj-"):
+        return "object-to-object.yaml"
+    return None
+
+
+def _source_edge(source: ClaimSourceRecord, claim: ClaimArtifact) -> dict[str, object]:
+    return {
+        "from_id": source.source_ref,
+        "to_id": claim.claim_target_id,
+        "relationship": "supports_claim_target",
+        "source_refs": [source.source_ref],
+        "source_type": source.source_type,
+        "claim_type": "compiled_summary",
+        "evidence_strength": "supporting",
+        "coverage_state": "partial",
+        "confidence": "high",
+        "last_verified": claim.submitted_at.split("T", 1)[0],
+        "open_questions": [],
+        "compiled_from_claims": [claim.claim_id],
+    }
+
+
+def _compiled_edge_payload(edge: ClaimEdgeRecord, claim_id: str) -> dict[str, object]:
+    return {
+        "from_id": edge.from_id,
+        "to_id": edge.to_id,
+        "relationship": edge.relationship,
+        "source_refs": edge.source_refs,
+        "source_type": edge.source_type,
+        "claim_type": "compiled_summary",
+        "evidence_strength": edge.evidence_strength,
+        "coverage_state": edge.coverage_state,
+        "confidence": edge.confidence,
+        "last_verified": edge.last_verified,
+        "open_questions": edge.open_questions,
+        "compiled_from_claims": [claim_id],
+    }
+
+
+def _compiled_candidate_payload(candidate: ClaimCandidateRecord, claim_id: str) -> dict[str, object]:
+    payload = {
+        "candidate_id": candidate.candidate_id,
+        "proposed_name": candidate.proposed_name,
+        "candidate_type": candidate.candidate_type,
+        "reason": candidate.reason,
+        "trigger_files": candidate.trigger_files,
+        "source_type": candidate.source_type,
+        "claim_type": "compiled_summary",
+        "confidence": candidate.confidence,
+        "triage_status": candidate.triage_status,
+        "first_seen_wave": candidate.first_seen_wave,
+        "last_verified": candidate.last_verified,
+        "compiled_from_claims": [claim_id],
+    }
+    if candidate.candidate_type == "subsystem":
+        payload["discovered_from_claim"] = claim_id
+        payload["discovered_from_subsystem"] = None
+    else:
+        payload["discovered_from_claim"] = claim_id
+    return payload
+
+
+def _write_manifest(
+    registry_root: Path,
+    *,
+    compiled_claim_ids: list[str],
+    written_files: list[str],
+) -> None:
+    manifest_path = registry_root / "manifest.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "artifact": "legacy-semantic-map-registry",
+                "canonical_seed_sources": list(CANONICAL_SEED_SOURCES),
+                "generated_canonical_files": written_files,
+                "compiled_claim_ids": compiled_claim_ids,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+
+def compile_claim_artifacts(
+    registry_root: Path,
+    claim_paths: Sequence[Path],
+) -> CompilationResult:
+    relative_claim_paths = [_assert_claim_path(registry_root, path) for path in claim_paths]
+    claims = [_load_claim(registry_root / relative_path) for relative_path in relative_claim_paths]
+    claims = sorted(claims, key=lambda item: item.claim_id)
+
+    written_files: list[str] = []
+    subsystem_index: list[dict[str, str]] = []
+    object_index: list[dict[str, str]] = []
+    edge_payloads: dict[str, list[dict[str, object]]] = {
+        "execution-to-subsystem.yaml": [],
+        "execution-to-object.yaml": [],
+        "subsystem-to-object.yaml": [],
+        "object-to-object.yaml": [],
+        "source-to-node.yaml": [],
+    }
+    candidate_payloads: dict[str, list[dict[str, object]]] = {
+        "subsystem-candidates.yaml": [],
+        "object-candidates.yaml": [],
+    }
+
+    for claim in claims:
+        for source in claim.sources_read:
+            edge_payloads["source-to-node.yaml"].append(_source_edge(source, claim))
+
+        for edge in claim.edges_added:
+            routed_file = _route_edge(edge)
+            if routed_file is not None:
+                edge_payloads[routed_file].append(_compiled_edge_payload(edge, claim.claim_id))
+
+        for candidate in claim.candidates_raised:
+            if candidate.candidate_type == "subsystem":
+                candidate_payloads["subsystem-candidates.yaml"].append(
+                    _compiled_candidate_payload(candidate, claim.claim_id)
+                )
+            elif candidate.candidate_type == "object":
+                candidate_payloads["object-candidates.yaml"].append(
+                    _compiled_candidate_payload(candidate, claim.claim_id)
+                )
+
+        if claim.claim_scope == "execution":
+            payload = {
+                "path_id": claim.claim_target_id,
+                "entry_surface": _path_entry_surface(claim.claim_target_id),
+                "domain_or_surface": _path_domain_or_surface(claim.claim_target_id),
+                "stages": [],
+                "touches_subsystems": [],
+                "touches_outputs": [],
+                "branches_to": [],
+                "rebuild_target_boundary": [],
+                "rebuild_capability": [],
+                "governance_relevance": [],
+                "source_refs": _sorted_unique(
+                    [item.source_ref for item in claim.sources_read]
+                    + [ref for obj in claim.objects_discovered for ref in obj.source_refs]
+                ),
+                "source_type": claim.sources_read[0].source_type,
+                "claim_type": "compiled_summary",
+                "evidence_strength": "strong",
+                "coverage_state": "partial",
+                "confidence": "high",
+                "last_verified": max(
+                    (item.last_verified for item in claim.objects_discovered),
+                    default="not_yet_verified",
+                ),
+                "open_questions": claim.open_questions,
+                "compiled_from_claims": [claim.claim_id],
+            }
+            output_path = registry_root / "execution" / "paths" / f"{claim.claim_target_id}.yaml"
+            _write_yaml(output_path, payload)
+            written_files.append(output_path.relative_to(registry_root).as_posix())
+
+        if claim.claim_scope == "subsystems":
+            payload = {
+                "subsystem_id": claim.claim_target_id,
+                "title": _title_from_id(claim.claim_target_id),
+                "status": "active",
+                "semantic_scope": f"Compiled subsystem summary for {claim.claim_target_id}.",
+                "source_families": [],
+                "primary_sources": _sorted_unique(item.source_ref for item in claim.sources_read),
+                "secondary_sources": [],
+                "execution_nodes": [],
+                "owned_surfaces": [],
+                "owned_outputs": [],
+                "discovered_objects": _sorted_unique(
+                    item.object_id for item in claim.objects_discovered
+                ),
+                "candidate_objects": [],
+                "candidate_subsystems": [],
+                "upstream_dependencies": [],
+                "downstream_dependencies": [],
+                "claim_type": "compiled_summary",
+                "source_type": claim.sources_read[0].source_type,
+                "evidence_strength": "strong",
+                "coverage_state": "partial",
+                "open_questions": claim.open_questions,
+                "confidence": "high",
+                "last_verified": max(
+                    (item.last_verified for item in claim.objects_discovered),
+                    default="not_yet_verified",
+                ),
+                "last_audited_at": claim.submitted_at,
+                "compiled_from_claims": [claim.claim_id],
+            }
+            output_path = registry_root / "subsystems" / f"{claim.claim_target_id}.yaml"
+            _write_yaml(output_path, payload)
+            written_files.append(output_path.relative_to(registry_root).as_posix())
+            subsystem_index.append(
+                {
+                    "subsystem_id": claim.claim_target_id,
+                    "path": f"subsystems/{claim.claim_target_id}.yaml",
+                }
+            )
+
+        if claim.claim_scope == "objects":
+            target_object = next(
+                item for item in claim.objects_discovered if item.object_id == claim.claim_target_id
+            )
+            payload = {
+                "object_id": target_object.object_id,
+                "title": target_object.title,
+                "status": "active",
+                "object_type": "discovered_semantic_object",
+                "summary": target_object.summary,
+                "source_refs": target_object.source_refs,
+                "seen_in_subsystems": [],
+                "related_objects": [],
+                "claim_type": "compiled_summary",
+                "source_type": target_object.source_type,
+                "evidence_strength": target_object.evidence_strength,
+                "coverage_state": target_object.coverage_state,
+                "confidence": target_object.confidence,
+                "last_verified": target_object.last_verified,
+                "open_questions": target_object.open_questions,
+                "compiled_from_claims": [claim.claim_id],
+            }
+            output_path = registry_root / "objects" / f"{claim.claim_target_id}.yaml"
+            _write_yaml(output_path, payload)
+            written_files.append(output_path.relative_to(registry_root).as_posix())
+            object_index.append(
+                {
+                    "object_id": claim.claim_target_id,
+                    "path": f"objects/{claim.claim_target_id}.yaml",
+                }
+            )
+
+    subsystem_index = sorted(subsystem_index, key=lambda item: item["subsystem_id"])
+    object_index = sorted(object_index, key=lambda item: item["object_id"])
+    _write_yaml(registry_root / "subsystems" / "index.yaml", {"subsystems": subsystem_index})
+    _write_yaml(registry_root / "objects" / "index.yaml", {"objects": object_index})
+    written_files.extend(["subsystems/index.yaml", "objects/index.yaml"])
+
+    for filename, payload in edge_payloads.items():
+        payload = sorted(payload, key=lambda item: (item["from_id"], item["to_id"], item["relationship"]))
+        _write_yaml(registry_root / "edges" / filename, {"edges": payload})
+        written_files.append(f"edges/{filename}")
+
+    for filename, key in (
+        ("subsystem-candidates.yaml", "subsystem_candidates"),
+        ("object-candidates.yaml", "object_candidates"),
+    ):
+        payload = sorted(candidate_payloads[filename], key=lambda item: item["candidate_id"])
+        _write_yaml(registry_root / "candidates" / filename, {key: payload})
+        written_files.append(f"candidates/{filename}")
+
+    written_files = sorted(set(written_files))
+    compiled_claim_ids = [claim.claim_id for claim in claims]
+    _write_manifest(
+        registry_root,
+        compiled_claim_ids=compiled_claim_ids,
+        written_files=written_files,
+    )
+    return CompilationResult(
+        compiled_claim_ids=compiled_claim_ids,
+        written_files=written_files,
+    )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--registry-root", type=Path, required=True)
+    parser.add_argument("--claim", type=Path, action="append", default=[])
+    args = parser.parse_args()
+
+    compile_claim_artifacts(args.registry_root, args.claim)
+
+
+if __name__ == "__main__":
+    main()

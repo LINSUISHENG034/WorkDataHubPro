@@ -83,7 +83,16 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
         "sources/families.yaml",
         "waves/index.yaml",
         "subsystems/.gitkeep",
+        "subsystems/index.yaml",
         "objects/.gitkeep",
+        "objects/index.yaml",
+        "edges/execution-to-subsystem.yaml",
+        "edges/execution-to-object.yaml",
+        "edges/subsystem-to-object.yaml",
+        "edges/object-to-object.yaml",
+        "edges/source-to-node.yaml",
+        "candidates/subsystem-candidates.yaml",
+        "candidates/object-candidates.yaml",
         "claims/wave-2026-04-16-registry-bootstrap/execution/.gitkeep",
         "claims/wave-2026-04-16-registry-bootstrap/subsystems/.gitkeep",
         "claims/wave-2026-04-16-registry-bootstrap/objects/.gitkeep",
@@ -103,6 +112,7 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
     assert "must never be added to `docs/wiki-bi/index.md`" in readme_text
     assert "distributed agents may write only under `claims/<wave_id>/`" in readme_text
     assert "canonical registry files remain main-thread-managed" in readme_text
+    assert "canonical compilation is a main-thread-only operation" in readme_text
 
     manifest = json.loads((registry_root / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["canonical_seed_sources"] == [
@@ -110,6 +120,8 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
         "sources/families.yaml",
         "waves/index.yaml",
     ]
+    assert manifest["generated_canonical_files"] == []
+    assert manifest["compiled_claim_ids"] == []
 
     entry_surfaces = yaml.safe_load(
         (registry_root / "execution" / "entry-surfaces.yaml").read_text(encoding="utf-8")

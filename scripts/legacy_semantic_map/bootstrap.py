@@ -17,6 +17,18 @@ DEFAULT_REGISTRY_ROOT = (
     Path(__file__).resolve().parents[2] / "docs" / "wiki-bi" / "_meta" / "legacy-semantic-map"
 )
 
+EMPTY_REGISTRY_PAYLOADS = {
+    "subsystems/index.yaml": {"subsystems": []},
+    "objects/index.yaml": {"objects": []},
+    "edges/execution-to-subsystem.yaml": {"edges": []},
+    "edges/execution-to-object.yaml": {"edges": []},
+    "edges/subsystem-to-object.yaml": {"edges": []},
+    "edges/object-to-object.yaml": {"edges": []},
+    "edges/source-to-node.yaml": {"edges": []},
+    "candidates/subsystem-candidates.yaml": {"subsystem_candidates": []},
+    "candidates/object-candidates.yaml": {"object_candidates": []},
+}
+
 README_TEXT = """# Legacy Semantic Map
 
 This subtree is an internal discovery ledger for legacy semantic mapping work.
@@ -25,6 +37,7 @@ It must never be added to `docs/wiki-bi/index.md`.
 
 distributed agents may write only under `claims/<wave_id>/`.
 canonical registry files remain main-thread-managed.
+canonical compilation is a main-thread-only operation.
 
 active owner: the main-thread maintainer of the current semantic-map wave
 archive trigger: acceptance of the target durable wiki updates plus disposition of remaining findings for that wave
@@ -64,8 +77,10 @@ def bootstrap_semantic_map(registry_root: Path = DEFAULT_REGISTRY_ROOT) -> Path:
     _write_json(
         registry_root / "manifest.json",
         {
-            "artifact": "legacy-semantic-map-bootstrap",
+            "artifact": "legacy-semantic-map-registry",
             "canonical_seed_sources": list(CANONICAL_SEED_SOURCES),
+            "generated_canonical_files": [],
+            "compiled_claim_ids": [],
         },
     )
     _write_yaml(
@@ -80,6 +95,8 @@ def bootstrap_semantic_map(registry_root: Path = DEFAULT_REGISTRY_ROOT) -> Path:
         registry_root / "waves" / "index.yaml",
         bootstrap_wave_payload(),
     )
+    for relative_path, payload in EMPTY_REGISTRY_PAYLOADS.items():
+        _write_yaml(registry_root / relative_path, payload)
     return registry_root
 
 
