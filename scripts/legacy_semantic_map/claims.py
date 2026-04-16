@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from pathlib import Path
 import re
 
+import yaml
+
 from .models import (
     CLAIM_TYPES,
     CONFIDENCE_LEVELS,
@@ -144,3 +146,23 @@ def claim_relative_path(claim: ClaimArtifact) -> Path:
         / CLAIM_SCOPE_DIRECTORIES[claim.claim_scope]
         / f"{claim.claim_id}.yaml"
     )
+
+
+def _registered_wave_ids(registry_root: Path) -> set[str]:
+    waves_index = yaml.safe_load(
+        (registry_root / "waves" / "index.yaml").read_text(encoding="utf-8")
+    )
+    return {item["wave_id"] for item in waves_index["waves"]}
+
+
+def write_claim_artifact(registry_root: Path, claim: ClaimArtifact) -> Path:
+    if claim.wave_id not in _registered_wave_ids(registry_root):
+        raise ValueError(f"Unregistered wave_id: {claim.wave_id}")
+
+    output_path = registry_root / claim_relative_path(claim)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        yaml.safe_dump(claim.to_payload(), sort_keys=False, allow_unicode=False),
+        encoding="utf-8",
+    )
+    return output_path

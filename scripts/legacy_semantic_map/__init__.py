@@ -6,6 +6,7 @@ from .claims import (
     ClaimEdgeRecord,
     ClaimSourceRecord,
     claim_relative_path,
+    write_claim_artifact,
 )
 from .models import (
     BOOTSTRAP_WAVE,
@@ -45,6 +46,7 @@ __all__ = [
     "TRIAGE_STATUSES",
     "WAVE_ID_PATTERN",
     "claim_relative_path",
+    "write_claim_artifact",
     "SeededEntrySurface",
     "SeededSourceFamily",
     "SeededWave",

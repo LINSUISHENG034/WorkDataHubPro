@@ -4,7 +4,9 @@ from dataclasses import replace
 from pathlib import Path
 
 import pytest
+import yaml
 
+from scripts.legacy_semantic_map.bootstrap import bootstrap_semantic_map
 from scripts.legacy_semantic_map.claims import (
     CLAIM_SCOPE_DIRECTORIES,
     ClaimArtifact,
@@ -13,6 +15,7 @@ from scripts.legacy_semantic_map.claims import (
     ClaimEdgeRecord,
     ClaimSourceRecord,
     claim_relative_path,
+    write_claim_artifact,
 )
 from scripts.legacy_semantic_map.models import CONFIDENCE_LEVELS
 
@@ -177,3 +180,50 @@ def test_claim_records_reject_invalid_constrained_vocabularies() -> None:
 
     with pytest.raises(ValueError, match="Unsupported triage_status"):
         replace(claim.candidates_raised[0], triage_status="queued")
+
+
+def test_write_claim_artifact_writes_yaml_under_registered_wave(tmp_path: Path) -> None:
+    registry_root = tmp_path / "legacy-semantic-map"
+    bootstrap_semantic_map(registry_root)
+
+    claim = _build_execution_claim()
+    output_path = write_claim_artifact(registry_root, claim)
+
+    assert output_path == (
+        registry_root
+        / "claims"
+        / "wave-2026-04-16-registry-bootstrap"
+        / "execution"
+        / "claim-wave-2026-04-16-registry-bootstrap-annuity-performance-manual-entry.yaml"
+    )
+
+    payload = yaml.safe_load(output_path.read_text(encoding="utf-8"))
+    assert payload["claim_id"] == claim.claim_id
+    assert payload["sources_read"][0]["source_ref"] == (
+        "src/work_data_hub/cli/etl/domain_validation.py"
+    )
+    assert payload["objects_discovered"][0]["object_id"] == (
+        "obj-annuity-performance-manual-entry"
+    )
+    assert payload["edges_added"][0]["relationship"] == "discovers_object"
+    assert payload["candidates_raised"][0]["candidate_id"] == (
+        "cand-subsystem-annuity-performance-manual-entry"
+    )
+
+
+def test_write_claim_artifact_rejects_unregistered_wave(tmp_path: Path) -> None:
+    registry_root = tmp_path / "legacy-semantic-map"
+    bootstrap_semantic_map(registry_root)
+
+    claim = _build_execution_claim()
+    invalid_claim = ClaimArtifact(
+        **(
+            claim.to_payload()
+            | {
+                "wave_id": "wave-2026-04-17-unregistered",
+            }
+        )
+    )
+
+    with pytest.raises(ValueError, match="Unregistered wave_id"):
+        write_claim_artifact(registry_root, invalid_claim)
