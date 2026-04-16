@@ -1,0 +1,36 @@
+seeded_entry_surfaces:
+- entry_family: manual_cli_entrypoints
+  surface_id: annuity_performance
+  title: Annuity performance replay and operator entrypoints
+  status: seeded
+  coverage_state: seeded
+- entry_family: manual_cli_entrypoints
+  surface_id: annual_award
+  title: Annual award replay and operator entrypoints
+  status: seeded
+  coverage_state: seeded
+- entry_family: manual_cli_entrypoints
+  surface_id: annual_loss
+  title: Annual loss replay and operator entrypoints
+  status: seeded
+  coverage_state: seeded
+- entry_family: manual_cli_entrypoints
+  surface_id: annuity_income
+  title: Annuity income replay and operator entrypoints
+  status: seeded
+  coverage_state: seeded
+- entry_family: manual_cli_entrypoints
+  surface_id: customer_mdm
+  title: Manual customer MDM command surfaces
+  status: seeded
+  coverage_state: seeded
+- entry_family: scheduled_orchestrated_entrypoints
+  surface_id: company_lookup_queue
+  title: Deferred company lookup queue orchestration surface
+  status: seeded
+  coverage_state: seeded
+- entry_family: scheduled_orchestrated_entrypoints
+  surface_id: reference_sync
+  title: Reference sync orchestration surface
+  status: seeded
+  coverage_state: seeded

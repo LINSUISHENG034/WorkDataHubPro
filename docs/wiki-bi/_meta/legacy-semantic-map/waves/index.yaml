@@ -1,0 +1,23 @@
+active_wave_id: wave-2026-04-16-registry-bootstrap
+waves:
+- wave_id: wave-2026-04-16-registry-bootstrap
+  title: Registry bootstrap
+  status: active
+  opened_at: '2026-04-16'
+  seeded_entry_surfaces:
+  - annuity_performance
+  - annual_award
+  - annual_loss
+  - annuity_income
+  - customer_mdm
+  - company_lookup_queue
+  - reference_sync
+  seeded_high_priority_source_families:
+  - legacy-domain-capability-maps
+  - legacy-operator-runtime-surfaces
+  - legacy-identity-and-reference-runtime
+  - current-first-wave-governance-specs
+  - current-wiki-bi-surfaces
+  - current-replay-and-reference-assets
+  admitted_subsystems: []
+  closed_at: null
