@@ -211,6 +211,32 @@ def test_write_claim_artifact_writes_yaml_under_registered_wave(tmp_path: Path) 
     )
 
 
+def test_write_claim_artifact_round_trips_rehydrated_registered_wave_claim(
+    tmp_path: Path,
+) -> None:
+    registry_root = tmp_path / "legacy-semantic-map"
+    bootstrap_semantic_map(registry_root)
+
+    claim = _build_execution_claim()
+    original_path = write_claim_artifact(registry_root, claim)
+    rehydrated_claim = ClaimArtifact(**yaml.safe_load(original_path.read_text(encoding="utf-8")))
+
+    rewritten_path = write_claim_artifact(registry_root, rehydrated_claim)
+
+    assert rewritten_path == original_path
+    payload = yaml.safe_load(rewritten_path.read_text(encoding="utf-8"))
+    assert payload == claim.to_payload()
+    assert payload["sources_read"][0]["note"] == (
+        "Manual domain validation entrypoint for annuity performance."
+    )
+    assert payload["objects_discovered"][0]["source_refs"] == [
+        "src/work_data_hub/cli/etl/domain_validation.py",
+    ]
+    assert payload["candidates_raised"][0]["trigger_files"] == [
+        "src/work_data_hub/cli/etl/domain_validation.py",
+    ]
+
+
 def test_write_claim_artifact_rejects_unregistered_wave(tmp_path: Path) -> None:
     registry_root = tmp_path / "legacy-semantic-map"
     bootstrap_semantic_map(registry_root)

@@ -4,6 +4,7 @@ from dataclasses import asdict
 from dataclasses import dataclass
 from pathlib import Path
 import re
+from typing import TypeVar
 
 import yaml
 
@@ -23,6 +24,7 @@ CLAIM_SCOPE_DIRECTORIES = {
     "subsystems": "subsystems",
     "objects": "objects",
 }
+T = TypeVar("T")
 
 
 def _validate_choice(field_name: str, value: str, allowed_values: tuple[str, ...]) -> None:
@@ -33,6 +35,21 @@ def _validate_choice(field_name: str, value: str, allowed_values: tuple[str, ...
 def _validate_pattern(field_name: str, value: str, pattern: str) -> None:
     if re.fullmatch(pattern, value) is None:
         raise ValueError(f"Malformed {field_name}: {value}")
+
+
+def _coerce_record(record_type: type[T], value: T | dict[str, object]) -> T:
+    if isinstance(value, record_type):
+        return value
+    if isinstance(value, dict):
+        return record_type(**value)
+    raise TypeError(f"Unsupported {record_type.__name__} payload: {value!r}")
+
+
+def _coerce_record_list(
+    record_type: type[T],
+    values: list[T] | list[dict[str, object]],
+) -> list[T]:
+    return [_coerce_record(record_type, value) for value in values]
 
 
 @dataclass(frozen=True)
@@ -125,14 +142,30 @@ class ClaimArtifact:
     compiled_into: list[str]
     submitted_at: str
 
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "sources_read",
+            _coerce_record_list(ClaimSourceRecord, self.sources_read),
+        )
+        object.__setattr__(
+            self,
+            "objects_discovered",
+            _coerce_record_list(ClaimDiscoveredObjectRecord, self.objects_discovered),
+        )
+        object.__setattr__(
+            self,
+            "edges_added",
+            _coerce_record_list(ClaimEdgeRecord, self.edges_added),
+        )
+        object.__setattr__(
+            self,
+            "candidates_raised",
+            _coerce_record_list(ClaimCandidateRecord, self.candidates_raised),
+        )
+
     def to_payload(self) -> dict[str, object]:
-        return {
-            **asdict(self),
-            "sources_read": [asdict(item) for item in self.sources_read],
-            "objects_discovered": [asdict(item) for item in self.objects_discovered],
-            "edges_added": [asdict(item) for item in self.edges_added],
-            "candidates_raised": [asdict(item) for item in self.candidates_raised],
-        }
+        return asdict(self)
 
 
 def claim_relative_path(claim: ClaimArtifact) -> Path:
