@@ -25,6 +25,7 @@
 ## 关键约束
 
 - 回填结果、快照结果与事实结果不能各自为政
+- `reference_sync` authoritative outputs 与 fact-derived backfill outputs 不能被混写成同一 provenance
 - 状态字段不能因为实现方便而改变业务含义
 - 输出 compare 应围绕稳定语义与受治理资产，而不是临时运行偶然结果
 
@@ -49,6 +50,7 @@
 
 ## 相关证据
 
+- [引用同步与回填证据](../../evidence/reference-and-backfill-evidence.md)
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
 - [`annual_award` 输出合同](./annual-award-output-contract.md)

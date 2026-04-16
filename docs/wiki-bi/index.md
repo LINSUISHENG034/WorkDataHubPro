@@ -40,6 +40,8 @@
   - 先看输入现实聚合页，再进入年金 workbook family 与业务收集 variants 的对象级 evidence page。
 - [什么样的输出才算“正确”](./standards/output-correctness/output-correctness.md)
   - 正确输出应满足语义、粒度、关系和验收资产多重约束。
+- [`reference_sync` 与 `backfill` 到底差在哪里](./evidence/reference-and-backfill-evidence.md)
+  - 先看证据页，再进入 [`backfill`](./concepts/backfill.md) 与 [`reference_sync`](./surfaces/reference-sync.md)，避免把 authoritative pre-load 与 fact-derived writeback 混成一层。
 - [为什么 `deferred` 不等于“没有验证资产”](./evidence/validation-result-history-evidence.md)
   - current registry 已显式登记很多尚未物化的 asset kinds，问题是治理状态，而不是是否被看见。
 - [`annuity_performance` 的输入、输出和处理到底是什么](./standards/input-reality/annuity-performance-input-contract.md)
@@ -137,6 +139,7 @@
 - [验证资产证据](./evidence/verification-assets-evidence.md) : 聚合 golden set、replay baseline、validation guide、error fixtures 等证据。
 - [validation result history 证据](./evidence/validation-result-history-evidence.md) : 聚合 legacy parity result 目录、current asset registry 与 validation history 的治理结论。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
+- [引用同步与回填证据](./evidence/reference-and-backfill-evidence.md) : 聚合 authoritative `reference_sync`、fact-derived `backfill` 与 customer-master 衍生写入之间的稳定边界。
 - [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的专题差异，并把细节分发到对象级 evidence page。
 - [`annuity_income` 字段处理证据](./evidence/annuity-income-field-processing-evidence.md) : 把 annuity_income 的关键字段处理分成工程性质量提升与业务语义处理。
 - [`annuity_income` branch mapping 证据](./evidence/annuity-income-branch-mapping-evidence.md) : 固化 `COMPANY_BRANCH_MAPPING` manual overrides 与 placement gap。
@@ -177,5 +180,6 @@
 - [Round 21：Phase E surface decision closure](./_meta/absorption-rounds/round-21-phase-e-surface-decision-closure.md) : maintenance 轮次，把 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 收紧成 current accepted runtime 与 deferred runtime 分层的决策包。
 - [Round 22：high-traffic evidence normalization](./_meta/absorption-rounds/round-22-high-traffic-evidence-normalization.md) : maintenance 轮次，把高流量 aggregate evidence pages 收紧成一致的 dispatcher + object-page 分发骨架，提高 lint 友好度。
 - [Round 23：production-sample augmentation](./_meta/absorption-rounds/round-23-production-sample-augmentation.md) : maintenance 轮次，把代表性单月生产样本验证过的 workbook family、业务收集 variants 与 ledger surface 回写成 durable wiki 入口。
+- [Round 24：reference and backfill pilot](./_meta/absorption-rounds/round-24-reference-backfill-pilot.md) : pilot 轮次，用单一 subagent 验证 evidence-first 吸收 reference/backfill 模块并收紧下一轮 prompt / review gate。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

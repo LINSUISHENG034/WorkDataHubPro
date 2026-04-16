@@ -69,6 +69,7 @@
 - [enterprise enrichment persistence](../surfaces/enterprise-enrichment-persistence.md)
 - [standalone tooling](../surfaces/standalone-tooling.md)
 - [reference_sync](../surfaces/reference-sync.md)
+- [引用同步与回填证据](./reference-and-backfill-evidence.md)
 - [`company_lookup_queue`](../surfaces/company-lookup-queue.md)
 - [business collection ledger workbook](../surfaces/business-collection-ledger-workbook.md)
 - [business collection workbook variants 证据](./business-collection-workbook-variants-evidence.md)

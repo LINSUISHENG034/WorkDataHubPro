@@ -3,6 +3,12 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-16 01:36] absorb | Round 24 reference and backfill pilot
+
+- 新增 `reference-and-backfill-evidence.md`，把 authoritative `reference_sync`、fact-derived `backfill`、customer-master 衍生写入与 provenance / state 边界写成 durable evidence page
+- 收紧 `backfill` 概念页、`reference_sync` surface 页与四个 domain 导航页的连接，让 evidence-first 写法先落到对象页、domain 页只保留 thin-navigation 入口
+- 记录单模块 pilot 的治理经验：prompt 应更早要求“稳定结论先入 evidence page、runtime/state 未闭环一律写成证据缺口”，review gate 要检查 aggregate page 只做 dispatcher 不重新吸厚内容
+
 ## [2026-04-16 01:08] plan | legacy semantic absorption module map and subagent playbook
 
 - established the eight-module coverage model to absorb hidden legacy semantics with reviewable module boundaries
