@@ -26,16 +26,30 @@
 
 本页当前优先固化的是 workbook + sheet contract，而不是仓库外部目录扫描策略。
 
+## legacy raw-source 语义摘录（先证据，后实现）
+
+以下语义来自 legacy annual_award 文档/配置/runbook，作为 current 合同解释背景：
+
+- legacy workbook 发现规则曾显式依赖 `data/real_data/{YYYYMM}/收集数据/业务收集` 与 `*台账登记*.xlsx` / `*当年中标*.xlsx`
+- legacy 双 sheet 名称为 `企年受托中标(空白)` 与 `企年投资中标(空白)`，并通过 `sheet_names` 合并读取
+- legacy load key 以 `上报月份` + `业务类型` 刷新，且 `requires_backfill: true`
+
+这些语义用于解释 contract lineage，不自动提升为 current accepted intake gate。
+
 ## Sheet 合同
 
 - 必需 sheet
   - `TrusteeAwards`
   - `InvesteeAwards`
+- legacy 对应 sheet（仅 lineage，不代表 current 运行时直接接受）
+  - `企年受托中标(空白)` -> `TrusteeAwards`
+  - `企年投资中标(空白)` -> `InvesteeAwards`
 - 输入形态
   - multi-sheet event domain
 - intake 结果
   - 两个 sheet 的记录会被并入同一个 `annual_award:{period}` batch
   - anchor row 序列按合并后的稳定顺序编号，而不是各 sheet 各自重起
+  - `source_sheet` 是 required field；`plan_code` / `plan_type` 以 alternative group 方式校验（至少其一存在）
 
 ## observed production reality
 
@@ -74,6 +88,16 @@
 
 因此输入合同允许 header level 的别名适配，但不允许缺失业务上不可替代的核心含义。
 
+此外，当前 source-intake contract 允许并审计以下 adaptation keys：
+
+- `aliases_applied`
+- `derived_fields`
+- `ignored_columns`
+- `missing_non_golden_columns`
+- `source_headers`
+
+其中 `missing_non_golden_columns` 当前只跟踪 `plan_code`、`source_company_id`、`product_line_code` 的缺失，不应被误读为硬失败。
+
 ## 运行时容忍边界
 
 当前 evidence 表明：
@@ -96,6 +120,12 @@
 - 同时缺失 `plan_code` 与 `plan_type`，使计划锚点消失
 - 缺失 `award_amount`，使记录不再表达中标事实
 - 把 synthetic fixture 冒充为 real replay / accepted workbook 现实
+
+## 输入 merge gates（merge 前最小通过线）
+
+- intake contract checkpoint 需维持 `record_count` 与 required/adaptation key contract 不漂移
+- replay 入口仍以包含 `TrusteeAwards` + `InvesteeAwards` 的单 workbook 为最小可运行单元
+- source-intake adaptation 只能记录适配事实，不得把相邻 summary/attachment workbook silently 提升为 accepted contract
 
 ## 当前实现证据
 
@@ -123,3 +153,8 @@
 
 - [real-data validation](../verification-method/real-data-validation.md)
 - [golden scenarios](../verification-method/golden-scenarios.md)
+
+## 当前证据缺口
+
+- legacy 中文 sheet 名称到 current 英文 sheet 名称的 runtime 等价接受性，尚无 current integration/replay 直接证据
+- legacy 目录扫描与 pattern 发现策略目前仅作为 lineage 背景；current accepted slice 仍以显式 workbook path 为运行契约

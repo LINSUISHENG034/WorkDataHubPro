@@ -11,6 +11,7 @@
 - 缺失计划号的补全
 - 对客户状态判断的下游影响
 - 与 `annual_loss` 共同证明 event domain 不是“单 sheet 边缘例外”
+- 同时承接 legacy `企年受托中标(空白)` / `企年投资中标(空白)` 到 current `TrusteeAwards` / `InvesteeAwards` 的语义迁移
 
 ## 核心概念入口
 
@@ -58,6 +59,12 @@
 - observed production reality：代表性单月生产样本验证表明，business-collection ledger workbook 当前承载 accepted award sheets，同时同目录里还存在相邻 summary workbook。
 - stable contract：`annual_award` 只认领自己的 event-domain sheets，不把整个 ledger workbook 或 summary workbook 写成 accepted contract。
 - observed production variant / adjacent operator reality：`业务收集` 目录中的相邻 summary / attachment workbook 先作为 observed production variant 或 surface 处理，再等待更强证据判断是否进入未来 contract。
+
+## 隐藏语义定位
+
+- multi-sheet 合并、anchor 序列与 alias 适配细节固定在[`annual_award` 输入合同](../standards/input-reality/annual-award-input-contract.md)与[`annual_award` 字段处理证据](../evidence/annual-award-field-processing-evidence.md)。
+- plan-code enrichment 的 history 选择、fallback 与 trace 规则固定在[`annual_award` 输出合同](../standards/output-correctness/annual-award-output-contract.md)与字段处理证据，不在本页展开 pipeline walkthrough。
+- 任何跨模块依赖（如 projection 对 fixture 的桥接）仅在合同/证据页以 merge-gate 语义记录，本页保持 domain 导航用途。
 
 ## 当前验证资产姿态
 
