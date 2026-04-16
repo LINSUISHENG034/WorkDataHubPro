@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict
 from dataclasses import dataclass
 from pathlib import Path
+import re
 
 from .models import (
     CLAIM_TYPES,
@@ -14,6 +15,7 @@ from .models import (
     WAVE_ID_PATTERN,
 )
 
+CLAIM_ID_PATTERN = r"[a-z0-9]+(?:-[a-z0-9]+)*"
 CLAIM_SCOPE_DIRECTORIES = {
     "execution": "execution",
     "subsystems": "subsystems",
@@ -21,11 +23,24 @@ CLAIM_SCOPE_DIRECTORIES = {
 }
 
 
+def _validate_choice(field_name: str, value: str, allowed_values: tuple[str, ...]) -> None:
+    if value not in allowed_values:
+        raise ValueError(f"Unsupported {field_name}: {value}")
+
+
+def _validate_pattern(field_name: str, value: str, pattern: str) -> None:
+    if re.fullmatch(pattern, value) is None:
+        raise ValueError(f"Malformed {field_name}: {value}")
+
+
 @dataclass(frozen=True)
 class ClaimSourceRecord:
     source_ref: str
     source_type: str
     note: str
+
+    def __post_init__(self) -> None:
+        _validate_choice("source_type", self.source_type, SOURCE_TYPES)
 
 
 @dataclass(frozen=True)
@@ -42,6 +57,13 @@ class ClaimDiscoveredObjectRecord:
     last_verified: str
     open_questions: list[str]
 
+    def __post_init__(self) -> None:
+        _validate_choice("source_type", self.source_type, SOURCE_TYPES)
+        _validate_choice("claim_type", self.claim_type, CLAIM_TYPES)
+        _validate_choice("evidence_strength", self.evidence_strength, EVIDENCE_STRENGTHS)
+        _validate_choice("coverage_state", self.coverage_state, COVERAGE_STATES)
+        _validate_choice("confidence", self.confidence, CONFIDENCE_LEVELS)
+
 
 @dataclass(frozen=True)
 class ClaimEdgeRecord:
@@ -57,6 +79,13 @@ class ClaimEdgeRecord:
     last_verified: str
     open_questions: list[str]
 
+    def __post_init__(self) -> None:
+        _validate_choice("source_type", self.source_type, SOURCE_TYPES)
+        _validate_choice("claim_type", self.claim_type, CLAIM_TYPES)
+        _validate_choice("evidence_strength", self.evidence_strength, EVIDENCE_STRENGTHS)
+        _validate_choice("coverage_state", self.coverage_state, COVERAGE_STATES)
+        _validate_choice("confidence", self.confidence, CONFIDENCE_LEVELS)
+
 
 @dataclass(frozen=True)
 class ClaimCandidateRecord:
@@ -71,6 +100,13 @@ class ClaimCandidateRecord:
     triage_status: str
     first_seen_wave: str
     last_verified: str
+
+    def __post_init__(self) -> None:
+        _validate_choice("source_type", self.source_type, SOURCE_TYPES)
+        _validate_choice("claim_type", self.claim_type, CLAIM_TYPES)
+        _validate_choice("confidence", self.confidence, CONFIDENCE_LEVELS)
+        _validate_choice("triage_status", self.triage_status, TRIAGE_STATUSES)
+        _validate_pattern("first_seen_wave", self.first_seen_wave, WAVE_ID_PATTERN)
 
 
 @dataclass(frozen=True)
@@ -100,6 +136,8 @@ class ClaimArtifact:
 def claim_relative_path(claim: ClaimArtifact) -> Path:
     if claim.claim_scope not in CLAIM_SCOPE_DIRECTORIES:
         raise ValueError(f"Unsupported claim_scope: {claim.claim_scope}")
+    _validate_pattern("wave_id", claim.wave_id, WAVE_ID_PATTERN)
+    _validate_pattern("claim_id", claim.claim_id, CLAIM_ID_PATTERN)
     return (
         Path("claims")
         / claim.wave_id
