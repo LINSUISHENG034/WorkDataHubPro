@@ -24,6 +24,22 @@
 - 没有为了补信息而新建本可落到既有 object page 的宽泛 summary page
 - substantial round 已留下 round note，或至少有一段可回溯的 lint 结果摘要
 
+## Exclusion
+
+`docs/wiki-bi/_meta/legacy-semantic-map/` 不属于 durable wiki page family。
+
+因此这棵子树：
+
+- 不参加 `docs/wiki-bi/index.md` 可达性检查
+- 不参加 concept / standard / domain / surface / evidence 模板检查
+- 不因未被 catalog 收录而被视为 lint failure
+
+如果本轮改动了 semantic map 子树，应该改查：
+
+- `docs/wiki-bi/index.md` 仍然没有收录 `legacy-semantic-map`
+- `docs/wiki-bi/_meta/legacy-semantic-map/README.md` 仍明确写着 `not durable wiki content`
+- `README.md` 仍写着 active owner 与 archive trigger
+
 ## 推荐执行方式
 
 完成一轮 substantial maintenance 后，至少做下面两步：

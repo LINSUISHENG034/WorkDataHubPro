@@ -250,10 +250,42 @@
 - durable wiki 只保留业务语义、标准、surface、evidence 与 round sediment
 - subagent / worktree / merge sequencing 这类执行层材料不再放在 `docs/wiki-bi/`，应留在 `docs/superpowers/`、`.planning/` 或 git history
 
+## 下阶段：semantic map 驱动的 wiki 吸收
+
+下阶段不再先按“再开一个 round note”推进，而是先用 semantic map 建 discovery ledger，
+再由该 ledger 驱动 durable wiki 的吸收顺序。
+
+工作原则：
+
+- `docs/wiki-bi/` 仍是唯一长期知识层
+- `docs/wiki-bi/_meta/legacy-semantic-map/` 只是内部发现账本，不进入 durable catalog
+- semantic map 负责暴露 coverage holes、source provenance、open questions 与 candidate boundaries
+- durable wiki 只吸收已经达到 `Stable Finding` 阈值的对象、标准、surface 与 domain 结论
+- 一旦目标吸收波次完成，semantic map 对应波次应进入归档评估，而不是继续并行维护
+
+推荐顺序：
+
+1. 先完成 semantic map bootstrap，固定 vocabularies、seed catalogs、wave identity 与 boundary README
+2. 再围绕 first-wave 未闭合的 cross-cutting surfaces 开 discovery wave，而不是重复已完成的 Round 24-27 语义补强
+3. 每个 discovery wave 先补 semantic map，再把稳定结论吸收到 `evidence/`
+4. `evidence/` 稳定后，再回写 `concepts/`、`standards/`、`surfaces/`、`domains/`
+5. wiki 更新被接受后，关闭对应 semantic-map wave，并评估 claims / tooling 的归档
+
+## 优先 discovery 主题簇
+
+建议优先围绕下列仍未闭合的语义带做 semantic-map-first discovery：
+
+- `company_lookup_queue` 的异步重试、恢复与 operator-visible consequence
+- `reference_sync` 的 authoritative sync-state 与 retained-or-replaced runtime boundary
+- enterprise identity / EQC persistence surfaces 的 retain / defer / retire decision package
+- manual `customer-mdm` command surfaces 的保留边界与 current-side evidence
+- shared unresolved-name / failed-record artifacts 的跨域治理与 runbook evidence
+
 ## 当前推荐入口
 
-如果后续继续推进，推荐优先从以下对象簇重新做收益排序：
+如果马上继续推进，推荐按下面顺序开工：
 
-- 仍有显著 `当前证据缺口` 的 aggregate evidence family
-- 仍停留在 shared page、但已具备对象级拆分条件的高频对象
-- 仍需要补 current-side evidence 或 current-side decision package 的 surface / verification topic
+- semantic map bootstrap
+- `company_lookup_queue` + identity persistence discovery wave
+- `reference_sync` + backfill boundary deepening wave
+- `customer-mdm` manual commands + shared operator artifacts wave

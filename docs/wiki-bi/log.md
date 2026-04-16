@@ -3,6 +3,12 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-16 19:50] plan | semantic map 驱动的下一阶段 wiki 吸收
+
+- 将 `wiki-absorption-roadmap.md` 改写为 semantic-map-first 路线：先建 discovery ledger，再把稳定结论吸收到 durable wiki
+- 在 `wiki-maintenance-lint-checklist.md` 中显式排除 `docs/wiki-bi/_meta/legacy-semantic-map/`，并要求继续检查其未进入 `index.md` 且 `README.md` 保留 owner / archive trigger
+- 收紧 semantic map bootstrap 边界，明确下一阶段优先围绕 `company_lookup_queue`、`reference_sync`、enterprise persistence、manual `customer-mdm` commands 与 shared operator artifacts 做 discovery wave
+
 ## [2026-04-16 10:23] maintain | 清理 `wiki-bi` 中的执行态流程漂移
 
 - 从 `docs/wiki-bi/_meta/` 移除 subagent/worktree/merge sequencing 这类执行层材料，避免 durable wiki 再次承担 workflow 说明职责
