@@ -13,6 +13,20 @@
 - 哪些字段是稳定输入骨架
 - 哪些缺失属于可降级处理，哪些会破坏输入合同
 
+## 证据锚点（evidence-first）
+
+- `legacy_doc`
+  - `E:\Projects\WorkDataHub\docs/domains/annuity_income.md`
+  - `E:\Projects\WorkDataHub\docs/runbooks/annuity_income.md`
+- `legacy_config`
+  - `E:\Projects\WorkDataHub\config\data_sources.yml`
+- `legacy_code`
+  - `E:\Projects\WorkDataHub\src\work_data_hub\domain\annuity_income\pipeline_builder.py`
+  - `E:\Projects\WorkDataHub\src\work_data_hub\domain\annuity_income\schemas.py`
+  - `E:\Projects\WorkDataHub\src\work_data_hub\domain\annuity_income\helpers.py`
+- `current_runbook`
+  - `docs/runbooks/annuity-income-replay.md`
+
 ## 输入介质与发现规则
 
 - 文件格式
@@ -64,6 +78,14 @@
 - 身份解析线索
 - 收入事实载荷
 
+## hidden field semantics（输入边界内可见、但非直观字段）
+
+- `计划号` 与 `计划代码` 共同构成计划锚点输入，运行时先做 alias 归一再进入计划语义处理
+- `客户名称` 的空值判定包含 `null`、空字符串与占位值 `"0"`；这不是业务值
+- 当 `计划类型=单一计划` 且 `计划名称` 以 `企业年金计划` 结尾时，空 `客户名称` 才允许从 `计划名称` 提取
+- `年金账户名` 作为隐藏线索字段，在 `客户名称` 清洗前复制保留；输入侧不要求用户显式提供这个字段
+- `company_id` 不是输入硬门槛；输入合同允许在解析阶段再产生 identity 结果（含 temp-id fallback）
+
 当前更适合视为“高价值补强字段”，但不宜在本页直接上升为硬门槛的还有：
 
 - `计划类型`
@@ -85,6 +107,7 @@
 - `计划类型` 缺失会削弱 defaulting 与解释能力，但当前不宜直接写成一票否决
 - `company_id` 不要求作为输入直接提供；运行时允许进入 temp-id fallback
 - ID5 account-name fallback 不属于当前允许恢复的输入补救路径
+- `机构代码` 的默认链条是：优先 branch mapping，其次源 `机构`，最后 `G00`
 
 ## 无效源条件
 
@@ -96,6 +119,13 @@
 - 缺失 `月度`、`业务类型` 这类主解释字段
 - 收入数值载荷整体缺失，导致记录不再能表达收入事实
 - 将 synthetic fixture 冒充为 real-data sample
+
+## merge gates（输入合同）
+
+- gate-1：source discovery 必须命中 workbook family + `收入明细` sheet
+- gate-2：计划锚点必须存在（`计划号` 或 `计划代码` 至少其一）
+- gate-3：收入数值族不能整体缺失（`固费`、`浮费`、`回补`、`税`）
+- gate-4：unresolved identity 只能走受治理 fallback/artifact 路径，不能被静默吞掉
 
 补充说明：
 

@@ -41,6 +41,17 @@ current project 已有：
 - unresolved identity 的 operator-facing artifacts
 - post-ID5 identity governance 与 branch mapping 约束
 
+## Wave 01 M2 语义聚焦（薄页指针）
+
+- hidden field semantics：
+  - `客户名称` 在清洗前会复制为 `年金账户名`，用于后续 identity 解析与审计线索保留
+  - `计划类型=单一计划` 且 `计划名称` 匹配 `企业年金计划` 后缀时，空 `客户名称` 可由计划名提取
+- operator-visible differences：
+  - unresolved identity 不是静默丢弃；需要外显为 `unknown_names_csv` / failed-record artifacts
+  - 当前 contract 明确 `projection_results = []`，不把 legacy hook 路径伪装成默认运行路径
+
+具体规则、证据强度与缺口统一沉淀在输入/输出合同与字段处理证据页，本页不展开 pipeline 细节。
+
 ## 合同级入口
 
 - [`annuity_income` 输入合同](../standards/input-reality/annuity-income-input-contract.md)
