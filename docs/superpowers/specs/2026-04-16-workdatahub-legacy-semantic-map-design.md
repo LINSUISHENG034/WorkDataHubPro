@@ -970,6 +970,49 @@ Success condition:
 
 - the map proves discovery usefulness without becoming a second durable knowledge layer
 
+### 18.5 Branch Strategy For Multi-Plan Execution
+
+Because these implementation plans are intentionally staged and later slices
+depend on earlier semantic-map contracts, they should not all merge directly to
+`main` as they complete.
+
+Recommended branches:
+
+- `slice/semantic-map-integration`
+- `slice/semantic-map-registry-bootstrap`
+- `slice/semantic-map-claim-workflow`
+- `slice/semantic-map-reporting-wave-closeout`
+- `slice/semantic-map-first-wave-pilot`
+
+The current bootstrap branch may keep its existing historical name
+`slice/legacy-semantic-map-registry-bootstrap-closure` if it is already in use.
+Do not rename an active branch mid-slice only to match the newer convention.
+Apply the `slice/semantic-map-<slice-name>` pattern to new slice branches.
+
+Branch responsibilities:
+
+- `main` remains the clean long-lived branch and does not receive partial semantic-map work
+- `slice/semantic-map-integration` is the semantic-map integration baseline and the only pre-`main` branch that should accumulate accepted semantic-map slices
+- each slice branch owns one approved implementation plan and should stay narrow to that plan's boundary
+
+### 18.6 Operation Order For Dependent Slices
+
+The semantic-map plans should be executed in this order:
+
+1. implement the earliest required foundation slice on its own branch and verify that slice-specific contracts pass
+2. merge that completed slice branch into `slice/semantic-map-integration`, not `main`
+3. cut the next dependent slice branch from the current `slice/semantic-map-integration` head rather than from `main` or from another developer's in-flight slice branch
+4. complete and verify the next slice on its own branch, then merge it back into `slice/semantic-map-integration`
+5. repeat this pattern until all semantic-map plans and their cross-slice fixes are integrated
+6. run the full semantic-map acceptance review on `slice/semantic-map-integration`
+7. merge `slice/semantic-map-integration` to `main` only after the whole semantic-map package is accepted
+
+Additional guards:
+
+- do not implement new semantic-map features directly on `slice/semantic-map-integration`; use it only for integrating completed slice branches, resolving cross-slice conflicts, and running larger verification
+- if a slice changes shared contracts such as `models.py`, manifest shape, or canonical registry schema, avoid opening multiple concurrent slices that edit the same shared contract surface
+- if a foundational slice is still volatile, delay downstream slices until the integration baseline stabilizes enough to avoid repeated rebases and schema churn
+
 ---
 
 ## 19. Relationship To Wiki Consumption
