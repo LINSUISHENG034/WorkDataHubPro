@@ -13,7 +13,7 @@
 - 哪些 reference / customer signals 属于本域的显式治理后果
 - 哪些下游 projection 由它驱动，但不应反写成“本域原始事实”
 
-## direct fact output
+## 直接事实输出
 
 当前 accepted slice 的直接事实发布目标是：
 
@@ -21,7 +21,7 @@
 
 这层表达的是中标事件事实本身，而不是状态推论。
 
-## reference / customer signals
+## 引用 / 客户信号
 
 replay evidence 表明，`annual_award` 当前还会显式发布：
 
@@ -41,7 +41,7 @@ replay evidence 表明，`annual_award` 当前还会显式发布：
 
 该顺序属于输出可解释性合同的一部分，不应在无证据情况下重排。
 
-## derived downstream outputs
+## 下游派生输出
 
 当前 accepted slice 的 projection 结果是：
 
@@ -70,7 +70,7 @@ replay evidence 表明，`annual_award` 当前还会显式发布：
 - `contract_state` / `monthly_snapshot` 明确消费已发布事实，而不是只依赖旧 fixture
 - compatibility case 若出现，应定位到真实失败 checkpoint，而不是被模糊折叠成单一 row-count 差异
 
-## 输出 merge gates（merge 前最小通过线）
+## 输出合同 gate（合并前最小通过线）
 
 - publication targets 保持 5 个：`fact_annual_award`、`company_reference`、`customer_master_signal`、`contract_state`、`monthly_snapshot`
 - projection targets 保持 2 个：`contract_state`、`monthly_snapshot`

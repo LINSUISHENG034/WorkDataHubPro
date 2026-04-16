@@ -64,7 +64,7 @@
 - verification surface 只负责“如何证明”与“证据路径”；不替代 runtime design，也不替代 operator runbook。
 - 聚合页只维护 shared adjudication memory；对象级生命周期决策应落在独立 surface page。
 
-## Round 21 决策包
+## 当前治理裁决
 
 | 对象 | retain | replace | defer | retire |
 |---|---|---|---|---|

@@ -82,7 +82,7 @@ legacy 审计明确指出，这个 surface 至少涉及：
 - current repo 尚未保留 repo-native `reference_sync` runtime、schedule 或 sync-state persistence；这些 production/bootstrap concerns 继续保持 deferred
 - 目前至少不能再把它当成“跟随 domain 一起自然覆盖”的隐含对象
 
-## Round 21 决策边界
+## 当前治理边界
 
 - `retain`
   - target inventory

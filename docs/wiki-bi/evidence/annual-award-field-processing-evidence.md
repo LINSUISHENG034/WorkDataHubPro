@@ -9,7 +9,7 @@
 
 重点不是复述 event pipeline，而是说明中标事件在 current accepted slice 中如何从 multi-sheet workbook 进入可验证事实。
 
-## legacy raw sources（证据优先级前置）
+## legacy 原始来源（证据优先级前置）
 
 本轮语义加深优先吸收下列 legacy 来源，再与 current code/tests 对照：
 
@@ -80,13 +80,13 @@
 - replay runbook
 - legacy capability-map / runbook / config（用于 lineage 背景，不单独构成 current 强证）
 
-## forbidden page drift 护栏
+## 禁止 page drift 的护栏
 
 - 不把 legacy 目录扫描 pattern、中文 sheet 名称直接写成 current runtime 必然接受事实，除非有 current tests/replay 证据
 - 不把 replay seed fixture（如 `fixture_annual_loss`）写成 `annual_award` direct output
 - 不把跨模块依赖结论扩写到其他 module 页面；未闭合项只在本页“当前证据缺口”记录
 
-## merge-gate 证据摘要
+## 合并 gate 证据摘要
 
 - gate 通过时应满足：`publication_results=5`、`projection_results=2`、`compatibility_case=False`
 - gate 失败时应能在 `fact_processing` / `identity_resolution` / `contract_state` / `monthly_snapshot` 中定位 primary failure checkpoint

@@ -82,11 +82,11 @@
 - [customer MDM 生命周期证据](../evidence/customer-mdm-lifecycle-evidence.md)
 - [`customer-mdm` 手工命令面](../surfaces/customer-mdm-commands.md)
 
-## 相关 atomic concepts
+## 相关原子概念
 
 - [新到账客户状态：`is_new`](./is-new.md)
 
-## 相关 domains
+## 相关 domain
 
 - [`annual_award`](../domains/annual-award.md)
 - [`annual_loss`](../domains/annual-loss.md)

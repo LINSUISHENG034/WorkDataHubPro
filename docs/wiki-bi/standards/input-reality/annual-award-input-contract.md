@@ -26,7 +26,7 @@
 
 本页当前优先固化的是 workbook + sheet contract，而不是仓库外部目录扫描策略。
 
-## legacy raw-source 语义摘录（先证据，后实现）
+## legacy 原始来源语义摘录（先证据，后实现）
 
 以下语义来自 legacy annual_award 文档/配置/runbook，作为 current 合同解释背景：
 
@@ -51,7 +51,7 @@
   - anchor row 序列按合并后的稳定顺序编号，而不是各 sheet 各自重起
   - `source_sheet` 是 required field；`plan_code` / `plan_type` 以 alternative group 方式校验（至少其一存在）
 
-## observed production reality
+## 观测到的生产现实
 
 - representative single-month production-sample validation shows the business-collection ledger workbook currently contains the accepted event-domain sheets
 - the same business-collection folder also contains adjacent summary and attachment-style workbooks
@@ -121,7 +121,7 @@
 - 缺失 `award_amount`，使记录不再表达中标事实
 - 把 synthetic fixture 冒充为 real replay / accepted workbook 现实
 
-## 输入 merge gates（merge 前最小通过线）
+## 输入合同 gate（合并前最小通过线）
 
 - intake contract checkpoint 需维持 `record_count` 与 required/adaptation key contract 不漂移
 - replay 入口仍以包含 `TrusteeAwards` + `InvesteeAwards` 的单 workbook 为最小可运行单元

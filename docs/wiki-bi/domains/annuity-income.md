@@ -41,7 +41,7 @@ current project 已有：
 - unresolved identity 的 operator-facing artifacts
 - post-ID5 identity governance 与 branch mapping 约束
 
-## Wave 01 M2 语义聚焦（薄页指针）
+## 当前语义聚焦（薄页指针）
 
 - hidden field semantics：
   - `客户名称` 在清洗前会复制为 `年金账户名`，用于后续 identity 解析与审计线索保留
@@ -81,10 +81,10 @@ current project 已有：
 - [`annuity_income` ID5 retirement 证据](../evidence/annuity-income-id5-retirement-evidence.md)
 - [`annuity_income` operator artifacts 证据](../evidence/annuity-income-operator-artifacts-evidence.md)
 
-## 当前 production reality 问答
+## 当前生产现实问答
 
 - accepted source contract：[`annuity_income` 输入合同](../standards/input-reality/annuity-income-input-contract.md) 中定义的 `收入明细` sheet contract。
-- observed production reality：代表性单月生产样本验证表明，annuity workbook family 在同一本物理 workbook 中同时出现 `规模明细` 与 `收入明细`。
+- 观测到的生产现实：代表性单月生产样本验证表明，annuity workbook family 在同一本物理 workbook 中同时出现 `规模明细` 与 `收入明细`。
 - stable contract：`annuity_income` 仍只认领 `收入明细`，shared workbook family 不会把收入域与规模域写成同一 accepted contract。
 - observed production variant：shared workbook family 属于 workbook-discovery 与 explainability 线索，不是把一个观测月份自动推广为 universal contract 的依据。
 
@@ -100,4 +100,4 @@ current project 已有：
 当前尤其要避免的是：
 
 - 因为它最早以制度记忆方式进入 wiki，就让它长期停留在“只导航、不回答合同问题”的状态
-- 把 compatibility memory、active runtime path 与 retired behavior 混写成一段模糊的 identity 叙述
+- 把兼容性记忆、当前运行路径与已退休行为混写成一段模糊的 identity 叙述

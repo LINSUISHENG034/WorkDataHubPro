@@ -49,10 +49,10 @@
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
 
-## 当前 production reality 问答
+## 当前生产现实问答
 
 - accepted source contract：[`annuity_performance` 输入合同](../standards/input-reality/annuity-performance-input-contract.md) 中定义的 `规模明细` sheet contract。
-- observed production reality：代表性单月生产样本验证表明，annuity workbook family 在同一本物理 workbook 中同时出现 `规模明细` 与 `收入明细`。
+- 观测到的生产现实：代表性单月生产样本验证表明，annuity workbook family 在同一本物理 workbook 中同时出现 `规模明细` 与 `收入明细`。
 - stable contract：`annuity_performance` 只认领 `规模明细`，不会因为 shared workbook family 而与 `annuity_income` 合并成一个 accepted contract。
 - observed production variant：shared workbook family 用于 workbook discovery 与 explainability 补强，不用于把单月观测上升为 universal contract。
 

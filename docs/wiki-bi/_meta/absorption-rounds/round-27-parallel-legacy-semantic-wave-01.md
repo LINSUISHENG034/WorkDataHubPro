@@ -1,46 +1,38 @@
-# Round 27：parallel legacy semantic wave 01
+# Round 27：legacy 语义补强收口
 
 > 状态：Completed
 > 日期：2026-04-16
-> 主题簇：parallel-wave / wiki-bi / legacy-semantics
+> 主题簇：领域语义 / operator 与 verification 补强
 
-## Modules Executed
+## 本轮覆盖对象
 
-- `M1` `annuity_performance`
-- `M2` `annuity_income`
-- `M3` `annual_award`
-- `M4` `annual_loss`
-- `M8` operator/runtime/verification governance
+- `annuity_performance`
+- `annuity_income`
+- `annual_award`
+- `annual_loss`
+- operator / runtime / verification 相关 shared pages
 
-## Modules Merged
+## 本轮收口的稳定结论
 
-- `M1`
-- `M2`
-- `M3`
-- `M4`
-- `M8`
+- 四个高流量 domain 继续保持薄导航页形态，但已经具备更完整的合同级入口与对象级证据回链。
+- `annuity_income` 的隐藏字段语义、operator-visible differences 与 current contract posture 已被收紧到输入/输出合同与字段处理证据页。
+- `annual_award` / `annual_loss` 的 event-domain 输入、输出与字段处理语义继续保持对称，不再只依赖薄导航页的碎片记忆。
+- `annuity_performance` / `annuity_income` / event domains 与 shared evidence pages 之间的 cross-link 现在更接近“对象页先承载结论，domain 页只做分发”的形态。
+- operator、runtime 与 verification 相关 shared pages 继续把未闭环项留在 `当前证据缺口`，而不是把 legacy breadth 写成 current active runtime。
 
-## Modules Held Back
+## 本轮回写页
 
-- none
+- [`annuity_performance`](../../domains/annuity-performance.md)
+- [`annuity_income`](../../domains/annuity-income.md)
+- [`annual_award`](../../domains/annual-award.md)
+- [`annual_loss`](../../domains/annual-loss.md)
+- [operator 与 surface 证据](../../evidence/operator-and-surface-evidence.md)
+- [验证资产证据](../../evidence/verification-assets-evidence.md)
+- [validation result history 证据](../../evidence/validation-result-history-evidence.md)
 
-## Reusable Prompt Pattern
+## 下一步入口
 
-- raw sources first, with domain docs/runbooks/config ahead of code and code treated as second-pass audit evidence
-- exact write set per module, with controller-owned integration files kept out of parallel worker ownership
-- evidence-first ordering, then contract/surface/domain link tightening
-- explicit forbidden page drift so unresolved findings stay in `当前证据缺口`
-- merge gates repeated in the worker prompt before review
-
-## Review Failure Patterns
-
-- parallel sibling branches do not remain fast-forwardable after another sibling merges; each later sibling needed a quick rebase onto the updated program branch before `--ff-only` integration
-- controller-owned integration files must stay centralized, or the wave immediately reintroduces `index.md` / `log.md` / round-note collision risk
-- aggregate evidence pages still need review for dispatcher discipline even when the write set itself is clean
-
-## Next Wave Admission Rules
-
-- keep controller-owned integration files off parallel worker write sets
-- require disjoint module write sets plus evidence-template preservation before merge
-- require quick rebase onto the current program branch before each `--ff-only` integration when sibling branches have already merged
-- only start another parallel wave after the reused prompt shape still yields thin domain pages, stable evidence-first ordering, and no unresolved shared-file ownership drift
+- [`annuity_income` 输入合同](../../standards/input-reality/annuity-income-input-contract.md)
+- [`annual_award` 输入合同](../../standards/input-reality/annual-award-input-contract.md)
+- [`annual_loss` 输入合同](../../standards/input-reality/annual-loss-input-contract.md)
+- [operator 与 surface 证据](../../evidence/operator-and-surface-evidence.md)

@@ -13,7 +13,7 @@
 - 哪些 identity / customer-facing signals 是本域显式产物
 - 哪些 projection 是 loss fact 的下游治理结果
 
-## direct fact output
+## 直接事实输出
 
 当前 accepted slice 的直接事实发布目标是：
 
@@ -21,7 +21,7 @@
 
 这层表达的是年度流失事件事实本身，而不是状态或 operator artifact 的替代物。
 
-## reference / customer signals
+## 引用 / 客户信号
 
 replay evidence 表明，`annual_loss` 当前还会显式发布：
 
@@ -30,7 +30,7 @@ replay evidence 表明，`annual_loss` 当前还会显式发布：
 
 这说明本域除了事实，还要把 unresolved / resolved identity 后果与客户侧流失信号写成可验证输出。
 
-## derived downstream outputs
+## 下游派生输出
 
 当前 accepted slice 的 projection 结果是：
 

@@ -1,24 +1,14 @@
 # `wiki-bi` 吸收路线图
 
 > 状态：Active
-> 日期：2026-04-15
+> 日期：2026-04-16
 > 作用：给 `wiki-bi` 的内容吸收提供整体顺序和每轮主题边界
 
 ---
 
-## Subagent-Governed Legacy Semantic Absorption
+## 基础主题簇（已完成）
 
-Goal:
-
-- absorb hidden legacy semantics through a coverage-first module map
-- validate the subagent workflow through three pilot modules before parallel scaling
-
-Primary references:
-
-- `docs/wiki-bi/_meta/wiki-legacy-semantic-absorption-module-map.md`
-- `docs/wiki-bi/_meta/wiki-subagent-worktree-playbook.md`
-
-## Round 1：状态与快照
+### Round 1：状态与快照
 
 目标：
 
@@ -36,7 +26,7 @@ Primary references:
 
 - completed on 2026-04-14
 
-## Round 2：身份与补查
+### Round 2：身份与补查
 
 目标：
 
@@ -53,7 +43,7 @@ Primary references:
 
 - completed on 2026-04-14
 
-## Round 3：输入现实
+### Round 3：输入现实
 
 目标：
 
@@ -69,7 +59,7 @@ Primary references:
 
 - completed on 2026-04-14
 
-## Round 4：验证资产
+### Round 4：验证资产
 
 目标：
 
@@ -85,7 +75,7 @@ Primary references:
 
 - completed on 2026-04-14
 
-## Round 5：operator 与 surfaces
+### Round 5：operator 与 surfaces
 
 目标：
 
@@ -101,7 +91,7 @@ Primary references:
 
 - completed on 2026-04-14
 
-## Round 6：`annuity_income` 专题补强
+### Round 6：`annuity_income` 专题补强
 
 目标：
 
@@ -117,11 +107,9 @@ Primary references:
 
 - completed on 2026-04-14
 
-## Follow-on Round 07：`is_new` 对象级证据拆分
+## Follow-on 轮次（已完成）
 
-目标：
-
-- 验证对象级 evidence page 拆分机制是否有效
+### Round 07：`is_new` 对象级证据拆分
 
 主入口页：
 
@@ -133,13 +121,7 @@ Primary references:
 
 - completed on 2026-04-14
 
-## Follow-on Round 08：`annuity_income` slice admission package
-
-目标：
-
-- 把 `annuity_income` 的制度记忆转成 slice-admission-ready evidence
-- 把 branch mapping、ID5 retirement、operator artifacts 从专题 gap 页拆成对象级 evidence
-- 在不提前卷入 Phase E surface 决策的前提下，为下一份可执行 slice plan 建立稳定入口
+### Round 08：`annuity_income` slice admission package
 
 主入口页：
 
@@ -152,13 +134,7 @@ Primary references:
 
 - completed on 2026-04-14
 
-## Follow-on Round 09：legacy wiki 退役收口
-
-目标：
-
-- 把旧 wiki 层从并行知识层收口并移除
-- 明确 `project/`、`roadmap/`、`phases/`、`governance/`、`lessons/`、`_meta/` 的 durable 去向
-- 在保留 provenance 的前提下，停止让旧 wiki 层出现在当前权威文档里
+### Round 09：legacy wiki 退役收口
 
 主入口页：
 
@@ -170,216 +146,114 @@ Primary references:
 
 - completed on 2026-04-14
 
-## 当前位置
+## Maintenance 轮次（已完成）
 
-首批六轮吸收已经完成，follow-on Round 07、Round 08 与 Round 09 也已经完成。
+### Round 10-23
 
-Round 10 已完成当前 wiki 的导航收紧与低入链维护。
-Round 11 已完成 Phase E operator/runtime surfaces decision package。
-Round 12 已完成 verification result history and fixture governance。
-Round 13 已完成 identity governance deepening。
-Round 14 已完成 status family selective evidence split。
-Round 15 已完成 `annuity_performance` I/O contracts。
-Round 16 已完成 `annuity_performance` implementation gap audit。
-Round 17、Round 18、Round 19、Round 20、Round 21、Round 22 与 Round 23 已把 domain-upgrade workflow、`annuity_income` 合同入口、event-domain 对称升级、verification-asset adjudication、Phase E surface closure、高流量 evidence normalization 与 production-sample augmentation 进一步收口。
+覆盖范围：
 
-后续如需继续推进，不建议再按“还能补哪些零散页”来选题，而应继续按预估收益大小推进。
-
-## 下一阶段收益排序
-
-### 1. Round 11：Phase E operator/runtime surfaces decision package
-
-预估收益：最高
-
-原因：
-
-- 当前 `wiki-bi` 中最集中的 open question 已经收敛到 surface 治理主题，而不是 domain 语义主题
-- `operator-and-surface-evidence.md` 已明确指出 `reference_sync`、`company_lookup_queue`、manual `customer-mdm` commands、enterprise persistence、GUI / standalone tools 仍处于未决状态
-- 这组问题横跨 identity、operator、runtime、artifact 与 future rebuild governance，收口后能直接提高后续设计与 slice admission 的决策质量
-- legacy raw sources 已经足够丰富，包括 CLI dispatch、runbook、`reference_sync.yml`、`customer_mdm` 模块、`enterprise.enrichment_requests` / `enterprise.enrichment_index` 相关代码路径
-
-目标：
-
-- 把 Phase E surface 相关对象从“已知存在”推进到“明确的治理问题陈述”
-- 对 `retain / replace / retire / defer` 形成对象级 evidence package，而不是继续停留在泛化 evidence page 里
-- 优先收紧 `reference_sync`、`company_lookup_queue`、manual `customer-mdm` commands、enterprise persistence、standalone `cleanse` CLI、GUI tooling 之间的边界
-
-主入口页：
-
-- `evidence/operator-and-surface-evidence.md`
-- `surfaces/reference-sync.md`
-- `surfaces/company-lookup-queue.md`
-- `surfaces/customer-mdm-commands.md`
-
-状态：
-
-- completed on 2026-04-14
-
-### 2. Round 12：verification result history and fixture governance
-
-预估收益：高
-
-原因：
-
-- 当前验证资产层已经有较完整的 taxonomy，但 `validation result history`、error-case fixtures、domain-level golden set 仍未制度化收口
-- 这组内容直接决定 future acceptance story 是否可追溯，收益仅次于 surface decision package
-- `verification_guide_real_data.md`、`dataset_requirements.md`、legacy parity validation guide 与 current replay registry 已经形成足够强的 raw-source 基底
-
-目标：
-
-- 把 validation result history 从“存在于 legacy / replay 记忆中”推进到明确 evidence object
-- 收紧 error-case fixtures 的 `planned but not created` 语义，不让它继续处于模糊状态
-- 判断 `annual_award` / `annual_loss` 是否需要独立 domain-level golden set，至少把判断边界写清楚
-
-主入口页：
-
-- `evidence/verification-assets-evidence.md`
-- `standards/verification-method/golden-scenarios.md`
-- `standards/verification-method/real-data-validation.md`
-
-状态：
-
-- completed on 2026-04-14
-
-### 3. Round 13：identity governance deepening
-
-预估收益：中高
-
-原因：
-
-- `company_id` 相关基础语义已经吸收，但 identity governance 仍缺少更明确的标准层表达
-- `temp-id`、ID1-ID5 mapping files、branch mapping、queue / cache / provider 边界仍分散在 evidence 与 domain 记忆中
-- 这轮的收益高于继续做状态对象级拆分，因为它更直接服务后续 identity-related design 与 rebuild review
-
-目标：
-
-- 判断是否需要新增独立 identity governance standard，或者继续以现有标准页承载但收紧结构
-- 继续把 `temp-id`、mapping files、identity fallback chain 的制度边界从主题 evidence page 中拆得更清楚
-- 把 `annuity_income` 已拆出的 branch mapping / ID5 记忆，与 broader identity governance 重新接回
-
-主入口页：
-
-- `evidence/identity-and-lookup-evidence.md`
-- `concepts/company-id.md`
-- `concepts/temp-id.md`
-- `surfaces/company-lookup-queue.md`
-
-状态：
-
-- completed on 2026-04-14
-
-### 4. Round 14：selective object-level evidence split for status family
-
-预估收益：中
-
-原因：
-
-- `is_new` 的对象级拆分已经证明机制可行，但继续拆 `is_winning_this_year`、`is_loss_reported`、`is_churned_this_year` 的边际收益不如前三项
-- 这轮更适合作为结构优化，而不是当前阶段的主攻方向
-
-目标：
-
-- 只在明确满足拆分阈值时，继续做状态家族的对象级 evidence page
-- 优先服务高频复用对象，而不是机械式把所有状态都拆成单页
-
-主入口页：
-
-- `evidence/status-and-snapshot-evidence.md`
-- `concepts/customer-status.md`
-- `standards/semantic-correctness/customer-status-semantics.md`
-
-状态：
-
-- completed on 2026-04-14
-
-## 短期计划（2026-04-15）
-
-Round 22 完成后，当前 wiki 已不再主要缺“domain I/O 问答入口”、verification asset 的基础裁决表达，或核心 Phase E surfaces 的基础边界闭环。
-
-因此这批短期计划中的三轮都已完成；后续如需继续推进，应重新按收益排序选题，而不是机械延续本批短期计划：
-
-### Round 20：verification asset adjudication package
-
-预估收益：最高
-
-原因：
-
-- [验证资产证据](../evidence/verification-assets-evidence.md) 与 [validation result history 证据](../evidence/validation-result-history-evidence.md) 已经把问题对象识别清楚，但状态词仍不够收束
-- 这组问题直接影响后续 acceptance story、adjudication memory 与 slice governance
-- 相比继续补 domain 页面，这一轮对未来决策的杠杆更高
-
-主入口页：
-
-- `evidence/verification-assets-evidence.md`
-- `evidence/validation-result-history-evidence.md`
-- `standards/verification-method/golden-scenarios.md`
+- domain 导航与 cross-reference 收紧
+- Phase E operator/runtime surfaces decision package
+- verification result history and fixture governance
+- identity governance deepening
+- status family selective evidence split
+- `annuity_performance` I/O contracts 与 implementation gap audit
+- domain upgrade workflow pattern
+- `annuity_income` 合同入口升级
+- event-domain contract upgrade
+- verification asset adjudication package
+- Phase E surface decision closure
+- high-traffic evidence normalization
+- production-sample augmentation
 
 状态：
 
 - completed on 2026-04-15
 
-### Round 21：Phase E surface decision closure
+## Round 24-27：legacy 隐含语义补强（已完成）
 
-预估收益：高
+### Round 24：引用同步与回填语义收紧
 
-原因：
+目标：
 
-- Round 11 已经把主要 surface 对象显式登记，但 retain / replace / retire / defer 仍未闭环
-- `reference_sync`、`company_lookup_queue` 与 enterprise persistence 都已经足够成熟，不应继续长期停留在“还需独立决策”的状态
-- 这轮直接服务 future architecture / runtime governance，而不是重复对象识别
+- 把 `reference_sync` 与 `backfill` 从模糊补齐逻辑拆成两个独立治理对象
 
 主入口页：
 
-- `evidence/operator-and-surface-evidence.md`
+- `evidence/reference-and-backfill-evidence.md`
+- `concepts/backfill.md`
 - `surfaces/reference-sync.md`
+
+状态：
+
+- completed on 2026-04-16
+
+### Round 25：身份治理语义分层收紧
+
+目标：
+
+- 把 identity governance 收紧成“当前运行路径 / 历史记忆 / 已退休行为 / operator-visible consequence”四层表达
+
+主入口页：
+
+- `concepts/company-id.md`
+- `concepts/temp-id.md`
+- `standards/semantic-correctness/identity-governance.md`
 - `surfaces/company-lookup-queue.md`
 - `surfaces/enterprise-enrichment-persistence.md`
 
 状态：
 
-- completed on 2026-04-15
+- completed on 2026-04-16
 
-### Round 22：high-traffic evidence normalization
+### Round 26：状态与快照生命周期补强
 
-预估收益：中高
+目标：
 
-原因：
-
-- Round 19 已经把 evidence 最小模板制度化
-- 但 [状态与快照证据](../evidence/status-and-snapshot-evidence.md)、[验证资产证据](../evidence/verification-assets-evidence.md)、[operator 与 surface 证据](../evidence/operator-and-surface-evidence.md) 仍未完全收紧到统一骨架
-- 这轮适合作为 Round 20 / 21 之后的维护收口，而不是抢在高价值结论之前做纯格式整理
+- 为 `customer-mdm` 年度生命周期补齐对象级证据，并继续保持概念层与命令面的分层
 
 主入口页：
 
-- `evidence/status-and-snapshot-evidence.md`
-- `evidence/verification-assets-evidence.md`
-- `evidence/operator-and-surface-evidence.md`
+- `evidence/customer-mdm-lifecycle-evidence.md`
+- `concepts/customer-status.md`
+- `standards/semantic-correctness/customer-status-semantics.md`
 
 状态：
 
-- completed on 2026-04-15
+- completed on 2026-04-16
 
-## Round 23: production-sample augmentation
+### Round 27：legacy 语义补强收口
 
-Goal:
+目标：
 
-- absorb concrete workbook-family and workbook-variant reality from the legacy project plus representative single-month production-sample validation
-- strengthen wiki answers about real production input without collapsing observed variants into accepted contracts
-- classify adjacent business-collection workbooks as explicit surfaces or evidence objects
+- 对四个高流量 domain 与 shared operator / verification pages 做最后一轮对象级补强与 cross-link 收口
 
-Entry pages:
+主入口页：
 
-- `evidence/input-reality-evidence.md`
-- `standards/input-reality/input-reality-contracts.md`
-- `standards/verification-method/real-data-validation.md`
+- `domains/annuity-performance.md`
+- `domains/annuity-income.md`
+- `domains/annual-award.md`
+- `domains/annual-loss.md`
 - `evidence/operator-and-surface-evidence.md`
+- `evidence/verification-assets-evidence.md`
 
-Status:
+状态：
 
-- completed on 2026-04-15
+- completed on 2026-04-16
+
+## 当前位置
+
+`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次，以及 Round 24-27 的 legacy 隐含语义补强。
+
+当前应明确保持两条边界：
+
+- durable wiki 只保留业务语义、标准、surface、evidence 与 round sediment
+- subagent / worktree / merge sequencing 这类执行层材料不再放在 `docs/wiki-bi/`，应留在 `docs/superpowers/`、`.planning/` 或 git history
 
 ## 当前推荐入口
 
-当前这批短期计划已经完成。
+如果后续继续推进，推荐优先从以下对象簇重新做收益排序：
 
-如果后续继续推进，推荐优先从“仍有厚 aggregate page 但尚未统一模板的 evidence family”或“仍停留在 shared page 的高频对象”重新做一轮收益排序，而不是默认再开新的 planned round。
+- 仍有显著 `当前证据缺口` 的 aggregate evidence family
+- 仍停留在 shared page、但已具备对象级拆分条件的高频对象
+- 仍需要补 current-side evidence 或 current-side decision package 的 surface / verification topic

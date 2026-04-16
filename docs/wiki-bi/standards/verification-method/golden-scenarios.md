@@ -1,4 +1,4 @@
-# golden scenarios
+# golden scenario 标准
 
 > standard_type: `verification-method`
 > related_standard_types: `input-reality`, `output-correctness`

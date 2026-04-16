@@ -38,7 +38,7 @@
   - merged `anchor_row_no` 在双 sheet 间连续递增，不按 sheet 重置
   - trailing empty rows 会被跳过，不应污染 anchor row 序列
 
-## observed production reality
+## 观测到的生产现实
 
 - representative single-month production-sample validation shows the business-collection ledger workbook currently contains the accepted event-domain sheets
 - the same business-collection folder also contains adjacent summary and attachment-style workbooks

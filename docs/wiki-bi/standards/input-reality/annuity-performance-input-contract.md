@@ -37,13 +37,13 @@
   - 不应把 event domain 的 multi-sheet 经验套到 `annuity_performance`
   - 也不应因为测试夹具常常很小，就假定真实 workbook 没有额外列
 
-## observed production reality
+## 观测到的生产现实
 
 - representative single-month production-sample validation shows the current workbook family contains both `规模明细` and `收入明细` in one physical workbook
 - `annuity_performance` still owns the `规模明细` sheet contract
 - `annuity_income` still owns the `收入明细` sheet contract
 - the shared workbook family strengthens workbook-discovery and explainability understanding, not domain collapse
-- accepted contract 仍然是 `规模明细` sheet，而 shared workbook family 属于 observed production reality
+- accepted contract 仍然是 `规模明细` sheet，而 shared workbook family 属于观测到的生产现实
 
 ## 最小字段骨架
 

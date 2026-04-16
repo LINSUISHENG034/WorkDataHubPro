@@ -27,7 +27,7 @@
 - temp-id 是受治理 fallback，不等于正式身份
 - `company_lookup_queue` 与 `unknown_names_csv` 都是 identity 主题中的独立 surface / artifact
 - mapping / override files、cache、provider、queue 与 temp-id 一起构成 identity governance，而不是彼此孤立的“小功能”
-- current project 已显式保护 deterministic / opaque temp identity 与 source-value-first 行为，Round 13 已把 broader identity governance 提升为独立标准层
+- current project 已显式保护 deterministic / opaque temp identity 与 source-value-first 行为，broader identity governance 也已被提升为独立标准层
 - `annual_award` 与 `annual_loss` 当前都已具备 contract-grade identity writeback 入口，不再只是状态语义的旁路来源
 
 ## 四层分离证据视图

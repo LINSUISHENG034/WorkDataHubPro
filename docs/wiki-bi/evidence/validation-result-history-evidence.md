@@ -45,7 +45,7 @@
 - 当前 integration tests 中的 inline failure cases
 - `gate_runtime.py` 中的 comparison-run package schema
 
-## Round 20 裁决表达
+## 当前裁决表达
 
 | 对象 | 当前状态 | 当前裁决含义 | 不应误写成什么 |
 |---|---|---|---|

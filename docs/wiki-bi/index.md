@@ -34,8 +34,8 @@
   - 企业身份标识是跨 domain 连接事实、主数据、快照和验证的核心对象。
 - [什么算受治理的身份 fallback](./standards/semantic-correctness/identity-governance.md)
   - temp-id、mapping files、cache、provider、queue 的边界需要作为 identity governance 统一理解。
-- [如何区分 active runtime、historical memory、retired 与 operator-visible consequence](./standards/semantic-correctness/identity-governance.md)
-  - 身份治理相关叙述必须四层分离；未闭环项进入 evidence gaps，不混写成 active runtime。
+- [如何区分当前运行路径、历史记忆、已退休行为与可见后果](./standards/semantic-correctness/identity-governance.md)
+  - 身份治理相关叙述必须四层分离；未闭环项进入 evidence gaps，不混写成当前运行路径。
 - [什么算 real-data validation](./standards/verification-method/real-data-validation.md)
   - 真实数据验证不是“拿真实文件跑一下”，而是有边界和目标的验证方法。
 - [当前生产 workbook 长什么样](./evidence/input-reality-evidence.md)
@@ -159,8 +159,6 @@
 - [轻量实施计划](./_meta/wiki-implementation-plan.md) : 首批 seed scaffold 的实施范围、顺序与完成定义。
 - [吸收工作流](./_meta/wiki-absorption-workflow.md) : 定义主题簇吸收、分类 gate、每轮输出与验收清单。
 - [吸收路线图](./_meta/wiki-absorption-roadmap.md) : 定义主题簇整体顺序与每轮主入口页。
-- [legacy 语义吸收模块图](./_meta/wiki-legacy-semantic-absorption-module-map.md) : 固定 eight-module coverage 模型，用于并行吸收 hidden legacy semantics。
-- [subagent worktree 执行手册](./_meta/wiki-subagent-worktree-playbook.md) : 固定 one-module-one-write-set 的 subagent 执行与评审 gate。
 - [吸收轮次索引](./_meta/absorption-rounds/index.md) : 记录每轮闭环的经验沉淀与下一轮入口。
 - [Round 01：状态与快照](./_meta/absorption-rounds/round-01-status-and-snapshot.md) : 首轮闭环沉淀，记录状态与快照主题簇的稳定结论、可复用经验与下一轮目标。
 - [Round 02：身份与补查](./_meta/absorption-rounds/round-02-identity-and-lookup.md) : 第二轮闭环沉淀，记录 `company_id`、temp-id、lookup surface 与下一轮目标。
@@ -185,9 +183,9 @@
 - [Round 21：Phase E surface decision closure](./_meta/absorption-rounds/round-21-phase-e-surface-decision-closure.md) : maintenance 轮次，把 `reference_sync`、`company_lookup_queue` 与 enterprise persistence 收紧成 current accepted runtime 与 deferred runtime 分层的决策包。
 - [Round 22：high-traffic evidence normalization](./_meta/absorption-rounds/round-22-high-traffic-evidence-normalization.md) : maintenance 轮次，把高流量 aggregate evidence pages 收紧成一致的 dispatcher + object-page 分发骨架，提高 lint 友好度。
 - [Round 23：production-sample augmentation](./_meta/absorption-rounds/round-23-production-sample-augmentation.md) : maintenance 轮次，把代表性单月生产样本验证过的 workbook family、业务收集 variants 与 ledger surface 回写成 durable wiki 入口。
-- [Round 24：reference and backfill pilot](./_meta/absorption-rounds/round-24-reference-backfill-pilot.md) : pilot 轮次，用单一 subagent 验证 evidence-first 吸收 reference/backfill 模块并收紧下一轮 prompt / review gate。
-- [Round 25：identity governance pilot](./_meta/absorption-rounds/round-25-identity-governance-pilot.md) : pilot 轮次，验证 identity 语义页面的四层分离写法，并保持 queue surface 与 persistence surface 的明确拆分。
-- [Round 26：status and snapshot pilot](./_meta/absorption-rounds/round-26-status-snapshot-pilot.md) : pilot 轮次，验证状态公式、年度生命周期证据与命令运行面三层分离写法是否稳定。
-- [Round 27：parallel legacy semantic wave 01](./_meta/absorption-rounds/round-27-parallel-legacy-semantic-wave-01.md) : parallel-wave 轮次，在 controller-owned 集成文件保持集中回写的前提下并行吸收剩余五个模块。
+- [Round 24：引用同步与回填语义收紧](./_meta/absorption-rounds/round-24-reference-backfill-pilot.md) : maintenance 轮次，把 `reference_sync` 与 `backfill` 的边界收紧成稳定对象，并接回四个 domain。
+- [Round 25：身份治理语义分层收紧](./_meta/absorption-rounds/round-25-identity-governance-pilot.md) : maintenance 轮次，把 identity governance 收紧成四层分离表达，并明确 queue 与 persistence 的独立边界。
+- [Round 26：状态与快照生命周期补强](./_meta/absorption-rounds/round-26-status-snapshot-pilot.md) : maintenance 轮次，为 `customer-mdm` 年度生命周期补齐对象级证据，并继续收紧概念层与命令面分层。
+- [Round 27：legacy 语义补强收口](./_meta/absorption-rounds/round-27-parallel-legacy-semantic-wave-01.md) : maintenance 轮次，对四个高流量 domain 与 shared operator / verification pages 做对象级补强与 cross-link 收口。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

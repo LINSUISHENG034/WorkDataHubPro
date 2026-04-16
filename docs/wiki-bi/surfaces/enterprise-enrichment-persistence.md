@@ -34,22 +34,22 @@
 
 ## 四层分离（persistence 专属）
 
-### active runtime path
+### 当前运行路径
 
 - current accepted runtime 只显式保护身份解析行为链与可见性证据，不等于保留了全量 enterprise persistence footprint
 - `enrichment_index`/`company_name_index`、`base_info`、`enrichment_requests` 的 durable persistence 当前仍未作为 active runtime 受测闭环
 
-### compatibility inventory / historical memory
+### 兼容性清单 / 历史记忆
 
 - legacy persistence family（cache/queue/provider）作为制度记忆必须保留
 - `company_id_overrides_*`、`company_branch.yml`、`eqc_confidence.yml` 仍是解释 persistence 决策来源的 memory 资产
 
-### retired fallback behavior
+### 已退休且不得恢复的回退行为
 
 - “只要保留 legacy 表面宽度，identity 才算正确”的叙述应视为 retired 假设
 - retired 的是把 persistence footprint 误当成唯一正确运行态，不是这些对象的治理价值
 
-### operator-visible consequence
+### 面向操作人员的可见后果
 
 - persistence deferred 不等于后果消失；operator 仍需通过 artifacts/signal/evidence 观察 unresolved identity
 - 若 future 恢复 durable persistence，必须以对象级 evidence 明确 admission，而不是在语义页隐式复活
@@ -94,7 +94,7 @@
 - current accepted validation runtime 没有 repo-native `enrichment_requests`、`enrichment_index`、`company_name_index`、`base_info`、`business_info`、`biz_label` 等 surface；被保留的是 identity 行为链与 evidence contract，而不是 legacy 表面宽度
 - 因此更合理的 closure 方式不是整体 retain / retire，而是分别判断 cache、queue persistence、provider raw/cleansed persistence 的 active runtime status
 
-## Round 21 决策边界
+## 当前治理边界
 
 | 子对象 | 当前边界 | 说明 |
 |---|---|---|

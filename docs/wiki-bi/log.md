@@ -1,43 +1,37 @@
-# Wiki BI Log
+# Wiki BI 日志
 
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
-## [2026-04-16 08:43] absorb | Round 27 parallel legacy semantic wave 01
+## [2026-04-16 10:23] maintain | 清理 `wiki-bi` 中的执行态流程漂移
 
-- accepted the three pilot modules as `accepted-pilot`, admitted `M1` / `M2` / `M3` / `M4` / `M8` into Wave 01, and merged all five remaining modules through isolated worktrees
-- kept `index.md` / `log.md` / round notes controller-owned during parallel execution, then wrote the integration closeout centrally after per-module review
-- recorded the reusable wave pattern and the one recurring integration friction point: sibling branches needed quick rebases onto the updated program branch before `--ff-only` merge
+- 从 `docs/wiki-bi/_meta/` 移除 subagent/worktree/merge sequencing 这类执行层材料，避免 durable wiki 再次承担 workflow 说明职责
+- 将 Round 24-27、`index.md`、`wiki-absorption-roadmap.md` 与吸收轮次索引重写为纯语义沉淀，不再把试点、并行波次与集成流程当作主导航对象
+- 清理 durable page 中的 round-specific 标题，使对象页只保留当前有效结论而不绑定某次维护轮次
 
-## [2026-04-16 08:14] absorb | Round 26 status and snapshot pilot
+## [2026-04-16 08:43] maintain | Round 27 legacy 语义补强收口
 
-- new lifecycle evidence page
-- clearer concept vs command/runtime split
-- prompt shape feels stable for this pilot, with unresolved runtime items kept in evidence gaps
+- 对 `annuity_performance`、`annuity_income`、`annual_award`、`annual_loss` 与 shared operator / verification pages 做对象级补强与 cross-link 收口
+- 继续保持 domain 页的薄导航形态，把 contract-grade 结论留在输入/输出合同与字段处理证据页
+- 将 current runtime、历史记忆与未闭环项继续分层表达，未收口部分统一留在 `当前证据缺口`
 
-## [2026-04-16 08:08] absorb | Round 25 identity governance pilot
+## [2026-04-16 08:14] absorb | Round 26 状态与快照生命周期补强
 
-- identity layering improvement
-- queue vs persistence split
-- prompt-design lesson
+- 新增 `customer-mdm` 年度生命周期证据页，补入 `yearly-init`、`sync`、`snapshot`、ratchet-style 与 `status_year` 的语义边界
+- 收紧概念层与命令 / runtime 层分离，使年度状态语义回到概念 / 标准，命令触发路径继续留在 surface / evidence
+- 将尚未 current-side 闭环的 runtime 项继续登记在 evidence gaps，而不是提升成稳定结论
 
-## [2026-04-16 01:36] absorb | Round 24 reference and backfill pilot
+## [2026-04-16 08:08] absorb | Round 25 身份治理语义分层收紧
 
-- 新增 `reference-and-backfill-evidence.md`，把 authoritative `reference_sync`、fact-derived `backfill`、customer-master 衍生写入与 provenance / state 边界写成 durable evidence page
-- 收紧 `backfill` 概念页、`reference_sync` surface 页与四个 domain 导航页的连接，让 evidence-first 写法先落到对象页、domain 页只保留 thin-navigation 入口
-- 记录单模块 pilot 的治理经验：prompt 应更早要求“稳定结论先入 evidence page、runtime/state 未闭环一律写成证据缺口”，review gate 要检查 aggregate page 只做 dispatcher 不重新吸厚内容
+- 将 `company_id`、`temp_id` 与 identity governance 收紧成“当前运行路径 / 历史记忆 / 已退休行为 / operator-visible consequence”四层表达
+- 明确 `company_lookup_queue` 与 enterprise persistence 是两个不同 surface，避免再把异步补查语义与持久化对象族混写
+- 将 unresolved identity 的外显要求继续写成 operator artifact / signal / evidence-gap 边界，而不是内部 trace 假设
 
-## [2026-04-16 01:08] plan | legacy semantic absorption module map and subagent playbook
+## [2026-04-16 01:36] absorb | Round 24 引用同步与回填语义收紧
 
-- established the eight-module coverage model to absorb hidden legacy semantics with reviewable module boundaries
-- fixed `.worktrees/` as the required isolation mode for all subagent execution
-- sequenced three single-module pilots before a parallel wave rollout
-
-## [2026-04-16 01:27] review | legacy semantic absorption coverage and governance
-
-- found coverage blind spots in discovery/input-contract, shared cleansing/transform substrate, load/write-contract schema, reference-sync state, enrichment-index learning/conflict semantics, and scheduled/operator runtime surfaces without needing to add `M9`
-- updated the module map to keep the exact eight-module model while assigning discovery/runtime plus cross-domain execution semantics to `M8`, schema and reference-sync state to `M6`, and enrichment-index semantics to `M5`; also clarified legacy-path relativity and `parallel-wave` as post-pilot admission only
-- added merge gates before pilot execution so primary-checkout review, same-change closure artifacts, evidence-template and stable-finding checks, write-set enforcement, thin domain pages, and controller-owned integration-file sequencing are all explicit
+- 新增 `reference-and-backfill-evidence.md`，把 authoritative `reference_sync`、fact-derived `backfill` 与 customer-master 衍生写入写成 durable evidence page
+- 收紧 `backfill` 概念页、`reference_sync` surface 页与四个 domain 导航页的连接，明确“对象页承载结论，domain 页只做分发”
+- 明确 `reference_sync` 与 `backfill` 同属 reference strategy，但拥有不同 provenance、target footprint 与治理边界
 
 ## [2026-04-15 23:43] plan | Round 23 production-sample augmentation
 
@@ -194,7 +188,7 @@
 
 - 根据后续人工审核与再次代码核对，将 `GAP-AP-001`、`GAP-AP-006` 降级为已判定非 gap
 - 将 `GAP-AP-002` 收紧为“wiki 过窄已确认”，并把 `客户名称` 缺失从绝对无效源调整为降级输入语义
-- 将 `GAP-AP-003` 收紧为 active runtime path 与 schema-level contract 的代码漂移
+- 将 `GAP-AP-003` 收紧为“当前运行路径与 schema-level contract 的代码漂移”
 - 将 `GAP-AP-004`、`GAP-AP-005` 收紧为高概率代码问题，并新增 `GAP-AP-007` 记录 company_id YAML priority 的实现漂移
 
 ## [2026-04-15] adjudicate | annuity_performance gap disposition split
@@ -229,7 +223,7 @@
 - 在 `index.md` 中新增维护者入口，显式提示 canonical playbook、confirmed domain-upgrade set 与 lint checklist
 - 在 `wiki-domain-upgrade-framework.md` 中明确其为当前唯一 canonical maintenance playbook，并补入 implementation-evidence / identity narrative / lint gate 三个控制项
 - 为 `annuity_income` 新增输入合同、输出合同与字段处理证据页，使它不再只停留在专题 evidence + institutional memory 层
-- 更新 `annuity_income`、`company_id`、`identity-governance` 与相关 evidence pages，把 active runtime path、compatibility inventory、retired behavior 与 operator consequence 分层写清
+- 更新 `annuity_income`、`company_id`、`identity-governance` 与相关 evidence pages，把“当前运行路径”“兼容性清单”“已退休行为”“可见后果”分层写清
 - 新增 Round 18，记录这次“发现路径优化 + annuity_income 对称升级”的 maintenance 闭环
 
 ## [2026-04-15 13:03] maintain | 收紧 annuity_income 合同边界与字段处理证据形态

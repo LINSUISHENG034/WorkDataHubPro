@@ -51,41 +51,41 @@
 - async queue / operator artifact 是 unresolved identity 的外显治理面，而不是附属噪音
 - `annuity_income` 的 branch mapping 与 ID5 retirement 属于 identity governance 的专题决策，而不是孤立 domain 特例
 
-## narrative layering
+## 叙述分层
 
 维护时尤其要把下面几层分开：
 
-- compatibility inventory / historical memory
-- active runtime path
-- retired behavior that must not be reintroduced
-- operator-visible consequence
+- 兼容性清单 / 历史记忆
+- 当前运行路径
+- 已退休且不得恢复的行为
+- 面向操作人员的可见后果
 
-### compatibility inventory / historical memory
+### 兼容性清单 / 历史记忆
 
 - legacy 5-step fallback chain、mapping overrides、passthrough、EQC/provider 记忆都属于这一层
 - 这层回答“历史上有哪些受治理手段存在过”，不是直接宣布它们今天仍按原优先级执行
 
-### active runtime path
+### 当前运行路径
 
 - current project 当前显式受测的主链路仍是 `source_value -> cache -> provider -> temp_id_fallback`
 - `annual_award` / `annual_loss` 还显式保护 source-preserving plan-code enrichment，但这属于 event-domain contract 的当前行为，不等于重建了全部 legacy identity stack
-- current path 的语义只覆盖受测行为；queue persistence、provider raw/cleansed persistence 仍是 deferred runtime，不应写进 active runtime path
+- 当前路径的语义只覆盖受测行为；queue persistence、provider raw/cleansed persistence 仍是 deferred runtime，不应写进当前运行路径
 
-### retired behavior that must not be reintroduced
+### 已退休且不得恢复的行为
 
 - ID5 fallback retirement 不应被写成“必要时再开”的兼容开关
 - legacy `TE...` 风格 temp identity 不应在 current replay / publication path 中复活
 - retired fallback 一旦被误写进“当前可选路径”，会直接破坏语义正确性判定
 
-### operator-visible consequence
+### 面向操作人员的可见后果
 
 - unresolved identity 必须能外显到 queue、artifact、signal 或 evidence package，而不是只留在内部 trace
 - `company_reference`、`customer_loss_signal`、`unknown_names_csv` 与 queue surface 都属于 operator 可见后果的一部分
-- 当 queue / persistence 未在 current runtime 物化时，operator-visible consequence 仍需通过 artifacts/evidence 表达，未闭环项必须进入 evidence gaps
+- 当 queue / persistence 未在 current runtime 物化时，面向操作人员的可见后果仍需通过 artifacts/evidence 表达，未闭环项必须进入 evidence gaps
 
 ## 分层检查问句（用于评审）
 
-1. 这条结论是在描述 active runtime path，还是只是在登记 historical memory？
+1. 这条结论是在描述当前运行路径，还是只是在登记历史记忆？
 2. 这条 fallback 是否已退休（retired），如果是，是否被误写成“可随时恢复”？
 3. 这条 unresolved 后果是否 operator-visible，还是只停在内部 trace？
 4. 当前页面是否把 deferred runtime 混写为 active runtime？

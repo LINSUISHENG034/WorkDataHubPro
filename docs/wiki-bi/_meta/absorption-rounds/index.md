@@ -1,4 +1,4 @@
-# Absorption Rounds
+# 吸收轮次
 
 ## 轮次索引
 
@@ -48,15 +48,15 @@
   - maintenance 轮次，把高流量 aggregate evidence pages 收紧成一致的 dispatcher + object-page 分发骨架，提高 lint 友好度。
 - [Round 23：production-sample augmentation](./round-23-production-sample-augmentation.md)
   - maintenance 轮次，把代表性单月生产样本验证过的 workbook family、业务收集 workbook variants 与 ledger surface 现实回写成受边界控制的对象级证据。
-- [Round 24：reference and backfill pilot](./round-24-reference-backfill-pilot.md)
-  - pilot 轮次，用单一模块试跑 evidence-first 吸收 reference/backfill，并把 prompt / review gate 的收紧经验沉淀下来。
-- [Round 25：identity governance pilot](./round-25-identity-governance-pilot.md)
-  - pilot 轮次，验证 identity 语义页的四层分离写法，并明确 `company_lookup_queue` 与 enterprise persistence 作为两个独立 surface 的治理边界。
-- [Round 26：status and snapshot pilot](./round-26-status-snapshot-pilot.md)
-  - pilot 轮次，验证状态公式记忆、年度生命周期证据与命令运行面三层分离写法，并将未决 runtime 项集中写入 evidence gaps。
-- [Round 27：parallel legacy semantic wave 01](./round-27-parallel-legacy-semantic-wave-01.md)
-  - parallel-wave 轮次，在 controller-owned 集成文件保持集中回写的前提下并行吸收 `M1`、`M2`、`M3`、`M4` 与 `M8`。
+- [Round 24：引用同步与回填语义收紧](./round-24-reference-backfill-pilot.md)
+  - maintenance 轮次，把 `reference_sync` 与 `backfill` 拆成同一 reference strategy 下的两层对象，并补齐四个 domain 的统一入口。
+- [Round 25：身份治理语义分层收紧](./round-25-identity-governance-pilot.md)
+  - maintenance 轮次，把 identity governance 收紧成四层分离表达，并明确 queue surface 与 persistence surface 的独立边界。
+- [Round 26：状态与快照生命周期补强](./round-26-status-snapshot-pilot.md)
+  - maintenance 轮次，为 `customer-mdm` 年度生命周期补齐对象级证据，并把概念层与命令运行面重新分开。
+- [Round 27：legacy 语义补强收口](./round-27-parallel-legacy-semantic-wave-01.md)
+  - maintenance 轮次，对四个高流量 domain 及 shared operator / verification pages 做最后一轮对象级补强与 cross-link 收口。
 
 ## 计划轮次
 
-- 当前无其他 planned round；如需继续推进，应先吸收 Round 24-27 的 pilot / wave 经验，再判断是否需要更多 single-module pilots 或下一轮并行波次。
+- 当前无其他 planned round；如需继续推进，应先按高价值对象页与证据缺口重新排序，而不是继续扩写执行流程材料。

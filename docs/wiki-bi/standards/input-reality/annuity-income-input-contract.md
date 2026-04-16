@@ -53,13 +53,13 @@
   - 不能把 `规模明细` 当作 `annuity_income` 的有效输入 sheet
   - 也不能把 multi-sheet event-domain 经验直接套到本域
 
-## observed production reality
+## 观测到的生产现实
 
 - representative single-month production-sample validation shows the current workbook family contains both `规模明细` and `收入明细` in one physical workbook
 - `annuity_performance` still owns the `规模明细` sheet contract
 - `annuity_income` still owns the `收入明细` sheet contract
 - the shared workbook family strengthens workbook-discovery and explainability understanding, not domain collapse
-- accepted contract 仍然是 `收入明细` sheet，而 shared workbook family 属于 observed production reality
+- accepted contract 仍然是 `收入明细` sheet，而 shared workbook family 属于观测到的生产现实
 
 ## 最小字段骨架
 
@@ -120,7 +120,7 @@
 - 收入数值载荷整体缺失，导致记录不再能表达收入事实
 - 将 synthetic fixture 冒充为 real-data sample
 
-## merge gates（输入合同）
+## 输入合同 gate
 
 - gate-1：source discovery 必须命中 workbook family + `收入明细` sheet
 - gate-2：计划锚点必须存在（`计划号` 或 `计划代码` 至少其一）

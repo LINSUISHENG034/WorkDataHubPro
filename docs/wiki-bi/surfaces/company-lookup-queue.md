@@ -35,22 +35,22 @@ legacy code 进一步说明：
 
 ## 四层分离（queue 专属）
 
-### active runtime path
+### 当前运行路径
 
-- current accepted runtime 中，queue 语义由同步身份主链与 operator-visible unresolved artifacts 替代承接
+- current accepted runtime 中，queue 语义由同步身份主链与面向操作人员可见的 unresolved artifacts 替代承接
 - 因此 queue 在当前属于“治理对象已登记，但 runtime 未复刻”的状态
 
-### compatibility inventory / historical memory
+### 兼容性清单 / 历史记忆
 
 - legacy queue 的 `pending/processing` 去重、retry backoff、graceful degradation、stale-processing reset 均属于历史记忆
 - 这些语义来自 `lookup_queue.py` 与 `enrichment_requests` 持久化约束，应继续保留在 wiki memory 层
 
-### retired fallback behavior
+### 已退休且不得恢复的回退行为
 
 - “默认依赖 queue 才能完成身份治理”这一叙述应视为 retired 假设
 - queue retired 的是 runtime 依赖地位，不是其治理语义本身
 
-### operator-visible consequence
+### 面向操作人员的可见后果
 
 - unresolved identity 仍需对 operator 可见；若不走 queue，需要 artifacts/signal/evidence 明确承接
 - 任何“queue 不在 current runtime，因此无需可见性外显”的写法都属于语义错误
@@ -94,7 +94,7 @@ legacy code 进一步说明：
 - 当前至少不应再被当作“隐含存在，不必登记”的对象
 - unresolved 的 operator consequence 要么进入 artifacts/signal，要么登记在 evidence gap；不能因 queue deferred 而静默消失
 
-## Round 21 决策边界
+## 当前治理边界
 
 - `retain`
   - async lookup runtime 是独立 surface，不是 identity fallback chain 的一个可省略细节
