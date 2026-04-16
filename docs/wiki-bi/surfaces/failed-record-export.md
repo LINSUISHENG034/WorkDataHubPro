@@ -15,6 +15,12 @@ failed-record export 指在验证或处理失败时，把失败记录导出为 o
 - 支持 operator 排查
 - 让验证失败不只停留在日志层
 
+## operator / runtime / verification 合同
+
+- operator 合同：失败导出必须给出可消费记录（至少包含失败原因与定位字段），而不是只给汇总错误数。
+- runtime 合同：失败导出应被视为 failure-path 的稳定输出面；是否同步写出、落盘路径与命名策略属于显式治理项。
+- verification 合同：验证通过不只看“任务失败/成功”，还要检查失败导出 artifact 的可发现性与可追溯性。
+
 ## 为什么它是独立 surface
 
 它不是普通 debug 输出，而是失败处理与可观测性的一部分。
@@ -45,7 +51,8 @@ failed-record export 指在验证或处理失败时，把失败记录导出为 o
 - 当前应视为需要显式判断是否保留的 operator artifact
 - 当前至少应继续在 wiki 中维持其制度记忆，不能因未实现而从治理视野中消失
 
-## 仍未决的问题
+## 当前证据缺口
 
-- 是否必须在 rebuild 中保留等价 artifact
-- 如果保留，最小交付形态是什么
+- rebuild 是否必须保留 domain-agnostic 的 failed-record export contract 仍未闭环
+- 若保留，artifact schema（字段、归档策略、保留期）与最小 operator 消费路径仍未成文
+- 本仓库未包含 legacy `infrastructure/validation/*` 原始实现；当前语义依赖已吸收 audit 证据，原始代码级核验仍待补证

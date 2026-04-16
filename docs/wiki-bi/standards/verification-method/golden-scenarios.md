@@ -32,6 +32,12 @@
 - identity fallback chain 不能只依赖注释或口头记忆
 - legacy-only asset 不应因为 current project 尚未吸收就失去制度记忆
 
+## operator / runtime / verification 治理口径
+
+- operator 口径：golden scenario 需要可执行入口与可复核输出路径，不能只写成抽象 checklist。
+- runtime 口径：scenario 应映射到明确运行链路（identity、reference、publication、artifact visibility），避免只验证 happy path。
+- verification 口径：asset kind 的状态语义必须可判定；`accepted`、`deferred`、`planned`、`retired` 不得混用。
+
 ## 当前资产角色边界
 
 - `golden set`
@@ -79,6 +85,12 @@
 - unresolved-name artifact visibility
 - failed-record artifact visibility
 
+## 最小执行契约
+
+- 每个高风险 scenario 至少绑定一个“输入样本类型 + 目标检查点 + 证据落点”三元组。
+- 若 scenario 依赖 legacy-only 资产，当前标准应明确其状态为治理目标，不得暗示已 repo-native 吸收。
+- 若 scenario 只由 inline tests 覆盖，需在证据页面显式标注其复用边界，避免被误读为 fixture pack。
+
 ## 非例
 
 - 用 replay baseline 代替 golden scenario taxonomy
@@ -97,3 +109,9 @@
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
 - [身份与补查证据](../../evidence/identity-and-lookup-evidence.md)
 - [validation result history 证据](../../evidence/validation-result-history-evidence.md)
+
+## 当前证据缺口
+
+- repo-native `golden_set` / `golden_baseline` 仍未对 accepted slices 形成 admitted 资产闭环
+- `error_case_fixture` 仍是显式 `deferred`；当前主要依赖 inline failure-path 覆盖
+- legacy `dataset_requirements.md` 原始文件在本仓库不可直接读取，scenario taxonomy 的原文级复核仍待补证

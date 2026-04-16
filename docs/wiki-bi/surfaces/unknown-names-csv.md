@@ -31,6 +31,12 @@
 - unresolved identity 需要被显式暴露给 operator
 - 不能只依赖日志或临时推理
 
+## operator / runtime / verification 合同
+
+- operator 合同：unknown-names 导出应提供最小人工处置所需字段，支持后续映射补强与回溯。
+- runtime 合同：unresolved-name visibility 属于 identity chain 的外显出口，不应被 queue / cache / temp-id fallback 语义吞掉。
+- verification 合同：验证需覆盖“未识别名称是否被显式导出”，而不仅是主输出 fact 是否写出。
+
 ## 相关概念
 
 - [企业身份标识：`company_id`](../concepts/company-id.md)
@@ -51,7 +57,8 @@
 - 当前应被视为需要显式治理的 operator artifact
 - 不能因为 replay 路径暂时不产出该 artifact，就假定它没有长期价值
 
-## 仍未决的问题
+## 当前证据缺口
 
-- rebuild 是否保留该 artifact
-- 若保留，是否仍使用 CSV 形态
+- rebuild 是否保留 unknown-names artifact 仍待对象级裁决
+- 若保留，是否固定为 CSV、是否允许等价结构化格式，以及消费接口边界仍未闭环
+- 当前 cross-domain artifact parity 尚未完成；已接受的显式验证主要来自 `annuity_income` 相关证据

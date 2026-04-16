@@ -20,6 +20,7 @@
 | E-SF-010 | current_code | supporting | explicitly_tracked | `company-lookup-queue`, `enterprise-enrichment-persistence` | 2026-04-15 | `src/work_data_hub_pro/capabilities/identity_resolution/service.py` 当前采用 `source_value -> cache_hit -> provider_lookup -> temp_id_fallback` 的同步治理链，且 repo 中不存在 `enrichment_requests`、`enrichment_index`、`base_info` 等 repo-native runtime surface。 |
 | E-SF-011 | current_test | supporting | explicitly_tracked | `company-lookup-queue`, `unknown-names-csv`, `failed-record-export`, `annuity-income` | 2026-04-15 | `tests/integration/test_annuity_income_operator_artifacts.py` 证明 unresolved identity 当前会被外显到 `unknown_names_csv` 与 failed-record artifacts，而不是被当前 repo 的 async lookup queue 吞掉。 |
 | E-SF-012 | current_reference_asset | supporting | explicitly_tracked | `business-collection-ledger-workbook`, `business-collection-workbook-variants-evidence`, `annual-award`, `annual-loss` | 2026-04-15 | representative single-month production-sample validation 显示 business-collection ledger workbook 与相邻 summary workbook 共同构成 `业务收集` workbook family；写回内容仅限 workbook metadata 与 sheet names，raw workbook path 不作为 durable wiki 引用对象。 |
+| E-SF-013 | current_runbook | supporting | explicitly_tracked | `failed-record-export`, `unknown-names-csv`, `customer-mdm-commands` | 2026-04-16 | `docs/runbooks/annuity-income-replay.md` 把 operator artifact visibility 明确写成 replay run 目标之一，说明 artifact 不是实现副作用，而是可验证的运行面义务。 |
 
 ## 本轮已吸收的稳定结论
 
@@ -56,6 +57,13 @@
 - 已经形成稳定独立对象的 surface，应优先分发到对应 surface page，而不是在本页重复承载完整对象叙述。
 - income-specific artifact contract 作为 accepted replacement evidence 保留摘要即可；若 future cross-domain artifact parity 闭环，再考虑独立提升 shared artifact object。
 
+## operator / runtime / verification 治理口径
+
+- operator surface 必须同时回答三个问题：谁触发、输出落到哪里、失败后由谁消费；缺一项即不应宣称“已闭环”。
+- runtime surface 的 retain / replace / defer 必须与 current accepted slices 的真实保护方式一一对应，避免把 legacy breadth 误写成 current active runtime。
+- verification surface 只负责“如何证明”与“证据路径”；不替代 runtime design，也不替代 operator runbook。
+- 聚合页只维护 shared adjudication memory；对象级生命周期决策应落在独立 surface page。
+
 ## Round 21 决策包
 
 | 对象 | retain | replace | defer | retire |
@@ -81,3 +89,4 @@
 - standalone tooling family 已被显式登记，但 retain / retire / defer 边界仍待后续治理决策
 - manual `customer-mdm` commands 虽已显式登记，但每条命令的 retain / replace / retire 边界仍待后续治理决策
 - `业务收集` 目录下相邻 workbook variants 的多月稳定性与最终 surface catalog 仍待更多样本验证
+- 本仓库未携带 legacy `src/work_data_hub/*` 与 `docs/guides/validation/*` 原始路径，当前对 legacy runtime breadth 的表述依赖既有 audit 产物；若后续需要对象级 closure，需补充可复核的原始证据映射

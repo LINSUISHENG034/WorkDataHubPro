@@ -55,8 +55,16 @@
 | comparison-run package schema | current code 已定义固定 package 路径 | current repo 已有 durable package contract，可承接未来 comparison artifacts | 不应被误写成“当前已经有 comparison_runs corpus” |
 | repo-native comparison-run package | 当前缺失 | 仍是未来可吸收对象，而不是既成事实 | 不应因为有 legacy corpus 或 package schema 就被宣称已存在 |
 
+## operator / runtime / verification 治理口径
+
+- result history 属于 verification governance，不替代 runtime contract，也不替代 operator runbook。
+- operator 侧结论必须能回指到具体 comparison package 或 checkpoint baseline；仅保留“通过/失败”口头结论不构成可复核证据。
+- runtime 若发生语义变更，必须在 result history 中留下可追溯差异入口；否则不应宣称“兼容性已被证明”。
+- 聚合页只维护 history 的裁决语义与 provenance 边界；具体 domain 差异应下沉到 domain evidence 或 replay artifacts。
+
 ## 当前证据缺口
 
 - legacy validation result history 仍未形成 current project 的 adjudication-facing durable package
 - `annual_award` / `annual_loss` 的 domain-level golden set 仍是显式 deferred，而不是已物化资产
 - real-data sample 仍是治理目标，但 current repo 尚无 repo-native sample
+- legacy `tests/fixtures/validation_results/` 原始目录在本仓库不可直接读取，当前以 audit 记录作为替代来源；若进入关闭裁决阶段需补充可执行路径级再验证

@@ -29,6 +29,12 @@ real-data validation 至少应满足：
 - 真实运行结果必须可被审阅，而不是只保留口头结论
 - 如果验证依赖 SQL / report / evidence package，这些都属于验证资产的一部分
 
+## operator / runtime / verification 治理口径
+
+- operator 口径：real-data validation 必须可复跑、可审阅、可定位到具体样本与结果包。
+- runtime 口径：real-data 验证覆盖的是运行语义与数据形态，不等同于仅验证 CLI 可执行。
+- verification 口径：当 real-data sample 为 `deferred` 时，必须明确当前验证替代物及其不能覆盖的边界。
+
 ## 当前可接受的资产组合
 
 一次有效的 real-data validation，通常至少需要下面几类资产中的若干项组合：
@@ -47,6 +53,12 @@ real-data validation 至少应满足：
 - 如果当前只能用 synthetic fixture 或 replay baseline 支撑验证，必须明确说明它们没有替代 real-data sample
 - legacy comparison report、JSON diff 与 validation result corpus 可以作为 adjudication input，但它们本身并不等于 current project 已拥有 governed real-data sample
 - 历史 comparison report、JSON diff、parity result 目录属于 validation result history，应作为可复核资产保留
+
+## 最小执行契约
+
+- 一次 real-data validation 需至少包含：样本来源说明、检查清单、结果包路径、差异裁决结论。
+- 若仅执行 replay-backed 验证，报告必须显式写明其不是 full real-data validation。
+- 对 production-sample writeback 的结论必须标注是 accepted contract、observed variant 还是 operator reality。
 
 ## production-sample writeback 规则
 
@@ -73,3 +85,9 @@ real-data validation 至少应满足：
 - [business collection workbook variants 证据](../../evidence/business-collection-workbook-variants-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
 - [validation result history 证据](../../evidence/validation-result-history-evidence.md)
+
+## 当前证据缺口
+
+- accepted slices 仍无 repo-native `real_data_sample` 资产，当前状态应持续标记为 `deferred`
+- legacy `verification_guide_real_data.md` 原始文件在本仓库不可直接读取，操作级核验口径仍依赖 audit 吸收结果
+- legacy result corpus 尚未吸收为 current adjudication-facing durable package，跨轮次 real-data 比较仍缺统一落点

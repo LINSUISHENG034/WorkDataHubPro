@@ -55,6 +55,13 @@
 - 已经形成独立结果历史对象的内容，应优先分发到 [validation result history 证据](./validation-result-history-evidence.md)，而不是在本页重复维护整套 result-history 细节。
 - domain-specific validation memory 只在仍承担治理入口价值时保留摘要；细节应继续下沉到对象级 evidence page 或 slice-specific page。
 
+## operator / runtime / verification 治理口径
+
+- verification assets 的治理对象是“可复核证明路径”，不是“实现细节列表”。
+- operator-facing validation 必须同时声明输入样本类型、检查口径与证据落点；否则只能算执行记录，不能算治理资产。
+- runtime 真实保护面与 asset state 必须一致：`accepted` 需有 repo-native 资产与受测入口；`deferred` 仅表示显式登记，不得推断已存在。
+- 聚合页只承载 state model 与跨域裁决记忆，具体资产的物化/消费方式必须下沉到标准页或对象页。
+
 ## Round 20 裁决表达
 
 | 对象 | manifest 状态 | 当前保护方式 | 当前裁决含义 |
@@ -80,3 +87,4 @@
 - repo-native `golden_set` / `golden_baseline` 仍未被任何 accepted slice admitted；在更宽的 curated scenario pack 成立前，不应回退成“可能已经有”
 - `annuity_income` 的验证资产虽然已有对象级 admission evidence，但 dated parity result history 仍主要停留在 legacy 侧
 - current project 已经有 explicit registry 与 package schema，但仍缺少对 legacy validation result corpus 的 adjudication-facing 吸收
+- 本仓库当前不可直接读取 legacy `dataset_requirements.md` 与 `verification_guide_real_data.md` 原始文件；相关稳定结论基于已吸收 audit 证据，原始路径级再核验仍是待补证事项

@@ -22,6 +22,12 @@
 - 提供 ad hoc EQC 查询与可选 persistence
 - 提供部署打包类 GUI 工具
 
+## operator / runtime / verification 合同
+
+- operator 合同：独立工具的入口、输入前置条件、输出去向必须可查询；否则只能算临时脚本，不应提升为治理 surface。
+- runtime 合同：standalone tooling 默认是“邻接运行面”，不自动并入 domain runtime；是否与主线共享持久化要单独裁决。
+- verification 合同：工具面验证关注可执行性、输出可核查性与边界不越权，而不是追求 domain contract 全覆盖。
+
 ## 为什么它是独立 surface
 
 这些对象并不是普通 helper，因为它们在 unified CLI 中有独立命令入口，且其中一部分有自己的 GUI 应用与 controller。
@@ -50,8 +56,9 @@
 - 不应因为它们不属于主 ETL path，就从 wiki 中完全消失
 - 也不应因为它们有独立 CLI / GUI 入口，就自动假定都要进入 rebuild 核心边界
 
-## 仍未决的问题
+## 当前证据缺口
 
-- `cleanse` 是否属于 rebuild 需要保留的 operator tool
-- EQC GUI 是否应继续承担可选 persistence 角色
-- intranet deployment GUI 是否属于 durable product surface，还是独立 support tooling
+- `cleanse` 的 retain / retire 决策仍未形成对象级 closure
+- EQC GUI 家族是否保留可选 persistence 语义仍未闭环
+- intranet deployment GUI 是否属于 durable product surface 仍待明确
+- 本仓库未携带 legacy `src/work_data_hub/cli/__main__.py` 与 GUI 原始实现；当前对象边界依赖既有 code-audit 证据，原始路径级复核仍待补证
