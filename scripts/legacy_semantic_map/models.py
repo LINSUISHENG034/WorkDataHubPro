@@ -31,6 +31,11 @@ EVIDENCE_STRENGTHS = (
     "supporting",
     "weak",
 )
+CONFIDENCE_LEVELS = (
+    "high",
+    "medium",
+    "low",
+)
 COVERAGE_STATES = (
     "seeded",
     "mapped",
