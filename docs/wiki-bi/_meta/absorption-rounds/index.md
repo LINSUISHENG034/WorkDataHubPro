@@ -54,7 +54,9 @@
   - pilot 轮次，验证 identity 语义页的四层分离写法，并明确 `company_lookup_queue` 与 enterprise persistence 作为两个独立 surface 的治理边界。
 - [Round 26：status and snapshot pilot](./round-26-status-snapshot-pilot.md)
   - pilot 轮次，验证状态公式记忆、年度生命周期证据与命令运行面三层分离写法，并将未决 runtime 项集中写入 evidence gaps。
+- [Round 27：parallel legacy semantic wave 01](./round-27-parallel-legacy-semantic-wave-01.md)
+  - parallel-wave 轮次，在 controller-owned 集成文件保持集中回写的前提下并行吸收 `M1`、`M2`、`M3`、`M4` 与 `M8`。
 
 ## 计划轮次
 
-- 当前无其他 planned round；如需继续推进，应先吸收 Round 24-26 的 pilot 经验，再判断是否需要更多 single-module pilots 或并行波次。
+- 当前无其他 planned round；如需继续推进，应先吸收 Round 24-27 的 pilot / wave 经验，再判断是否需要更多 single-module pilots 或下一轮并行波次。

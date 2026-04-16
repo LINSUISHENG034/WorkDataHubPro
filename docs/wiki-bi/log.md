@@ -3,6 +3,12 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-16 08:43] absorb | Round 27 parallel legacy semantic wave 01
+
+- accepted the three pilot modules as `accepted-pilot`, admitted `M1` / `M2` / `M3` / `M4` / `M8` into Wave 01, and merged all five remaining modules through isolated worktrees
+- kept `index.md` / `log.md` / round notes controller-owned during parallel execution, then wrote the integration closeout centrally after per-module review
+- recorded the reusable wave pattern and the one recurring integration friction point: sibling branches needed quick rebases onto the updated program branch before `--ff-only` merge
+
 ## [2026-04-16 08:14] absorb | Round 26 status and snapshot pilot
 
 - new lifecycle evidence page

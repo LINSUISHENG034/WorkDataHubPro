@@ -188,5 +188,6 @@
 - [Round 24：reference and backfill pilot](./_meta/absorption-rounds/round-24-reference-backfill-pilot.md) : pilot 轮次，用单一 subagent 验证 evidence-first 吸收 reference/backfill 模块并收紧下一轮 prompt / review gate。
 - [Round 25：identity governance pilot](./_meta/absorption-rounds/round-25-identity-governance-pilot.md) : pilot 轮次，验证 identity 语义页面的四层分离写法，并保持 queue surface 与 persistence surface 的明确拆分。
 - [Round 26：status and snapshot pilot](./_meta/absorption-rounds/round-26-status-snapshot-pilot.md) : pilot 轮次，验证状态公式、年度生命周期证据与命令运行面三层分离写法是否稳定。
+- [Round 27：parallel legacy semantic wave 01](./_meta/absorption-rounds/round-27-parallel-legacy-semantic-wave-01.md) : parallel-wave 轮次，在 controller-owned 集成文件保持集中回写的前提下并行吸收剩余五个模块。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。
