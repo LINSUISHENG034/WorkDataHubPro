@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 import json
 from pathlib import Path
 
@@ -238,10 +239,14 @@ def test_compile_claim_artifacts_writes_canonical_registry_files(tmp_path: Path)
     assert candidate_payload["subsystem_candidates"][0]["candidate_id"] == (
         "cand-subsystem-annuity-performance-manual-entry"
     )
+    assert candidate_payload["subsystem_candidates"][0]["priority"] == "high"
 
     manifest = json.loads((registry_root / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["generated_canonical_files"] == sorted(result.written_files)
     assert manifest["compiled_claim_ids"] == result.compiled_claim_ids
+    assert manifest["compiled_claims_by_wave"] == {
+        "wave-2026-04-16-registry-bootstrap": result.compiled_claim_ids
+    }
 
 
 def test_compile_claim_artifacts_rejects_non_claim_paths(tmp_path: Path) -> None:
@@ -253,3 +258,52 @@ def test_compile_claim_artifacts_rejects_non_claim_paths(tmp_path: Path) -> None
 
     with pytest.raises(ValueError, match="must live under claims/"):
         compile_claim_artifacts(registry_root, [rogue_claim])
+
+
+def test_compile_claim_artifacts_preserves_compiled_claims_by_wave_history(tmp_path: Path) -> None:
+    registry_root = tmp_path / "legacy-semantic-map"
+    bootstrap_semantic_map(registry_root)
+
+    first_execution_path = write_claim_artifact(registry_root, _build_execution_claim())
+    compile_claim_artifacts(registry_root, [first_execution_path])
+
+    waves_index = yaml.safe_load((registry_root / "waves" / "index.yaml").read_text(encoding="utf-8"))
+    waves_index["active_wave_id"] = "wave-2026-04-17-reporting"
+    waves_index["waves"].append(
+        {
+            "wave_id": "wave-2026-04-17-reporting",
+            "title": "Reporting",
+            "status": "active",
+            "wave_ordinal": 2,
+            "opened_at": "2026-04-17",
+            "closed_at": None,
+            "seeded_entry_surfaces": ["annuity_performance"],
+            "seeded_high_priority_source_families": ["legacy-domain-capability-maps"],
+            "admitted_subsystems": [],
+            "durable_wiki_targets_accepted": False,
+            "findings_disposition_complete": False,
+            "depends_on_active_wave_working_state": False,
+        }
+    )
+    (registry_root / "waves" / "index.yaml").write_text(
+        yaml.safe_dump(waves_index, sort_keys=False, allow_unicode=False),
+        encoding="utf-8",
+    )
+
+    second_claim = replace(
+        _build_execution_claim(),
+        claim_id="claim-wave-2026-04-17-reporting-annuity-performance-manual-entry",
+        wave_id="wave-2026-04-17-reporting",
+    )
+    second_execution_path = write_claim_artifact(registry_root, second_claim)
+    compile_claim_artifacts(registry_root, [second_execution_path])
+
+    manifest = json.loads((registry_root / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["compiled_claims_by_wave"] == {
+        "wave-2026-04-16-registry-bootstrap": [
+            "claim-wave-2026-04-16-registry-bootstrap-annuity-performance-manual-entry"
+        ],
+        "wave-2026-04-17-reporting": [
+            "claim-wave-2026-04-17-reporting-annuity-performance-manual-entry"
+        ],
+    }

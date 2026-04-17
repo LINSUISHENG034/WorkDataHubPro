@@ -1,3 +1,4 @@
+from .closeout import claim_digests_for_wave, mutable_claim_ids, prior_integrity_report_digests
 from .compiler import CompilationResult, compile_claim_artifacts
 from .claims import (
     CLAIM_SCOPE_DIRECTORIES,
@@ -16,16 +17,20 @@ from .models import (
     CONFIDENCE_LEVELS,
     COVERAGE_STATES,
     EVIDENCE_STRENGTHS,
+    GREEN_OBJECT_EDGE_COVERAGE_THRESHOLD,
+    PRIORITY_LEVELS,
     SEEDED_ENTRY_SURFACES,
     SEEDED_HIGH_PRIORITY_SOURCE_FAMILIES,
     SOURCE_TYPES,
     STATUSES,
     TRIAGE_STATUSES,
+    WAVE_STATUSES,
     WAVE_ID_PATTERN,
     SeededEntrySurface,
     SeededSourceFamily,
     SeededWave,
 )
+from .reporting import ReportGenerationResult, generate_reports
 
 __all__ = [
     "BOOTSTRAP_WAVE",
@@ -49,8 +54,16 @@ __all__ = [
     "WAVE_ID_PATTERN",
     "claim_relative_path",
     "compile_claim_artifacts",
+    "claim_digests_for_wave",
+    "generate_reports",
+    "GREEN_OBJECT_EDGE_COVERAGE_THRESHOLD",
+    "mutable_claim_ids",
+    "PRIORITY_LEVELS",
+    "prior_integrity_report_digests",
+    "ReportGenerationResult",
     "write_claim_artifact",
     "SeededEntrySurface",
     "SeededSourceFamily",
     "SeededWave",
+    "WAVE_STATUSES",
 ]

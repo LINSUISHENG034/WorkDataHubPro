@@ -82,6 +82,8 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
         "execution/stages/.gitkeep",
         "sources/families.yaml",
         "waves/index.yaml",
+        "reports/current/.gitkeep",
+        "reports/waves/wave-2026-04-16-registry-bootstrap/.gitkeep",
         "subsystems/.gitkeep",
         "subsystems/index.yaml",
         "objects/.gitkeep",
@@ -122,6 +124,7 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
     ]
     assert manifest["generated_canonical_files"] == []
     assert manifest["compiled_claim_ids"] == []
+    assert manifest["compiled_claims_by_wave"] == {}
 
     entry_surfaces = yaml.safe_load(
         (registry_root / "execution" / "entry-surfaces.yaml").read_text(encoding="utf-8")
@@ -157,6 +160,7 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
             "wave_id": "wave-2026-04-16-registry-bootstrap",
             "title": "Registry bootstrap",
             "status": "active",
+            "wave_ordinal": 1,
             "seeded_entry_surfaces": [
                 "annuity_performance",
                 "annual_award",
@@ -175,6 +179,9 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
                 "current-replay-and-reference-assets",
             ],
             "admitted_subsystems": [],
+            "durable_wiki_targets_accepted": False,
+            "findings_disposition_complete": False,
+            "depends_on_active_wave_working_state": False,
             "opened_at": "2026-04-16",
             "closed_at": None,
         }

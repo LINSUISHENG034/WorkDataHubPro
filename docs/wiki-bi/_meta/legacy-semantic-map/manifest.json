@@ -6,5 +6,6 @@
     "waves/index.yaml"
   ],
   "generated_canonical_files": [],
-  "compiled_claim_ids": []
+  "compiled_claim_ids": [],
+  "compiled_claims_by_wave": {}
 }

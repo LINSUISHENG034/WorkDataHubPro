@@ -13,6 +13,7 @@ from .models import (
     CONFIDENCE_LEVELS,
     COVERAGE_STATES,
     EVIDENCE_STRENGTHS,
+    PRIORITY_LEVELS,
     SOURCE_TYPES,
     TRIAGE_STATUSES,
     WAVE_ID_PATTERN,
@@ -119,11 +120,13 @@ class ClaimCandidateRecord:
     triage_status: str
     first_seen_wave: str
     last_verified: str
+    priority: str = "high"
 
     def __post_init__(self) -> None:
         _validate_choice("source_type", self.source_type, SOURCE_TYPES)
         _validate_choice("claim_type", self.claim_type, CLAIM_TYPES)
         _validate_choice("confidence", self.confidence, CONFIDENCE_LEVELS)
+        _validate_choice("priority", self.priority, PRIORITY_LEVELS)
         _validate_choice("triage_status", self.triage_status, TRIAGE_STATUSES)
         _validate_pattern("first_seen_wave", self.first_seen_wave, WAVE_ID_PATTERN)
 

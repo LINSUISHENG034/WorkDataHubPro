@@ -63,6 +63,8 @@ def bootstrap_semantic_map(registry_root: Path = DEFAULT_REGISTRY_ROOT) -> Path:
     for relative_dir in (
         "execution/paths",
         "execution/stages",
+        "reports/current",
+        f"reports/waves/{BOOTSTRAP_WAVE.wave_id}",
         "subsystems",
         "objects",
         f"claims/{BOOTSTRAP_WAVE.wave_id}/execution",
@@ -81,6 +83,7 @@ def bootstrap_semantic_map(registry_root: Path = DEFAULT_REGISTRY_ROOT) -> Path:
             "canonical_seed_sources": list(CANONICAL_SEED_SOURCES),
             "generated_canonical_files": [],
             "compiled_claim_ids": [],
+            "compiled_claims_by_wave": {},
         },
     )
     _write_yaml(
