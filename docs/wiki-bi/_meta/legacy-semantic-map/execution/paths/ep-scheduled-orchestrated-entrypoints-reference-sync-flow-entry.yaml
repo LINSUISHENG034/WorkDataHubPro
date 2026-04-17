@@ -1,0 +1,27 @@
+path_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
+entry_surface: scheduled_orchestrated_entrypoints
+domain_or_surface: reference_sync
+stages: []
+touches_subsystems: []
+touches_outputs: []
+branches_to: []
+rebuild_target_boundary: []
+rebuild_capability: []
+governance_relevance: []
+source_refs:
+- docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+- reference/historical_replays/annuity_income/legacy_reference_derivation_2026_03.json
+- src/work_data_hub/orchestration/reference_sync.py.txt
+- src/work_data_hub/reference/reference_sync.py.txt
+source_type: legacy_code
+claim_type: compiled_summary
+evidence_strength: strong
+coverage_state: partial
+confidence: high
+last_verified: '2026-04-17'
+open_questions:
+- Reference sync remains representative-only until a later wave resolves the governance
+  handoff and durable wiki disposition.
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution

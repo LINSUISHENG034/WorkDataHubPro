@@ -1,0 +1,24 @@
+object_id: obj-customer-mdm-lifecycle
+title: Customer MDM lifecycle handoff
+status: active
+object_type: discovered_semantic_object
+summary: Customer MDM remains a representative pilot surface with identity and lifecycle
+  evidence recorded but not fully closed.
+source_refs:
+- src/work_data_hub/cli/customer_mdm.py.txt
+- src/work_data_hub/services/customer_identity.py.txt
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+seen_in_subsystems: []
+related_objects: []
+claim_type: compiled_summary
+source_type: legacy_code
+evidence_strength: strong
+coverage_state: mapped
+confidence: high
+last_verified: '2026-04-17'
+open_questions:
+- Customer MDM remains representative-only until durable wiki absorption decides whether
+  the manual runtime should be retained or deferred.
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object

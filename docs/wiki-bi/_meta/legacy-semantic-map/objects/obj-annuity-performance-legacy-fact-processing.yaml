@@ -1,0 +1,21 @@
+object_id: obj-annuity-performance-legacy-fact-processing
+title: Annuity performance legacy fact processing
+status: active
+object_type: discovered_semantic_object
+summary: Legacy annuity performance processing evidence stays traceable to replay
+  and wiki-bi standards.
+source_refs:
+- docs/domains/annuity_performance-capability-map.md
+- docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
+- reference/historical_replays/annuity_performance/legacy_fact_processing_2026_03.json
+seen_in_subsystems: []
+related_objects: []
+claim_type: compiled_summary
+source_type: legacy_doc
+evidence_strength: strong
+coverage_state: mapped
+confidence: high
+last_verified: '2026-04-17'
+open_questions: []
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-annuity-performance-object

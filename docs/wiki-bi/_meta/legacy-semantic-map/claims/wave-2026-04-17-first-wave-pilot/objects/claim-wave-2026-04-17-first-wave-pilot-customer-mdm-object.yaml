@@ -1,0 +1,43 @@
+claim_id: claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+wave_id: wave-2026-04-17-first-wave-pilot
+claim_scope: objects
+claim_target_id: obj-customer-mdm-lifecycle
+sources_read:
+- source_ref: src/work_data_hub/cli/customer_mdm.py.txt
+  source_type: legacy_code
+  note: Legacy pilot evidence anchors this semantic object.
+- source_ref: src/work_data_hub/services/customer_identity.py.txt
+  source_type: legacy_code
+  note: Legacy pilot evidence anchors this semantic object.
+- source_ref: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  note: Current wiki-bi evidence records the customer lifecycle semantics.
+- source_ref: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: current_wiki
+  note: Current evidence keeps the identity/runtime coupling visible.
+objects_discovered:
+- object_id: obj-customer-mdm-lifecycle
+  title: Customer MDM lifecycle handoff
+  summary: Customer MDM remains a representative pilot surface with identity and lifecycle
+    evidence recorded but not fully closed.
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm.py.txt
+  - src/work_data_hub/services/customer_identity.py.txt
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: legacy_code
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions:
+  - Customer MDM remains representative-only until durable wiki absorption decides
+    whether the manual runtime should be retained or deferred.
+edges_added: []
+candidates_raised: []
+open_questions:
+- Customer MDM remains representative-only until durable wiki absorption decides whether
+  the manual runtime should be retained or deferred.
+compiled_into: []
+submitted_at: '2026-04-17T09:15:00Z'

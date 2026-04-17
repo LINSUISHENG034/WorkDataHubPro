@@ -1,1 +1,15 @@
-objects: []
+objects:
+- object_id: obj-annual-award-legacy-fact-processing
+  path: objects/obj-annual-award-legacy-fact-processing.yaml
+- object_id: obj-annual-loss-legacy-fact-processing
+  path: objects/obj-annual-loss-legacy-fact-processing.yaml
+- object_id: obj-annuity-income-legacy-fact-processing
+  path: objects/obj-annuity-income-legacy-fact-processing.yaml
+- object_id: obj-annuity-performance-legacy-fact-processing
+  path: objects/obj-annuity-performance-legacy-fact-processing.yaml
+- object_id: obj-company-lookup-queue-runtime
+  path: objects/obj-company-lookup-queue-runtime.yaml
+- object_id: obj-customer-mdm-lifecycle
+  path: objects/obj-customer-mdm-lifecycle.yaml
+- object_id: obj-reference-sync-runtime
+  path: objects/obj-reference-sync-runtime.yaml

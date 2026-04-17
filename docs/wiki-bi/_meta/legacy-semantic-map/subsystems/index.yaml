@@ -1,1 +1,9 @@
-subsystems: []
+subsystems:
+- subsystem_id: ss-annual-award
+  path: subsystems/ss-annual-award.yaml
+- subsystem_id: ss-annual-loss
+  path: subsystems/ss-annual-loss.yaml
+- subsystem_id: ss-annuity-income
+  path: subsystems/ss-annuity-income.yaml
+- subsystem_id: ss-annuity-performance
+  path: subsystems/ss-annuity-performance.yaml

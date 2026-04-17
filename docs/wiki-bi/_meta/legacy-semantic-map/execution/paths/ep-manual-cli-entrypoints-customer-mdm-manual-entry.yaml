@@ -1,0 +1,29 @@
+path_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+entry_surface: manual_cli_entrypoints
+domain_or_surface: customer_mdm
+stages: []
+touches_subsystems: []
+touches_outputs: []
+branches_to: []
+rebuild_target_boundary: []
+rebuild_capability: []
+governance_relevance: []
+source_refs:
+- docs/guides/domain-migration/customer-mdm-workflow.md
+- docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+- reference/historical_replays/annual_award/legacy_identity_resolution_2026_03.json
+- src/work_data_hub/cli/customer_mdm.py.txt
+- src/work_data_hub/services/customer_identity.py.txt
+source_type: legacy_doc
+claim_type: compiled_summary
+evidence_strength: strong
+coverage_state: partial
+confidence: high
+last_verified: '2026-04-17'
+open_questions:
+- Customer MDM remains representative-only until durable wiki absorption decides whether
+  the manual runtime should be retained or deferred.
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution

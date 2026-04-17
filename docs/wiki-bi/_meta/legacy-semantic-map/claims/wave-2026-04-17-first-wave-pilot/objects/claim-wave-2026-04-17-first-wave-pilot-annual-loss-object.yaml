@@ -1,0 +1,37 @@
+claim_id: claim-wave-2026-04-17-first-wave-pilot-annual-loss-object
+wave_id: wave-2026-04-17-first-wave-pilot
+claim_scope: objects
+claim_target_id: obj-annual-loss-legacy-fact-processing
+sources_read:
+- source_ref: docs/domains/annual_loss-capability-map.md
+  source_type: legacy_doc
+  note: Legacy pilot evidence anchors this semantic object.
+- source_ref: docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  source_type: current_wiki
+  note: Current wiki-bi evidence preserves the accepted annual loss field-processing
+    semantics.
+- source_ref: reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json
+  source_type: current_reference_asset
+  note: Historical replay output remains the accepted comparison asset for annual
+    loss.
+objects_discovered:
+- object_id: obj-annual-loss-legacy-fact-processing
+  title: Annual loss legacy fact processing
+  summary: Legacy annual loss processing evidence stays grounded in replay outputs
+    and current field-processing evidence.
+  source_refs:
+  - docs/domains/annual_loss-capability-map.md
+  - docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  - reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json
+  source_type: legacy_doc
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into: []
+submitted_at: '2026-04-17T09:15:00Z'

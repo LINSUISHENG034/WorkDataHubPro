@@ -1,1 +1,39 @@
-subsystem_candidates: []
+subsystem_candidates:
+- candidate_id: cand-company-lookup-queue-publication-boundary
+  proposed_name: company-lookup-queue-publication-boundary
+  candidate_type: subsystem
+  reason: Representative pilot coverage surfaced an unresolved publication/runtime
+    boundary that should stay candidate-only for now.
+  trigger_files:
+  - src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  - src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  confidence: medium
+  priority: high
+  triage_status: new
+  first_seen_wave: wave-2026-04-17-first-wave-pilot
+  last_verified: '2026-04-17'
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution
+  discovered_from_claim: claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution
+  discovered_from_subsystem: null
+- candidate_id: cand-customer-mdm-manual-runtime-boundary
+  proposed_name: customer-mdm-manual-runtime
+  candidate_type: subsystem
+  reason: Representative mapping identified a manual-runtime boundary that still needs
+    durable disposition before closure.
+  trigger_files:
+  - src/work_data_hub/cli/customer_mdm.py.txt
+  - src/work_data_hub/services/customer_identity.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  confidence: medium
+  priority: high
+  triage_status: new
+  first_seen_wave: wave-2026-04-17-first-wave-pilot
+  last_verified: '2026-04-17'
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+  discovered_from_claim: claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+  discovered_from_subsystem: null
