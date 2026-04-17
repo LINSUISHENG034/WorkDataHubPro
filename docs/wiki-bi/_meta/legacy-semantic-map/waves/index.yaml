@@ -3,6 +3,7 @@ waves:
 - wave_id: wave-2026-04-16-registry-bootstrap
   title: Registry bootstrap
   status: active
+  wave_ordinal: 1
   opened_at: '2026-04-16'
   seeded_entry_surfaces:
   - annuity_performance
@@ -20,4 +21,7 @@ waves:
   - current-wiki-bi-surfaces
   - current-replay-and-reference-assets
   admitted_subsystems: []
+  durable_wiki_targets_accepted: false
+  findings_disposition_complete: false
+  depends_on_active_wave_working_state: false
   closed_at: null

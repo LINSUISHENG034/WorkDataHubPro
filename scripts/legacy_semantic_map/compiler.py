@@ -113,6 +113,7 @@ def _compiled_candidate_payload(candidate: ClaimCandidateRecord, claim_id: str) 
         "source_type": candidate.source_type,
         "claim_type": "compiled_summary",
         "confidence": candidate.confidence,
+        "priority": candidate.priority,
         "triage_status": candidate.triage_status,
         "first_seen_wave": candidate.first_seen_wave,
         "last_verified": candidate.last_verified,
@@ -130,9 +131,18 @@ def _write_manifest(
     registry_root: Path,
     *,
     compiled_claim_ids: list[str],
+    compiled_claims_by_wave: dict[str, list[str]],
     written_files: list[str],
 ) -> None:
     manifest_path = registry_root / "manifest.json"
+    existing_payload: dict[str, object] = {}
+    if manifest_path.exists():
+        existing_payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    merged_compiled_claims_by_wave = {
+        str(wave_id): sorted(claim_ids)
+        for wave_id, claim_ids in existing_payload.get("compiled_claims_by_wave", {}).items()
+    }
+    merged_compiled_claims_by_wave.update(compiled_claims_by_wave)
     manifest_path.write_text(
         json.dumps(
             {
@@ -140,6 +150,7 @@ def _write_manifest(
                 "canonical_seed_sources": list(CANONICAL_SEED_SOURCES),
                 "generated_canonical_files": written_files,
                 "compiled_claim_ids": compiled_claim_ids,
+                "compiled_claims_by_wave": merged_compiled_claims_by_wave,
             },
             indent=2,
         )
@@ -317,9 +328,17 @@ def compile_claim_artifacts(
 
     written_files = sorted(set(written_files))
     compiled_claim_ids = [claim.claim_id for claim in claims]
+    compiled_claims_by_wave: dict[str, list[str]] = {}
+    for claim in claims:
+        compiled_claims_by_wave.setdefault(claim.wave_id, []).append(claim.claim_id)
+    compiled_claims_by_wave = {
+        wave_id: sorted(claim_ids)
+        for wave_id, claim_ids in sorted(compiled_claims_by_wave.items())
+    }
     _write_manifest(
         registry_root,
         compiled_claim_ids=compiled_claim_ids,
+        compiled_claims_by_wave=compiled_claims_by_wave,
         written_files=written_files,
     )
     return CompilationResult(

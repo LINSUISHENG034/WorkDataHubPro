@@ -19,6 +19,12 @@ def test_semantic_map_repo_docs_are_governed() -> None:
         SEMANTIC_MAP_ROOT / "execution" / "stages" / ".gitkeep",
         SEMANTIC_MAP_ROOT / "sources" / "families.yaml",
         SEMANTIC_MAP_ROOT / "waves" / "index.yaml",
+        SEMANTIC_MAP_ROOT / "reports" / "current" / ".gitkeep",
+        SEMANTIC_MAP_ROOT
+        / "reports"
+        / "waves"
+        / "wave-2026-04-16-registry-bootstrap"
+        / ".gitkeep",
         SEMANTIC_MAP_ROOT / "subsystems" / ".gitkeep",
         SEMANTIC_MAP_ROOT / "subsystems" / "index.yaml",
         SEMANTIC_MAP_ROOT / "objects" / ".gitkeep",
@@ -57,6 +63,7 @@ def test_semantic_map_repo_docs_are_governed() -> None:
     ]
     assert manifest["generated_canonical_files"] == []
     assert manifest["compiled_claim_ids"] == []
+    assert manifest["compiled_claims_by_wave"] == {}
 
     readme_text = (SEMANTIC_MAP_ROOT / "README.md").read_text(encoding="utf-8")
     assert "internal discovery ledger" in readme_text
