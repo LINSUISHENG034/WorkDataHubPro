@@ -26,6 +26,20 @@ SOURCE_TYPES = (
     "current_wiki",
     "current_reference_asset",
 )
+SEMANTIC_NODE_TYPES = (
+    "semantic_concept",
+    "semantic_rule",
+    "semantic_non_equivalence",
+    "semantic_lifecycle",
+    "semantic_fact_family",
+    "semantic_decision_anchor",
+)
+SEMANTIC_AUTHORITIES = (
+    "authoritative_semantic_source",
+    "runtime_witness",
+    "implementation_hint",
+    "historical_context",
+)
 EVIDENCE_STRENGTHS = (
     "strong",
     "supporting",

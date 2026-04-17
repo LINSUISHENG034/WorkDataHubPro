@@ -98,6 +98,7 @@ def test_claim_artifact_contract_and_relative_path_shape() -> None:
         "execution": "execution",
         "subsystems": "subsystems",
         "objects": "objects",
+        "semantic": "semantic",
     }
 
     assert claim_relative_path(claim) == Path(

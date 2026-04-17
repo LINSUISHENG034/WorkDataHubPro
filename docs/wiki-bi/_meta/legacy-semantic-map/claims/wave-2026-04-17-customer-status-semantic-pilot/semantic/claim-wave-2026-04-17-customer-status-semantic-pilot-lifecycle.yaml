@@ -1,0 +1,57 @@
+claim_id: claim-wave-2026-04-17-customer-status-semantic-pilot-lifecycle
+wave_id: wave-2026-04-17-customer-status-semantic-pilot
+claim_scope: semantic
+claim_target_id: sem-lifecycle-customer-status-yearly-cycle
+sources_read:
+- source_ref: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  note: Current lifecycle evidence page already preserves the stable lifecycle action split.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  note: Legacy contract sync implementation witnesses sync semantics and yearly identity anchoring.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/contract_sync.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/snapshot_refresh.py
+  source_type: legacy_code
+  note: Legacy snapshot refresh implementation witnesses snapshot-layer semantics.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/snapshot_refresh.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/etl/hooks.py
+  source_type: legacy_code
+  note: Legacy ETL hook wiring witnesses automatic lifecycle transitions.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/etl/hooks.py
+  semantic_authority: implementation_hint
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+semantic_findings:
+- semantic_id: sem-lifecycle-customer-status-yearly-cycle
+  semantic_node_type: semantic_lifecycle
+  title: Customer-status yearly lifecycle
+  summary: The yearly customer-status lifecycle is composed of distinct yearly-init, sync, and snapshot actions.
+  business_conclusion: yearly-init, sync, and snapshot are distinct lifecycle actions and should not be collapsed into one status operation.
+  primary_source_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  supporting_source_refs:
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  - src/work_data_hub/customer_mdm/snapshot_refresh.py
+  - src/work_data_hub/cli/etl/hooks.py
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  non_equivalent_to: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+submitted_at: '2026-04-17T13:20:00Z'

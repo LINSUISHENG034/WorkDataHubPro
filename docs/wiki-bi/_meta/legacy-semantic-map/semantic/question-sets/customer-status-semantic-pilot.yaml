@@ -1,0 +1,29 @@
+question_set_id: customer-status-semantic-pilot
+title: Customer status semantic pilot
+required_question_ids:
+- q-customer-status-concept
+- q-customer-master-backfill-concept
+- q-is-new-definition-rule
+- q-status-source-splitting-rule
+- q-customer-master-vs-status-non-equivalence
+- q-customer-type-vs-is-new-non-equivalence
+- q-customer-status-lifecycle
+- q-customer-status-fact-family
+- q-customer-status-decision-anchor
+required_semantic_node_ids:
+- sem-concept-customer-status
+- sem-concept-customer-master-backfill
+- sem-rule-is-new-definition
+- sem-rule-status-source-splitting
+- sem-non-equivalence-customer-master-vs-status
+- sem-non-equivalence-customer-type-vs-is-new
+- sem-lifecycle-customer-status-yearly-cycle
+- sem-fact-family-customer-status-source-family
+- sem-decision-anchor-customer-status-rules
+required_non_equivalence_ids:
+- sem-non-equivalence-customer-master-vs-status
+- sem-non-equivalence-customer-type-vs-is-new
+durable_target_pages:
+- docs/wiki-bi/concepts/customer-status.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
