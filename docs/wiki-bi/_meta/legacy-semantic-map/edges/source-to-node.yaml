@@ -1,1 +1,1079 @@
-edges: []
+edges:
+- from_id: docs/domains/annual_award-capability-map.md
+  to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annual_award-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-execution
+- from_id: docs/domains/annual_award-capability-map.md
+  to_id: obj-annual-award-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annual_award-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-object
+- from_id: docs/domains/annual_award-capability-map.md
+  to_id: ss-annual-award
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annual_award-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-subsystem
+- from_id: docs/domains/annual_loss-capability-map.md
+  to_id: ep-manual-cli-entrypoints-annual-loss-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annual_loss-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-execution
+- from_id: docs/domains/annual_loss-capability-map.md
+  to_id: obj-annual-loss-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annual_loss-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-object
+- from_id: docs/domains/annual_loss-capability-map.md
+  to_id: ss-annual-loss
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annual_loss-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-subsystem
+- from_id: docs/domains/annuity_income-capability-map.md
+  to_id: ep-manual-cli-entrypoints-annuity-income-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-execution
+- from_id: docs/domains/annuity_income-capability-map.md
+  to_id: obj-annuity-income-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-object
+- from_id: docs/domains/annuity_income-capability-map.md
+  to_id: ss-annuity-income
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-subsystem
+- from_id: docs/domains/annuity_performance-capability-map.md
+  to_id: ep-manual-cli-entrypoints-annuity-performance-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annuity_performance-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution
+- from_id: docs/domains/annuity_performance-capability-map.md
+  to_id: obj-annuity-performance-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annuity_performance-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-object
+- from_id: docs/domains/annuity_performance-capability-map.md
+  to_id: ss-annuity-performance
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annuity_performance-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-subsystem
+- from_id: docs/guides/domain-migration/annual-award.md
+  to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/domain-migration/annual-award.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-execution
+- from_id: docs/guides/domain-migration/annual-loss.md
+  to_id: ep-manual-cli-entrypoints-annual-loss-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/domain-migration/annual-loss.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-execution
+- from_id: docs/guides/domain-migration/annuity-income.md
+  to_id: ep-manual-cli-entrypoints-annuity-income-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/domain-migration/annuity-income.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-execution
+- from_id: docs/guides/domain-migration/annuity-performance.md
+  to_id: ep-manual-cli-entrypoints-annuity-performance-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/domain-migration/annuity-performance.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution
+- from_id: docs/guides/domain-migration/customer-mdm-workflow.md
+  to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/domain-migration/customer-mdm-workflow.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: docs/runbooks/annual-award-replay.md
+  to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/runbooks/annual-award-replay.md
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-execution
+- from_id: docs/runbooks/annual-loss-replay.md
+  to_id: ep-manual-cli-entrypoints-annual-loss-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/runbooks/annual-loss-replay.md
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-execution
+- from_id: docs/runbooks/annuity-income-replay.md
+  to_id: ep-manual-cli-entrypoints-annuity-income-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/runbooks/annuity-income-replay.md
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-execution
+- from_id: docs/runbooks/annuity-performance-replay.md
+  to_id: ep-manual-cli-entrypoints-annuity-performance-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/runbooks/annuity-performance-replay.md
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-execution
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ep-manual-cli-entrypoints-annual-loss-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-execution
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ep-manual-cli-entrypoints-annuity-income-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-execution
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ep-manual-cli-entrypoints-annuity-performance-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ss-annual-award
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-subsystem
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ss-annual-loss
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-subsystem
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ss-annuity-income
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-subsystem
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: ss-annuity-performance
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-subsystem
+- from_id: docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-execution
+- from_id: docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  to_id: obj-annual-award-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-object
+- from_id: docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  to_id: ss-annual-award
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-subsystem
+- from_id: docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  to_id: ep-manual-cli-entrypoints-annual-loss-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-execution
+- from_id: docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  to_id: obj-annual-loss-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-object
+- from_id: docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  to_id: ss-annual-loss
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-subsystem
+- from_id: docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+  to_id: ep-manual-cli-entrypoints-annuity-income-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-execution
+- from_id: docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+  to_id: obj-annuity-income-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-object
+- from_id: docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+  to_id: ss-annuity-income
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-subsystem
+- from_id: docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
+  to_id: ep-manual-cli-entrypoints-annuity-performance-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution
+- from_id: docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
+  to_id: obj-annuity-performance-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-object
+- from_id: docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
+  to_id: ss-annuity-performance
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-subsystem
+- from_id: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  to_id: obj-customer-mdm-lifecycle
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  to_id: obj-customer-mdm-lifecycle
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  to_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution
+- from_id: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  to_id: obj-company-lookup-queue-runtime
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object
+- from_id: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  to_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution
+- from_id: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  to_id: obj-reference-sync-runtime
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-reference-sync-object
+- from_id: reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json
+  to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-execution
+- from_id: reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json
+  to_id: obj-annual-award-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-object
+- from_id: reference/historical_replays/annual_award/legacy_identity_resolution_2026_03.json
+  to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annual_award/legacy_identity_resolution_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json
+  to_id: ep-manual-cli-entrypoints-annual-loss-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-execution
+- from_id: reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json
+  to_id: obj-annual-loss-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-object
+- from_id: reference/historical_replays/annuity_income/legacy_fact_processing_2026_03.json
+  to_id: ep-manual-cli-entrypoints-annuity-income-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annuity_income/legacy_fact_processing_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-execution
+- from_id: reference/historical_replays/annuity_income/legacy_fact_processing_2026_03.json
+  to_id: obj-annuity-income-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annuity_income/legacy_fact_processing_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-object
+- from_id: reference/historical_replays/annuity_income/legacy_reference_derivation_2026_03.json
+  to_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annuity_income/legacy_reference_derivation_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution
+- from_id: reference/historical_replays/annuity_income/legacy_reference_derivation_2026_03.json
+  to_id: obj-reference-sync-runtime
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annuity_income/legacy_reference_derivation_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-reference-sync-object
+- from_id: reference/historical_replays/annuity_performance/legacy_fact_processing_2026_03.json
+  to_id: ep-manual-cli-entrypoints-annuity-performance-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annuity_performance/legacy_fact_processing_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution
+- from_id: reference/historical_replays/annuity_performance/legacy_fact_processing_2026_03.json
+  to_id: obj-annuity-performance-legacy-fact-processing
+  relationship: supports_claim_target
+  source_refs:
+  - reference/historical_replays/annuity_performance/legacy_fact_processing_2026_03.json
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-object
+- from_id: src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  to_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution
+- from_id: src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  to_id: obj-company-lookup-queue-runtime
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object
+- from_id: src/work_data_hub/cli/customer_mdm.py.txt
+  to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: src/work_data_hub/cli/customer_mdm.py.txt
+  to_id: obj-customer-mdm-lifecycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  to_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution
+- from_id: src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  to_id: obj-company-lookup-queue-runtime
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object
+- from_id: src/work_data_hub/orchestration/reference_sync.py.txt
+  to_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/reference_sync.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution
+- from_id: src/work_data_hub/orchestration/reference_sync.py.txt
+  to_id: obj-reference-sync-runtime
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/reference_sync.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-reference-sync-object
+- from_id: src/work_data_hub/reference/reference_sync.py.txt
+  to_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/reference/reference_sync.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution
+- from_id: src/work_data_hub/reference/reference_sync.py.txt
+  to_id: obj-reference-sync-runtime
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/reference/reference_sync.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-reference-sync-object
+- from_id: src/work_data_hub/services/customer_identity.py.txt
+  to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/services/customer_identity.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: src/work_data_hub/services/customer_identity.py.txt
+  to_id: obj-customer-mdm-lifecycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/services/customer_identity.py.txt
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: tests/replay/test_phase2_reference_derivation_gates.py
+  to_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
+  relationship: supports_claim_target
+  source_refs:
+  - tests/replay/test_phase2_reference_derivation_gates.py
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution
+- from_id: tests/replay/test_phase2_reference_derivation_gates.py
+  to_id: obj-company-lookup-queue-runtime
+  relationship: supports_claim_target
+  source_refs:
+  - tests/replay/test_phase2_reference_derivation_gates.py
+  source_type: current_reference_asset
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object

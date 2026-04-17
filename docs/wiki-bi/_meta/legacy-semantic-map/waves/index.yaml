@@ -1,8 +1,8 @@
-active_wave_id: wave-2026-04-16-registry-bootstrap
+active_wave_id: wave-2026-04-17-first-wave-pilot
 waves:
 - wave_id: wave-2026-04-16-registry-bootstrap
   title: Registry bootstrap
-  status: active
+  status: closed
   wave_ordinal: 1
   opened_at: '2026-04-16'
   seeded_entry_surfaces:
@@ -24,4 +24,44 @@ waves:
   durable_wiki_targets_accepted: false
   findings_disposition_complete: false
   depends_on_active_wave_working_state: false
+  closed_at: '2026-04-17'
+- wave_id: wave-2026-04-17-first-wave-pilot
+  title: First-wave pilot
+  status: active
+  wave_ordinal: 2
+  opened_at: '2026-04-17'
+  seeded_entry_surfaces:
+  - annuity_performance
+  - annual_award
+  - annual_loss
+  - annuity_income
+  - customer_mdm
+  - company_lookup_queue
+  - reference_sync
+  seeded_high_priority_source_families:
+  - legacy-domain-capability-maps
+  - legacy-operator-runtime-surfaces
+  - legacy-identity-and-reference-runtime
+  - current-first-wave-governance-specs
+  - current-wiki-bi-surfaces
+  - current-replay-and-reference-assets
+  admitted_subsystems:
+  - ss-annuity-performance
+  - ss-annual-award
+  - ss-annual-loss
+  - ss-annuity-income
+  durable_wiki_targets_accepted: false
+  findings_disposition_complete: false
+  depends_on_active_wave_working_state: false
   closed_at: null
+  pilot_depth_tiers:
+    tier_a:
+    - annuity_performance
+    - annual_award
+    - annual_loss
+    - annuity_income
+    tier_b:
+    - customer_mdm
+    - company_lookup_queue
+    - reference_sync
+  pilot_execution_note: docs/runbooks/legacy-semantic-map-first-wave-pilot.md

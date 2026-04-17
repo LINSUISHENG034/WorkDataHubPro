@@ -1,0 +1,29 @@
+subsystem_id: ss-annuity-income
+title: Annuity Income
+status: active
+semantic_scope: Compiled subsystem summary for ss-annuity-income.
+source_families: []
+primary_sources:
+- docs/domains/annuity_income-capability-map.md
+- docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+- docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+secondary_sources: []
+execution_nodes: []
+owned_surfaces: []
+owned_outputs: []
+discovered_objects:
+- obj-annuity-income-legacy-fact-processing
+candidate_objects: []
+candidate_subsystems: []
+upstream_dependencies: []
+downstream_dependencies: []
+claim_type: compiled_summary
+source_type: legacy_doc
+evidence_strength: strong
+coverage_state: partial
+open_questions: []
+confidence: high
+last_verified: '2026-04-17'
+last_audited_at: '2026-04-17T09:30:00Z'
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-annuity-income-subsystem

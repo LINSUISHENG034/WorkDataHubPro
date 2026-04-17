@@ -1,0 +1,44 @@
+claim_id: claim-wave-2026-04-17-first-wave-pilot-reference-sync-object
+wave_id: wave-2026-04-17-first-wave-pilot
+claim_scope: objects
+claim_target_id: obj-reference-sync-runtime
+sources_read:
+- source_ref: src/work_data_hub/orchestration/reference_sync.py.txt
+  source_type: legacy_code
+  note: Legacy pilot evidence anchors this semantic object.
+- source_ref: src/work_data_hub/reference/reference_sync.py.txt
+  source_type: legacy_code
+  note: Legacy pilot evidence anchors this semantic object.
+- source_ref: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  source_type: current_wiki
+  note: Current wiki-bi evidence preserves the reference and backfill semantics.
+- source_ref: reference/historical_replays/annuity_income/legacy_reference_derivation_2026_03.json
+  source_type: current_reference_asset
+  note: Historical reference-derivation output remains the accepted comparison asset
+    for representative reference sync mapping.
+objects_discovered:
+- object_id: obj-reference-sync-runtime
+  title: Reference sync runtime handoff
+  summary: Reference sync remains representative-only while boundary and governance
+    decisions stay open for future waves.
+  source_refs:
+  - src/work_data_hub/orchestration/reference_sync.py.txt
+  - src/work_data_hub/reference/reference_sync.py.txt
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  - reference/historical_replays/annuity_income/legacy_reference_derivation_2026_03.json
+  source_type: legacy_code
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions:
+  - Reference sync remains representative-only until a later wave resolves the governance
+    handoff and durable wiki disposition.
+edges_added: []
+candidates_raised: []
+open_questions:
+- Reference sync remains representative-only until a later wave resolves the governance
+  handoff and durable wiki disposition.
+compiled_into: []
+submitted_at: '2026-04-17T09:15:00Z'

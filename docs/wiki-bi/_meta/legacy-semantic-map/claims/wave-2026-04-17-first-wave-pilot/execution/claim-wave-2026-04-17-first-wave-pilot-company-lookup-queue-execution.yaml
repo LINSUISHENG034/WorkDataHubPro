@@ -1,0 +1,82 @@
+claim_id: claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution
+wave_id: wave-2026-04-17-first-wave-pilot
+claim_scope: execution
+claim_target_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
+sources_read:
+- source_ref: src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  source_type: legacy_code
+  note: Legacy orchestration snapshot captures the company lookup queue surface.
+- source_ref: src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  source_type: legacy_code
+  note: Legacy backfill snapshot captures the downstream queue recovery path.
+- source_ref: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  note: Coverage matrix keeps company lookup queue inside the representative pilot
+    denominator.
+- source_ref: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  note: Current operator evidence keeps the queue surface visible without forcing
+    closure.
+- source_ref: tests/replay/test_phase2_reference_derivation_gates.py
+  source_type: current_reference_asset
+  note: Replay gate coverage remains an accepted current reference asset around the
+    queue-adjacent path.
+objects_discovered:
+- object_id: obj-company-lookup-queue-runtime
+  title: Company lookup queue runtime boundary
+  summary: Company lookup queue remains representative-only while operator/runtime
+    boundaries stay open for later waves.
+  source_refs:
+  - src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  - src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  - tests/replay/test_phase2_reference_derivation_gates.py
+  source_type: legacy_code
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions:
+  - Company lookup queue stays representative-only until a later wave decides whether
+    the runtime boundary belongs in durable publication guidance.
+edges_added:
+- from_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
+  to_id: obj-company-lookup-queue-runtime
+  relationship: discovers_object
+  source_refs:
+  - src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  - src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  - tests/replay/test_phase2_reference_derivation_gates.py
+  source_type: legacy_code
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions:
+  - Company lookup queue stays representative-only until a later wave decides whether
+    the runtime boundary belongs in durable publication guidance.
+candidates_raised:
+- candidate_id: cand-company-lookup-queue-publication-boundary
+  candidate_type: subsystem
+  proposed_name: company-lookup-queue-publication-boundary
+  reason: Representative pilot coverage surfaced an unresolved publication/runtime
+    boundary that should stay candidate-only for now.
+  trigger_files:
+  - src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  - src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  source_type: legacy_code
+  claim_type: open_question
+  confidence: medium
+  triage_status: new
+  first_seen_wave: wave-2026-04-17-first-wave-pilot
+  last_verified: '2026-04-17'
+  priority: high
+open_questions:
+- Company lookup queue stays representative-only until a later wave decides whether
+  the runtime boundary belongs in durable publication guidance.
+compiled_into: []
+submitted_at: '2026-04-17T09:00:00Z'

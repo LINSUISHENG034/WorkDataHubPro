@@ -1,1 +1,65 @@
-edges: []
+edges:
+- from_id: ss-annual-award
+  to_id: obj-annual-award-legacy-fact-processing
+  relationship: owns_object
+  source_refs:
+  - docs/domains/annual_award-capability-map.md
+  - docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-subsystem
+- from_id: ss-annual-loss
+  to_id: obj-annual-loss-legacy-fact-processing
+  relationship: owns_object
+  source_refs:
+  - docs/domains/annual_loss-capability-map.md
+  - docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-subsystem
+- from_id: ss-annuity-income
+  to_id: obj-annuity-income-legacy-fact-processing
+  relationship: owns_object
+  source_refs:
+  - docs/domains/annuity_income-capability-map.md
+  - docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-subsystem
+- from_id: ss-annuity-performance
+  to_id: obj-annuity-performance-legacy-fact-processing
+  relationship: owns_object
+  source_refs:
+  - docs/domains/annuity_performance-capability-map.md
+  - docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-subsystem

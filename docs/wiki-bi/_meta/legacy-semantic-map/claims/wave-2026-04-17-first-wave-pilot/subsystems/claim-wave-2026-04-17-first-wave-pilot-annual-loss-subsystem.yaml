@@ -1,0 +1,50 @@
+claim_id: claim-wave-2026-04-17-first-wave-pilot-annual-loss-subsystem
+wave_id: wave-2026-04-17-first-wave-pilot
+claim_scope: subsystems
+claim_target_id: ss-annual-loss
+sources_read:
+- source_ref: docs/domains/annual_loss-capability-map.md
+  source_type: legacy_doc
+  note: Legacy capability map captures the annual loss surface.
+- source_ref: docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  source_type: current_wiki
+  note: Current wiki-bi evidence preserves the accepted annual loss field-processing
+    semantics.
+- source_ref: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  note: Coverage matrix admits annual loss into the first-wave pilot denominator.
+objects_discovered:
+- object_id: obj-annual-loss-legacy-fact-processing
+  title: Annual loss legacy fact processing
+  summary: Legacy annual loss processing evidence stays grounded in replay outputs
+    and current field-processing evidence.
+  source_refs:
+  - docs/domains/annual_loss-capability-map.md
+  - docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  - reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json
+  source_type: legacy_doc
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+edges_added:
+- from_id: ss-annual-loss
+  to_id: obj-annual-loss-legacy-fact-processing
+  relationship: owns_object
+  source_refs:
+  - docs/domains/annual_loss-capability-map.md
+  - docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: legacy_doc
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+candidates_raised: []
+open_questions: []
+compiled_into: []
+submitted_at: '2026-04-17T09:30:00Z'

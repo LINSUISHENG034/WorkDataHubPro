@@ -1,1 +1,77 @@
-edges: []
+edges:
+- from_id: ep-manual-cli-entrypoints-annual-award-manual-entry
+  to_id: ss-annual-award
+  relationship: touches_subsystem
+  source_refs:
+  - docs/domains/annual_award-capability-map.md
+  - docs/guides/domain-migration/annual-award.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  - docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  - reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json
+  - docs/runbooks/annual-award-replay.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-award-execution
+- from_id: ep-manual-cli-entrypoints-annual-loss-manual-entry
+  to_id: ss-annual-loss
+  relationship: touches_subsystem
+  source_refs:
+  - docs/domains/annual_loss-capability-map.md
+  - docs/guides/domain-migration/annual-loss.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  - docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  - reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json
+  - docs/runbooks/annual-loss-replay.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annual-loss-execution
+- from_id: ep-manual-cli-entrypoints-annuity-income-manual-entry
+  to_id: ss-annuity-income
+  relationship: touches_subsystem
+  source_refs:
+  - docs/domains/annuity_income-capability-map.md
+  - docs/guides/domain-migration/annuity-income.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  - docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+  - reference/historical_replays/annuity_income/legacy_fact_processing_2026_03.json
+  - docs/runbooks/annuity-income-replay.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-income-execution
+- from_id: ep-manual-cli-entrypoints-annuity-performance-manual-entry
+  to_id: ss-annuity-performance
+  relationship: touches_subsystem
+  source_refs:
+  - docs/domains/annuity_performance-capability-map.md
+  - docs/guides/domain-migration/annuity-performance.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  - docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
+  - reference/historical_replays/annuity_performance/legacy_fact_processing_2026_03.json
+  - docs/runbooks/annuity-performance-replay.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution

@@ -1,0 +1,26 @@
+path_id: ep-manual-cli-entrypoints-annuity-income-manual-entry
+entry_surface: manual_cli_entrypoints
+domain_or_surface: annuity_income
+stages: []
+touches_subsystems: []
+touches_outputs: []
+branches_to: []
+rebuild_target_boundary: []
+rebuild_capability: []
+governance_relevance: []
+source_refs:
+- docs/domains/annuity_income-capability-map.md
+- docs/guides/domain-migration/annuity-income.md
+- docs/runbooks/annuity-income-replay.md
+- docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+- docs/wiki-bi/evidence/annuity-income-field-processing-evidence.md
+- reference/historical_replays/annuity_income/legacy_fact_processing_2026_03.json
+source_type: legacy_doc
+claim_type: compiled_summary
+evidence_strength: strong
+coverage_state: partial
+confidence: high
+last_verified: '2026-04-17'
+open_questions: []
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-annuity-income-execution

@@ -1,0 +1,20 @@
+{
+  "wave_id": "wave-2026-04-17-first-wave-pilot",
+  "wave_status": "green",
+  "entrypoint_coverage_pct": 100.0,
+  "high_priority_source_family_coverage_pct": 100.0,
+  "object_edge_coverage_pct": 100.0,
+  "orphan_high_priority_source_count": 0,
+  "stale_high_priority_candidate_count": 0,
+  "untriaged_candidate_age_by_wave": {
+    "max": 0,
+    "count_gt_0": 0,
+    "count_gt_1": 0,
+    "by_candidate": {
+      "cand-company-lookup-queue-publication-boundary": 0,
+      "cand-customer-mdm-manual-runtime-boundary": 0,
+      "cand-reference-sync-governance-bridge": 0
+    }
+  },
+  "generated_at": "2026-04-17T09:30:00Z"
+}

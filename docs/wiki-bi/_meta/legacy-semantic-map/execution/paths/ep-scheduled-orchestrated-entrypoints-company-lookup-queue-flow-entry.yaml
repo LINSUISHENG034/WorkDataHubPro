@@ -1,0 +1,27 @@
+path_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
+entry_surface: scheduled_orchestrated_entrypoints
+domain_or_surface: company_lookup_queue
+stages: []
+touches_subsystems: []
+touches_outputs: []
+branches_to: []
+rebuild_target_boundary: []
+rebuild_capability: []
+governance_relevance: []
+source_refs:
+- docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
+- src/work_data_hub/backfill/company_lookup_backfill.py.txt
+- src/work_data_hub/orchestration/company_lookup_queue.py.txt
+- tests/replay/test_phase2_reference_derivation_gates.py
+source_type: legacy_code
+claim_type: compiled_summary
+evidence_strength: strong
+coverage_state: partial
+confidence: high
+last_verified: '2026-04-17'
+open_questions:
+- Company lookup queue stays representative-only until a later wave decides whether
+  the runtime boundary belongs in durable publication guidance.
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution

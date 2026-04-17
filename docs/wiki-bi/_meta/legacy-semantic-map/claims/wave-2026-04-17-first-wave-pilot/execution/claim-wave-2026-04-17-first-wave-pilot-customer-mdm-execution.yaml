@@ -1,0 +1,89 @@
+claim_id: claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+wave_id: wave-2026-04-17-first-wave-pilot
+claim_scope: execution
+claim_target_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+sources_read:
+- source_ref: docs/guides/domain-migration/customer-mdm-workflow.md
+  source_type: legacy_doc
+  note: Legacy migration note records the manual customer MDM workflow.
+- source_ref: src/work_data_hub/cli/customer_mdm.py.txt
+  source_type: legacy_code
+  note: Legacy CLI snapshot captures the manual customer MDM entry surface.
+- source_ref: src/work_data_hub/services/customer_identity.py.txt
+  source_type: legacy_code
+  note: Legacy identity service snapshot captures the runtime boundary behind customer
+    MDM.
+- source_ref: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  note: Coverage matrix keeps customer MDM inside the representative pilot denominator.
+- source_ref: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  note: Current wiki-bi evidence records the customer lifecycle semantics.
+- source_ref: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: current_wiki
+  note: Current evidence keeps the identity/runtime coupling visible.
+- source_ref: reference/historical_replays/annual_award/legacy_identity_resolution_2026_03.json
+  source_type: current_reference_asset
+  note: Historical identity-resolution output remains the accepted comparison asset
+    for representative customer MDM mapping.
+objects_discovered:
+- object_id: obj-customer-mdm-lifecycle
+  title: Customer MDM lifecycle handoff
+  summary: Customer MDM remains a representative pilot surface with identity and lifecycle
+    evidence recorded but not fully closed.
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm.py.txt
+  - src/work_data_hub/services/customer_identity.py.txt
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: legacy_code
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions:
+  - Customer MDM remains representative-only until durable wiki absorption decides
+    whether the manual runtime should be retained or deferred.
+edges_added:
+- from_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
+  to_id: obj-customer-mdm-lifecycle
+  relationship: discovers_object
+  source_refs:
+  - docs/guides/domain-migration/customer-mdm-workflow.md
+  - src/work_data_hub/cli/customer_mdm.py.txt
+  - src/work_data_hub/services/customer_identity.py.txt
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  - reference/historical_replays/annual_award/legacy_identity_resolution_2026_03.json
+  source_type: legacy_doc
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions:
+  - Customer MDM remains representative-only until durable wiki absorption decides
+    whether the manual runtime should be retained or deferred.
+candidates_raised:
+- candidate_id: cand-customer-mdm-manual-runtime-boundary
+  candidate_type: subsystem
+  proposed_name: customer-mdm-manual-runtime
+  reason: Representative mapping identified a manual-runtime boundary that still needs
+    durable disposition before closure.
+  trigger_files:
+  - src/work_data_hub/cli/customer_mdm.py.txt
+  - src/work_data_hub/services/customer_identity.py.txt
+  source_type: legacy_code
+  claim_type: open_question
+  confidence: medium
+  triage_status: new
+  first_seen_wave: wave-2026-04-17-first-wave-pilot
+  last_verified: '2026-04-17'
+  priority: high
+open_questions:
+- Customer MDM remains representative-only until durable wiki absorption decides whether
+  the manual runtime should be retained or deferred.
+compiled_into: []
+submitted_at: '2026-04-17T09:00:00Z'

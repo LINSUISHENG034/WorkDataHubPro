@@ -1,0 +1,26 @@
+path_id: ep-manual-cli-entrypoints-annual-award-manual-entry
+entry_surface: manual_cli_entrypoints
+domain_or_surface: annual_award
+stages: []
+touches_subsystems: []
+touches_outputs: []
+branches_to: []
+rebuild_target_boundary: []
+rebuild_capability: []
+governance_relevance: []
+source_refs:
+- docs/domains/annual_award-capability-map.md
+- docs/guides/domain-migration/annual-award.md
+- docs/runbooks/annual-award-replay.md
+- docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+- docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+- reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json
+source_type: legacy_doc
+claim_type: compiled_summary
+evidence_strength: strong
+coverage_state: partial
+confidence: high
+last_verified: '2026-04-17'
+open_questions: []
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-annual-award-execution

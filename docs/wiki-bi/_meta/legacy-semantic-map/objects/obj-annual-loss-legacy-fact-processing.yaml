@@ -1,0 +1,21 @@
+object_id: obj-annual-loss-legacy-fact-processing
+title: Annual loss legacy fact processing
+status: active
+object_type: discovered_semantic_object
+summary: Legacy annual loss processing evidence stays grounded in replay outputs and
+  current field-processing evidence.
+source_refs:
+- docs/domains/annual_loss-capability-map.md
+- docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+- reference/historical_replays/annual_loss/legacy_fact_processing_2026_03.json
+seen_in_subsystems: []
+related_objects: []
+claim_type: compiled_summary
+source_type: legacy_doc
+evidence_strength: strong
+coverage_state: mapped
+confidence: high
+last_verified: '2026-04-17'
+open_questions: []
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-annual-loss-object

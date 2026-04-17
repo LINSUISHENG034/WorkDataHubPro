@@ -1,0 +1,29 @@
+subsystem_id: ss-annual-award
+title: Annual Award
+status: active
+semantic_scope: Compiled subsystem summary for ss-annual-award.
+source_families: []
+primary_sources:
+- docs/domains/annual_award-capability-map.md
+- docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+- docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+secondary_sources: []
+execution_nodes: []
+owned_surfaces: []
+owned_outputs: []
+discovered_objects:
+- obj-annual-award-legacy-fact-processing
+candidate_objects: []
+candidate_subsystems: []
+upstream_dependencies: []
+downstream_dependencies: []
+claim_type: compiled_summary
+source_type: legacy_doc
+evidence_strength: strong
+coverage_state: partial
+open_questions: []
+confidence: high
+last_verified: '2026-04-17'
+last_audited_at: '2026-04-17T09:30:00Z'
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-annual-award-subsystem

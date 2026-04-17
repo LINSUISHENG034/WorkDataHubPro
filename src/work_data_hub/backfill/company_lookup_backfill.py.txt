@@ -1,0 +1,6 @@
+# Legacy snapshot: company lookup backfill helper.
+
+
+def backfill_company_lookup(batch_id: str) -> str:
+    """Legacy backfill helper for company lookup queue replay."""
+    return f"backfill:{batch_id}"

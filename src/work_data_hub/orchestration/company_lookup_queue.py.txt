@@ -1,0 +1,6 @@
+# Legacy snapshot: company lookup queue orchestration surface.
+
+
+def enqueue_company_lookup(company_id: str) -> str:
+    """Legacy queue surface for company lookup refresh jobs."""
+    return f"queued:{company_id}"

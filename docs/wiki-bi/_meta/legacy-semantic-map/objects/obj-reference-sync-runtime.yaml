@@ -1,0 +1,24 @@
+object_id: obj-reference-sync-runtime
+title: Reference sync runtime handoff
+status: active
+object_type: discovered_semantic_object
+summary: Reference sync remains representative-only while boundary and governance
+  decisions stay open for future waves.
+source_refs:
+- src/work_data_hub/orchestration/reference_sync.py.txt
+- src/work_data_hub/reference/reference_sync.py.txt
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+- reference/historical_replays/annuity_income/legacy_reference_derivation_2026_03.json
+seen_in_subsystems: []
+related_objects: []
+claim_type: compiled_summary
+source_type: legacy_code
+evidence_strength: strong
+coverage_state: mapped
+confidence: high
+last_verified: '2026-04-17'
+open_questions:
+- Reference sync remains representative-only until a later wave resolves the governance
+  handoff and durable wiki disposition.
+compiled_from_claims:
+- claim-wave-2026-04-17-first-wave-pilot-reference-sync-object

@@ -1,0 +1,45 @@
+claim_id: claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object
+wave_id: wave-2026-04-17-first-wave-pilot
+claim_scope: objects
+claim_target_id: obj-company-lookup-queue-runtime
+sources_read:
+- source_ref: src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  source_type: legacy_code
+  note: Legacy pilot evidence anchors this semantic object.
+- source_ref: src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  source_type: legacy_code
+  note: Legacy pilot evidence anchors this semantic object.
+- source_ref: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  note: Current operator evidence keeps the queue surface visible without forcing
+    closure.
+- source_ref: tests/replay/test_phase2_reference_derivation_gates.py
+  source_type: current_reference_asset
+  note: Replay gate coverage remains an accepted current reference asset around the
+    queue-adjacent path.
+objects_discovered:
+- object_id: obj-company-lookup-queue-runtime
+  title: Company lookup queue runtime boundary
+  summary: Company lookup queue remains representative-only while operator/runtime
+    boundaries stay open for later waves.
+  source_refs:
+  - src/work_data_hub/orchestration/company_lookup_queue.py.txt
+  - src/work_data_hub/backfill/company_lookup_backfill.py.txt
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  - tests/replay/test_phase2_reference_derivation_gates.py
+  source_type: legacy_code
+  claim_type: direct_observation
+  evidence_strength: strong
+  coverage_state: mapped
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions:
+  - Company lookup queue stays representative-only until a later wave decides whether
+    the runtime boundary belongs in durable publication guidance.
+edges_added: []
+candidates_raised: []
+open_questions:
+- Company lookup queue stays representative-only until a later wave decides whether
+  the runtime boundary belongs in durable publication guidance.
+compiled_into: []
+submitted_at: '2026-04-17T09:15:00Z'
