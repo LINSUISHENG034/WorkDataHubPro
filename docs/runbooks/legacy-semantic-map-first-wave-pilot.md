@@ -3,8 +3,9 @@
 ## Purpose
 
 Run the Slice 4 first-wave pilot from checked-in evidence, then review the
-generated semantic-map artifacts without promoting them into durable wiki
-content.
+generated semantic-map artifacts. On the current integration branch, the pilot
+and its Phase B closeout are already accepted; use this runbook to reproduce
+the checked-in state before merge review, not to reopen pilot scope.
 
 ## Scope
 
@@ -41,7 +42,8 @@ After a successful run from the accepted claim set:
 
 - `docs/wiki-bi/_meta/legacy-semantic-map/waves/index.yaml`
   - bootstrap wave is closed
-  - `wave-2026-04-17-first-wave-pilot` is active
+  - `wave-2026-04-17-first-wave-pilot` is closed
+  - `closed_at = '2026-04-17'`
   - pilot depth tiers point to Tier A and Tier B surfaces
 - `docs/wiki-bi/_meta/legacy-semantic-map/claims/wave-2026-04-17-first-wave-pilot/`
   - 7 execution claims
@@ -60,10 +62,9 @@ After a successful run from the accepted claim set:
   - `orphan_high_priority_source_count = 0`
   - `stale_high_priority_candidate_count = 0`
 - `docs/wiki-bi/_meta/legacy-semantic-map/reports/current/integrity-status.json`
-  - `closeout_ready = false`
-  - blockers stay limited to:
-    - `durable_wiki_targets_not_accepted`
-    - `findings_disposition_incomplete`
+  - `closeout_ready = true`
+  - `archive_ready = true`
+  - `blocking_reasons = []`
 
 ## Interpretation
 
@@ -72,21 +73,25 @@ What the pilot proves:
 - the semantic-map model can compile real checked-in claims into execution,
   subsystem, object, edge, and candidate outputs
 - the current reporting pipeline can classify the admitted pilot denominator as
-  mechanically green without claiming durable wiki closure
+  mechanically green through formal closeout and archive readiness
 - Tier A surfaces support deeper subsystem/object mapping while Tier B surfaces
   remain representative-only and candidate-heavy
 
-What the pilot does not prove:
+What the pilot still does not prove:
 
-- durable wiki placement is settled
-- operator/runtime-adjacent surfaces are fully closed
-- the semantic map is ready to replace later absorption work
+- that every future semantic-map wave should follow the same denominator or
+  depth split
+- that operator/runtime-adjacent surfaces need no further semantic analysis in
+  later waves
+- that the semantic map should replace durable wiki maintenance as the long-term
+  answer surface
 
-## Follow-On Questions
+## Next Stage
 
-- whether the next wave should deepen one Tier B runtime surface or begin an
-  absorption-adjacent pass
-- whether any representative candidate should be promoted into a stable
-  subsystem/object in a later wave
-- whether the admitted denominator should stay at seven surfaces or split into
-  separate fact-domain and operator/runtime waves
+- primary branch decision: treat the semantic-map package as merge-ready for
+  `main` review
+- if review requires more semantic-map work before merge, open one new bounded
+  slice from `slice/semantic-map-integration` instead of reopening broad pilot
+  discovery
+- see `docs/runbooks/legacy-semantic-map-first-wave-closeout.md` for the
+  accepted closeout summary

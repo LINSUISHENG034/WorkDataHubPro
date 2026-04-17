@@ -27,7 +27,7 @@ waves:
   closed_at: '2026-04-17'
 - wave_id: wave-2026-04-17-first-wave-pilot
   title: First-wave pilot
-  status: active
+  status: closed
   wave_ordinal: 2
   opened_at: '2026-04-17'
   seeded_entry_surfaces:
@@ -53,7 +53,7 @@ waves:
   durable_wiki_targets_accepted: true
   findings_disposition_complete: true
   depends_on_active_wave_working_state: false
-  closed_at: null
+  closed_at: '2026-04-17'
   pilot_depth_tiers:
     tier_a:
     - annuity_performance

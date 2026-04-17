@@ -45,7 +45,7 @@ def test_run_first_wave_pilot_rebuilds_checked_in_registry_deterministically(
     assert first_coverage["entrypoint_coverage_pct"] == 100.0
     assert first_coverage["high_priority_source_family_coverage_pct"] == 100.0
     assert first_integrity["closeout_ready"] is True
-    assert first_integrity["archive_ready"] is False
+    assert first_integrity["archive_ready"] is True
     assert first_integrity["blocking_reasons"] == []
     assert manifest["compiled_claims_by_wave"][FIRST_WAVE_PILOT_WAVE_ID] == manifest[
         "compiled_claim_ids"

@@ -2,7 +2,7 @@
   "wave_id": "wave-2026-04-17-first-wave-pilot",
   "wave_status": "green",
   "closeout_ready": true,
-  "archive_ready": false,
+  "archive_ready": true,
   "immutability_check_passed": true,
   "required_claim_ids": [
     "claim-wave-2026-04-17-first-wave-pilot-annual-award-execution",

@@ -34,7 +34,8 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
     assert bootstrap_wave["closed_at"] == "2026-04-17"
 
     pilot_wave = wave_lookup[FIRST_WAVE_PILOT_WAVE_ID]
-    assert pilot_wave["status"] == "active"
+    assert pilot_wave["status"] == "closed"
+    assert pilot_wave["closed_at"] == "2026-04-17"
     assert pilot_wave["durable_wiki_targets_accepted"] is True
     assert pilot_wave["findings_disposition_complete"] is True
     assert pilot_wave["seeded_entry_surfaces"] == [*TIER_A_SURFACES, *TIER_B_SURFACES]
@@ -155,5 +156,5 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
     assert coverage["stale_high_priority_candidate_count"] == 0
     assert integrity["wave_status"] == "green"
     assert integrity["closeout_ready"] is True
-    assert integrity["archive_ready"] is False
+    assert integrity["archive_ready"] is True
     assert integrity["blocking_reasons"] == []
