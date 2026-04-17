@@ -83,6 +83,39 @@ This ordering is intentional:
 - subsystems give agents stable parseable responsibility zones
 - semantic objects become the durable units that can later be consumed by wiki updates
 
+### 4.1 Dual-Layer Operating Model
+
+The semantic map should use a dual-layer operating model:
+
+1. discovery remains execution-first
+2. canonical compilation becomes semantic-first
+
+This means:
+
+- execution paths still act as the primary discovery entrypoints
+- subsystem clustering still acts as the primary parallel work surface
+- canonical outputs that are expected to support `wiki-bi` absorption should center on business semantics rather than on runtime structure alone
+
+In practice:
+
+- execution, subsystem, and object files remain important witness and provenance layers
+- semantic canonical files become the preferred review surface when the question is about business meaning, semantic boundary, or wiki absorption readiness
+
+### 4.2 Canonical Priority Rule
+
+When discovery facts and canonical outputs serve different purposes, canonical
+priority must follow the business-semantic goal:
+
+- discovery layers answer **where the semantics were found**
+- semantic canonical layers answer **what the business semantics are**
+
+The semantic map is not successful merely because all entry surfaces are
+registered.
+
+It is successful only when the canonical layer can express business conclusions
+and business non-equivalences directly enough that later `wiki-bi` work does
+not need to reconstruct them from execution-path files by hand.
+
 ---
 
 ## 5. Placement And Boundary Rule
@@ -337,6 +370,45 @@ In addition, at least one of the following must be true:
 Promotion should be conservative. Early map usefulness comes from coverage, not
 from creating many standalone object files.
 
+### 9.4 Semantic-First Canonical Node Families
+
+For canonical compilation, semantic findings should be promoted into explicit
+semantic node families when they are stable enough to support absorption or
+review.
+
+The minimum semantic node families are:
+
+- `semantic_concept`
+- `semantic_rule`
+- `semantic_non_equivalence`
+- `semantic_lifecycle`
+- `semantic_fact_family`
+- `semantic_decision_anchor`
+
+These families exist because business-semantic alignment requires more than
+simple object registration:
+
+- concepts name what the business meaning is about
+- rules describe what must be true
+- non-equivalences describe what must not be collapsed together
+- lifecycles describe distinct operational-semantic actions
+- fact families describe the data products or evidence families that carry the semantic meaning
+- decision anchors identify the strongest current authority for a semantic conclusion
+
+### 9.5 Non-Equivalence As A First-Class Output
+
+The semantic map should explicitly record business-semantic non-equivalence
+instead of leaving it only in prose or open questions.
+
+Examples:
+
+- customer master backfill is not the same thing as customer status evaluation
+- a customer-master label such as `年金客户类型 = 新客` is not the same thing as the snapshot status field `is_new`
+- a missing customer name is not automatically equivalent to a failed customer-identity interpretation
+
+If a later `wiki-bi` page would be materially wrong without this distinction,
+the distinction belongs in the semantic canonical layer.
+
 ---
 
 ## 10. Physical Layout
@@ -368,11 +440,21 @@ docs/wiki-bi/_meta/legacy-semantic-map/
 ├── candidates/
 │   ├── subsystem-candidates.yaml
 │   └── object-candidates.yaml
+├── semantic/
+│   ├── index.yaml
+│   ├── concepts/
+│   ├── rules/
+│   ├── non-equivalences/
+│   ├── lifecycles/
+│   ├── fact-families/
+│   ├── decision-anchors/
+│   └── question-sets/
 ├── claims/
 │   └── <wave_id>/
 │       ├── execution/
 │       ├── subsystems/
-│       └── objects/
+│       ├── objects/
+│       └── semantic/
 ├── waves/
 │   └── index.yaml
 └── reports/
@@ -391,6 +473,7 @@ This is a mixed registry design:
 - claim artifacts are wave-local and append-friendly
 - generated summaries live separately from canonical facts
 - associated helper code, when needed, lives in `scripts/legacy_semantic_map/` rather than `src/work_data_hub_pro/`
+- semantic-first canonical outputs live under `semantic/` and are allowed to coexist with execution/subsystem/object witness outputs
 
 The manifest must not become a second manual fact source.
 
@@ -505,6 +588,35 @@ Each promoted canonical object file should minimally include:
 - `last_verified`
 - `open_questions`
 
+### 12.2A Semantic Canonical Files
+
+Each semantic canonical file should minimally include:
+
+- `semantic_id`
+- `semantic_node_type`
+- `title`
+- `summary`
+- `business_conclusion`
+- `primary_semantic_sources`
+- `supporting_witness_sources`
+- `semantic_authority`
+- `related_execution_nodes`
+- `related_subsystems`
+- `related_objects`
+- `non_equivalent_to`
+- `open_questions`
+- `durable_target_pages`
+- `durable_summary_ready`
+- `requires_human_judgement`
+- `blocked_by`
+- `archive_after_absorption`
+- `confidence`
+- `last_verified`
+
+The canonical semantic file is the preferred machine-facing answer surface when
+the later question is "what is the business meaning?" rather than "which runtime
+surface exposed it?".
+
 ### 12.3 Execution Path Files
 
 Each canonical path file should minimally include:
@@ -564,18 +676,32 @@ Each claim file should minimally include:
 - `compiled_into`
 - `submitted_at`
 
+Semantic claim variants should additionally allow:
+
+- `semantic_findings`
+- `semantic_question_ids`
+- `source_authority_notes`
+- `candidate_non_equivalences`
+
 ### 12.6 Minimum Discovery Metadata Rule
 
 Every newly recorded discovery unit must have at least:
 
 - source references
 - source type
+- semantic authority when the finding is intended for semantic canonical compilation
 - claim type
 - evidence strength
 - coverage state
 - confidence
 - last verified date or explicit `not_yet_verified` marker
 - open questions
+
+Every semantic canonical unit must additionally have:
+
+- at least one primary semantic source
+- at least one durable target page or explicit absorption blocker
+- explicit support for any required non-equivalence boundary that materially affects the intended wiki absorption
 
 This keeps Phase A permissive but not untraceable.
 
@@ -621,6 +747,22 @@ Allowed values:
 These values intentionally align with the existing `wiki-bi` evidence model where
 possible so the later absorption step does not need a separate translation layer.
 
+### 13.3A `semantic_authority`
+
+Allowed values:
+
+- `authoritative_semantic_source`
+- `runtime_witness`
+- `implementation_hint`
+- `historical_context`
+
+Interpretation:
+
+- `authoritative_semantic_source` defines or most strongly constrains the business meaning
+- `runtime_witness` proves current or accepted system behavior
+- `implementation_hint` helps discovery but does not outrank stronger business-semantic evidence
+- `historical_context` provides background only
+
 ### 13.4 `evidence_strength`
 
 Allowed values:
@@ -664,6 +806,7 @@ Use stable lowercase kebab-case identifiers with fixed prefixes:
 - `path_id`: `ep-<entry-family>-<surface>-<slug>`
 - `subsystem_id`: `ss-<slug>`
 - `object_id`: `obj-<slug>`
+- `semantic_id`: `sem-<node-family>-<slug>`
 - `candidate_id`: `cand-<type>-<slug>`
 - `claim_id`: `claim-<wave-id>-<slug>`
 - `wave_id`: `wave-YYYY-MM-DD-<slug>`
@@ -693,6 +836,11 @@ Every mapping task must produce:
 - `objects_discovered`
 - `edges_added`
 - `candidates_raised`
+
+When the task is semantic-canonical in nature, it must also produce:
+
+- `semantic_findings`
+- any required semantic non-equivalence findings for the assigned question set
 
 This is mandatory even when the mapping result is small.
 
@@ -775,6 +923,7 @@ The authoritative denominator files are:
 - `execution/entry-surfaces.yaml` for seeded execution entry coverage
 - `sources/families.yaml` for source-family coverage
 - `waves/index.yaml` for active wave identity and candidate age calculations
+- `semantic/question-sets/*.yaml` for semantic-question coverage
 
 ### 15.4 Candidate Staleness Rule
 
@@ -799,6 +948,12 @@ Therefore:
 - discovering a semantic object is more important than perfectly classifying it
 - discovering that a new subsystem boundary is needed is more important than forcing it into the wrong current subsystem
 - broad registration is preferred to silent omission
+
+For semantic-first canonical compilation, this principle should be refined as:
+
+- registering a discovery is still better than omitting it
+- but canonical semantic promotion should prefer stable business conclusions over early structural neatness
+- structural coverage alone does not justify claiming semantic closure
 
 ### 16.2 High-Priority Initial Focus
 
@@ -867,6 +1022,20 @@ Read source files should not remain unmapped to any node.
 Clearly adjacent, low-priority, or one-off materials should be marked as such
 instead of being silently treated as core semantic surfaces.
 
+### 17.8A Stub And Alias Control
+
+Accepted semantic canonical outputs must not rely on stub-only or virtualized
+source aliases as their highest-authority primary semantic source.
+
+Stub files, simplified mirrors, or local helper snapshots may still be used as:
+
+- discovery aids
+- implementation hints
+- test fixtures
+
+They must not become the strongest semantic authority for a compiled semantic
+conclusion when a real legacy or current source exists.
+
 ### 17.9 Status Output
 
 Integrity and coverage reporting should produce at least:
@@ -891,6 +1060,11 @@ At minimum, reporting should calculate:
 - `orphan_high_priority_source_count`
 - `stale_high_priority_candidate_count`
 - `untriaged_candidate_age_by_wave`
+- `semantic_question_coverage_pct`
+- `semantic_non_equivalence_coverage_pct`
+- `stub_primary_source_count`
+- `authoritative_primary_source_pct`
+- `absorption_contract_completion_pct`
 
 Metric denominators must come from the seeded wave inputs, not from ad hoc
 human judgment.
@@ -905,6 +1079,8 @@ For a target wave:
   - `orphan_high_priority_source_count = 0`
   - `object_edge_coverage_pct >= 95`
   - `stale_high_priority_candidate_count = 0`
+  - `semantic_question_coverage_pct = 100` for the target semantic question set when one is explicitly admitted for the wave
+  - `stub_primary_source_count = 0` for accepted semantic canonical outputs
 - `yellow` means:
   - high-priority entry surfaces and source families are mostly mapped, but one or more of the green thresholds is not yet met
   - no critical unmapped high-priority entry surface is being ignored
@@ -913,6 +1089,8 @@ For a target wave:
   - a high-priority source family remains unmapped
   - orphan high-priority sources exist
   - a high-priority candidate has remained untriaged for more than one audit wave
+  - a required semantic question remains unanswered for a wave that admitted a semantic question set
+  - an accepted semantic conclusion is anchored only by stub-only primary sources
 
 ---
 

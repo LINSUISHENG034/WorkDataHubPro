@@ -95,6 +95,14 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
         "edges/source-to-node.yaml",
         "candidates/subsystem-candidates.yaml",
         "candidates/object-candidates.yaml",
+        "semantic/index.yaml",
+        "semantic/concepts/.gitkeep",
+        "semantic/rules/.gitkeep",
+        "semantic/non-equivalences/.gitkeep",
+        "semantic/lifecycles/.gitkeep",
+        "semantic/fact-families/.gitkeep",
+        "semantic/decision-anchors/.gitkeep",
+        "semantic/question-sets/.gitkeep",
         "claims/wave-2026-04-16-registry-bootstrap/execution/.gitkeep",
         "claims/wave-2026-04-16-registry-bootstrap/subsystems/.gitkeep",
         "claims/wave-2026-04-16-registry-bootstrap/objects/.gitkeep",
@@ -125,6 +133,11 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
     assert manifest["generated_canonical_files"] == []
     assert manifest["compiled_claim_ids"] == []
     assert manifest["compiled_claims_by_wave"] == {}
+
+    semantic_index = yaml.safe_load(
+        (registry_root / "semantic" / "index.yaml").read_text(encoding="utf-8")
+    )
+    assert semantic_index == {"semantic_nodes": []}
 
     entry_surfaces = yaml.safe_load(
         (registry_root / "execution" / "entry-surfaces.yaml").read_text(encoding="utf-8")

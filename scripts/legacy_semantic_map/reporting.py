@@ -123,6 +123,24 @@ def _object_ids_for_wave(registry_root: Path, wave_claim_ids: set[str]) -> list[
     return sorted(object_ids)
 
 
+def _semantic_nodes_for_wave(
+    registry_root: Path,
+    wave_claim_ids: set[str],
+) -> list[dict[str, object]]:
+    semantic_index_path = registry_root / "semantic" / "index.yaml"
+    if not semantic_index_path.exists():
+        return []
+    semantic_index = _load_yaml(semantic_index_path).get("semantic_nodes", [])
+    nodes: list[dict[str, object]] = []
+    for item in semantic_index:
+        path = registry_root / str(item["path"])
+        payload = _load_yaml(path)
+        compiled = set(payload.get("compiled_from_claims", []))
+        if not compiled or compiled & wave_claim_ids:
+            nodes.append(payload)
+    return nodes
+
+
 def _edge_payloads(
     registry_root: Path,
     filename: str,
@@ -222,12 +240,16 @@ def _classify_wave_status(
     object_edge_coverage_pct: float,
     orphan_high_priority_source_count: int,
     stale_high_priority_candidate_count: int,
+    semantic_question_coverage_pct: float = 100.0,
+    stub_primary_source_count: int = 0,
 ) -> str:
     if (
         entrypoint_coverage_pct < 100.0
         or high_priority_source_family_coverage_pct < 100.0
         or orphan_high_priority_source_count > 0
         or stale_high_priority_candidate_count > 0
+        or semantic_question_coverage_pct < 100.0
+        or stub_primary_source_count > 0
     ):
         return "red"
     if object_edge_coverage_pct >= GREEN_OBJECT_EDGE_COVERAGE_THRESHOLD:
@@ -300,6 +322,55 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
         visible_claim_ids,
     )
 
+    semantic_nodes = _semantic_nodes_for_wave(registry_root, visible_claim_ids)
+    question_set_id = target_wave.get("semantic_question_set_id")
+    required_semantic_node_ids: list[str] = []
+    required_non_equivalence_ids: list[str] = []
+    if isinstance(question_set_id, str) and question_set_id:
+        question_set = _load_yaml(
+            registry_root / "semantic" / "question-sets" / f"{question_set_id}.yaml"
+        )
+        required_semantic_node_ids = list(question_set.get("required_semantic_node_ids", []))
+        required_non_equivalence_ids = list(question_set.get("required_non_equivalence_ids", []))
+
+    semantic_node_ids = {
+        str(node["semantic_id"])
+        for node in semantic_nodes
+        if isinstance(node.get("semantic_id"), str)
+    }
+    semantic_question_coverage_pct = _pct(
+        len(set(required_semantic_node_ids) & semantic_node_ids),
+        len(required_semantic_node_ids),
+    )
+    semantic_non_equivalence_coverage_pct = _pct(
+        len(set(required_non_equivalence_ids) & semantic_node_ids),
+        len(required_non_equivalence_ids),
+    )
+    stub_primary_source_count = sum(
+        1
+        for node in semantic_nodes
+        if any(
+            isinstance(source_ref, str) and source_ref.endswith(".txt")
+            for source_ref in node.get("primary_semantic_sources", [])
+        )
+    )
+    authoritative_primary_source_pct = _pct(
+        sum(
+            1
+            for node in semantic_nodes
+            if node.get("semantic_authority") == "authoritative_semantic_source"
+        ),
+        len(semantic_nodes),
+    )
+    absorption_contract_completion_pct = _pct(
+        sum(
+            1
+            for node in semantic_nodes
+            if node.get("durable_target_pages") or node.get("blocked_by")
+        ),
+        len(semantic_nodes),
+    )
+
     by_candidate, stale_high_priority_candidate_count = _candidate_age_summary(
         registry_root,
         active_wave_ordinal=int(wave_lookup[active_wave_id]["wave_ordinal"]),
@@ -312,6 +383,8 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
         object_edge_coverage_pct=object_edge_coverage_pct,
         orphan_high_priority_source_count=orphan_high_priority_source_count,
         stale_high_priority_candidate_count=stale_high_priority_candidate_count,
+        semantic_question_coverage_pct=semantic_question_coverage_pct,
+        stub_primary_source_count=stub_primary_source_count,
     )
 
     manifest = _load_json(registry_root / "manifest.json")
@@ -354,6 +427,10 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
     blocking_reasons: list[str] = []
     if wave_status != "green":
         blocking_reasons.append(f"wave_status_{wave_status}")
+    if semantic_question_coverage_pct < 100.0:
+        blocking_reasons.append("semantic_question_coverage_incomplete")
+    if stub_primary_source_count > 0:
+        blocking_reasons.append("stub_primary_sources_detected")
     if missing_claim_ids:
         blocking_reasons.append("missing_compiled_claim_ids")
     if mutable_ids:
@@ -380,6 +457,11 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
         "object_edge_coverage_pct": object_edge_coverage_pct,
         "orphan_high_priority_source_count": orphan_high_priority_source_count,
         "stale_high_priority_candidate_count": stale_high_priority_candidate_count,
+        "semantic_question_coverage_pct": semantic_question_coverage_pct,
+        "semantic_non_equivalence_coverage_pct": semantic_non_equivalence_coverage_pct,
+        "stub_primary_source_count": stub_primary_source_count,
+        "authoritative_primary_source_pct": authoritative_primary_source_pct,
+        "absorption_contract_completion_pct": absorption_contract_completion_pct,
         "untriaged_candidate_age_by_wave": {
             "max": max(by_candidate.values(), default=0),
             "count_gt_0": sum(1 for value in by_candidate.values() if value > 0),

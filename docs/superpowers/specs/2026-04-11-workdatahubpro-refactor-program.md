@@ -88,6 +88,7 @@ What is not yet true:
 - production storage/publication and operator tooling remain deferred
 - special orchestration surfaces such as `company_lookup_queue` and `reference_sync` are now explicitly registered, but not yet closed
 - enterprise persistence surfaces and manual `customer-mdm` operator paths are now explicitly registered, but not yet closed
+- the semantic-map pilot exists as an internal discovery ledger, but semantic-first canonical alignment and wiki-absorption support are not yet admitted as a closed follow-on slice
 - first-wave legacy retirement decisions are not yet recorded
 
 ## 4. Success Definition
@@ -284,6 +285,7 @@ vocabulary where it fits:
 | reference bootstrap / reference-sync runtime | legacy uses an explicit `reference_sync` orchestration surface plus incremental state | deferred | separate reference bootstrap/runtime plan |
 | enterprise identity / EQC persistence surfaces | legacy persists cache, queue, and raw/cleansed EQC data beyond fact-domain outputs | deferred | separate identity persistence plan |
 | manual customer-status command surfaces and shared operator artifacts | legacy supports `customer-mdm` manual commands and cross-domain unresolved-name / failed-record artifacts | deferred | separate operator-tools / artifact-governance plan |
+| semantic-map semantic-first canonical alignment and wiki-absorption support | the current semantic-map pilot proves discovery plumbing, but canonical outputs still overfit execution structure and under-express real business semantics needed for durable `wiki-bi` absorption | planned | execute `slice/semantic-map-semantic-first-canonical-pilot` from `slice/semantic-map-integration@002f4f7` using `docs/superpowers/plans/2026-04-17-workdatahubpro-semantic-map-semantic-first-canonical-optimization.md` |
 | evidence and compatibility storage location | current artifacts are repository/file-backed in validation mode | planned | physical storage decision |
 | operator tooling and Dagster | replay CLI exists; broader operator flow does not | deferred | separate operator-tools and Dagster plan |
 
@@ -338,6 +340,7 @@ The following decisions still block broad first-wave rollout:
 7. which manual `customer-mdm` commands remain supported in the rebuild and in what form
 8. whether unresolved-name and failed-record artifacts remain mandatory operator outputs across first-wave runs
 9. operator-tooling and Dagster rollout order after replay-only validation
+10. how the semantic-map should preserve execution-first discovery while compiling semantic-first canonical outputs that align to real business semantics and durable `wiki-bi` absorption targets
 
 ## 14. Final Program Position
 

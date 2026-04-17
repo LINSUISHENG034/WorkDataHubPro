@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import asdict
 from dataclasses import dataclass
+from dataclasses import field
 from pathlib import Path
 import re
 from typing import TypeVar
@@ -14,6 +15,8 @@ from .models import (
     COVERAGE_STATES,
     EVIDENCE_STRENGTHS,
     PRIORITY_LEVELS,
+    SEMANTIC_AUTHORITIES,
+    SEMANTIC_NODE_TYPES,
     SOURCE_TYPES,
     TRIAGE_STATUSES,
     WAVE_ID_PATTERN,
@@ -24,6 +27,7 @@ CLAIM_SCOPE_DIRECTORIES = {
     "execution": "execution",
     "subsystems": "subsystems",
     "objects": "objects",
+    "semantic": "semantic",
 }
 T = TypeVar("T")
 
@@ -58,9 +62,18 @@ class ClaimSourceRecord:
     source_ref: str
     source_type: str
     note: str
+    workspace_id: str | None = None
+    relative_path: str | None = None
+    semantic_authority: str | None = None
 
     def __post_init__(self) -> None:
         _validate_choice("source_type", self.source_type, SOURCE_TYPES)
+        if self.semantic_authority is not None:
+            _validate_choice(
+                "semantic_authority",
+                self.semantic_authority,
+                SEMANTIC_AUTHORITIES,
+            )
 
 
 @dataclass(frozen=True)
@@ -132,6 +145,28 @@ class ClaimCandidateRecord:
 
 
 @dataclass(frozen=True)
+class ClaimSemanticFindingRecord:
+    semantic_id: str
+    semantic_node_type: str
+    title: str
+    summary: str
+    business_conclusion: str
+    primary_source_refs: list[str]
+    supporting_source_refs: list[str]
+    semantic_authority: str
+    durable_target_pages: list[str]
+    confidence: str
+    last_verified: str
+    open_questions: list[str]
+    non_equivalent_to: list[str] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        _validate_choice("semantic_node_type", self.semantic_node_type, SEMANTIC_NODE_TYPES)
+        _validate_choice("semantic_authority", self.semantic_authority, SEMANTIC_AUTHORITIES)
+        _validate_choice("confidence", self.confidence, CONFIDENCE_LEVELS)
+
+
+@dataclass(frozen=True)
 class ClaimArtifact:
     claim_id: str
     wave_id: str
@@ -144,6 +179,7 @@ class ClaimArtifact:
     open_questions: list[str]
     compiled_into: list[str]
     submitted_at: str
+    semantic_findings: list[ClaimSemanticFindingRecord] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         object.__setattr__(
@@ -165,6 +201,11 @@ class ClaimArtifact:
             self,
             "candidates_raised",
             _coerce_record_list(ClaimCandidateRecord, self.candidates_raised),
+        )
+        object.__setattr__(
+            self,
+            "semantic_findings",
+            _coerce_record_list(ClaimSemanticFindingRecord, self.semantic_findings),
         )
 
     def to_payload(self) -> dict[str, object]:

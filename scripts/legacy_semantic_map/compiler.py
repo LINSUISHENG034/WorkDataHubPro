@@ -8,7 +8,12 @@ from typing import Iterable, Sequence
 
 import yaml
 
-from .claims import ClaimArtifact, ClaimCandidateRecord, ClaimEdgeRecord, ClaimSourceRecord
+from .claims import (
+    ClaimArtifact,
+    ClaimCandidateRecord,
+    ClaimEdgeRecord,
+    ClaimSourceRecord,
+)
 from .models import CANONICAL_SEED_SOURCES
 
 
@@ -67,6 +72,17 @@ def _route_edge(edge: ClaimEdgeRecord) -> str | None:
     if edge.from_id.startswith("obj-") and edge.to_id.startswith("obj-"):
         return "object-to-object.yaml"
     return None
+
+
+def _semantic_directory_name(node_type: str) -> str:
+    return {
+        "semantic_concept": "concepts",
+        "semantic_rule": "rules",
+        "semantic_non_equivalence": "non-equivalences",
+        "semantic_lifecycle": "lifecycles",
+        "semantic_fact_family": "fact-families",
+        "semantic_decision_anchor": "decision-anchors",
+    }[node_type]
 
 
 def _source_edge(source: ClaimSourceRecord, claim: ClaimArtifact) -> dict[str, object]:
@@ -170,6 +186,7 @@ def compile_claim_artifacts(
     written_files: list[str] = []
     subsystem_index: list[dict[str, str]] = []
     object_index: list[dict[str, str]] = []
+    semantic_index: list[dict[str, str]] = []
     edge_payloads: dict[str, list[dict[str, object]]] = {
         "execution-to-subsystem.yaml": [],
         "execution-to-object.yaml": [],
@@ -307,11 +324,53 @@ def compile_claim_artifacts(
                 }
             )
 
+        if claim.claim_scope == "semantic":
+            for finding in claim.semantic_findings:
+                directory_name = _semantic_directory_name(finding.semantic_node_type)
+                payload = {
+                    "semantic_id": finding.semantic_id,
+                    "semantic_node_type": finding.semantic_node_type,
+                    "title": finding.title,
+                    "summary": finding.summary,
+                    "business_conclusion": finding.business_conclusion,
+                    "primary_semantic_sources": finding.primary_source_refs,
+                    "supporting_witness_sources": finding.supporting_source_refs,
+                    "semantic_authority": finding.semantic_authority,
+                    "related_execution_nodes": [],
+                    "related_subsystems": [],
+                    "related_objects": [],
+                    "non_equivalent_to": finding.non_equivalent_to,
+                    "open_questions": finding.open_questions,
+                    "durable_target_pages": finding.durable_target_pages,
+                    "durable_summary_ready": bool(finding.durable_target_pages),
+                    "requires_human_judgement": False,
+                    "blocked_by": [],
+                    "archive_after_absorption": True,
+                    "confidence": finding.confidence,
+                    "last_verified": finding.last_verified,
+                    "compiled_from_claims": [claim.claim_id],
+                }
+                relative_path = f"semantic/{directory_name}/{finding.semantic_id}.yaml"
+                output_path = registry_root / relative_path
+                _write_yaml(output_path, payload)
+                written_files.append(relative_path)
+                semantic_index.append(
+                    {
+                        "semantic_id": finding.semantic_id,
+                        "semantic_node_type": finding.semantic_node_type,
+                        "path": relative_path,
+                    }
+                )
+
     subsystem_index = sorted(subsystem_index, key=lambda item: item["subsystem_id"])
     object_index = sorted(object_index, key=lambda item: item["object_id"])
     _write_yaml(registry_root / "subsystems" / "index.yaml", {"subsystems": subsystem_index})
     _write_yaml(registry_root / "objects" / "index.yaml", {"objects": object_index})
     written_files.extend(["subsystems/index.yaml", "objects/index.yaml"])
+    if semantic_index:
+        semantic_index = sorted(semantic_index, key=lambda item: item["semantic_id"])
+        _write_yaml(registry_root / "semantic" / "index.yaml", {"semantic_nodes": semantic_index})
+        written_files.append("semantic/index.yaml")
 
     for filename, payload in edge_payloads.items():
         payload = sorted(payload, key=lambda item: (item["from_id"], item["to_id"], item["relationship"]))

@@ -65,3 +65,16 @@ waves:
     - company_lookup_queue
     - reference_sync
   pilot_execution_note: docs/runbooks/legacy-semantic-map-first-wave-pilot.md
+- wave_id: wave-2026-04-17-customer-status-semantic-pilot
+  title: Customer status semantic pilot
+  status: closed
+  wave_ordinal: 3
+  opened_at: '2026-04-17'
+  seeded_entry_surfaces: []
+  seeded_high_priority_source_families: []
+  admitted_subsystems: []
+  durable_wiki_targets_accepted: true
+  findings_disposition_complete: true
+  depends_on_active_wave_working_state: false
+  closed_at: '2026-04-17'
+  semantic_question_set_id: customer-status-semantic-pilot
