@@ -10,11 +10,7 @@
     "max": 0,
     "count_gt_0": 0,
     "count_gt_1": 0,
-    "by_candidate": {
-      "cand-company-lookup-queue-publication-boundary": 0,
-      "cand-customer-mdm-manual-runtime-boundary": 0,
-      "cand-reference-sync-governance-bridge": 0
-    }
+    "by_candidate": {}
   },
   "generated_at": "2026-04-17T09:30:00Z"
 }

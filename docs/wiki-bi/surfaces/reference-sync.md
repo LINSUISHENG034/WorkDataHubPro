@@ -81,6 +81,7 @@ legacy 审计明确指出，这个 surface 至少涉及：
 - 被保留的是 target inventory、authoritative source-of-truth 映射与 sync contract 这层治理记忆，而不是 legacy daily schedule / sync-state persistence 本身
 - current repo 尚未保留 repo-native `reference_sync` runtime、schedule 或 sync-state persistence；这些 production/bootstrap concerns 继续保持 deferred
 - 目前至少不能再把它当成“跟随 domain 一起自然覆盖”的隐含对象
+- Phase B consume/absorb 已将 `cand-reference-sync-governance-bridge` 明确归一为 `deferred`；当前 durable truth 是保留治理桥接记忆并继续 deferred runtime/bootstrap closure，而不是把 `reference_sync` 误写成已恢复的 repo-native runtime
 
 ## 当前治理边界
 

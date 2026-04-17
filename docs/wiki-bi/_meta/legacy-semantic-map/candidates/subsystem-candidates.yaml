@@ -2,8 +2,9 @@ subsystem_candidates:
 - candidate_id: cand-company-lookup-queue-publication-boundary
   proposed_name: company-lookup-queue-publication-boundary
   candidate_type: subsystem
-  reason: Representative pilot coverage surfaced an unresolved publication/runtime
-    boundary that should stay candidate-only for now.
+  reason: Phase B normalized this representative publication/runtime boundary to deferred
+    because the durable wiki already preserves truthful deferred runtime reality without
+    forcing false closure.
   trigger_files:
   - src/work_data_hub/orchestration/company_lookup_queue.py.txt
   - src/work_data_hub/backfill/company_lookup_backfill.py.txt
@@ -11,7 +12,7 @@ subsystem_candidates:
   claim_type: compiled_summary
   confidence: medium
   priority: high
-  triage_status: new
+  triage_status: deferred
   first_seen_wave: wave-2026-04-17-first-wave-pilot
   last_verified: '2026-04-17'
   compiled_from_claims:
@@ -21,8 +22,9 @@ subsystem_candidates:
 - candidate_id: cand-customer-mdm-manual-runtime-boundary
   proposed_name: customer-mdm-manual-runtime
   candidate_type: subsystem
-  reason: Representative mapping identified a manual-runtime boundary that still needs
-    durable disposition before closure.
+  reason: Phase B normalized this manual-runtime boundary to deferred because the
+    durable wiki already preserves truthful operator/runtime memory without forcing
+    premature command-surface closure.
   trigger_files:
   - src/work_data_hub/cli/customer_mdm.py.txt
   - src/work_data_hub/services/customer_identity.py.txt
@@ -30,7 +32,7 @@ subsystem_candidates:
   claim_type: compiled_summary
   confidence: medium
   priority: high
-  triage_status: new
+  triage_status: deferred
   first_seen_wave: wave-2026-04-17-first-wave-pilot
   last_verified: '2026-04-17'
   compiled_from_claims:

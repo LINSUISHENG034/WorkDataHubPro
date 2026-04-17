@@ -2,8 +2,9 @@ object_candidates:
 - candidate_id: cand-reference-sync-governance-bridge
   proposed_name: reference-sync-governance-bridge
   candidate_type: object
-  reason: Representative pilot coverage surfaced a governance handoff that should
-    remain candidate-only until a later absorption wave.
+  reason: Phase B normalized this governance handoff to deferred because the durable
+    wiki already preserves truthful deferred bootstrap/runtime reality without forcing
+    false repo-native closure.
   trigger_files:
   - src/work_data_hub/orchestration/reference_sync.py.txt
   - src/work_data_hub/reference/reference_sync.py.txt
@@ -11,7 +12,7 @@ object_candidates:
   claim_type: compiled_summary
   confidence: medium
   priority: high
-  triage_status: new
+  triage_status: deferred
   first_seen_wave: wave-2026-04-17-first-wave-pilot
   last_verified: '2026-04-17'
   compiled_from_claims:

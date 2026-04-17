@@ -23,8 +23,8 @@ sources_read:
 objects_discovered:
 - object_id: obj-reference-sync-runtime
   title: Reference sync runtime handoff
-  summary: Reference sync remains representative-only while boundary and governance
-    decisions stay open for future waves.
+  summary: Reference sync remains representative-only with deferred runtime/bootstrap
+    closure explicitly preserved in durable wiki guidance.
   source_refs:
   - src/work_data_hub/orchestration/reference_sync.py.txt
   - src/work_data_hub/reference/reference_sync.py.txt
@@ -36,9 +36,7 @@ objects_discovered:
   coverage_state: mapped
   confidence: high
   last_verified: '2026-04-17'
-  open_questions:
-  - Reference sync remains representative-only until a later wave resolves the governance
-    handoff and durable wiki disposition.
+  open_questions: []
 edges_added:
 - from_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
   to_id: obj-reference-sync-runtime
@@ -55,27 +53,26 @@ edges_added:
   coverage_state: mapped
   confidence: high
   last_verified: '2026-04-17'
-  open_questions:
-  - Reference sync remains representative-only until a later wave resolves the governance
-    handoff and durable wiki disposition.
+  open_questions: []
 candidates_raised:
 - candidate_id: cand-reference-sync-governance-bridge
   candidate_type: object
   proposed_name: reference-sync-governance-bridge
-  reason: Representative pilot coverage surfaced a governance handoff that should
-    remain candidate-only until a later absorption wave.
+  reason: Phase B normalized this governance handoff to deferred because the durable
+    wiki already preserves truthful deferred bootstrap/runtime reality without
+    forcing false repo-native closure.
   trigger_files:
   - src/work_data_hub/orchestration/reference_sync.py.txt
   - src/work_data_hub/reference/reference_sync.py.txt
   source_type: legacy_code
-  claim_type: open_question
+  claim_type: compiled_summary
   confidence: medium
-  triage_status: new
+  triage_status: deferred
   first_seen_wave: wave-2026-04-17-first-wave-pilot
   last_verified: '2026-04-17'
   priority: high
-open_questions:
-- Reference sync remains representative-only until a later wave resolves the governance
-  handoff and durable wiki disposition.
-compiled_into: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/reference-sync.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
 submitted_at: '2026-04-17T09:00:00Z'

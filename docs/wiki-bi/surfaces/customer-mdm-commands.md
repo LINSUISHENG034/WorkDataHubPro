@@ -88,6 +88,7 @@ legacy unified CLI 与 deployment guide 都把这组命令当作独立 operator 
 - 具体哪些命令必须保留，仍待后续稳定决策
 - 在做 state / snapshot / annual lifecycle 相关判断时，不应假设只有自动 hook 路径存在
 - 当前至少应保留“手工 recovery / recompute controls 曾经是正式操作面”的制度记忆
+- Phase B consume/absorb 已将 `cand-customer-mdm-manual-runtime-boundary` 明确归一为 `deferred`；当前 durable truth 是保留 manual runtime/operator surface 的制度记忆，而不是提前宣称命令集合已经定案
 
 ## 仍未决的问题
 

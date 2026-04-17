@@ -35,6 +35,8 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
 
     pilot_wave = wave_lookup[FIRST_WAVE_PILOT_WAVE_ID]
     assert pilot_wave["status"] == "active"
+    assert pilot_wave["durable_wiki_targets_accepted"] is True
+    assert pilot_wave["findings_disposition_complete"] is True
     assert pilot_wave["seeded_entry_surfaces"] == [*TIER_A_SURFACES, *TIER_B_SURFACES]
     assert pilot_wave["pilot_depth_tiers"] == {
         "tier_a": TIER_A_SURFACES,
@@ -152,9 +154,6 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
     assert coverage["orphan_high_priority_source_count"] == 0
     assert coverage["stale_high_priority_candidate_count"] == 0
     assert integrity["wave_status"] == "green"
-    assert integrity["closeout_ready"] is False
+    assert integrity["closeout_ready"] is True
     assert integrity["archive_ready"] is False
-    assert integrity["blocking_reasons"] == [
-        "durable_wiki_targets_not_accepted",
-        "findings_disposition_incomplete",
-    ]
+    assert integrity["blocking_reasons"] == []

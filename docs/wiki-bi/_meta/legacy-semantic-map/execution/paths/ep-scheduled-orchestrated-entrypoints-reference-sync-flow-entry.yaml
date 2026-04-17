@@ -20,8 +20,6 @@ evidence_strength: strong
 coverage_state: partial
 confidence: high
 last_verified: '2026-04-17'
-open_questions:
-- Reference sync remains representative-only until a later wave resolves the governance
-  handoff and durable wiki disposition.
+open_questions: []
 compiled_from_claims:
 - claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution

@@ -22,8 +22,6 @@ evidence_strength: strong
 coverage_state: partial
 confidence: high
 last_verified: '2026-04-17'
-open_questions:
-- Customer MDM remains representative-only until durable wiki absorption decides whether
-  the manual runtime should be retained or deferred.
+open_questions: []
 compiled_from_claims:
 - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution

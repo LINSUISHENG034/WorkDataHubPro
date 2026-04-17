@@ -50,8 +50,8 @@ waves:
   - ss-annual-award
   - ss-annual-loss
   - ss-annuity-income
-  durable_wiki_targets_accepted: false
-  findings_disposition_complete: false
+  durable_wiki_targets_accepted: true
+  findings_disposition_complete: true
   depends_on_active_wave_working_state: false
   closed_at: null
   pilot_depth_tiers:

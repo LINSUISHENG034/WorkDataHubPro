@@ -24,8 +24,8 @@ sources_read:
 objects_discovered:
 - object_id: obj-company-lookup-queue-runtime
   title: Company lookup queue runtime boundary
-  summary: Company lookup queue remains representative-only while operator/runtime
-    boundaries stay open for later waves.
+  summary: Company lookup queue remains representative-only with deferred runtime/publication
+    closure explicitly preserved in durable wiki guidance.
   source_refs:
   - src/work_data_hub/orchestration/company_lookup_queue.py.txt
   - src/work_data_hub/backfill/company_lookup_backfill.py.txt
@@ -37,9 +37,7 @@ objects_discovered:
   coverage_state: mapped
   confidence: high
   last_verified: '2026-04-17'
-  open_questions:
-  - Company lookup queue stays representative-only until a later wave decides whether
-    the runtime boundary belongs in durable publication guidance.
+  open_questions: []
 edges_added:
 - from_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
   to_id: obj-company-lookup-queue-runtime
@@ -56,27 +54,26 @@ edges_added:
   coverage_state: mapped
   confidence: high
   last_verified: '2026-04-17'
-  open_questions:
-  - Company lookup queue stays representative-only until a later wave decides whether
-    the runtime boundary belongs in durable publication guidance.
+  open_questions: []
 candidates_raised:
 - candidate_id: cand-company-lookup-queue-publication-boundary
   candidate_type: subsystem
   proposed_name: company-lookup-queue-publication-boundary
-  reason: Representative pilot coverage surfaced an unresolved publication/runtime
-    boundary that should stay candidate-only for now.
+  reason: Phase B normalized this representative publication/runtime boundary to
+    deferred because the durable wiki already preserves truthful deferred runtime
+    reality without forcing false closure.
   trigger_files:
   - src/work_data_hub/orchestration/company_lookup_queue.py.txt
   - src/work_data_hub/backfill/company_lookup_backfill.py.txt
   source_type: legacy_code
-  claim_type: open_question
+  claim_type: compiled_summary
   confidence: medium
-  triage_status: new
+  triage_status: deferred
   first_seen_wave: wave-2026-04-17-first-wave-pilot
   last_verified: '2026-04-17'
   priority: high
-open_questions:
-- Company lookup queue stays representative-only until a later wave decides whether
-  the runtime boundary belongs in durable publication guidance.
-compiled_into: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
 submitted_at: '2026-04-17T09:00:00Z'

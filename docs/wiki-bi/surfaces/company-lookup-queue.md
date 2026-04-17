@@ -93,6 +93,7 @@ legacy code 进一步说明：
 - `enterprise.enrichment_requests` 一类 queue persistence 仍随 broader queue/runtime plan 一并 deferred
 - 当前至少不应再被当作“隐含存在，不必登记”的对象
 - unresolved 的 operator consequence 要么进入 artifacts/signal，要么登记在 evidence gap；不能因 queue deferred 而静默消失
+- Phase B consume/absorb 已将 `cand-company-lookup-queue-publication-boundary` 明确归一为 `deferred`；当前 durable truth 是保留该治理对象与 deferred runtime reality，而不是强行写成已闭环 runtime
 
 ## 当前治理边界
 

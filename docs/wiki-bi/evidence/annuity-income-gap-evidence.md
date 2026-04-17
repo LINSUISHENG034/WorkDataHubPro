@@ -13,7 +13,7 @@
 | E-AI-003 | legacy_doc | strong | absorbed | `annuity-income`, `golden-scenarios`, `real-data-validation` | 2026-04-14 | `E:\Projects\WorkDataHub\docs\guides\validation\legacy-parity-validation.md` 明确 legacy 存在 annuity_income parity validation script 与结果目录。 |
 | E-AI-004 | audit | strong | absorbed | `annuity-income`, `verification-assets-evidence`, `operator-and-surface-evidence` | 2026-04-14 | `2026-04-12-verification-assets-search-findings.md` 明确 annuity_income 是唯一未闭合 first-wave domain，且 15 个关键事项都主要停留在 legacy 侧。 |
 | E-AI-005 | audit | supporting | absorbed | `annuity-income`, `company-id`, `unknown-names-csv`, `failed-record-export` | 2026-04-14 | `2026-04-12-legacy-code-audit.md` 明确 annuity_income 仍是 active domain，且有 `unknown_names_csv` 和 failed-record export 等 operator artifacts。 |
-| E-AI-006 | legacy_doc | supporting | open_question | `annuity-income`, `plan-type` | 2026-04-14 | cleansing rules 文档指出 6 个 COMPANY_BRANCH_MAPPING manual overrides 缺口，这些制度记忆在 rebuild 中尚未显式安放。 |
+| E-AI-006 | legacy_doc | supporting | absorbed | `annuity-income`, `plan-type`, `annuity-income-branch-mapping-evidence` | 2026-04-17 | cleansing rules 文档指出的 6 个 COMPANY_BRANCH_MAPPING manual overrides 已在 `annuity-income-branch-mapping-evidence`、current config、processor 与 integration tests 中获得显式安放；本页只保留 dispatcher 级摘要。 |
 
 ## 哪些来源是强证
 
@@ -38,11 +38,11 @@
 - ID5 fallback retirement 是必须保留的制度记忆，不应在后续重构中被无意复活
 - `annuity_income` 既有验证资产记忆，也有 operator artifact 记忆
 - annuity_income 的差异不只是“少一个 domain”，还包括身份、artifact、validation 和 branch mapping 的特殊遗留
+- `COMPANY_BRANCH_MAPPING` manual overrides 现已通过对象级 branch-mapping 证据页与 current validation slice 资产显式安放
 - 当前 aggregate page 应主要承担 dispatcher 角色，而不是继续承载全部细节
 
 ## 当前证据缺口
 
-- current project 已有显式 slice、测试、replay assets 与 runbook 承接
-- 当前真正需要继续收敛的是：
-  - contract-grade input / output / field-processing page set
-  - identity 叙述中 active path 与 compatibility inventory 的分层
+- current project 已有显式 slice、contract-grade input / output / field-processing 页面、测试、replay assets 与 runbook 承接
+- branch mapping manual overrides 的制度记忆已在对象级 evidence page 与 current implementation/test evidence 中获得明确落点
+- 当前 remaining follow-on 仅是后续是否把这组 overrides 从 domain-local 实现进一步抽象到更广的 shared mapping governance；这不再是 first-wave absorption blocker

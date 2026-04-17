@@ -1,7 +1,7 @@
 {
   "wave_id": "wave-2026-04-17-first-wave-pilot",
   "wave_status": "green",
-  "closeout_ready": false,
+  "closeout_ready": true,
   "archive_ready": false,
   "immutability_check_passed": true,
   "required_claim_ids": [
@@ -46,10 +46,7 @@
   ],
   "missing_claim_ids": [],
   "mutable_claim_ids_detected": [],
-  "blocking_reasons": [
-    "durable_wiki_targets_not_accepted",
-    "findings_disposition_incomplete"
-  ],
+  "blocking_reasons": [],
   "accepted_claim_digests": {
     "claim-wave-2026-04-17-first-wave-pilot-annual-award-execution": "2db9a0b7a2b5b34bc5904ecbbd0ee123a96b0620426f64f960854996efab73ec",
     "claim-wave-2026-04-17-first-wave-pilot-annual-award-object": "768bb16db86f8d54a196973370a4f1ae218687712d64fbf3605e35474d0f712b",
@@ -63,11 +60,11 @@
     "claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution": "a0e798b8bcaf6409b714a8f45b87fe0c1b70bfe70471b9be9196bd95f1e088aa",
     "claim-wave-2026-04-17-first-wave-pilot-annuity-performance-object": "047c765623327b1b1256918d377e427ede84cbce12b598587051ec812dc5f1a3",
     "claim-wave-2026-04-17-first-wave-pilot-annuity-performance-subsystem": "595dd8081adaa1e3297b258126c7b33b4594be3bf18f864e3fb5057865d1c497",
-    "claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution": "b129a60b8a3cb0aded4275849911bde838c3d573ce9f74a417526f54c4e4039b",
+    "claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution": "84e82e92d26417bd6e3099abc6e0e5ea4f245f18775efaaeff00f73262758ffa",
     "claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object": "e80c6a25d0d1edac256e035676fc87965df1dfac9ee45943a66066d119a68115",
-    "claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution": "8fc19a99b38bd83dd8f9534b70fe60de516e51dcd84900d35d7300a34fd893cf",
+    "claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution": "02bd69e8cec5f2a1710505f3058eafeb3f4b96f4aecd228ff09570ad393ac4b1",
     "claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object": "e23771ff1918342accf0d3e0fa124502463f4581454fcc122928f36a0445f384",
-    "claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution": "09d2749ce5fc9a6568e21fc3b09ac05dac01205d44eb33ff8dbed4b827e14219",
+    "claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution": "101b05d39cb77cb3b767a1004e417586881bed1c5a916114401093332d9bff07",
     "claim-wave-2026-04-17-first-wave-pilot-reference-sync-object": "3bb57608bc831fe2517a08854dc8a3a51e3681ce46d126a170a27f1e1675e019"
   },
   "generated_at": "2026-04-17T09:30:00Z"

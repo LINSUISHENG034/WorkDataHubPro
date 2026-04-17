@@ -29,8 +29,8 @@ sources_read:
 objects_discovered:
 - object_id: obj-customer-mdm-lifecycle
   title: Customer MDM lifecycle handoff
-  summary: Customer MDM remains a representative pilot surface with identity and lifecycle
-    evidence recorded but not fully closed.
+  summary: Customer MDM remains a representative pilot surface whose manual runtime/operator
+    boundary is now explicitly preserved as deferred durable truth.
   source_refs:
   - src/work_data_hub/cli/customer_mdm.py.txt
   - src/work_data_hub/services/customer_identity.py.txt
@@ -42,9 +42,7 @@ objects_discovered:
   coverage_state: mapped
   confidence: high
   last_verified: '2026-04-17'
-  open_questions:
-  - Customer MDM remains representative-only until durable wiki absorption decides
-    whether the manual runtime should be retained or deferred.
+  open_questions: []
 edges_added:
 - from_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
   to_id: obj-customer-mdm-lifecycle
@@ -63,27 +61,26 @@ edges_added:
   coverage_state: mapped
   confidence: high
   last_verified: '2026-04-17'
-  open_questions:
-  - Customer MDM remains representative-only until durable wiki absorption decides
-    whether the manual runtime should be retained or deferred.
+  open_questions: []
 candidates_raised:
 - candidate_id: cand-customer-mdm-manual-runtime-boundary
   candidate_type: subsystem
   proposed_name: customer-mdm-manual-runtime
-  reason: Representative mapping identified a manual-runtime boundary that still needs
-    durable disposition before closure.
+  reason: Phase B normalized this manual-runtime boundary to deferred because the
+    durable wiki already preserves truthful operator/runtime memory without forcing
+    premature command-surface closure.
   trigger_files:
   - src/work_data_hub/cli/customer_mdm.py.txt
   - src/work_data_hub/services/customer_identity.py.txt
   source_type: legacy_code
-  claim_type: open_question
+  claim_type: compiled_summary
   confidence: medium
-  triage_status: new
+  triage_status: deferred
   first_seen_wave: wave-2026-04-17-first-wave-pilot
   last_verified: '2026-04-17'
   priority: high
-open_questions:
-- Customer MDM remains representative-only until durable wiki absorption decides whether
-  the manual runtime should be retained or deferred.
-compiled_into: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/customer-mdm-commands.md
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
 submitted_at: '2026-04-17T09:00:00Z'
