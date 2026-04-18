@@ -41,6 +41,7 @@ from .models import (
     SeededSourceFamily,
     SeededWave,
 )
+from .probe import ProbeRunResult, StabilityCheck, probe_wave
 from .reporting import ReportGenerationResult, generate_reports
 from .waves import allow_audit_wave_read, load_waves_index, require_active_open_wave, wave_lookup
 
@@ -83,10 +84,13 @@ __all__ = [
     "PROPOSAL_RECOMMENDATION_STATUSES",
     "PROPOSAL_SEMANTIC_SCOPE_TYPES",
     "prior_integrity_report_digests",
+    "ProbeRunResult",
+    "probe_wave",
     "ReportGenerationResult",
     "require_active_open_wave",
     "allow_audit_wave_read",
     "SEMANTIC_MATURITY_LEVELS",
+    "StabilityCheck",
     "write_claim_artifact",
     "SeededEntrySurface",
     "SeededSourceFamily",

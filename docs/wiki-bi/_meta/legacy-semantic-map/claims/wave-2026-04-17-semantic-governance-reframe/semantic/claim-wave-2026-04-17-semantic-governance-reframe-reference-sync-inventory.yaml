@@ -1,0 +1,90 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-fact-family-reference-sync-target-inventory
+sources_read:
+- source_ref: config/reference_sync.yml
+  source_type: legacy_config
+  note: Reference sync config explicitly declares target inventory, source types, and per-table sync modes.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/reference_sync.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/domain/reference_backfill/sync_models.py
+  source_type: legacy_code
+  note: ReferenceSyncTableConfig makes target table, target schema, source type, sync mode, and primary key part of the governed contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/domain/reference_backfill/sync_models.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/surfaces/reference-sync.md
+  source_type: current_wiki
+  note: Current wiki already preserves the authoritative target inventory boundary.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/surfaces/reference-sync.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/reference-sync.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+submitted_at: '2026-04-18T02:05:00Z'
+semantic_findings:
+- semantic_id: sem-fact-family-reference-sync-target-inventory
+  semantic_node_type: semantic_fact_family
+  title: Reference sync target inventory
+  summary: reference_sync is governed through an explicit target inventory rather than an abstract background helper.
+  business_conclusion: reference_sync owns an explicit authoritative target inventory with per-table source type, sync mode, primary-key, and target-schema contracts.
+  primary_source_refs:
+  - config/reference_sync.yml
+  supporting_source_refs:
+  - src/work_data_hub/domain/reference_backfill/sync_models.py
+  - docs/wiki-bi/surfaces/reference-sync.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/reference-sync.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - The runtime implementation details can change, but the target-inventory contract is stable and is already preserved by current wiki guidance.
+    proxy_usage_refs:
+    - src/work_data_hub/domain/reference_backfill/sync_models.py
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/reference-sync.md
+    - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+    related_runtime_carriers:
+    - obj-reference-sync-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports preserving reference_sync as a distinct authoritative inventory surface rather than collapsing it into generic backfill.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that describe reference_sync as an implicit helper without its own target inventory.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a stable target-inventory fact family.
+        target_pages:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        blocked_by: []
+trigger_id: trigger-reference-sync-probe
+orchestration_iteration: 1

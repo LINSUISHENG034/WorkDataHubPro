@@ -3,27 +3,43 @@
   "wave_status": "green",
   "closeout_ready": false,
   "archive_ready": false,
-  "immutability_check_passed": true,
+  "immutability_check_passed": false,
   "required_claim_ids": [
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
-    "claim-wave-2026-04-17-semantic-governance-reframe-rules"
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules",
+    "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
+    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet"
   ],
   "compiled_claim_ids": [
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
-    "claim-wave-2026-04-17-semantic-governance-reframe-rules"
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules",
+    "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
+    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet"
   ],
   "missing_claim_ids": [],
-  "mutable_claim_ids_detected": [],
+  "mutable_claim_ids_detected": [
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state"
+  ],
   "blocking_reasons": [
+    "mutable_accepted_claims_detected",
     "durable_wiki_targets_not_accepted",
     "findings_disposition_incomplete"
   ],
   "accepted_claim_digests": {
-    "claim-wave-2026-04-17-semantic-governance-reframe-core": "98f55cf0e2a3486ec157180b13822addf8b51a606d1a8dde24caa1e087ee5a0c",
-    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle": "0d265414f90af178b408cda08ba9b6b6a98dae9e55046744af008be417b2fe54",
-    "claim-wave-2026-04-17-semantic-governance-reframe-rules": "f6a2bdd5730368083a7418a440b738d410edb10e8ae85cd712432870117fd689"
+    "claim-wave-2026-04-17-semantic-governance-reframe-core": "f0571729e279bc5f36dbf3fd91c9c6b6dc56dbc6c4112f5a664b3430cbe513fe",
+    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle": "3337169bf6d3e05df9284fa069cab7aef4fa4017523f940dbb51c3f5946e6b7e",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory": "b931b3ca303485dd188667e2bdd4282c39563bcc3f55060329a47260edaa75e0",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state": "45b513ddd29f4bf6c6c0dc79bdc4cd7617400e16576dff9d7c05712f43a62da5",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules": "a240077b3d16ff9f3a127f4dc2723b4435b5dd991806cbea030265a3aa14b2c8",
+    "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor": "13cd4fa53871832b0ce406cfd080f15bc5e14a93de20d6621f3a0eb283921236",
+    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet": "a670ec64b55be4d0138ae911955015efa005bd01537da4fd1eb7becd6fdf13bc"
   },
-  "generated_at": "2026-04-17T13:20:00Z"
+  "generated_at": "2026-04-18T02:05:00Z"
 }

@@ -1,0 +1,103 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-status-year-identity-anchor
+sources_read:
+- source_ref: docs/business-background/战客身份定义与更新逻辑.md
+  source_type: legacy_doc
+  note: Business background explicitly defines status_year as the annual identity anchor rather than a generic creation-year label.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/战客身份定义与更新逻辑.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/customer_mdm/year_init.py
+  source_type: legacy_code
+  note: Year initialization uses the year boundary to initialize annual customer-status fields.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/year_init.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  note: Contract sync derives the business year from the period and uses it for prior-year and annual status logic.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/contract_sync.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  note: Current evidence page preserves the same boundary and notes the current-side authoritative-source gap.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+submitted_at: '2026-04-18T01:00:00Z'
+semantic_findings:
+- semantic_id: sem-rule-status-year-identity-anchor
+  semantic_node_type: semantic_rule
+  title: status_year identity anchor
+  summary: status_year anchors annual customer-status identity and is not interchangeable with snapshot_month.
+  business_conclusion: status_year is an annual identity anchor for customer-status semantics, not a generic timestamp label and not the same semantic field as snapshot_month.
+  primary_source_refs:
+  - docs/business-background/战客身份定义与更新逻辑.md
+  supporting_source_refs:
+  - src/work_data_hub/customer_mdm/year_init.py
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions:
+  - The rebuild-side authoritative runtime source for status_year remains an evidence gap until current-side adjudication is completed.
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Legacy runtime derives year-specific behavior from period and yearly init actions, but the current rebuild-side authoritative source is still unresolved.
+    proxy_usage_refs:
+    - src/work_data_hub/customer_mdm/year_init.py
+    - src/work_data_hub/customer_mdm/contract_sync.py
+    downstream_consequence_refs:
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions:
+    - What is the rebuild-side authoritative runtime carrier for status_year?
+    gate_blockers:
+    - high_priority_governance_questions_open
+    governance_implications:
+      slice_admission:
+        summary: Supports preserving status_year as a yearly semantic anchor, but blocks treating the current rebuild-side source as closed truth.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by:
+        - high_priority_governance_questions_open
+      defer_candidates:
+        summary: Current-side source closure can be deferred until rebuild runtime adjudication completes.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Safe to absorb as a semantic rule with an explicit evidence gap, not as a closed runtime-source decision.
+        target_pages:
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by:
+        - high_priority_governance_questions_open
+trigger_id: trigger-annual-status-mining
+orchestration_iteration: 1

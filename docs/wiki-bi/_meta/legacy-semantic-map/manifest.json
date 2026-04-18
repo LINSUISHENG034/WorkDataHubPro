@@ -32,12 +32,16 @@
     "semantic/concepts/sem-concept-customer-status.yaml",
     "semantic/decision-anchors/sem-decision-anchor-customer-status-rules.yaml",
     "semantic/fact-families/sem-fact-family-customer-status-source-family.yaml",
+    "semantic/fact-families/sem-fact-family-reference-sync-target-inventory.yaml",
     "semantic/index.yaml",
     "semantic/lifecycles/sem-lifecycle-customer-status-yearly-cycle.yaml",
     "semantic/non-equivalences/sem-non-equivalence-customer-master-vs-status.yaml",
     "semantic/non-equivalences/sem-non-equivalence-customer-type-vs-is-new.yaml",
     "semantic/rules/sem-rule-is-new-definition.yaml",
+    "semantic/rules/sem-rule-reference-sync-incremental-state.yaml",
     "semantic/rules/sem-rule-status-source-splitting.yaml",
+    "semantic/rules/sem-rule-status-year-identity-anchor.yaml",
+    "semantic/rules/sem-rule-strategic-ratchet.yaml",
     "subsystems/index.yaml",
     "subsystems/ss-annual-award.yaml",
     "subsystems/ss-annual-loss.yaml",
@@ -47,7 +51,11 @@
   "compiled_claim_ids": [
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
-    "claim-wave-2026-04-17-semantic-governance-reframe-rules"
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules",
+    "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
+    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet"
   ],
   "compiled_claims_by_wave": {
     "wave-2026-04-17-first-wave-pilot": [
@@ -73,7 +81,11 @@
     "wave-2026-04-17-semantic-governance-reframe": [
       "claim-wave-2026-04-17-semantic-governance-reframe-core",
       "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
-      "claim-wave-2026-04-17-semantic-governance-reframe-rules"
+      "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
+      "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
+      "claim-wave-2026-04-17-semantic-governance-reframe-rules",
+      "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
+      "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet"
     ]
   }
 }

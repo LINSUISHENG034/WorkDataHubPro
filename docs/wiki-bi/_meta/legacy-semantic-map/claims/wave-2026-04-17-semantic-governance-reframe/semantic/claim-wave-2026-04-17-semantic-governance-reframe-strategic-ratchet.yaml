@@ -1,0 +1,90 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-strategic-ratchet
+sources_read:
+- source_ref: docs/business-background/战客身份定义与更新逻辑.md
+  source_type: legacy_doc
+  note: 'Business background describes the ratchet rule as a stable business constraint: strategic customers can be upgraded but not automatically downgraded by short-term decline.'
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/战客身份定义与更新逻辑.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  note: apply_ratchet_rule and sync commentary witness the same upgrade-only strategic semantics.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/contract_sync.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  note: Current evidence page already states the same ratchet-style meaning.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+submitted_at: '2026-04-18T01:05:00Z'
+semantic_findings:
+- semantic_id: sem-rule-strategic-ratchet
+  semantic_node_type: semantic_rule
+  title: Strategic ratchet rule
+  summary: Strategic customer status can upgrade into place but should not be automatically downgraded by short-term decline.
+  business_conclusion: The strategic-customer rule is upgrade-only in normal status sync semantics; a customer may become strategic, but short-term decline does not automatically revoke strategic status.
+  primary_source_refs:
+  - docs/business-background/战客身份定义与更新逻辑.md
+  supporting_source_refs:
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Operational sync code implements the rule, but the authority comes from the business-background definition and accepted lifecycle evidence.
+    proxy_usage_refs:
+    - src/work_data_hub/customer_mdm/contract_sync.py
+    downstream_consequence_refs:
+    - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports preserving the strategic upgrade-only rule as a business semantic constraint in customer-status interpretation.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring downgrade-friendly narratives that contradict the strategic ratchet semantics.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+trigger_id: trigger-annual-status-mining
+orchestration_iteration: 1

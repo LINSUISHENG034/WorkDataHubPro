@@ -1,0 +1,82 @@
+semantic_id: sem-rule-reference-sync-incremental-state
+semantic_node_type: semantic_rule
+title: Reference sync incremental state contract
+summary: reference_sync carries an operator-facing incremental-state contract rather
+  than being a stateless full-refresh surface only.
+business_conclusion: reference_sync includes a per-table incremental-state contract
+  based on last_synced_at, with explicit operator-facing overrides for explicit state
+  and force_full_sync.
+primary_semantic_sources:
+- config/reference_sync.yml
+supporting_witness_sources:
+- src/work_data_hub/orchestration/reference_sync_ops.py
+- src/work_data_hub/io/repositories/sync_state_repository.py
+- docs/wiki-bi/surfaces/reference-sync.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/surfaces/reference-sync.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Current accepted rebuild slices do not retain the repo-native sync-state runtime,
+    but the legacy semantic contract remains stable as deferred governance truth.
+  proxy_usage_refs:
+  - src/work_data_hub/orchestration/reference_sync_ops.py
+  - src/work_data_hub/io/repositories/sync_state_repository.py
+  downstream_consequence_refs:
+  - docs/wiki-bi/surfaces/reference-sync.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  related_runtime_carriers:
+  - obj-reference-sync-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports preserving incremental-state semantics as part of the deferred
+        reference_sync governance surface.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/reference-sync.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports keeping sync-state persistence deferred in current runtime
+        while preserving the contract in durable governance memory.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/reference-sync.md
+      blocked_by: []
+    retire_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review as a stable legacy semantic contract
+        with deferred runtime disposition.
+      target_pages:
+      - docs/wiki-bi/surfaces/reference-sync.md
+      - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Current accepted rebuild slices do not retain the repo-native sync-state runtime,
+  but the legacy semantic contract remains stable as deferred governance truth.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T02:00:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state

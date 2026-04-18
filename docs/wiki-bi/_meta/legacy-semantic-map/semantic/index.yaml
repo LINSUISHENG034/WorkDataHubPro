@@ -11,6 +11,9 @@ semantic_nodes:
 - semantic_id: sem-fact-family-customer-status-source-family
   semantic_node_type: semantic_fact_family
   path: semantic/fact-families/sem-fact-family-customer-status-source-family.yaml
+- semantic_id: sem-fact-family-reference-sync-target-inventory
+  semantic_node_type: semantic_fact_family
+  path: semantic/fact-families/sem-fact-family-reference-sync-target-inventory.yaml
 - semantic_id: sem-lifecycle-customer-status-yearly-cycle
   semantic_node_type: semantic_lifecycle
   path: semantic/lifecycles/sem-lifecycle-customer-status-yearly-cycle.yaml
@@ -23,6 +26,15 @@ semantic_nodes:
 - semantic_id: sem-rule-is-new-definition
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-is-new-definition.yaml
+- semantic_id: sem-rule-reference-sync-incremental-state
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-reference-sync-incremental-state.yaml
 - semantic_id: sem-rule-status-source-splitting
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-status-source-splitting.yaml
+- semantic_id: sem-rule-status-year-identity-anchor
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-status-year-identity-anchor.yaml
+- semantic_id: sem-rule-strategic-ratchet
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-strategic-ratchet.yaml

@@ -4,18 +4,22 @@
     "sem-concept-customer-master-backfill",
     "sem-concept-customer-status",
     "sem-fact-family-customer-status-source-family",
+    "sem-fact-family-reference-sync-target-inventory",
     "sem-lifecycle-customer-status-yearly-cycle",
     "sem-non-equivalence-customer-master-vs-status",
     "sem-rule-is-new-definition",
-    "sem-rule-status-source-splitting"
+    "sem-rule-reference-sync-incremental-state",
+    "sem-rule-status-source-splitting",
+    "sem-rule-strategic-ratchet"
   ],
   "blocked_semantic_ids": [
-    "sem-non-equivalence-customer-type-vs-is-new"
+    "sem-non-equivalence-customer-type-vs-is-new",
+    "sem-rule-status-year-identity-anchor"
   ],
   "blocked_by_gate_reasons": {
     "contradiction_unresolved": 1,
-    "high_priority_governance_questions_open": 1
+    "high_priority_governance_questions_open": 2
   },
-  "durable_target_page_count": 3,
-  "generated_at": "2026-04-17T13:20:00Z"
+  "durable_target_page_count": 5,
+  "generated_at": "2026-04-18T02:05:00Z"
 }

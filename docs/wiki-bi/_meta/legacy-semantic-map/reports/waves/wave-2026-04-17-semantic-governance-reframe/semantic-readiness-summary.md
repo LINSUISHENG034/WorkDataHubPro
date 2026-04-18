@@ -1,5 +1,5 @@
 # Semantic readiness summary: wave-2026-04-17-semantic-governance-reframe
 
-- reviewable proposal ids: sem-concept-customer-master-backfill, sem-concept-customer-status, sem-fact-family-customer-status-source-family, sem-lifecycle-customer-status-yearly-cycle, sem-non-equivalence-customer-master-vs-status, sem-rule-is-new-definition, sem-rule-status-source-splitting
-- blocked proposal ids: sem-non-equivalence-customer-type-vs-is-new
-- durable target page count: 3
+- reviewable proposal ids: sem-concept-customer-master-backfill, sem-concept-customer-status, sem-fact-family-customer-status-source-family, sem-fact-family-reference-sync-target-inventory, sem-lifecycle-customer-status-yearly-cycle, sem-non-equivalence-customer-master-vs-status, sem-rule-is-new-definition, sem-rule-reference-sync-incremental-state, sem-rule-status-source-splitting, sem-rule-strategic-ratchet
+- blocked proposal ids: sem-non-equivalence-customer-type-vs-is-new, sem-rule-status-year-identity-anchor
+- durable target page count: 5

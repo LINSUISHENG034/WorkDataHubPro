@@ -1,0 +1,81 @@
+semantic_id: sem-rule-strategic-ratchet
+semantic_node_type: semantic_rule
+title: Strategic ratchet rule
+summary: Strategic customer status can upgrade into place but should not be automatically
+  downgraded by short-term decline.
+business_conclusion: The strategic-customer rule is upgrade-only in normal status
+  sync semantics; a customer may become strategic, but short-term decline does not
+  automatically revoke strategic status.
+primary_semantic_sources:
+- "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\u66F4\u65B0\
+  \u903B\u8F91.md"
+supporting_witness_sources:
+- src/work_data_hub/customer_mdm/contract_sync.py
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - Operational sync code implements the rule, but the authority comes from the business-background
+    definition and accepted lifecycle evidence.
+  proxy_usage_refs:
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  downstream_consequence_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports preserving the strategic upgrade-only rule as a business semantic
+        constraint in customer-status interpretation.
+      affected_surfaces:
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring downgrade-friendly narratives that contradict
+        the strategic ratchet semantics.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Operational sync code implements the rule, but the authority comes from the business-background
+  definition and accepted lifecycle evidence.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T01:05:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet

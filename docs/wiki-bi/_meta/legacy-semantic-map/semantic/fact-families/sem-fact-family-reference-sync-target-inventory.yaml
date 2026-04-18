@@ -1,0 +1,79 @@
+semantic_id: sem-fact-family-reference-sync-target-inventory
+semantic_node_type: semantic_fact_family
+title: Reference sync target inventory
+summary: reference_sync is governed through an explicit target inventory rather than
+  an abstract background helper.
+business_conclusion: reference_sync owns an explicit authoritative target inventory
+  with per-table source type, sync mode, primary-key, and target-schema contracts.
+primary_semantic_sources:
+- config/reference_sync.yml
+supporting_witness_sources:
+- src/work_data_hub/domain/reference_backfill/sync_models.py
+- docs/wiki-bi/surfaces/reference-sync.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/surfaces/reference-sync.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - The runtime implementation details can change, but the target-inventory contract
+    is stable and is already preserved by current wiki guidance.
+  proxy_usage_refs:
+  - src/work_data_hub/domain/reference_backfill/sync_models.py
+  downstream_consequence_refs:
+  - docs/wiki-bi/surfaces/reference-sync.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  related_runtime_carriers:
+  - obj-reference-sync-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports preserving reference_sync as a distinct authoritative inventory
+        surface rather than collapsing it into generic backfill.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/reference-sync.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that describe reference_sync as an
+        implicit helper without its own target inventory.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review as a stable target-inventory fact
+        family.
+      target_pages:
+      - docs/wiki-bi/surfaces/reference-sync.md
+      - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- The runtime implementation details can change, but the target-inventory contract
+  is stable and is already preserved by current wiki guidance.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T02:05:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory
