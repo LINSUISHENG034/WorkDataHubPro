@@ -41,6 +41,8 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - Phase 2 governance sign-off closed: Phase 6 remediation and re-verification completed on 2026-04-13 with the exact replay acceptance suite and governance contract suite both passing
 - Phase 3 implementation complete: all three replay slices use shared orchestration primitives, typed diagnostics are stable, and replay execution/diagnostics have agent- and human-facing CLI entrypoints
 - Phase 3 governance sign-off closed (2026-04-13): Phase 03.1 remediation addressed truthful failure evidence, fail-closed diagnose package loading, and typed invalid-id CLI behavior; project/verification/wiki wording now synchronized
+- Phase 4 planned and ready to execute: `.planning/phases/04-agent-operations-governance-hardening/` contains context, research, validation, and four approved execution plans for lineage lookup, evidence redaction, compatibility lifecycle hardening, and runbook alignment
+- Phase 4 execution has not started yet: there are no `04-xx-SUMMARY.md` artifacts on disk, so the next truthful step is execution rather than more planning
 - Phase 6 complete: truthful `source_intake` contract semantics, stable intermediate checkpoint payloads, annual-award outcome repair, and governance status synchronization are all in place
 - Deferred carry-forward from Phase 2: verification-asset rows for `golden_set`, `golden_baseline`, `real_data_sample`, and dedicated error-case fixtures remain explicitly deferred
 
@@ -98,4 +100,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-13 after Phase 3 closure*
+*Last updated: 2026-04-18 after status correction to reflect Phase 4 planning state*
