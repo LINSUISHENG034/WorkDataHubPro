@@ -14,8 +14,9 @@
 | E-ST-004 | legacy_doc | supporting | legacy_only | `real-data-validation`, `output-correctness`, `customer-mdm-commands` | 2026-04-14 | `verification_guide_real_data.md` 提供 snapshot / contract 输出的 operator 验证路径，但尚未被 `wiki-bi` 完全吸收。 |
 | E-ST-005 | audit | supporting | absorbed | `customer-mdm-commands`, `snapshot-granularity`, `annuity_performance` | 2026-04-14 | `2026-04-12-legacy-code-audit.md` 识别 manual command surface 与 hook-linked outputs，适合作为 surface 级旁证。 |
 | E-ST-006 | audit | supporting | absorbed | `customer-status`, `output-correctness` | 2026-04-14 | `2026-04-12-verification-assets-search-findings.md` 说明状态与 snapshot 相关验证资产仍存在显式缺口。 |
-| E-ST-007 | current_test | supporting | explicitly_tracked | `customer-status`, `snapshot-granularity`, `annual-award`, `annual-loss`, `annuity_performance` | 2026-04-15 | `tests/integration/test_projection_outputs.py`、`tests/replay/test_annuity_performance_slice.py`、`tests/replay/test_annual_award_slice.py` 与 `tests/replay/test_annual_loss_slice.py` 说明 current repo 已把 published facts、`contract_state` 与 `monthly_snapshot` 的主链路变成显式受测行为。 |
+| E-ST-007 | current_test | supporting | explicitly_tracked | `customer-status`, `snapshot-granularity`, `annual-award`, `annual-loss`, `annuity-performance` | 2026-04-15 | `tests/integration/test_projection_outputs.py`、`tests/replay/test_annuity_performance_slice.py`、`tests/replay/test_annual_award_slice.py` 与 `tests/replay/test_annual_loss_slice.py` 说明 current repo 已把 published facts、`contract_state` 与 `monthly_snapshot` 的主链路变成显式受测行为。 |
 | E-ST-008 | legacy_code+config | strong | absorbed | `customer-status`, `snapshot-granularity`, `customer-status-semantics`, `customer-mdm-commands` | 2026-04-16 | 新增 [`customer-mdm-lifecycle-evidence`](./customer-mdm-lifecycle-evidence.md)，聚合 `year_init`/`sync`/`snapshot` 生命周期、ratchet-style 含义与 `status_year` 语义边界。 |
+| E-ST-009 | current_wiki | supporting | absorbed | `customer-status`, `customer-type`, `customer-status-semantics` | 2026-04-18 | 新增 [`customer-status-annual-identity-evidence`](./customer-status-annual-identity-evidence.md)，把 `is_strategic` / `is_existing` / `contract_status` / `status_year` 收紧成独立 annual identity object page。 |
 
 ## 本轮已吸收的稳定结论
 
@@ -23,6 +24,7 @@
 - `is_new` 是 derived status，不是客户分类标签
 - `is_new` 只存在于客户 / 产品线粒度，不存在计划层版本
 - `customer.客户年金计划` 是 strategic / existing / contract_status / status_year 的关键锚点
+- annual identity family 现在有了独立对象页，避免继续把 `is_strategic` / `is_existing` / `contract_status` / `status_year` 只留在 aggregate narrative 里
 - `customer-mdm` 手工命令面是独立 operator surface，不应被“自动 hook 已覆盖”吞掉
 - `is_winning_this_year` 与 `is_loss_reported` 已满足对象级 evidence 拆分阈值
 - `is_churned_this_year` 当前仍更适合留在主题页，因为它同时牵涉 product-line / plan 双粒度与 AUM 汇总语义
@@ -52,6 +54,7 @@
 - [`is_new` 对象级证据](./is-new-evidence.md)
 - [`is_winning_this_year` 对象级证据](./is-winning-this-year-evidence.md)
 - [`is_loss_reported` 对象级证据](./is-loss-reported-evidence.md)
+- [customer 年度身份证据](./customer-status-annual-identity-evidence.md)
 - [customer MDM 生命周期证据](./customer-mdm-lifecycle-evidence.md)
 
 ## 当前证据缺口
@@ -61,3 +64,4 @@
 - `is_new` 已经满足对象级 evidence 拆分条件，并已作为后续对象级拆分样板落地
 - current project 对 `is_new`、`is_winning_this_year`、`is_loss_reported` 的对象级 current evidence 仍主要通过 shared status / projection pages 承接
 - `status_year` 在 current runtime 的 authoritative 取值路径仍待决策收口
+- `customer_type` 被当作 `is_new` proxy 的 legacy 相邻用法仍未完成治理处置，不可写成已关闭冲突

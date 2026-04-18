@@ -12,6 +12,8 @@
   - 先看 [domain wiki 升级框架](./_meta/wiki-domain-upgrade-framework.md) 与 [wiki maintenance lint checklist](./_meta/wiki-maintenance-lint-checklist.md)，默认应优化既有 playbook，而不是创建平行流程。
 - 我想确认哪些 domain 已经是 confirmed upgrade targets
   - 当前明确集合是 `annuity_performance`、`annual_award`、`annual_loss`、`annuity_income`。
+- 我想补强 customer status 里最容易被误读的 annual identity 语义
+  - 先看 [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md)，再看 [客户状态语义正确性](./standards/semantic-correctness/customer-status-semantics.md)。
 
 ## 阅读意图
 
@@ -70,6 +72,12 @@
   - 从 `annual_award` 进入，再串到 `annual_loss`、`annuity_performance` 与相关标准页，看 event domain 如何进入状态语义与输入现实。
 - [如何区分状态公式记忆、年度生命周期语义与命令运行面](./evidence/customer-mdm-lifecycle-evidence.md)
   - 先看生命周期证据页，再回到概念页和 surface 页，避免把语义定义与命令细节混写。
+- [如何理解 `is_strategic` / `is_existing` / `contract_status` / `status_year`](./evidence/customer-status-annual-identity-evidence.md)
+  - 这四个字段属于 annual identity family，应一起理解，而不是分别散落在多个页面里。
+- [为什么 `status_year` 不等于 `snapshot_month`](./standards/semantic-correctness/customer-status-semantics.md)
+  - 一个是年度身份锚点，一个是月度快照锚点；相似不代表可互换。
+- [为什么 `customer_type` 不能直接当作 `is_new`](./concepts/customer-type.md)
+  - 语义上它们不等价；legacy proxy usage 需要保留为治理冲突背景，而不是被误写成定义。
 
 ## 全量 Catalog
 
@@ -144,6 +152,7 @@
 - [身份与补查证据](./evidence/identity-and-lookup-evidence.md) : 聚合 `company_id`、temp-id、lookup、plan-code enrichment 相关证据。
 - [状态与快照证据](./evidence/status-and-snapshot-evidence.md) : 聚合客户状态、快照、customer MDM 相关证据。
 - [customer MDM 生命周期证据](./evidence/customer-mdm-lifecycle-evidence.md) : 固化 `year_init`、`sync`、`snapshot`、ratchet-style 与 `status_year` 的年度生命周期证据边界。
+- [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md) : 固化 `is_strategic`、`is_existing`、`contract_status`、`status_year` 与 proxy-conflict 边界。
 - [`is_new` 对象级证据](./evidence/is-new-evidence.md) : 聚合 `is_new` 的公式、粒度边界、非例与验证路径。
 - [`is_winning_this_year` 对象级证据](./evidence/is-winning-this-year-evidence.md) : 聚合年度中标状态的事实来源、粒度边界与验证路径。
 - [`is_loss_reported` 对象级证据](./evidence/is-loss-reported-evidence.md) : 聚合年度流失申报状态的事实来源、粒度边界与验证路径。

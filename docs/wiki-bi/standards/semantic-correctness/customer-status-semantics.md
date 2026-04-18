@@ -13,6 +13,10 @@
 - `is_winning_this_year`
 - `is_loss_reported`
 - `is_churned_this_year`
+- `is_strategic`
+- `is_existing`
+- `contract_status`
+- `status_year`
 - `customer_type` 与状态的边界
 
 ## 正确性定义
@@ -47,8 +51,8 @@
   - 由 [`annuity_performance`](../../domains/annuity-performance.md) 承接规模表现后的已流失判断
 - `is_new`
   - 当年中标且非 existing
-- `is_strategic` / `is_existing` / `contract_status`
-  - 以 `customer.客户年金计划` 为核心锚点的状态家族
+- `is_strategic` / `is_existing` / `contract_status` / `status_year`
+  - 以 `customer.客户年金计划` 为核心锚点的年度身份家族
 
 ## `status_year` 语义口径
 
@@ -56,12 +60,26 @@
 - `status_year` 与 `snapshot_month` 不是可互换字段：一个是年度语义锚点，一个是月度快照锚点。
 - 若运行时来源仍未完全闭环，应登记为 evidence gap，不可写成稳定 runtime 结论。
 
+## annual identity family 语义口径
+
+- `is_strategic`、`is_existing`、`contract_status`、`status_year` 应作为同一 annual identity family 分层理解，而不是拆成互不相关的零散状态。
+- strategic 身份具有 ratchet-style 语义：允许升级，不应因短期回落自动降级。
+- `customer.客户年金计划` 承担年度身份锚点；快照负责消费与展示，不应反向改写 annual identity family 的定义。
+
+## `customer_type` proxy 冲突口径
+
+- `customer_type` 不能被静默提升为 `is_new` truth。
+- 若 legacy 相邻流程中存在把 `customer_type` label 当作 `is_new` proxy 的做法，应记录为治理上下文或 evidence gap，而不是写成语义等价。
+- 这类 proxy conflict 尚未 current-side 收口时，应保持“语义已分层、治理仍待裁决”的表达。
+
 ## 关键约束
 
 - `is_new` 与 `年金客户类型` 必须分层理解
 - status source 可以不同，不能假设所有状态都来自同一事实表
 - 产品线粒度与计划粒度的状态集合不应被强行对齐
 - `customer.客户年金计划` 的状态锚点不应被误写为快照字段本身
+- `status_year` 与 `snapshot_month` 不应互相替代
+- strategic ratchet 语义属于业务定义，不应降格为“实现细节”
 - 命令调用方式、hook 顺序、CLI 参数不属于语义标准正文
 
 ## 非例
@@ -86,6 +104,7 @@
 ## 相关证据
 
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
+- [customer 年度身份证据](../../evidence/customer-status-annual-identity-evidence.md)
 - [customer MDM 生命周期证据](../../evidence/customer-mdm-lifecycle-evidence.md)
 - [`is_new` 对象级证据](../../evidence/is-new-evidence.md)
 - [`is_winning_this_year` 对象级证据](../../evidence/is-winning-this-year-evidence.md)
