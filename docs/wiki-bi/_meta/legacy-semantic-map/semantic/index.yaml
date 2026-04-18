@@ -1,4 +1,7 @@
 semantic_nodes:
+- semantic_id: sem-concept-classification-family-layering
+  semantic_node_type: semantic_concept
+  path: semantic/concepts/sem-concept-classification-family-layering.yaml
 - semantic_id: sem-concept-customer-annual-identity-family
   semantic_node_type: semantic_concept
   path: semantic/concepts/sem-concept-customer-annual-identity-family.yaml
@@ -14,6 +17,9 @@ semantic_nodes:
 - semantic_id: sem-fact-family-customer-status-source-family
   semantic_node_type: semantic_fact_family
   path: semantic/fact-families/sem-fact-family-customer-status-source-family.yaml
+- semantic_id: sem-fact-family-plan-classification-stack
+  semantic_node_type: semantic_fact_family
+  path: semantic/fact-families/sem-fact-family-plan-classification-stack.yaml
 - semantic_id: sem-fact-family-reference-sync-target-inventory
   semantic_node_type: semantic_fact_family
   path: semantic/fact-families/sem-fact-family-reference-sync-target-inventory.yaml
@@ -29,6 +35,9 @@ semantic_nodes:
 - semantic_id: sem-non-equivalence-customer-type-vs-is-new
   semantic_node_type: semantic_non_equivalence
   path: semantic/non-equivalences/sem-non-equivalence-customer-type-vs-is-new.yaml
+- semantic_id: sem-non-equivalence-input-plan-type-vs-customer-master-plan-type
+  semantic_node_type: semantic_non_equivalence
+  path: semantic/non-equivalences/sem-non-equivalence-input-plan-type-vs-customer-master-plan-type.yaml
 - semantic_id: sem-rule-is-churned-this-year-definition
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-is-churned-this-year-definition.yaml

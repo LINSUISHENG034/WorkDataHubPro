@@ -1,0 +1,99 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-non-equivalence-input-plan-type-vs-customer-master-plan-type
+sources_read:
+- source_ref: docs/business-background/年金计划类型与客户名称业务背景.md
+  source_type: legacy_doc
+  note: Business background distinguishes input-side plan type semantics from later customer-identification and aggregation outcomes.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/年金计划类型与客户名称业务背景.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/foreign_keys.yml
+  source_type: legacy_config
+  note: Foreign-key rules show input 计划类型 being aggregated into customer-master 年金计划类型 rather than copied as the same-layer object.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/foreign_keys.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/wiki-bi/concepts/plan-type.md
+  source_type: current_wiki
+  note: Current concept page already states that input plan_type is not equivalent to customer-master 年金计划类型.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/concepts/plan-type.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/classification-family-evidence.md
+  source_type: current_wiki
+  note: Current evidence page preserves the same non-equivalence boundary across input and aggregation layers.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/classification-family-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/concepts/plan-type.md
+- docs/wiki-bi/evidence/classification-family-evidence.md
+submitted_at: '2026-04-18T05:22:00Z'
+semantic_findings:
+- semantic_id: sem-non-equivalence-input-plan-type-vs-customer-master-plan-type
+  semantic_node_type: semantic_non_equivalence
+  title: Input plan type vs customer-master plan type
+  summary: Input 计划类型 and aggregated customer-master 年金计划类型 are related but not equivalent layers.
+  business_conclusion: Input-side 计划类型 is not equivalent to aggregated customer-master 年金计划类型; the latter is a grouped customer-master classification result, not a direct copy of the former.
+  primary_source_refs:
+  - docs/business-background/年金计划类型与客户名称业务背景.md
+  - config/foreign_keys.yml
+  supporting_source_refs:
+  - docs/wiki-bi/concepts/plan-type.md
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/plan-type.md
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to:
+  - sem-concept-classification-family-layering
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Runtime and reporting pages sometimes mention both fields under one plan-type umbrella, but the accepted sources keep the input and customer-master layers distinct.
+    proxy_usage_refs:
+    - docs/wiki-bi/concepts/plan-type.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/plan-type.md
+    - docs/wiki-bi/evidence/classification-family-evidence.md
+    related_runtime_carriers:
+    - obj-annuity-performance-legacy-fact-processing
+    - obj-annuity-income-legacy-fact-processing
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports admission decisions that keep input plan-type interpretation separate from customer-master aggregated labels.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/plan-type.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that silently collapse input plan type into customer-master 年金计划类型.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/classification-family-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/concepts/plan-type.md
+        - docs/wiki-bi/evidence/classification-family-evidence.md
+        blocked_by: []
+trigger_id: trigger-classification-family-002
+orchestration_iteration: 1

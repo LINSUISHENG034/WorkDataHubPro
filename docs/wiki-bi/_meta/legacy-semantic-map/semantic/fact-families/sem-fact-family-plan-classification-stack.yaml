@@ -1,0 +1,84 @@
+semantic_id: sem-fact-family-plan-classification-stack
+semantic_node_type: semantic_fact_family
+title: Plan classification stack
+summary: The plan-classification stack spans input plan type, downstream business
+  type interpretation, aggregated customer-master labels, and portfolio anchors.
+business_conclusion: "Input \u8BA1\u5212\u7C7B\u578B, downstream \u4E1A\u52A1\u7C7B\
+  \u578B, aggregated \u7BA1\u7406\u8D44\u683C and \u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\
+  , and \u7EC4\u5408\u4EE3\u7801 together form a governed classification stack rather\
+  \ than one single-source field set."
+primary_semantic_sources:
+- config/foreign_keys.yml
+supporting_witness_sources:
+- docs/cleansing-rules/annuity-performance.md
+- docs/cleansing-rules/annuity-income.md
+- docs/wiki-bi/evidence/classification-family-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/evidence/classification-family-evidence.md
+- docs/wiki-bi/concepts/plan-type.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - Runtime pipelines materialize only parts of the stack per domain, but the governed
+    stack is visible once the config and cleansing rules are read together.
+  proxy_usage_refs:
+  - docs/cleansing-rules/annuity-performance.md
+  - docs/cleansing-rules/annuity-income.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  - docs/wiki-bi/concepts/plan-type.md
+  related_runtime_carriers:
+  - obj-annuity-performance-legacy-fact-processing
+  - obj-annuity-income-legacy-fact-processing
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports governance decisions that keep the full classification stack
+        visible across input, aggregation, and portfolio layers.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/classification-family-evidence.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring single-field explanations that hide the classification
+        stack.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/classification-family-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/evidence/classification-family-evidence.md
+      - docs/wiki-bi/concepts/plan-type.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Runtime pipelines materialize only parts of the stack per domain, but the governed
+  stack is visible once the config and cleansing rules are read together.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T05:20:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering

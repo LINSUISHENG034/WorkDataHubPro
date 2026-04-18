@@ -1,0 +1,94 @@
+semantic_id: sem-concept-classification-family-layering
+semantic_node_type: semantic_concept
+title: Classification family layering
+summary: "\u8BA1\u5212\u7C7B\u578B, \u5E74\u91D1\u8BA1\u5212\u7C7B\u578B, \u4E1A\u52A1\
+  \u7C7B\u578B, \u7BA1\u7406\u8D44\u683C, and \u7EC4\u5408\u4EE3\u7801 form one layered\
+  \ classification family rather than one flat field set."
+business_conclusion: "\u8BA1\u5212\u7C7B\u578B, \u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\
+  , \u4E1A\u52A1\u7C7B\u578B, \u7BA1\u7406\u8D44\u683C, and \u7EC4\u5408\u4EE3\u7801\
+  \ belong to one classification family with different roles across input interpretation,\
+  \ customer-master aggregation, and portfolio anchoring."
+primary_semantic_sources:
+- "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\u5BA2\u6237\
+  \u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+- config/foreign_keys.yml
+supporting_witness_sources:
+- docs/cleansing-rules/annuity-performance.md
+- docs/cleansing-rules/annuity-income.md
+- docs/wiki-bi/evidence/classification-family-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/plan-type.md
+- docs/wiki-bi/evidence/classification-family-evidence.md
+- docs/wiki-bi/concepts/company-id.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Runtime pages may discuss these fields in domain-local terms, but the accepted
+    evidence preserves one layered classification family across domains.
+  - The family is stable as business meaning even when individual runtime carriers
+    differ by domain.
+  proxy_usage_refs:
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/plan-type.md
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  - docs/wiki-bi/concepts/company-id.md
+  related_runtime_carriers:
+  - obj-annuity-performance-legacy-fact-processing
+  - obj-annuity-income-legacy-fact-processing
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports preserving classification semantics as one grouped family
+        instead of scattering them into unrelated per-field narratives.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/plan-type.md
+      - docs/wiki-bi/evidence/classification-family-evidence.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring explanations that flatten customer-master labels,
+        plan-type inputs, and portfolio anchors into one interchangeable layer.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/classification-family-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/concepts/plan-type.md
+      - docs/wiki-bi/evidence/classification-family-evidence.md
+      - docs/wiki-bi/concepts/company-id.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Runtime pages may discuss these fields in domain-local terms, but the accepted evidence
+  preserves one layered classification family across domains.
+- The family is stable as business meaning even when individual runtime carriers differ
+  by domain.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T05:20:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering

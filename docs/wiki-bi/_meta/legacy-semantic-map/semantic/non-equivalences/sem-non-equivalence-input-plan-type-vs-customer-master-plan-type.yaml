@@ -1,0 +1,84 @@
+semantic_id: sem-non-equivalence-input-plan-type-vs-customer-master-plan-type
+semantic_node_type: semantic_non_equivalence
+title: Input plan type vs customer-master plan type
+summary: "Input \u8BA1\u5212\u7C7B\u578B and aggregated customer-master \u5E74\u91D1\
+  \u8BA1\u5212\u7C7B\u578B are related but not equivalent layers."
+business_conclusion: "Input-side \u8BA1\u5212\u7C7B\u578B is not equivalent to aggregated\
+  \ customer-master \u5E74\u91D1\u8BA1\u5212\u7C7B\u578B; the latter is a grouped\
+  \ customer-master classification result, not a direct copy of the former."
+primary_semantic_sources:
+- "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\u5BA2\u6237\
+  \u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+- config/foreign_keys.yml
+supporting_witness_sources:
+- docs/wiki-bi/concepts/plan-type.md
+- docs/wiki-bi/evidence/classification-family-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to:
+- sem-concept-classification-family-layering
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/plan-type.md
+- docs/wiki-bi/evidence/classification-family-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Runtime and reporting pages sometimes mention both fields under one plan-type
+    umbrella, but the accepted sources keep the input and customer-master layers distinct.
+  proxy_usage_refs:
+  - docs/wiki-bi/concepts/plan-type.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/plan-type.md
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  related_runtime_carriers:
+  - obj-annuity-performance-legacy-fact-processing
+  - obj-annuity-income-legacy-fact-processing
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports admission decisions that keep input plan-type interpretation
+        separate from customer-master aggregated labels.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/plan-type.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: "Candidate for retiring narratives that silently collapse input plan\
+        \ type into customer-master \u5E74\u91D1\u8BA1\u5212\u7C7B\u578B."
+      affected_surfaces:
+      - docs/wiki-bi/evidence/classification-family-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/concepts/plan-type.md
+      - docs/wiki-bi/evidence/classification-family-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Runtime and reporting pages sometimes mention both fields under one plan-type umbrella,
+  but the accepted sources keep the input and customer-master layers distinct.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T05:22:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence

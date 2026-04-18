@@ -5,13 +5,13 @@
     "observed": 0,
     "inferred": 3,
     "contested": 1,
-    "consumption-candidate": 12
+    "consumption-candidate": 15
   },
   "contested_semantic_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
   "recommendation_counts": {
-    "recommended_stable_canonical": 12,
+    "recommended_stable_canonical": 15,
     "recommended_contested": 1,
     "claim_level_only": 3
   },
@@ -20,18 +20,21 @@
   ],
   "governance_implication_summaries": {
     "slice_admission": {
-      "count": 16,
+      "count": 19,
       "ids": [
+        "sem-concept-classification-family-layering",
         "sem-concept-customer-annual-identity-family",
         "sem-concept-customer-master-backfill",
         "sem-concept-customer-status",
         "sem-decision-anchor-customer-status-rules",
         "sem-fact-family-customer-status-source-family",
+        "sem-fact-family-plan-classification-stack",
         "sem-fact-family-reference-sync-target-inventory",
         "sem-grain-split-is-churned-this-year",
         "sem-lifecycle-customer-status-yearly-cycle",
         "sem-non-equivalence-customer-master-vs-status",
         "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-non-equivalence-input-plan-type-vs-customer-master-plan-type",
         "sem-rule-is-churned-this-year-definition",
         "sem-rule-is-new-definition",
         "sem-rule-reference-sync-incremental-state",
@@ -49,13 +52,16 @@
       ]
     },
     "retire_candidates": {
-      "count": 9,
+      "count": 12,
       "ids": [
+        "sem-concept-classification-family-layering",
         "sem-concept-customer-annual-identity-family",
         "sem-fact-family-customer-status-source-family",
+        "sem-fact-family-plan-classification-stack",
         "sem-fact-family-reference-sync-target-inventory",
         "sem-lifecycle-customer-status-yearly-cycle",
         "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-non-equivalence-input-plan-type-vs-customer-master-plan-type",
         "sem-rule-is-churned-this-year-definition",
         "sem-rule-is-new-definition",
         "sem-rule-status-source-splitting",
@@ -63,18 +69,21 @@
       ]
     },
     "durable_wiki_absorption": {
-      "count": 16,
+      "count": 19,
       "ids": [
+        "sem-concept-classification-family-layering",
         "sem-concept-customer-annual-identity-family",
         "sem-concept-customer-master-backfill",
         "sem-concept-customer-status",
         "sem-decision-anchor-customer-status-rules",
         "sem-fact-family-customer-status-source-family",
+        "sem-fact-family-plan-classification-stack",
         "sem-fact-family-reference-sync-target-inventory",
         "sem-grain-split-is-churned-this-year",
         "sem-lifecycle-customer-status-yearly-cycle",
         "sem-non-equivalence-customer-master-vs-status",
         "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-non-equivalence-input-plan-type-vs-customer-master-plan-type",
         "sem-rule-is-churned-this-year-definition",
         "sem-rule-is-new-definition",
         "sem-rule-reference-sync-incremental-state",
@@ -90,5 +99,5 @@
   "unresolved_proxy_conflict_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
-  "generated_at": "2026-04-18T04:30:00Z"
+  "generated_at": "2026-04-18T05:22:00Z"
 }

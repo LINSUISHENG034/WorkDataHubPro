@@ -1,0 +1,170 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-concept-classification-family-layering
+sources_read:
+- source_ref: docs/business-background/年金计划类型与客户名称业务背景.md
+  source_type: legacy_doc
+  note: Business background explicitly states that plan type changes how customer-name, plan-name, and plan-code clues should be interpreted.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/年金计划类型与客户名称业务背景.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/foreign_keys.yml
+  source_type: legacy_config
+  note: Foreign-key aggregation rules explicitly separate input-side 计划类型, downstream 管理资格, aggregated 年金计划类型, and portfolio anchor 组合代码.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/foreign_keys.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/cleansing-rules/annuity-performance.md
+  source_type: legacy_doc
+  note: Annuity performance cleansing rules show that 计划类型 and 业务类型 drive plan-code and portfolio defaulting rather than acting as identity truth.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/cleansing-rules/annuity-performance.md
+  semantic_authority: runtime_witness
+- source_ref: docs/cleansing-rules/annuity-income.md
+  source_type: legacy_doc
+  note: Annuity income cleansing rules preserve the same layered classification roles across 计划类型, 业务类型, and 组合代码.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/cleansing-rules/annuity-income.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/classification-family-evidence.md
+  source_type: current_wiki
+  note: Current durable evidence page already preserves the same layered family boundary and target pages.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/classification-family-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/concepts/plan-type.md
+- docs/wiki-bi/evidence/classification-family-evidence.md
+- docs/wiki-bi/concepts/company-id.md
+submitted_at: '2026-04-18T05:20:00Z'
+semantic_findings:
+- semantic_id: sem-concept-classification-family-layering
+  semantic_node_type: semantic_concept
+  title: Classification family layering
+  summary: 计划类型, 年金计划类型, 业务类型, 管理资格, and 组合代码 form one layered classification family rather than one flat field set.
+  business_conclusion: 计划类型, 年金计划类型, 业务类型, 管理资格, and 组合代码 belong to one classification family with different roles across input interpretation, customer-master aggregation, and portfolio anchoring.
+  primary_source_refs:
+  - docs/business-background/年金计划类型与客户名称业务背景.md
+  - config/foreign_keys.yml
+  supporting_source_refs:
+  - docs/cleansing-rules/annuity-performance.md
+  - docs/cleansing-rules/annuity-income.md
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/plan-type.md
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  - docs/wiki-bi/concepts/company-id.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Runtime pages may discuss these fields in domain-local terms, but the accepted evidence preserves one layered classification family across domains.
+    - The family is stable as business meaning even when individual runtime carriers differ by domain.
+    proxy_usage_refs:
+    - docs/wiki-bi/evidence/classification-family-evidence.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/plan-type.md
+    - docs/wiki-bi/evidence/classification-family-evidence.md
+    - docs/wiki-bi/concepts/company-id.md
+    related_runtime_carriers:
+    - obj-annuity-performance-legacy-fact-processing
+    - obj-annuity-income-legacy-fact-processing
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports preserving classification semantics as one grouped family instead of scattering them into unrelated per-field narratives.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/plan-type.md
+        - docs/wiki-bi/evidence/classification-family-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring explanations that flatten customer-master labels, plan-type inputs, and portfolio anchors into one interchangeable layer.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/classification-family-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/concepts/plan-type.md
+        - docs/wiki-bi/evidence/classification-family-evidence.md
+        - docs/wiki-bi/concepts/company-id.md
+        blocked_by: []
+- semantic_id: sem-fact-family-plan-classification-stack
+  semantic_node_type: semantic_fact_family
+  title: Plan classification stack
+  summary: The plan-classification stack spans input plan type, downstream business type interpretation, aggregated customer-master labels, and portfolio anchors.
+  business_conclusion: Input 计划类型, downstream 业务类型, aggregated 管理资格 and 年金计划类型, and 组合代码 together form a governed classification stack rather than one single-source field set.
+  primary_source_refs:
+  - config/foreign_keys.yml
+  supporting_source_refs:
+  - docs/cleansing-rules/annuity-performance.md
+  - docs/cleansing-rules/annuity-income.md
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/evidence/classification-family-evidence.md
+  - docs/wiki-bi/concepts/plan-type.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Runtime pipelines materialize only parts of the stack per domain, but the governed stack is visible once the config and cleansing rules are read together.
+    proxy_usage_refs:
+    - docs/cleansing-rules/annuity-performance.md
+    - docs/cleansing-rules/annuity-income.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/evidence/classification-family-evidence.md
+    - docs/wiki-bi/concepts/plan-type.md
+    related_runtime_carriers:
+    - obj-annuity-performance-legacy-fact-processing
+    - obj-annuity-income-legacy-fact-processing
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports governance decisions that keep the full classification stack visible across input, aggregation, and portfolio layers.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/classification-family-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring single-field explanations that hide the classification stack.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/classification-family-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/evidence/classification-family-evidence.md
+        - docs/wiki-bi/concepts/plan-type.md
+        blocked_by: []
+trigger_id: trigger-classification-family-001
+orchestration_iteration: 1
