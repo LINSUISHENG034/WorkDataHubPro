@@ -62,6 +62,8 @@
   - maintenance 轮次，把 `关键年金计划`、`is_churned_this_year` shared coverage 与 classification family 推进成新的 durable business-semantics 入口。
 - [Round 30：relationship breadth deepening](./round-30-relationship-breadth-deepening.md)
   - maintenance 轮次，把 `关联计划数` 从 dispatcher 提示推进成 durable relationship-breadth 对象页。
+- [Round 31：relationship breadth and classification closeout](./round-31-relationship-breadth-and-classification-closeout.md)
+  - maintenance 轮次，把 `关联机构数` 与 `管理资格` 推进成 durable objects，并把 remaining follow-on candidates 收紧回 dispatcher / evidence 层。
 
 ## 计划轮次
 

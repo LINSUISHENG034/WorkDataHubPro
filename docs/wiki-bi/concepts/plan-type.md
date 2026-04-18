@@ -59,6 +59,7 @@
 
 - [企业身份标识：`company_id`](./company-id.md)
 - [回填：`backfill`](./backfill.md)
+- [管理资格](./management-qualification.md)
 
 ## 相关标准
 

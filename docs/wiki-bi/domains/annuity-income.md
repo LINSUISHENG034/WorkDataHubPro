@@ -36,13 +36,15 @@ current project 已有：
 - [`tags`](../concepts/tags.md)
 - [主拓机构](../concepts/primary-branch.md)
 - [关联计划数](../concepts/related-plan-count.md)
+- [关联机构数](../concepts/related-branch-count.md)
+- [管理资格](../concepts/management-qualification.md)
 
 ## 关键输出结果
 
 - direct fact output
 - reference / customer signal
 - customer-master-derived signals（fee-weighted 主拓机构、关键计划、`yyMM新建`、`新客*`）
-- 其中 `关联计划数` 用于解释 relationship breadth，不等于主导计划锚点，也不等于 snapshot-side `plan_count`
+- 其中 `关联计划数` 与 `关联机构数` 分别解释计划侧与机构侧的 relationship breadth，不等于主导对象锚点，也不等于 snapshot-side 计数字段
 - unresolved identity 的 operator-facing artifacts
 - post-ID5 identity governance 与 branch mapping 约束
 
@@ -51,6 +53,7 @@ current project 已有：
 - hidden field semantics：
   - `客户名称` 在清洗前会复制为 `年金账户名`，用于后续 identity 解析与审计线索保留
   - `计划类型=单一计划` 且 `计划名称` 匹配 `企业年金计划` 后缀时，空 `客户名称` 可由计划名提取
+  - classification family 中的 customer-master 聚合分类可继续通过 [管理资格](../concepts/management-qualification.md) 回答，而不是只停留在 field-processing dispatcher
 - operator-visible differences：
   - unresolved identity 不是静默丢弃；需要外显为 `unknown_names_csv` / failed-record artifacts
   - 当前 contract 明确 `projection_results = []`，不把 legacy hook 路径伪装成默认运行路径

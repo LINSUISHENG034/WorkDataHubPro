@@ -21,6 +21,8 @@
 - [`tags`](../concepts/tags.md)
 - [主拓机构](../concepts/primary-branch.md)
 - [关联计划数](../concepts/related-plan-count.md)
+- [关联机构数](../concepts/related-branch-count.md)
+- [管理资格](../concepts/management-qualification.md)
 - [快照粒度：`snapshot_granularity`](../concepts/snapshot-granularity.md)
 
 ## 关键输出结果
@@ -70,8 +72,9 @@
 
 - 输入侧关键语义（`客户名称` / `年金账户名`、`集团企业客户号` / `年金账户号`、row-level hard gate）见 [`annuity_performance` 输入合同](../standards/input-reality/annuity-performance-input-contract.md)。
 - 输出侧关键语义（`max_by` 主拓机构/关键计划、`tags=yyMM新建`、temp-id backfill 边界）见 [`annuity_performance` 输出合同](../standards/output-correctness/annuity-performance-output-contract.md)。
-- cross-domain customer-master-derived signal family（`主拓机构`、`关键年金计划`、`关联计划数`、`yyMM新建`）见 [customer-master signals 证据](../evidence/customer-master-signals-evidence.md)。
-- 其中 `关联计划数` 已有独立对象页，用来解释 relationship breadth，而不是主导计划选择或 snapshot `plan_count`：[关联计划数](../concepts/related-plan-count.md)。
+- cross-domain customer-master-derived signal family（`主拓机构`、`关键年金计划`、`关联计划数`、`关联机构数`、`yyMM新建`）见 [customer-master signals 证据](../evidence/customer-master-signals-evidence.md)。
+- relationship breadth 现在已有两个 count-side 对象页：计划侧见 [关联计划数](../concepts/related-plan-count.md)，机构侧见 [关联机构数](../concepts/related-branch-count.md)。
+- classification family 中的 customer-master 聚合分类见 [管理资格](../concepts/management-qualification.md) 与 [classification family 证据](../evidence/classification-family-evidence.md)。
 - 字段级证据和证据强度分层见 [`annuity_performance` 字段处理证据](../evidence/annuity-performance-field-processing-evidence.md)。
 
 ## 相关 domains

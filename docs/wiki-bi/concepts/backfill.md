@@ -30,7 +30,8 @@
 - 回填建立在 processed fact rows 之上，而不是 raw workbook 行
 - 不同 domain 会贡献不同 backfill targets 与 weighting column
 - `tags`、`主拓机构`、`关键年金计划`、`关联计划数` 这类 customer-master signals 都依赖 aggregation rule，不能当作无来源字段
-- `关键年金计划` 只回答“哪个计划最具主导性”，不替代 `其他年金计划` 或 `关联计划数` 这类 relationship breadth 信号
+- `关键年金计划` 只回答“哪个计划最具主导性”，不替代 `其他年金计划`、`关联计划数` 或 `关联机构数` 这类 relationship breadth 信号
+- `管理资格` 回答 customer-master 聚合分类，不等于输入侧 `业务类型`
 - temp-id / blank value 的处理会直接影响 backfill 输出
 
 ## 对输出与下游的影响
@@ -61,6 +62,8 @@
 - [主拓机构](./primary-branch.md)
 - [关键年金计划](./key-annuity-plan.md)
 - [关联计划数](./related-plan-count.md)
+- [关联机构数](./related-branch-count.md)
+- [管理资格](./management-qualification.md)
 
 ## 相关标准
 

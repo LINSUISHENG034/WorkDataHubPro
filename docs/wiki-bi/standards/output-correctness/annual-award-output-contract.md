@@ -35,6 +35,8 @@ replay evidence 表明，`annual_award` 当前还会显式发布：
 - `tags=yyMM中标`
 - `年金客户类型=中标客户`
 - 基于 `计划规模` 的主导 customer/master 值
+- relationship-breadth outputs：`关联计划数`、`关联机构数`、`其他年金计划`、`其他开拓机构`
+- 聚合分类结果 `管理资格`
 
 ## enrichment 语义合同（hidden but required）
 
@@ -100,11 +102,15 @@ replay evidence 表明，`annual_award` 当前还会显式发布：
 - [回填：`backfill`](../../concepts/backfill.md)
 - [`tags`](../../concepts/tags.md)
 - [年金客户类型：`customer_type`](../../concepts/customer-type.md)
+- [关联计划数](../../concepts/related-plan-count.md)
+- [关联机构数](../../concepts/related-branch-count.md)
+- [管理资格](../../concepts/management-qualification.md)
 
 ## 相关证据
 
 - [`annual_award` 字段处理证据](../../evidence/annual-award-field-processing-evidence.md)
 - [customer-master signals 证据](../../evidence/customer-master-signals-evidence.md)
+- [classification family 证据](../../evidence/classification-family-evidence.md)
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
 

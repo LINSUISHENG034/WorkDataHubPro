@@ -18,6 +18,7 @@
 
 - `关联计划数` 不等于 `关键年金计划`
 - `关联计划数` 不等于 `其他年金计划`
+- `关联计划数` 不等于 `关联机构数`
 - `关联计划数` 不等于 snapshot-side `plan_count`
 - `关联计划数` 只回答“有多少个不同计划”，不枚举具体是哪几个计划
 
@@ -25,7 +26,7 @@
 
 - `annuity_performance` / `annuity_income` 以 `计划代码` 聚合 relationship breadth
 - `annual_award` / `annual_loss` 以 `年金计划号` 聚合 relationship breadth
-- 它与 `其他年金计划`、`其他开拓机构` 一起构成 customer-master relationship breadth，但三者回答的问题不同
+- 它与 `关联机构数`、`其他年金计划`、`其他开拓机构` 一起构成 customer-master relationship breadth，但各自回答的问题不同
 - blank value filtering 与 distinct 规则会直接影响最终计数
 
 ## 对输出与下游的影响
@@ -45,6 +46,7 @@
 
 - [回填：`backfill`](./backfill.md)
 - [关键年金计划](./key-annuity-plan.md)
+- [关联机构数](./related-branch-count.md)
 - [快照粒度：`snapshot_granularity`](./snapshot-granularity.md)
 
 ## 相关标准

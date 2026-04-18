@@ -5,6 +5,12 @@
 
 ## [2026-04-18 20:34] maintain | customer_type vs is_new governance package
 
+## [2026-04-18 23:06] maintain | round 31 relationship breadth and classification closeout
+
+- 新增 `related-branch-count.md` 与 `management-qualification.md`，把 `关联机构数` 与 `管理资格` 从遗漏或 dispatcher-only 状态推进成 durable wiki 对象
+- 回写 `customer-master-signals-evidence`、`classification-family-evidence`、相邻 concept / field-processing / output-contract / domain 页面，使 relationship breadth 与 classification family 的边界更直接可答
+- 新增 Round 31 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确 `其他年金计划`、`其他开拓机构`、`组合代码` 仍保留为 follow-on candidates
+
 - 新增 `customer-type-is-new-governance-evidence.md`，把 semantic non-equivalence、legacy proxy usage 与 disposition question 收紧成独立治理对象
 - 回写 `customer-type`、`is-new`、`customer-status-semantics` 与相邻 evidence/index 页面，使它们统一使用 semantic truth / proxy history / governance disposition 这组表达
 - 收紧 semantic-map canonical non-equivalence 节点，准备把该项从“模糊 contested discovery”推进到“已确认语义、待裁决 disposition”的 successor-wave 视图

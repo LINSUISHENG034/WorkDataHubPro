@@ -23,7 +23,7 @@
 - `reference_sync` 与 `backfill` 是同一 reference strategy 下的两层对象，不应再被写成同一条“补齐逻辑”。
 - `reference_sync` 负责把 authoritative reference data 预先同步到受治理 target inventory；`backfill` 负责从 processed facts 派生缺失对象与 customer-master signals。
 - `backfill` 的输入前提是 canonicalized fact rows，而不是 raw workbook rows；它在 legacy contract 中承担 FK-safe gate，先于事实加载完成。
-- `backfill` 不只补 reference keys，还会写 customer-master 级别的 `主拓机构`、`关键年金计划`、`关联计划数`、`tags`、`年金客户类型` 等派生结果。
+- `backfill` 不只补 reference keys，还会写 customer-master 级别的 `主拓机构`、`关键年金计划`、`关联计划数`、`关联机构数`、`tags`、`年金客户类型` 等派生结果。
 - domain-specific aggregation 是业务语义，不是实现细节：`annuity_performance` 以 `期末资产规模` 选主拓对象，`annuity_income` 以 `固费` 选主拓对象，event domains 以 `计划规模` 形成 customer-master signals。
 - `skip_blank_values` 与 `company_id` 的 temp-id 过滤属于稳定语义边界；未解析身份或 `(空白)` 键不应被直接物化成 customer master。
 - `reference_sync` 的 authoritative 写入与 backfill 的 auto-derived 写入有不同 provenance：前者标记为 `authoritative` 且默认 `needs_review = false`，后者标记为 `auto_derived` 且 `needs_review = true`。

@@ -64,7 +64,7 @@
 - identity resolution、plan-code defaulting、backfill 聚合、contract / snapshot 派生这类动作属于明确业务语义处理
 - 某些字段同时跨两类，例如 `计划代码`、`客户名称`、`机构代码`，因为它们先要被清洗成可用格式，之后才进入业务解释
 - `annuity_performance` 的隐藏字段语义不是“字段数量”，而是字段在 direct fact、backfill、snapshot 三层里的角色迁移
-- `计划类型`、`业务类型`、`组合代码` 与 customer-master `年金计划类型` / `管理资格` 属于同一 classification family 的不同层，统一解释见 [classification family 证据](./classification-family-evidence.md)
+- `计划类型`、`业务类型`、`组合代码` 与 customer-master `年金计划类型` / `管理资格` 属于同一 classification family 的不同层；统一解释见 [classification family 证据](./classification-family-evidence.md) 与 [管理资格](../concepts/management-qualification.md)
 
 ## 哪些来源是强证
 
