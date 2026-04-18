@@ -14,6 +14,9 @@ semantic_nodes:
 - semantic_id: sem-fact-family-reference-sync-target-inventory
   semantic_node_type: semantic_fact_family
   path: semantic/fact-families/sem-fact-family-reference-sync-target-inventory.yaml
+- semantic_id: sem-grain-split-is-churned-this-year
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-grain-split-is-churned-this-year.yaml
 - semantic_id: sem-lifecycle-customer-status-yearly-cycle
   semantic_node_type: semantic_lifecycle
   path: semantic/lifecycles/sem-lifecycle-customer-status-yearly-cycle.yaml
@@ -23,6 +26,9 @@ semantic_nodes:
 - semantic_id: sem-non-equivalence-customer-type-vs-is-new
   semantic_node_type: semantic_non_equivalence
   path: semantic/non-equivalences/sem-non-equivalence-customer-type-vs-is-new.yaml
+- semantic_id: sem-rule-is-churned-this-year-definition
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-is-churned-this-year-definition.yaml
 - semantic_id: sem-rule-is-new-definition
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-is-new-definition.yaml

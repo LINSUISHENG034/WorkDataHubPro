@@ -1,0 +1,79 @@
+semantic_id: sem-grain-split-is-churned-this-year
+semantic_node_type: semantic_rule
+title: is_churned_this_year grain split
+summary: Churn keeps the same monthly AUM-zero meaning across two snapshot grains,
+  but with different match keys.
+business_conclusion: "Product-line churn matches company_id + \u4EA7\u54C1\u7EBF\u4EE3\
+  \u7801, while plan-level churn matches company_id + \u8BA1\u5212\u4EE3\u7801 + \u4EA7\
+  \u54C1\u7EBF\u4EE3\u7801; the two fields share a semantic family but are not interchangeable\
+  \ at query grain."
+primary_semantic_sources:
+- config/customer_status_rules.yml
+supporting_witness_sources:
+- docs/verification_guide_real_data.md
+- src/work_data_hub/customer_mdm/snapshot_refresh.py
+- docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/customer-status.md
+- docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+proposal_governance:
+  recommendation_status: claim_level_only
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Runtime surfaces often reuse the same field label for both grains, but the accepted
+    evidence keeps the match keys distinct.
+  proxy_usage_refs:
+  - src/work_data_hub/customer_mdm/snapshot_refresh.py
+  downstream_consequence_refs:
+  - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports keeping plan and product-line churn separate when validating
+        snapshot outputs.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Best absorbed into shared status and evidence pages instead of a standalone
+        object page.
+      target_pages:
+      - docs/wiki-bi/concepts/customer-status.md
+      - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: inferred
+discovery_view_status: sufficient
+consumption_readiness_status: discovery-only
+readiness_notes:
+- Runtime surfaces often reuse the same field label for both grains, but the accepted
+  evidence keeps the match keys distinct.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T02:10:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year

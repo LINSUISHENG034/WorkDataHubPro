@@ -1,0 +1,93 @@
+semantic_id: sem-rule-is-churned-this-year-definition
+semantic_node_type: semantic_rule
+title: is_churned_this_year definition
+summary: is_churned_this_year is a monthly churn judgement derived from current-month
+  annuity-performance AUM, not a yearly loss-report flag.
+business_conclusion: "is_churned_this_year means the current snapshot month has zero\
+  \ summed AUM for the matched grain in business.\u89C4\u6A21\u660E\u7EC6, with missing\
+  \ current-month rows interpreted as zero and therefore churned."
+primary_semantic_sources:
+- config/customer_status_rules.yml
+- "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+  \u6001\u6765\u6E90\u5206\u6790.md"
+supporting_witness_sources:
+- docs/verification_guide_real_data.md
+- src/work_data_hub/customer_mdm/status_evaluator.py
+- src/work_data_hub/customer_mdm/snapshot_refresh.py
+- docs/wiki-bi/concepts/customer-status.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to:
+- sem-rule-is-loss-reported-definition
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/customer-status.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+- docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - Legacy runtime may colloquially group churn with yearly loss, but the accepted
+    rule anchors churn to current-month annuity performance rather than annual loss
+    reporting.
+  proxy_usage_refs:
+  - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+    \u6001\u6765\u6E90\u5206\u6790.md"
+  - docs/wiki-bi/evidence/is-loss-reported-evidence.md
+  downstream_consequence_refs:
+  - docs/verification_guide_real_data.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports preserving churn as a monthly annuity-performance judgement
+        and blocks collapsing it into the annual-loss status family.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/customer-status.md
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that equate churn with annual loss-reporting
+        or ignore the current-month zero-or-missing AUM rule.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review on the shared status pages; no
+        object-level split is recommended yet because the meaning still spans product-line
+        and plan grains.
+      target_pages:
+      - docs/wiki-bi/concepts/customer-status.md
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Legacy runtime may colloquially group churn with yearly loss, but the accepted rule
+  anchors churn to current-month annuity performance rather than annual loss reporting.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T02:10:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year

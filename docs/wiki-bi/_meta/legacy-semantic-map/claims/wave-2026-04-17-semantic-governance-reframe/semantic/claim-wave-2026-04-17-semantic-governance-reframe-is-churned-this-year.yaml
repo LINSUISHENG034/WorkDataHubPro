@@ -1,0 +1,185 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-is-churned-this-year-definition
+sources_read:
+- source_ref: config/customer_status_rules.yml
+  source_type: legacy_config
+  note: Status rules config is the authoritative rule anchor for churn semantics, source family, time scope, and grain split.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/customer_status_rules.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/business-background/客户主数据回填与状态来源分析.md
+  source_type: legacy_doc
+  note: Business background explains that churned status is derived from annuity performance disappearance or zero AUM and distinguishes it from loss-reported status.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/客户主数据回填与状态来源分析.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/verification_guide_real_data.md
+  source_type: legacy_doc
+  note: Verification guide provides downstream witness queries that treat current-month summed AUM zero as the validation condition for churn at both product-line and plan grain.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/verification_guide_real_data.md
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/status_evaluator.py
+  source_type: legacy_code
+  note: current_period_sum_zero implements churn as COALESCE(SUM(...), 0) = 0, so missing current-month rows are treated as churn.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/status_evaluator.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/snapshot_refresh.py
+  source_type: legacy_code
+  note: Snapshot refresh materializes both product-line and plan-level churn fields into the two monthly snapshot tables.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/snapshot_refresh.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/concepts/customer-status.md
+  source_type: current_wiki
+  note: Current concept page preserves the monthly annuity-performance boundary for churn semantics.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/concepts/customer-status.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  source_type: current_wiki
+  note: Current semantic-correctness page preserves the annuity-performance boundary and the status-family split.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+  source_type: current_wiki
+  note: Current aggregate evidence page records that churn should remain on the shared status page because it spans two grains and AUM semantics.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/concepts/customer-status.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+- docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+submitted_at: '2026-04-18T02:10:00Z'
+semantic_findings:
+- semantic_id: sem-rule-is-churned-this-year-definition
+  semantic_node_type: semantic_rule
+  title: is_churned_this_year definition
+  summary: is_churned_this_year is a monthly churn judgement derived from current-month annuity-performance AUM, not a yearly loss-report flag.
+  business_conclusion: is_churned_this_year means the current snapshot month has zero summed AUM for the matched grain in business.规模明细, with missing current-month rows interpreted as zero and therefore churned.
+  primary_source_refs:
+  - config/customer_status_rules.yml
+  - docs/business-background/客户主数据回填与状态来源分析.md
+  supporting_source_refs:
+  - docs/verification_guide_real_data.md
+  - src/work_data_hub/customer_mdm/status_evaluator.py
+  - src/work_data_hub/customer_mdm/snapshot_refresh.py
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to:
+  - sem-rule-is-loss-reported-definition
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Legacy runtime may colloquially group churn with yearly loss, but the accepted rule anchors churn to current-month annuity performance rather than annual loss reporting.
+    proxy_usage_refs:
+    - docs/business-background/客户主数据回填与状态来源分析.md
+    - docs/wiki-bi/evidence/is-loss-reported-evidence.md
+    downstream_consequence_refs:
+    - docs/verification_guide_real_data.md
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports preserving churn as a monthly annuity-performance judgement and blocks collapsing it into the annual-loss status family.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/customer-status.md
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that equate churn with annual loss-reporting or ignore the current-month zero-or-missing AUM rule.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review on the shared status pages; no object-level split is recommended yet because the meaning still spans product-line and plan grains.
+        target_pages:
+        - docs/wiki-bi/concepts/customer-status.md
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+        blocked_by: []
+- semantic_id: sem-grain-split-is-churned-this-year
+  semantic_node_type: semantic_rule
+  title: is_churned_this_year grain split
+  summary: Churn keeps the same monthly AUM-zero meaning across two snapshot grains, but with different match keys.
+  business_conclusion: Product-line churn matches company_id + 产品线代码, while plan-level churn matches company_id + 计划代码 + 产品线代码; the two fields share a semantic family but are not interchangeable at query grain.
+  primary_source_refs:
+  - config/customer_status_rules.yml
+  supporting_source_refs:
+  - docs/verification_guide_real_data.md
+  - src/work_data_hub/customer_mdm/snapshot_refresh.py
+  - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Runtime surfaces often reuse the same field label for both grains, but the accepted evidence keeps the match keys distinct.
+    proxy_usage_refs:
+    - src/work_data_hub/customer_mdm/snapshot_refresh.py
+    downstream_consequence_refs:
+    - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports keeping plan and product-line churn separate when validating snapshot outputs.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Best absorbed into shared status and evidence pages instead of a standalone object page.
+        target_pages:
+        - docs/wiki-bi/concepts/customer-status.md
+        - docs/wiki-bi/evidence/status-and-snapshot-evidence.md
+        blocked_by: []
+trigger_id: trigger-annual-status-mining
+orchestration_iteration: 1
