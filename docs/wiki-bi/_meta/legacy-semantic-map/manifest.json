@@ -33,17 +33,23 @@
     "semantic/concepts/sem-concept-customer-master-backfill.yaml",
     "semantic/concepts/sem-concept-customer-status.yaml",
     "semantic/concepts/sem-concept-identity-governance-layering.yaml",
+    "semantic/concepts/sem-concept-reference-strategy-layering.yaml",
     "semantic/decision-anchors/sem-decision-anchor-customer-status-rules.yaml",
     "semantic/fact-families/sem-fact-family-customer-status-source-family.yaml",
     "semantic/fact-families/sem-fact-family-plan-classification-stack.yaml",
     "semantic/fact-families/sem-fact-family-reference-sync-target-inventory.yaml",
     "semantic/index.yaml",
+    "semantic/lifecycles/sem-lifecycle-company-lookup-queue-recovery-cycle.yaml",
     "semantic/lifecycles/sem-lifecycle-customer-status-yearly-cycle.yaml",
+    "semantic/lifecycles/sem-lifecycle-reference-sync-preload-cycle.yaml",
     "semantic/non-equivalences/sem-non-equivalence-customer-master-vs-status.yaml",
     "semantic/non-equivalences/sem-non-equivalence-customer-type-vs-is-new.yaml",
     "semantic/non-equivalences/sem-non-equivalence-input-plan-type-vs-customer-master-plan-type.yaml",
+    "semantic/non-equivalences/sem-non-equivalence-reference-sync-vs-backfill.yaml",
     "semantic/non-equivalences/sem-non-equivalence-temp-id-vs-company-id.yaml",
     "semantic/rules/sem-grain-split-is-churned-this-year.yaml",
+    "semantic/rules/sem-rule-annuity-performance-post-hook-chain.yaml",
+    "semantic/rules/sem-rule-company-lookup-queue-single-domain-boundary.yaml",
     "semantic/rules/sem-rule-is-churned-this-year-definition.yaml",
     "semantic/rules/sem-rule-is-new-definition.yaml",
     "semantic/rules/sem-rule-reference-sync-incremental-state.yaml",
@@ -58,19 +64,7 @@
     "subsystems/ss-annuity-performance.yaml"
   ],
   "compiled_claim_ids": [
-    "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
-    "claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering",
-    "claim-wave-2026-04-17-semantic-governance-reframe-core",
-    "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering",
-    "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
-    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
-    "claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence",
-    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
-    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
-    "claim-wave-2026-04-17-semantic-governance-reframe-rules",
-    "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
-    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet",
-    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence"
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle"
   ],
   "compiled_claims_by_wave": {
     "wave-2026-04-17-first-wave-pilot": [
@@ -94,19 +88,7 @@
       "claim-wave-2026-04-17-first-wave-pilot-reference-sync-object"
     ],
     "wave-2026-04-17-semantic-governance-reframe": [
-      "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
-      "claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering",
-      "claim-wave-2026-04-17-semantic-governance-reframe-core",
-      "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering",
-      "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
-      "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
-      "claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence",
-      "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
-      "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
-      "claim-wave-2026-04-17-semantic-governance-reframe-rules",
-      "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
-      "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet",
-      "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence"
+      "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle"
     ]
   }
 }

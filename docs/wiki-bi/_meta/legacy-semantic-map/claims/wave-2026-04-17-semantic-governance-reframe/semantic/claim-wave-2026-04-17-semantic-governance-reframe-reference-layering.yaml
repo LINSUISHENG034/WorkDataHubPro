@@ -1,0 +1,164 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-reference-layering
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-concept-reference-strategy-layering
+sources_read:
+- source_ref: docs/guides/infrastructure/backfill-mechanism-guide.md
+  source_type: legacy_doc
+  note: Legacy guide explicitly separates the reference strategy into pre-load reference_sync and process-time backfill under the FK-safe workflow.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/backfill-mechanism-guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/reference_sync.yml
+  source_type: legacy_config
+  note: reference_sync config defines the governed authoritative pre-load surface, including target inventory, schedule, and sync contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/reference_sync.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/business-background/客户主数据回填与状态来源分析.md
+  source_type: legacy_doc
+  note: Business-background guidance keeps customer-master backfill semantics distinct from status and snapshot semantics.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/客户主数据回填与状态来源分析.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  source_type: current_wiki
+  note: Current evidence page already preserves the accepted split between authoritative reference_sync and derived backfill.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/concepts/backfill.md
+- docs/wiki-bi/surfaces/reference-sync.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+submitted_at: '2026-04-18T08:00:00Z'
+semantic_findings:
+- semantic_id: sem-concept-reference-strategy-layering
+  semantic_node_type: semantic_concept
+  title: Reference strategy layering
+  summary: Legacy reference handling splits authoritative pre-load reference_sync from process-time backfill instead of treating both as one generic completion step.
+  business_conclusion: reference_sync and backfill belong to one reference strategy but they are layered, non-equivalent objects. reference_sync preloads authoritative reference data before fact processing, while backfill derives missing references and customer-master side effects from processed fact rows under FK-safe gating.
+  primary_source_refs:
+  - docs/guides/infrastructure/backfill-mechanism-guide.md
+  - config/reference_sync.yml
+  - docs/business-background/客户主数据回填与状态来源分析.md
+  supporting_source_refs:
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/backfill.md
+  - docs/wiki-bi/surfaces/reference-sync.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Legacy materials sometimes discuss both paths as one broad补齐 story, but the accepted semantic boundary is a two-layer strategy rather than one undifferentiated operation.
+    proxy_usage_refs:
+    - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/backfill.md
+    - docs/wiki-bi/surfaces/reference-sync.md
+    - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+    related_runtime_carriers:
+    - obj-reference-sync-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports keeping authoritative pre-load and derived backfill as separate slice concerns instead of collapsing them into one reference bucket.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/backfill.md
+        - docs/wiki-bi/surfaces/reference-sync.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring unresolved runtime/state questions without erasing the layered reference strategy itself.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that describe reference_sync and backfill as interchangeable execution steps.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a stable semantic boundary for legacy reference handling.
+        target_pages:
+        - docs/wiki-bi/concepts/backfill.md
+        - docs/wiki-bi/surfaces/reference-sync.md
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        blocked_by: []
+- semantic_id: sem-non-equivalence-reference-sync-vs-backfill
+  semantic_node_type: semantic_non_equivalence
+  title: reference_sync vs backfill
+  summary: reference_sync and backfill may touch related business objects, but they do not express the same write surface or provenance.
+  business_conclusion: object-name overlap does not make reference_sync and backfill semantically equivalent. reference_sync writes governed authoritative inventory with pre-load semantics, while backfill writes derived or side-effectful objects after processed facts have already established missing references.
+  primary_source_refs:
+  - docs/guides/infrastructure/backfill-mechanism-guide.md
+  - config/reference_sync.yml
+  supporting_source_refs:
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/backfill.md
+  - docs/wiki-bi/surfaces/reference-sync.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to:
+  - sem-concept-reference-strategy-layering
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Shared business nouns across the two paths are scope-limited aliases, not proof that the two paths have the same semantic role.
+    proxy_usage_refs:
+    - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/backfill.md
+    - docs/wiki-bi/surfaces/reference-sync.md
+    related_runtime_carriers:
+    - obj-reference-sync-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports evaluating reference_sync and backfill independently when deciding whether a slice preserved the legacy reference contract.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/backfill.md
+        - docs/wiki-bi/surfaces/reference-sync.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring unresolved state/runtime questions without re-merging the two write surfaces.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring descriptions that equate pre-load authority with process-time derivation.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as an explicit non-equivalence in the legacy reference strategy.
+        target_pages:
+        - docs/wiki-bi/concepts/backfill.md
+        - docs/wiki-bi/surfaces/reference-sync.md
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        blocked_by: []
+trigger_id: trigger-reference-layering-001
+orchestration_iteration: 1

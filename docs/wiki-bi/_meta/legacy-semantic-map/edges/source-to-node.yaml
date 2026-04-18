@@ -84,6 +84,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
 - from_id: config/reference_sync.yml
+  to_id: sem-concept-reference-strategy-layering
+  relationship: supports_claim_target
+  source_refs:
+  - config/reference_sync.yml
+  source_type: legacy_config
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-layering
+- from_id: config/reference_sync.yml
   to_id: sem-fact-family-reference-sync-target-inventory
   relationship: supports_claim_target
   source_refs:
@@ -98,6 +112,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory
 - from_id: config/reference_sync.yml
+  to_id: sem-lifecycle-reference-sync-preload-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - config/reference_sync.yml
+  source_type: legacy_config
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
+- from_id: config/reference_sync.yml
   to_id: sem-rule-reference-sync-incremental-state
   relationship: supports_claim_target
   source_refs:
@@ -111,6 +139,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state
+- from_id: docs/archive/guides/cli-migration-guide.md
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - docs/archive/guides/cli-migration-guide.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
 - from_id: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\
     \u72B6\u6001\u6765\u6E90\u5206\u6790.md"
   to_id: sem-concept-customer-status
@@ -127,6 +169,22 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-core
+- from_id: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\
+    \u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  to_id: sem-concept-reference-strategy-layering
+  relationship: supports_claim_target
+  source_refs:
+  - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+    \u6001\u6765\u6E90\u5206\u6790.md"
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-layering
 - from_id: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\
     \u72B6\u6001\u6765\u6E90\u5206\u6790.md"
   to_id: sem-rule-is-churned-this-year-definition
@@ -191,6 +249,22 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family
+- from_id: "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\u66F4\
+    \u65B0\u903B\u8F91.md"
+  to_id: sem-rule-annuity-performance-post-hook-chain
+  relationship: supports_claim_target
+  source_refs:
+  - "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\u66F4\u65B0\
+    \u903B\u8F91.md"
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
 - from_id: "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\u66F4\
     \u65B0\u903B\u8F91.md"
   to_id: sem-rule-status-year-identity-anchor
@@ -489,6 +563,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: docs/guides/infrastructure/backfill-mechanism-guide.md
+  to_id: sem-concept-reference-strategy-layering
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/infrastructure/backfill-mechanism-guide.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-layering
+- from_id: docs/guides/infrastructure/backfill-mechanism-guide.md
+  to_id: sem-lifecycle-reference-sync-preload-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/infrastructure/backfill-mechanism-guide.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
 - from_id: docs/guides/infrastructure/company-enrichment-service.md
   to_id: sem-concept-identity-governance-layering
   relationship: supports_claim_target
@@ -503,6 +605,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
+- from_id: docs/guides/infrastructure/company-enrichment-service.md
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
 - from_id: docs/guides/infrastructure/company-enrichment-service.md
   to_id: sem-non-equivalence-temp-id-vs-company-id
   relationship: supports_claim_target
@@ -727,6 +843,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-subsystem
+- from_id: docs/verification_guide_real_data.md
+  to_id: sem-rule-annuity-performance-post-hook-chain
+  relationship: supports_claim_target
+  source_refs:
+  - docs/verification_guide_real_data.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
 - from_id: docs/verification_guide_real_data.md
   to_id: sem-rule-is-churned-this-year-definition
   relationship: supports_claim_target
@@ -1078,6 +1208,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-lifecycle
 - from_id: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  to_id: sem-rule-annuity-performance-post-hook-chain
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
+- from_id: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
   to_id: sem-rule-status-year-identity-anchor
   relationship: supports_claim_target
   source_refs:
@@ -1189,6 +1333,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object
+- from_id: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
 - from_id: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
   to_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
   relationship: supports_claim_target
@@ -1217,6 +1375,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-reference-sync-object
+- from_id: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  to_id: sem-concept-reference-strategy-layering
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-layering
 - from_id: docs/wiki-bi/evidence/status-and-snapshot-evidence.md
   to_id: sem-rule-is-churned-this-year-definition
   relationship: supports_claim_target
@@ -1245,6 +1417,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-core
+- from_id: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  to_id: sem-rule-annuity-performance-post-hook-chain
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
 - from_id: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
   to_id: sem-rule-is-churned-this-year-definition
   relationship: supports_claim_target
@@ -1287,6 +1473,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
+- from_id: docs/wiki-bi/surfaces/company-lookup-queue.md
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
 - from_id: docs/wiki-bi/surfaces/reference-sync.md
   to_id: sem-fact-family-reference-sync-target-inventory
   relationship: supports_claim_target
@@ -1301,6 +1501,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory
+- from_id: docs/wiki-bi/surfaces/reference-sync.md
+  to_id: sem-lifecycle-reference-sync-preload-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/surfaces/reference-sync.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
 - from_id: docs/wiki-bi/surfaces/reference-sync.md
   to_id: sem-rule-reference-sync-incremental-state
   relationship: supports_claim_target
@@ -1525,6 +1739,48 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: src/work_data_hub/cli/customer_mdm/snapshot.py
+  to_id: sem-rule-annuity-performance-post-hook-chain
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm/snapshot.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
+- from_id: src/work_data_hub/cli/customer_mdm/sync.py
+  to_id: sem-rule-annuity-performance-post-hook-chain
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm/sync.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
+- from_id: src/work_data_hub/cli/etl/executors.py
+  to_id: sem-rule-annuity-performance-post-hook-chain
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/etl/executors.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
 - from_id: src/work_data_hub/cli/etl/hooks.py
   to_id: sem-lifecycle-customer-status-yearly-cycle
   relationship: supports_claim_target
@@ -1539,6 +1795,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-lifecycle
+- from_id: src/work_data_hub/cli/etl/hooks.py
+  to_id: sem-rule-annuity-performance-post-hook-chain
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/etl/hooks.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
 - from_id: src/work_data_hub/customer_mdm/contract_sync.py
   to_id: sem-concept-customer-annual-identity-family
   relationship: supports_claim_target
@@ -1665,6 +1935,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor
+- from_id: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
 - from_id: src/work_data_hub/domain/reference_backfill/sync_models.py
   to_id: sem-fact-family-reference-sync-target-inventory
   relationship: supports_claim_target
@@ -1777,6 +2061,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-reference-sync-object
+- from_id: src/work_data_hub/orchestration/reference_sync_jobs.py
+  to_id: sem-lifecycle-reference-sync-preload-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/reference_sync_jobs.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
+- from_id: src/work_data_hub/orchestration/reference_sync_ops.py
+  to_id: sem-lifecycle-reference-sync-preload-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/reference_sync_ops.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
 - from_id: src/work_data_hub/orchestration/reference_sync_ops.py
   to_id: sem-rule-reference-sync-incremental-state
   relationship: supports_claim_target
@@ -1791,6 +2103,48 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state
+- from_id: src/work_data_hub/orchestration/schedules.py
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/schedules.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
+- from_id: src/work_data_hub/orchestration/schedules.py
+  to_id: sem-lifecycle-reference-sync-preload-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/schedules.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
+- from_id: src/work_data_hub/orchestration/sensors.py
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/sensors.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
 - from_id: src/work_data_hub/reference/reference_sync.py.txt
   to_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
   relationship: supports_claim_target
@@ -1847,6 +2201,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: tests/integration/test_cli_multi_domain.py
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - tests/integration/test_cli_multi_domain.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
 - from_id: tests/replay/test_phase2_reference_derivation_gates.py
   to_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
   relationship: supports_claim_target
@@ -1875,3 +2243,45 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object
+- from_id: tests/unit/domain/company_enrichment/test_lookup_queue.py
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/domain/company_enrichment/test_lookup_queue.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
+- from_id: tests/unit/orchestration/test_schedules.py
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/orchestration/test_schedules.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
+- from_id: tests/unit/orchestration/test_sensors.py
+  to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/orchestration/test_sensors.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle

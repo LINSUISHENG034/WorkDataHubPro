@@ -1,0 +1,87 @@
+semantic_id: sem-non-equivalence-reference-sync-vs-backfill
+semantic_node_type: semantic_non_equivalence
+title: reference_sync vs backfill
+summary: reference_sync and backfill may touch related business objects, but they
+  do not express the same write surface or provenance.
+business_conclusion: object-name overlap does not make reference_sync and backfill
+  semantically equivalent. reference_sync writes governed authoritative inventory
+  with pre-load semantics, while backfill writes derived or side-effectful objects
+  after processed facts have already established missing references.
+primary_semantic_sources:
+- docs/guides/infrastructure/backfill-mechanism-guide.md
+- config/reference_sync.yml
+supporting_witness_sources:
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to:
+- sem-concept-reference-strategy-layering
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/backfill.md
+- docs/wiki-bi/surfaces/reference-sync.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Shared business nouns across the two paths are scope-limited aliases, not proof
+    that the two paths have the same semantic role.
+  proxy_usage_refs:
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/backfill.md
+  - docs/wiki-bi/surfaces/reference-sync.md
+  related_runtime_carriers:
+  - obj-reference-sync-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports evaluating reference_sync and backfill independently when
+        deciding whether a slice preserved the legacy reference contract.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/backfill.md
+      - docs/wiki-bi/surfaces/reference-sync.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports deferring unresolved state/runtime questions without re-merging
+        the two write surfaces.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/reference-sync.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring descriptions that equate pre-load authority
+        with process-time derivation.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review as an explicit non-equivalence
+        in the legacy reference strategy.
+      target_pages:
+      - docs/wiki-bi/concepts/backfill.md
+      - docs/wiki-bi/surfaces/reference-sync.md
+      - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Shared business nouns across the two paths are scope-limited aliases, not proof
+  that the two paths have the same semantic role.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T08:00:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-reference-layering

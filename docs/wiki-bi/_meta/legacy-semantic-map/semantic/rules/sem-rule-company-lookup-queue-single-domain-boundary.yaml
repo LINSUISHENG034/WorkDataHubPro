@@ -1,0 +1,83 @@
+semantic_id: sem-rule-company-lookup-queue-single-domain-boundary
+semantic_node_type: semantic_rule
+title: Company lookup queue single-domain boundary
+summary: company_lookup_queue is an explicit special orchestration domain, not a normal
+  member of multi-domain ETL execution.
+business_conclusion: company_lookup_queue should be interpreted as a standalone orchestration
+  surface. It is valid as a single-domain special run, but it is excluded from multi-domain
+  and --all-domains ETL paths, which keeps queue recovery semantics separate from
+  normal fact-domain batching.
+primary_semantic_sources:
+- docs/archive/guides/cli-migration-guide.md
+supporting_witness_sources:
+- tests/integration/test_cli_multi_domain.py
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - The queue can still be invoked from ETL-facing tooling, but that does not make
+    it a normal fact-domain member of multi-domain execution.
+  proxy_usage_refs:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  related_runtime_carriers:
+  - obj-company-lookup-queue-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports evaluating queue orchestration separately from fact-domain
+        admission and batching rules.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports deferring queue retention decisions while preserving its operator-boundary
+        semantics.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring descriptions that present queue processing as
+        an ordinary all-domains ETL member.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review as a stable operator-boundary rule
+        for company_lookup_queue.
+      target_pages:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- The queue can still be invoked from ETL-facing tooling, but that does not make it
+  a normal fact-domain member of multi-domain execution.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T08:45:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
