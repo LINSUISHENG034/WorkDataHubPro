@@ -97,9 +97,26 @@ Do not bulk-read former legacy-wiki material, the old repo, or unrelated discipl
    - `update-existing`
    - `create-synthesis-page`
 3. Prefer updating an existing object page over creating a broad duplicate summary.
-4. When a durable page changes, update `docs/wiki-bi/index.md` and append `docs/wiki-bi/log.md` in the same pass.
-5. When the change comes from real implementation work, verify the current repo and write back evidence as `current_test`, `current_reference_asset`, or `current_runbook` where relevant.
-6. When the work is a substantial absorption round, update or create the corresponding file under `docs/wiki-bi/_meta/absorption-rounds/`.
+4. When the same semantic family is scattered across multiple domain pages, output-contract pages, and evidence pages, prefer this tightening pattern:
+   - first create or update one cross-domain evidence dispatcher
+   - then promote only the highest-value misunderstood objects into concept pages
+   - then reconnect high-traffic domain and output-contract pages back to those durable targets
+   - do not split every subfield into its own object page in the same round unless each one has clear standalone question-answer value
+5. When deciding whether to create a new concept page, prefer promotion only if the object:
+   - appears repeatedly across multiple high-traffic pages
+   - is easy to confuse with a different semantic layer
+   - is not only one domain's private implementation detail
+   - can answer “what it is / what it is not / why it matters” on its own
+6. When a durable page changes, update `docs/wiki-bi/index.md` and append `docs/wiki-bi/log.md` in the same pass.
+7. When the change comes from real implementation work, verify the current repo and write back evidence as `current_test`, `current_reference_asset`, or `current_runbook` where relevant.
+8. When the work is a substantial absorption round, update or create the corresponding file under `docs/wiki-bi/_meta/absorption-rounds/`.
+
+For substantial maintenance rounds, also check whether the round should write back to:
+
+- `docs/wiki-bi/_meta/absorption-rounds/index.md`
+- `docs/wiki-bi/_meta/wiki-absorption-roadmap.md`
+
+Do this when the round adds a new durable object family, closes a major gap, or becomes part of the durable maintenance story instead of remaining a one-off page edit.
 
 ## Workflow 2: Absorb And Clean Former Legacy-Wiki Material
 
@@ -170,6 +187,23 @@ Use these destinations consistently:
 
 Do not create phase-status, roadmap, execution-progress, or changelog-style wiki pages under `docs/wiki-bi/`.
 
+## High-Risk Semantic Layer Checks
+
+Before writing or tightening durable conclusions, explicitly test whether the page is mixing any of these layers:
+
+- customer-master-derived signals vs snapshot statuses
+  - examples: `tags`, `年金客户类型`, `主拓机构` vs `is_new`, `is_winning_this_year`, `is_loss_reported`
+- dominant-value outputs vs raw input columns
+  - examples: `主拓机构`, `关键年金计划` vs source `机构名称`, `机构代码`, `计划代码`
+- backfill/classification results vs projection/status results
+  - examples: customer-master labels and tags vs contract/snapshot fields
+
+If the page is mixing layers:
+
+- keep stable business meaning in concept / standard pages
+- keep source-backed nuance and unresolved tension in evidence pages
+- do not collapse the two into one sentence just because the legacy implementation touches them in the same flow
+
 ## Completion Checklist
 
 Before claiming the wiki task is complete, check:
@@ -178,9 +212,22 @@ Before claiming the wiki task is complete, check:
 - stable conclusions are separated from open questions
 - no duplicate summary page was created unnecessarily
 - `docs/wiki-bi/index.md` and `docs/wiki-bi/log.md` were updated when durable pages changed
+- new concept or evidence pages are reachable from:
+  - `docs/wiki-bi/index.md`
+  - at least one owning concept / standard / evidence page
+  - at least one high-traffic domain or contract page when the object is cross-domain
 - cross-links still make sense and no obvious orphan page was introduced
+- evidence dispatcher pages still preserve the expected mini-template:
+  - `结论主题`
+  - `证据记录`
+  - strong/supporting split
+  - `当前证据缺口`
 - any removed legacy-wiki content has a clear durable replacement or explicit removal rationale
 - any implementation-backed statement was verified against current repo evidence
+- substantial rounds wrote back the correct maintenance sediment:
+  - round note or lint summary
+  - `docs/wiki-bi/_meta/absorption-rounds/index.md` when the round is durable
+  - `docs/wiki-bi/_meta/wiki-absorption-roadmap.md` when the round changes the durable maintenance story
 
 ## Red Flags
 
