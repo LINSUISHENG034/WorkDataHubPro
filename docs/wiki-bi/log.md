@@ -9,6 +9,12 @@
 - 在 `wiki-maintenance-lint-checklist.md` 中显式排除 `docs/wiki-bi/_meta/legacy-semantic-map/`，并要求继续检查其未进入 `index.md` 且 `README.md` 保留 owner / archive trigger
 - 收紧 semantic map bootstrap 边界，明确下一阶段优先围绕 `company_lookup_queue`、`reference_sync`、enterprise persistence、manual `customer-mdm` commands 与 shared operator artifacts 做 discovery wave
 
+## [2026-04-18 19:48] maintain | customer-master derived signals 收紧
+
+- 新增 `customer-master-signals-evidence.md`，把 `tags`、`主拓机构`、`关键年金计划`、关系计数与 `年金客户类型` 收紧成 cross-domain customer-master signal family
+- 新增 `tags` 与 `主拓机构` concept pages，并将它们接回 `backfill`、`customer_type`、四个高流量 domain 与四份输出合同
+- 本轮只收紧 cross-domain customer-master semantics，不扩写新的 runtime/operator surface 决策范围
+
 ## [2026-04-16 10:23] maintain | 清理 `wiki-bi` 中的执行态流程漂移
 
 - 从 `docs/wiki-bi/_meta/` 移除 subagent/worktree/merge sequencing 这类执行层材料，避免 durable wiki 再次承担 workflow 说明职责

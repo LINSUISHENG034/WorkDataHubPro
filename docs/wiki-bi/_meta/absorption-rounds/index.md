@@ -56,6 +56,8 @@
   - maintenance 轮次，为 `customer-mdm` 年度生命周期补齐对象级证据，并把概念层与命令运行面重新分开。
 - [Round 27：legacy 语义补强收口](./round-27-parallel-legacy-semantic-wave-01.md)
   - maintenance 轮次，对四个高流量 domain 及 shared operator / verification pages 做最后一轮对象级补强与 cross-link 收口。
+- [Round 28：customer-master derived signals 收紧](./round-28-customer-master-derived-signals.md)
+  - maintenance 轮次，把 `tags`、`主拓机构` 与 cross-domain customer-master-derived signal family 收紧成 durable object pages 与 evidence dispatcher。
 
 ## 计划轮次
 

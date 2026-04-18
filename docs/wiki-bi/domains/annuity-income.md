@@ -33,11 +33,14 @@ current project 已有：
 - [临时身份：`temp_id`](../concepts/temp-id.md)
 - [年金计划类型：`plan_type`](../concepts/plan-type.md)
 - [回填：`backfill`](../concepts/backfill.md)
+- [`tags`](../concepts/tags.md)
+- [主拓机构](../concepts/primary-branch.md)
 
 ## 关键输出结果
 
 - direct fact output
 - reference / customer signal
+- customer-master-derived signals（fee-weighted 主拓机构、关键计划、`yyMM新建`、`新客*`）
 - unresolved identity 的 operator-facing artifacts
 - post-ID5 identity governance 与 branch mapping 约束
 
@@ -70,6 +73,7 @@ current project 已有：
 ## 关键证据来源
 
 - [引用同步与回填证据](../evidence/reference-and-backfill-evidence.md)
+- [customer-master signals 证据](../evidence/customer-master-signals-evidence.md)
 - [`annuity_income` 字段处理证据](../evidence/annuity-income-field-processing-evidence.md)
 - [annuity workbook family 证据](../evidence/annuity-workbook-family-evidence.md)
 - [输入现实证据](../evidence/input-reality-evidence.md)

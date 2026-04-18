@@ -20,11 +20,13 @@
 - [年金计划类型：`plan_type`](../concepts/plan-type.md)
 - [客户状态总览](../concepts/customer-status.md)
 - [快照粒度：`snapshot_granularity`](../concepts/snapshot-granularity.md)
+- [`tags`](../concepts/tags.md)
 
 ## 关键输出结果
 
 - `fact_annual_award` 直接事实输出
 - `company_reference` 与 `customer_master_signal`
+- customer-master-derived signals（`yyMM中标`、`中标客户`、event-driven 主拓对象）
 - 对 `is_winning_this_year` / `is_new` 的上游支撑
 - 为 `contract_state` / `monthly_snapshot` 提供年度中标事实来源
 - 对缺失计划号和身份识别形成 event-domain 级别的补齐压力
@@ -43,6 +45,7 @@
 ## 关键证据来源
 
 - [引用同步与回填证据](../evidence/reference-and-backfill-evidence.md)
+- [customer-master signals 证据](../evidence/customer-master-signals-evidence.md)
 - [输入现实证据](../evidence/input-reality-evidence.md)
 - [business collection workbook variants 证据](../evidence/business-collection-workbook-variants-evidence.md)
 - [`annual_award` 字段处理证据](../evidence/annual-award-field-processing-evidence.md)

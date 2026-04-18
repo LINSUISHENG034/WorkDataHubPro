@@ -18,6 +18,8 @@
 - [客户状态总览](../concepts/customer-status.md)
 - [年金计划类型：`plan_type`](../concepts/plan-type.md)
 - [回填：`backfill`](../concepts/backfill.md)
+- [`tags`](../concepts/tags.md)
+- [主拓机构](../concepts/primary-branch.md)
 - [快照粒度：`snapshot_granularity`](../concepts/snapshot-granularity.md)
 
 ## 关键输出结果
@@ -42,6 +44,7 @@
 - [引用同步与回填证据](../evidence/reference-and-backfill-evidence.md)
 - [输入现实证据](../evidence/input-reality-evidence.md)
 - [annuity workbook family 证据](../evidence/annuity-workbook-family-evidence.md)
+- [customer-master signals 证据](../evidence/customer-master-signals-evidence.md)
 - [`annuity_performance` 字段处理证据](../evidence/annuity-performance-field-processing-evidence.md)
 - [`annuity_performance` implementation gap 证据](../evidence/annuity-performance-implementation-gap-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
@@ -66,6 +69,7 @@
 
 - 输入侧关键语义（`客户名称` / `年金账户名`、`集团企业客户号` / `年金账户号`、row-level hard gate）见 [`annuity_performance` 输入合同](../standards/input-reality/annuity-performance-input-contract.md)。
 - 输出侧关键语义（`max_by` 主拓机构/关键计划、`tags=yyMM新建`、temp-id backfill 边界）见 [`annuity_performance` 输出合同](../standards/output-correctness/annuity-performance-output-contract.md)。
+- cross-domain customer-master-derived signal family（`主拓机构`、`关键年金计划`、`关联计划数`、`yyMM新建`）见 [customer-master signals 证据](../evidence/customer-master-signals-evidence.md)。
 - 字段级证据和证据强度分层见 [`annuity_performance` 字段处理证据](../evidence/annuity-performance-field-processing-evidence.md)。
 
 ## 相关 domains
