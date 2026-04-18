@@ -78,6 +78,8 @@
   - 一个是年度身份锚点，一个是月度快照锚点；相似不代表可互换。
 - [为什么 `customer_type` 不能直接当作 `is_new`](./concepts/customer-type.md)
   - 语义上它们不等价；legacy proxy usage 需要保留为治理冲突背景，而不是被误写成定义。
+- [如何收口 `customer_type vs is_new` 的治理冲突](./evidence/customer-type-is-new-governance-evidence.md)
+  - 先看治理证据页，再回到标准页确认 semantic truth、proxy history 与 disposition question 的分层。
 
 ## 全量 Catalog
 
@@ -153,6 +155,7 @@
 - [状态与快照证据](./evidence/status-and-snapshot-evidence.md) : 聚合客户状态、快照、customer MDM 相关证据。
 - [customer MDM 生命周期证据](./evidence/customer-mdm-lifecycle-evidence.md) : 固化 `year_init`、`sync`、`snapshot`、ratchet-style 与 `status_year` 的年度生命周期证据边界。
 - [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md) : 固化 `is_strategic`、`is_existing`、`contract_status`、`status_year` 与 proxy-conflict 边界。
+- [customer_type vs `is_new` 治理证据](./evidence/customer-type-is-new-governance-evidence.md) : 固化 semantic non-equivalence、legacy proxy usage 与 disposition question。
 - [`is_new` 对象级证据](./evidence/is-new-evidence.md) : 聚合 `is_new` 的公式、粒度边界、非例与验证路径。
 - [`is_winning_this_year` 对象级证据](./evidence/is-winning-this-year-evidence.md) : 聚合年度中标状态的事实来源、粒度边界与验证路径。
 - [`is_loss_reported` 对象级证据](./evidence/is-loss-reported-evidence.md) : 聚合年度流失申报状态的事实来源、粒度边界与验证路径。

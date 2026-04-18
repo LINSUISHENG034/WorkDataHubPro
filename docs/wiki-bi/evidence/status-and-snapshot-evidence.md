@@ -55,6 +55,7 @@
 - [`is_winning_this_year` 对象级证据](./is-winning-this-year-evidence.md)
 - [`is_loss_reported` 对象级证据](./is-loss-reported-evidence.md)
 - [customer 年度身份证据](./customer-status-annual-identity-evidence.md)
+- [customer_type vs `is_new` 治理证据](./customer-type-is-new-governance-evidence.md)
 - [customer MDM 生命周期证据](./customer-mdm-lifecycle-evidence.md)
 
 ## 当前证据缺口
@@ -64,4 +65,4 @@
 - `is_new` 已经满足对象级 evidence 拆分条件，并已作为后续对象级拆分样板落地
 - current project 对 `is_new`、`is_winning_this_year`、`is_loss_reported` 的对象级 current evidence 仍主要通过 shared status / projection pages 承接
 - `status_year` 在 current runtime 的 authoritative 取值路径仍待决策收口
-- `customer_type` 被当作 `is_new` proxy 的 legacy 相邻用法仍未完成治理处置，不可写成已关闭冲突
+- `customer_type` 被当作 `is_new` proxy 的 legacy 相邻用法现在已有独立治理页，但最终 disposition 仍待主线程裁决，不可写成已关闭冲突

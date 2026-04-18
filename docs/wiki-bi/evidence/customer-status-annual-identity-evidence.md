@@ -32,11 +32,13 @@
 - rebuild-side `status_year` authoritative runtime carrier 仍未闭环；当前只能稳定表达 legacy 语义，不能提前宣称 current runtime 已收口。
 - legacy 相邻流程中仍存在把 `customer_type` label 当作 `is_new` proxy 的用法；这属于治理冲突背景，不是 durable semantic definition。
 - annual identity family 在 current project 中的对象级 current evidence 仍主要通过 shared projection / status pages 承接，尚未完全拆成更细的 current-side object evidence。
+- `customer_type vs is_new` 的 proxy-disposition 已邻接本页，但其具体 defer / retire / historical-context 结论应留在独立治理页，不在 annual identity family 页面内混写。
 
 ## 相关页面
 
 - [客户状态总览](../concepts/customer-status.md)
 - [年金客户类型：`customer_type`](../concepts/customer-type.md)
+- [customer_type vs `is_new` 治理证据](./customer-type-is-new-governance-evidence.md)
 - [客户状态语义正确性](../standards/semantic-correctness/customer-status-semantics.md)
 - [customer MDM 生命周期证据](./customer-mdm-lifecycle-evidence.md)
 - [状态与快照证据](./status-and-snapshot-evidence.md)

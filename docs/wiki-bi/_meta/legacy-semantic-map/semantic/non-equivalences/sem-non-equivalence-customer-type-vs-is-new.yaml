@@ -3,11 +3,9 @@ semantic_node_type: semantic_non_equivalence
 title: Customer type label vs is_new
 summary: Customer type labels belong to customer master backfill and must not be treated
   as snapshot status fields.
-business_conclusion: "Customer-master labels such as \u5E74\u91D1\u5BA2\u6237\u7C7B\
-  \u578B are not equivalent to the snapshot status field is_new."
+business_conclusion: "Customer-master labels such as \u5E74\u91D1\u5BA2\u6237\u7C7B\u578B are not equivalent to the snapshot status field is_new."
 primary_semantic_sources:
-- "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
-  \u6001\u6765\u6E90\u5206\u6790.md"
+- "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\u6001\u6765\u6E90\u5206\u6790.md"
 supporting_witness_sources:
 - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
 semantic_authority: authoritative_semantic_source
@@ -18,78 +16,76 @@ non_equivalent_to:
 - sem-rule-is-new-definition
 open_questions: []
 durable_target_pages:
+- docs/wiki-bi/evidence/customer-type-is-new-governance-evidence.md
 - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+- docs/wiki-bi/concepts/customer-type.md
 proposal_governance:
-  recommendation_status: recommended_contested
+  recommendation_status: claim_level_only
   semantic_scope_type: semantic_object
   authority_gate_passed: true
   downstream_consequence_gate_passed: true
-  contradiction_accounting_status: unresolved
+  contradiction_accounting_status: explained_historical_drift
   contradiction_accounting_notes:
-  - Legacy customer-type labels are still used as an operational proxy for is_new
-    in adjacent flows.
-  - The business semantic boundary is evident, but the proxy conflict still needs
-    main-thread governance review.
+  - Semantic non-equivalence is already stable; the remaining work is how legacy proxy usage should be disposed in durable governance.
+  - Adjacent proxy usage belongs to compatibility / retirement review, not to semantic re-definition of is_new.
   proxy_usage_refs:
+  - docs/wiki-bi/evidence/customer-type-is-new-governance-evidence.md
   - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
   downstream_consequence_refs:
   - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/evidence/customer-type-is-new-governance-evidence.md
   - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
   related_runtime_carriers:
   - obj-customer-mdm-lifecycle
   high_priority_governance_questions:
-  - Does the customer-type proxy require a defer or retire decision for legacy status
-    consumers?
+  - Should legacy customer-type proxy usage be retired for future semantic interpretation?
+  - If temporary compatibility wording is retained, where is its boundary documented?
   gate_blockers:
-  - contradiction_unresolved
   - high_priority_governance_questions_open
   governance_implications:
     slice_admission:
-      summary: Blocks automatic admission of customer-type proxy usage as customer-status
-        truth.
+      summary: Supports preserving semantic non-equivalence while keeping proxy-disposition out of customer-status truth.
       affected_surfaces:
       - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
       blocked_by:
-      - contradiction_unresolved
+      - high_priority_governance_questions_open
     defer_candidates:
-      summary: Candidate for defer review until proxy usage is explicitly adjudicated.
+      summary: Candidate for defer review if compatibility wording must survive without being promoted into semantic truth.
       affected_surfaces:
+      - docs/wiki-bi/evidence/customer-type-is-new-governance-evidence.md
       - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
       blocked_by:
-      - contradiction_unresolved
+      - high_priority_governance_questions_open
     retire_candidates:
-      summary: Candidate for retiring customer-type proxy usage if the main thread
-        confirms the semantic split.
+      summary: Candidate for retiring proxy-heavy customer-type usage from future semantic interpretation while preserving historical context.
       affected_surfaces:
+      - docs/wiki-bi/evidence/customer-type-is-new-governance-evidence.md
       - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
       blocked_by:
       - high_priority_governance_questions_open
     durable_wiki_absorption:
-      summary: Not ready for durable absorption while the proxy conflict remains unresolved.
+      summary: Semantic split is absorbable, but the final proxy disposition still needs explicit governance review.
       target_pages:
+      - docs/wiki-bi/evidence/customer-type-is-new-governance-evidence.md
+      - docs/wiki-bi/concepts/customer-type.md
       - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
       blocked_by:
-      - contradiction_unresolved
       - high_priority_governance_questions_open
 durable_summary_ready: true
 requires_human_judgement: false
 blocked_by:
-- contradiction_unresolved
 - high_priority_governance_questions_open
 archive_after_absorption: true
-semantic_maturity_level: contested
-discovery_view_status: contested
+semantic_maturity_level: inferred
+discovery_view_status: sufficient
 consumption_readiness_status: blocked
 readiness_notes:
-- Legacy customer-type labels are still used as an operational proxy for is_new in
-  adjacent flows.
-- The business semantic boundary is evident, but the proxy conflict still needs main-thread
-  governance review.
-- contradiction_unresolved
+- Semantic non-equivalence is stable.
+- Remaining work is governance disposition of legacy proxy usage, not additional semantic discovery.
 - high_priority_governance_questions_open
 compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
 compiled_at: '2026-04-17T13:00:00Z'
 confidence: high
-last_verified: '2026-04-17'
+last_verified: '2026-04-18'
 compiled_from_claims:
 - claim-wave-2026-04-17-semantic-governance-reframe-core

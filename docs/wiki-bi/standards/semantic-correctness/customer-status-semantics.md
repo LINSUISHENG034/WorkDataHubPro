@@ -71,6 +71,7 @@
 - `customer_type` 不能被静默提升为 `is_new` truth。
 - 若 legacy 相邻流程中存在把 `customer_type` label 当作 `is_new` proxy 的做法，应记录为治理上下文或 evidence gap，而不是写成语义等价。
 - 这类 proxy conflict 尚未 current-side 收口时，应保持“语义已分层、治理仍待裁决”的表达。
+- 一旦进入治理收口阶段，应把它写成显式 disposition package，而不是继续只保留一句“存在冲突”的提醒。
 
 ## 关键约束
 
@@ -105,6 +106,7 @@
 
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
 - [customer 年度身份证据](../../evidence/customer-status-annual-identity-evidence.md)
+- [customer_type vs `is_new` 治理证据](../../evidence/customer-type-is-new-governance-evidence.md)
 - [customer MDM 生命周期证据](../../evidence/customer-mdm-lifecycle-evidence.md)
 - [`is_new` 对象级证据](../../evidence/is-new-evidence.md)
 - [`is_winning_this_year` 对象级证据](../../evidence/is-winning-this-year-evidence.md)
