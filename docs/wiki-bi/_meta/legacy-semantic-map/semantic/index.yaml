@@ -1,4 +1,7 @@
 semantic_nodes:
+- semantic_id: sem-concept-customer-annual-identity-family
+  semantic_node_type: semantic_concept
+  path: semantic/concepts/sem-concept-customer-annual-identity-family.yaml
 - semantic_id: sem-concept-customer-master-backfill
   semantic_node_type: semantic_concept
   path: semantic/concepts/sem-concept-customer-master-backfill.yaml

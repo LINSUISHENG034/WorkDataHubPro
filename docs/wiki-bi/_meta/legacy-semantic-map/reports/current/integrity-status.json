@@ -3,8 +3,9 @@
   "wave_status": "green",
   "closeout_ready": false,
   "archive_ready": false,
-  "immutability_check_passed": true,
+  "immutability_check_passed": false,
   "required_claim_ids": [
+    "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
@@ -15,6 +16,7 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet"
   ],
   "compiled_claim_ids": [
+    "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
@@ -25,12 +27,16 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet"
   ],
   "missing_claim_ids": [],
-  "mutable_claim_ids_detected": [],
+  "mutable_claim_ids_detected": [
+    "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family"
+  ],
   "blocking_reasons": [
+    "mutable_accepted_claims_detected",
     "durable_wiki_targets_not_accepted",
     "findings_disposition_incomplete"
   ],
   "accepted_claim_digests": {
+    "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family": "0f93f0aa467dc9fd1dd4306fc15f237c56be09ef5e7bd2f53adfbebae4759a10",
     "claim-wave-2026-04-17-semantic-governance-reframe-core": "f0571729e279bc5f36dbf3fd91c9c6b6dc56dbc6c4112f5a664b3430cbe513fe",
     "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year": "87fc30e6cbb4a01ed7e9eb4a8eedc99d0e08c671cc13e344c8a5d2bddbbef7d9",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle": "3337169bf6d3e05df9284fa069cab7aef4fa4017523f940dbb51c3f5946e6b7e",
@@ -40,5 +46,5 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor": "13cd4fa53871832b0ce406cfd080f15bc5e14a93de20d6621f3a0eb283921236",
     "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet": "a670ec64b55be4d0138ae911955015efa005bd01537da4fd1eb7becd6fdf13bc"
   },
-  "generated_at": "2026-04-18T02:10:00Z"
+  "generated_at": "2026-04-18T04:30:00Z"
 }

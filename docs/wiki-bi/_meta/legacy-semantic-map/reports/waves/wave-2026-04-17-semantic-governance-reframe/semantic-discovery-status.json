@@ -5,13 +5,13 @@
     "observed": 0,
     "inferred": 3,
     "contested": 1,
-    "consumption-candidate": 11
+    "consumption-candidate": 12
   },
   "contested_semantic_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
   "recommendation_counts": {
-    "recommended_stable_canonical": 11,
+    "recommended_stable_canonical": 12,
     "recommended_contested": 1,
     "claim_level_only": 3
   },
@@ -20,8 +20,9 @@
   ],
   "governance_implication_summaries": {
     "slice_admission": {
-      "count": 15,
+      "count": 16,
       "ids": [
+        "sem-concept-customer-annual-identity-family",
         "sem-concept-customer-master-backfill",
         "sem-concept-customer-status",
         "sem-decision-anchor-customer-status-rules",
@@ -48,8 +49,9 @@
       ]
     },
     "retire_candidates": {
-      "count": 8,
+      "count": 9,
       "ids": [
+        "sem-concept-customer-annual-identity-family",
         "sem-fact-family-customer-status-source-family",
         "sem-fact-family-reference-sync-target-inventory",
         "sem-lifecycle-customer-status-yearly-cycle",
@@ -61,8 +63,9 @@
       ]
     },
     "durable_wiki_absorption": {
-      "count": 15,
+      "count": 16,
       "ids": [
+        "sem-concept-customer-annual-identity-family",
         "sem-concept-customer-master-backfill",
         "sem-concept-customer-status",
         "sem-decision-anchor-customer-status-rules",
@@ -87,5 +90,5 @@
   "unresolved_proxy_conflict_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
-  "generated_at": "2026-04-18T02:10:00Z"
+  "generated_at": "2026-04-18T04:30:00Z"
 }

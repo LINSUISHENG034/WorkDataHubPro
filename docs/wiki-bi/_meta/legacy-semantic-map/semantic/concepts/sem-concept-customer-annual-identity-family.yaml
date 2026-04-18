@@ -1,0 +1,92 @@
+semantic_id: sem-concept-customer-annual-identity-family
+semantic_node_type: semantic_concept
+title: Customer annual identity family
+summary: "is_strategic, is_existing, contract_status, and status_year form one annual\
+  \ identity family anchored in customer.\u5BA2\u6237\u5E74\u91D1\u8BA1\u5212."
+business_conclusion: "is_strategic, is_existing, contract_status, and status_year\
+  \ should be interpreted together as one annual customer-identity family anchored\
+  \ in customer.\u5BA2\u6237\u5E74\u91D1\u8BA1\u5212; snapshots consume this family\
+  \ for analysis but do not redefine it."
+primary_semantic_sources:
+- "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\u66F4\u65B0\
+  \u903B\u8F91.md"
+supporting_witness_sources:
+- src/work_data_hub/customer_mdm/year_init.py
+- src/work_data_hub/customer_mdm/contract_sync.py
+- docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/customer-status.md
+- docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Adjacent runtime and wiki surfaces sometimes discuss the four fields separately,
+    but the legacy evidence keeps them grouped as one annual identity boundary.
+  - Snapshot-facing pages consume these fields for analysis, yet they do not overturn
+    the contract-layer identity grouping.
+  proxy_usage_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports preserving annual identity family semantics as a grouped business
+        boundary instead of scattering these fields across unrelated status narratives.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/customer-status.md
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that treat annual identity fields
+        as unrelated standalone labels.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/concepts/customer-status.md
+      - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Adjacent runtime and wiki surfaces sometimes discuss the four fields separately,
+  but the legacy evidence keeps them grouped as one annual identity boundary.
+- Snapshot-facing pages consume these fields for analysis, yet they do not overturn
+  the contract-layer identity grouping.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T04:30:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family

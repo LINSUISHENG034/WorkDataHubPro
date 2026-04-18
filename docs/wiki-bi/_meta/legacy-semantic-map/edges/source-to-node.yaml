@@ -89,6 +89,22 @@ edges:
   - claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year
 - from_id: "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\u66F4\
     \u65B0\u903B\u8F91.md"
+  to_id: sem-concept-customer-annual-identity-family
+  relationship: supports_claim_target
+  source_refs:
+  - "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\u66F4\u65B0\
+    \u903B\u8F91.md"
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family
+- from_id: "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\u66F4\
+    \u65B0\u903B\u8F91.md"
   to_id: sem-rule-status-year-identity-anchor
   relationship: supports_claim_target
   source_refs:
@@ -861,6 +877,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet
+- from_id: docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+  to_id: sem-concept-customer-annual-identity-family
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family
 - from_id: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
   to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
   relationship: supports_claim_target
@@ -1254,6 +1284,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-lifecycle
 - from_id: src/work_data_hub/customer_mdm/contract_sync.py
+  to_id: sem-concept-customer-annual-identity-family
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family
+- from_id: src/work_data_hub/customer_mdm/contract_sync.py
   to_id: sem-lifecycle-customer-status-yearly-cycle
   relationship: supports_claim_target
   source_refs:
@@ -1337,6 +1381,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year
+- from_id: src/work_data_hub/customer_mdm/year_init.py
+  to_id: sem-concept-customer-annual-identity-family
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/year_init.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family
 - from_id: src/work_data_hub/customer_mdm/year_init.py
   to_id: sem-rule-status-year-identity-anchor
   relationship: supports_claim_target

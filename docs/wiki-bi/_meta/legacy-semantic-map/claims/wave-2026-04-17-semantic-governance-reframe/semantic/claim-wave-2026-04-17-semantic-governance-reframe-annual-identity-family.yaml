@@ -1,0 +1,104 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-concept-customer-annual-identity-family
+sources_read:
+- source_ref: docs/business-background/战客身份定义与更新逻辑.md
+  source_type: legacy_doc
+  note: Business background explicitly groups is_strategic, is_existing, contract_status, and status_year as one annual identity surface anchored in customer.客户年金计划.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/战客身份定义与更新逻辑.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/customer_mdm/year_init.py
+  source_type: legacy_code
+  note: year_init treats is_strategic and is_existing as yearly initialization fields over the same annual contract surface.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/year_init.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  note: contract_sync updates contract_status, is_strategic, and is_existing together as SCD2 annual identity state in customer.客户年金计划.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/contract_sync.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+  source_type: current_wiki
+  note: Current durable evidence page already preserves the same annual identity family boundary.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/concepts/customer-status.md
+- docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+submitted_at: '2026-04-18T04:30:00Z'
+semantic_findings:
+- semantic_id: sem-concept-customer-annual-identity-family
+  semantic_node_type: semantic_concept
+  title: Customer annual identity family
+  summary: is_strategic, is_existing, contract_status, and status_year form one annual identity family anchored in customer.客户年金计划.
+  business_conclusion: is_strategic, is_existing, contract_status, and status_year should be interpreted together as one annual customer-identity family anchored in customer.客户年金计划; snapshots consume this family for analysis but do not redefine it.
+  primary_source_refs:
+  - docs/business-background/战客身份定义与更新逻辑.md
+  supporting_source_refs:
+  - src/work_data_hub/customer_mdm/year_init.py
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Adjacent runtime and wiki surfaces sometimes discuss the four fields separately, but the legacy evidence keeps them grouped as one annual identity boundary.
+    - Snapshot-facing pages consume these fields for analysis, yet they do not overturn the contract-layer identity grouping.
+    proxy_usage_refs:
+    - docs/wiki-bi/concepts/customer-status.md
+    - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/customer-status.md
+    - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports preserving annual identity family semantics as a grouped business boundary instead of scattering these fields across unrelated status narratives.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/customer-status.md
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that treat annual identity fields as unrelated standalone labels.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/concepts/customer-status.md
+        - docs/wiki-bi/evidence/customer-status-annual-identity-evidence.md
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+trigger_id: trigger-annual-identity-family
+orchestration_iteration: 1

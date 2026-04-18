@@ -28,6 +28,7 @@
     "objects/obj-company-lookup-queue-runtime.yaml",
     "objects/obj-customer-mdm-lifecycle.yaml",
     "objects/obj-reference-sync-runtime.yaml",
+    "semantic/concepts/sem-concept-customer-annual-identity-family.yaml",
     "semantic/concepts/sem-concept-customer-master-backfill.yaml",
     "semantic/concepts/sem-concept-customer-status.yaml",
     "semantic/decision-anchors/sem-decision-anchor-customer-status-rules.yaml",
@@ -51,6 +52,7 @@
     "subsystems/ss-annuity-performance.yaml"
   ],
   "compiled_claim_ids": [
+    "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
@@ -82,6 +84,7 @@
       "claim-wave-2026-04-17-first-wave-pilot-reference-sync-object"
     ],
     "wave-2026-04-17-semantic-governance-reframe": [
+      "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
       "claim-wave-2026-04-17-semantic-governance-reframe-core",
       "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
       "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
