@@ -30,6 +30,12 @@ replay evidence 表明，`annual_loss` 当前还会显式发布：
 
 这说明本域除了事实，还要把 unresolved / resolved identity 后果与客户侧流失信号写成可验证输出。
 
+这些 customer-master-derived signals 至少包括：
+
+- `tags=yyMM流失`
+- `年金客户类型=流失客户`
+- 基于 `计划规模` 的主导 customer/master 值
+
 ## 下游派生输出
 
 当前 accepted slice 的 projection 结果是：
@@ -87,10 +93,13 @@ replay evidence 表明，`annual_loss` 当前还会显式发布：
 - [企业身份标识：`company_id`](../../concepts/company-id.md)
 - [临时身份：`temp_id`](../../concepts/temp-id.md)
 - [客户状态总览](../../concepts/customer-status.md)
+- [`tags`](../../concepts/tags.md)
+- [年金客户类型：`customer_type`](../../concepts/customer-type.md)
 
 ## 相关证据
 
 - [`annual_loss` 字段处理证据](../../evidence/annual-loss-field-processing-evidence.md)
+- [customer-master signals 证据](../../evidence/customer-master-signals-evidence.md)
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
 

@@ -32,6 +32,8 @@
   - 新到账状态与客户分类标签不是同一层语义。
 - [`company_id` 在业务上到底是什么](./concepts/company-id.md)
   - 企业身份标识是跨 domain 连接事实、主数据、快照和验证的核心对象。
+- [customer master 里的 `tags`、`主拓机构`、`关键年金计划` 到底是什么](./evidence/customer-master-signals-evidence.md)
+  - 这些不是零散字段，而是一组由 backfill/customer signal 规则派生出来的 customer-master 语义对象。
 - [什么算受治理的身份 fallback](./standards/semantic-correctness/identity-governance.md)
   - temp-id、mapping files、cache、provider、queue 的边界需要作为 identity governance 统一理解。
 - [如何区分当前运行路径、历史记忆、已退休行为与可见后果](./standards/semantic-correctness/identity-governance.md)
@@ -42,6 +44,8 @@
   - 先看输入现实聚合页，再进入年金 workbook family 与业务收集 variants 的对象级 evidence page。
 - [什么样的输出才算“正确”](./standards/output-correctness/output-correctness.md)
   - 正确输出应满足语义、粒度、关系和验收资产多重约束。
+- [为什么 `yyMM新建` / `yyMM中标` / `yyMM流失` 不是 snapshot status](./concepts/tags.md)
+  - `tags` 属于 customer-master 事件轨迹，不等于 `is_new` / `is_winning_this_year` / `is_loss_reported`。
 - [`reference_sync` 与 `backfill` 到底差在哪里](./evidence/reference-and-backfill-evidence.md)
   - 先看证据页，再进入 [`backfill`](./concepts/backfill.md) 与 [`reference_sync`](./surfaces/reference-sync.md)，避免把 authoritative pre-load 与 fact-derived writeback 混成一层。
 - [为什么 `deferred` 不等于“没有验证资产”](./evidence/validation-result-history-evidence.md)
@@ -76,6 +80,8 @@
 - [客户状态总览](./concepts/customer-status.md) : 汇总客户状态相关概念、判定边界与下游影响。
 - [`is_new`：新到账客户状态](./concepts/is-new.md) : 解释新到账状态与中标、存量、客户分类的关系。
 - [年金客户类型：`customer_type`](./concepts/customer-type.md) : 说明客户分类标签与状态字段的区别。
+- [客户事件轨迹标签：`tags`](./concepts/tags.md) : 说明 `yyMM新建` / `yyMM中标` / `yyMM流失` 这类 customer-master 标签的业务语义。
+- [主拓机构](./concepts/primary-branch.md) : 说明 customer-master / reference 对象上的主导机构归属不是输入列直接复制。
 - [年金计划类型：`plan_type`](./concepts/plan-type.md) : 说明单一计划与集合计划的语义差异和约束。
 - [快照粒度：`snapshot_granularity`](./concepts/snapshot-granularity.md) : 定义客户/产品线与客户/计划两类快照粒度。
 - [回填：`backfill`](./concepts/backfill.md) : 说明主数据/参考数据回填的业务语义和边界。
@@ -145,6 +151,7 @@
 - [validation result history 证据](./evidence/validation-result-history-evidence.md) : 聚合 legacy parity result 目录、current asset registry 与 validation history 的治理结论。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
 - [引用同步与回填证据](./evidence/reference-and-backfill-evidence.md) : 聚合 authoritative `reference_sync`、fact-derived `backfill` 与 customer-master 衍生写入之间的稳定边界。
+- [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) : 聚合 `tags`、`主拓机构`、`关键年金计划`、关系计数与 `年金客户类型` 的 cross-domain customer-master 语义。
 - [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的专题差异，并把细节分发到对象级 evidence page。
 - [`annuity_income` 字段处理证据](./evidence/annuity-income-field-processing-evidence.md) : 把 annuity_income 的关键字段处理分成工程性质量提升与业务语义处理。
 - [`annuity_income` branch mapping 证据](./evidence/annuity-income-branch-mapping-evidence.md) : 固化 `COMPANY_BRANCH_MAPPING` manual overrides 与 placement gap。
@@ -187,5 +194,6 @@
 - [Round 25：身份治理语义分层收紧](./_meta/absorption-rounds/round-25-identity-governance-pilot.md) : maintenance 轮次，把 identity governance 收紧成四层分离表达，并明确 queue 与 persistence 的独立边界。
 - [Round 26：状态与快照生命周期补强](./_meta/absorption-rounds/round-26-status-snapshot-pilot.md) : maintenance 轮次，为 `customer-mdm` 年度生命周期补齐对象级证据，并继续收紧概念层与命令面分层。
 - [Round 27：legacy 语义补强收口](./_meta/absorption-rounds/round-27-parallel-legacy-semantic-wave-01.md) : maintenance 轮次，对四个高流量 domain 与 shared operator / verification pages 做对象级补强与 cross-link 收口。
+- [Round 28：customer-master derived signals 收紧](./_meta/absorption-rounds/round-28-customer-master-derived-signals.md) : maintenance 轮次，把 `tags`、`主拓机构` 与 cross-domain customer-master-derived signal family 收紧成 durable objects。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

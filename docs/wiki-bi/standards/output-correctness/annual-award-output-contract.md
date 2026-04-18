@@ -30,6 +30,12 @@ replay evidence 表明，`annual_award` 当前还会显式发布：
 
 这说明本域不只是写一张事实表，它还会把 identity 与客户主数据相关信号推进到可验证输出层。
 
+这些 customer-master-derived signals 至少包括：
+
+- `tags=yyMM中标`
+- `年金客户类型=中标客户`
+- 基于 `计划规模` 的主导 customer/master 值
+
 ## enrichment 语义合同（hidden but required）
 
 `plan_code` enrichment 在 current accepted slice 的稳定顺序是：
@@ -92,10 +98,13 @@ replay evidence 表明，`annual_award` 当前还会显式发布：
 - [客户状态总览](../../concepts/customer-status.md)
 - [企业身份标识：`company_id`](../../concepts/company-id.md)
 - [回填：`backfill`](../../concepts/backfill.md)
+- [`tags`](../../concepts/tags.md)
+- [年金客户类型：`customer_type`](../../concepts/customer-type.md)
 
 ## 相关证据
 
 - [`annual_award` 字段处理证据](../../evidence/annual-award-field-processing-evidence.md)
+- [customer-master signals 证据](../../evidence/customer-master-signals-evidence.md)
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
 

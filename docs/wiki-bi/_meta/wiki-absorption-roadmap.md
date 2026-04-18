@@ -170,7 +170,7 @@
 
 - completed on 2026-04-15
 
-## Round 24-27：legacy 隐含语义补强（已完成）
+## Round 24-28：legacy 隐含语义补强（已完成）
 
 ### Round 24：引用同步与回填语义收紧
 
@@ -241,9 +241,26 @@
 
 - completed on 2026-04-16
 
+### Round 28：customer-master derived signals 收紧
+
+目标：
+
+- 把 `tags`、`主拓机构` 与 cross-domain customer-master-derived signals 从 scattered mentions 收紧成 durable concepts + evidence dispatcher
+
+主入口页：
+
+- `evidence/customer-master-signals-evidence.md`
+- `concepts/tags.md`
+- `concepts/primary-branch.md`
+- `concepts/backfill.md`
+
+状态：
+
+- completed on 2026-04-18
+
 ## 当前位置
 
-`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次，以及 Round 24-27 的 legacy 隐含语义补强。
+`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次，以及 Round 24-28 的 legacy 隐含语义补强。
 
 当前应明确保持两条边界：
 
@@ -252,8 +269,7 @@
 
 ## 下阶段：semantic map 驱动的 wiki 吸收
 
-下阶段不再先按“再开一个 round note”推进，而是先用 semantic map 建 discovery ledger，
-再由该 ledger 驱动 durable wiki 的吸收顺序。
+下阶段仍不应回到“先开 round 再找对象”的旧路径。Round 28 处理的是已明确暴露的 durable customer-master signal gap；剩余 runtime/operator 主题仍应先用 semantic map 建 discovery ledger，再由该 ledger 驱动 durable wiki 的吸收顺序。
 
 工作原则：
 
