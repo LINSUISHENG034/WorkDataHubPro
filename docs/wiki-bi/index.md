@@ -15,7 +15,7 @@
 - 我想补强 customer status 里最容易被误读的 annual identity 语义
   - 先看 [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md)，再看 [客户状态语义正确性](./standards/semantic-correctness/customer-status-semantics.md)。
 - 我想继续补强 legacy business semantics
-  - 先看 [Round 29：legacy 业务语义扩展包](./_meta/absorption-rounds/round-29-legacy-business-semantics-expansion.md)，再从 [关键年金计划](./concepts/key-annuity-plan.md) 与 [classification family 证据](./evidence/classification-family-evidence.md) 进入。
+  - 先看 [Round 30：relationship breadth deepening](./_meta/absorption-rounds/round-30-relationship-breadth-deepening.md)，再从 [关联计划数](./concepts/related-plan-count.md) 与 [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) 进入。
 
 ## 阅读意图
 
@@ -40,6 +40,8 @@
   - 这些不是零散字段，而是一组由 backfill/customer signal 规则派生出来的 customer-master 语义对象。
 - [`关键年金计划` 到底是什么](./concepts/key-annuity-plan.md)
   - 它回答“哪个计划最具主导性”，不是任意一条源记录上的 `计划代码`。
+- [`关联计划数` 到底是什么](./concepts/related-plan-count.md)
+  - 它回答“这个客户关联了多少个不同计划”，不等于主导计划，也不等于 snapshot `plan_count`。
 - [什么算受治理的身份 fallback](./standards/semantic-correctness/identity-governance.md)
   - temp-id、mapping files、cache、provider、queue 的边界需要作为 identity governance 统一理解。
 - [如何区分当前运行路径、历史记忆、已退休行为与可见后果](./standards/semantic-correctness/identity-governance.md)
@@ -101,6 +103,7 @@
 - [客户事件轨迹标签：`tags`](./concepts/tags.md) : 说明 `yyMM新建` / `yyMM中标` / `yyMM流失` 这类 customer-master 标签的业务语义。
 - [主拓机构](./concepts/primary-branch.md) : 说明 customer-master / reference 对象上的主导机构归属不是输入列直接复制。
 - [关键年金计划](./concepts/key-annuity-plan.md) : 说明 customer-master signal family 中“主导计划锚点”的语义，不把它混写成原始 `计划代码`。
+- [关联计划数](./concepts/related-plan-count.md) : 说明 customer-master relationship breadth 中“关联了多少个不同计划”的语义，不把它混写成主导计划或 snapshot `plan_count`。
 - [年金计划类型：`plan_type`](./concepts/plan-type.md) : 说明单一计划与集合计划的语义差异和约束。
 - [快照粒度：`snapshot_granularity`](./concepts/snapshot-granularity.md) : 定义客户/产品线与客户/计划两类快照粒度。
 - [回填：`backfill`](./concepts/backfill.md) : 说明主数据/参考数据回填的业务语义和边界。
@@ -218,5 +221,6 @@
 - [Round 27：legacy 语义补强收口](./_meta/absorption-rounds/round-27-parallel-legacy-semantic-wave-01.md) : maintenance 轮次，对四个高流量 domain 与 shared operator / verification pages 做对象级补强与 cross-link 收口。
 - [Round 28：customer-master derived signals 收紧](./_meta/absorption-rounds/round-28-customer-master-derived-signals.md) : maintenance 轮次，把 `tags`、`主拓机构` 与 cross-domain customer-master-derived signal family 收紧成 durable objects。
 - [Round 29：legacy 业务语义扩展包](./_meta/absorption-rounds/round-29-legacy-business-semantics-expansion.md) : maintenance 轮次，把 `关键年金计划`、`is_churned_this_year` shared coverage 与 classification family 继续推进成 durable business-semantics 入口。
+- [Round 30：relationship breadth deepening](./_meta/absorption-rounds/round-30-relationship-breadth-deepening.md) : maintenance 轮次，把 `关联计划数` 从 dispatcher 提示推进成 durable relationship-breadth 对象页。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

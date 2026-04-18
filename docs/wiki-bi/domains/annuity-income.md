@@ -35,12 +35,14 @@ current project 已有：
 - [回填：`backfill`](../concepts/backfill.md)
 - [`tags`](../concepts/tags.md)
 - [主拓机构](../concepts/primary-branch.md)
+- [关联计划数](../concepts/related-plan-count.md)
 
 ## 关键输出结果
 
 - direct fact output
 - reference / customer signal
 - customer-master-derived signals（fee-weighted 主拓机构、关键计划、`yyMM新建`、`新客*`）
+- 其中 `关联计划数` 用于解释 relationship breadth，不等于主导计划锚点，也不等于 snapshot-side `plan_count`
 - unresolved identity 的 operator-facing artifacts
 - post-ID5 identity governance 与 branch mapping 约束
 
