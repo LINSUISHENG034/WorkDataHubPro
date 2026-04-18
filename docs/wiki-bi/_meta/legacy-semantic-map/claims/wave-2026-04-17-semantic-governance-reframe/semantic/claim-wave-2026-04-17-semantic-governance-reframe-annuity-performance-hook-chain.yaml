@@ -1,0 +1,134 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-annuity-performance-post-hook-chain
+sources_read:
+- source_ref: docs/business-background/战客身份定义与更新逻辑.md
+  source_type: legacy_doc
+  note: Business-background guidance defines the yearly identity family as a layered process across contract sync, year init, and snapshot refresh.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/战客身份定义与更新逻辑.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/verification_guide_real_data.md
+  source_type: legacy_doc
+  note: Verification guide explicitly documents the three-hook post-ETL chain and states that it triggers only after annuity_performance completes.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/verification_guide_real_data.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/cli/etl/hooks.py
+  source_type: legacy_code
+  note: Hook registry binds contract_status_sync, year_init, and snapshot_refresh to annuity_performance and preserves execution order.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/etl/hooks.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/etl/executors.py
+  source_type: legacy_code
+  note: CLI executor runs post-ETL hooks only after successful ETL completion and treats manual customer-mdm commands as recovery paths.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/etl/executors.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/customer_mdm/sync.py
+  source_type: legacy_code
+  note: customer-mdm sync remains an explicit manual recovery entry instead of the default primary trigger.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/customer_mdm/sync.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/customer_mdm/snapshot.py
+  source_type: legacy_code
+  note: customer-mdm snapshot remains an explicit manual recovery entry instead of the default primary trigger.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/customer_mdm/snapshot.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  note: Current evidence page already preserves the distinction between yearly-init, sync, snapshot, and command surfaces.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  source_type: current_wiki
+  note: Current semantic-correctness standard keeps yearly identity, snapshot, and operator surfaces layered rather than collapsed.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/customer-mdm-commands.md
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+submitted_at: '2026-04-18T08:20:00Z'
+semantic_findings:
+- semantic_id: sem-rule-annuity-performance-post-hook-chain
+  semantic_node_type: semantic_rule
+  title: annuity_performance post-hook chain
+  summary: customer_mdm sync and snapshot side effects are not generic post-load behavior; they are an annuity_performance-specific hook chain with ordered recovery semantics.
+  business_conclusion: >-
+    the default runtime path for customer_mdm yearly identity updates is an
+    annuity_performance-only post-ETL chain: contract_status_sync, then
+    year_init for January periods, then snapshot_refresh. Manual customer-mdm
+    commands exist as recovery or operator surfaces, not as the primary semantic
+    trigger for normal downstream refresh.
+  primary_source_refs:
+  - docs/business-background/战客身份定义与更新逻辑.md
+  - docs/verification_guide_real_data.md
+  supporting_source_refs:
+  - src/work_data_hub/cli/etl/hooks.py
+  - src/work_data_hub/cli/etl/executors.py
+  - src/work_data_hub/cli/customer_mdm/sync.py
+  - src/work_data_hub/cli/customer_mdm/snapshot.py
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/customer-mdm-commands.md
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Manual customer-mdm commands remain valid operator surfaces, but they act as recovery paths and do not overturn the default annuity_performance-triggered hook chain.
+    proxy_usage_refs:
+    - docs/wiki-bi/surfaces/customer-mdm-commands.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    related_runtime_carriers: []
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports evaluating customer_mdm downstream behavior as an annuity_performance-gated chain rather than a generic hook available to every domain.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/customer-mdm-commands.md
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring future runtime changes while preserving the legacy trigger boundary and ordered chain semantics.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring descriptions that treat manual customer-mdm commands as the default trigger path for normal monthly downstream refresh.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/customer-mdm-commands.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a stable runtime-to-semantic trigger rule for customer_mdm downstream updates.
+        target_pages:
+        - docs/wiki-bi/surfaces/customer-mdm-commands.md
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+trigger_id: trigger-customer-mdm-hook-chain-001
+orchestration_iteration: 1

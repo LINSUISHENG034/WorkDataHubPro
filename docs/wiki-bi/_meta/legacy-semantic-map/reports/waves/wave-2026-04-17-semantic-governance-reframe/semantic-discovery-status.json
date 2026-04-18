@@ -3,112 +3,56 @@
   "discovery_view_status": "green",
   "semantic_maturity_counts": {
     "observed": 0,
-    "inferred": 3,
-    "contested": 1,
-    "consumption-candidate": 18
+    "inferred": 0,
+    "contested": 0,
+    "consumption-candidate": 4
   },
-  "contested_semantic_ids": [
-    "sem-non-equivalence-customer-type-vs-is-new"
-  ],
+  "contested_semantic_ids": [],
   "recommendation_counts": {
-    "recommended_stable_canonical": 18,
-    "recommended_contested": 1,
-    "claim_level_only": 3
+    "recommended_stable_canonical": 4,
+    "recommended_contested": 0,
+    "claim_level_only": 0
   },
-  "contested_proposal_ids": [
-    "sem-non-equivalence-customer-type-vs-is-new"
-  ],
+  "contested_proposal_ids": [],
   "governance_implication_summaries": {
     "slice_admission": {
-      "count": 22,
+      "count": 4,
       "ids": [
-        "sem-concept-classification-family-layering",
-        "sem-concept-customer-annual-identity-family",
-        "sem-concept-customer-master-backfill",
-        "sem-concept-customer-status",
-        "sem-concept-identity-governance-layering",
-        "sem-decision-anchor-customer-status-rules",
-        "sem-fact-family-customer-status-source-family",
-        "sem-fact-family-plan-classification-stack",
-        "sem-fact-family-reference-sync-target-inventory",
-        "sem-grain-split-is-churned-this-year",
-        "sem-lifecycle-customer-status-yearly-cycle",
-        "sem-non-equivalence-customer-master-vs-status",
-        "sem-non-equivalence-customer-type-vs-is-new",
-        "sem-non-equivalence-input-plan-type-vs-customer-master-plan-type",
-        "sem-non-equivalence-temp-id-vs-company-id",
-        "sem-rule-is-churned-this-year-definition",
-        "sem-rule-is-new-definition",
-        "sem-rule-reference-sync-incremental-state",
-        "sem-rule-status-source-splitting",
-        "sem-rule-status-year-identity-anchor",
-        "sem-rule-strategic-ratchet",
-        "sem-rule-unresolved-identity-operator-visibility"
+        "sem-concept-reference-strategy-layering",
+        "sem-lifecycle-reference-sync-preload-cycle",
+        "sem-non-equivalence-reference-sync-vs-backfill",
+        "sem-rule-annuity-performance-post-hook-chain"
       ]
     },
     "defer_candidates": {
-      "count": 5,
+      "count": 4,
       "ids": [
-        "sem-concept-identity-governance-layering",
-        "sem-non-equivalence-customer-type-vs-is-new",
-        "sem-rule-reference-sync-incremental-state",
-        "sem-rule-status-year-identity-anchor",
-        "sem-rule-unresolved-identity-operator-visibility"
+        "sem-concept-reference-strategy-layering",
+        "sem-lifecycle-reference-sync-preload-cycle",
+        "sem-non-equivalence-reference-sync-vs-backfill",
+        "sem-rule-annuity-performance-post-hook-chain"
       ]
     },
     "retire_candidates": {
-      "count": 15,
+      "count": 4,
       "ids": [
-        "sem-concept-classification-family-layering",
-        "sem-concept-customer-annual-identity-family",
-        "sem-concept-identity-governance-layering",
-        "sem-fact-family-customer-status-source-family",
-        "sem-fact-family-plan-classification-stack",
-        "sem-fact-family-reference-sync-target-inventory",
-        "sem-lifecycle-customer-status-yearly-cycle",
-        "sem-non-equivalence-customer-type-vs-is-new",
-        "sem-non-equivalence-input-plan-type-vs-customer-master-plan-type",
-        "sem-non-equivalence-temp-id-vs-company-id",
-        "sem-rule-is-churned-this-year-definition",
-        "sem-rule-is-new-definition",
-        "sem-rule-status-source-splitting",
-        "sem-rule-strategic-ratchet",
-        "sem-rule-unresolved-identity-operator-visibility"
+        "sem-concept-reference-strategy-layering",
+        "sem-lifecycle-reference-sync-preload-cycle",
+        "sem-non-equivalence-reference-sync-vs-backfill",
+        "sem-rule-annuity-performance-post-hook-chain"
       ]
     },
     "durable_wiki_absorption": {
-      "count": 22,
+      "count": 4,
       "ids": [
-        "sem-concept-classification-family-layering",
-        "sem-concept-customer-annual-identity-family",
-        "sem-concept-customer-master-backfill",
-        "sem-concept-customer-status",
-        "sem-concept-identity-governance-layering",
-        "sem-decision-anchor-customer-status-rules",
-        "sem-fact-family-customer-status-source-family",
-        "sem-fact-family-plan-classification-stack",
-        "sem-fact-family-reference-sync-target-inventory",
-        "sem-grain-split-is-churned-this-year",
-        "sem-lifecycle-customer-status-yearly-cycle",
-        "sem-non-equivalence-customer-master-vs-status",
-        "sem-non-equivalence-customer-type-vs-is-new",
-        "sem-non-equivalence-input-plan-type-vs-customer-master-plan-type",
-        "sem-non-equivalence-temp-id-vs-company-id",
-        "sem-rule-is-churned-this-year-definition",
-        "sem-rule-is-new-definition",
-        "sem-rule-reference-sync-incremental-state",
-        "sem-rule-status-source-splitting",
-        "sem-rule-status-year-identity-anchor",
-        "sem-rule-strategic-ratchet",
-        "sem-rule-unresolved-identity-operator-visibility"
+        "sem-concept-reference-strategy-layering",
+        "sem-lifecycle-reference-sync-preload-cycle",
+        "sem-non-equivalence-reference-sync-vs-backfill",
+        "sem-rule-annuity-performance-post-hook-chain"
       ]
     }
   },
-  "carrier_scope_mismatch_ids": [
-    "sem-decision-anchor-customer-status-rules"
-  ],
-  "unresolved_proxy_conflict_ids": [
-    "sem-non-equivalence-customer-type-vs-is-new"
-  ],
-  "generated_at": "2026-04-18T06:12:00Z"
+  "carrier_scope_mismatch_ids": [],
+  "unresolved_proxy_conflict_ids": [],
+  "generated_at": "2026-04-18T08:20:00Z"
 }

@@ -1,0 +1,112 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-lifecycle-reference-sync-preload-cycle
+sources_read:
+- source_ref: docs/guides/infrastructure/backfill-mechanism-guide.md
+  source_type: legacy_doc
+  note: Legacy guide places reference_sync in the pre-load layer ahead of fact loading and backfill.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/backfill-mechanism-guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/reference_sync.yml
+  source_type: legacy_config
+  note: reference_sync config defines the scheduled daily pre-load window and target inventory contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/reference_sync.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/orchestration/reference_sync_jobs.py
+  source_type: legacy_code
+  note: Dagster job exposes reference_sync as a dedicated orchestration surface instead of folding it into domain ETL.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/reference_sync_jobs.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/orchestration/schedules.py
+  source_type: legacy_code
+  note: Daily schedule binds reference_sync to a 01:00 Asia/Shanghai pre-load run.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/schedules.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/orchestration/reference_sync_ops.py
+  source_type: legacy_code
+  note: Runtime op resolves explicit state, persisted state, and force_full_sync inside the dedicated reference_sync cycle.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/reference_sync_ops.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/surfaces/reference-sync.md
+  source_type: current_wiki
+  note: Current wiki already preserves deferred runtime/bootstrap truth for reference_sync.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/surfaces/reference-sync.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/reference-sync.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+submitted_at: '2026-04-18T08:10:00Z'
+semantic_findings:
+- semantic_id: sem-lifecycle-reference-sync-preload-cycle
+  semantic_node_type: semantic_lifecycle
+  title: Reference sync pre-load cycle
+  summary: reference_sync is a dedicated pre-load cycle with its own job, schedule, and stateful runtime controls rather than an inline side effect of domain ETL.
+  business_conclusion: reference_sync should be interpreted as an independent pre-load lifecycle. It is scheduled before fact-oriented processing, owns its own job/op boundary, and carries explicit state controls such as persisted state, explicit state injection, and force_full_sync.
+  primary_source_refs:
+  - docs/guides/infrastructure/backfill-mechanism-guide.md
+  - config/reference_sync.yml
+  supporting_source_refs:
+  - src/work_data_hub/orchestration/reference_sync_jobs.py
+  - src/work_data_hub/orchestration/schedules.py
+  - src/work_data_hub/orchestration/reference_sync_ops.py
+  - docs/wiki-bi/surfaces/reference-sync.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/reference-sync.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Later runtime simplifications may hide or defer pieces of the repo-native cycle, but the legacy pre-load lifecycle itself remains stable and explainable.
+    proxy_usage_refs:
+    - docs/wiki-bi/surfaces/reference-sync.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/reference-sync.md
+    - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+    related_runtime_carriers:
+    - obj-reference-sync-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports treating reference_sync as its own pre-load lifecycle when evaluating whether reference coverage exists before fact loading.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring runtime-retention choices while preserving the legacy pre-load lifecycle in governance memory.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring descriptions that reduce reference_sync to a hidden helper inside fact processing.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a stable lifecycle description of legacy reference_sync.
+        target_pages:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        blocked_by: []
+trigger_id: trigger-reference-sync-cycle-001
+orchestration_iteration: 1

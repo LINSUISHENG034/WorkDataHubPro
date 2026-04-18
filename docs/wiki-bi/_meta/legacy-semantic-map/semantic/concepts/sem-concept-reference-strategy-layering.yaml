@@ -1,0 +1,91 @@
+semantic_id: sem-concept-reference-strategy-layering
+semantic_node_type: semantic_concept
+title: Reference strategy layering
+summary: Legacy reference handling splits authoritative pre-load reference_sync from
+  process-time backfill instead of treating both as one generic completion step.
+business_conclusion: reference_sync and backfill belong to one reference strategy
+  but they are layered, non-equivalent objects. reference_sync preloads authoritative
+  reference data before fact processing, while backfill derives missing references
+  and customer-master side effects from processed fact rows under FK-safe gating.
+primary_semantic_sources:
+- docs/guides/infrastructure/backfill-mechanism-guide.md
+- config/reference_sync.yml
+- "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+  \u6001\u6765\u6E90\u5206\u6790.md"
+supporting_witness_sources:
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/backfill.md
+- docs/wiki-bi/surfaces/reference-sync.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - "Legacy materials sometimes discuss both paths as one broad\u8865\u9F50 story,\
+    \ but the accepted semantic boundary is a two-layer strategy rather than one undifferentiated\
+    \ operation."
+  proxy_usage_refs:
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/backfill.md
+  - docs/wiki-bi/surfaces/reference-sync.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  related_runtime_carriers:
+  - obj-reference-sync-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports keeping authoritative pre-load and derived backfill as separate
+        slice concerns instead of collapsing them into one reference bucket.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/backfill.md
+      - docs/wiki-bi/surfaces/reference-sync.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports deferring unresolved runtime/state questions without erasing
+        the layered reference strategy itself.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/reference-sync.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that describe reference_sync and
+        backfill as interchangeable execution steps.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review as a stable semantic boundary for
+        legacy reference handling.
+      target_pages:
+      - docs/wiki-bi/concepts/backfill.md
+      - docs/wiki-bi/surfaces/reference-sync.md
+      - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- "Legacy materials sometimes discuss both paths as one broad\u8865\u9F50 story, but\
+  \ the accepted semantic boundary is a two-layer strategy rather than one undifferentiated\
+  \ operation."
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T08:00:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-reference-layering
