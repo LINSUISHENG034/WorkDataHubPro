@@ -5,54 +5,46 @@
     "observed": 0,
     "inferred": 0,
     "contested": 0,
-    "consumption-candidate": 4
+    "consumption-candidate": 2
   },
   "contested_semantic_ids": [],
   "recommendation_counts": {
-    "recommended_stable_canonical": 4,
+    "recommended_stable_canonical": 2,
     "recommended_contested": 0,
     "claim_level_only": 0
   },
   "contested_proposal_ids": [],
   "governance_implication_summaries": {
     "slice_admission": {
-      "count": 4,
+      "count": 2,
       "ids": [
-        "sem-concept-reference-strategy-layering",
-        "sem-lifecycle-reference-sync-preload-cycle",
-        "sem-non-equivalence-reference-sync-vs-backfill",
-        "sem-rule-annuity-performance-post-hook-chain"
+        "sem-lifecycle-company-lookup-queue-recovery-cycle",
+        "sem-rule-company-lookup-queue-single-domain-boundary"
       ]
     },
     "defer_candidates": {
-      "count": 4,
+      "count": 2,
       "ids": [
-        "sem-concept-reference-strategy-layering",
-        "sem-lifecycle-reference-sync-preload-cycle",
-        "sem-non-equivalence-reference-sync-vs-backfill",
-        "sem-rule-annuity-performance-post-hook-chain"
+        "sem-lifecycle-company-lookup-queue-recovery-cycle",
+        "sem-rule-company-lookup-queue-single-domain-boundary"
       ]
     },
     "retire_candidates": {
-      "count": 4,
+      "count": 2,
       "ids": [
-        "sem-concept-reference-strategy-layering",
-        "sem-lifecycle-reference-sync-preload-cycle",
-        "sem-non-equivalence-reference-sync-vs-backfill",
-        "sem-rule-annuity-performance-post-hook-chain"
+        "sem-lifecycle-company-lookup-queue-recovery-cycle",
+        "sem-rule-company-lookup-queue-single-domain-boundary"
       ]
     },
     "durable_wiki_absorption": {
-      "count": 4,
+      "count": 2,
       "ids": [
-        "sem-concept-reference-strategy-layering",
-        "sem-lifecycle-reference-sync-preload-cycle",
-        "sem-non-equivalence-reference-sync-vs-backfill",
-        "sem-rule-annuity-performance-post-hook-chain"
+        "sem-lifecycle-company-lookup-queue-recovery-cycle",
+        "sem-rule-company-lookup-queue-single-domain-boundary"
       ]
     }
   },
   "carrier_scope_mismatch_ids": [],
   "unresolved_proxy_conflict_ids": [],
-  "generated_at": "2026-04-18T08:20:00Z"
+  "generated_at": "2026-04-18T08:45:00Z"
 }

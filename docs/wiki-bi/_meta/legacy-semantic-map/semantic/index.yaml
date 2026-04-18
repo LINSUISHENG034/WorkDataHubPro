@@ -1,13 +1,7 @@
 semantic_nodes:
-- semantic_id: sem-concept-reference-strategy-layering
-  semantic_node_type: semantic_concept
-  path: semantic/concepts/sem-concept-reference-strategy-layering.yaml
-- semantic_id: sem-lifecycle-reference-sync-preload-cycle
+- semantic_id: sem-lifecycle-company-lookup-queue-recovery-cycle
   semantic_node_type: semantic_lifecycle
-  path: semantic/lifecycles/sem-lifecycle-reference-sync-preload-cycle.yaml
-- semantic_id: sem-non-equivalence-reference-sync-vs-backfill
-  semantic_node_type: semantic_non_equivalence
-  path: semantic/non-equivalences/sem-non-equivalence-reference-sync-vs-backfill.yaml
-- semantic_id: sem-rule-annuity-performance-post-hook-chain
+  path: semantic/lifecycles/sem-lifecycle-company-lookup-queue-recovery-cycle.yaml
+- semantic_id: sem-rule-company-lookup-queue-single-domain-boundary
   semantic_node_type: semantic_rule
-  path: semantic/rules/sem-rule-annuity-performance-post-hook-chain.yaml
+  path: semantic/rules/sem-rule-company-lookup-queue-single-domain-boundary.yaml

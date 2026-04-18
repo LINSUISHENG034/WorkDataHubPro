@@ -1,0 +1,211 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+sources_read:
+- source_ref: docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  note: Service guide explicitly documents the async enrichment loop, queue states, and retry cadence.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/company-enrichment-service.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  source_type: legacy_code
+  note: Queue DAO implements ready-only dequeue, bounded retry backoff, permanent failure threshold, and stale-processing reset.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/orchestration/schedules.py
+  source_type: legacy_code
+  note: Hourly schedule binds process_company_lookup_queue_job to the queue-processing loop.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/schedules.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/orchestration/sensors.py
+  source_type: legacy_code
+  note: Optional sensor triggers queue processing reactively from ready-only queue depth, not raw pending count.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/sensors.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/orchestration/test_schedules.py
+  source_type: legacy_test
+  note: Schedule tests preserve the hourly queue-processing contract and batch-size propagation.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/orchestration/test_schedules.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/orchestration/test_sensors.py
+  source_type: legacy_test
+  note: Sensor tests preserve the ready-only threshold trigger contract for queue depth.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/orchestration/test_sensors.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/domain/company_enrichment/test_lookup_queue.py
+  source_type: legacy_test
+  note: Queue tests preserve backoff filtering, retry scheduling, and stale-processing reset behavior.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/domain/company_enrichment/test_lookup_queue.py
+  semantic_authority: runtime_witness
+- source_ref: docs/archive/guides/cli-migration-guide.md
+  source_type: legacy_doc
+  note: CLI migration guide classifies company_lookup_queue as a special orchestration domain rather than a normal multi-domain ETL member.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/archive/guides/cli-migration-guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: tests/integration/test_cli_multi_domain.py
+  source_type: legacy_test
+  note: CLI tests preserve the single-domain-only boundary for company_lookup_queue.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/integration/test_cli_multi_domain.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/surfaces/company-lookup-queue.md
+  source_type: current_wiki
+  note: Current surface page preserves queue dedup, graceful degradation, and deferred runtime reality.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/surfaces/company-lookup-queue.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  note: Current operator/surface evidence preserves queue scheduling and deferred governance posture as explicit surface memory.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
+submitted_at: '2026-04-18T08:45:00Z'
+semantic_findings:
+- semantic_id: sem-lifecycle-company-lookup-queue-recovery-cycle
+  semantic_node_type: semantic_lifecycle
+  title: Company lookup queue recovery cycle
+  summary: company_lookup_queue is a bounded asynchronous recovery loop with explicit retry, trigger, and stale-processing recovery semantics.
+  business_conclusion: >-
+    company_lookup_queue is not just an enqueue side effect. It owns a recovery
+    cycle: hourly scheduled processing, optional threshold-based sensor
+    triggering, dequeue only when next_retry_at has elapsed, bounded retry
+    backoff of 1/5/15 minutes, permanent failure after three attempts, and stale
+    processing rows reset back to pending.
+  primary_source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  - src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  - src/work_data_hub/orchestration/schedules.py
+  - src/work_data_hub/orchestration/sensors.py
+  supporting_source_refs:
+  - tests/unit/orchestration/test_schedules.py
+  - tests/unit/orchestration/test_sensors.py
+  - tests/unit/domain/company_enrichment/test_lookup_queue.py
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Current accepted runtime may externalize unresolved identity through artifacts instead of retaining the full repo-native queue, but the legacy queue recovery cycle itself remains stable governance memory.
+    proxy_usage_refs:
+    - docs/wiki-bi/surfaces/company-lookup-queue.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/company-lookup-queue.md
+    - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports treating queue retry/recovery semantics as a distinct runtime memory when assessing unresolved-identity handling.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring repo-native queue retention without erasing the recovery-loop semantics from governance truth.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring descriptions that reduce queue behavior to a single enqueue-only fallback.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a stable description of the legacy queue recovery lifecycle.
+        target_pages:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+- semantic_id: sem-rule-company-lookup-queue-single-domain-boundary
+  semantic_node_type: semantic_rule
+  title: Company lookup queue single-domain boundary
+  summary: company_lookup_queue is an explicit special orchestration domain, not a normal member of multi-domain ETL execution.
+  business_conclusion: >-
+    company_lookup_queue should be interpreted as a standalone orchestration
+    surface. It is valid as a single-domain special run, but it is excluded from
+    multi-domain and --all-domains ETL paths, which keeps queue recovery
+    semantics separate from normal fact-domain batching.
+  primary_source_refs:
+  - docs/archive/guides/cli-migration-guide.md
+  supporting_source_refs:
+  - tests/integration/test_cli_multi_domain.py
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - The queue can still be invoked from ETL-facing tooling, but that does not make it a normal fact-domain member of multi-domain execution.
+    proxy_usage_refs:
+    - docs/wiki-bi/surfaces/company-lookup-queue.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/company-lookup-queue.md
+    - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports evaluating queue orchestration separately from fact-domain admission and batching rules.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring queue retention decisions while preserving its operator-boundary semantics.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring descriptions that present queue processing as an ordinary all-domains ETL member.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a stable operator-boundary rule for company_lookup_queue.
+        target_pages:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+trigger_id: trigger-company-lookup-queue-cycle-001
+orchestration_iteration: 1

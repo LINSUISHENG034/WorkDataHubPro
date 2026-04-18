@@ -3,27 +3,27 @@
   "wave_status": "green",
   "closeout_ready": false,
   "archive_ready": false,
-  "immutability_check_passed": true,
+  "immutability_check_passed": false,
   "required_claim_ids": [
-    "claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain",
-    "claim-wave-2026-04-17-semantic-governance-reframe-reference-layering",
-    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle"
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle"
   ],
   "compiled_claim_ids": [
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle"
+  ],
+  "missing_claim_ids": [],
+  "mutable_claim_ids_detected": [
     "claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain",
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle",
     "claim-wave-2026-04-17-semantic-governance-reframe-reference-layering",
     "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle"
   ],
-  "missing_claim_ids": [],
-  "mutable_claim_ids_detected": [],
   "blocking_reasons": [
+    "mutable_accepted_claims_detected",
     "durable_wiki_targets_not_accepted",
     "findings_disposition_incomplete"
   ],
   "accepted_claim_digests": {
-    "claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain": "0bbcb1476d64c08958254e2295e5670543e4a58d83a440ba9e24a93913b9f5bc",
-    "claim-wave-2026-04-17-semantic-governance-reframe-reference-layering": "377086b1e640c00c9ee5187e63920f53168057a87b365479a82dfce7329fed5e",
-    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle": "275c9ba2bdf9edbf1827f416f92ff69d58ca277114af4565d51bfb3031da2310"
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle": "260abb4bc30dbaf192ea0cb2f3233d48b8e5403814c6cc7e4d5df4857cc9dfec"
   },
-  "generated_at": "2026-04-18T08:20:00Z"
+  "generated_at": "2026-04-18T08:45:00Z"
 }

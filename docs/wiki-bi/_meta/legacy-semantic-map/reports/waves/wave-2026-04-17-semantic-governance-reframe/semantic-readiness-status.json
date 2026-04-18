@@ -1,13 +1,11 @@
 {
   "wave_id": "wave-2026-04-17-semantic-governance-reframe",
   "handoff_ready_semantic_ids": [
-    "sem-concept-reference-strategy-layering",
-    "sem-lifecycle-reference-sync-preload-cycle",
-    "sem-non-equivalence-reference-sync-vs-backfill",
-    "sem-rule-annuity-performance-post-hook-chain"
+    "sem-lifecycle-company-lookup-queue-recovery-cycle",
+    "sem-rule-company-lookup-queue-single-domain-boundary"
   ],
   "blocked_semantic_ids": [],
   "blocked_by_gate_reasons": {},
-  "durable_target_page_count": 6,
-  "generated_at": "2026-04-18T08:20:00Z"
+  "durable_target_page_count": 2,
+  "generated_at": "2026-04-18T08:45:00Z"
 }
