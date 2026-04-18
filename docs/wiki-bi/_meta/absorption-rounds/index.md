@@ -64,6 +64,8 @@
   - maintenance 轮次，把 `关联计划数` 从 dispatcher 提示推进成 durable relationship-breadth 对象页。
 - [Round 31：relationship breadth and classification closeout](./round-31-relationship-breadth-and-classification-closeout.md)
   - maintenance 轮次，把 `关联机构数` 与 `管理资格` 推进成 durable objects，并把 remaining follow-on candidates 收紧回 dispatcher / evidence 层。
+- [Round 32：shared unresolved artifact governance](./round-32-shared-unresolved-artifact-governance.md)
+  - maintenance 轮次，把 shared unresolved-name / failed-record artifact family 收紧成 durable evidence dispatcher，同时保持 income-specific accepted closure 与 cross-domain parity gap 分层表达。
 
 ## 计划轮次
 

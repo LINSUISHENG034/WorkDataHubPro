@@ -85,6 +85,7 @@ current project 已有：
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
+- [unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)
 - [`annuity_income` 专题证据](../evidence/annuity-income-gap-evidence.md)
 - [`annuity_income` branch mapping 证据](../evidence/annuity-income-branch-mapping-evidence.md)
 - [`annuity_income` ID5 retirement 证据](../evidence/annuity-income-id5-retirement-evidence.md)
@@ -110,3 +111,4 @@ current project 已有：
 
 - 因为它最早以制度记忆方式进入 wiki，就让它长期停留在“只导航、不回答合同问题”的状态
 - 把兼容性记忆、当前运行路径与已退休行为混写成一段模糊的 identity 叙述
+- 把 income-specific accepted artifact contract 误写成 shared cross-domain artifact parity 已闭环

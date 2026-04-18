@@ -81,6 +81,7 @@
 
 - unresolved identity 必须能外显到 queue、artifact、signal 或 evidence package，而不是只留在内部 trace
 - `company_reference`、`customer_loss_signal`、`unknown_names_csv` 与 queue surface 都属于 operator 可见后果的一部分
+- shared unresolved-name / failed-record artifact family 现在已有对象级 evidence page，但 current accepted closure 仍只覆盖一部分 domain；不能把“有 shared page”误写成“全域 active contract”
 - 当 queue / persistence 未在 current runtime 物化时，面向操作人员的可见后果仍需通过 artifacts/evidence 表达，未闭环项必须进入 evidence gaps
 
 ## 分层检查问句（用于评审）
@@ -106,6 +107,7 @@
 ## 相关证据
 
 - [身份与补查证据](../../evidence/identity-and-lookup-evidence.md)
+- [unresolved-name and failed-record 证据](../../evidence/unresolved-name-and-failed-record-evidence.md)
 - [`annuity_income` branch mapping 证据](../../evidence/annuity-income-branch-mapping-evidence.md)
 - [`annuity_income` ID5 retirement 证据](../../evidence/annuity-income-id5-retirement-evidence.md)
 - [`annuity_income` operator artifacts 证据](../../evidence/annuity-income-operator-artifacts-evidence.md)

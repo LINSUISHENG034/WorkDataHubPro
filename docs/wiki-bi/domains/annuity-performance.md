@@ -54,6 +54,7 @@
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
+- [unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)
 
 ## 当前生产现实问答
 
@@ -75,6 +76,7 @@
 - cross-domain customer-master-derived signal family（`主拓机构`、`关键年金计划`、`关联计划数`、`关联机构数`、`yyMM新建`）见 [customer-master signals 证据](../evidence/customer-master-signals-evidence.md)。
 - relationship breadth 现在已有两个 count-side 对象页：计划侧见 [关联计划数](../concepts/related-plan-count.md)，机构侧见 [关联机构数](../concepts/related-branch-count.md)。
 - classification family 中的 customer-master 聚合分类见 [管理资格](../concepts/management-qualification.md) 与 [classification family 证据](../evidence/classification-family-evidence.md)。
+- legacy unresolved-name / failed-record artifacts 现在有 shared evidence page；它说明 `annuity_performance` 属于 historical artifact breadth，但 current accepted parity 仍未闭环：[unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)。
 - 字段级证据和证据强度分层见 [`annuity_performance` 字段处理证据](../evidence/annuity-performance-field-processing-evidence.md)。
 
 ## 相关 domains

@@ -33,6 +33,7 @@
 - surface 主题最容易被“当前主线只关注 fact domain”掩盖，因此必须显式登记
 - current accepted validation slices 已经用显式 `reference_derivation + publication` 取代 hidden reference-sync side effects；被替代的是 legacy runtime surface，不是 target inventory 与 source-of-truth contract
 - current accepted validation slices 没有 repo-native async lookup queue；被 accepted 的是同步 identity chain、temp-id fallback 与 operator-visible unresolved artifacts，而不是 legacy queue orchestration
+- shared unresolved-name / failed-record artifacts 现在已有独立 evidence dispatcher，可直接解释 queue deferred 之后由什么来承接 operator-visible consequence
 - enterprise persistence 不应再被当作一整团“identity 附属表”；更合理的 closure 方式是把 cache、queue persistence、provider raw/cleansed persistence 分别判断是否处于 active runtime
 - 对 first-wave validation runtime 来说，`reference_sync`、`company_lookup_queue` 与 enterprise persistence 的 runtime breadth 都不属于 active retained surface；它们要么已经被更显式的 flow 替代，要么仍保持 deferred
 - `业务收集` workbook reality 现在已从“聊天里提到过的文件夹记忆”升级为显式 surface/evidence topic
@@ -55,7 +56,7 @@
 
 - 本页继续承载 surface family 的 shared decision package，尤其是 queue、reference sync、manual commands、operator artifacts 与 enterprise persistence 之间的边界关系。
 - 已经形成稳定独立对象的 surface，应优先分发到对应 surface page，而不是在本页重复承载完整对象叙述。
-- income-specific artifact contract 作为 accepted replacement evidence 保留摘要即可；若 future cross-domain artifact parity 闭环，再考虑独立提升 shared artifact object。
+- shared unresolved-name / failed-record family 现在已有对象级 evidence page；本页只保留其与 queue deferred、identity surface 和 current replacement story 的聚合裁决。
 
 ## operator / runtime / verification 治理口径
 
@@ -81,11 +82,12 @@
 - [`company_lookup_queue`](../surfaces/company-lookup-queue.md)
 - [business collection ledger workbook](../surfaces/business-collection-ledger-workbook.md)
 - [business collection workbook variants 证据](./business-collection-workbook-variants-evidence.md)
+- [unresolved-name and failed-record 证据](./unresolved-name-and-failed-record-evidence.md)
 - [`annuity_income` operator artifacts 证据](./annuity-income-operator-artifacts-evidence.md)
 
 ## 当前证据缺口
 
-- shared unresolved-name / failed-record artifact parity 仍未完成 cross-domain closure；当前只有 `annuity_income` 获得 accepted artifact contract
+- shared unresolved-name / failed-record artifact parity 仍未完成 cross-domain closure；当前已有 shared evidence dispatcher，但 accepted artifact contract 仍只有 `annuity_income`
 - standalone tooling family 已被显式登记，但 retain / retire / defer 边界仍待后续治理决策
 - manual `customer-mdm` commands 虽已显式登记，但每条命令的 retain / replace / retire 边界仍待后续治理决策
 - `业务收集` 目录下相邻 workbook variants 的多月稳定性与最终 surface catalog 仍待更多样本验证

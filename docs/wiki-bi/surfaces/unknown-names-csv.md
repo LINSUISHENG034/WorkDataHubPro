@@ -50,15 +50,18 @@
 
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
+- [unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)
 - [`annuity_income` operator artifacts 证据](../evidence/annuity-income-operator-artifacts-evidence.md)
 
 ## 当前重构处理状态
 
 - 当前应被视为需要显式治理的 operator artifact
+- legacy breadth 至少覆盖 `annuity_performance` 与 `annuity_income`
+- current accepted explicit artifact closure 目前主要来自 `annuity_income`
 - 不能因为 replay 路径暂时不产出该 artifact，就假定它没有长期价值
 
 ## 当前证据缺口
 
 - rebuild 是否保留 unknown-names artifact 仍待对象级裁决
 - 若保留，是否固定为 CSV、是否允许等价结构化格式，以及消费接口边界仍未闭环
-- 当前 cross-domain artifact parity 尚未完成；已接受的显式验证主要来自 `annuity_income` 相关证据
+- 当前 cross-domain artifact parity 尚未完成；shared breadth 见 [unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)，已接受的显式验证仍主要来自 `annuity_income` 相关证据

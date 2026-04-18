@@ -26,6 +26,7 @@
 - 5-step fallback chain 属于制度记忆，不只是实现细节
 - temp-id 是受治理 fallback，不等于正式身份
 - `company_lookup_queue` 与 `unknown_names_csv` 都是 identity 主题中的独立 surface / artifact
+- unresolved identity 的 shared artifact family 现在已有独立 evidence dispatcher，可直接解释 queue deferred 之后仍需怎样外显给 operator
 - mapping / override files、cache、provider、queue 与 temp-id 一起构成 identity governance，而不是彼此孤立的“小功能”
 - current project 已显式保护 deterministic / opaque temp identity 与 source-value-first 行为，broader identity governance 也已被提升为独立标准层
 - `annual_award` 与 `annual_loss` 当前都已具备 contract-grade identity writeback 入口，不再只是状态语义的旁路来源
@@ -61,8 +62,13 @@
 - [`annuity_income` ID5 retirement 证据](./annuity-income-id5-retirement-evidence.md)
 - [`annuity_income` operator artifacts 证据](./annuity-income-operator-artifacts-evidence.md)
 
+## shared artifact 补强页
+
+- [unresolved-name and failed-record 证据](./unresolved-name-and-failed-record-evidence.md)
+
 ## 当前证据缺口
 
 - queue runtime 与 enterprise persistence 在 current runtime 中的替代承接（若存在）仍缺少对象级闭环证据，暂不应写成 active runtime path
+- shared artifact family 已有 durable dispatcher，但 cross-domain parity 仍未闭环；当前 accepted artifact replacement 仍主要来自 `annuity_income`
 - cache / provider / mapping 的跨域一致性边界仍需更多 current-side evidence 才能从 compatibility memory 升级为 active conclusion
 - temp-id、ID1-ID5 mapping files 与 annuity_income 相关身份差异仍未形成完整对象级 evidence 套件

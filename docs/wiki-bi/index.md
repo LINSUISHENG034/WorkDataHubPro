@@ -16,6 +16,8 @@
   - 先看 [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md)，再看 [客户状态语义正确性](./standards/semantic-correctness/customer-status-semantics.md)。
 - 我想继续补强 legacy business semantics
   - 先看 [Round 31：relationship breadth and classification closeout](./_meta/absorption-rounds/round-31-relationship-breadth-and-classification-closeout.md)，再从 [关联机构数](./concepts/related-branch-count.md)、[管理资格](./concepts/management-qualification.md) 与 [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) 进入。
+- 我想继续补 shared operator artifacts / queue replacement 这条线
+  - 先看 [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md)，再从 [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) 与 [`company_lookup_queue`](./surfaces/company-lookup-queue.md) 进入。
 
 ## 阅读意图
 
@@ -70,6 +72,8 @@
   - 合同页补齐后，应先看 gap evidence，再决定是修 wiki 还是修实现。
 - [哪些 system surfaces 不能被隐含忽略](./surfaces/company-lookup-queue.md)
   - queue、reference sync、manual commands、operator artifacts 都是显式治理对象。
+- [deferred queue 之后 unresolved identity 由什么来外显](./evidence/unresolved-name-and-failed-record-evidence.md)
+  - 当前要把 queue deferred 和 artifact replacement 分开理解：shared family 已有证据页，但 accepted closure 仍主要是 income-specific。
 - [哪些 legacy tools 属于相邻 operator tooling，而不是业务主路径](./surfaces/standalone-tooling.md)
   - `cleanse`、EQC GUI、deployment GUI 需要显式登记，但不能自动等同于 rebuild 核心边界。
 - [为什么旧项目不能直接作为新架构模板](./_meta/wiki-design.md)
@@ -180,6 +184,7 @@
 - [验证资产证据](./evidence/verification-assets-evidence.md) : 聚合 golden set、replay baseline、validation guide、error fixtures 等证据。
 - [validation result history 证据](./evidence/validation-result-history-evidence.md) : 聚合 legacy parity result 目录、current asset registry 与 validation history 的治理结论。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
+- [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) : 聚合 shared unresolved-name / failed-record artifacts 的 legacy breadth、current accepted closure 与 parity gaps。
 - [引用同步与回填证据](./evidence/reference-and-backfill-evidence.md) : 聚合 authoritative `reference_sync`、fact-derived `backfill` 与 customer-master 衍生写入之间的稳定边界。
 - [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) : 聚合 `tags`、`主拓机构`、`关键年金计划`、关系计数与 `年金客户类型` 的 cross-domain customer-master 语义。
 - [classification family 证据](./evidence/classification-family-evidence.md) : 聚合 `计划类型`、`年金计划类型`、`业务类型`、`管理资格` 与 `组合代码` 的跨层语义边界。
@@ -229,5 +234,6 @@
 - [Round 29：legacy 业务语义扩展包](./_meta/absorption-rounds/round-29-legacy-business-semantics-expansion.md) : maintenance 轮次，把 `关键年金计划`、`is_churned_this_year` shared coverage 与 classification family 继续推进成 durable business-semantics 入口。
 - [Round 30：relationship breadth deepening](./_meta/absorption-rounds/round-30-relationship-breadth-deepening.md) : maintenance 轮次，把 `关联计划数` 从 dispatcher 提示推进成 durable relationship-breadth 对象页。
 - [Round 31：relationship breadth and classification closeout](./_meta/absorption-rounds/round-31-relationship-breadth-and-classification-closeout.md) : maintenance 轮次，把 `关联机构数` 与 `管理资格` 推进成 durable objects，并收紧 remaining follow-on candidates。
+- [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md) : maintenance 轮次，把 shared unresolved-name / failed-record artifact family 收紧成 durable evidence dispatcher，并保持 income-specific accepted closure 与 cross-domain parity gap 分层表达。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

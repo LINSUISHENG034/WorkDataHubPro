@@ -5,6 +5,12 @@
 
 ## [2026-04-18 20:34] maintain | customer_type vs is_new governance package
 
+## [2026-04-18 23:42] maintain | round 32 shared unresolved artifact governance
+
+- 新增 `unresolved-name-and-failed-record-evidence.md`，把 shared unresolved-name / failed-record artifact family 从 scattered gaps 收紧成 durable evidence dispatcher
+- 回写 `operator-and-surface-evidence`、`identity-and-lookup-evidence`、相邻 surface / identity / domain / contract 页面，使 queue deferred 与 artifact replacement 的关系更直接可答
+- 新增 Round 32 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确 current accepted artifact closure 仍以 `annuity_income` 为主，cross-domain parity 继续留在 follow-on
+
 ## [2026-04-18 23:06] maintain | round 31 relationship breadth and classification closeout
 
 - 新增 `related-branch-count.md` 与 `management-qualification.md`，把 `关联机构数` 与 `管理资格` 从遗漏或 dispatcher-only 状态推进成 durable wiki 对象

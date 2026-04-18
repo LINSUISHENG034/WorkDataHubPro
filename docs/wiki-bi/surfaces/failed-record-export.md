@@ -44,15 +44,19 @@ failed-record export 指在验证或处理失败时，把失败记录导出为 o
 
 - [验证资产证据](../evidence/verification-assets-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
+- [unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)
 - [`annuity_income` operator artifacts 证据](../evidence/annuity-income-operator-artifacts-evidence.md)
 
 ## 当前重构处理状态
 
 - 当前应视为需要显式判断是否保留的 operator artifact
+- legacy breadth 至少覆盖 `annuity_performance`、`annual_award`、`annual_loss` 与 `annuity_income`
+- current accepted explicit artifact closure 目前主要来自 `annuity_income`
 - 当前至少应继续在 wiki 中维持其制度记忆，不能因未实现而从治理视野中消失
 
 ## 当前证据缺口
 
 - rebuild 是否必须保留 domain-agnostic 的 failed-record export contract 仍未闭环
 - 若保留，artifact schema（字段、归档策略、保留期）与最小 operator 消费路径仍未成文
+- shared breadth 与 remaining parity gap 见 [unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)
 - 本仓库未包含 legacy `infrastructure/validation/*` 原始实现；当前语义依赖已吸收 audit 证据，原始代码级核验仍待补证

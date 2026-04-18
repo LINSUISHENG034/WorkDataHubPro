@@ -28,6 +28,7 @@
 - `annuity_income` 不只是 fact-processing domain，它还有明确的 operator-facing artifact 合同
 - `unknown_names_csv` 负责把 unresolved identity 显式暴露给人工治理
 - failed-record export 负责把 failure path 从日志层拉到可消费 artifact 层
+- 本页现在承接 income-specific accepted artifact contract；shared family 入口见 [unresolved-name and failed-record 证据](./unresolved-name-and-failed-record-evidence.md)
 
 ## 叙述分层
 
@@ -52,3 +53,4 @@
 
 - current project 已有显式 runbook、replay assertion 与 targeted tests 来保护这些 artifact
 - artifact 形态是否仍是 CSV 可以后续再定，但“必须显式治理”这一点已经稳定
+- 本页不负责宣称 cross-domain parity 已闭环；shared breadth 与 remaining gaps 统一留给 [unresolved-name and failed-record 证据](./unresolved-name-and-failed-record-evidence.md)

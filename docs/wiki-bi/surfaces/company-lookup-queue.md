@@ -53,6 +53,7 @@ legacy code 进一步说明：
 ### 面向操作人员的可见后果
 
 - unresolved identity 仍需对 operator 可见；若不走 queue，需要 artifacts/signal/evidence 明确承接
+- 当前 shared artifact 承接见 [unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)；它解释了哪些 legacy artifact 广度已被看见，哪些 current-side closure 仍未完成
 - 任何“queue 不在 current runtime，因此无需可见性外显”的写法都属于语义错误
 
 ## 为什么它是独立 surface
@@ -84,6 +85,7 @@ legacy code 进一步说明：
 
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
+- [unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)
 
 ## 当前重构处理状态
 
@@ -93,6 +95,7 @@ legacy code 进一步说明：
 - `enterprise.enrichment_requests` 一类 queue persistence 仍随 broader queue/runtime plan 一并 deferred
 - 当前至少不应再被当作“隐含存在，不必登记”的对象
 - unresolved 的 operator consequence 要么进入 artifacts/signal，要么登记在 evidence gap；不能因 queue deferred 而静默消失
+- current accepted replacement evidence 目前主要是 income-specific artifact visibility，而不是 cross-domain queue replacement closure
 - Phase B consume/absorb 已将 `cand-company-lookup-queue-publication-boundary` 明确归一为 `deferred`；当前 durable truth 是保留该治理对象与 deferred runtime reality，而不是强行写成已闭环 runtime
 
 ## 当前治理边界

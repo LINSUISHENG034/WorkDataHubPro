@@ -312,20 +312,37 @@
 
 - completed on 2026-04-18
 
+## Round 32：shared unresolved artifact governance（已完成）
+
+目标：
+
+- 把 shared unresolved-name / failed-record artifact family 从 scattered gap text 收紧成 durable evidence dispatcher
+
+主入口页：
+
+- `evidence/unresolved-name-and-failed-record-evidence.md`
+- `surfaces/company-lookup-queue.md`
+- `surfaces/unknown-names-csv.md`
+- `surfaces/failed-record-export.md`
+
+状态：
+
+- completed on 2026-04-18
+
 ## 当前位置
 
-`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次，以及 Round 24-31 的 legacy 隐含语义补强。
+`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次、Round 24-31 的 legacy 隐含语义补强，以及 Round 32 的第一批 semantic-map-adjacent artifact discovery 收口。
 
 当前应明确保持两条边界：
 
 - durable wiki 只保留业务语义、标准、surface、evidence 与 round sediment
 - subagent / worktree / merge sequencing 这类执行层材料不再放在 `docs/wiki-bi/`，应留在 `docs/superpowers/`、`.planning/` 或 git history
 
-## 下阶段：回到 semantic map 驱动的 surface discovery
+## 下阶段：继续 semantic map 驱动的 surface discovery
 
-Round 29 到 Round 31 已经把当前最值得立即提升的一批 business semantics 再补了一轮：`关键年金计划`、`关联计划数`、`关联机构数` 不再只是 dispatcher 提示，`管理资格` 也不再只剩 classification dispatcher 里的一个边界句子。
+Round 29 到 Round 31 已经把当前最值得立即提升的一批 business semantics 再补了一轮；Round 32 则把 shared unresolved-name / failed-record artifact family 从“gap-only 提示”推进成了 durable evidence dispatcher。
 
-因此，下阶段不应继续围绕同一批 business-semantic 对象机械拆页，而应回到 semantic-map-first 的 runtime/operator discovery。
+因此，下阶段不应回头继续机械拆相邻 business-semantic 对象，而应继续沿 semantic-map-first 的 runtime/operator discovery 往下走。
 
 工作原则：
 
@@ -339,12 +356,12 @@ Round 29 到 Round 31 已经把当前最值得立即提升的一批 business sem
 双轨顺序：
 
 1. 先围绕 first-wave 未闭合的 cross-cutting surfaces 开 discovery wave，而不是重复已完成的 Round 24-30 business-semantics 补强
-2. 保持 Round 31 留下的 follow-on candidates 为“候选对象”，而不是立刻继续拆更多 concept pages
+2. 保持 remaining business-semantic candidates 为“候选对象”，而不是立刻继续拆更多 concept pages
 3. 每个 discovery wave 先补 semantic map，再把稳定结论吸收到 `evidence/`
 4. `evidence/` 稳定后，再回写 `concepts/`、`standards/`、`surfaces/`、`domains/`
 5. wiki 更新被接受后，关闭对应 semantic-map wave，并评估 claims / tooling 的归档
 
-Round 31 留下的 follow-on candidates：
+remaining business-semantic candidates：
 
 - `其他年金计划`、`其他开拓机构`
 - `组合代码`
@@ -365,5 +382,6 @@ Round 31 留下的 follow-on candidates：
 
 如果马上继续推进，推荐按下面顺序开工：
 
-- `related-branch-count.md`、`management-qualification.md` 与相邻 dispatcher 页作为本轮 business-semantics 收口入口
-- `company_lookup_queue` + identity persistence discovery wave
+- `unresolved-name-and-failed-record-evidence.md` 与相邻 surface 页作为 artifact cluster 入口
+- `reference_sync` sync-state / retained-or-replaced runtime boundary
+- manual `customer-mdm` + enterprise persistence closure wave
