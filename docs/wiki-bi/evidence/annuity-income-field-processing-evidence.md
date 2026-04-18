@@ -81,6 +81,7 @@
 - 计划锚点参与的 identity resolution
 - 不恢复 ID5 的 retirement boundary
 - unresolved cases 的 operator artifact / signal 外显
+- `计划类型`、`业务类型`、`组合代码` 与 customer-master `年金计划类型` / `管理资格` 属于同一 classification family 的不同层，统一解释见 [classification family 证据](./classification-family-evidence.md)
 
 这些规则会直接改变：
 

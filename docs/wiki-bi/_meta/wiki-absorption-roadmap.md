@@ -1,7 +1,7 @@
 # `wiki-bi` 吸收路线图
 
 > 状态：Active
-> 日期：2026-04-16
+> 日期：2026-04-18
 > 作用：给 `wiki-bi` 的内容吸收提供整体顺序和每轮主题边界
 
 ---
@@ -258,18 +258,39 @@
 
 - completed on 2026-04-18
 
+### Round 29：legacy 业务语义扩展包
+
+目标：
+
+- 把 `关键年金计划`、`is_churned_this_year` shared coverage 与 classification family 推进成新的 durable business-semantics 入口
+
+主入口页：
+
+- `concepts/key-annuity-plan.md`
+- `evidence/customer-master-signals-evidence.md`
+- `concepts/customer-status.md`
+- `evidence/status-and-snapshot-evidence.md`
+- `evidence/classification-family-evidence.md`
+- `concepts/plan-type.md`
+
+状态：
+
+- completed on 2026-04-18
+
 ## 当前位置
 
-`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次，以及 Round 24-28 的 legacy 隐含语义补强。
+`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次，以及 Round 24-29 的 legacy 隐含语义补强。
 
 当前应明确保持两条边界：
 
 - durable wiki 只保留业务语义、标准、surface、evidence 与 round sediment
 - subagent / worktree / merge sequencing 这类执行层材料不再放在 `docs/wiki-bi/`，应留在 `docs/superpowers/`、`.planning/` 或 git history
 
-## 下阶段：semantic map 驱动的 wiki 吸收
+## 下阶段：回到 semantic map 驱动的 surface discovery
 
-下阶段仍不应回到“先开 round 再找对象”的旧路径。Round 28 处理的是已明确暴露的 durable customer-master signal gap；剩余 runtime/operator 主题仍应先用 semantic map 建 discovery ledger，再由该 ledger 驱动 durable wiki 的吸收顺序。
+Round 29 已经把当前最值得立即提升的 business semantics 补了一轮：`关键年金计划` 不再只是 dispatcher 提示，`is_churned_this_year` 也不再只剩一句“以后再拆”的说明，classification family 现在有了 cross-domain dispatcher。
+
+因此，下阶段不应继续围绕同一批 business-semantic 对象机械拆页，而应回到 semantic-map-first 的 runtime/operator discovery。
 
 工作原则：
 
@@ -281,11 +302,19 @@
 
 推荐顺序：
 
-1. 先完成 semantic map bootstrap，固定 vocabularies、seed catalogs、wave identity 与 boundary README
-2. 再围绕 first-wave 未闭合的 cross-cutting surfaces 开 discovery wave，而不是重复已完成的 Round 24-27 语义补强
+1. 先围绕 first-wave 未闭合的 cross-cutting surfaces 开 discovery wave，而不是重复已完成的 Round 24-29 business-semantics 补强
+2. 保持 Round 29 留下的 follow-on candidates 为“候选对象”，而不是立刻继续拆更多 concept pages
 3. 每个 discovery wave 先补 semantic map，再把稳定结论吸收到 `evidence/`
 4. `evidence/` 稳定后，再回写 `concepts/`、`standards/`、`surfaces/`、`domains/`
 5. wiki 更新被接受后，关闭对应 semantic-map wave，并评估 claims / tooling 的归档
+
+Round 29 留下的 follow-on candidates：
+
+- `关联计划数`、`其他年金计划`、`其他开拓机构`
+- `管理资格`
+- `组合代码`
+
+这些对象目前仍更适合留在 dispatcher / evidence 层，除非后续 raw sources 或 current-side evidence 把它们推进到独立 object-page 阈值。
 
 ## 优先 discovery 主题簇
 
@@ -301,7 +330,7 @@
 
 如果马上继续推进，推荐按下面顺序开工：
 
-- semantic map bootstrap
+- `classification-family-evidence.md` 与 `customer-master-signals-evidence.md` 作为本轮 business-semantics 入口
 - `company_lookup_queue` + identity persistence discovery wave
 - `reference_sync` + backfill boundary deepening wave
 - `customer-mdm` manual commands + shared operator artifacts wave

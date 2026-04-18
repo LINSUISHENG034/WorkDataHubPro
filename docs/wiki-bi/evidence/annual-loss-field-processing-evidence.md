@@ -57,6 +57,7 @@
 - `机构 -> institution_code` 的当前治理默认
 - 基于 current contract rows（`valid_to=9999-12-31`）与 `effective_period` 顺序的 plan-code temporal enrichment
 - unresolved identity 的 governed temp-id fallback
+- `计划类型` 与 `业务类型` 是 event intake classification anchors，而 customer-master `年金计划类型` / `管理资格` 属于聚合层；统一解释见 [classification family 证据](./classification-family-evidence.md)
 
 ## 哪些来源是强证
 

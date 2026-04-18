@@ -9,6 +9,12 @@
 - 回写 `customer-type`、`is-new`、`customer-status-semantics` 与相邻 evidence/index 页面，使它们统一使用 semantic truth / proxy history / governance disposition 这组表达
 - 收紧 semantic-map canonical non-equivalence 节点，准备把该项从“模糊 contested discovery”推进到“已确认语义、待裁决 disposition”的 successor-wave 视图
 
+## [2026-04-18 21:43] maintain | round 29 legacy business semantics expansion
+
+- 新增 `key-annuity-plan.md` 与 `classification-family-evidence.md`，把 `关键年金计划` 和 classification family 从 dispatcher / field-processing 碎片推进成 durable wiki 入口
+- 回写 `customer-master-signals-evidence`、`backfill`、`primary-branch`、`customer-status`、`customer-status-semantics` 与相邻合同/证据页，使 `is_churned_this_year`、relationship breadth 与 classification family 的边界更直接可答
+- 新增 Round 29 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确本轮仍停留在 business-semantics scope，没有重开 runtime/operator closure
+
 ## [2026-04-18 20:19] maintain | annual identity semantics coverage
 
 - 新增 `customer-status-annual-identity-evidence.md`，把 `is_strategic`、`is_existing`、`contract_status`、`status_year` 收紧成 annual identity family 的 durable object page

@@ -49,6 +49,8 @@
   - 由 [`annual_loss`](../../domains/annual-loss.md) 提供的年度流失申报事实
 - `is_churned_this_year`
   - 由 [`annuity_performance`](../../domains/annuity-performance.md) 承接规模表现后的已流失判断
+  - 其 accepted 语义是：匹配粒度在当前快照月的 `规模明细` AUM 汇总为 `0`，或该月已无记录
+  - 它与 `is_loss_reported` 的年度申报事实不是同一层对象
 - `is_new`
   - 当年中标且非 existing
 - `is_strategic` / `is_existing` / `contract_status` / `status_year`
@@ -78,6 +80,7 @@
 - `is_new` 与 `年金客户类型` 必须分层理解
 - status source 可以不同，不能假设所有状态都来自同一事实表
 - 产品线粒度与计划粒度的状态集合不应被强行对齐
+- `is_churned_this_year` 与计划层 sibling 字段虽然同属 churn family，但 match key 不同，不能在查询粒度上互换
 - `customer.客户年金计划` 的状态锚点不应被误写为快照字段本身
 - `status_year` 与 `snapshot_month` 不应互相替代
 - strategic ratchet 语义属于业务定义，不应降格为“实现细节”
@@ -87,6 +90,7 @@
 
 - 用 `customer_type` 直接替代 `is_new`
 - 因为实现方便，就给计划级快照添加并不存在的状态语义
+- 用 `is_loss_reported` 直接替代 `is_churned_this_year`
 - 因为 hook 顺序存在，就把顺序本身写成状态定义
 
 ## 相关概念
