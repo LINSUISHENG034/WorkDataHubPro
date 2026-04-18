@@ -1,7 +1,0 @@
-# Legacy snapshot: customer identity service surface.
-
-
-def resolve_customer_identity(name: str) -> str | None:
-    """Legacy customer identity lookup path."""
-    normalized = name.strip().lower()
-    return normalized or None

@@ -1,8 +1,0 @@
-# Legacy snapshot: manual customer MDM CLI surface.
-
-from pathlib import Path
-
-
-def run_customer_mdm(command_root: Path) -> str:
-    """Legacy manual entrypoint for customer MDM lifecycle reconciliation."""
-    return f"customer-mdm:{command_root.name}"

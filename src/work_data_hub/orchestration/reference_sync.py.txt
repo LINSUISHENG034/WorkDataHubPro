@@ -1,6 +1,0 @@
-# Legacy snapshot: reference sync orchestration surface.
-
-
-def schedule_reference_sync(period: str) -> str:
-    """Legacy orchestration surface for reference synchronization."""
-    return f"reference-sync:{period}"

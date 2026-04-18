@@ -1,6 +1,0 @@
-# Legacy snapshot: reference synchronization service.
-
-
-def build_reference_sync_payload(source_name: str) -> dict[str, str]:
-    """Legacy reference synchronization payload builder."""
-    return {'source': source_name, 'mode': 'legacy-sync'}
