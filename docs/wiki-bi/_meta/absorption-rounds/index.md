@@ -58,8 +58,9 @@
   - maintenance 轮次，对四个高流量 domain 及 shared operator / verification pages 做最后一轮对象级补强与 cross-link 收口。
 - [Round 28：customer-master derived signals 收紧](./round-28-customer-master-derived-signals.md)
   - maintenance 轮次，把 `tags`、`主拓机构` 与 cross-domain customer-master-derived signal family 收紧成 durable object pages 与 evidence dispatcher。
+- [Round 29：legacy 业务语义扩展包](./round-29-legacy-business-semantics-expansion.md)
+  - maintenance 轮次，把 `关键年金计划`、`is_churned_this_year` shared coverage 与 classification family 推进成新的 durable business-semantics 入口。
 
 ## 计划轮次
 
-- [Round 29：legacy 业务语义扩展包](./round-29-legacy-business-semantics-expansion.md)
-  - planned 轮次，优先把 customer-master relationship breadth、`is_churned_this_year` 与 classification family 推进成新的 durable business-semantics 入口。
+- 当前无其他 planned round；如需继续推进，应先回到 semantic-map-first discovery，并只在出现新的 high-value stable findings 时再开下一轮 durable absorption。

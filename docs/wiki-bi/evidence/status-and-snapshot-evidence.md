@@ -27,7 +27,8 @@
 - annual identity family 现在有了独立对象页，避免继续把 `is_strategic` / `is_existing` / `contract_status` / `status_year` 只留在 aggregate narrative 里
 - `customer-mdm` 手工命令面是独立 operator surface，不应被“自动 hook 已覆盖”吞掉
 - `is_winning_this_year` 与 `is_loss_reported` 已满足对象级 evidence 拆分阈值
-- `is_churned_this_year` 当前仍更适合留在主题页，因为它同时牵涉 product-line / plan 双粒度与 AUM 汇总语义
+- `is_churned_this_year` 现在已明确为“当前快照月 `规模明细` AUM 为 `0` 或当月已无记录”的 monthly judgement，不能与 `is_loss_reported` 混写
+- `is_churned_this_year` 与计划层 sibling 字段共享同一 semantic family，但因为 product-line / plan 双粒度并存，本轮仍保留在 shared status pages 中表达
 - current repo 已对 `contract_state -> monthly_snapshot` 形成显式 projection tests 与 replay evidence，但状态家族的对象级 current evidence 仍未完全拆开
 - `customer-mdm` 生命周期语义已形成独立证据页：概念页保留公式/语义，命令与运行时细节留在 surface/evidence
 
@@ -46,6 +47,7 @@
 
 - 本页继续承载客户状态总览、快照粒度、customer-mdm surface 与未拆状态对象之间的共享语义。
 - 已形成独立对象且被高频单独引用的状态，应优先落到对象级 evidence page，而不是继续把细节堆回 aggregate page。
+- `is_churned_this_year` 当前的 accepted truth 已回写到 shared status pages；尚未拆出的部分是 dual-grain 细节，而不是语义仍不清楚。
 - domain 入口仍主要通过 [`annual_award`](../domains/annual-award.md)、[`annual_loss`](../domains/annual-loss.md)、[`annuity_performance`](../domains/annuity-performance.md) 接入本页；本页不负责重复这些 domain 的合同级叙述。
 - 三层分工固定为：概念页保留公式记忆、生命周期页承载 yearly 语义证据、surface 页承载 command/runtime 细节。
 
@@ -60,7 +62,7 @@
 
 ## 当前证据缺口
 
-- `is_churned_this_year` 仍未拆成对象级 evidence page
+- `is_churned_this_year` 的 standalone evidence page 仍然 deferred；本轮已把 monthly AUM-zero 语义与 dual-grain 边界写实到 shared status pages
 - `verification_guide_real_data.md` 的更多 operator query path 仍待后续吸收
 - `is_new` 已经满足对象级 evidence 拆分条件，并已作为后续对象级拆分样板落地
 - current project 对 `is_new`、`is_winning_this_year`、`is_loss_reported` 的对象级 current evidence 仍主要通过 shared status / projection pages 承接

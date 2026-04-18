@@ -16,7 +16,7 @@
 
 - `is_loss_reported` 是年度流失申报事实在客户 / 产品线粒度上的状态表达
 - 它的直接事实来源是 `annual_loss`，而不是规模下降或其他推断
-- 它与 `is_churned_this_year` 不是同一层判断：一个是申报事实，一个是规模表现判断
+- 它与 `is_churned_this_year` 不是同一层判断：一个是年度申报事实，一个是“当前快照月 AUM 为 `0` 或当月已无记录”的 monthly churn judgement
 
 ## 哪些来源是强证
 

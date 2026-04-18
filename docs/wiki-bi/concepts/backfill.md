@@ -30,6 +30,7 @@
 - 回填建立在 processed fact rows 之上，而不是 raw workbook 行
 - 不同 domain 会贡献不同 backfill targets 与 weighting column
 - `tags`、`主拓机构`、`关键年金计划`、`关联计划数` 这类 customer-master signals 都依赖 aggregation rule，不能当作无来源字段
+- `关键年金计划` 只回答“哪个计划最具主导性”，不替代 `其他年金计划` 或 `关联计划数` 这类 relationship breadth 信号
 - temp-id / blank value 的处理会直接影响 backfill 输出
 
 ## 对输出与下游的影响
@@ -49,6 +50,7 @@
 - `annuity_performance` / `annuity_income` 会同时衍生 reference tables 与 customer master
 - `annual_award` / `annual_loss` 当前主要把 event facts 衍生为 customer-master signals
 - customer-master 的主拓对象选择并不统一；不同 domain 分别使用 `期末资产规模`、`固费`、`计划规模` 作为主导权重
+- customer-master 的关键计划选择也不统一；不同 domain 会按各自权重列决定 `关键年金计划`
 - `tags` 也不是统一常量；不同 domain 分别形成 `yyMM新建`、`yyMM中标`、`yyMM流失`
 
 ## 相关概念
@@ -57,6 +59,7 @@
 - [年金客户类型：`customer_type`](./customer-type.md)
 - [`tags`](./tags.md)
 - [主拓机构](./primary-branch.md)
+- [关键年金计划](./key-annuity-plan.md)
 
 ## 相关标准
 

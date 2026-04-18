@@ -14,6 +14,8 @@
   - 当前明确集合是 `annuity_performance`、`annual_award`、`annual_loss`、`annuity_income`。
 - 我想补强 customer status 里最容易被误读的 annual identity 语义
   - 先看 [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md)，再看 [客户状态语义正确性](./standards/semantic-correctness/customer-status-semantics.md)。
+- 我想继续补强 legacy business semantics
+  - 先看 [Round 29：legacy 业务语义扩展包](./_meta/absorption-rounds/round-29-legacy-business-semantics-expansion.md)，再从 [关键年金计划](./concepts/key-annuity-plan.md) 与 [classification family 证据](./evidence/classification-family-evidence.md) 进入。
 
 ## 阅读意图
 
@@ -36,6 +38,8 @@
   - 企业身份标识是跨 domain 连接事实、主数据、快照和验证的核心对象。
 - [customer master 里的 `tags`、`主拓机构`、`关键年金计划` 到底是什么](./evidence/customer-master-signals-evidence.md)
   - 这些不是零散字段，而是一组由 backfill/customer signal 规则派生出来的 customer-master 语义对象。
+- [`关键年金计划` 到底是什么](./concepts/key-annuity-plan.md)
+  - 它回答“哪个计划最具主导性”，不是任意一条源记录上的 `计划代码`。
 - [什么算受治理的身份 fallback](./standards/semantic-correctness/identity-governance.md)
   - temp-id、mapping files、cache、provider、queue 的边界需要作为 identity governance 统一理解。
 - [如何区分当前运行路径、历史记忆、已退休行为与可见后果](./standards/semantic-correctness/identity-governance.md)
@@ -80,6 +84,10 @@
   - 语义上它们不等价；legacy proxy usage 需要保留为治理冲突背景，而不是被误写成定义。
 - [如何收口 `customer_type vs is_new` 的治理冲突](./evidence/customer-type-is-new-governance-evidence.md)
   - 先看治理证据页，再回到标准页确认 semantic truth、proxy history 与 disposition question 的分层。
+- [为什么 `is_churned_this_year` 不等于 `is_loss_reported`](./standards/semantic-correctness/customer-status-semantics.md)
+  - 一个是 monthly churn judgement，一个是 annual loss-report fact；字段名相邻不代表语义等价。
+- [如何区分 `计划类型` / `年金计划类型` / `业务类型` / `管理资格` / `组合代码`](./evidence/classification-family-evidence.md)
+  - 这些对象横跨输入分类、聚合分类和 portfolio 锚点，需要按 classification family 分层理解。
 
 ## 全量 Catalog
 
@@ -92,6 +100,7 @@
 - [年金客户类型：`customer_type`](./concepts/customer-type.md) : 说明客户分类标签与状态字段的区别。
 - [客户事件轨迹标签：`tags`](./concepts/tags.md) : 说明 `yyMM新建` / `yyMM中标` / `yyMM流失` 这类 customer-master 标签的业务语义。
 - [主拓机构](./concepts/primary-branch.md) : 说明 customer-master / reference 对象上的主导机构归属不是输入列直接复制。
+- [关键年金计划](./concepts/key-annuity-plan.md) : 说明 customer-master signal family 中“主导计划锚点”的语义，不把它混写成原始 `计划代码`。
 - [年金计划类型：`plan_type`](./concepts/plan-type.md) : 说明单一计划与集合计划的语义差异和约束。
 - [快照粒度：`snapshot_granularity`](./concepts/snapshot-granularity.md) : 定义客户/产品线与客户/计划两类快照粒度。
 - [回填：`backfill`](./concepts/backfill.md) : 说明主数据/参考数据回填的业务语义和边界。
@@ -164,6 +173,7 @@
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
 - [引用同步与回填证据](./evidence/reference-and-backfill-evidence.md) : 聚合 authoritative `reference_sync`、fact-derived `backfill` 与 customer-master 衍生写入之间的稳定边界。
 - [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) : 聚合 `tags`、`主拓机构`、`关键年金计划`、关系计数与 `年金客户类型` 的 cross-domain customer-master 语义。
+- [classification family 证据](./evidence/classification-family-evidence.md) : 聚合 `计划类型`、`年金计划类型`、`业务类型`、`管理资格` 与 `组合代码` 的跨层语义边界。
 - [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的专题差异，并把细节分发到对象级 evidence page。
 - [`annuity_income` 字段处理证据](./evidence/annuity-income-field-processing-evidence.md) : 把 annuity_income 的关键字段处理分成工程性质量提升与业务语义处理。
 - [`annuity_income` branch mapping 证据](./evidence/annuity-income-branch-mapping-evidence.md) : 固化 `COMPANY_BRANCH_MAPPING` manual overrides 与 placement gap。
@@ -207,5 +217,6 @@
 - [Round 26：状态与快照生命周期补强](./_meta/absorption-rounds/round-26-status-snapshot-pilot.md) : maintenance 轮次，为 `customer-mdm` 年度生命周期补齐对象级证据，并继续收紧概念层与命令面分层。
 - [Round 27：legacy 语义补强收口](./_meta/absorption-rounds/round-27-parallel-legacy-semantic-wave-01.md) : maintenance 轮次，对四个高流量 domain 与 shared operator / verification pages 做对象级补强与 cross-link 收口。
 - [Round 28：customer-master derived signals 收紧](./_meta/absorption-rounds/round-28-customer-master-derived-signals.md) : maintenance 轮次，把 `tags`、`主拓机构` 与 cross-domain customer-master-derived signal family 收紧成 durable objects。
+- [Round 29：legacy 业务语义扩展包](./_meta/absorption-rounds/round-29-legacy-business-semantics-expansion.md) : maintenance 轮次，把 `关键年金计划`、`is_churned_this_year` shared coverage 与 classification family 继续推进成 durable business-semantics 入口。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

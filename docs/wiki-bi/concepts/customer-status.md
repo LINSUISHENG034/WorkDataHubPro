@@ -20,7 +20,8 @@
 
 - `is_new = is_winning_this_year AND NOT is_existing`
 - `is_winning_this_year` / `is_loss_reported` 属于年度语义
-- `is_churned_this_year` 由月度规模事实承接
+- `is_churned_this_year` 由月度规模事实承接，表示匹配粒度在当前快照月的 AUM 汇总为 `0`，或当月已无记录
+- `is_churned_this_year` 不等于 `is_loss_reported`；前者是 monthly churn judgement，后者是 annual loss-report fact
 
 这里保留的是语义与公式记忆，不承载命令触发、hook 顺序或运行时参数。
 
@@ -71,6 +72,7 @@
   - 来源于 [`annual_loss`](../domains/annual-loss.md)
 - `is_churned_this_year`
   - 来源于 [`annuity_performance`](../domains/annuity-performance.md)
+  - 客户 / 产品线粒度以 `company_id + product_line_code` 匹配；计划层 sibling 字段再加上 `plan_code`
 - `is_new`
   - 来源于派生判断：当年中标且非 existing
 - `is_strategic` / `is_existing` / `contract_status` / `status_year`
@@ -94,6 +96,7 @@
 - 状态不应被理解为 hook 顺序本身
 - `contract_status` 不等于“所有状态的总开关”
 - `status_year` 不等于普通年份字段，也不等于 `snapshot_month`
+- `is_churned_this_year` 不等于 `is_loss_reported`；不能把申报流失事实当作 monthly churn 的 proxy
 
 ## 生命周期证据入口
 
