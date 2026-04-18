@@ -32,6 +32,7 @@
     "semantic/concepts/sem-concept-customer-annual-identity-family.yaml",
     "semantic/concepts/sem-concept-customer-master-backfill.yaml",
     "semantic/concepts/sem-concept-customer-status.yaml",
+    "semantic/concepts/sem-concept-identity-governance-layering.yaml",
     "semantic/decision-anchors/sem-decision-anchor-customer-status-rules.yaml",
     "semantic/fact-families/sem-fact-family-customer-status-source-family.yaml",
     "semantic/fact-families/sem-fact-family-plan-classification-stack.yaml",
@@ -41,6 +42,7 @@
     "semantic/non-equivalences/sem-non-equivalence-customer-master-vs-status.yaml",
     "semantic/non-equivalences/sem-non-equivalence-customer-type-vs-is-new.yaml",
     "semantic/non-equivalences/sem-non-equivalence-input-plan-type-vs-customer-master-plan-type.yaml",
+    "semantic/non-equivalences/sem-non-equivalence-temp-id-vs-company-id.yaml",
     "semantic/rules/sem-grain-split-is-churned-this-year.yaml",
     "semantic/rules/sem-rule-is-churned-this-year-definition.yaml",
     "semantic/rules/sem-rule-is-new-definition.yaml",
@@ -48,6 +50,7 @@
     "semantic/rules/sem-rule-status-source-splitting.yaml",
     "semantic/rules/sem-rule-status-year-identity-anchor.yaml",
     "semantic/rules/sem-rule-strategic-ratchet.yaml",
+    "semantic/rules/sem-rule-unresolved-identity-operator-visibility.yaml",
     "subsystems/index.yaml",
     "subsystems/ss-annual-award.yaml",
     "subsystems/ss-annual-loss.yaml",
@@ -58,6 +61,7 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
     "claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering",
     "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
     "claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence",
@@ -65,7 +69,8 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
     "claim-wave-2026-04-17-semantic-governance-reframe-rules",
     "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
-    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet"
+    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet",
+    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence"
   ],
   "compiled_claims_by_wave": {
     "wave-2026-04-17-first-wave-pilot": [
@@ -92,6 +97,7 @@
       "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
       "claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering",
       "claim-wave-2026-04-17-semantic-governance-reframe-core",
+      "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering",
       "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
       "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
       "claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence",
@@ -99,7 +105,8 @@
       "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
       "claim-wave-2026-04-17-semantic-governance-reframe-rules",
       "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
-      "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet"
+      "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet",
+      "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence"
     ]
   }
 }

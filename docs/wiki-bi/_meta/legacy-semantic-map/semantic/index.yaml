@@ -11,6 +11,9 @@ semantic_nodes:
 - semantic_id: sem-concept-customer-status
   semantic_node_type: semantic_concept
   path: semantic/concepts/sem-concept-customer-status.yaml
+- semantic_id: sem-concept-identity-governance-layering
+  semantic_node_type: semantic_concept
+  path: semantic/concepts/sem-concept-identity-governance-layering.yaml
 - semantic_id: sem-decision-anchor-customer-status-rules
   semantic_node_type: semantic_decision_anchor
   path: semantic/decision-anchors/sem-decision-anchor-customer-status-rules.yaml
@@ -38,6 +41,9 @@ semantic_nodes:
 - semantic_id: sem-non-equivalence-input-plan-type-vs-customer-master-plan-type
   semantic_node_type: semantic_non_equivalence
   path: semantic/non-equivalences/sem-non-equivalence-input-plan-type-vs-customer-master-plan-type.yaml
+- semantic_id: sem-non-equivalence-temp-id-vs-company-id
+  semantic_node_type: semantic_non_equivalence
+  path: semantic/non-equivalences/sem-non-equivalence-temp-id-vs-company-id.yaml
 - semantic_id: sem-rule-is-churned-this-year-definition
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-is-churned-this-year-definition.yaml
@@ -56,3 +62,6 @@ semantic_nodes:
 - semantic_id: sem-rule-strategic-ratchet
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-strategic-ratchet.yaml
+- semantic_id: sem-rule-unresolved-identity-operator-visibility
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-unresolved-identity-operator-visibility.yaml

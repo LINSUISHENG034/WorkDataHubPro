@@ -55,6 +55,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence
+- from_id: config/mappings/company_id/company_id_overrides_name.yml
+  to_id: sem-concept-identity-governance-layering
+  relationship: supports_claim_target
+  source_refs:
+  - config/mappings/company_id/company_id_overrides_name.yml
+  source_type: legacy_config
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
+- from_id: config/mappings/company_id/company_id_overrides_plan.yml
+  to_id: sem-concept-identity-governance-layering
+  relationship: supports_claim_target
+  source_refs:
+  - config/mappings/company_id/company_id_overrides_plan.yml
+  source_type: legacy_config
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
 - from_id: config/reference_sync.yml
   to_id: sem-fact-family-reference-sync-target-inventory
   relationship: supports_claim_target
@@ -461,6 +489,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: docs/guides/infrastructure/company-enrichment-service.md
+  to_id: sem-concept-identity-governance-layering
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
+- from_id: docs/guides/infrastructure/company-enrichment-service.md
+  to_id: sem-non-equivalence-temp-id-vs-company-id
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence
 - from_id: docs/runbooks/annual-award-replay.md
   to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
   relationship: supports_claim_target
@@ -685,6 +741,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year
+- from_id: docs/wiki-bi/concepts/company-id.md
+  to_id: sem-non-equivalence-temp-id-vs-company-id
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/concepts/company-id.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence
 - from_id: docs/wiki-bi/concepts/customer-status.md
   to_id: sem-concept-customer-status
   relationship: supports_claim_target
@@ -741,6 +811,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence
+- from_id: docs/wiki-bi/concepts/temp-id.md
+  to_id: sem-non-equivalence-temp-id-vs-company-id
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/concepts/temp-id.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence
 - from_id: docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
   to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
   relationship: supports_claim_target
@@ -867,6 +951,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-annuity-income-subsystem
+- from_id: docs/wiki-bi/evidence/annuity-income-id5-retirement-evidence.md
+  to_id: sem-non-equivalence-temp-id-vs-company-id
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/annuity-income-id5-retirement-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence
 - from_id: docs/wiki-bi/evidence/annuity-performance-field-processing-evidence.md
   to_id: ep-manual-cli-entrypoints-annuity-performance-manual-entry
   relationship: supports_claim_target
@@ -1049,6 +1147,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  to_id: sem-concept-identity-governance-layering
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
 - from_id: docs/wiki-bi/evidence/operator-and-surface-evidence.md
   to_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
   relationship: supports_claim_target
@@ -1161,6 +1273,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-rules
+- from_id: docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  to_id: sem-concept-identity-governance-layering
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
 - from_id: docs/wiki-bi/surfaces/reference-sync.md
   to_id: sem-fact-family-reference-sync-target-inventory
   relationship: supports_claim_target
@@ -1553,6 +1679,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory
+- from_id: src/work_data_hub/infrastructure/enrichment/repository/other_ops.py
+  to_id: sem-concept-identity-governance-layering
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/infrastructure/enrichment/repository/other_ops.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
+- from_id: src/work_data_hub/infrastructure/enrichment/resolver/backflow.py
+  to_id: sem-concept-identity-governance-layering
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/infrastructure/enrichment/resolver/backflow.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
 - from_id: src/work_data_hub/io/repositories/sync_state_repository.py
   to_id: sem-rule-reference-sync-incremental-state
   relationship: supports_claim_target

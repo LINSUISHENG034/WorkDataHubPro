@@ -1,0 +1,95 @@
+semantic_id: sem-concept-identity-governance-layering
+semantic_node_type: semantic_concept
+title: Identity governance layering
+summary: Identity resolution is a governed layered chain spanning overrides, cache,
+  provider lookup, and temp-id fallback rather than a one-field mapping trick.
+business_conclusion: Identity resolution should be interpreted as a governed layered
+  chain across overrides, cache, passthrough or historical memory, provider lookup,
+  and temp-id fallback, with explicit operator-visible unresolved consequences.
+primary_semantic_sources:
+- docs/guides/infrastructure/company-enrichment-service.md
+- config/mappings/company_id/company_id_overrides_plan.yml
+- config/mappings/company_id/company_id_overrides_name.yml
+supporting_witness_sources:
+- src/work_data_hub/infrastructure/enrichment/resolver/backflow.py
+- src/work_data_hub/infrastructure/enrichment/repository/other_ops.py
+- docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/company-id.md
+- docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Current runtime may simplify the active chain, but the governed identity boundary
+    still includes the historical layered chain and explicit retirement edges.
+  - Queue and persistence surfaces act as witness surfaces for unresolved consequences,
+    not as proof that the current runtime has fully retained legacy breadth.
+  proxy_usage_refs:
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/company-id.md
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  related_runtime_carriers:
+  - obj-company-lookup-queue-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports treating identity resolution as a governed semantic boundary
+        rather than as local resolver implementation detail.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/company-id.md
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports deferring runtime-breadth closure questions while still preserving
+        the layered governance semantics.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that collapse identity governance
+        into a single direct lookup step.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/concepts/company-id.md
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Current runtime may simplify the active chain, but the governed identity boundary
+  still includes the historical layered chain and explicit retirement edges.
+- Queue and persistence surfaces act as witness surfaces for unresolved consequences,
+  not as proof that the current runtime has fully retained legacy breadth.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T06:10:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering

@@ -1,0 +1,92 @@
+semantic_id: sem-rule-unresolved-identity-operator-visibility
+semantic_node_type: semantic_rule
+title: Unresolved identity operator visibility
+summary: Unresolved identity must remain operator-visible through queue, artifact,
+  signal, or evidence consequences rather than disappearing inside fallback logic.
+business_conclusion: Unresolved identity is not allowed to disappear silently; it
+  must stay operator-visible through queue, artifact, signal, or evidence consequences
+  even when the active runtime does not retain the full legacy queue breadth.
+primary_semantic_sources:
+- docs/guides/infrastructure/company-enrichment-service.md
+- docs/domains/annuity_income-capability-map.md
+supporting_witness_sources:
+- src/work_data_hub/domain/company_enrichment/lookup_queue.py
+- src/work_data_hub/infrastructure/enrichment/resolver/backflow.py
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/surfaces/unknown-names-csv.md
+- docs/wiki-bi/evidence/annuity-income-operator-artifacts-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/surfaces/unknown-names-csv.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - The accepted rebuild runtime may externalize unresolved identity through artifacts
+    instead of a repo-native async queue, but the operator-visible obligation remains
+    stable.
+  proxy_usage_refs:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/surfaces/unknown-names-csv.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  - docs/wiki-bi/evidence/annuity-income-operator-artifacts-evidence.md
+  related_runtime_carriers:
+  - obj-company-lookup-queue-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports accepting identity flows only when unresolved outcomes remain
+        explicitly operator-visible.
+      affected_surfaces:
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      - docs/wiki-bi/surfaces/unknown-names-csv.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports deferring specific queue runtime choices while preserving
+        the visibility obligation.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that treat unresolved identity as
+        an internal-only concern.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      - docs/wiki-bi/surfaces/unknown-names-csv.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- The accepted rebuild runtime may externalize unresolved identity through artifacts
+  instead of a repo-native async queue, but the operator-visible obligation remains
+  stable.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T06:10:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering

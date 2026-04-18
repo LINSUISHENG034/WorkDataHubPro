@@ -1,0 +1,89 @@
+semantic_id: sem-non-equivalence-temp-id-vs-company-id
+semantic_node_type: semantic_non_equivalence
+title: Temp ID vs company_id
+summary: temp_id and formal company_id are related identity carriers but not equivalent
+  semantic objects.
+business_conclusion: temp_id is a governed record-retention fallback for unresolved
+  identity and is not equivalent to formal company_id.
+primary_semantic_sources:
+- docs/guides/infrastructure/company-enrichment-service.md
+- docs/wiki-bi/concepts/temp-id.md
+supporting_witness_sources:
+- docs/wiki-bi/concepts/company-id.md
+- docs/wiki-bi/evidence/annuity-income-id5-retirement-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to:
+- sem-concept-identity-governance-layering
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/temp-id.md
+- docs/wiki-bi/concepts/company-id.md
+- docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - temp_id may travel through the same pipelines as formal company_id, but that shared
+    carrier path does not make the two identity objects equivalent.
+  - Post-ID5 flows still preserve unresolved records, yet the preserved record-retention
+    semantics remain distinct from formal enterprise identity truth.
+  proxy_usage_refs:
+  - docs/wiki-bi/concepts/temp-id.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/temp-id.md
+  - docs/wiki-bi/concepts/company-id.md
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  related_runtime_carriers:
+  - obj-company-lookup-queue-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports identity-governance decisions that keep temp-id fallback separate
+        from formal enterprise identity.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/temp-id.md
+      - docs/wiki-bi/concepts/company-id.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that treat temp-id generation as
+        if identity resolution were already complete.
+      affected_surfaces:
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/concepts/temp-id.md
+      - docs/wiki-bi/concepts/company-id.md
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Post-ID5 flows still preserve unresolved records, yet the preserved record-retention
+  semantics remain distinct from formal enterprise identity truth.
+- temp_id may travel through the same pipelines as formal company_id, but that shared
+  carrier path does not make the two identity objects equivalent.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T06:12:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence

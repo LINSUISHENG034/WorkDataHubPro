@@ -1,0 +1,191 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-concept-identity-governance-layering
+sources_read:
+- source_ref: docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  note: Infrastructure guide explicitly presents identity resolution as a governed multi-layer chain ending in temp-id fallback and async queue visibility.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/company-enrichment-service.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/mappings/company_id/company_id_overrides_plan.yml
+  source_type: legacy_config
+  note: Plan override mappings witness the YAML-governed override layer in the identity chain.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/mappings/company_id/company_id_overrides_plan.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/mappings/company_id/company_id_overrides_name.yml
+  source_type: legacy_config
+  note: Name override mappings witness the governed customer-name override layer and explicit exclusion behavior.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/mappings/company_id/company_id_overrides_name.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/infrastructure/enrichment/resolver/backflow.py
+  source_type: legacy_code
+  note: Resolver backflow shows cache writeback, temp-id generation, and async enrichment enqueue as distinct governance steps.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/enrichment/resolver/backflow.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/infrastructure/enrichment/repository/other_ops.py
+  source_type: legacy_code
+  note: Persistence operations show enrichment_index, enrichment_requests, and base_info as separate governed persistence surfaces.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/enrichment/repository/other_ops.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  source_type: current_wiki
+  note: Current durable standard already preserves the layered identity-governance boundary and separation of runtime, historical memory, retirement, and operator-visible consequences.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: current_wiki
+  note: Current evidence page preserves the same layered identity-governance story and durable targets.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/concepts/company-id.md
+- docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+submitted_at: '2026-04-18T06:10:00Z'
+semantic_findings:
+- semantic_id: sem-concept-identity-governance-layering
+  semantic_node_type: semantic_concept
+  title: Identity governance layering
+  summary: Identity resolution is a governed layered chain spanning overrides, cache, provider lookup, and temp-id fallback rather than a one-field mapping trick.
+  business_conclusion: Identity resolution should be interpreted as a governed layered chain across overrides, cache, passthrough or historical memory, provider lookup, and temp-id fallback, with explicit operator-visible unresolved consequences.
+  primary_source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  - config/mappings/company_id/company_id_overrides_plan.yml
+  - config/mappings/company_id/company_id_overrides_name.yml
+  supporting_source_refs:
+  - src/work_data_hub/infrastructure/enrichment/resolver/backflow.py
+  - src/work_data_hub/infrastructure/enrichment/repository/other_ops.py
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/company-id.md
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Current runtime may simplify the active chain, but the governed identity boundary still includes the historical layered chain and explicit retirement edges.
+    - Queue and persistence surfaces act as witness surfaces for unresolved consequences, not as proof that the current runtime has fully retained legacy breadth.
+    proxy_usage_refs:
+    - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+    - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/company-id.md
+    - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+    - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports treating identity resolution as a governed semantic boundary rather than as local resolver implementation detail.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/company-id.md
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring runtime-breadth closure questions while still preserving the layered governance semantics.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that collapse identity governance into a single direct lookup step.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/concepts/company-id.md
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+- semantic_id: sem-rule-unresolved-identity-operator-visibility
+  semantic_node_type: semantic_rule
+  title: Unresolved identity operator visibility
+  summary: Unresolved identity must remain operator-visible through queue, artifact, signal, or evidence consequences rather than disappearing inside fallback logic.
+  business_conclusion: Unresolved identity is not allowed to disappear silently; it must stay operator-visible through queue, artifact, signal, or evidence consequences even when the active runtime does not retain the full legacy queue breadth.
+  primary_source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  - docs/domains/annuity_income-capability-map.md
+  supporting_source_refs:
+  - src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  - src/work_data_hub/infrastructure/enrichment/resolver/backflow.py
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/surfaces/unknown-names-csv.md
+  - docs/wiki-bi/evidence/annuity-income-operator-artifacts-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/surfaces/unknown-names-csv.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - The accepted rebuild runtime may externalize unresolved identity through artifacts instead of a repo-native async queue, but the operator-visible obligation remains stable.
+    proxy_usage_refs:
+    - docs/wiki-bi/surfaces/company-lookup-queue.md
+    - docs/wiki-bi/surfaces/unknown-names-csv.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+    - docs/wiki-bi/evidence/annuity-income-operator-artifacts-evidence.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports accepting identity flows only when unresolved outcomes remain explicitly operator-visible.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        - docs/wiki-bi/surfaces/unknown-names-csv.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring specific queue runtime choices while preserving the visibility obligation.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that treat unresolved identity as an internal-only concern.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        - docs/wiki-bi/surfaces/unknown-names-csv.md
+        blocked_by: []
+trigger_id: trigger-identity-governance-001
+orchestration_iteration: 1
