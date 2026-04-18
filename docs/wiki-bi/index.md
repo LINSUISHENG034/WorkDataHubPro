@@ -18,6 +18,8 @@
   - 先看 [Round 31：relationship breadth and classification closeout](./_meta/absorption-rounds/round-31-relationship-breadth-and-classification-closeout.md)，再从 [关联机构数](./concepts/related-branch-count.md)、[管理资格](./concepts/management-qualification.md) 与 [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) 进入。
 - 我想继续补 shared operator artifacts / queue replacement 这条线
   - 先看 [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md)，再从 [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) 与 [`company_lookup_queue`](./surfaces/company-lookup-queue.md) 进入。
+- 我想继续补 `reference_sync` runtime / state 这条线
+  - 先看 [Round 33：reference_sync governance](./_meta/absorption-rounds/round-33-reference-sync-governance.md)，再从 [`reference_sync` runtime and state 证据](./evidence/reference-sync-runtime-and-state-evidence.md) 与 [`reference_sync`](./surfaces/reference-sync.md) 进入。
 
 ## 阅读意图
 
@@ -62,6 +64,8 @@
   - `tags` 属于 customer-master 事件轨迹，不等于 `is_new` / `is_winning_this_year` / `is_loss_reported`。
 - [`reference_sync` 与 `backfill` 到底差在哪里](./evidence/reference-and-backfill-evidence.md)
   - 先看证据页，再进入 [`backfill`](./concepts/backfill.md) 与 [`reference_sync`](./surfaces/reference-sync.md)，避免把 authoritative pre-load 与 fact-derived writeback 混成一层。
+- [`reference_sync` 当前到底保留了什么、替代了什么](./evidence/reference-sync-runtime-and-state-evidence.md)
+  - 它现在有独立 evidence page，可直接回答 target inventory、`last_synced_at` incremental contract 与 current `reference_derivation -> publication` replacement boundary。
 - [为什么 `deferred` 不等于“没有验证资产”](./evidence/validation-result-history-evidence.md)
   - current registry 已显式登记很多尚未物化的 asset kinds，问题是治理状态，而不是是否被看见。
 - [`annuity_performance` 的输入、输出和处理到底是什么](./standards/input-reality/annuity-performance-input-contract.md)
@@ -184,6 +188,7 @@
 - [验证资产证据](./evidence/verification-assets-evidence.md) : 聚合 golden set、replay baseline、validation guide、error fixtures 等证据。
 - [validation result history 证据](./evidence/validation-result-history-evidence.md) : 聚合 legacy parity result 目录、current asset registry 与 validation history 的治理结论。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
+- [`reference_sync` runtime and state 证据](./evidence/reference-sync-runtime-and-state-evidence.md) : 聚合 `reference_sync` 的 target inventory、incremental sync-state 与 current replacement boundary。
 - [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) : 聚合 shared unresolved-name / failed-record artifacts 的 legacy breadth、current accepted closure 与 parity gaps。
 - [引用同步与回填证据](./evidence/reference-and-backfill-evidence.md) : 聚合 authoritative `reference_sync`、fact-derived `backfill` 与 customer-master 衍生写入之间的稳定边界。
 - [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) : 聚合 `tags`、`主拓机构`、`关键年金计划`、关系计数与 `年金客户类型` 的 cross-domain customer-master 语义。
@@ -235,5 +240,6 @@
 - [Round 30：relationship breadth deepening](./_meta/absorption-rounds/round-30-relationship-breadth-deepening.md) : maintenance 轮次，把 `关联计划数` 从 dispatcher 提示推进成 durable relationship-breadth 对象页。
 - [Round 31：relationship breadth and classification closeout](./_meta/absorption-rounds/round-31-relationship-breadth-and-classification-closeout.md) : maintenance 轮次，把 `关联机构数` 与 `管理资格` 推进成 durable objects，并收紧 remaining follow-on candidates。
 - [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md) : maintenance 轮次，把 shared unresolved-name / failed-record artifact family 收紧成 durable evidence dispatcher，并保持 income-specific accepted closure 与 cross-domain parity gap 分层表达。
+- [Round 33：reference_sync governance](./_meta/absorption-rounds/round-33-reference-sync-governance.md) : maintenance 轮次，把 `reference_sync` 的 target inventory、sync-state 与 current replacement boundary 收紧成对象级 evidence route。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

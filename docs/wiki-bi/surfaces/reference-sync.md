@@ -73,11 +73,13 @@ legacy 审计明确指出，这个 surface 至少涉及：
 
 - [引用同步与回填证据](../evidence/reference-and-backfill-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
+- [`reference_sync` runtime and state 证据](../evidence/reference-sync-runtime-and-state-evidence.md)
 
 ## 当前重构处理状态
 
 - 当前应作为显式治理 surface 保留在 wiki 中
 - 对 current accepted validation slices 而言，legacy `reference_sync` runtime 已被显式 `reference_derivation -> publication` 链取代，而不是继续作为独立日常 sync runtime 存在
+- target inventory、incremental sync-state 与 current replacement story 现在已有对象级 evidence page，可直接回答“legacy 保留了什么 / current 替代了什么”
 - 被保留的是 target inventory、authoritative source-of-truth 映射与 sync contract 这层治理记忆，而不是 legacy daily schedule / sync-state persistence 本身
 - current repo 尚未保留 repo-native `reference_sync` runtime、schedule 或 sync-state persistence；这些 production/bootstrap concerns 继续保持 deferred
 - 目前至少不能再把它当成“跟随 domain 一起自然覆盖”的隐含对象
@@ -101,6 +103,6 @@ legacy 审计明确指出，这个 surface 至少涉及：
 
 ## 当前证据缺口
 
-- legacy `reference_sync` 的 per-table `last_synced_at` state 已被 raw code 证明，但状态表 schema、保留策略与 operator recovery contract 仍未形成对象级 wiki 表达。
-- authoritative source mapping 已在 config 层稳定可见，但 target inventory 与 current replacement publication story 仍分散在多个页面，尚未沉淀成单一 current-side object page。
+- legacy `reference_sync` 的 per-table `last_synced_at` state 已有对象级 evidence page，但状态表 schema、保留策略与 operator recovery contract 仍未形成更细颗粒度 wiki 表达。
+- authoritative source mapping、target inventory 与 current replacement publication story 现在已有对象级 evidence route，但 future bootstrap/runtime admission 仍未闭环。
 - current repo 没有 repo-native `reference_sync` runtime / state store；若未来重建 bootstrap surface，不能直接继承 legacy 结论，必须重新补证。

@@ -22,6 +22,7 @@
 
 - `reference_sync` 与 `backfill` 是同一 reference strategy 下的两层对象，不应再被写成同一条“补齐逻辑”。
 - `reference_sync` 负责把 authoritative reference data 预先同步到受治理 target inventory；`backfill` 负责从 processed facts 派生缺失对象与 customer-master signals。
+- `reference_sync` 的 target inventory、incremental sync-state 与 current replacement story 现在已有对象级 evidence page，不再只散落在 aggregate 表格和 surface 叙述里。
 - `backfill` 的输入前提是 canonicalized fact rows，而不是 raw workbook rows；它在 legacy contract 中承担 FK-safe gate，先于事实加载完成。
 - `backfill` 不只补 reference keys，还会写 customer-master 级别的 `主拓机构`、`关键年金计划`、`关联计划数`、`关联机构数`、`tags`、`年金客户类型` 等派生结果。
 - domain-specific aggregation 是业务语义，不是实现细节：`annuity_performance` 以 `期末资产规模` 选主拓对象，`annuity_income` 以 `固费` 选主拓对象，event domains 以 `计划规模` 形成 customer-master signals。
@@ -47,10 +48,11 @@
 
 - [回填：`backfill`](../concepts/backfill.md)
 - [`reference_sync`](../surfaces/reference-sync.md)
+- [`reference_sync` runtime and state 证据](./reference-sync-runtime-and-state-evidence.md)
 - [operator 与 surface 证据](./operator-and-surface-evidence.md)
 
 ## 当前证据缺口
 
-- legacy `reference_sync` 的 sync-state persistence 已在 op/service 层被观察到，但状态表 schema、保留策略与 operator recovery contract 仍未形成对象级 wiki page。
+- legacy `reference_sync` 的 sync-state persistence 已有对象级 evidence page，但状态表 schema、保留策略与 operator recovery contract 仍未形成更细的 wiki object。
 - backfill 写入后的 `_needs_review` closure flow 目前只被 raw code/doc 侧证明，尚未被提升为独立 operator workflow object。
 - 同名业务对象在 authoritative sync 与 derived backfill 中的 schema drift 已被识别，但哪些 footprint 应在 current wiki 中被长期保留仍待后续治理裁决。

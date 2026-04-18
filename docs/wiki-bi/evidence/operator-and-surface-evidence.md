@@ -25,6 +25,7 @@
 ## 本轮已吸收的稳定结论
 
 - `reference_sync` 不是普通 helper，而是带有明确 target inventory、source mode 与 sync contract 的独立 runtime / integration surface
+- `reference_sync` 的 target inventory、incremental sync-state 与 current replacement story 现在已有对象级 evidence route，不再只停留在 shared decision table
 - `failed-record export` 不是普通 debug 输出，而是 operator artifact
 - manual `customer-mdm` commands 不是 hook 的副产品，而是独立 operator surface，并且 deployment guide 暴露了手工 recovery / recompute 路径
 - `enterprise.enrichment_index`、`enterprise.enrichment_requests`、`enterprise.base_info` 共同构成 identity 相关 persistence surface，不能长期隐身
@@ -78,6 +79,7 @@
 - [enterprise enrichment persistence](../surfaces/enterprise-enrichment-persistence.md)
 - [standalone tooling](../surfaces/standalone-tooling.md)
 - [reference_sync](../surfaces/reference-sync.md)
+- [`reference_sync` runtime and state 证据](./reference-sync-runtime-and-state-evidence.md)
 - [引用同步与回填证据](./reference-and-backfill-evidence.md)
 - [`company_lookup_queue`](../surfaces/company-lookup-queue.md)
 - [business collection ledger workbook](../surfaces/business-collection-ledger-workbook.md)

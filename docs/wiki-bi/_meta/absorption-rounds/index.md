@@ -66,6 +66,8 @@
   - maintenance 轮次，把 `关联机构数` 与 `管理资格` 推进成 durable objects，并把 remaining follow-on candidates 收紧回 dispatcher / evidence 层。
 - [Round 32：shared unresolved artifact governance](./round-32-shared-unresolved-artifact-governance.md)
   - maintenance 轮次，把 shared unresolved-name / failed-record artifact family 收紧成 durable evidence dispatcher，同时保持 income-specific accepted closure 与 cross-domain parity gap 分层表达。
+- [Round 33：reference_sync governance](./round-33-reference-sync-governance.md)
+  - maintenance 轮次，把 `reference_sync` 的 target inventory、sync-state 与 current replacement boundary 收紧成对象级 evidence route。
 
 ## 计划轮次
 

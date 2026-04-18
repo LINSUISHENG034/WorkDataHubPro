@@ -73,6 +73,7 @@
 ## 相关证据
 
 - [引用同步与回填证据](../evidence/reference-and-backfill-evidence.md)
+- [`reference_sync` runtime and state 证据](../evidence/reference-sync-runtime-and-state-evidence.md)
 - [customer-master signals 证据](../evidence/customer-master-signals-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)

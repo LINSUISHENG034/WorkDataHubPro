@@ -5,6 +5,12 @@
 
 ## [2026-04-18 20:34] maintain | customer_type vs is_new governance package
 
+## [2026-04-19 00:11] maintain | round 33 reference_sync governance
+
+- 新增 `reference-sync-runtime-and-state-evidence.md`，把 `reference_sync` 的 target inventory、incremental sync-state 与 current replacement boundary 从 scattered statements 收紧成 durable object-level evidence route
+- 回写 `reference-sync.md`、`reference-and-backfill-evidence`、`operator-and-surface-evidence`、`backfill` 与 `output-correctness`，使 `reference_sync` 的治理边界更直接可答
+- 新增 Round 33 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确 runtime breadth 仍继续 deferred，下一步优先转向 manual `customer-mdm` / enterprise persistence closure wave
+
 ## [2026-04-18 23:42] maintain | round 32 shared unresolved artifact governance
 
 - 新增 `unresolved-name-and-failed-record-evidence.md`，把 shared unresolved-name / failed-record artifact family 从 scattered gaps 收紧成 durable evidence dispatcher

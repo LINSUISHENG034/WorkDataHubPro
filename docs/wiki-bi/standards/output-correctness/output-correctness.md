@@ -51,6 +51,7 @@
 ## 相关证据
 
 - [引用同步与回填证据](../../evidence/reference-and-backfill-evidence.md)
+- [`reference_sync` runtime and state 证据](../../evidence/reference-sync-runtime-and-state-evidence.md)
 - [状态与快照证据](../../evidence/status-and-snapshot-evidence.md)
 - [验证资产证据](../../evidence/verification-assets-evidence.md)
 - [`annual_award` 输出合同](./annual-award-output-contract.md)

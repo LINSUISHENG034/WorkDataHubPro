@@ -329,9 +329,25 @@
 
 - completed on 2026-04-18
 
+## Round 33：reference_sync governance（已完成）
+
+目标：
+
+- 把 `reference_sync` 的 target inventory、incremental sync-state 与 current replacement boundary 收紧成 durable object-level evidence route
+
+主入口页：
+
+- `evidence/reference-sync-runtime-and-state-evidence.md`
+- `surfaces/reference-sync.md`
+- `evidence/reference-and-backfill-evidence.md`
+
+状态：
+
+- completed on 2026-04-19
+
 ## 当前位置
 
-`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次、Round 24-31 的 legacy 隐含语义补强，以及 Round 32 的第一批 semantic-map-adjacent artifact discovery 收口。
+`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次、Round 24-31 的 legacy 隐含语义补强，以及 Round 32-33 的第一批 semantic-map-adjacent surface-discovery 收口。
 
 当前应明确保持两条边界：
 
@@ -340,7 +356,7 @@
 
 ## 下阶段：继续 semantic map 驱动的 surface discovery
 
-Round 29 到 Round 31 已经把当前最值得立即提升的一批 business semantics 再补了一轮；Round 32 则把 shared unresolved-name / failed-record artifact family 从“gap-only 提示”推进成了 durable evidence dispatcher。
+Round 29 到 Round 31 已经把当前最值得立即提升的一批 business semantics 再补了一轮；Round 32 把 shared unresolved-name / failed-record artifact family 从“gap-only 提示”推进成了 durable evidence dispatcher；Round 33 则把 `reference_sync` 的 target inventory / sync-state / replacement boundary 补成了对象级 evidence route。
 
 因此，下阶段不应回头继续机械拆相邻 business-semantic 对象，而应继续沿 semantic-map-first 的 runtime/operator discovery 往下走。
 
@@ -382,6 +398,5 @@ remaining business-semantic candidates：
 
 如果马上继续推进，推荐按下面顺序开工：
 
-- `unresolved-name-and-failed-record-evidence.md` 与相邻 surface 页作为 artifact cluster 入口
-- `reference_sync` sync-state / retained-or-replaced runtime boundary
+- `reference-sync-runtime-and-state-evidence.md` 与相邻 surface / aggregate evidence 页作为 `reference_sync` cluster 入口
 - manual `customer-mdm` + enterprise persistence closure wave
