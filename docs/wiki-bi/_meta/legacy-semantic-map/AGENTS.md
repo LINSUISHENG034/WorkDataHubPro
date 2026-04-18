@@ -18,6 +18,7 @@ This `AGENTS.md` governs the `docs/wiki-bi/_meta/legacy-semantic-map/` subtree.
   - lifecycle distinctions
   - source-family splitting
 - Turning accepted claim artifacts into canonical semantic-map outputs and reports.
+- Canonical `semantic/` outputs are for business meaning and business-governance semantics, not for runtime/operator surfaces by themselves.
 
 ## What the tooling is not
 
@@ -88,6 +89,7 @@ This `AGENTS.md` governs the `docs/wiki-bi/_meta/legacy-semantic-map/` subtree.
 
 - Frequent runtime proxy usage is evidence, but not semantic authority by itself.
 - Projection-, status-, and output-adjacent evidence should generally outrank operator convenience or implementation-local shortcuts when the question is about business meaning.
+- Runtime/operator surface semantics by themselves should not be promoted into canonical `semantic/` nodes unless the node is explicitly expressing business meaning rather than engineering/runtime behavior.
 - A stable canonical object should let a later maintainer explain both:
   - what the business semantic boundary is
   - why legacy runtime usage may have looked different without overturning that boundary
@@ -190,6 +192,7 @@ This loop was successfully used to extract a customer-status semantic rule from:
 - Record business conclusions in clear English even when the source evidence is Chinese.
 - Avoid collapsing distinct meanings into one node just to reduce artifact count.
 - If two business notions are "not the same thing", prefer explicit non-equivalence or separate semantic nodes.
+- Queue, schedule, CLI, operator, runtime, and persistence surfaces should normally remain in `surfaces/`, `evidence/`, object/candidate tracking, or governance-memory form unless they directly encode business meaning rather than engineering/runtime behavior.
 
 ## Safety rules
 

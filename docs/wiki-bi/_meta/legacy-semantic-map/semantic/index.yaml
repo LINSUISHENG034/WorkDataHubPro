@@ -23,12 +23,6 @@ semantic_nodes:
 - semantic_id: sem-non-equivalence-customer-type-vs-is-new
   semantic_node_type: semantic_non_equivalence
   path: semantic/non-equivalences/sem-non-equivalence-customer-type-vs-is-new.yaml
-- semantic_id: sem-rule-company-lookup-queue-dedup-gating
-  semantic_node_type: semantic_rule
-  path: semantic/rules/sem-rule-company-lookup-queue-dedup-gating.yaml
-- semantic_id: sem-rule-company-lookup-queue-retry-graceful-degradation
-  semantic_node_type: semantic_rule
-  path: semantic/rules/sem-rule-company-lookup-queue-retry-graceful-degradation.yaml
 - semantic_id: sem-rule-is-new-definition
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-is-new-definition.yaml

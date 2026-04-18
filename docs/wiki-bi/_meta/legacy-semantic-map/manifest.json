@@ -51,8 +51,6 @@
     "subsystems/ss-annuity-performance.yaml"
   ],
   "compiled_claim_ids": [
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup",
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
     "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
@@ -83,8 +81,6 @@
       "claim-wave-2026-04-17-first-wave-pilot-reference-sync-object"
     ],
     "wave-2026-04-17-semantic-governance-reframe": [
-      "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup",
-      "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry",
       "claim-wave-2026-04-17-semantic-governance-reframe-core",
       "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
       "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",

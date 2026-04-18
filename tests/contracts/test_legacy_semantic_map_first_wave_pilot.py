@@ -147,7 +147,7 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
     assert manifest["compiled_claim_ids"]
     assert manifest["compiled_claim_ids"] == manifest["compiled_claims_by_wave"][SUCCESSOR_WAVE_ID]
     assert FIRST_WAVE_PILOT_WAVE_ID in manifest["compiled_claims_by_wave"]
-    assert len(manifest["compiled_claims_by_wave"][SUCCESSOR_WAVE_ID]) == 9
+    assert len(manifest["compiled_claims_by_wave"][SUCCESSOR_WAVE_ID]) == 7
     assert len(manifest["compiled_claims_by_wave"][FIRST_WAVE_PILOT_WAVE_ID]) == 18
     assert "semantic/index.yaml" in manifest["generated_canonical_files"]
     assert "semantic/concepts/sem-concept-customer-status.yaml" in manifest[

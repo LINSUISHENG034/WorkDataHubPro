@@ -5,8 +5,6 @@
   "archive_ready": false,
   "immutability_check_passed": true,
   "required_claim_ids": [
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup",
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
     "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
@@ -16,8 +14,6 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet"
   ],
   "compiled_claim_ids": [
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup",
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
     "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
@@ -33,8 +29,6 @@
     "findings_disposition_incomplete"
   ],
   "accepted_claim_digests": {
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup": "de32fd01316db61465c4ce482e50b1bbac9e4e9435a7e809fd864dcf6ee22229",
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry": "ff22d5602c544786b31c8f88b5727f45da88d3ab7b28bf2dc8bfa37454482b4c",
     "claim-wave-2026-04-17-semantic-governance-reframe-core": "f0571729e279bc5f36dbf3fd91c9c6b6dc56dbc6c4112f5a664b3430cbe513fe",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle": "3337169bf6d3e05df9284fa069cab7aef4fa4017523f940dbb51c3f5946e6b7e",
     "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory": "b931b3ca303485dd188667e2bdd4282c39563bcc3f55060329a47260edaa75e0",
@@ -43,5 +37,5 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor": "13cd4fa53871832b0ce406cfd080f15bc5e14a93de20d6621f3a0eb283921236",
     "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet": "a670ec64b55be4d0138ae911955015efa005bd01537da4fd1eb7becd6fdf13bc"
   },
-  "generated_at": "2026-04-18T03:05:00Z"
+  "generated_at": "2026-04-18T02:05:00Z"
 }
