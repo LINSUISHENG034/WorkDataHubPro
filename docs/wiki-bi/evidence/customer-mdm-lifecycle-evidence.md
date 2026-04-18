@@ -4,6 +4,8 @@
 
 本页固化 `customer-mdm` 年度生命周期的证据：`yearly-init`、`sync`、`snapshot`、ratchet-style 含义与 `status_year` 语义边界。
 
+annual identity family 的对象级含义由 [customer 年度身份证据](./customer-status-annual-identity-evidence.md) 承接；本页更关注动作语义与生命周期分层。
+
 ## 证据记录
 
 | evidence_id | source_type | evidence_strength | coverage_state | supported_pages | last_verified | notes |
@@ -20,6 +22,7 @@
 - `yearly-init`、`sync`、`snapshot` 是不同生命周期动作，不是同一动作的别名。
 - ratchet-style 含义当前稳定为：`is_strategic` 允许升级，不应被自动降级覆盖。
 - `status_year` 语义是“年度身份锚点”，但具体运行时取值可能来自 period 推导而非单一配置项。
+- annual identity family 的对象含义应由独立对象页承接，避免把 lifecycle sequencing 与 status-family definition 混写。
 - 年度语义与公式记忆应留在概念/标准；命令触发路径与执行顺序应留在 surface/evidence。
 
 ## 语义边界提醒
@@ -35,6 +38,7 @@
 ## 相关页面
 
 - [客户状态总览](../concepts/customer-status.md)
+- [customer 年度身份证据](./customer-status-annual-identity-evidence.md)
 - [快照粒度：`snapshot_granularity`](../concepts/snapshot-granularity.md)
 - [客户状态语义正确性](../standards/semantic-correctness/customer-status-semantics.md)
 - [状态与快照证据](./status-and-snapshot-evidence.md)

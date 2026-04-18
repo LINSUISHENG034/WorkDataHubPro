@@ -40,6 +40,13 @@
 - 影响 operator 对客户分类标签的理解
 - 容易在对照 `is_new` 时引发语义误读
 
+## proxy 冲突提醒
+
+- `customer_type` 与 `is_new` 在语义上不等价。
+- legacy 相邻流程里可能会把 `customer_type` label 当作 `is_new` 的近似 proxy，但这只是治理上下文，不是 durable semantic definition。
+- 当前应把这类 proxy usage 显式保留为冲突背景，而不是静默写成“客户类型就是新到账状态”。
+- 该冲突现在已有独立治理入口：[customer_type vs `is_new` 治理证据](../evidence/customer-type-is-new-governance-evidence.md)。
+
 ## 常见误解 / 非例
 
 - `年金客户类型 = 中标客户` 不等于 `is_new`
@@ -58,6 +65,8 @@
 
 ## 相关证据
 
+- [customer 年度身份证据](../evidence/customer-status-annual-identity-evidence.md)
+- [customer_type vs `is_new` 治理证据](../evidence/customer-type-is-new-governance-evidence.md)
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
 - [customer-master signals 证据](../evidence/customer-master-signals-evidence.md)

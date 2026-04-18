@@ -3,6 +3,18 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-18 20:34] maintain | customer_type vs is_new governance package
+
+- 新增 `customer-type-is-new-governance-evidence.md`，把 semantic non-equivalence、legacy proxy usage 与 disposition question 收紧成独立治理对象
+- 回写 `customer-type`、`is-new`、`customer-status-semantics` 与相邻 evidence/index 页面，使它们统一使用 semantic truth / proxy history / governance disposition 这组表达
+- 收紧 semantic-map canonical non-equivalence 节点，准备把该项从“模糊 contested discovery”推进到“已确认语义、待裁决 disposition”的 successor-wave 视图
+
+## [2026-04-18 20:19] maintain | annual identity semantics coverage
+
+- 新增 `customer-status-annual-identity-evidence.md`，把 `is_strategic`、`is_existing`、`contract_status`、`status_year` 收紧成 annual identity family 的 durable object page
+- 收紧 `customer-status` / `customer-status-semantics` / `customer-type`，显式写清 `status_year` 锚点、strategic ratchet 语义与 `customer_type` vs `is_new` 的 proxy-conflict
+- 回写 `customer-mdm-lifecycle-evidence`、`status-and-snapshot-evidence` 与 `index.md`，让维护者和读者都能直接进入这个主题
+
 ## [2026-04-16 19:50] plan | semantic map 驱动的下一阶段 wiki 吸收
 
 - 将 `wiki-absorption-roadmap.md` 改写为 semantic-map-first 路线：先建 discovery ledger，再把稳定结论吸收到 durable wiki

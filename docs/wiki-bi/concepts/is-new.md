@@ -40,6 +40,12 @@
 - 影响与 legacy / replay 输出的 compare 结论
 - 不能被 `customer.客户明细` 中的标签字段替代
 
+## 与 customer-type label 的边界
+
+- `is_new` 的定义依赖年度状态语义，尤其是 `is_existing`，而不是依赖 `customer_type` label。
+- 若 legacy 输出或相邻流程曾借用 customer-type label，那只是 proxy history，不是公式定义的一部分。
+- 相关治理收口见 [customer_type vs `is_new` 治理证据](../evidence/customer-type-is-new-governance-evidence.md)。
+
 ## 常见误解 / 非例
 
 - `中标客户` 不等于 `is_new = true`
@@ -63,3 +69,4 @@
 
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [`is_new` 对象级证据](../evidence/is-new-evidence.md)
+- [customer_type vs `is_new` 治理证据](../evidence/customer-type-is-new-governance-evidence.md)

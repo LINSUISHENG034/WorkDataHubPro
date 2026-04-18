@@ -14,7 +14,7 @@
 - 是否被申报流失
 - 是否已经流失
 - 是否属于新到账
-- 在年度身份维度上是否 strategic / existing
+- 在年度身份维度上是否 strategic / existing，以及它处在哪种 contract / status_year 语境
 
 ## 公式记忆（语义层）
 
@@ -23,6 +23,23 @@
 - `is_churned_this_year` 由月度规模事实承接
 
 这里保留的是语义与公式记忆，不承载命令触发、hook 顺序或运行时参数。
+
+## 年度身份家族
+
+`is_strategic`、`is_existing`、`contract_status`、`status_year` 应一起理解为 customer annual identity family。
+
+这组字段回答的是“客户在某一年度语境中的身份与合同状态如何被锚定”，而不是单次快照有没有命中某个标签。
+
+- `status_year`
+  - 年度身份锚点，不等于 `snapshot_month`
+- `is_strategic`
+  - 承接 strategic 身份判断，并保留 ratchet-style 只升不自动降的语义
+- `is_existing`
+  - 承接“上一年度语境已存在”的身份记忆
+- `contract_status`
+  - 承接年度身份语境中的合同状态判断
+
+这组语义的对象级证据入口见 [customer 年度身份证据](../evidence/customer-status-annual-identity-evidence.md)。
 
 ## 分层模型
 
@@ -76,9 +93,11 @@
 - `中标客户` 标签不等于“当前快照中的新到账状态”
 - 状态不应被理解为 hook 顺序本身
 - `contract_status` 不等于“所有状态的总开关”
+- `status_year` 不等于普通年份字段，也不等于 `snapshot_month`
 
 ## 生命周期证据入口
 
+- [customer 年度身份证据](../evidence/customer-status-annual-identity-evidence.md)
 - [customer MDM 生命周期证据](../evidence/customer-mdm-lifecycle-evidence.md)
 - [`customer-mdm` 手工命令面](../surfaces/customer-mdm-commands.md)
 
@@ -101,6 +120,7 @@
 ## 相关证据
 
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
+- [customer 年度身份证据](../evidence/customer-status-annual-identity-evidence.md)
 - [customer MDM 生命周期证据](../evidence/customer-mdm-lifecycle-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
 - [`is_new` 对象级证据](../evidence/is-new-evidence.md)
