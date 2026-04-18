@@ -1,4 +1,4 @@
-active_wave_id: wave-2026-04-17-first-wave-pilot
+active_wave_id: wave-2026-04-17-semantic-governance-reframe
 waves:
 - wave_id: wave-2026-04-16-registry-bootstrap
   title: Registry bootstrap
@@ -78,3 +78,15 @@ waves:
   depends_on_active_wave_working_state: false
   closed_at: '2026-04-17'
   semantic_question_set_id: customer-status-semantic-pilot
+- wave_id: wave-2026-04-17-semantic-governance-reframe
+  title: Semantic governance reframe
+  status: active
+  wave_ordinal: 4
+  opened_at: '2026-04-17'
+  seeded_entry_surfaces: []
+  seeded_high_priority_source_families: []
+  admitted_subsystems: []
+  durable_wiki_targets_accepted: false
+  findings_disposition_complete: false
+  depends_on_active_wave_working_state: false
+  closed_at: null

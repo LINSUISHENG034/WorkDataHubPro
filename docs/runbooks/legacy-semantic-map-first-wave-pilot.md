@@ -22,10 +22,18 @@ the checked-in state before merge review, not to reopen pilot scope.
 
 ## Commands
 
-Compile the accepted checked-in pilot claims and generate reports:
+The default front door now targets `wave-2026-04-17-semantic-governance-reframe`.
+
+Compile the active successor wave and generate reports:
 
 ```bash
 uv run python -m scripts.legacy_semantic_map.pilot --registry-root docs/wiki-bi/_meta/legacy-semantic-map
+```
+
+Re-run the historical first-wave pilot explicitly:
+
+```bash
+uv run python -m scripts.legacy_semantic_map.pilot --registry-root docs/wiki-bi/_meta/legacy-semantic-map --wave-id wave-2026-04-17-first-wave-pilot
 ```
 
 Targeted validation:
@@ -56,15 +64,17 @@ After a successful run from the accepted claim set:
   - `compiled_claim_ids` is populated
   - `compiled_claims_by_wave.wave-2026-04-17-first-wave-pilot` is populated
 - `docs/wiki-bi/_meta/legacy-semantic-map/reports/current/coverage-status.json`
+  - `wave_id = "wave-2026-04-17-semantic-governance-reframe"`
   - `wave_status = "green"`
-  - `entrypoint_coverage_pct = 100.0`
-  - `high_priority_source_family_coverage_pct = 100.0`
-  - `orphan_high_priority_source_count = 0`
-  - `stale_high_priority_candidate_count = 0`
+  - `semantic_question_coverage_pct = 100.0`
 - `docs/wiki-bi/_meta/legacy-semantic-map/reports/current/integrity-status.json`
-  - `closeout_ready = true`
-  - `archive_ready = true`
-  - `blocking_reasons = []`
+  - `closeout_ready = false`
+  - `archive_ready = false`
+  - `blocking_reasons = ["durable_wiki_targets_not_accepted", "findings_disposition_incomplete"]`
+
+When running the explicit historical first-wave command above, expect the
+command to fail unless the target wave is reopened; closed waves remain audit
+read-only under CT-018.
 
 ## Interpretation
 

@@ -1,0 +1,36 @@
+semantic_id: sem-non-equivalence-customer-master-vs-status
+semantic_node_type: semantic_non_equivalence
+title: Customer master backfill vs customer status
+summary: Master-data completion and status evaluation cannot be collapsed into one
+  semantic layer.
+business_conclusion: Customer master backfill is not equivalent to customer status
+  evaluation.
+primary_semantic_sources:
+- "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+  \u6001\u6765\u6E90\u5206\u6790.md"
+supporting_witness_sources:
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to:
+- sem-concept-customer-status
+- sem-concept-customer-master-backfill
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes: []
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-17T13:00:00Z'
+confidence: high
+last_verified: '2026-04-17'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-core

@@ -88,7 +88,7 @@ What is not yet true:
 - production storage/publication and operator tooling remain deferred
 - special orchestration surfaces such as `company_lookup_queue` and `reference_sync` are now explicitly registered, but not yet closed
 - enterprise persistence surfaces and manual `customer-mdm` operator paths are now explicitly registered, but not yet closed
-- the semantic-map pilot exists as an internal discovery ledger, but semantic-first canonical alignment and wiki-absorption support are not yet admitted as a closed follow-on slice
+- the semantic-map pilot exists as an internal discovery ledger, but CT-017 is superseded by CT-018 and the admitted follow-on is now the successor-wave semantic-governance reframe
 - first-wave legacy retirement decisions are not yet recorded
 
 ## 4. Success Definition
@@ -285,7 +285,7 @@ vocabulary where it fits:
 | reference bootstrap / reference-sync runtime | legacy uses an explicit `reference_sync` orchestration surface plus incremental state | deferred | separate reference bootstrap/runtime plan |
 | enterprise identity / EQC persistence surfaces | legacy persists cache, queue, and raw/cleansed EQC data beyond fact-domain outputs | deferred | separate identity persistence plan |
 | manual customer-status command surfaces and shared operator artifacts | legacy supports `customer-mdm` manual commands and cross-domain unresolved-name / failed-record artifacts | deferred | separate operator-tools / artifact-governance plan |
-| semantic-map semantic-first canonical alignment and wiki-absorption support | the current semantic-map pilot proves discovery plumbing, but canonical outputs still overfit execution structure and under-express real business semantics needed for durable `wiki-bi` absorption | planned | execute `slice/semantic-map-semantic-first-canonical-pilot` from `slice/semantic-map-integration@002f4f7` using `docs/superpowers/plans/2026-04-17-workdatahubpro-semantic-map-semantic-first-canonical-optimization.md` |
+| semantic-map agent-governance reframe (`CT-018`) | the current semantic-map pilot proves registry/report plumbing, but the active follow-on must move to successor-wave semantic governance so agents can accumulate coverage-first semantics without reopening closed waves or presenting semantic-map outputs as durable wiki truth | planned | execute `docs/superpowers/plans/2026-04-18-workdatahubpro-semantic-map-agent-governance-reframe.md` on `slice/semantic-map-integration` using only successor-wave execution on `wave-2026-04-17-semantic-governance-reframe`; CT-017 historical outputs remain retained for audit context and are not reopened |
 | evidence and compatibility storage location | current artifacts are repository/file-backed in validation mode | planned | physical storage decision |
 | operator tooling and Dagster | replay CLI exists; broader operator flow does not | deferred | separate operator-tools and Dagster plan |
 

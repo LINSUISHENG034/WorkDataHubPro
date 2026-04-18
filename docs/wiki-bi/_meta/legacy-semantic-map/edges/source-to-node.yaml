@@ -1,4 +1,34 @@
 edges:
+- from_id: config/customer_status_rules.yml
+  to_id: sem-rule-is-new-definition
+  relationship: supports_claim_target
+  source_refs:
+  - config/customer_status_rules.yml
+  source_type: legacy_config
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-rules
+- from_id: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\
+    \u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  to_id: sem-concept-customer-status
+  relationship: supports_claim_target
+  source_refs:
+  - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+    \u6001\u6765\u6E90\u5206\u6790.md"
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-core
 - from_id: docs/domains/annual_award-capability-map.md
   to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
   relationship: supports_claim_target
@@ -447,6 +477,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-subsystem
+- from_id: docs/wiki-bi/concepts/customer-status.md
+  to_id: sem-concept-customer-status
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-core
+- from_id: docs/wiki-bi/concepts/customer-status.md
+  to_id: sem-rule-is-new-definition
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-rules
 - from_id: docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
   to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
   relationship: supports_claim_target
@@ -643,6 +701,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  to_id: sem-lifecycle-customer-status-yearly-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-lifecycle
 - from_id: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
   to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
   relationship: supports_claim_target
@@ -727,6 +799,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-reference-sync-object
+- from_id: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  to_id: sem-concept-customer-status
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-core
+- from_id: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  to_id: sem-rule-is-new-definition
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-rules
 - from_id: reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json
   to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
   relationship: supports_claim_target
@@ -937,6 +1037,48 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: src/work_data_hub/cli/etl/hooks.py
+  to_id: sem-lifecycle-customer-status-yearly-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/etl/hooks.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-lifecycle
+- from_id: src/work_data_hub/customer_mdm/contract_sync.py
+  to_id: sem-lifecycle-customer-status-yearly-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-lifecycle
+- from_id: src/work_data_hub/customer_mdm/snapshot_refresh.py
+  to_id: sem-lifecycle-customer-status-yearly-cycle
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/snapshot_refresh.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-lifecycle
 - from_id: src/work_data_hub/orchestration/company_lookup_queue.py.txt
   to_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
   relationship: supports_claim_target

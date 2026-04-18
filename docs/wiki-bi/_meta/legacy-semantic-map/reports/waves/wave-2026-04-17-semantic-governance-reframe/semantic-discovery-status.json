@@ -1,0 +1,12 @@
+{
+  "wave_id": "wave-2026-04-17-semantic-governance-reframe",
+  "discovery_view_status": "green",
+  "semantic_maturity_counts": {
+    "observed": 0,
+    "inferred": 0,
+    "contested": 0,
+    "consumption-candidate": 9
+  },
+  "contested_semantic_ids": [],
+  "generated_at": "2026-04-17T13:20:00Z"
+}

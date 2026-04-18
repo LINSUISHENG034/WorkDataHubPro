@@ -1,0 +1,112 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-rules
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-is-new-definition
+sources_read:
+- source_ref: config/customer_status_rules.yml
+  source_type: legacy_config
+  note: Status rules config is the authoritative current rule anchor for status-source
+    semantics and derived is_new semantics.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/customer_status_rules.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/wiki-bi/concepts/customer-status.md
+  source_type: current_wiki
+  note: Current concept page preserves the formula memory for is_new.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/concepts/customer-status.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  source_type: current_wiki
+  note: Current semantic-correctness page preserves source splitting and status-family
+    boundaries.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/concepts/customer-status.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+submitted_at: '2026-04-17T13:10:00Z'
+semantic_findings:
+- semantic_id: sem-rule-is-new-definition
+  semantic_node_type: semantic_rule
+  title: is_new definition
+  summary: is_new is a derived yearly status, not a customer-master label.
+  business_conclusion: is_new is defined as is_winning_this_year AND NOT is_existing.
+  primary_source_refs:
+  - config/customer_status_rules.yml
+  supporting_source_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  non_equivalent_to:
+  - sem-non-equivalence-customer-type-vs-is-new
+- semantic_id: sem-rule-status-source-splitting
+  semantic_node_type: semantic_rule
+  title: Status source splitting
+  summary: Different customer-status fields are sourced from different fact families.
+  business_conclusion: Status fields do not share one fact source; winning, loss-reported,
+    and churned semantics come from different source families.
+  primary_source_refs:
+  - config/customer_status_rules.yml
+  supporting_source_refs:
+  - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+    \u6001\u6765\u6E90\u5206\u6790.md"
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  non_equivalent_to: []
+- semantic_id: sem-fact-family-customer-status-source-family
+  semantic_node_type: semantic_fact_family
+  title: Customer-status source family
+  summary: Customer-status semantics depend on multiple fact families rather than
+    one universal status table.
+  business_conclusion: "\u89C4\u6A21\u660E\u7EC6, \u4E2D\u6807\u5BA2\u6237\u660E\u7EC6\
+    , \u6D41\u5931\u5BA2\u6237\u660E\u7EC6, and customer snapshot tables together\
+    \ form the customer-status fact family."
+  primary_source_refs:
+  - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+    \u6001\u6765\u6E90\u5206\u6790.md"
+  - config/customer_status_rules.yml
+  supporting_source_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/customer-status.md
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  non_equivalent_to: []
+- semantic_id: sem-decision-anchor-customer-status-rules
+  semantic_node_type: semantic_decision_anchor
+  title: Customer-status rules decision anchor
+  summary: customer_status_rules.yml is the strongest current rule anchor for status-source
+    semantics.
+  business_conclusion: config/customer_status_rules.yml is the primary current decision
+    anchor for customer-status source semantics.
+  primary_source_refs:
+  - config/customer_status_rules.yml
+  supporting_source_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  non_equivalent_to: []
+trigger_id: trigger-semantic-governance-reframe
+orchestration_iteration: 1

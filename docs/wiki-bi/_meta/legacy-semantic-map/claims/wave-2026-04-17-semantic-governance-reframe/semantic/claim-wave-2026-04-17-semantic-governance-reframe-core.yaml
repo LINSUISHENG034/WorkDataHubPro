@@ -1,0 +1,120 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-core
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-concept-customer-status
+sources_read:
+- source_ref: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\
+    \u4E0E\u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  source_type: legacy_doc
+  note: Business background page explicitly separates customer master backfill from
+    customer status.
+  workspace_id: legacy_work_data_hub
+  relative_path: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\
+    \u4E0E\u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/wiki-bi/concepts/customer-status.md
+  source_type: current_wiki
+  note: Current durable concept page already preserves the customer-status concept
+    family.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/concepts/customer-status.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  source_type: current_wiki
+  note: Current durable standard page already preserves the key non-equivalence constraints.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/concepts/customer-status.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+submitted_at: '2026-04-17T13:00:00Z'
+semantic_findings:
+- semantic_id: sem-concept-customer-status
+  semantic_node_type: semantic_concept
+  title: Customer status
+  summary: Customer status is a business-semantic layer for yearly, monthly, and snapshot
+    judgments.
+  business_conclusion: Customer status is a distinct semantic layer that should not
+    be flattened into one table or one field family.
+  primary_source_refs:
+  - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+    \u6001\u6765\u6E90\u5206\u6790.md"
+  supporting_source_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/customer-status.md
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  non_equivalent_to:
+  - sem-concept-customer-master-backfill
+- semantic_id: sem-concept-customer-master-backfill
+  semantic_node_type: semantic_concept
+  title: Customer master backfill
+  summary: Customer master backfill is the reference/master-data completion layer,
+    not the status-evaluation layer.
+  business_conclusion: Customer master backfill solves master-data completion and
+    should not be treated as customer-status evaluation.
+  primary_source_refs:
+  - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+    \u6001\u6765\u6E90\u5206\u6790.md"
+  supporting_source_refs:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  non_equivalent_to:
+  - sem-concept-customer-status
+- semantic_id: sem-non-equivalence-customer-master-vs-status
+  semantic_node_type: semantic_non_equivalence
+  title: Customer master backfill vs customer status
+  summary: Master-data completion and status evaluation cannot be collapsed into one
+    semantic layer.
+  business_conclusion: Customer master backfill is not equivalent to customer status
+    evaluation.
+  primary_source_refs:
+  - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+    \u6001\u6765\u6E90\u5206\u6790.md"
+  supporting_source_refs:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  non_equivalent_to:
+  - sem-concept-customer-status
+  - sem-concept-customer-master-backfill
+- semantic_id: sem-non-equivalence-customer-type-vs-is-new
+  semantic_node_type: semantic_non_equivalence
+  title: Customer type label vs is_new
+  summary: Customer type labels belong to customer master backfill and must not be
+    treated as snapshot status fields.
+  business_conclusion: "Customer-master labels such as \u5E74\u91D1\u5BA2\u6237\u7C7B\
+    \u578B are not equivalent to the snapshot status field is_new."
+  primary_source_refs:
+  - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+    \u6001\u6765\u6E90\u5206\u6790.md"
+  supporting_source_refs:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  confidence: high
+  last_verified: '2026-04-17'
+  open_questions: []
+  non_equivalent_to:
+  - sem-rule-is-new-definition
+trigger_id: trigger-semantic-governance-reframe
+orchestration_iteration: 1

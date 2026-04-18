@@ -40,6 +40,21 @@ SEMANTIC_AUTHORITIES = (
     "implementation_hint",
     "historical_context",
 )
+SEMANTIC_MATURITY_LEVELS = (
+    "observed",
+    "inferred",
+    "contested",
+    "consumption-candidate",
+)
+DISCOVERY_VIEW_STATUSES = (
+    "sufficient",
+    "contested",
+)
+CONSUMPTION_READINESS_STATUSES = (
+    "discovery-only",
+    "reviewable",
+    "blocked",
+)
 EVIDENCE_STRENGTHS = (
     "strong",
     "supporting",

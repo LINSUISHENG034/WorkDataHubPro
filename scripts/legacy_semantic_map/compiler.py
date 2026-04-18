@@ -12,9 +12,11 @@ from .claims import (
     ClaimArtifact,
     ClaimCandidateRecord,
     ClaimEdgeRecord,
+    ClaimSemanticFindingRecord,
     ClaimSourceRecord,
 )
 from .models import CANONICAL_SEED_SOURCES
+from .waves import require_active_open_wave
 
 
 @dataclass(frozen=True)
@@ -44,8 +46,29 @@ def _write_yaml(path: Path, payload: object) -> None:
     )
 
 
+def _load_yaml_if_exists(path: Path) -> dict[str, object]:
+    if not path.exists():
+        return {}
+    return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+
+
 def _sorted_unique(values: Iterable[str]) -> list[str]:
     return sorted({value for value in values if value})
+
+
+def _dedupe_payloads(payloads: Iterable[dict[str, object]]) -> list[dict[str, object]]:
+    deduped: dict[str, dict[str, object]] = {}
+    for payload in payloads:
+        deduped[json.dumps(payload, sort_keys=True)] = payload
+    return list(deduped.values())
+
+
+def _merge_index_entries(
+    entries: list[dict[str, str]],
+    key_name: str,
+) -> list[dict[str, str]]:
+    merged = {entry[key_name]: entry for entry in entries}
+    return [merged[key] for key in sorted(merged)]
 
 
 def _title_from_id(identifier: str) -> str:
@@ -83,6 +106,16 @@ def _semantic_directory_name(node_type: str) -> str:
         "semantic_fact_family": "fact-families",
         "semantic_decision_anchor": "decision-anchors",
     }[node_type]
+
+
+def _semantic_maturity_level(finding: ClaimSemanticFindingRecord) -> str:
+    if finding.open_questions:
+        return "contested"
+    if finding.durable_target_pages:
+        return "consumption-candidate"
+    if len(set(finding.primary_source_refs + finding.supporting_source_refs)) > 1:
+        return "inferred"
+    return "observed"
 
 
 def _source_edge(source: ClaimSourceRecord, claim: ClaimArtifact) -> dict[str, object]:
@@ -159,12 +192,15 @@ def _write_manifest(
         for wave_id, claim_ids in existing_payload.get("compiled_claims_by_wave", {}).items()
     }
     merged_compiled_claims_by_wave.update(compiled_claims_by_wave)
+    merged_generated_files = sorted(
+        set(existing_payload.get("generated_canonical_files", [])) | set(written_files)
+    )
     manifest_path.write_text(
         json.dumps(
             {
                 "artifact": "legacy-semantic-map-registry",
                 "canonical_seed_sources": list(CANONICAL_SEED_SOURCES),
-                "generated_canonical_files": written_files,
+                "generated_canonical_files": merged_generated_files,
                 "compiled_claim_ids": compiled_claim_ids,
                 "compiled_claims_by_wave": merged_compiled_claims_by_wave,
             },
@@ -183,20 +219,55 @@ def compile_claim_artifacts(
     claims = [_load_claim(registry_root / relative_path) for relative_path in relative_claim_paths]
     claims = sorted(claims, key=lambda item: item.claim_id)
 
+    for claim in claims:
+        require_active_open_wave(registry_root, claim.wave_id)
+
     written_files: list[str] = []
-    subsystem_index: list[dict[str, str]] = []
-    object_index: list[dict[str, str]] = []
+    subsystem_index: list[dict[str, str]] = list(
+        _load_yaml_if_exists(registry_root / "subsystems" / "index.yaml").get("subsystems", [])
+    )
+    object_index: list[dict[str, str]] = list(
+        _load_yaml_if_exists(registry_root / "objects" / "index.yaml").get("objects", [])
+    )
     semantic_index: list[dict[str, str]] = []
     edge_payloads: dict[str, list[dict[str, object]]] = {
-        "execution-to-subsystem.yaml": [],
-        "execution-to-object.yaml": [],
-        "subsystem-to-object.yaml": [],
-        "object-to-object.yaml": [],
-        "source-to-node.yaml": [],
+        "execution-to-subsystem.yaml": list(
+            _load_yaml_if_exists(registry_root / "edges" / "execution-to-subsystem.yaml").get(
+                "edges", []
+            )
+        ),
+        "execution-to-object.yaml": list(
+            _load_yaml_if_exists(registry_root / "edges" / "execution-to-object.yaml").get(
+                "edges", []
+            )
+        ),
+        "subsystem-to-object.yaml": list(
+            _load_yaml_if_exists(registry_root / "edges" / "subsystem-to-object.yaml").get(
+                "edges", []
+            )
+        ),
+        "object-to-object.yaml": list(
+            _load_yaml_if_exists(registry_root / "edges" / "object-to-object.yaml").get(
+                "edges", []
+            )
+        ),
+        "source-to-node.yaml": list(
+            _load_yaml_if_exists(registry_root / "edges" / "source-to-node.yaml").get(
+                "edges", []
+            )
+        ),
     }
     candidate_payloads: dict[str, list[dict[str, object]]] = {
-        "subsystem-candidates.yaml": [],
-        "object-candidates.yaml": [],
+        "subsystem-candidates.yaml": list(
+            _load_yaml_if_exists(registry_root / "candidates" / "subsystem-candidates.yaml").get(
+                "subsystem_candidates", []
+            )
+        ),
+        "object-candidates.yaml": list(
+            _load_yaml_if_exists(registry_root / "candidates" / "object-candidates.yaml").get(
+                "object_candidates", []
+            )
+        ),
     }
 
     for claim in claims:
@@ -327,6 +398,10 @@ def compile_claim_artifacts(
         if claim.claim_scope == "semantic":
             for finding in claim.semantic_findings:
                 directory_name = _semantic_directory_name(finding.semantic_node_type)
+                maturity_level = _semantic_maturity_level(finding)
+                relative_path = f"semantic/{directory_name}/{finding.semantic_id}.yaml"
+                output_path = registry_root / relative_path
+                existing_payload = _load_yaml_if_exists(output_path)
                 payload = {
                     "semantic_id": finding.semantic_id,
                     "semantic_node_type": finding.semantic_node_type,
@@ -346,12 +421,24 @@ def compile_claim_artifacts(
                     "requires_human_judgement": False,
                     "blocked_by": [],
                     "archive_after_absorption": True,
+                    "semantic_maturity_level": maturity_level,
+                    "discovery_view_status": (
+                        "contested" if maturity_level == "contested" else "sufficient"
+                    ),
+                    "consumption_readiness_status": (
+                        "reviewable"
+                        if finding.durable_target_pages
+                        else "discovery-only"
+                    ),
+                    "readiness_notes": list(finding.open_questions),
+                    "compiled_from_wave_id": claim.wave_id,
+                    "compiled_at": claim.submitted_at,
                     "confidence": finding.confidence,
                     "last_verified": finding.last_verified,
-                    "compiled_from_claims": [claim.claim_id],
+                    "compiled_from_claims": _sorted_unique(
+                        list(existing_payload.get("compiled_from_claims", [])) + [claim.claim_id]
+                    ),
                 }
-                relative_path = f"semantic/{directory_name}/{finding.semantic_id}.yaml"
-                output_path = registry_root / relative_path
                 _write_yaml(output_path, payload)
                 written_files.append(relative_path)
                 semantic_index.append(
@@ -362,8 +449,8 @@ def compile_claim_artifacts(
                     }
                 )
 
-    subsystem_index = sorted(subsystem_index, key=lambda item: item["subsystem_id"])
-    object_index = sorted(object_index, key=lambda item: item["object_id"])
+    subsystem_index = _merge_index_entries(subsystem_index, "subsystem_id")
+    object_index = _merge_index_entries(object_index, "object_id")
     _write_yaml(registry_root / "subsystems" / "index.yaml", {"subsystems": subsystem_index})
     _write_yaml(registry_root / "objects" / "index.yaml", {"objects": object_index})
     written_files.extend(["subsystems/index.yaml", "objects/index.yaml"])
@@ -373,7 +460,11 @@ def compile_claim_artifacts(
         written_files.append("semantic/index.yaml")
 
     for filename, payload in edge_payloads.items():
-        payload = sorted(payload, key=lambda item: (item["from_id"], item["to_id"], item["relationship"]))
+        payload = _dedupe_payloads(payload)
+        payload = sorted(
+            payload,
+            key=lambda item: (item["from_id"], item["to_id"], item["relationship"]),
+        )
         _write_yaml(registry_root / "edges" / filename, {"edges": payload})
         written_files.append(f"edges/{filename}")
 
@@ -381,7 +472,10 @@ def compile_claim_artifacts(
         ("subsystem-candidates.yaml", "subsystem_candidates"),
         ("object-candidates.yaml", "object_candidates"),
     ):
-        payload = sorted(candidate_payloads[filename], key=lambda item: item["candidate_id"])
+        payload = {
+            item["candidate_id"]: item for item in candidate_payloads[filename]
+        }
+        payload = [payload[candidate_id] for candidate_id in sorted(payload)]
         _write_yaml(registry_root / "candidates" / filename, {key: payload})
         written_files.append(f"candidates/{filename}")
 

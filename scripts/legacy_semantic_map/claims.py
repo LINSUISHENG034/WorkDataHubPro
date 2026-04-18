@@ -21,6 +21,7 @@ from .models import (
     TRIAGE_STATUSES,
     WAVE_ID_PATTERN,
 )
+from .waves import require_active_open_wave
 
 CLAIM_ID_PATTERN = r"[a-z0-9]+(?:-[a-z0-9]+)*"
 CLAIM_SCOPE_DIRECTORIES = {
@@ -180,6 +181,8 @@ class ClaimArtifact:
     compiled_into: list[str]
     submitted_at: str
     semantic_findings: list[ClaimSemanticFindingRecord] = field(default_factory=list)
+    trigger_id: str | None = None
+    orchestration_iteration: int | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(
@@ -235,6 +238,7 @@ def _registered_wave_ids(registry_root: Path) -> set[str]:
 def write_claim_artifact(registry_root: Path, claim: ClaimArtifact) -> Path:
     if claim.wave_id not in _registered_wave_ids(registry_root):
         raise ValueError(f"Unregistered wave_id: {claim.wave_id}")
+    require_active_open_wave(registry_root, claim.wave_id)
 
     output_path = registry_root / claim_relative_path(claim)
     output_path.parent.mkdir(parents=True, exist_ok=True)

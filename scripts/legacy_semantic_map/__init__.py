@@ -17,8 +17,11 @@ from .models import (
     CONFIDENCE_LEVELS,
     COVERAGE_STATES,
     EVIDENCE_STRENGTHS,
+    CONSUMPTION_READINESS_STATUSES,
+    DISCOVERY_VIEW_STATUSES,
     GREEN_OBJECT_EDGE_COVERAGE_THRESHOLD,
     PRIORITY_LEVELS,
+    SEMANTIC_MATURITY_LEVELS,
     SEEDED_ENTRY_SURFACES,
     SEEDED_HIGH_PRIORITY_SOURCE_FAMILIES,
     SOURCE_TYPES,
@@ -31,6 +34,7 @@ from .models import (
     SeededWave,
 )
 from .reporting import ReportGenerationResult, generate_reports
+from .waves import allow_audit_wave_read, load_waves_index, require_active_open_wave, wave_lookup
 
 __all__ = [
     "BOOTSTRAP_WAVE",
@@ -44,7 +48,9 @@ __all__ = [
     "CLAIM_TYPES",
     "CANONICAL_SEED_SOURCES",
     "CONFIDENCE_LEVELS",
+    "CONSUMPTION_READINESS_STATUSES",
     "COVERAGE_STATES",
+    "DISCOVERY_VIEW_STATUSES",
     "EVIDENCE_STRENGTHS",
     "SEEDED_ENTRY_SURFACES",
     "SEEDED_HIGH_PRIORITY_SOURCE_FAMILIES",
@@ -57,13 +63,18 @@ __all__ = [
     "claim_digests_for_wave",
     "generate_reports",
     "GREEN_OBJECT_EDGE_COVERAGE_THRESHOLD",
+    "load_waves_index",
     "mutable_claim_ids",
     "PRIORITY_LEVELS",
     "prior_integrity_report_digests",
     "ReportGenerationResult",
+    "require_active_open_wave",
+    "allow_audit_wave_read",
+    "SEMANTIC_MATURITY_LEVELS",
     "write_claim_artifact",
     "SeededEntrySurface",
     "SeededSourceFamily",
     "SeededWave",
     "WAVE_STATUSES",
+    "wave_lookup",
 ]

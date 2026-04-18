@@ -9,8 +9,10 @@ from typing import Sequence
 from .bootstrap import DEFAULT_REGISTRY_ROOT
 from .compiler import CompilationResult, compile_claim_artifacts
 from .reporting import ReportGenerationResult, generate_reports
+from .waves import require_active_open_wave
 
 FIRST_WAVE_PILOT_WAVE_ID = "wave-2026-04-17-first-wave-pilot"
+ACTIVE_SUCCESSOR_WAVE_ID = "wave-2026-04-17-semantic-governance-reframe"
 
 
 @dataclass(frozen=True)
@@ -79,6 +81,7 @@ def run_first_wave_pilot(
     claim_paths: Sequence[Path] | None = None,
 ) -> PilotRunResult:
     resolved_root = registry_root.resolve()
+    require_active_open_wave(resolved_root, wave_id)
     selected_claim_paths = _validated_claim_paths(
         resolved_root,
         wave_id,
@@ -98,7 +101,10 @@ def run_first_wave_pilot(
 
 def main(argv: Sequence[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
-        description="Compile accepted first-wave pilot claims and generate reports."
+        description=(
+            "Compile accepted semantic-map claims and generate reports for the "
+            "active successor wave."
+        )
     )
     parser.add_argument(
         "--registry-root",
@@ -108,8 +114,11 @@ def main(argv: Sequence[str] | None = None) -> None:
     )
     parser.add_argument(
         "--wave-id",
-        default=FIRST_WAVE_PILOT_WAVE_ID,
-        help="Wave identifier to compile and report.",
+        default=ACTIVE_SUCCESSOR_WAVE_ID,
+        help=(
+            "Wave identifier to compile and report. Defaults to the active "
+            "successor wave."
+        ),
     )
     parser.add_argument(
         "--claim",

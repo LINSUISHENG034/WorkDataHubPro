@@ -8,6 +8,7 @@ import yaml
 
 from .closeout import claim_digests_for_wave, mutable_claim_ids, prior_integrity_report_digests
 from .models import GREEN_OBJECT_EDGE_COVERAGE_THRESHOLD
+from .waves import allow_audit_wave_read, require_active_open_wave, wave_lookup
 
 
 @dataclass(frozen=True)
@@ -17,6 +18,10 @@ class ReportGenerationResult:
     current_integrity_report: Path
     wave_coverage_report: Path
     wave_integrity_report: Path
+    semantic_discovery_report: Path
+    semantic_readiness_report: Path
+    semantic_discovery_summary: Path
+    semantic_readiness_summary: Path
 
 
 def _load_yaml(path: Path) -> dict[str, object]:
@@ -32,15 +37,15 @@ def _write_json(path: Path, payload: object) -> None:
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
+def _write_text(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content.rstrip() + "\n", encoding="utf-8")
+
+
 def _pct(numerator: int, denominator: int) -> float:
     if denominator == 0:
         return 100.0
     return round((numerator / denominator) * 100, 2)
-
-
-def _wave_lookup(registry_root: Path) -> tuple[str, dict[str, dict[str, object]]]:
-    waves_index = _load_yaml(registry_root / "waves" / "index.yaml")
-    return waves_index["active_wave_id"], {item["wave_id"]: item for item in waves_index["waves"]}
 
 
 def _claim_ids_for_wave(registry_root: Path, wave_id: str) -> set[str]:
@@ -280,10 +285,14 @@ def _deterministic_generated_at(
 
 
 def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportGenerationResult:
-    active_wave_id, wave_lookup = _wave_lookup(registry_root)
+    active_wave_id, waves = wave_lookup(registry_root)
     target_wave_id = wave_id or active_wave_id
-    target_wave = wave_lookup[target_wave_id]
-    wave_ordinals = {key: int(value["wave_ordinal"]) for key, value in wave_lookup.items()}
+    explicit_wave_id = wave_id is not None
+    if not explicit_wave_id:
+        target_wave = require_active_open_wave(registry_root, target_wave_id)
+    else:
+        target_wave = allow_audit_wave_read(registry_root, target_wave_id)
+    wave_ordinals = {key: int(value["wave_ordinal"]) for key, value in waves.items()}
     wave_claim_ids = _claim_ids_for_wave(registry_root, target_wave_id)
     visible_claim_ids = _claim_ids_visible_to_wave(
         registry_root,
@@ -373,7 +382,7 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
 
     by_candidate, stale_high_priority_candidate_count = _candidate_age_summary(
         registry_root,
-        active_wave_ordinal=int(wave_lookup[active_wave_id]["wave_ordinal"]),
+        active_wave_ordinal=int(waves[active_wave_id]["wave_ordinal"]),
         target_wave_ordinal=int(target_wave["wave_ordinal"]),
         wave_ordinals=wave_ordinals,
     )
@@ -488,12 +497,98 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
     current_coverage_path = registry_root / "reports" / "current" / "coverage-status.json"
     current_integrity_path = registry_root / "reports" / "current" / "integrity-status.json"
     wave_coverage_path = registry_root / "reports" / "waves" / target_wave_id / "coverage-status.json"
+    wave_reports_dir = registry_root / "reports" / "waves" / target_wave_id
+    semantic_discovery_path = wave_reports_dir / "semantic-discovery-status.json"
+    semantic_readiness_path = wave_reports_dir / "semantic-readiness-status.json"
+    semantic_discovery_summary_path = wave_reports_dir / "semantic-discovery-summary.md"
+    semantic_readiness_summary_path = wave_reports_dir / "semantic-readiness-summary.md"
 
-    if target_wave_id == active_wave_id:
+    maturity_counts = {
+        level: sum(
+            1
+            for node in semantic_nodes
+            if node.get("semantic_maturity_level") == level
+        )
+        for level in (
+            "observed",
+            "inferred",
+            "contested",
+            "consumption-candidate",
+        )
+    }
+    contested_semantic_ids = sorted(
+        str(node["semantic_id"])
+        for node in semantic_nodes
+        if node.get("semantic_maturity_level") == "contested"
+    )
+    handoff_ready_ids = sorted(
+        str(node["semantic_id"])
+        for node in semantic_nodes
+        if node.get("consumption_readiness_status") == "reviewable"
+    )
+    blocked_semantic_ids = sorted(
+        str(node["semantic_id"])
+        for node in semantic_nodes
+        if node.get("consumption_readiness_status") == "blocked"
+        or node.get("blocked_by")
+    )
+    durable_target_page_count = len(
+        {
+            str(page)
+            for node in semantic_nodes
+            for page in node.get("durable_target_pages", [])
+            if isinstance(page, str)
+        }
+    )
+    semantic_discovery_payload = {
+        "wave_id": target_wave_id,
+        "discovery_view_status": coverage_payload["wave_status"],
+        "semantic_maturity_counts": maturity_counts,
+        "contested_semantic_ids": contested_semantic_ids,
+        "generated_at": generated_at,
+    }
+    semantic_readiness_payload = {
+        "wave_id": target_wave_id,
+        "handoff_ready_semantic_ids": handoff_ready_ids,
+        "blocked_semantic_ids": blocked_semantic_ids,
+        "durable_target_page_count": durable_target_page_count,
+        "generated_at": generated_at,
+    }
+
+    if (
+        target_wave_id == active_wave_id
+        and target_wave.get("status") == "active"
+        and not target_wave.get("closed_at")
+    ):
         _write_json(current_coverage_path, coverage_payload)
         _write_json(current_integrity_path, integrity_payload)
     _write_json(wave_coverage_path, coverage_payload)
     _write_json(wave_integrity_path, integrity_payload)
+    _write_json(semantic_discovery_path, semantic_discovery_payload)
+    _write_json(semantic_readiness_path, semantic_readiness_payload)
+    _write_text(
+        semantic_discovery_summary_path,
+        "\n".join(
+            [
+                f"# Semantic discovery summary: {target_wave_id}",
+                "",
+                f"- discovery view status: {semantic_discovery_payload['discovery_view_status']}",
+                f"- contested semantic ids: {', '.join(contested_semantic_ids) if contested_semantic_ids else 'none'}",
+            ]
+        ),
+    )
+    _write_text(
+        semantic_readiness_summary_path,
+        "\n".join(
+            [
+                f"# Semantic readiness summary: {target_wave_id}",
+                "",
+                f"- handoff ready semantic ids: {', '.join(handoff_ready_ids) if handoff_ready_ids else 'none'}",
+                f"- blocked semantic ids: {', '.join(blocked_semantic_ids) if blocked_semantic_ids else 'none'}",
+                f"- durable target page count: {durable_target_page_count}",
+            ]
+        ),
+    )
 
     return ReportGenerationResult(
         wave_id=target_wave_id,
@@ -501,4 +596,8 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
         current_integrity_report=current_integrity_path,
         wave_coverage_report=wave_coverage_path,
         wave_integrity_report=wave_integrity_path,
+        semantic_discovery_report=semantic_discovery_path,
+        semantic_readiness_report=semantic_readiness_path,
+        semantic_discovery_summary=semantic_discovery_summary_path,
+        semantic_readiness_summary=semantic_readiness_summary_path,
     )

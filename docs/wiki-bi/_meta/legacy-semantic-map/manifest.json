@@ -28,6 +28,16 @@
     "objects/obj-company-lookup-queue-runtime.yaml",
     "objects/obj-customer-mdm-lifecycle.yaml",
     "objects/obj-reference-sync-runtime.yaml",
+    "semantic/concepts/sem-concept-customer-master-backfill.yaml",
+    "semantic/concepts/sem-concept-customer-status.yaml",
+    "semantic/decision-anchors/sem-decision-anchor-customer-status-rules.yaml",
+    "semantic/fact-families/sem-fact-family-customer-status-source-family.yaml",
+    "semantic/index.yaml",
+    "semantic/lifecycles/sem-lifecycle-customer-status-yearly-cycle.yaml",
+    "semantic/non-equivalences/sem-non-equivalence-customer-master-vs-status.yaml",
+    "semantic/non-equivalences/sem-non-equivalence-customer-type-vs-is-new.yaml",
+    "semantic/rules/sem-rule-is-new-definition.yaml",
+    "semantic/rules/sem-rule-status-source-splitting.yaml",
     "subsystems/index.yaml",
     "subsystems/ss-annual-award.yaml",
     "subsystems/ss-annual-loss.yaml",
@@ -35,24 +45,9 @@
     "subsystems/ss-annuity-performance.yaml"
   ],
   "compiled_claim_ids": [
-    "claim-wave-2026-04-17-first-wave-pilot-annual-award-execution",
-    "claim-wave-2026-04-17-first-wave-pilot-annual-award-object",
-    "claim-wave-2026-04-17-first-wave-pilot-annual-award-subsystem",
-    "claim-wave-2026-04-17-first-wave-pilot-annual-loss-execution",
-    "claim-wave-2026-04-17-first-wave-pilot-annual-loss-object",
-    "claim-wave-2026-04-17-first-wave-pilot-annual-loss-subsystem",
-    "claim-wave-2026-04-17-first-wave-pilot-annuity-income-execution",
-    "claim-wave-2026-04-17-first-wave-pilot-annuity-income-object",
-    "claim-wave-2026-04-17-first-wave-pilot-annuity-income-subsystem",
-    "claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution",
-    "claim-wave-2026-04-17-first-wave-pilot-annuity-performance-object",
-    "claim-wave-2026-04-17-first-wave-pilot-annuity-performance-subsystem",
-    "claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-execution",
-    "claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object",
-    "claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution",
-    "claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object",
-    "claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution",
-    "claim-wave-2026-04-17-first-wave-pilot-reference-sync-object"
+    "claim-wave-2026-04-17-semantic-governance-reframe-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules"
   ],
   "compiled_claims_by_wave": {
     "wave-2026-04-17-first-wave-pilot": [
@@ -74,6 +69,11 @@
       "claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object",
       "claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution",
       "claim-wave-2026-04-17-first-wave-pilot-reference-sync-object"
+    ],
+    "wave-2026-04-17-semantic-governance-reframe": [
+      "claim-wave-2026-04-17-semantic-governance-reframe-core",
+      "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
+      "claim-wave-2026-04-17-semantic-governance-reframe-rules"
     ]
   }
 }

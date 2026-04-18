@@ -34,10 +34,32 @@ def test_semantic_map_repo_docs_are_governed() -> None:
         / "waves"
         / "wave-2026-04-17-first-wave-pilot"
         / "integrity-status.json",
+        SEMANTIC_MAP_ROOT
+        / "reports"
+        / "waves"
+        / "wave-2026-04-17-semantic-governance-reframe"
+        / "coverage-status.json",
+        SEMANTIC_MAP_ROOT
+        / "reports"
+        / "waves"
+        / "wave-2026-04-17-semantic-governance-reframe"
+        / "integrity-status.json",
+        SEMANTIC_MAP_ROOT
+        / "reports"
+        / "waves"
+        / "wave-2026-04-17-semantic-governance-reframe"
+        / "semantic-discovery-status.json",
+        SEMANTIC_MAP_ROOT
+        / "reports"
+        / "waves"
+        / "wave-2026-04-17-semantic-governance-reframe"
+        / "semantic-readiness-status.json",
         SEMANTIC_MAP_ROOT / "subsystems" / "ss-annuity-performance.yaml",
         SEMANTIC_MAP_ROOT / "subsystems" / "index.yaml",
         SEMANTIC_MAP_ROOT / "objects" / "obj-annuity-performance-legacy-fact-processing.yaml",
         SEMANTIC_MAP_ROOT / "objects" / "index.yaml",
+        SEMANTIC_MAP_ROOT / "semantic" / "index.yaml",
+        SEMANTIC_MAP_ROOT / "semantic" / "concepts" / "sem-concept-customer-status.yaml",
         SEMANTIC_MAP_ROOT / "edges" / "execution-to-subsystem.yaml",
         SEMANTIC_MAP_ROOT / "edges" / "execution-to-object.yaml",
         SEMANTIC_MAP_ROOT / "edges" / "subsystem-to-object.yaml",
@@ -60,6 +82,11 @@ def test_semantic_map_repo_docs_are_governed() -> None:
         / "wave-2026-04-17-first-wave-pilot"
         / "objects"
         / "claim-wave-2026-04-17-first-wave-pilot-annuity-performance-object.yaml",
+        SEMANTIC_MAP_ROOT
+        / "claims"
+        / "wave-2026-04-17-semantic-governance-reframe"
+        / "semantic"
+        / "claim-wave-2026-04-17-semantic-governance-reframe-core.yaml",
     ]
     for path in expected_paths:
         assert path.exists(), f"Expected semantic-map pilot artifact at {path}"
@@ -72,9 +99,11 @@ def test_semantic_map_repo_docs_are_governed() -> None:
     ]
     assert manifest["generated_canonical_files"]
     assert manifest["compiled_claim_ids"]
-    assert manifest["compiled_claims_by_wave"] == {
-        "wave-2026-04-17-first-wave-pilot": manifest["compiled_claim_ids"],
-    }
+    assert manifest["compiled_claim_ids"] == manifest["compiled_claims_by_wave"][
+        "wave-2026-04-17-semantic-governance-reframe"
+    ]
+    assert "wave-2026-04-17-first-wave-pilot" in manifest["compiled_claims_by_wave"]
+    assert "wave-2026-04-17-semantic-governance-reframe" in manifest["compiled_claims_by_wave"]
 
     readme_text = (SEMANTIC_MAP_ROOT / "README.md").read_text(encoding="utf-8")
     assert "internal discovery ledger" in readme_text

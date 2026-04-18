@@ -1,0 +1,17 @@
+{
+  "wave_id": "wave-2026-04-17-semantic-governance-reframe",
+  "handoff_ready_semantic_ids": [
+    "sem-concept-customer-master-backfill",
+    "sem-concept-customer-status",
+    "sem-decision-anchor-customer-status-rules",
+    "sem-fact-family-customer-status-source-family",
+    "sem-lifecycle-customer-status-yearly-cycle",
+    "sem-non-equivalence-customer-master-vs-status",
+    "sem-non-equivalence-customer-type-vs-is-new",
+    "sem-rule-is-new-definition",
+    "sem-rule-status-source-splitting"
+  ],
+  "blocked_semantic_ids": [],
+  "durable_target_page_count": 3,
+  "generated_at": "2026-04-17T13:20:00Z"
+}

@@ -1,0 +1,33 @@
+semantic_id: sem-rule-status-source-splitting
+semantic_node_type: semantic_rule
+title: Status source splitting
+summary: Different customer-status fields are sourced from different fact families.
+business_conclusion: Status fields do not share one fact source; winning, loss-reported,
+  and churned semantics come from different source families.
+primary_semantic_sources:
+- config/customer_status_rules.yml
+supporting_witness_sources:
+- "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+  \u6001\u6765\u6E90\u5206\u6790.md"
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes: []
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-17T13:10:00Z'
+confidence: high
+last_verified: '2026-04-17'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-rules

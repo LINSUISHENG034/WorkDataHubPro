@@ -1,0 +1,36 @@
+semantic_id: sem-lifecycle-customer-status-yearly-cycle
+semantic_node_type: semantic_lifecycle
+title: Customer-status yearly lifecycle
+summary: The yearly customer-status lifecycle is composed of distinct yearly-init,
+  sync, and snapshot actions.
+business_conclusion: yearly-init, sync, and snapshot are distinct lifecycle actions
+  and should not be collapsed into one status operation.
+primary_semantic_sources:
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+supporting_witness_sources:
+- src/work_data_hub/customer_mdm/contract_sync.py
+- src/work_data_hub/customer_mdm/snapshot_refresh.py
+- src/work_data_hub/cli/etl/hooks.py
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+- docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes: []
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-17T13:20:00Z'
+confidence: high
+last_verified: '2026-04-17'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-lifecycle

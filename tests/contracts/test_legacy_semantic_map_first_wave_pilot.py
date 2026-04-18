@@ -9,6 +9,7 @@ from scripts.legacy_semantic_map.pilot import FIRST_WAVE_PILOT_WAVE_ID
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SEMANTIC_MAP_ROOT = REPO_ROOT / "docs" / "wiki-bi" / "_meta" / "legacy-semantic-map"
+SUCCESSOR_WAVE_ID = "wave-2026-04-17-semantic-governance-reframe"
 TIER_A_SURFACES = [
     "annuity_performance",
     "annual_award",
@@ -26,7 +27,7 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
     waves_index = yaml.safe_load(
         (SEMANTIC_MAP_ROOT / "waves" / "index.yaml").read_text(encoding="utf-8")
     )
-    assert waves_index["active_wave_id"] == FIRST_WAVE_PILOT_WAVE_ID
+    assert waves_index["active_wave_id"] == SUCCESSOR_WAVE_ID
     wave_lookup = {item["wave_id"]: item for item in waves_index["waves"]}
 
     bootstrap_wave = wave_lookup["wave-2026-04-16-registry-bootstrap"]
@@ -44,6 +45,10 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
         "tier_b": TIER_B_SURFACES,
     }
     assert (REPO_ROOT / pilot_wave["pilot_execution_note"]).exists()
+
+    successor_wave = wave_lookup[SUCCESSOR_WAVE_ID]
+    assert successor_wave["status"] == "active"
+    assert successor_wave["closed_at"] is None
     families = yaml.safe_load(
         (SEMANTIC_MAP_ROOT / "sources" / "families.yaml").read_text(encoding="utf-8")
     )["seeded_high_priority_source_families"]
@@ -129,14 +134,14 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
     manifest = json.loads((SEMANTIC_MAP_ROOT / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["generated_canonical_files"]
     assert manifest["compiled_claim_ids"]
-    assert manifest["compiled_claims_by_wave"][FIRST_WAVE_PILOT_WAVE_ID] == manifest[
-        "compiled_claim_ids"
-    ]
-    assert "execution/paths/ep-manual-cli-entrypoints-annuity-performance-manual-entry.yaml" in manifest[
+    assert manifest["compiled_claim_ids"] == manifest["compiled_claims_by_wave"][SUCCESSOR_WAVE_ID]
+    assert FIRST_WAVE_PILOT_WAVE_ID in manifest["compiled_claims_by_wave"]
+    assert len(manifest["compiled_claims_by_wave"][SUCCESSOR_WAVE_ID]) == 3
+    assert len(manifest["compiled_claims_by_wave"][FIRST_WAVE_PILOT_WAVE_ID]) == 18
+    assert "semantic/index.yaml" in manifest["generated_canonical_files"]
+    assert "semantic/concepts/sem-concept-customer-status.yaml" in manifest[
         "generated_canonical_files"
     ]
-    assert "subsystems/ss-annuity-performance.yaml" in manifest["generated_canonical_files"]
-    assert "objects/obj-reference-sync-runtime.yaml" in manifest["generated_canonical_files"]
 
     coverage = json.loads(
         (SEMANTIC_MAP_ROOT / "reports" / "current" / "coverage-status.json").read_text(
@@ -148,13 +153,17 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
             encoding="utf-8"
         )
     )
-    assert coverage["wave_id"] == FIRST_WAVE_PILOT_WAVE_ID
+    assert coverage["wave_id"] == SUCCESSOR_WAVE_ID
     assert coverage["wave_status"] == "green"
     assert coverage["entrypoint_coverage_pct"] == 100.0
     assert coverage["high_priority_source_family_coverage_pct"] == 100.0
     assert coverage["orphan_high_priority_source_count"] == 0
     assert coverage["stale_high_priority_candidate_count"] == 0
+    assert coverage["semantic_question_coverage_pct"] == 100.0
     assert integrity["wave_status"] == "green"
-    assert integrity["closeout_ready"] is True
-    assert integrity["archive_ready"] is True
-    assert integrity["blocking_reasons"] == []
+    assert integrity["closeout_ready"] is False
+    assert integrity["archive_ready"] is False
+    assert integrity["blocking_reasons"] == [
+        "durable_wiki_targets_not_accepted",
+        "findings_disposition_incomplete",
+    ]
