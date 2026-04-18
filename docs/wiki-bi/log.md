@@ -15,6 +15,12 @@
 - 回写 `customer-master-signals-evidence`、`backfill`、`primary-branch`、`customer-status`、`customer-status-semantics` 与相邻合同/证据页，使 `is_churned_this_year`、relationship breadth 与 classification family 的边界更直接可答
 - 新增 Round 29 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确本轮仍停留在 business-semantics scope，没有重开 runtime/operator closure
 
+## [2026-04-18 22:21] maintain | round 30 relationship breadth deepening
+
+- 新增 `related-plan-count.md`，把 `关联计划数` 从 customer-master signal dispatcher 提升为独立 relationship-breadth object page
+- 回写 `customer-master-signals-evidence`、`backfill`、`key-annuity-plan` 与相邻 domain/output-contract 页面，使 `关联计划数`、`关键年金计划` 与 snapshot `plan_count` 的边界更直接可答
+- 新增 Round 30 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确 `其他年金计划`、`其他开拓机构` 仍暂留在 dispatcher 层
+
 ## [2026-04-18 20:19] maintain | annual identity semantics coverage
 
 - 新增 `customer-status-annual-identity-evidence.md`，把 `is_strategic`、`is_existing`、`contract_status`、`status_year` 收紧成 annual identity family 的 durable object page

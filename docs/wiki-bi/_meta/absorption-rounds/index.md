@@ -60,6 +60,8 @@
   - maintenance 轮次，把 `tags`、`主拓机构` 与 cross-domain customer-master-derived signal family 收紧成 durable object pages 与 evidence dispatcher。
 - [Round 29：legacy 业务语义扩展包](./round-29-legacy-business-semantics-expansion.md)
   - maintenance 轮次，把 `关键年金计划`、`is_churned_this_year` shared coverage 与 classification family 推进成新的 durable business-semantics 入口。
+- [Round 30：relationship breadth deepening](./round-30-relationship-breadth-deepening.md)
+  - maintenance 轮次，把 `关联计划数` 从 dispatcher 提示推进成 durable relationship-breadth 对象页。
 
 ## 计划轮次
 

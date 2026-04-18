@@ -170,7 +170,7 @@
 
 - completed on 2026-04-15
 
-## Round 24-28：legacy 隐含语义补强（已完成）
+## Round 24-30：legacy 隐含语义补强（已完成）
 
 ### Round 24：引用同步与回填语义收紧
 
@@ -277,9 +277,27 @@
 
 - completed on 2026-04-18
 
+### Round 30：relationship breadth deepening
+
+目标：
+
+- 把 `关联计划数` 从 dispatcher 提示推进成 durable relationship-breadth 对象页
+
+主入口页：
+
+- `concepts/related-plan-count.md`
+- `evidence/customer-master-signals-evidence.md`
+- `concepts/key-annuity-plan.md`
+- `domains/annuity_performance.md`
+- `domains/annuity_income.md`
+
+状态：
+
+- completed on 2026-04-18
+
 ## 当前位置
 
-`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次，以及 Round 24-29 的 legacy 隐含语义补强。
+`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次，以及 Round 24-30 的 legacy 隐含语义补强。
 
 当前应明确保持两条边界：
 
@@ -288,7 +306,7 @@
 
 ## 下阶段：回到 semantic map 驱动的 surface discovery
 
-Round 29 已经把当前最值得立即提升的 business semantics 补了一轮：`关键年金计划` 不再只是 dispatcher 提示，`is_churned_this_year` 也不再只剩一句“以后再拆”的说明，classification family 现在有了 cross-domain dispatcher。
+Round 29 和 Round 30 已经把当前最值得立即提升的一批 business semantics 补了一轮：`关键年金计划` 与 `关联计划数` 不再只是 dispatcher 提示，`is_churned_this_year` 也不再只剩一句“以后再拆”的说明，classification family 现在有了 cross-domain dispatcher。
 
 因此，下阶段不应继续围绕同一批 business-semantic 对象机械拆页，而应回到 semantic-map-first 的 runtime/operator discovery。
 
@@ -303,15 +321,15 @@ Round 29 已经把当前最值得立即提升的 business semantics 补了一轮
 
 双轨顺序：
 
-1. 先围绕 first-wave 未闭合的 cross-cutting surfaces 开 discovery wave，而不是重复已完成的 Round 24-29 business-semantics 补强
-2. 保持 Round 29 留下的 follow-on candidates 为“候选对象”，而不是立刻继续拆更多 concept pages
+1. 先围绕 first-wave 未闭合的 cross-cutting surfaces 开 discovery wave，而不是重复已完成的 Round 24-30 business-semantics 补强
+2. 保持 Round 30 留下的 follow-on candidates 为“候选对象”，而不是立刻继续拆更多 concept pages
 3. 每个 discovery wave 先补 semantic map，再把稳定结论吸收到 `evidence/`
 4. `evidence/` 稳定后，再回写 `concepts/`、`standards/`、`surfaces/`、`domains/`
 5. wiki 更新被接受后，关闭对应 semantic-map wave，并评估 claims / tooling 的归档
 
-Round 29 留下的 follow-on candidates：
+Round 30 留下的 follow-on candidates：
 
-- `关联计划数`、`其他年金计划`、`其他开拓机构`
+- `其他年金计划`、`其他开拓机构`
 - `管理资格`
 - `组合代码`
 
@@ -331,5 +349,5 @@ Round 29 留下的 follow-on candidates：
 
 如果马上继续推进，推荐按下面顺序开工：
 
-- `classification-family-evidence.md` 与 `customer-master-signals-evidence.md` 作为本轮 business-semantics 入口
+- `related-plan-count.md` 与 `customer-master-signals-evidence.md` 作为本轮 relationship-breadth 入口
 - `company_lookup_queue` + identity persistence discovery wave
