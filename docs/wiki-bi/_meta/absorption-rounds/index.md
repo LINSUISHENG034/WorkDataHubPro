@@ -61,4 +61,5 @@
 
 ## 计划轮次
 
-- 当前无其他 planned round；如需继续推进，应先按高价值对象页与证据缺口重新排序，而不是继续扩写执行流程材料。
+- [Round 29：legacy 业务语义扩展包](./round-29-legacy-business-semantics-expansion.md)
+  - planned 轮次，优先把 customer-master relationship breadth、`is_churned_this_year` 与 classification family 推进成新的 durable business-semantics 入口。

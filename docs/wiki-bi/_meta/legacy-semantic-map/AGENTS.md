@@ -90,6 +90,7 @@ This `AGENTS.md` governs the `docs/wiki-bi/_meta/legacy-semantic-map/` subtree.
 - Frequent runtime proxy usage is evidence, but not semantic authority by itself.
 - Projection-, status-, and output-adjacent evidence should generally outrank operator convenience or implementation-local shortcuts when the question is about business meaning.
 - Runtime/operator surface semantics by themselves should not be promoted into canonical `semantic/` nodes unless the node is explicitly expressing business meaning rather than engineering/runtime behavior.
+- Being registered in the ledger as an execution path, object, candidate, surface, or evidence topic does not by itself justify promotion into canonical `semantic/` output.
 - A stable canonical object should let a later maintainer explain both:
   - what the business semantic boundary is
   - why legacy runtime usage may have looked different without overturning that boundary

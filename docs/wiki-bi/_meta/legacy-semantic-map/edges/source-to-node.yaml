@@ -1001,34 +1001,6 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-rules
-- from_id: docs/wiki-bi/surfaces/company-lookup-queue.md
-  to_id: sem-rule-company-lookup-queue-dedup-gating
-  relationship: supports_claim_target
-  source_refs:
-  - docs/wiki-bi/surfaces/company-lookup-queue.md
-  source_type: current_wiki
-  claim_type: compiled_summary
-  evidence_strength: supporting
-  coverage_state: partial
-  confidence: high
-  last_verified: '2026-04-18'
-  open_questions: []
-  compiled_from_claims:
-  - claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup
-- from_id: docs/wiki-bi/surfaces/company-lookup-queue.md
-  to_id: sem-rule-company-lookup-queue-retry-graceful-degradation
-  relationship: supports_claim_target
-  source_refs:
-  - docs/wiki-bi/surfaces/company-lookup-queue.md
-  source_type: current_wiki
-  claim_type: compiled_summary
-  evidence_strength: supporting
-  coverage_state: partial
-  confidence: high
-  last_verified: '2026-04-18'
-  open_questions: []
-  compiled_from_claims:
-  - claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry
 - from_id: docs/wiki-bi/surfaces/reference-sync.md
   to_id: sem-fact-family-reference-sync-target-inventory
   relationship: supports_claim_target
@@ -1267,20 +1239,6 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
-- from_id: src/work_data_hub/cli/etl/executors.py
-  to_id: sem-rule-company-lookup-queue-retry-graceful-degradation
-  relationship: supports_claim_target
-  source_refs:
-  - src/work_data_hub/cli/etl/executors.py
-  source_type: legacy_code
-  claim_type: compiled_summary
-  evidence_strength: supporting
-  coverage_state: partial
-  confidence: high
-  last_verified: '2026-04-18'
-  open_questions: []
-  compiled_from_claims:
-  - claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry
 - from_id: src/work_data_hub/cli/etl/hooks.py
   to_id: sem-lifecycle-customer-status-yearly-cycle
   relationship: supports_claim_target
@@ -1393,34 +1351,6 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor
-- from_id: src/work_data_hub/domain/company_enrichment/lookup_queue.py
-  to_id: sem-rule-company-lookup-queue-dedup-gating
-  relationship: supports_claim_target
-  source_refs:
-  - src/work_data_hub/domain/company_enrichment/lookup_queue.py
-  source_type: legacy_code
-  claim_type: compiled_summary
-  evidence_strength: supporting
-  coverage_state: partial
-  confidence: high
-  last_verified: '2026-04-18'
-  open_questions: []
-  compiled_from_claims:
-  - claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup
-- from_id: src/work_data_hub/domain/company_enrichment/lookup_queue.py
-  to_id: sem-rule-company-lookup-queue-retry-graceful-degradation
-  relationship: supports_claim_target
-  source_refs:
-  - src/work_data_hub/domain/company_enrichment/lookup_queue.py
-  source_type: legacy_code
-  claim_type: compiled_summary
-  evidence_strength: supporting
-  coverage_state: partial
-  confidence: high
-  last_verified: '2026-04-18'
-  open_questions: []
-  compiled_from_claims:
-  - claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry
 - from_id: src/work_data_hub/domain/reference_backfill/sync_models.py
   to_id: sem-fact-family-reference-sync-target-inventory
   relationship: supports_claim_target
@@ -1519,20 +1449,6 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state
-- from_id: src/work_data_hub/orchestration/schedules.py
-  to_id: sem-rule-company-lookup-queue-retry-graceful-degradation
-  relationship: supports_claim_target
-  source_refs:
-  - src/work_data_hub/orchestration/schedules.py
-  source_type: legacy_code
-  claim_type: compiled_summary
-  evidence_strength: supporting
-  coverage_state: partial
-  confidence: high
-  last_verified: '2026-04-18'
-  open_questions: []
-  compiled_from_claims:
-  - claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry
 - from_id: src/work_data_hub/reference/reference_sync.py.txt
   to_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
   relationship: supports_claim_target

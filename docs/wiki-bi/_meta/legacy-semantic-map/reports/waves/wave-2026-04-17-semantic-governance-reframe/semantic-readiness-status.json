@@ -18,8 +18,9 @@
     "sem-rule-status-year-identity-anchor"
   ],
   "blocked_by_gate_reasons": {
+    "contradiction_unresolved": 1,
     "high_priority_governance_questions_open": 2
   },
-  "durable_target_page_count": 8,
+  "durable_target_page_count": 6,
   "generated_at": "2026-04-18T02:10:00Z"
 }

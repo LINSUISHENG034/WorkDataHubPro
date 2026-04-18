@@ -38,8 +38,6 @@
     "semantic/non-equivalences/sem-non-equivalence-customer-master-vs-status.yaml",
     "semantic/non-equivalences/sem-non-equivalence-customer-type-vs-is-new.yaml",
     "semantic/rules/sem-grain-split-is-churned-this-year.yaml",
-    "semantic/rules/sem-rule-company-lookup-queue-dedup-gating.yaml",
-    "semantic/rules/sem-rule-company-lookup-queue-retry-graceful-degradation.yaml",
     "semantic/rules/sem-rule-is-churned-this-year-definition.yaml",
     "semantic/rules/sem-rule-is-new-definition.yaml",
     "semantic/rules/sem-rule-reference-sync-incremental-state.yaml",

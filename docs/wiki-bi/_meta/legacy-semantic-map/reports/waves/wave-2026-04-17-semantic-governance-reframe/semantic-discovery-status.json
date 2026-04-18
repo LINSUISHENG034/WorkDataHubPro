@@ -3,17 +3,21 @@
   "discovery_view_status": "green",
   "semantic_maturity_counts": {
     "observed": 0,
-    "inferred": 4,
-    "contested": 0,
+    "inferred": 3,
+    "contested": 1,
     "consumption-candidate": 11
   },
-  "contested_semantic_ids": [],
+  "contested_semantic_ids": [
+    "sem-non-equivalence-customer-type-vs-is-new"
+  ],
   "recommendation_counts": {
     "recommended_stable_canonical": 11,
-    "recommended_contested": 0,
-    "claim_level_only": 4
+    "recommended_contested": 1,
+    "claim_level_only": 3
   },
-  "contested_proposal_ids": [],
+  "contested_proposal_ids": [
+    "sem-non-equivalence-customer-type-vs-is-new"
+  ],
   "governance_implication_summaries": {
     "slice_admission": {
       "count": 15,
@@ -80,6 +84,8 @@
   "carrier_scope_mismatch_ids": [
     "sem-decision-anchor-customer-status-rules"
   ],
-  "unresolved_proxy_conflict_ids": [],
+  "unresolved_proxy_conflict_ids": [
+    "sem-non-equivalence-customer-type-vs-is-new"
+  ],
   "generated_at": "2026-04-18T02:10:00Z"
 }

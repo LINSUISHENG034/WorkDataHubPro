@@ -267,9 +267,14 @@
 - durable wiki 只保留业务语义、标准、surface、evidence 与 round sediment
 - subagent / worktree / merge sequencing 这类执行层材料不再放在 `docs/wiki-bi/`，应留在 `docs/superpowers/`、`.planning/` 或 git history
 
-## 下阶段：semantic map 驱动的 wiki 吸收
+## 下阶段：先补 business semantics，再回到 surface discovery
 
-下阶段仍不应回到“先开 round 再找对象”的旧路径。Round 28 处理的是已明确暴露的 durable customer-master signal gap；剩余 runtime/operator 主题仍应先用 semantic map 建 discovery ledger，再由该 ledger 驱动 durable wiki 的吸收顺序。
+Round 28 收紧的是 customer-master signal family 的第一层对象。下一阶段不应简单回到“只做 surface discovery”，也不应重新把 semantic map 当作最终知识层。更合理的顺序是：
+
+1. 先执行 [Round 29：legacy 业务语义扩展包](./absorption-rounds/round-29-legacy-business-semantics-expansion.md)，把已经有稳定 raw sources 的 business-semantic 对象继续提升为 durable wiki
+2. Round 29 收口后，再回到 semantic-map-first 的 runtime/operator discovery wave
+
+也就是说，semantic map 仍是 discovery ledger，但它当前首先要服务 business-semantics promotion，而不是抢先扩写更多未沉淀的 runtime 账本。
 
 工作原则：
 
@@ -279,15 +284,21 @@
 - durable wiki 只吸收已经达到 `Stable Finding` 阈值的对象、标准、surface 与 domain 结论
 - 一旦目标吸收波次完成，semantic map 对应波次应进入归档评估，而不是继续并行维护
 
-推荐顺序：
+双轨顺序：
 
-1. 先完成 semantic map bootstrap，固定 vocabularies、seed catalogs、wave identity 与 boundary README
-2. 再围绕 first-wave 未闭合的 cross-cutting surfaces 开 discovery wave，而不是重复已完成的 Round 24-27 语义补强
+1. 先执行 Round 29，把 customer-master relationship breadth、`is_churned_this_year` 与 classification family 这些仍处于 dispatcher / aggregate narrative 的对象推进到 durable wiki
+2. 再围绕 first-wave 未闭合的 cross-cutting surfaces 开 semantic-map discovery wave，而不是重复已完成的 Round 24-28 业务语义补强
 3. 每个 discovery wave 先补 semantic map，再把稳定结论吸收到 `evidence/`
 4. `evidence/` 稳定后，再回写 `concepts/`、`standards/`、`surfaces/`、`domains/`
 5. wiki 更新被接受后，关闭对应 semantic-map wave，并评估 claims / tooling 的归档
 
-## 优先 discovery 主题簇
+## 优先业务语义对象簇
+
+- customer-master relationship breadth：`关键年金计划`、`关联计划数`、`其他年金计划`、`其他开拓机构`
+- `is_churned_this_year`：monthly churn judgement、grain split、与 `is_loss_reported` 的非等价边界
+- classification family：`计划类型`、`业务类型`、`管理资格`、`组合代码`、`年金计划类型`
+
+## 后续 discovery 主题簇
 
 建议优先围绕下列仍未闭合的语义带做 semantic-map-first discovery：
 
@@ -301,7 +312,7 @@
 
 如果马上继续推进，推荐按下面顺序开工：
 
-- semantic map bootstrap
+- [Round 29：legacy 业务语义扩展包](./absorption-rounds/round-29-legacy-business-semantics-expansion.md)
+- customer-master signals 证据
+- 状态与快照证据
 - `company_lookup_queue` + identity persistence discovery wave
-- `reference_sync` + backfill boundary deepening wave
-- `customer-mdm` manual commands + shared operator artifacts wave
