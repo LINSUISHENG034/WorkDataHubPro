@@ -4,8 +4,8 @@ This `AGENTS.md` governs the `docs/wiki-bi/_meta/legacy-semantic-map/` subtree.
 
 ## Purpose
 
-- Treat this subtree as a structured discovery ledger for legacy semantic mapping.
-- Do not treat it as durable wiki content.
+- Treat this subtree as a structured discovery ledger and proposal workspace for legacy semantic mapping.
+- Do not treat proposal artifacts or compiled outputs here as durable wiki content or final governance truth.
 - Do not add it to `docs/wiki-bi/index.md`.
 
 ## What the tooling is good at
@@ -94,7 +94,7 @@ This `AGENTS.md` governs the `docs/wiki-bi/_meta/legacy-semantic-map/` subtree.
 
 ## Agent decision authority
 
-- Agents may auto-adjudicate semantic proposals.
+- Agents may auto-adjudicate semantic proposals, but they must not treat proposal-grade outputs as final shared governance truth.
 - Agents must not finalize shared governance truth.
 - Proposal-making and final acceptance are different responsibilities.
 

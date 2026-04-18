@@ -17,14 +17,53 @@ non_equivalent_to: []
 open_questions: []
 durable_target_pages:
 - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+proposal_governance:
+  recommendation_status: claim_level_only
+  semantic_scope_type: witness_surface
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - customer_status_rules.yml is an important decision anchor and witness surface,
+    but it is not itself the final business semantic object.
+  proxy_usage_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Useful as supporting evidence for slice admission review, not as standalone
+        semantic truth.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Supports durable wiki review as a witness surface only.
+      target_pages:
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      blocked_by: []
 durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
 archive_after_absorption: true
-semantic_maturity_level: consumption-candidate
+semantic_maturity_level: inferred
 discovery_view_status: sufficient
-consumption_readiness_status: reviewable
-readiness_notes: []
+consumption_readiness_status: discovery-only
+readiness_notes:
+- customer_status_rules.yml is an important decision anchor and witness surface, but
+  it is not itself the final business semantic object.
 compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
 compiled_at: '2026-04-17T13:10:00Z'
 confidence: high

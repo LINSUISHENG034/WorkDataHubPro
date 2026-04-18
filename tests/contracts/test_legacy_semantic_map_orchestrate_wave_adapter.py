@@ -48,6 +48,23 @@ def test_orchestrate_wave_is_idempotent_by_trigger_id(tmp_path: Path) -> None:
     assert first["generated_canonical_files"] == second["generated_canonical_files"]
 
 
+def test_orchestrate_wave_persists_trigger_metadata_on_emitted_claims(tmp_path: Path) -> None:
+    registry_root = _copy_registry_tree(tmp_path)
+
+    result = orchestrate_wave(
+        registry_root,
+        SUCCESSOR_WAVE_ID,
+        trigger_id="trigger-key-semantics-001",
+        orchestration_iteration=2,
+    )
+
+    assert result["claim_paths"]
+    for relative_path in result["claim_paths"]:
+        claim_payload = yaml.safe_load((registry_root / relative_path).read_text(encoding="utf-8"))
+        assert claim_payload["trigger_id"] == "trigger-key-semantics-001"
+        assert claim_payload["orchestration_iteration"] == 2
+
+
 def test_orchestrate_wave_preserves_existing_witness_registry_files(tmp_path: Path) -> None:
     registry_root = tmp_path / "legacy-semantic-map"
     bootstrap_semantic_map(registry_root)

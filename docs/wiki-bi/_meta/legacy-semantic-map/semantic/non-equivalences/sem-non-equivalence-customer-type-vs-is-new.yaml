@@ -19,14 +19,74 @@ non_equivalent_to:
 open_questions: []
 durable_target_pages:
 - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+proposal_governance:
+  recommendation_status: recommended_contested
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: unresolved
+  contradiction_accounting_notes:
+  - Legacy customer-type labels are still used as an operational proxy for is_new
+    in adjacent flows.
+  - The business semantic boundary is evident, but the proxy conflict still needs
+    main-thread governance review.
+  proxy_usage_refs:
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions:
+  - Does the customer-type proxy require a defer or retire decision for legacy status
+    consumers?
+  gate_blockers:
+  - contradiction_unresolved
+  - high_priority_governance_questions_open
+  governance_implications:
+    slice_admission:
+      summary: Blocks automatic admission of customer-type proxy usage as customer-status
+        truth.
+      affected_surfaces:
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by:
+      - contradiction_unresolved
+    defer_candidates:
+      summary: Candidate for defer review until proxy usage is explicitly adjudicated.
+      affected_surfaces:
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by:
+      - contradiction_unresolved
+    retire_candidates:
+      summary: Candidate for retiring customer-type proxy usage if the main thread
+        confirms the semantic split.
+      affected_surfaces:
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by:
+      - high_priority_governance_questions_open
+    durable_wiki_absorption:
+      summary: Not ready for durable absorption while the proxy conflict remains unresolved.
+      target_pages:
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by:
+      - contradiction_unresolved
+      - high_priority_governance_questions_open
 durable_summary_ready: true
 requires_human_judgement: false
-blocked_by: []
+blocked_by:
+- contradiction_unresolved
+- high_priority_governance_questions_open
 archive_after_absorption: true
-semantic_maturity_level: consumption-candidate
-discovery_view_status: sufficient
-consumption_readiness_status: reviewable
-readiness_notes: []
+semantic_maturity_level: contested
+discovery_view_status: contested
+consumption_readiness_status: blocked
+readiness_notes:
+- Legacy customer-type labels are still used as an operational proxy for is_new in
+  adjacent flows.
+- The business semantic boundary is evident, but the proxy conflict still needs main-thread
+  governance review.
+- contradiction_unresolved
+- high_priority_governance_questions_open
 compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
 compiled_at: '2026-04-17T13:00:00Z'
 confidence: high

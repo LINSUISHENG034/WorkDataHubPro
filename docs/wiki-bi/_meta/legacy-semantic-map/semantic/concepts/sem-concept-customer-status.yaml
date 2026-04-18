@@ -20,6 +20,45 @@ non_equivalent_to:
 open_questions: []
 durable_target_pages:
 - docs/wiki-bi/concepts/customer-status.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Runtime pages sometimes flatten customer status into adjacent lifecycle labels,
+    but the business semantic boundary remains distinct.
+  proxy_usage_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports admission of customer-status semantics as a separate business
+        boundary.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/customer-status.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the main thread accepts the
+        proposal.
+      target_pages:
+      - docs/wiki-bi/concepts/customer-status.md
+      blocked_by: []
 durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
@@ -27,7 +66,9 @@ archive_after_absorption: true
 semantic_maturity_level: consumption-candidate
 discovery_view_status: sufficient
 consumption_readiness_status: reviewable
-readiness_notes: []
+readiness_notes:
+- Runtime pages sometimes flatten customer status into adjacent lifecycle labels,
+  but the business semantic boundary remains distinct.
 compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
 compiled_at: '2026-04-17T13:00:00Z'
 confidence: high

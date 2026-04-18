@@ -3,10 +3,72 @@
   "discovery_view_status": "green",
   "semantic_maturity_counts": {
     "observed": 0,
-    "inferred": 0,
-    "contested": 0,
-    "consumption-candidate": 9
+    "inferred": 1,
+    "contested": 1,
+    "consumption-candidate": 7
   },
-  "contested_semantic_ids": [],
+  "contested_semantic_ids": [
+    "sem-non-equivalence-customer-type-vs-is-new"
+  ],
+  "recommendation_counts": {
+    "recommended_stable_canonical": 7,
+    "recommended_contested": 1,
+    "claim_level_only": 1
+  },
+  "contested_proposal_ids": [
+    "sem-non-equivalence-customer-type-vs-is-new"
+  ],
+  "governance_implication_summaries": {
+    "slice_admission": {
+      "count": 9,
+      "ids": [
+        "sem-concept-customer-master-backfill",
+        "sem-concept-customer-status",
+        "sem-decision-anchor-customer-status-rules",
+        "sem-fact-family-customer-status-source-family",
+        "sem-lifecycle-customer-status-yearly-cycle",
+        "sem-non-equivalence-customer-master-vs-status",
+        "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-rule-is-new-definition",
+        "sem-rule-status-source-splitting"
+      ]
+    },
+    "defer_candidates": {
+      "count": 1,
+      "ids": [
+        "sem-non-equivalence-customer-type-vs-is-new"
+      ]
+    },
+    "retire_candidates": {
+      "count": 5,
+      "ids": [
+        "sem-fact-family-customer-status-source-family",
+        "sem-lifecycle-customer-status-yearly-cycle",
+        "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-rule-is-new-definition",
+        "sem-rule-status-source-splitting"
+      ]
+    },
+    "durable_wiki_absorption": {
+      "count": 9,
+      "ids": [
+        "sem-concept-customer-master-backfill",
+        "sem-concept-customer-status",
+        "sem-decision-anchor-customer-status-rules",
+        "sem-fact-family-customer-status-source-family",
+        "sem-lifecycle-customer-status-yearly-cycle",
+        "sem-non-equivalence-customer-master-vs-status",
+        "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-rule-is-new-definition",
+        "sem-rule-status-source-splitting"
+      ]
+    }
+  },
+  "carrier_scope_mismatch_ids": [
+    "sem-decision-anchor-customer-status-rules"
+  ],
+  "unresolved_proxy_conflict_ids": [
+    "sem-non-equivalence-customer-type-vs-is-new"
+  ],
   "generated_at": "2026-04-17T13:20:00Z"
 }

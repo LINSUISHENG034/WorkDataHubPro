@@ -43,6 +43,42 @@ semantic_findings:
   open_questions: []
   non_equivalent_to:
   - sem-concept-customer-master-backfill
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Runtime pages sometimes flatten customer status into adjacent lifecycle labels, but the business semantic boundary remains distinct.
+    proxy_usage_refs:
+    - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/customer-status.md
+    - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports admission of customer-status semantics as a separate business boundary.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/customer-status.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the main thread accepts the proposal.
+        target_pages:
+        - docs/wiki-bi/concepts/customer-status.md
+        blocked_by: []
 - semantic_id: sem-concept-customer-master-backfill
   semantic_node_type: semantic_concept
   title: Customer master backfill
@@ -60,6 +96,41 @@ semantic_findings:
   open_questions: []
   non_equivalent_to:
   - sem-concept-customer-status
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Runtime usage often pairs master backfill with status refresh work, but the evidence keeps the master-data boundary separate.
+    proxy_usage_refs:
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Confirms customer master backfill should not be admitted as the same slice boundary as customer status evaluation.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
 - semantic_id: sem-non-equivalence-customer-master-vs-status
   semantic_node_type: semantic_non_equivalence
   title: Customer master backfill vs customer status
@@ -78,6 +149,41 @@ semantic_findings:
   non_equivalent_to:
   - sem-concept-customer-status
   - sem-concept-customer-master-backfill
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Legacy runtime flows can touch master backfill and status evaluation together, but the semantic non-equivalence is explicitly evidenced.
+    proxy_usage_refs:
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports keeping customer master backfill and customer status as separate governance surfaces.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is main-thread accepted.
+        target_pages:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
 - semantic_id: sem-non-equivalence-customer-type-vs-is-new
   semantic_node_type: semantic_non_equivalence
   title: Customer type label vs is_new
@@ -95,6 +201,53 @@ semantic_findings:
   open_questions: []
   non_equivalent_to:
   - sem-rule-is-new-definition
+  proposal_governance:
+    recommendation_status: recommended_contested
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: unresolved
+    contradiction_accounting_notes:
+    - Legacy customer-type labels are still used as an operational proxy for is_new in adjacent flows.
+    - The business semantic boundary is evident, but the proxy conflict still needs main-thread governance review.
+    proxy_usage_refs:
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/customer-status.md
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions:
+    - Does the customer-type proxy require a defer or retire decision for legacy status consumers?
+    gate_blockers:
+    - contradiction_unresolved
+    - high_priority_governance_questions_open
+    governance_implications:
+      slice_admission:
+        summary: Blocks automatic admission of customer-type proxy usage as customer-status truth.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by:
+        - contradiction_unresolved
+      defer_candidates:
+        summary: Candidate for defer review until proxy usage is explicitly adjudicated.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by:
+        - contradiction_unresolved
+      retire_candidates:
+        summary: Candidate for retiring customer-type proxy usage if the main thread confirms the semantic split.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by:
+        - high_priority_governance_questions_open
+      durable_wiki_absorption:
+        summary: Not ready for durable absorption while the proxy conflict remains unresolved.
+        target_pages:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by:
+        - contradiction_unresolved
+        - high_priority_governance_questions_open
 open_questions: []
 compiled_into:
 - docs/wiki-bi/concepts/customer-status.md

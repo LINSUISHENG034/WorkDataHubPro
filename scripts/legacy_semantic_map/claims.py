@@ -15,6 +15,9 @@ from .models import (
     COVERAGE_STATES,
     EVIDENCE_STRENGTHS,
     PRIORITY_LEVELS,
+    PROPOSAL_CONTRADICTION_ACCOUNTING_STATUSES,
+    PROPOSAL_RECOMMENDATION_STATUSES,
+    PROPOSAL_SEMANTIC_SCOPE_TYPES,
     SEMANTIC_AUTHORITIES,
     SEMANTIC_NODE_TYPES,
     SOURCE_TYPES,
@@ -146,6 +149,88 @@ class ClaimCandidateRecord:
 
 
 @dataclass(frozen=True)
+class ClaimGovernanceImpactRecord:
+    summary: str
+    affected_surfaces: list[str]
+    blocked_by: list[str]
+
+
+@dataclass(frozen=True)
+class ClaimDurableWikiAbsorptionRecord:
+    summary: str
+    target_pages: list[str]
+    blocked_by: list[str]
+
+
+@dataclass(frozen=True)
+class ClaimGovernanceImplicationsRecord:
+    slice_admission: ClaimGovernanceImpactRecord
+    defer_candidates: ClaimGovernanceImpactRecord
+    retire_candidates: ClaimGovernanceImpactRecord
+    durable_wiki_absorption: ClaimDurableWikiAbsorptionRecord
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "slice_admission",
+            _coerce_record(ClaimGovernanceImpactRecord, self.slice_admission),
+        )
+        object.__setattr__(
+            self,
+            "defer_candidates",
+            _coerce_record(ClaimGovernanceImpactRecord, self.defer_candidates),
+        )
+        object.__setattr__(
+            self,
+            "retire_candidates",
+            _coerce_record(ClaimGovernanceImpactRecord, self.retire_candidates),
+        )
+        object.__setattr__(
+            self,
+            "durable_wiki_absorption",
+            _coerce_record(ClaimDurableWikiAbsorptionRecord, self.durable_wiki_absorption),
+        )
+
+
+@dataclass(frozen=True)
+class ClaimProposalGovernanceRecord:
+    recommendation_status: str
+    semantic_scope_type: str
+    authority_gate_passed: bool
+    downstream_consequence_gate_passed: bool
+    contradiction_accounting_status: str
+    contradiction_accounting_notes: list[str]
+    proxy_usage_refs: list[str]
+    downstream_consequence_refs: list[str]
+    related_runtime_carriers: list[str]
+    high_priority_governance_questions: list[str]
+    gate_blockers: list[str]
+    governance_implications: ClaimGovernanceImplicationsRecord
+
+    def __post_init__(self) -> None:
+        _validate_choice(
+            "recommendation_status",
+            self.recommendation_status,
+            PROPOSAL_RECOMMENDATION_STATUSES,
+        )
+        _validate_choice(
+            "semantic_scope_type",
+            self.semantic_scope_type,
+            PROPOSAL_SEMANTIC_SCOPE_TYPES,
+        )
+        _validate_choice(
+            "contradiction_accounting_status",
+            self.contradiction_accounting_status,
+            PROPOSAL_CONTRADICTION_ACCOUNTING_STATUSES,
+        )
+        object.__setattr__(
+            self,
+            "governance_implications",
+            _coerce_record(ClaimGovernanceImplicationsRecord, self.governance_implications),
+        )
+
+
+@dataclass(frozen=True)
 class ClaimSemanticFindingRecord:
     semantic_id: str
     semantic_node_type: str
@@ -160,11 +245,18 @@ class ClaimSemanticFindingRecord:
     last_verified: str
     open_questions: list[str]
     non_equivalent_to: list[str] = field(default_factory=list)
+    proposal_governance: ClaimProposalGovernanceRecord | None = None
 
     def __post_init__(self) -> None:
         _validate_choice("semantic_node_type", self.semantic_node_type, SEMANTIC_NODE_TYPES)
         _validate_choice("semantic_authority", self.semantic_authority, SEMANTIC_AUTHORITIES)
         _validate_choice("confidence", self.confidence, CONFIDENCE_LEVELS)
+        if self.proposal_governance is not None:
+            object.__setattr__(
+                self,
+                "proposal_governance",
+                _coerce_record(ClaimProposalGovernanceRecord, self.proposal_governance),
+            )
 
 
 @dataclass(frozen=True)

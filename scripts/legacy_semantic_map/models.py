@@ -40,6 +40,23 @@ SEMANTIC_AUTHORITIES = (
     "implementation_hint",
     "historical_context",
 )
+PROPOSAL_RECOMMENDATION_STATUSES = (
+    "recommended_stable_canonical",
+    "recommended_contested",
+    "claim_level_only",
+)
+PROPOSAL_SEMANTIC_SCOPE_TYPES = (
+    "semantic_object",
+    "runtime_carrier",
+    "witness_surface",
+)
+PROPOSAL_CONTRADICTION_ACCOUNTING_STATUSES = (
+    "explained_operational_shortcut",
+    "explained_historical_drift",
+    "explained_scope_limited_alias",
+    "real_contradiction",
+    "unresolved",
+)
 SEMANTIC_MATURITY_LEVELS = (
     "observed",
     "inferred",

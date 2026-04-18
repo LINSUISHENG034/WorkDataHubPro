@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
 import json
 from dataclasses import dataclass
 from pathlib import Path
@@ -116,6 +117,64 @@ def _semantic_maturity_level(finding: ClaimSemanticFindingRecord) -> str:
     if len(set(finding.primary_source_refs + finding.supporting_source_refs)) > 1:
         return "inferred"
     return "observed"
+
+
+def _derived_proposal_failures(finding: ClaimSemanticFindingRecord) -> list[str]:
+    if finding.proposal_governance is None:
+        return list(finding.open_questions)
+
+    governance = finding.proposal_governance
+    failures: list[str] = []
+    if not governance.authority_gate_passed:
+        failures.append("authority_gate_failed")
+    if not governance.downstream_consequence_gate_passed:
+        failures.append("downstream_consequence_gate_failed")
+    if governance.contradiction_accounting_status in {"real_contradiction", "unresolved"}:
+        failures.append(f"contradiction_{governance.contradiction_accounting_status}")
+    if governance.high_priority_governance_questions:
+        failures.append("high_priority_governance_questions_open")
+    return _sorted_unique(failures)
+
+
+def _proposal_governance_blockers(finding: ClaimSemanticFindingRecord) -> list[str]:
+    if finding.proposal_governance is None:
+        return list(finding.open_questions)
+    return _sorted_unique(list(finding.proposal_governance.gate_blockers))
+
+
+def _proposal_recommendation_status(finding: ClaimSemanticFindingRecord) -> str | None:
+    if finding.proposal_governance is None:
+        return None
+
+    governance = finding.proposal_governance
+    derived_failures = _derived_proposal_failures(finding)
+    if governance.semantic_scope_type != "semantic_object":
+        return "claim_level_only"
+    if governance.recommendation_status == "recommended_stable_canonical" and derived_failures:
+        return "recommended_contested"
+    return governance.recommendation_status
+
+
+def _compatibility_projection(finding: ClaimSemanticFindingRecord) -> tuple[str, str, list[str]]:
+    recommendation_status = _proposal_recommendation_status(finding)
+    if recommendation_status is None:
+        maturity_level = _semantic_maturity_level(finding)
+        readiness_status = "reviewable" if finding.durable_target_pages else "discovery-only"
+        return maturity_level, readiness_status, []
+
+    blockers = _proposal_governance_blockers(finding)
+    distinct_source_ref_count = len(
+        set(finding.primary_source_refs).union(finding.supporting_source_refs)
+    )
+    if recommendation_status == "recommended_stable_canonical":
+        if finding.durable_target_pages:
+            return "consumption-candidate", "reviewable", []
+        return "inferred", "discovery-only", []
+    if recommendation_status == "recommended_contested":
+        return "contested", "blocked", blockers
+    if distinct_source_ref_count > 1:
+        return "inferred", "discovery-only", blockers
+    return "observed", "discovery-only", blockers
 
 
 def _source_edge(source: ClaimSourceRecord, claim: ClaimArtifact) -> dict[str, object]:
@@ -398,7 +457,7 @@ def compile_claim_artifacts(
         if claim.claim_scope == "semantic":
             for finding in claim.semantic_findings:
                 directory_name = _semantic_directory_name(finding.semantic_node_type)
-                maturity_level = _semantic_maturity_level(finding)
+                maturity_level, readiness_status, blocked_by = _compatibility_projection(finding)
                 relative_path = f"semantic/{directory_name}/{finding.semantic_id}.yaml"
                 output_path = registry_root / relative_path
                 existing_payload = _load_yaml_if_exists(output_path)
@@ -417,20 +476,30 @@ def compile_claim_artifacts(
                     "non_equivalent_to": finding.non_equivalent_to,
                     "open_questions": finding.open_questions,
                     "durable_target_pages": finding.durable_target_pages,
+                    "proposal_governance": (
+                        asdict(finding.proposal_governance)
+                        | {"recommendation_status": _proposal_recommendation_status(finding)}
+                        if finding.proposal_governance is not None
+                        else None
+                    ),
                     "durable_summary_ready": bool(finding.durable_target_pages),
                     "requires_human_judgement": False,
-                    "blocked_by": [],
+                    "blocked_by": blocked_by,
                     "archive_after_absorption": True,
                     "semantic_maturity_level": maturity_level,
                     "discovery_view_status": (
                         "contested" if maturity_level == "contested" else "sufficient"
                     ),
-                    "consumption_readiness_status": (
-                        "reviewable"
-                        if finding.durable_target_pages
-                        else "discovery-only"
+                    "consumption_readiness_status": readiness_status,
+                    "readiness_notes": _sorted_unique(
+                        list(finding.open_questions)
+                        + (
+                            list(finding.proposal_governance.contradiction_accounting_notes)
+                            if finding.proposal_governance is not None
+                            else []
+                        )
+                        + blocked_by
                     ),
-                    "readiness_notes": list(finding.open_questions),
                     "compiled_from_wave_id": claim.wave_id,
                     "compiled_at": claim.submitted_at,
                     "confidence": finding.confidence,

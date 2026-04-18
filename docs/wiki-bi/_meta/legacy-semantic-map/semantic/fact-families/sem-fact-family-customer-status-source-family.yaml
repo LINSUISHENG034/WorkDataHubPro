@@ -20,6 +20,46 @@ non_equivalent_to: []
 open_questions: []
 durable_target_pages:
 - docs/wiki-bi/concepts/customer-status.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - Runtime operators may speak about one customer-status source, but the accepted
+    evidence shows a fact family with multiple members.
+  proxy_usage_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports governance decisions that preserve the multi-family source
+        model.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/customer-status.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring single-source explanations that hide the fact-family
+        split.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/customer-status.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/concepts/customer-status.md
+      blocked_by: []
 durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
@@ -27,7 +67,9 @@ archive_after_absorption: true
 semantic_maturity_level: consumption-candidate
 discovery_view_status: sufficient
 consumption_readiness_status: reviewable
-readiness_notes: []
+readiness_notes:
+- Runtime operators may speak about one customer-status source, but the accepted evidence
+  shows a fact family with multiple members.
 compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
 compiled_at: '2026-04-17T13:10:00Z'
 confidence: high

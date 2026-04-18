@@ -21,9 +21,9 @@
     "findings_disposition_incomplete"
   ],
   "accepted_claim_digests": {
-    "claim-wave-2026-04-17-semantic-governance-reframe-core": "73988572e0e66dae356a8909ddfd2385254c907ba2f278be60bf81c67a2b5747",
-    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle": "cd99c96fc9b64ff393d8b97dcb5b23a43eadb44ee320f44b9bf54e216bea82f0",
-    "claim-wave-2026-04-17-semantic-governance-reframe-rules": "0b14e64e0475b60d9258f979df36d19272b29ea7581883bda69994ef2adbe46a"
+    "claim-wave-2026-04-17-semantic-governance-reframe-core": "98f55cf0e2a3486ec157180b13822addf8b51a606d1a8dde24caa1e087ee5a0c",
+    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle": "0d265414f90af178b408cda08ba9b6b6a98dae9e55046744af008be417b2fe54",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules": "f6a2bdd5730368083a7418a440b738d410edb10e8ae85cd712432870117fd689"
   },
   "generated_at": "2026-04-17T13:20:00Z"
 }

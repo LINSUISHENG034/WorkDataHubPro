@@ -20,6 +20,49 @@ open_questions: []
 durable_target_pages:
 - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
 - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - Hook wiring and sync steps are runtime witnesses, but the lifecycle boundary is
+    grounded in the evidence page and accepted action split.
+  proxy_usage_refs:
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  - src/work_data_hub/customer_mdm/snapshot_refresh.py
+  - src/work_data_hub/cli/etl/hooks.py
+  downstream_consequence_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports treating yearly-init, sync, and snapshot as separate lifecycle
+        actions in the admitted slice.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring collapsed one-step lifecycle descriptions.
+      affected_surfaces:
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by: []
 durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
@@ -27,7 +70,9 @@ archive_after_absorption: true
 semantic_maturity_level: consumption-candidate
 discovery_view_status: sufficient
 consumption_readiness_status: reviewable
-readiness_notes: []
+readiness_notes:
+- Hook wiring and sync steps are runtime witnesses, but the lifecycle boundary is
+  grounded in the evidence page and accepted action split.
 compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
 compiled_at: '2026-04-17T13:20:00Z'
 confidence: high

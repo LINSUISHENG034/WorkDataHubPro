@@ -51,6 +51,48 @@ semantic_findings:
   open_questions: []
   non_equivalent_to:
   - sem-non-equivalence-customer-type-vs-is-new
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Legacy runtime surfaces sometimes reuse customer-type labels as shorthand, but
+      the rule definition for is_new remains authoritative.
+    proxy_usage_refs:
+    - docs/wiki-bi/concepts/customer-status.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/customer-status.md
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports admitting the is_new rule as a business-semantic definition
+          rather than a proxy label.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/customer-status.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring proxy-heavy status interpretations that ignore
+          the rule boundary.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted
+          on the main thread.
+        target_pages:
+        - docs/wiki-bi/concepts/customer-status.md
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
 - semantic_id: sem-rule-status-source-splitting
   semantic_node_type: semantic_rule
   title: Status source splitting
@@ -69,6 +111,47 @@ semantic_findings:
   last_verified: '2026-04-17'
   open_questions: []
   non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Some runtime flows compress multiple status families into one operator view,
+      but the underlying source split is authoritative.
+    proxy_usage_refs:
+    - "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+      \u6001\u6765\u6E90\u5206\u6790.md"
+    downstream_consequence_refs:
+    - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports slice admission decisions that depend on keeping status
+          source families separate.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring one-table status narratives that erase source-family
+          splits.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted
+          on the main thread.
+        target_pages:
+        - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+        blocked_by: []
 - semantic_id: sem-fact-family-customer-status-source-family
   semantic_node_type: semantic_fact_family
   title: Customer-status source family
@@ -90,6 +173,46 @@ semantic_findings:
   last_verified: '2026-04-17'
   open_questions: []
   non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Runtime operators may speak about one customer-status source, but the accepted
+      evidence shows a fact family with multiple members.
+    proxy_usage_refs:
+    - docs/wiki-bi/concepts/customer-status.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/customer-status.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports governance decisions that preserve the multi-family source
+          model.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/customer-status.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring single-source explanations that hide the fact-family
+          split.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/customer-status.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted
+          on the main thread.
+        target_pages:
+        - docs/wiki-bi/concepts/customer-status.md
+        blocked_by: []
 - semantic_id: sem-decision-anchor-customer-status-rules
   semantic_node_type: semantic_decision_anchor
   title: Customer-status rules decision anchor
@@ -108,5 +231,42 @@ semantic_findings:
   last_verified: '2026-04-17'
   open_questions: []
   non_equivalent_to: []
-trigger_id: trigger-semantic-governance-reframe
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: witness_surface
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - customer_status_rules.yml is an important decision anchor and witness surface,
+      but it is not itself the final business semantic object.
+    proxy_usage_refs:
+    - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Useful as supporting evidence for slice admission review, not as
+          standalone semantic truth.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Supports durable wiki review as a witness surface only.
+        target_pages:
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        blocked_by: []
+trigger_id: trigger-key-semantics-001
 orchestration_iteration: 1

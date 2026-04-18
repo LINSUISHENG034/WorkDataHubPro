@@ -17,6 +17,48 @@ open_questions: []
 durable_target_pages:
 - docs/wiki-bi/concepts/customer-status.md
 - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Legacy runtime surfaces sometimes reuse customer-type labels as shorthand, but
+    the rule definition for is_new remains authoritative.
+  proxy_usage_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/customer-status.md
+  - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports admitting the is_new rule as a business-semantic definition
+        rather than a proxy label.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/customer-status.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring proxy-heavy status interpretations that ignore
+        the rule boundary.
+      affected_surfaces:
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/concepts/customer-status.md
+      - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
+      blocked_by: []
 durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
@@ -24,7 +66,9 @@ archive_after_absorption: true
 semantic_maturity_level: consumption-candidate
 discovery_view_status: sufficient
 consumption_readiness_status: reviewable
-readiness_notes: []
+readiness_notes:
+- Legacy runtime surfaces sometimes reuse customer-type labels as shorthand, but the
+  rule definition for is_new remains authoritative.
 compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
 compiled_at: '2026-04-17T13:10:00Z'
 confidence: high

@@ -521,6 +521,62 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
         for node in semantic_nodes
         if node.get("semantic_maturity_level") == "contested"
     )
+    recommendation_counts = {
+        status: sum(
+            1
+            for node in semantic_nodes
+            if isinstance(node.get("proposal_governance"), dict)
+            and node["proposal_governance"].get("recommendation_status") == status
+        )
+        for status in (
+            "recommended_stable_canonical",
+            "recommended_contested",
+            "claim_level_only",
+        )
+    }
+    contested_proposal_ids = sorted(
+        str(node["semantic_id"])
+        for node in semantic_nodes
+        if isinstance(node.get("proposal_governance"), dict)
+        and node["proposal_governance"].get("recommendation_status")
+        == "recommended_contested"
+    )
+    governance_implication_ids: dict[str, list[str]] = {
+        "slice_admission": [],
+        "defer_candidates": [],
+        "retire_candidates": [],
+        "durable_wiki_absorption": [],
+    }
+    carrier_scope_mismatch_ids: list[str] = []
+    unresolved_proxy_conflict_ids: list[str] = []
+    for node in semantic_nodes:
+        proposal_governance = node.get("proposal_governance")
+        if not isinstance(proposal_governance, dict):
+            continue
+        semantic_id = str(node["semantic_id"])
+        semantic_scope_type = proposal_governance.get("semantic_scope_type")
+        if semantic_scope_type in {"runtime_carrier", "witness_surface"}:
+            carrier_scope_mismatch_ids.append(semantic_id)
+        contradiction_status = proposal_governance.get("contradiction_accounting_status")
+        gate_blockers = proposal_governance.get("gate_blockers", [])
+        if contradiction_status in {"real_contradiction", "unresolved"} or any(
+            blocker in {"contradiction_real_contradiction", "contradiction_unresolved"}
+            for blocker in gate_blockers
+        ):
+            unresolved_proxy_conflict_ids.append(semantic_id)
+        governance_implications = proposal_governance.get("governance_implications")
+        if not isinstance(governance_implications, dict):
+            continue
+        for key in governance_implication_ids:
+            implication = governance_implications.get(key)
+            if not isinstance(implication, dict):
+                continue
+            summary = implication.get("summary")
+            affected = implication.get("affected_surfaces", [])
+            targets = implication.get("target_pages", [])
+            blocked = implication.get("blocked_by", [])
+            if summary or affected or targets or blocked:
+                governance_implication_ids[key].append(semantic_id)
     handoff_ready_ids = sorted(
         str(node["semantic_id"])
         for node in semantic_nodes
@@ -532,6 +588,11 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
         if node.get("consumption_readiness_status") == "blocked"
         or node.get("blocked_by")
     )
+    blocked_by_gate_reasons: dict[str, int] = {}
+    for node in semantic_nodes:
+        for reason in node.get("blocked_by", []):
+            if isinstance(reason, str) and reason:
+                blocked_by_gate_reasons[reason] = blocked_by_gate_reasons.get(reason, 0) + 1
     durable_target_page_count = len(
         {
             str(page)
@@ -545,12 +606,24 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
         "discovery_view_status": coverage_payload["wave_status"],
         "semantic_maturity_counts": maturity_counts,
         "contested_semantic_ids": contested_semantic_ids,
+        "recommendation_counts": recommendation_counts,
+        "contested_proposal_ids": contested_proposal_ids,
+        "governance_implication_summaries": {
+            key: {
+                "count": len(sorted(set(ids))),
+                "ids": sorted(set(ids)),
+            }
+            for key, ids in governance_implication_ids.items()
+        },
+        "carrier_scope_mismatch_ids": sorted(set(carrier_scope_mismatch_ids)),
+        "unresolved_proxy_conflict_ids": sorted(set(unresolved_proxy_conflict_ids)),
         "generated_at": generated_at,
     }
     semantic_readiness_payload = {
         "wave_id": target_wave_id,
         "handoff_ready_semantic_ids": handoff_ready_ids,
         "blocked_semantic_ids": blocked_semantic_ids,
+        "blocked_by_gate_reasons": dict(sorted(blocked_by_gate_reasons.items())),
         "durable_target_page_count": durable_target_page_count,
         "generated_at": generated_at,
     }
@@ -583,8 +656,8 @@ def generate_reports(registry_root: Path, wave_id: str | None = None) -> ReportG
             [
                 f"# Semantic readiness summary: {target_wave_id}",
                 "",
-                f"- handoff ready semantic ids: {', '.join(handoff_ready_ids) if handoff_ready_ids else 'none'}",
-                f"- blocked semantic ids: {', '.join(blocked_semantic_ids) if blocked_semantic_ids else 'none'}",
+                f"- reviewable proposal ids: {', '.join(handoff_ready_ids) if handoff_ready_ids else 'none'}",
+                f"- blocked proposal ids: {', '.join(blocked_semantic_ids) if blocked_semantic_ids else 'none'}",
                 f"- durable target page count: {durable_target_page_count}",
             ]
         ),

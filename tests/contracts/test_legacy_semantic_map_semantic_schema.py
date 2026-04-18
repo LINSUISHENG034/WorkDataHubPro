@@ -11,7 +11,13 @@ from scripts.legacy_semantic_map.claims import (
     ClaimSourceRecord,
     claim_relative_path,
 )
-from scripts.legacy_semantic_map.models import SEMANTIC_AUTHORITIES, SEMANTIC_NODE_TYPES
+from scripts.legacy_semantic_map.models import (
+    PROPOSAL_RECOMMENDATION_STATUSES,
+    PROPOSAL_SEMANTIC_SCOPE_TYPES,
+    PROPOSAL_CONTRADICTION_ACCOUNTING_STATUSES,
+    SEMANTIC_AUTHORITIES,
+    SEMANTIC_NODE_TYPES,
+)
 
 
 def _build_semantic_claim() -> ClaimArtifact:
@@ -54,6 +60,49 @@ def _build_semantic_claim() -> ClaimArtifact:
                 last_verified="2026-04-17",
                 open_questions=[],
                 non_equivalent_to=["sem-concept-customer-master-backfill"],
+                proposal_governance={
+                    "recommendation_status": "recommended_stable_canonical",
+                    "semantic_scope_type": "semantic_object",
+                    "authority_gate_passed": True,
+                    "downstream_consequence_gate_passed": True,
+                    "contradiction_accounting_status": "explained_scope_limited_alias",
+                    "contradiction_accounting_notes": [
+                        "Legacy operator usage mixes status and backfill labels.",
+                    ],
+                    "proxy_usage_refs": [
+                        "docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md",
+                    ],
+                    "downstream_consequence_refs": [
+                        "docs/wiki-bi/concepts/customer-status.md",
+                    ],
+                    "related_runtime_carriers": [
+                        "obj-customer-mdm-lifecycle",
+                    ],
+                    "high_priority_governance_questions": [],
+                    "gate_blockers": [],
+                    "governance_implications": {
+                        "slice_admission": {
+                            "summary": "Supports current customer-status slice admission.",
+                            "affected_surfaces": ["docs/wiki-bi/concepts/customer-status.md"],
+                            "blocked_by": [],
+                        },
+                        "defer_candidates": {
+                            "summary": "",
+                            "affected_surfaces": [],
+                            "blocked_by": [],
+                        },
+                        "retire_candidates": {
+                            "summary": "",
+                            "affected_surfaces": [],
+                            "blocked_by": [],
+                        },
+                        "durable_wiki_absorption": {
+                            "summary": "Ready for durable wiki proposal review.",
+                            "target_pages": ["docs/wiki-bi/concepts/customer-status.md"],
+                            "blocked_by": [],
+                        },
+                    },
+                },
             )
         ],
         open_questions=[],
@@ -79,6 +128,23 @@ def test_semantic_claim_contract_and_relative_path_shape() -> None:
         "implementation_hint",
         "historical_context",
     )
+    assert PROPOSAL_RECOMMENDATION_STATUSES == (
+        "recommended_stable_canonical",
+        "recommended_contested",
+        "claim_level_only",
+    )
+    assert PROPOSAL_SEMANTIC_SCOPE_TYPES == (
+        "semantic_object",
+        "runtime_carrier",
+        "witness_surface",
+    )
+    assert PROPOSAL_CONTRADICTION_ACCOUNTING_STATUSES == (
+        "explained_operational_shortcut",
+        "explained_historical_drift",
+        "explained_scope_limited_alias",
+        "real_contradiction",
+        "unresolved",
+    )
     assert CLAIM_SCOPE_DIRECTORIES == {
         "execution": "execution",
         "subsystems": "subsystems",
@@ -102,6 +168,47 @@ def test_semantic_claim_contract_and_relative_path_shape() -> None:
     assert payload["semantic_findings"][0]["durable_target_pages"] == [
         "docs/wiki-bi/concepts/customer-status.md",
     ]
+    assert payload["semantic_findings"][0]["proposal_governance"] == {
+        "recommendation_status": "recommended_stable_canonical",
+        "semantic_scope_type": "semantic_object",
+        "authority_gate_passed": True,
+        "downstream_consequence_gate_passed": True,
+        "contradiction_accounting_status": "explained_scope_limited_alias",
+        "contradiction_accounting_notes": [
+            "Legacy operator usage mixes status and backfill labels.",
+        ],
+        "proxy_usage_refs": [
+            "docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md",
+        ],
+        "downstream_consequence_refs": [
+            "docs/wiki-bi/concepts/customer-status.md",
+        ],
+        "related_runtime_carriers": ["obj-customer-mdm-lifecycle"],
+        "high_priority_governance_questions": [],
+        "gate_blockers": [],
+        "governance_implications": {
+            "slice_admission": {
+                "summary": "Supports current customer-status slice admission.",
+                "affected_surfaces": ["docs/wiki-bi/concepts/customer-status.md"],
+                "blocked_by": [],
+            },
+            "defer_candidates": {
+                "summary": "",
+                "affected_surfaces": [],
+                "blocked_by": [],
+            },
+            "retire_candidates": {
+                "summary": "",
+                "affected_surfaces": [],
+                "blocked_by": [],
+            },
+            "durable_wiki_absorption": {
+                "summary": "Ready for durable wiki proposal review.",
+                "target_pages": ["docs/wiki-bi/concepts/customer-status.md"],
+                "blocked_by": [],
+            },
+        },
+    }
 
 
 def test_semantic_schema_rejects_invalid_constrained_vocabularies() -> None:
@@ -132,4 +239,58 @@ def test_semantic_schema_rejects_invalid_constrained_vocabularies() -> None:
             last_verified="2026-04-17",
             open_questions=[],
             non_equivalent_to=[],
+        )
+
+    with pytest.raises(ValueError, match="Unsupported recommendation_status"):
+        ClaimSemanticFindingRecord(
+            semantic_id="sem-concept-customer-status",
+            semantic_node_type="semantic_concept",
+            title="Customer status",
+            summary="Bad proposal status.",
+            business_conclusion="Bad proposal status should fail validation.",
+            primary_source_refs=[
+                "docs/business-background/客户主数据回填与状态来源分析.md",
+            ],
+            supporting_source_refs=[],
+            semantic_authority="authoritative_semantic_source",
+            durable_target_pages=[],
+            confidence="high",
+            last_verified="2026-04-17",
+            open_questions=[],
+            non_equivalent_to=[],
+            proposal_governance={
+                "recommendation_status": "finalized_truth",
+                "semantic_scope_type": "semantic_object",
+                "authority_gate_passed": False,
+                "downstream_consequence_gate_passed": False,
+                "contradiction_accounting_status": "unresolved",
+                "contradiction_accounting_notes": [],
+                "proxy_usage_refs": [],
+                "downstream_consequence_refs": [],
+                "related_runtime_carriers": [],
+                "high_priority_governance_questions": [],
+                "gate_blockers": [],
+                "governance_implications": {
+                    "slice_admission": {
+                        "summary": "",
+                        "affected_surfaces": [],
+                        "blocked_by": [],
+                    },
+                    "defer_candidates": {
+                        "summary": "",
+                        "affected_surfaces": [],
+                        "blocked_by": [],
+                    },
+                    "retire_candidates": {
+                        "summary": "",
+                        "affected_surfaces": [],
+                        "blocked_by": [],
+                    },
+                    "durable_wiki_absorption": {
+                        "summary": "",
+                        "target_pages": [],
+                        "blocked_by": [],
+                    },
+                },
+            },
         )
