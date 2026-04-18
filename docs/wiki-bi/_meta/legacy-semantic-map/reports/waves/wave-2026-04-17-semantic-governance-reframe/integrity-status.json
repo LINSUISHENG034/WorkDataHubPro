@@ -3,27 +3,72 @@
   "wave_status": "green",
   "closeout_ready": false,
   "archive_ready": false,
-  "immutability_check_passed": false,
+  "immutability_check_passed": true,
   "required_claim_ids": [
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle"
+    "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
+    "claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain",
+    "claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering",
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-id-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle",
+    "claim-wave-2026-04-17-semantic-governance-reframe-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering",
+    "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
+    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
+    "claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-layering",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules",
+    "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
+    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet",
+    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence"
   ],
   "compiled_claim_ids": [
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle"
+    "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
+    "claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain",
+    "claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering",
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-id-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle",
+    "claim-wave-2026-04-17-semantic-governance-reframe-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering",
+    "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
+    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
+    "claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-layering",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules",
+    "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
+    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet",
+    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence"
   ],
   "missing_claim_ids": [],
-  "mutable_claim_ids_detected": [
-    "claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain",
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle",
-    "claim-wave-2026-04-17-semantic-governance-reframe-reference-layering",
-    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle"
-  ],
+  "mutable_claim_ids_detected": [],
   "blocking_reasons": [
-    "mutable_accepted_claims_detected",
     "durable_wiki_targets_not_accepted",
     "findings_disposition_incomplete"
   ],
   "accepted_claim_digests": {
-    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle": "260abb4bc30dbaf192ea0cb2f3233d48b8e5403814c6cc7e4d5df4857cc9dfec"
+    "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family": "0f93f0aa467dc9fd1dd4306fc15f237c56be09ef5e7bd2f53adfbebae4759a10",
+    "claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain": "0bbcb1476d64c08958254e2295e5670543e4a58d83a440ba9e24a93913b9f5bc",
+    "claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering": "d34fafb769f7e91ac3919bdae456cd33124b9b8260e5a4dff0c5b58b23543930",
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-id-core": "843de74f02f68a6caa144bf0475a3e15de4446abe48ee47f37008dd3ac150e27",
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle": "260abb4bc30dbaf192ea0cb2f3233d48b8e5403814c6cc7e4d5df4857cc9dfec",
+    "claim-wave-2026-04-17-semantic-governance-reframe-core": "f0571729e279bc5f36dbf3fd91c9c6b6dc56dbc6c4112f5a664b3430cbe513fe",
+    "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering": "7c6a1516070c8c77efb5a56f2176702a80f97af9e02598b16be42b4ec15b93be",
+    "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year": "87fc30e6cbb4a01ed7e9eb4a8eedc99d0e08c671cc13e344c8a5d2bddbbef7d9",
+    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle": "3337169bf6d3e05df9284fa069cab7aef4fa4017523f940dbb51c3f5946e6b7e",
+    "claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence": "9052aac9ccac442c0a5c76e9c662f5148b944d3cbc4592a6be5db0c034c3e0c6",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-layering": "377086b1e640c00c9ee5187e63920f53168057a87b365479a82dfce7329fed5e",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory": "b931b3ca303485dd188667e2bdd4282c39563bcc3f55060329a47260edaa75e0",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle": "275c9ba2bdf9edbf1827f416f92ff69d58ca277114af4565d51bfb3031da2310",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state": "45b513ddd29f4bf6c6c0dc79bdc4cd7617400e16576dff9d7c05712f43a62da5",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules": "a240077b3d16ff9f3a127f4dc2723b4435b5dd991806cbea030265a3aa14b2c8",
+    "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor": "13cd4fa53871832b0ce406cfd080f15bc5e14a93de20d6621f3a0eb283921236",
+    "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet": "a670ec64b55be4d0138ae911955015efa005bd01537da4fd1eb7becd6fdf13bc",
+    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence": "2866b502dfb558430098c343b4dba8426475a5642708b89b8d5b2593a764af4b"
   },
-  "generated_at": "2026-04-18T08:45:00Z"
+  "generated_at": "2026-04-18T09:30:00Z"
 }

@@ -1,0 +1,282 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-concept-company-id-anchor
+sources_read:
+- source_ref: docs/business-background/年金计划类型与客户名称业务背景.md
+  source_type: legacy_doc
+  note: Business background explicitly states that customer_name emptiness does not equal identity failure and that plan code, customer name, plan-name clues, account fields, and enrichment/cache all participate in company_id resolution.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/年金计划类型与客户名称业务背景.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  note: Infrastructure guide explicitly defines company_id as the canonical enterprise ID produced by a governed layered resolution chain and linked to temp-id fallback plus queue visibility.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/company-enrichment-service.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/mappings/company_id/company_id_overrides_plan.yml
+  source_type: legacy_config
+  note: Plan-code override config witnesses that identity governance includes explicit curated override layers rather than only dynamic lookup behavior.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/mappings/company_id/company_id_overrides_plan.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/mappings/company_id/company_id_overrides_name.yml
+  source_type: legacy_config
+  note: Customer-name override config witnesses that customer_name is only one governed input layer and may even resolve to explicit exclusion rather than enterprise identity truth.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/mappings/company_id/company_id_overrides_name.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: legacy/annuity_hub/data_handler/mappings.py
+  source_type: legacy_code
+  note: Legacy mapping code preserves the multi-source company_id family including plan code, account number, cleaned customer name, and account-name fallback.
+  workspace_id: legacy_work_data_hub
+  relative_path: legacy/annuity_hub/data_handler/mappings.py
+  semantic_authority: runtime_witness
+- source_ref: legacy/annuity_hub/data_handler/data_cleaner.py
+  source_type: legacy_code
+  note: Legacy cleaner shows the ordered resolution chain and proves that customer_name is normalized as an input witness rather than treated as the identity object itself.
+  workspace_id: legacy_work_data_hub
+  relative_path: legacy/annuity_hub/data_handler/data_cleaner.py
+  semantic_authority: runtime_witness
+- source_ref: io/schema/migrations/versions/007_create_customer_plan_contract.py
+  source_type: legacy_code
+  note: Customer-plan contract persistence treats company_id as the business key that anchors contract history and downstream status state.
+  workspace_id: legacy_work_data_hub
+  relative_path: io/schema/migrations/versions/007_create_customer_plan_contract.py
+  semantic_authority: runtime_witness
+- source_ref: io/schema/migrations/versions/008_create_fct_customer_monthly_status.py
+  source_type: legacy_code
+  note: Customer monthly snapshot persistence treats company_id as the stable customer/product-line identity anchor for monthly status outputs.
+  workspace_id: legacy_work_data_hub
+  relative_path: io/schema/migrations/versions/008_create_fct_customer_monthly_status.py
+  semantic_authority: runtime_witness
+- source_ref: io/schema/migrations/versions/011_create_fct_customer_plan_monthly.py
+  source_type: legacy_code
+  note: Plan-level monthly snapshot persistence keeps company_id as part of the primary grain for downstream plan status and measure outputs.
+  workspace_id: legacy_work_data_hub
+  relative_path: io/schema/migrations/versions/011_create_fct_customer_plan_monthly.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/concepts/company-id.md
+  source_type: current_wiki
+  note: Current durable concept page already preserves company_id as a cross-domain enterprise identity anchor rather than a local lookup byproduct.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/concepts/company-id.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: current_wiki
+  note: Current durable evidence page already records the layered identity-governance chain, operator-visible unresolved consequences, and downstream identity impact.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/concepts/company-id.md
+- docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+submitted_at: '2026-04-18T09:30:00Z'
+semantic_findings:
+- semantic_id: sem-concept-company-id-anchor
+  semantic_node_type: semantic_concept
+  title: Company ID
+  summary: company_id is the cross-domain enterprise identity anchor that stabilizes joins, backfill, customer master, contract history, and snapshot outputs.
+  business_conclusion: company_id should be interpreted as the stable enterprise identity anchor across domains and downstream projections, not as a local lookup byproduct or a thin alias of any one upstream field.
+  primary_source_refs:
+  - docs/business-background/年金计划类型与客户名称业务背景.md
+  - docs/guides/infrastructure/company-enrichment-service.md
+  - config/mappings/company_id/company_id_overrides_plan.yml
+  - config/mappings/company_id/company_id_overrides_name.yml
+  supporting_source_refs:
+  - legacy/annuity_hub/data_handler/mappings.py
+  - legacy/annuity_hub/data_handler/data_cleaner.py
+  - io/schema/migrations/versions/007_create_customer_plan_contract.py
+  - io/schema/migrations/versions/008_create_fct_customer_monthly_status.py
+  - io/schema/migrations/versions/011_create_fct_customer_plan_monthly.py
+  - docs/wiki-bi/concepts/company-id.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/company-id.md
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to:
+  - sem-non-equivalence-company-id-vs-customer-name
+  - sem-non-equivalence-temp-id-vs-company-id
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Runtime discussions often foreground resolver steps, cache hits, or queue behavior, but downstream contract and snapshot persistence show that company_id carries business identity consequences beyond the lookup step.
+    - Historical implementations reorder or simplify lookup tactics, yet the stable semantic boundary remains the same cross-domain enterprise identity anchor.
+    proxy_usage_refs:
+    - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+    downstream_consequence_refs:
+    - io/schema/migrations/versions/007_create_customer_plan_contract.py
+    - io/schema/migrations/versions/008_create_fct_customer_monthly_status.py
+    - io/schema/migrations/versions/011_create_fct_customer_plan_monthly.py
+    - docs/wiki-bi/concepts/company-id.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports treating company_id as a business-semantic identity boundary that spans event domains, customer master, and monthly snapshots.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/company-id.md
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that reduce company_id to a single local resolver implementation detail.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/concepts/company-id.md
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+- semantic_id: sem-rule-company-id-multi-signal-resolution
+  semantic_node_type: semantic_rule
+  title: Company ID multi-signal resolution
+  summary: company_id resolution is a layered multi-signal process; missing customer_name does not imply unresolved enterprise identity.
+  business_conclusion: company_id resolution must remain a governed multi-signal chain across overrides, plan clues, customer-name clues, account cues, cache, provider lookup, and fallback handling; customer_name emptiness alone must not be treated as identity failure.
+  primary_source_refs:
+  - docs/business-background/年金计划类型与客户名称业务背景.md
+  - docs/guides/infrastructure/company-enrichment-service.md
+  supporting_source_refs:
+  - legacy/annuity_hub/data_handler/mappings.py
+  - legacy/annuity_hub/data_handler/data_cleaner.py
+  - docs/wiki-bi/concepts/company-id.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/company-id.md
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Different historical layers preserve different priority orders or narrower active paths, but they all witness that company_id is not semantically reducible to one field or one step.
+    - Customer-name normalization, cache lookups, and fallback outputs are execution witnesses of the rule, not replacements for the rule itself.
+    proxy_usage_refs:
+    - legacy/annuity_hub/data_handler/data_cleaner.py
+    - docs/wiki-bi/concepts/company-id.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/company-id.md
+    - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports admitting identity work only when multiple business signals and governed fallback consequences remain visible.
+        affected_surfaces:
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring exact runtime breadth debates without collapsing the underlying multi-signal identity rule.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that equate empty customer_name with automatic identity failure.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/company-id.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/concepts/company-id.md
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+- semantic_id: sem-non-equivalence-company-id-vs-customer-name
+  semantic_node_type: semantic_non_equivalence
+  title: Company ID vs customer_name
+  summary: customer_name is one identity cue or proxy surface, not the stable enterprise identity anchor itself.
+  business_conclusion: customer_name and company_id are not equivalent; customer_name may be empty, normalized, excluded, or one of several clues, while company_id remains the stable cross-domain enterprise identity anchor.
+  primary_source_refs:
+  - docs/business-background/年金计划类型与客户名称业务背景.md
+  - legacy/annuity_hub/data_handler/data_cleaner.py
+  supporting_source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  - config/mappings/company_id/company_id_overrides_name.yml
+  - docs/wiki-bi/concepts/company-id.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/concepts/company-id.md
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to:
+  - sem-concept-company-id-anchor
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Legacy runtime sometimes uses cleaned customer_name values as a lookup carrier or queue key, but that operational carrier role does not make customer_name the enterprise identity object.
+    - Explicit name exclusions in override config further prove that customer_name can participate in identity governance without itself being the semantic truth object.
+    proxy_usage_refs:
+    - legacy/annuity_hub/data_handler/data_cleaner.py
+    - config/mappings/company_id/company_id_overrides_name.yml
+    downstream_consequence_refs:
+    - docs/wiki-bi/concepts/company-id.md
+    - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports keeping identity-governance pages from collapsing customer_name proxies into company_id truth.
+        affected_surfaces:
+        - docs/wiki-bi/concepts/company-id.md
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that describe customer_name as if it were the same object as company_id.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review once the proposal is accepted on the main thread.
+        target_pages:
+        - docs/wiki-bi/concepts/company-id.md
+        - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+        blocked_by: []
+trigger_id: trigger-company-id-001
+orchestration_iteration: 1

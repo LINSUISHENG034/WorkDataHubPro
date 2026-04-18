@@ -1,5 +1,5 @@
 # Semantic readiness summary: wave-2026-04-17-semantic-governance-reframe
 
-- reviewable proposal ids: sem-lifecycle-company-lookup-queue-recovery-cycle, sem-rule-company-lookup-queue-single-domain-boundary
-- blocked proposal ids: none
-- durable target page count: 2
+- reviewable proposal ids: sem-concept-classification-family-layering, sem-concept-company-id-anchor, sem-concept-customer-annual-identity-family, sem-concept-customer-master-backfill, sem-concept-customer-status, sem-concept-identity-governance-layering, sem-concept-reference-strategy-layering, sem-fact-family-customer-status-source-family, sem-fact-family-plan-classification-stack, sem-fact-family-reference-sync-target-inventory, sem-lifecycle-company-lookup-queue-recovery-cycle, sem-lifecycle-customer-status-yearly-cycle, sem-lifecycle-reference-sync-preload-cycle, sem-non-equivalence-company-id-vs-customer-name, sem-non-equivalence-customer-master-vs-status, sem-non-equivalence-input-plan-type-vs-customer-master-plan-type, sem-non-equivalence-reference-sync-vs-backfill, sem-non-equivalence-temp-id-vs-company-id, sem-rule-annuity-performance-post-hook-chain, sem-rule-company-id-multi-signal-resolution, sem-rule-company-lookup-queue-single-domain-boundary, sem-rule-is-churned-this-year-definition, sem-rule-is-new-definition, sem-rule-reference-sync-incremental-state, sem-rule-status-source-splitting, sem-rule-strategic-ratchet, sem-rule-unresolved-identity-operator-visibility
+- blocked proposal ids: sem-non-equivalence-customer-type-vs-is-new, sem-rule-status-year-identity-anchor
+- durable target page count: 18

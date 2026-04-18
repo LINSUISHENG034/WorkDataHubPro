@@ -56,6 +56,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-plan-type-non-equivalence
 - from_id: config/mappings/company_id/company_id_overrides_name.yml
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - config/mappings/company_id/company_id_overrides_name.yml
+  source_type: legacy_config
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
+- from_id: config/mappings/company_id/company_id_overrides_name.yml
   to_id: sem-concept-identity-governance-layering
   relationship: supports_claim_target
   source_refs:
@@ -69,6 +83,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
+- from_id: config/mappings/company_id/company_id_overrides_plan.yml
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - config/mappings/company_id/company_id_overrides_plan.yml
+  source_type: legacy_config
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
 - from_id: config/mappings/company_id/company_id_overrides_plan.yml
   to_id: sem-concept-identity-governance-layering
   relationship: supports_claim_target
@@ -217,6 +245,22 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering
+- from_id: "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\u5BA2\
+    \u6237\u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\u5BA2\u6237\
+    \u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
 - from_id: "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\u5BA2\
     \u6237\u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
   to_id: sem-non-equivalence-input-plan-type-vs-customer-master-plan-type
@@ -592,6 +636,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
 - from_id: docs/guides/infrastructure/company-enrichment-service.md
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
+- from_id: docs/guides/infrastructure/company-enrichment-service.md
   to_id: sem-concept-identity-governance-layering
   relationship: supports_claim_target
   source_refs:
@@ -871,6 +929,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year
+- from_id: docs/wiki-bi/concepts/company-id.md
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/concepts/company-id.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
 - from_id: docs/wiki-bi/concepts/company-id.md
   to_id: sem-non-equivalence-temp-id-vs-company-id
   relationship: supports_claim_target
@@ -1292,6 +1364,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
 - from_id: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
+- from_id: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
   to_id: sem-concept-identity-governance-layering
   relationship: supports_claim_target
   source_refs:
@@ -1529,6 +1615,76 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state
+- from_id: io/schema/migrations/versions/007_create_customer_plan_contract.py
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - io/schema/migrations/versions/007_create_customer_plan_contract.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
+- from_id: io/schema/migrations/versions/008_create_fct_customer_monthly_status.py
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - io/schema/migrations/versions/008_create_fct_customer_monthly_status.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
+- from_id: io/schema/migrations/versions/011_create_fct_customer_plan_monthly.py
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - io/schema/migrations/versions/011_create_fct_customer_plan_monthly.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
+- from_id: legacy/annuity_hub/data_handler/data_cleaner.py
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - legacy/annuity_hub/data_handler/data_cleaner.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
+- from_id: legacy/annuity_hub/data_handler/mappings.py
+  to_id: sem-concept-company-id-anchor
+  relationship: supports_claim_target
+  source_refs:
+  - legacy/annuity_hub/data_handler/mappings.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
 - from_id: reference/historical_replays/annual_award/legacy_fact_processing_2026_03.json
   to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
   relationship: supports_claim_target

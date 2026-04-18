@@ -1,0 +1,92 @@
+semantic_id: sem-non-equivalence-company-id-vs-customer-name
+semantic_node_type: semantic_non_equivalence
+title: Company ID vs customer_name
+summary: customer_name is one identity cue or proxy surface, not the stable enterprise
+  identity anchor itself.
+business_conclusion: customer_name and company_id are not equivalent; customer_name
+  may be empty, normalized, excluded, or one of several clues, while company_id remains
+  the stable cross-domain enterprise identity anchor.
+primary_semantic_sources:
+- "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\u5BA2\u6237\
+  \u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+- legacy/annuity_hub/data_handler/data_cleaner.py
+supporting_witness_sources:
+- docs/guides/infrastructure/company-enrichment-service.md
+- config/mappings/company_id/company_id_overrides_name.yml
+- docs/wiki-bi/concepts/company-id.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to:
+- sem-concept-company-id-anchor
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/company-id.md
+- docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - Legacy runtime sometimes uses cleaned customer_name values as a lookup carrier
+    or queue key, but that operational carrier role does not make customer_name the
+    enterprise identity object.
+  - Explicit name exclusions in override config further prove that customer_name can
+    participate in identity governance without itself being the semantic truth object.
+  proxy_usage_refs:
+  - legacy/annuity_hub/data_handler/data_cleaner.py
+  - config/mappings/company_id/company_id_overrides_name.yml
+  downstream_consequence_refs:
+  - docs/wiki-bi/concepts/company-id.md
+  - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+  related_runtime_carriers:
+  - obj-company-lookup-queue-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports keeping identity-governance pages from collapsing customer_name
+        proxies into company_id truth.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/company-id.md
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that describe customer_name as if
+        it were the same object as company_id.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/concepts/company-id.md
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Explicit name exclusions in override config further prove that customer_name can
+  participate in identity governance without itself being the semantic truth object.
+- Legacy runtime sometimes uses cleaned customer_name values as a lookup carrier or
+  queue key, but that operational carrier role does not make customer_name the enterprise
+  identity object.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T09:30:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-company-id-core

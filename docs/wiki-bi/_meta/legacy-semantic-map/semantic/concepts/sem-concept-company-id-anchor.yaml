@@ -1,0 +1,103 @@
+semantic_id: sem-concept-company-id-anchor
+semantic_node_type: semantic_concept
+title: Company ID
+summary: company_id is the cross-domain enterprise identity anchor that stabilizes
+  joins, backfill, customer master, contract history, and snapshot outputs.
+business_conclusion: company_id should be interpreted as the stable enterprise identity
+  anchor across domains and downstream projections, not as a local lookup byproduct
+  or a thin alias of any one upstream field.
+primary_semantic_sources:
+- "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\u5BA2\u6237\
+  \u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+- docs/guides/infrastructure/company-enrichment-service.md
+- config/mappings/company_id/company_id_overrides_plan.yml
+- config/mappings/company_id/company_id_overrides_name.yml
+supporting_witness_sources:
+- legacy/annuity_hub/data_handler/mappings.py
+- legacy/annuity_hub/data_handler/data_cleaner.py
+- io/schema/migrations/versions/007_create_customer_plan_contract.py
+- io/schema/migrations/versions/008_create_fct_customer_monthly_status.py
+- io/schema/migrations/versions/011_create_fct_customer_plan_monthly.py
+- docs/wiki-bi/concepts/company-id.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to:
+- sem-non-equivalence-company-id-vs-customer-name
+- sem-non-equivalence-temp-id-vs-company-id
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/concepts/company-id.md
+- docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Runtime discussions often foreground resolver steps, cache hits, or queue behavior,
+    but downstream contract and snapshot persistence show that company_id carries
+    business identity consequences beyond the lookup step.
+  - Historical implementations reorder or simplify lookup tactics, yet the stable
+    semantic boundary remains the same cross-domain enterprise identity anchor.
+  proxy_usage_refs:
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  downstream_consequence_refs:
+  - io/schema/migrations/versions/007_create_customer_plan_contract.py
+  - io/schema/migrations/versions/008_create_fct_customer_monthly_status.py
+  - io/schema/migrations/versions/011_create_fct_customer_plan_monthly.py
+  - docs/wiki-bi/concepts/company-id.md
+  related_runtime_carriers:
+  - obj-company-lookup-queue-runtime
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports treating company_id as a business-semantic identity boundary
+        that spans event domains, customer master, and monthly snapshots.
+      affected_surfaces:
+      - docs/wiki-bi/concepts/company-id.md
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that reduce company_id to a single
+        local resolver implementation detail.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review once the proposal is accepted on
+        the main thread.
+      target_pages:
+      - docs/wiki-bi/concepts/company-id.md
+      - docs/wiki-bi/standards/semantic-correctness/identity-governance.md
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Historical implementations reorder or simplify lookup tactics, yet the stable semantic
+  boundary remains the same cross-domain enterprise identity anchor.
+- Runtime discussions often foreground resolver steps, cache hits, or queue behavior,
+  but downstream contract and snapshot persistence show that company_id carries business
+  identity consequences beyond the lookup step.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T09:30:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-company-id-core
