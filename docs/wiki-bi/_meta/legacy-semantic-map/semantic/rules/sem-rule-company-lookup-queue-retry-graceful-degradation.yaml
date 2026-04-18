@@ -1,0 +1,91 @@
+semantic_id: sem-rule-company-lookup-queue-retry-graceful-degradation
+semantic_node_type: semantic_rule
+title: Company lookup queue retry and graceful degradation
+summary: company_lookup_queue uses bounded retry/backoff semantics and treats enqueue
+  failure as non-blocking degradation rather than a hard stop for the main identity
+  chain.
+business_conclusion: company_lookup_queue applies bounded retry/backoff via next_retry_at
+  and maximum-attempt semantics, while enqueue failure degrades gracefully instead
+  of blocking the main processing chain.
+primary_semantic_sources:
+- src/work_data_hub/domain/company_enrichment/lookup_queue.py
+supporting_witness_sources:
+- src/work_data_hub/cli/etl/executors.py
+- src/work_data_hub/orchestration/schedules.py
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Current accepted runtime replaces the legacy queue path with synchronous identity
+    handling and operator-visible unresolved artifacts, but the retry/graceful-degradation
+    semantics remain stable legacy governance truth.
+  proxy_usage_refs:
+  - src/work_data_hub/cli/etl/executors.py
+  - src/work_data_hub/orchestration/schedules.py
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  related_runtime_carriers:
+  - obj-company-lookup-queue-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports preserving retry/backoff and graceful-degradation semantics
+        as part of the deferred company_lookup_queue governance surface.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports keeping queue orchestration and persistence deferred while
+        preserving operator-facing retry semantics in durable governance memory.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that treat enqueue failure as a hard
+        prerequisite for current identity-chain success.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review as a stable queue retry/degradation
+        contract with deferred runtime disposition.
+      target_pages:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Current accepted runtime replaces the legacy queue path with synchronous identity
+  handling and operator-visible unresolved artifacts, but the retry/graceful-degradation
+  semantics remain stable legacy governance truth.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-18T03:05:00Z'
+confidence: high
+last_verified: '2026-04-18'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry

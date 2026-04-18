@@ -7,6 +7,8 @@
     "sem-fact-family-reference-sync-target-inventory",
     "sem-lifecycle-customer-status-yearly-cycle",
     "sem-non-equivalence-customer-master-vs-status",
+    "sem-rule-company-lookup-queue-dedup-gating",
+    "sem-rule-company-lookup-queue-retry-graceful-degradation",
     "sem-rule-is-new-definition",
     "sem-rule-reference-sync-incremental-state",
     "sem-rule-status-source-splitting",
@@ -20,6 +22,6 @@
     "contradiction_unresolved": 1,
     "high_priority_governance_questions_open": 2
   },
-  "durable_target_page_count": 5,
-  "generated_at": "2026-04-18T02:05:00Z"
+  "durable_target_page_count": 8,
+  "generated_at": "2026-04-18T03:05:00Z"
 }

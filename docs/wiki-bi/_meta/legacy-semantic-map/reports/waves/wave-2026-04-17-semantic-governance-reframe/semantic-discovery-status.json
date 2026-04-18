@@ -5,13 +5,13 @@
     "observed": 0,
     "inferred": 2,
     "contested": 1,
-    "consumption-candidate": 10
+    "consumption-candidate": 12
   },
   "contested_semantic_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
   "recommendation_counts": {
-    "recommended_stable_canonical": 10,
+    "recommended_stable_canonical": 12,
     "recommended_contested": 1,
     "claim_level_only": 2
   },
@@ -20,7 +20,7 @@
   ],
   "governance_implication_summaries": {
     "slice_admission": {
-      "count": 13,
+      "count": 15,
       "ids": [
         "sem-concept-customer-master-backfill",
         "sem-concept-customer-status",
@@ -30,6 +30,8 @@
         "sem-lifecycle-customer-status-yearly-cycle",
         "sem-non-equivalence-customer-master-vs-status",
         "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-rule-company-lookup-queue-dedup-gating",
+        "sem-rule-company-lookup-queue-retry-graceful-degradation",
         "sem-rule-is-new-definition",
         "sem-rule-reference-sync-incremental-state",
         "sem-rule-status-source-splitting",
@@ -38,27 +40,30 @@
       ]
     },
     "defer_candidates": {
-      "count": 3,
+      "count": 5,
       "ids": [
         "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-rule-company-lookup-queue-dedup-gating",
+        "sem-rule-company-lookup-queue-retry-graceful-degradation",
         "sem-rule-reference-sync-incremental-state",
         "sem-rule-status-year-identity-anchor"
       ]
     },
     "retire_candidates": {
-      "count": 7,
+      "count": 8,
       "ids": [
         "sem-fact-family-customer-status-source-family",
         "sem-fact-family-reference-sync-target-inventory",
         "sem-lifecycle-customer-status-yearly-cycle",
         "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-rule-company-lookup-queue-retry-graceful-degradation",
         "sem-rule-is-new-definition",
         "sem-rule-status-source-splitting",
         "sem-rule-strategic-ratchet"
       ]
     },
     "durable_wiki_absorption": {
-      "count": 13,
+      "count": 15,
       "ids": [
         "sem-concept-customer-master-backfill",
         "sem-concept-customer-status",
@@ -68,6 +73,8 @@
         "sem-lifecycle-customer-status-yearly-cycle",
         "sem-non-equivalence-customer-master-vs-status",
         "sem-non-equivalence-customer-type-vs-is-new",
+        "sem-rule-company-lookup-queue-dedup-gating",
+        "sem-rule-company-lookup-queue-retry-graceful-degradation",
         "sem-rule-is-new-definition",
         "sem-rule-reference-sync-incremental-state",
         "sem-rule-status-source-splitting",
@@ -82,5 +89,5 @@
   "unresolved_proxy_conflict_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
-  "generated_at": "2026-04-18T02:05:00Z"
+  "generated_at": "2026-04-18T03:05:00Z"
 }

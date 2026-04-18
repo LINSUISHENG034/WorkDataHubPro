@@ -1,0 +1,83 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-company-lookup-queue-dedup-gating
+sources_read:
+- source_ref: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  source_type: legacy_code
+  note: Lookup queue normalizes company names and gates duplicate queueing through normalized_name plus pending/processing state semantics.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/wiki-bi/surfaces/company-lookup-queue.md
+  source_type: current_wiki
+  note: Current queue surface already preserves dedup and pending/processing semantics as durable governance truth.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/surfaces/company-lookup-queue.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+submitted_at: '2026-04-18T03:00:00Z'
+semantic_findings:
+- semantic_id: sem-rule-company-lookup-queue-dedup-gating
+  semantic_node_type: semantic_rule
+  title: Company lookup queue dedup gating
+  summary: company_lookup_queue deduplicates and gates work by normalized_name and active queue states rather than enqueuing every unresolved identity blindly.
+  business_conclusion: company_lookup_queue uses normalized_name together with pending and processing state semantics as a queue-gating contract, so duplicate unresolved names are not treated as independent work items by default.
+  primary_source_refs:
+  - src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  supporting_source_refs:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  confidence: high
+  last_verified: '2026-04-18'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Current accepted runtime no longer depends on repo-native queue processing, but the dedup/gating contract remains a stable deferred governance truth.
+    proxy_usage_refs:
+    - docs/wiki-bi/surfaces/company-lookup-queue.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/company-lookup-queue.md
+    - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports preserving queue dedup semantics as part of the deferred company_lookup_queue governance surface.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports keeping queue runtime deferred while preserving dedup/gating semantics in durable governance memory.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        blocked_by: []
+      retire_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a stable queue-state contract with deferred runtime disposition.
+        target_pages:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+trigger_id: trigger-company-queue-probe
+orchestration_iteration: 1

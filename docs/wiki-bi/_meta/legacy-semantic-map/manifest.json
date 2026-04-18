@@ -37,6 +37,8 @@
     "semantic/lifecycles/sem-lifecycle-customer-status-yearly-cycle.yaml",
     "semantic/non-equivalences/sem-non-equivalence-customer-master-vs-status.yaml",
     "semantic/non-equivalences/sem-non-equivalence-customer-type-vs-is-new.yaml",
+    "semantic/rules/sem-rule-company-lookup-queue-dedup-gating.yaml",
+    "semantic/rules/sem-rule-company-lookup-queue-retry-graceful-degradation.yaml",
     "semantic/rules/sem-rule-is-new-definition.yaml",
     "semantic/rules/sem-rule-reference-sync-incremental-state.yaml",
     "semantic/rules/sem-rule-status-source-splitting.yaml",
@@ -49,6 +51,8 @@
     "subsystems/ss-annuity-performance.yaml"
   ],
   "compiled_claim_ids": [
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup",
+    "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
     "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
     "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
@@ -79,6 +83,8 @@
       "claim-wave-2026-04-17-first-wave-pilot-reference-sync-object"
     ],
     "wave-2026-04-17-semantic-governance-reframe": [
+      "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-dedup",
+      "claim-wave-2026-04-17-semantic-governance-reframe-company-queue-retry",
       "claim-wave-2026-04-17-semantic-governance-reframe-core",
       "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
       "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",

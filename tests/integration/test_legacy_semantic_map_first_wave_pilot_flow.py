@@ -27,7 +27,7 @@ def test_run_first_wave_pilot_rebuilds_active_successor_wave_deterministically(
     registry_root = _copy_dependency_tree(tmp_repo_root)
     orchestrate_wave(registry_root, SUCCESSOR_WAVE_ID)
     initial_claim_paths = pilot_claim_paths(registry_root, SUCCESSOR_WAVE_ID)
-    assert len(initial_claim_paths) == 5
+    assert len(initial_claim_paths) == 9
 
     first_result = run_first_wave_pilot(
         registry_root,
