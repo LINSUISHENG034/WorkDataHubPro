@@ -14,6 +14,9 @@ semantic_nodes:
 - semantic_id: sem-concept-customer-status
   semantic_node_type: semantic_concept
   path: semantic/concepts/sem-concept-customer-status.yaml
+- semantic_id: sem-concept-eqc-persistence-layering
+  semantic_node_type: semantic_concept
+  path: semantic/concepts/sem-concept-eqc-persistence-layering.yaml
 - semantic_id: sem-concept-identity-governance-layering
   semantic_node_type: semantic_concept
   path: semantic/concepts/sem-concept-identity-governance-layering.yaml
@@ -71,6 +74,12 @@ semantic_nodes:
 - semantic_id: sem-rule-company-lookup-queue-single-domain-boundary
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-company-lookup-queue-single-domain-boundary.yaml
+- semantic_id: sem-rule-enrichment-index-cache-boundary
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-enrichment-index-cache-boundary.yaml
+- semantic_id: sem-rule-first-wave-artifact-operator-evidence
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-first-wave-artifact-operator-evidence.yaml
 - semantic_id: sem-rule-is-churned-this-year-definition
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-is-churned-this-year-definition.yaml

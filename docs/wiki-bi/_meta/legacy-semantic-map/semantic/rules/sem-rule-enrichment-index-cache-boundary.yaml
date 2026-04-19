@@ -1,0 +1,97 @@
+semantic_id: sem-rule-enrichment-index-cache-boundary
+semantic_node_type: semantic_rule
+title: Enrichment index cache boundary
+summary: enrichment_index is a governed runtime cache with confidence and provenance
+  arbitration, not the durable enterprise identity truth object itself.
+business_conclusion: enrichment_index should be interpreted as a reusable runtime
+  cache layer that accelerates and records company_id resolution evidence, while durable
+  business identity semantics remain anchored in company_id and downstream business
+  projections rather than in cache rows themselves.
+primary_semantic_sources:
+- docs/guides/infrastructure/enrichment-index-update-mechanism.md
+- docs/guides/infrastructure/company-enrichment-service.md
+supporting_witness_sources:
+- io/schema/migrations/versions/001_initial_infrastructure.py
+- src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+- src/work_data_hub/infrastructure/enrichment/resolver/core.py
+- tests/unit/infrastructure/enrichment/test_mapping_repository_enrichment_index.py
+- tests/unit/infrastructure/enrichment/test_company_id_resolver.py
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to:
+- sem-concept-company-id-anchor
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - enrichment_index rows carry durable-looking metadata such as confidence, provenance,
+    and hit counts, but the legacy docs and resolver ordering still classify the table
+    as a cache layer inside the identity pipeline rather than as the enterprise identity
+    object.
+  - Runtime reuse and append-only behavior make the cache operationally important,
+    yet lower layers such as queueing, EQC lookup, and temp-id fallback remain able
+    to supersede cache misses or populate new cache evidence.
+  proxy_usage_refs:
+  - src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  - tests/unit/infrastructure/enrichment/test_company_id_resolver.py
+  downstream_consequence_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  related_runtime_carriers:
+  - obj-company-lookup-queue-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports preserving enrichment_index as a governed runtime-memory surface
+        without collapsing cache entries into canonical enterprise identity truth.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports deferring exact cache-retention mechanics while preserving
+        the stable semantic boundary that cache evidence is subordinate to company_id
+        governance.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that treat enrichment_index rows
+        as if they were the canonical identity object instead of an arbitration cache.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review as a stable cache-boundary rule
+        inside legacy identity resolution governance.
+      target_pages:
+      - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Runtime reuse and append-only behavior make the cache operationally important, yet
+  lower layers such as queueing, EQC lookup, and temp-id fallback remain able to supersede
+  cache misses or populate new cache evidence.
+- enrichment_index rows carry durable-looking metadata such as confidence, provenance,
+  and hit counts, but the legacy docs and resolver ordering still classify the table
+  as a cache layer inside the identity pipeline rather than as the enterprise identity
+  object.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-19T00:00:00Z'
+confidence: high
+last_verified: '2026-04-19'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary

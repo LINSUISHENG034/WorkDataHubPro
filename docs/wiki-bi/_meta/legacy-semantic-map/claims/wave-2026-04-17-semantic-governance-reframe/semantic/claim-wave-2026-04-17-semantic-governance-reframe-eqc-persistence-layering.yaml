@@ -61,7 +61,9 @@ objects_discovered: []
 edges_added: []
 candidates_raised: []
 open_questions: []
-compiled_into: []
+compiled_into:
+- docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
 submitted_at: '2026-04-19T00:00:00Z'
 semantic_findings:
 - semantic_id: sem-concept-eqc-persistence-layering
@@ -81,7 +83,9 @@ semantic_findings:
   - tests/unit/test_business_info_cleanser.py
   - tests/unit/test_biz_label_parser.py
   semantic_authority: authoritative_semantic_source
-  durable_target_pages: []
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
   confidence: high
   last_verified: '2026-04-19'
   open_questions: []
@@ -99,27 +103,33 @@ semantic_findings:
     - scripts/validation/EQC/eqc_iter_acquire.py
     - tests/integration/infrastructure/enrichment/test_eqc_data_persistence_integration.py
     downstream_consequence_refs:
-    - io/schema/migrations/versions/001_initial_infrastructure.py
-    - tests/integration/migrations/test_enterprise_schema_migration.py
+    - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+    - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
     related_runtime_carriers: []
     high_priority_governance_questions: []
     gate_blockers: []
     governance_implications:
       slice_admission:
         summary: Supports admitting a semantic boundary where EQC raw retention stays anchored in base_info and downstream cleansing or parsing work is evaluated separately for business_info and biz_label.
-        affected_surfaces: []
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
         blocked_by: []
       defer_candidates:
         summary: Supports deferring finer current-side adoption decisions without collapsing raw-retention and normalized-parsing semantics into one undifferentiated persistence claim.
-        affected_surfaces: []
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
         blocked_by: []
       retire_candidates:
         summary: Candidate for retiring narratives that treat business_info or biz_label as raw provider stores or that treat the full EQC persistence family as runtime-only scratch storage.
-        affected_surfaces: []
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
         blocked_by: []
       durable_wiki_absorption:
-        summary: Not yet targeted for durable wiki absorption in this claim; proposed here only as a wave-level semantic boundary.
-        target_pages: []
+        summary: Not yet targeted for stable canonical absorption; retain as a wave-level semantic boundary until stronger current-side adoption evidence exists.
+        target_pages:
+        - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
         blocked_by: []
 trigger_id: trigger-eqc-persistence-layering-001
 orchestration_iteration: 1

@@ -49,7 +49,8 @@ objects_discovered: []
 edges_added: []
 candidates_raised: []
 open_questions: []
-compiled_into: []
+compiled_into:
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
 submitted_at: '2026-04-19T00:00:00Z'
 semantic_findings:
 - semantic_id: sem-rule-enrichment-index-cache-boundary
