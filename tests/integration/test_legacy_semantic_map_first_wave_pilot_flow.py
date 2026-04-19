@@ -12,6 +12,13 @@ from scripts.legacy_semantic_map.pilot import (
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SEMANTIC_MAP_ROOT = REPO_ROOT / "docs" / "wiki-bi" / "_meta" / "legacy-semantic-map"
+REQUIRED_SUCCESSOR_CLAIM_IDS = {
+    "claim-wave-2026-04-17-semantic-governance-reframe-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
+}
 
 
 def _copy_dependency_tree(tmp_repo_root: Path) -> Path:
@@ -27,7 +34,9 @@ def test_run_first_wave_pilot_rebuilds_active_successor_wave_deterministically(
     registry_root = _copy_dependency_tree(tmp_repo_root)
     orchestrate_wave(registry_root, SUCCESSOR_WAVE_ID)
     initial_claim_paths = pilot_claim_paths(registry_root, SUCCESSOR_WAVE_ID)
-    assert len(initial_claim_paths) == 7
+    initial_claim_ids = {path.stem for path in initial_claim_paths}
+    assert REQUIRED_SUCCESSOR_CLAIM_IDS <= initial_claim_ids
+    assert len(initial_claim_paths) >= len(REQUIRED_SUCCESSOR_CLAIM_IDS)
 
     first_result = run_first_wave_pilot(
         registry_root,

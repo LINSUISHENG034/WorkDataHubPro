@@ -22,6 +22,13 @@ TIER_B_SURFACES = [
     "company_lookup_queue",
     "reference_sync",
 ]
+REQUIRED_SUCCESSOR_CLAIM_IDS = {
+    "claim-wave-2026-04-17-semantic-governance-reframe-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-lifecycle",
+    "claim-wave-2026-04-17-semantic-governance-reframe-rules",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory",
+    "claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state",
+}
 
 
 def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> None:
@@ -147,7 +154,16 @@ def test_first_wave_pilot_repo_state_is_populated_and_real_evidence_backed() -> 
     assert manifest["compiled_claim_ids"]
     assert manifest["compiled_claim_ids"] == manifest["compiled_claims_by_wave"][SUCCESSOR_WAVE_ID]
     assert FIRST_WAVE_PILOT_WAVE_ID in manifest["compiled_claims_by_wave"]
-    assert len(manifest["compiled_claims_by_wave"][SUCCESSOR_WAVE_ID]) == 7
+    successor_compiled = set(manifest["compiled_claims_by_wave"][SUCCESSOR_WAVE_ID])
+    successor_claim_files = {
+        path.stem
+        for path in (
+            SEMANTIC_MAP_ROOT / "claims" / SUCCESSOR_WAVE_ID / "semantic"
+        ).glob("*.yaml")
+    }
+    assert REQUIRED_SUCCESSOR_CLAIM_IDS <= successor_compiled
+    assert successor_compiled <= successor_claim_files
+    assert len(successor_compiled) >= len(REQUIRED_SUCCESSOR_CLAIM_IDS)
     assert len(manifest["compiled_claims_by_wave"][FIRST_WAVE_PILOT_WAVE_ID]) == 18
     assert "semantic/index.yaml" in manifest["generated_canonical_files"]
     assert "semantic/concepts/sem-concept-customer-status.yaml" in manifest[

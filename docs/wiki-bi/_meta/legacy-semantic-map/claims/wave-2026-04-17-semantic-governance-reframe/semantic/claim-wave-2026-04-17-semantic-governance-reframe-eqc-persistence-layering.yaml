@@ -34,25 +34,25 @@ sources_read:
   relative_path: scripts/validation/EQC/cleansing-rules-iteration-guide.md
   semantic_authority: runtime_witness
 - source_ref: tests/integration/infrastructure/enrichment/test_eqc_data_persistence_integration.py
-  source_type: tests
+  source_type: legacy_test
   note: Integration test verifies refresh writes raw_data to base_info while business_info is separately best-effort cleansed, preserving the same layering in runtime behavior.
   workspace_id: legacy_work_data_hub
   relative_path: tests/integration/infrastructure/enrichment/test_eqc_data_persistence_integration.py
   semantic_authority: runtime_witness
 - source_ref: tests/integration/migrations/test_enterprise_schema_migration.py
-  source_type: tests
+  source_type: legacy_test
   note: Migration tests verify business_info and biz_label foreign-key dependence on base_info and confirm their normalized or flattened structure, reinforcing the layered persistence contract.
   workspace_id: legacy_work_data_hub
   relative_path: tests/integration/migrations/test_enterprise_schema_migration.py
   semantic_authority: runtime_witness
 - source_ref: tests/unit/test_business_info_cleanser.py
-  source_type: tests
+  source_type: legacy_test
   note: BusinessInfoCleanser tests show business_info is a normalized business-semantic projection with type conversion and cleansing-status tracking rather than a raw provider payload store.
   workspace_id: legacy_work_data_hub
   relative_path: tests/unit/test_business_info_cleanser.py
   semantic_authority: runtime_witness
 - source_ref: tests/unit/test_biz_label_parser.py
-  source_type: tests
+  source_type: legacy_test
   note: BizLabelParser tests show biz_label is a parsed label-hierarchy projection keyed by company_id rather than a provider-retention blob.
   workspace_id: legacy_work_data_hub
   relative_path: tests/unit/test_biz_label_parser.py
