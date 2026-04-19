@@ -348,6 +348,27 @@ Not allowed:
 
 - merging in a dirty `main` worktree and hoping unrelated local state will stay out of the result
 - treating repeated `stash` / `unstash` cycles as the normal long-term substitute for worktree isolation
+- moving the `main` ref forward first and only then trying to make the root worktree match the new `HEAD`
+
+Before any merge, fast-forward, branch deletion, or worktree removal:
+
+- classify every untracked file as one of: committed deliverable, protected local state, or disposable local artifact
+- do not delete or ignore an untracked file until that classification is explicit
+- if a file is a committed deliverable, stage and commit it before merge cleanup instead of treating it as residue
+
+### 9.1.1 Merge Completion And Cleanup Checks
+
+After the merged result is validated, but before deleting any topic branch or
+worktree:
+
+1. confirm `git status` is clean in the merge context, or that any remaining untracked files were explicitly classified and intentionally retained
+2. confirm `git worktree list` still matches the worktrees you expect to keep
+3. only then delete the merged branch and remove its worktree
+4. if the repository root worktree will continue on `main`, update the working tree itself through a normal checkout/switch path; do not treat ref movement alone as completion
+
+Rule:
+
+- merge completion is not finished until branch refs, worktree directories, and the surviving working tree state all agree
 
 ### 9.2 Recovery When Branch Isolation Starts Late
 
@@ -423,6 +444,8 @@ Avoid these patterns:
 - merging replay differences without a compatibility decision
 - placing business logic into CLI, Dagster wiring, hooks, or generic helpers
 - continuing implementation in a mixed or dirty `main` worktree after you already know the work should be isolated
+- treating untracked planning or validation artifacts as disposable before deciding whether they are part of the committed slice deliverable
+- moving `main` by ref update and calling the merge complete before the surviving working tree has been synchronized and checked
 - allowing `spike/*` branches to become unofficial long-lived feature branches
 
 ## 12. Minimum Ready-To-Merge Checklist
