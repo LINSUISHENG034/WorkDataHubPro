@@ -84,6 +84,7 @@
 - `客户名称` 的空值判定包含 `null`、空字符串与占位值 `"0"`；这不是业务值
 - 当 `计划类型=单一计划` 且 `计划名称` 以 `企业年金计划` 结尾时，空 `客户名称` 才允许从 `计划名称` 提取
 - `年金账户名` 作为隐藏线索字段，在 `客户名称` 清洗前复制保留；输入侧不要求用户显式提供这个字段
+- `组合代码` 会经历 regex 清洗与 conditional defaulting，但其角色是 portfolio anchor，而不是普通附属列
 - `company_id` 不是输入硬门槛；输入合同允许在解析阶段再产生 identity 结果（含 temp-id fallback）
 
 当前更适合视为“高价值补强字段”，但不宜在本页直接上升为硬门槛的还有：
@@ -147,6 +148,7 @@
 - [企业身份标识：`company_id`](../../concepts/company-id.md)
 - [临时身份：`temp_id`](../../concepts/temp-id.md)
 - [年金计划类型：`plan_type`](../../concepts/plan-type.md)
+- [组合代码](../../concepts/portfolio-code.md)
 
 ## 相关证据
 

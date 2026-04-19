@@ -37,6 +37,7 @@ replay evidence 表明，`annual_loss` 当前还会显式发布：
 - 基于 `计划规模` 的主导 customer/master 值
 - relationship-breadth outputs：`关联计划数`、`关联机构数`、`其他年金计划`、`其他开拓机构`
 - 聚合分类结果 `管理资格`
+- 其中 `其他年金计划` 与 `其他开拓机构` 应先理解为 breadth-list outputs，用来补充 relationship breadth context，而不是自动等于“剔除 dominant anchor 后的精确余集”
 
 ## 下游派生输出
 
@@ -98,7 +99,9 @@ replay evidence 表明，`annual_loss` 当前还会显式发布：
 - [`tags`](../../concepts/tags.md)
 - [年金客户类型：`customer_type`](../../concepts/customer-type.md)
 - [关联计划数](../../concepts/related-plan-count.md)
+- [其他年金计划](../../concepts/other-annuity-plans.md)
 - [关联机构数](../../concepts/related-branch-count.md)
+- [其他开拓机构](../../concepts/other-branches.md)
 - [管理资格](../../concepts/management-qualification.md)
 
 ## 相关证据

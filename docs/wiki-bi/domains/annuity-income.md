@@ -32,11 +32,14 @@ current project 已有：
 - [企业身份标识：`company_id`](../concepts/company-id.md)
 - [临时身份：`temp_id`](../concepts/temp-id.md)
 - [年金计划类型：`plan_type`](../concepts/plan-type.md)
+- [组合代码](../concepts/portfolio-code.md)
 - [回填：`backfill`](../concepts/backfill.md)
 - [`tags`](../concepts/tags.md)
 - [主拓机构](../concepts/primary-branch.md)
 - [关联计划数](../concepts/related-plan-count.md)
+- [其他年金计划](../concepts/other-annuity-plans.md)
 - [关联机构数](../concepts/related-branch-count.md)
+- [其他开拓机构](../concepts/other-branches.md)
 - [管理资格](../concepts/management-qualification.md)
 
 ## 关键输出结果
@@ -44,7 +47,10 @@ current project 已有：
 - direct fact output
 - reference / customer signal
 - customer-master-derived signals（fee-weighted 主拓机构、关键计划、`yyMM新建`、`新客*`）
-- 其中 `关联计划数` 与 `关联机构数` 分别解释计划侧与机构侧的 relationship breadth，不等于主导对象锚点，也不等于 snapshot-side 计数字段
+- 其中 relationship breadth 现在在计划侧与机构侧都形成 dominant/count/list 三层：
+  - 计划侧见 [关键年金计划](../concepts/key-annuity-plan.md)、[关联计划数](../concepts/related-plan-count.md)、[其他年金计划](../concepts/other-annuity-plans.md)
+  - 机构侧见 [主拓机构](../concepts/primary-branch.md)、[关联机构数](../concepts/related-branch-count.md)、[其他开拓机构](../concepts/other-branches.md)
+- `组合代码` 作为 portfolio anchor 解释同一计划在不同组合语境下的承接关系，见 [组合代码](../concepts/portfolio-code.md)
 - unresolved identity 的 operator-facing artifacts
 - post-ID5 identity governance 与 branch mapping 约束
 

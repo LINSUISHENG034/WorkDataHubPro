@@ -84,6 +84,7 @@
 
 ## 关键证据来源
 
+- [enterprise enrichment persistence 证据](../evidence/enterprise-enrichment-persistence-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
 - [身份与补查证据](../evidence/identity-and-lookup-evidence.md)
 
@@ -93,6 +94,7 @@
 - 至少不能再把 `enrichment_index`、`enrichment_requests`、`base_info` 统称为“identity 附属表”后长期隐身
 - current accepted validation runtime 没有 repo-native `enrichment_requests`、`enrichment_index`、`company_name_index`、`base_info`、`business_info`、`biz_label` 等 surface；被保留的是 identity 行为链与 evidence contract，而不是 legacy 表面宽度
 - 因此更合理的 closure 方式不是整体 retain / retire，而是分别判断 cache、queue persistence、provider raw/cleansed persistence 的 active runtime status
+- cache / queue / provider-root / downstream normalized persistence 的对象级分层证据，统一见 [enterprise enrichment persistence 证据](../evidence/enterprise-enrichment-persistence-evidence.md)
 
 ## 当前治理边界
 

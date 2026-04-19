@@ -3,6 +3,24 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-19 11:26] maintain | round 36 manual customer-mdm and persistence closure
+
+- 新增 `customer-mdm-manual-runtime-evidence.md` 与 `enterprise-enrichment-persistence-evidence.md`，把 manual `customer-mdm` runtime boundary 与 enterprise persistence layering 从 aggregate surface text 收紧成对象级 evidence route
+- 回写 `customer-mdm-commands`、`enterprise-enrichment-persistence`、`operator-and-surface-evidence`、`identity-and-lookup-evidence` 与 `identity-governance`，使 current deferred boundary 更直接可答
+- 新增 Round 36 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确下一步更偏向 `company_lookup_queue` / standalone tooling 等 runtime decision package
+
+## [2026-04-19 10:57] maintain | round 35 portfolio anchor tightening
+
+- 新增 `portfolio-code.md`，把 `组合代码` 从 dispatcher / field-processing 交叉入口层推进成 durable wiki 对象
+- 回写 `classification-family-evidence`、相邻 concept / domain / input-output-contract 页面，使 portfolio-anchor 层不再混写成身份键或 customer-master 聚合分类
+- 新增 Round 35 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确下一步默认回到 manual `customer-mdm` / enterprise persistence closure wave
+
+## [2026-04-19 10:34] maintain | round 34 relationship breadth list deepening
+
+- 新增 `other-annuity-plans.md` 与 `other-branches.md`，把 `其他年金计划` 与 `其他开拓机构` 从 dispatcher-only 状态推进成 durable wiki 对象
+- 回写 `customer-master-signals-evidence`、相邻 concept / domain / output-contract 页面，使 relationship breadth 在计划侧与机构侧都形成 dominant / count / list 三层表达
+- 新增 Round 34 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确 `组合代码` 成为剩余主要 business-semantics follow-on candidate
+
 ## [2026-04-18 20:34] maintain | customer_type vs is_new governance package
 
 ## [2026-04-19 00:11] maintain | round 33 reference_sync governance

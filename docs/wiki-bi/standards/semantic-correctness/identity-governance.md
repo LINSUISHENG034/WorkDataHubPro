@@ -50,6 +50,7 @@
 - temp-id 是治理后的保留记录手段，不是“解析失败也算成功”的借口
 - async queue / operator artifact 是 unresolved identity 的外显治理面，而不是附属噪音
 - `annuity_income` 的 branch mapping 与 ID5 retirement 属于 identity governance 的专题决策，而不是孤立 domain 特例
+- cache / queue persistence、provider-retention root 与 downstream normalized persistence 也应分层理解，不能统称为“identity 附属表”
 
 ## 叙述分层
 
@@ -108,6 +109,7 @@
 
 - [身份与补查证据](../../evidence/identity-and-lookup-evidence.md)
 - [unresolved-name and failed-record 证据](../../evidence/unresolved-name-and-failed-record-evidence.md)
+- [enterprise enrichment persistence 证据](../../evidence/enterprise-enrichment-persistence-evidence.md)
 - [`annuity_income` branch mapping 证据](../../evidence/annuity-income-branch-mapping-evidence.md)
 - [`annuity_income` ID5 retirement 证据](../../evidence/annuity-income-id5-retirement-evidence.md)
 - [`annuity_income` operator artifacts 证据](../../evidence/annuity-income-operator-artifacts-evidence.md)

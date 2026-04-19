@@ -43,7 +43,7 @@
 | `客户名称` | normalized `客户名称` | 工程性质量提升 | 清理空白与标准化名称 | 影响 identity 解释与 explainability |
 | `客户名称` | `年金账户名` | 业务语义处理 | 在清理前保留原始账户名线索 | 保留 operator / identity 审计线索 |
 | `计划名称` + `计划类型` | 补全 `客户名称` | 业务语义处理 | 仅当 `单一计划` 且 `计划名称` 以 `企业年金计划` 结尾才提取公司名；不匹配不强补 | 防止集合计划或脏计划名被误当客户 |
-| `组合代码` | canonical `组合代码` | 工程性质量提升 | regex 清洗 + conditional defaulting | 影响 portfolio-level signal |
+| `组合代码` | canonical `组合代码` | 工程性质量提升 | regex 清洗 + conditional defaulting | 保护 portfolio anchor contract，并影响 portfolio-level signal |
 | `业务类型` | `产品线代码` | 业务语义处理 | 映射到产品线编码 | 影响 output classification |
 | `固费` / `浮费` / `回补` / `税` | canonical income facts | 工程性质量提升 | 数值清洗与默认值处理 | 决定 direct fact payload |
 | unresolved identity | temp-id / artifacts | 业务语义处理 | 不恢复 ID5，改走 governed temp-id fallback 与 artifact 输出 | 决定 `company_reference`、`unknown_names_csv`、failed-record visibility |
@@ -65,7 +65,7 @@
 - 日期标准化
 - 名称清洗与空白归一化
 - 收入数值默认值与数值清洗
-- `组合代码` 的格式修整与缺省补位
+- `组合代码` 的格式修整与缺省补位，用于保护 portfolio anchor，而不是把它降级成纯显示字段
 
 这些处理的目标是：
 
@@ -81,7 +81,7 @@
 - 计划锚点参与的 identity resolution
 - 不恢复 ID5 的 retirement boundary
 - unresolved cases 的 operator artifact / signal 外显
-- `计划类型`、`业务类型`、`组合代码` 与 customer-master `年金计划类型` / `管理资格` 属于同一 classification family 的不同层；统一解释见 [classification family 证据](./classification-family-evidence.md) 与 [管理资格](../concepts/management-qualification.md)
+- `计划类型`、`业务类型`、`组合代码` 与 customer-master `年金计划类型` / `管理资格` 属于同一 classification family 的不同层；统一解释见 [classification family 证据](./classification-family-evidence.md)、[管理资格](../concepts/management-qualification.md) 与 [组合代码](../concepts/portfolio-code.md)
 
 这些规则会直接改变：
 

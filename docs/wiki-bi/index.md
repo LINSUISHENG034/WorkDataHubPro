@@ -15,11 +15,13 @@
 - 我想补强 customer status 里最容易被误读的 annual identity 语义
   - 先看 [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md)，再看 [客户状态语义正确性](./standards/semantic-correctness/customer-status-semantics.md)。
 - 我想继续补强 legacy business semantics
-  - 先看 [Round 31：relationship breadth and classification closeout](./_meta/absorption-rounds/round-31-relationship-breadth-and-classification-closeout.md)，再从 [关联机构数](./concepts/related-branch-count.md)、[管理资格](./concepts/management-qualification.md) 与 [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) 进入。
+  - 先看 [Round 34：relationship breadth list deepening](./_meta/absorption-rounds/round-34-relationship-breadth-list-deepening.md)，再从 [其他年金计划](./concepts/other-annuity-plans.md)、[其他开拓机构](./concepts/other-branches.md) 与 [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) 进入。
 - 我想继续补 shared operator artifacts / queue replacement 这条线
   - 先看 [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md)，再从 [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) 与 [`company_lookup_queue`](./surfaces/company-lookup-queue.md) 进入。
 - 我想继续补 `reference_sync` runtime / state 这条线
   - 先看 [Round 33：reference_sync governance](./_meta/absorption-rounds/round-33-reference-sync-governance.md)，再从 [`reference_sync` runtime and state 证据](./evidence/reference-sync-runtime-and-state-evidence.md) 与 [`reference_sync`](./surfaces/reference-sync.md) 进入。
+- 我想继续补 manual `customer-mdm` / enterprise persistence 这条线
+  - 先看 [Round 36：manual customer-mdm and persistence closure](./_meta/absorption-rounds/round-36-manual-customer-mdm-and-persistence-closure.md)，再从 [`customer-mdm` manual runtime 证据](./evidence/customer-mdm-manual-runtime-evidence.md) 与 [enterprise enrichment persistence 证据](./evidence/enterprise-enrichment-persistence-evidence.md) 进入。
 
 ## 阅读意图
 
@@ -48,12 +50,22 @@
   - 它回答“这个客户关联了多少个不同计划”，不等于主导计划，也不等于 snapshot `plan_count`。
 - [`关联机构数` 到底是什么](./concepts/related-branch-count.md)
   - 它回答“这个客户关联了多少个不同机构”，不等于 `主拓机构`，也不等于 `其他开拓机构` 的清单。
+- [`组合代码` 到底是什么](./concepts/portfolio-code.md)
+  - 它回答 portfolio / classification anchor，不等于企业身份，也不等于 customer-master 聚合分类。
+- [`其他年金计划` 到底是什么](./concepts/other-annuity-plans.md)
+  - 它回答“这个客户还关联了哪些计划”的 breadth-list context，不等于 `关键年金计划`，也不等于 `关联计划数`。
+- [`其他开拓机构` 到底是什么](./concepts/other-branches.md)
+  - 它回答“这个客户还关联了哪些机构”的 breadth-list context，不等于 `主拓机构`，也不等于 `关联机构数`。
 - [`管理资格` 到底是什么](./concepts/management-qualification.md)
   - 它是 customer-master 聚合分类结果，不等于输入行上的 `业务类型`，也不等于 portfolio 锚点 `组合代码`。
 - [什么算受治理的身份 fallback](./standards/semantic-correctness/identity-governance.md)
   - temp-id、mapping files、cache、provider、queue 的边界需要作为 identity governance 统一理解。
 - [如何区分当前运行路径、历史记忆、已退休行为与可见后果](./standards/semantic-correctness/identity-governance.md)
   - 身份治理相关叙述必须四层分离；未闭环项进入 evidence gaps，不混写成当前运行路径。
+- [manual `customer-mdm` commands 与默认 hook path 到底是什么关系](./evidence/customer-mdm-manual-runtime-evidence.md)
+  - 它们是 legacy recovery / recompute surface，不应被混写成 current monthly primary trigger。
+- [enterprise persistence 当前到底保留了什么、递延了什么](./evidence/enterprise-enrichment-persistence-evidence.md)
+  - 先看 cache / queue / provider-root / downstream normalized persistence 的 layering，再看 current deferred boundary。
 - [什么算 real-data validation](./standards/verification-method/real-data-validation.md)
   - 真实数据验证不是“拿真实文件跑一下”，而是有边界和目标的验证方法。
 - [当前生产 workbook 长什么样](./evidence/input-reality-evidence.md)
@@ -116,7 +128,10 @@
 - [主拓机构](./concepts/primary-branch.md) : 说明 customer-master / reference 对象上的主导机构归属不是输入列直接复制。
 - [关键年金计划](./concepts/key-annuity-plan.md) : 说明 customer-master signal family 中“主导计划锚点”的语义，不把它混写成原始 `计划代码`。
 - [关联计划数](./concepts/related-plan-count.md) : 说明 customer-master relationship breadth 中“关联了多少个不同计划”的语义，不把它混写成主导计划或 snapshot `plan_count`。
+- [其他年金计划](./concepts/other-annuity-plans.md) : 说明 customer-master relationship breadth 中“还关联了哪些计划”的列表语义，不把它混写成主导计划或 breadth count。
 - [关联机构数](./concepts/related-branch-count.md) : 说明 customer-master relationship breadth 中“关联了多少个不同机构”的语义，不把它混写成主导机构或机构清单。
+- [其他开拓机构](./concepts/other-branches.md) : 说明 customer-master relationship breadth 中“还关联了哪些机构”的列表语义，不把它混写成主导机构或 breadth count。
+- [组合代码](./concepts/portfolio-code.md) : 说明事实层与 `mapping.组合计划` 之间的 portfolio/classification anchor 语义，不把它混写成身份键或 customer-master 聚合分类。
 - [管理资格](./concepts/management-qualification.md) : 说明 customer-master 聚合分类中的管理角色语义，不把它混写成输入侧 `业务类型` 或 `组合代码`。
 - [年金计划类型：`plan_type`](./concepts/plan-type.md) : 说明单一计划与集合计划的语义差异和约束。
 - [快照粒度：`snapshot_granularity`](./concepts/snapshot-granularity.md) : 定义客户/产品线与客户/计划两类快照粒度。
@@ -180,6 +195,7 @@
 - [身份与补查证据](./evidence/identity-and-lookup-evidence.md) : 聚合 `company_id`、temp-id、lookup、plan-code enrichment 相关证据。
 - [状态与快照证据](./evidence/status-and-snapshot-evidence.md) : 聚合客户状态、快照、customer MDM 相关证据。
 - [customer MDM 生命周期证据](./evidence/customer-mdm-lifecycle-evidence.md) : 固化 `year_init`、`sync`、`snapshot`、ratchet-style 与 `status_year` 的年度生命周期证据边界。
+- [`customer-mdm` manual runtime 证据](./evidence/customer-mdm-manual-runtime-evidence.md) : 聚合 manual `customer-mdm` command surface、default hook chain 与 current deferred boundary 的对象级证据。
 - [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md) : 固化 `is_strategic`、`is_existing`、`contract_status`、`status_year` 与 proxy-conflict 边界。
 - [customer_type vs `is_new` 治理证据](./evidence/customer-type-is-new-governance-evidence.md) : 固化 semantic non-equivalence、legacy proxy usage 与 disposition question。
 - [`is_new` 对象级证据](./evidence/is-new-evidence.md) : 聚合 `is_new` 的公式、粒度边界、非例与验证路径。
@@ -188,10 +204,11 @@
 - [验证资产证据](./evidence/verification-assets-evidence.md) : 聚合 golden set、replay baseline、validation guide、error fixtures 等证据。
 - [validation result history 证据](./evidence/validation-result-history-evidence.md) : 聚合 legacy parity result 目录、current asset registry 与 validation history 的治理结论。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
+- [enterprise enrichment persistence 证据](./evidence/enterprise-enrichment-persistence-evidence.md) : 聚合 cache/queue persistence、provider-retention root 与 downstream normalized persistence 的分层边界。
 - [`reference_sync` runtime and state 证据](./evidence/reference-sync-runtime-and-state-evidence.md) : 聚合 `reference_sync` 的 target inventory、incremental sync-state 与 current replacement boundary。
 - [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) : 聚合 shared unresolved-name / failed-record artifacts 的 legacy breadth、current accepted closure 与 parity gaps。
 - [引用同步与回填证据](./evidence/reference-and-backfill-evidence.md) : 聚合 authoritative `reference_sync`、fact-derived `backfill` 与 customer-master 衍生写入之间的稳定边界。
-- [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) : 聚合 `tags`、`主拓机构`、`关键年金计划`、关系计数与 `年金客户类型` 的 cross-domain customer-master 语义。
+- [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) : 聚合 `tags`、主导锚点、relationship breadth counts / lists 与 `年金客户类型` 的 cross-domain customer-master 语义。
 - [classification family 证据](./evidence/classification-family-evidence.md) : 聚合 `计划类型`、`年金计划类型`、`业务类型`、`管理资格` 与 `组合代码` 的跨层语义边界。
 - [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的专题差异，并把细节分发到对象级 evidence page。
 - [`annuity_income` 字段处理证据](./evidence/annuity-income-field-processing-evidence.md) : 把 annuity_income 的关键字段处理分成工程性质量提升与业务语义处理。
@@ -241,5 +258,8 @@
 - [Round 31：relationship breadth and classification closeout](./_meta/absorption-rounds/round-31-relationship-breadth-and-classification-closeout.md) : maintenance 轮次，把 `关联机构数` 与 `管理资格` 推进成 durable objects，并收紧 remaining follow-on candidates。
 - [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md) : maintenance 轮次，把 shared unresolved-name / failed-record artifact family 收紧成 durable evidence dispatcher，并保持 income-specific accepted closure 与 cross-domain parity gap 分层表达。
 - [Round 33：reference_sync governance](./_meta/absorption-rounds/round-33-reference-sync-governance.md) : maintenance 轮次，把 `reference_sync` 的 target inventory、sync-state 与 current replacement boundary 收紧成对象级 evidence route。
+- [Round 34：relationship breadth list deepening](./_meta/absorption-rounds/round-34-relationship-breadth-list-deepening.md) : maintenance 轮次，把 `其他年金计划` 与 `其他开拓机构` 推进成 durable objects，并让 relationship breadth 在计划侧与机构侧都形成 dominant / count / list 三层表达。
+- [Round 35：portfolio anchor tightening](./_meta/absorption-rounds/round-35-portfolio-anchor-tightening.md) : maintenance 轮次，把 `组合代码` 推进成 durable object，并把 classification family 的 portfolio-anchor 层收紧成直接可答的入口。
+- [Round 36：manual customer-mdm and persistence closure](./_meta/absorption-rounds/round-36-manual-customer-mdm-and-persistence-closure.md) : maintenance 轮次，把 manual `customer-mdm` runtime 与 enterprise persistence layering 收紧成对象级 evidence route。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。
