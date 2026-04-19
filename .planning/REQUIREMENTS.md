@@ -28,9 +28,9 @@
 ### Agent-Friendly Operability
 
 - [x] **OPS-01**: Agent can discover stable task entrypoints for replay execution, diagnostics, and rule updates without relying on hidden context
-- [ ] **OPS-02**: Agent can use standardized runbook + config contracts to add a new data source with bounded change surface
-- [ ] **OPS-03**: Agent can trace a produced output row back to its source and stage decisions through queryable lineage/evidence references
-- [ ] **OPS-04**: Project can provide explicit observability contracts (logs/traces/evidence structure) that support operations and incident response
+- [x] **OPS-02**: Agent can use standardized runbook + config contracts to add a new data source with bounded change surface
+- [x] **OPS-03**: Agent can trace a produced output row back to its source and stage decisions through queryable lineage/evidence references
+- [x] **OPS-04**: Project can provide explicit observability contracts (logs/traces/evidence structure) that support operations and incident response
 
 ### Performance and Reliability
 
@@ -40,9 +40,9 @@
 
 ### Governance and Security
 
-- [ ] **GOV-01**: Evidence artifacts can apply redaction policy for sensitive fields before persistence
+- [x] **GOV-01**: Evidence artifacts can apply redaction policy for sensitive fields before persistence
 - [x] **GOV-02**: Identity fallback behavior can avoid leaking raw business identifiers in generated temporary IDs
-- [ ] **GOV-03**: Compatibility adjudication can record mismatch severity, decision owner, and closure evidence for auditability
+- [x] **GOV-03**: Compatibility adjudication can record mismatch severity, decision owner, and closure evidence for auditability
 
 ## v2 Requirements
 
@@ -82,15 +82,15 @@
 | PIPE-03 | Phase 3 | Validated |
 | PIPE-04 | Phase 3 | Validated |
 | OPS-01 | Phase 3 | Validated |
-| OPS-02 | Phase 4 | Pending |
-| OPS-03 | Phase 4 | Pending |
-| OPS-04 | Phase 4 | Pending |
+| OPS-02 | Phase 4 | Validated |
+| OPS-03 | Phase 4 | Validated |
+| OPS-04 | Phase 4 | Validated |
 | PERF-01 | Phase 5 | Pending |
 | PERF-02 | Phase 5 | Pending |
 | PERF-03 | Phase 5 | Pending |
-| GOV-01 | Phase 4 | Pending |
+| GOV-01 | Phase 4 | Validated |
 | GOV-02 | Phase 3 | Validated |
-| GOV-03 | Phase 4 | Pending |
+| GOV-03 | Phase 4 | Validated |
 
 **Coverage:**
 - v1 requirements: 21 total
@@ -103,4 +103,4 @@
 
 ---
 *Requirements defined: 2026-04-12*
-*Last updated: 2026-04-13 after Phase 3 closure*
+*Last updated: 2026-04-19 after Phase 04 Plan 03 execution*

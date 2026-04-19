@@ -30,6 +30,10 @@ uv run python -m work_data_hub_pro.apps.etl_cli.main replay-annuity-income data/
 - `reference/historical_replays/annuity_income/evidence/trace/`
 - `reference/historical_replays/annuity_income/evidence/compatibility_cases/`
 
+## Canonical workflow
+
+Use `docs/runbooks/agent-maintenance-workflow.md` as the canonical maintenance workflow for source onboarding, governed rule changes, replay verification, evidence lookup, and compatibility case handling. Keep annuity income workbook names, replay-root defaults, and expected output counts in this runbook.
+
 ## Agent CLI
 
 Discover supported domains and registry roots:
@@ -48,6 +52,19 @@ Diagnose a completed comparison package:
 
 ```bash
 uv run python -m work_data_hub_pro.apps.etl_cli.main replay diagnose --comparison-run-id annuity_income-2026-03-<run-id>
+```
+
+Look up one output record through the persisted lineage and trace package:
+
+```bash
+uv run python -m work_data_hub_pro.apps.etl_cli.main replay lookup --comparison-run-id annuity_income-2026-03-<run-id> --record-id <record-id>
+```
+
+Inspect or close a compatibility case through the file-backed CLI:
+
+```bash
+uv run python -m work_data_hub_pro.apps.etl_cli.main compatibility show-case --evidence-root reference/historical_replays/annuity_income/evidence --case-id <case-id>
+uv run python -m work_data_hub_pro.apps.etl_cli.main compatibility close-case --evidence-root reference/historical_replays/annuity_income/evidence --case-id <case-id> --owner compatibility-review --resolution-note <note> --closure-evidence <path>
 ```
 
 ## Temp Identity Salt

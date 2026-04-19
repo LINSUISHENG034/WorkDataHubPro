@@ -14,6 +14,15 @@ from work_data_hub_pro.governance.compatibility.gate_models import (
     GateSummary,
 )
 from work_data_hub_pro.governance.compatibility.models import CompatibilityCase
+from work_data_hub_pro.governance.evidence_index.redaction import (
+    load_redaction_policy,
+    redact_compatibility_case,
+    redact_mapping_payload,
+    redact_trace_events,
+)
+
+
+_POLICY_PATH = Path(__file__).resolve().parents[4] / "config" / "policies" / "evidence_redaction.json"
 from work_data_hub_pro.platform.contracts.models import FieldTraceEvent
 from work_data_hub_pro.platform.contracts.publication import (
     PublicationMode,
@@ -67,9 +76,14 @@ def _publication_result_from_payload(payload: dict[str, Any]) -> PublicationResu
 class FileEvidenceIndex:
     def __init__(self, root: Path) -> None:
         self._root = root
+        self._redaction_policy = load_redaction_policy(_POLICY_PATH)
         (self._root / "trace").mkdir(parents=True, exist_ok=True)
         (self._root / "compatibility_cases").mkdir(parents=True, exist_ok=True)
         (self._root / "comparison_runs").mkdir(parents=True, exist_ok=True)
+
+    @property
+    def root(self) -> Path:
+        return self._root
 
     def comparison_run_root(self, comparison_run_id: str) -> Path:
         root = self._root / "comparison_runs" / comparison_run_id
@@ -140,11 +154,13 @@ class FileEvidenceIndex:
         events: list[FieldTraceEvent],
     ) -> Path:
         path = self._root / "trace" / f"{batch_id.replace(':', '_')}__row_{anchor_row_no}.json"
-        return self._write_json(path, events)
+        payload = redact_trace_events(_to_jsonable(events), self._redaction_policy)
+        return self._write_json(path, payload)
 
     def save_case(self, case: CompatibilityCase) -> Path:
         path = self._root / "compatibility_cases" / f"{case.case_id}.json"
-        return self._write_json(path, case)
+        payload = redact_compatibility_case(_to_jsonable(case), self._redaction_policy)
+        return self._write_json(path, payload)
 
     def load_case(self, case_id: str) -> CompatibilityCase:
         path = self._root / "compatibility_cases" / f"{case_id}.json"
@@ -164,7 +180,8 @@ class FileEvidenceIndex:
         results: list[CheckpointResult],
     ) -> Path:
         root = self.comparison_run_root(comparison_run_id)
-        return self._write_json(root / "checkpoint-results.json", results)
+        payload = redact_mapping_payload(_to_jsonable(results), self._redaction_policy)
+        return self._write_json(root / "checkpoint-results.json", payload)
 
     def write_source_intake_adaptation(
         self,
@@ -172,7 +189,8 @@ class FileEvidenceIndex:
         payload: dict[str, Any],
     ) -> Path:
         root = self.comparison_run_root(comparison_run_id)
-        return self._write_json(root / "source-intake-adaptation.json", payload)
+        redacted_payload = redact_mapping_payload(payload, self._redaction_policy)
+        return self._write_json(root / "source-intake-adaptation.json", redacted_payload)
 
     def write_lineage_impact(
         self,
@@ -180,7 +198,8 @@ class FileEvidenceIndex:
         payload: dict[str, Any],
     ) -> Path:
         root = self.comparison_run_root(comparison_run_id)
-        return self._write_json(root / "lineage-impact.json", payload)
+        redacted_payload = redact_mapping_payload(payload, self._redaction_policy)
+        return self._write_json(root / "lineage-impact.json", redacted_payload)
 
     def write_publication_results(
         self,
@@ -196,7 +215,8 @@ class FileEvidenceIndex:
         case: CompatibilityCase,
     ) -> Path:
         root = self.comparison_run_root(comparison_run_id)
-        return self._write_json(root / "compatibility-case.json", case)
+        payload = redact_compatibility_case(_to_jsonable(case), self._redaction_policy)
+        return self._write_json(root / "compatibility-case.json", payload)
 
     def write_report(self, comparison_run_id: str, report_markdown: str) -> Path:
         root = self.comparison_run_root(comparison_run_id)
@@ -246,6 +266,83 @@ class FileEvidenceIndex:
         )
         payload = self._read_json(path)
         return [_publication_result_from_payload(item) for item in payload]
+
+    def load_source_intake_adaptation(
+        self,
+        comparison_run_id: str,
+    ) -> dict[str, Any]:
+        path = self._resolve_package_path(
+            comparison_run_id,
+            "source_intake_adaptation",
+            "source-intake-adaptation.json",
+        )
+        if not path.exists():
+            raise ValueError("missing_lineage_package")
+        try:
+            payload = self._read_json(path)
+        except json.JSONDecodeError as exc:
+            raise ValueError("malformed_lineage_package") from exc
+        if not isinstance(payload, dict):
+            raise ValueError("malformed_lineage_package")
+        return payload
+
+    def load_lineage_impact(
+        self,
+        comparison_run_id: str,
+    ) -> dict[str, Any]:
+        path = self._resolve_package_path(
+            comparison_run_id,
+            "lineage_impact",
+            "lineage-impact.json",
+        )
+        if not path.exists():
+            raise ValueError("missing_lineage_package")
+        try:
+            payload = self._read_json(path)
+        except json.JSONDecodeError as exc:
+            raise ValueError("malformed_lineage_package") from exc
+        if not isinstance(payload, dict):
+            raise ValueError("malformed_lineage_package")
+        records = payload.get("records")
+        if not isinstance(records, list):
+            raise ValueError("malformed_lineage_package")
+        required_keys = {
+            "record_id",
+            "batch_id",
+            "anchor_row_no",
+            "origin_row_nos",
+            "parent_record_ids",
+            "trace_path",
+            "artifact_gaps",
+        }
+        for record in records:
+            if not isinstance(record, dict):
+                raise ValueError("malformed_lineage_package")
+            if not required_keys.issubset(record):
+                raise ValueError("malformed_lineage_package")
+            if not isinstance(record["record_id"], str):
+                raise ValueError("malformed_lineage_package")
+            if not isinstance(record["batch_id"], str):
+                raise ValueError("malformed_lineage_package")
+            if not isinstance(record["anchor_row_no"], int):
+                raise ValueError("malformed_lineage_package")
+            if not isinstance(record["origin_row_nos"], list) or not all(
+                isinstance(item, int) for item in record["origin_row_nos"]
+            ):
+                raise ValueError("malformed_lineage_package")
+            if not isinstance(record["parent_record_ids"], list) or not all(
+                isinstance(item, str) for item in record["parent_record_ids"]
+            ):
+                raise ValueError("malformed_lineage_package")
+            if record["trace_path"] is not None and not isinstance(
+                record["trace_path"], str
+            ):
+                raise ValueError("malformed_lineage_package")
+            if not isinstance(record["artifact_gaps"], list) or not all(
+                isinstance(item, str) for item in record["artifact_gaps"]
+            ):
+                raise ValueError("malformed_lineage_package")
+        return payload
 
     def load_comparison_case_for_run(
         self,

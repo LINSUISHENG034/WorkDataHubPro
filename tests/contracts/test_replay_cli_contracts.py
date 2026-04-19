@@ -56,6 +56,14 @@ def _fake_outcome() -> SimpleNamespace:
                     "reference/historical_replays/annual_award/evidence/"
                     "comparison_runs/annual-award-2026-03-pass/checkpoint-results.json"
                 ),
+                source_intake_adaptation=(
+                    "reference/historical_replays/annual_award/evidence/"
+                    "comparison_runs/annual-award-2026-03-pass/source-intake-adaptation.json"
+                ),
+                lineage_impact=(
+                    "reference/historical_replays/annual_award/evidence/"
+                    "comparison_runs/annual-award-2026-03-pass/lineage-impact.json"
+                ),
                 publication_results=(
                     "reference/historical_replays/annual_award/evidence/"
                     "comparison_runs/annual-award-2026-03-pass/publication-results.json"

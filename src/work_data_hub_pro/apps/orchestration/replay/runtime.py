@@ -266,6 +266,71 @@ def build_primary_failure(
     return None
 
 
+def _trace_artifact_path(
+    *,
+    evidence_index: FileEvidenceIndex,
+    batch_id: str,
+    anchor_row_no: int,
+) -> str | None:
+    path = evidence_index.root / "trace" / f"{batch_id.replace(':', '_')}__row_{anchor_row_no}.json"
+    if not path.exists():
+        return None
+    return _path_string(path)
+
+
+
+def _normalize_lineage_impact(
+    *,
+    lineage_impact: dict[str, Any],
+    context: ReplayExecutionContext,
+    batch_id: str,
+) -> dict[str, Any]:
+    records = lineage_impact.get("records")
+    if isinstance(records, list):
+        normalized_records: list[dict[str, Any]] = []
+        for record in records:
+            trace_path = record.get("trace_path")
+            artifact_gaps = record.get("artifact_gaps")
+            if trace_path is None and artifact_gaps is None:
+                artifact_gaps = ["trace_missing"]
+            normalized_records.append(
+                {
+                    "record_id": record["record_id"],
+                    "batch_id": record["batch_id"],
+                    "anchor_row_no": record["anchor_row_no"],
+                    "origin_row_nos": list(record["origin_row_nos"]),
+                    "parent_record_ids": list(record["parent_record_ids"]),
+                    "trace_path": trace_path,
+                    "artifact_gaps": list(artifact_gaps or []),
+                }
+            )
+        return {"records": normalized_records}
+
+    normalized_records = []
+    for link in sorted(
+        context.lineage_registry.all(),
+        key=lambda item: (item.anchor_row_no, item.record_id),
+    ):
+        trace_path = _trace_artifact_path(
+            evidence_index=context.evidence_index,
+            batch_id=batch_id,
+            anchor_row_no=link.anchor_row_no,
+        )
+        normalized_records.append(
+            {
+                "record_id": link.record_id,
+                "batch_id": batch_id,
+                "anchor_row_no": link.anchor_row_no,
+                "origin_row_nos": list(link.origin_row_nos),
+                "parent_record_ids": list(link.parent_record_ids),
+                "trace_path": trace_path,
+                "artifact_gaps": [] if trace_path is not None else ["trace_missing"],
+            }
+        )
+    return {"records": normalized_records}
+
+
+
 def finalize_replay_run(
     *,
     context: ReplayExecutionContext,
@@ -295,6 +360,11 @@ def finalize_replay_run(
         package_root=f"comparison_runs/{context.comparison_run_id}",
         package_paths=default_package_paths(context.comparison_run_id),
     )
+    normalized_lineage_impact = _normalize_lineage_impact(
+        lineage_impact=lineage_impact,
+        context=context,
+        batch_id=batch.batch_id,
+    )
     package_paths = write_comparison_run_package(
         evidence_index=context.evidence_index,
         manifest=manifest,
@@ -306,7 +376,7 @@ def finalize_replay_run(
             if result.diff is not None
         },
         source_intake_adaptation=source_intake_adaptation,
-        lineage_impact=lineage_impact,
+        lineage_impact=normalized_lineage_impact,
         publication_results=publication_results,
         compatibility_case=compatibility_case,
         report_markdown=report_markdown,
@@ -331,6 +401,8 @@ def finalize_replay_run(
         manifest=_path_string(package_paths["manifest"]),
         gate_summary=_path_string(package_paths["gate_summary"]),
         checkpoint_results=_path_string(package_paths["checkpoint_results"]),
+        source_intake_adaptation=_path_string(package_paths["source_intake_adaptation"]),
+        lineage_impact=_path_string(package_paths["lineage_impact"]),
         publication_results=_path_string(package_paths["publication_results"]),
         report=_path_string(package_paths["report"]),
         compatibility_case=(

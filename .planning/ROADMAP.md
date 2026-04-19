@@ -141,6 +141,15 @@ Make system operationally handoff-ready for agent-driven maintenance and governe
 
 **UI hint**: no
 
+**Status:** Complete (updated 2026-04-19)
+**Plans:** 4/4 plans complete
+
+Plans:
+- [x] 04-01 - output-to-source lookup contract and CLI
+- [x] 04-02 - evidence redaction policy and writer hardening
+- [x] 04-03 - compatibility lifecycle and closure-proof hardening
+- [x] 04-04 - agent maintenance workflow and incident runbooks
+
 ---
 
 ### Phase 5: Performance Reliability Optimization with Drift Safeguards
@@ -202,7 +211,7 @@ Plans:
 
 ---
 *Roadmap created: 2026-04-12*
-*Last updated: 2026-04-13 after Phase 03.1 closure*
+*Last updated: 2026-04-19 after Phase 04 Plan 03 execution*
 
 ### Phase 03.1: Phase 3 governance remediation - truthful failure evidence and diagnose hardening
 

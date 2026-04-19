@@ -24,6 +24,8 @@ class ReplayEvidencePaths:
     manifest: str
     gate_summary: str
     checkpoint_results: str
+    source_intake_adaptation: str
+    lineage_impact: str
     publication_results: str
     report: str
     compatibility_case: str | None = None

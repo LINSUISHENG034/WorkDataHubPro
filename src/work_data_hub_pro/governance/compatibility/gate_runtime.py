@@ -271,7 +271,8 @@ def write_comparison_run_package(
     package_paths = manifest.package_paths or default_package_paths(
         manifest.comparison_run_id
     )
-    updated_package_paths = dict(package_paths)
+    updated_package_paths = dict(default_package_paths(manifest.comparison_run_id))
+    updated_package_paths.update(package_paths)
     updated_results: list[CheckpointResult] = []
     diff_paths: dict[str, Path] = {}
     for result in checkpoint_results:
@@ -327,6 +328,13 @@ def write_comparison_run_package(
                 pro_result={},
                 business_rationale="No compatibility case created for this run.",
                 affected_rule_version="not-applicable",
+                decision_owner=None,
+                resolution_note=None,
+                closure_evidence=[],
+                closed_at=None,
+                closed_by=None,
+                resolved_outcome=None,
+                decision_history=[],
                 checkpoint_name="none",
                 comparison_run_id=manifest.comparison_run_id,
             ),

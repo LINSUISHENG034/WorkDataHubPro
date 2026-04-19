@@ -64,6 +64,14 @@ def test_replay_run_report_serializes_required_fields() -> None:
                 "reference/historical_replays/annual_award/evidence/"
                 "comparison_runs/annual-award-2026-03-001/checkpoint-results.json"
             ),
+            source_intake_adaptation=(
+                "reference/historical_replays/annual_award/evidence/"
+                "comparison_runs/annual-award-2026-03-001/source-intake-adaptation.json"
+            ),
+            lineage_impact=(
+                "reference/historical_replays/annual_award/evidence/"
+                "comparison_runs/annual-award-2026-03-001/lineage-impact.json"
+            ),
             publication_results=(
                 "reference/historical_replays/annual_award/evidence/"
                 "comparison_runs/annual-award-2026-03-001/publication-results.json"

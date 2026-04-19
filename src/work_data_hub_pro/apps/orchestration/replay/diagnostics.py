@@ -183,6 +183,24 @@ def load_replay_diagnostics(
                     comparison_run_root,
                 )
             ),
+            source_intake_adaptation=str(
+                _resolve_package_path(
+                    evidence_root,
+                    manifest,
+                    "source_intake_adaptation",
+                    "source-intake-adaptation.json",
+                    comparison_run_root,
+                )
+            ),
+            lineage_impact=str(
+                _resolve_package_path(
+                    evidence_root,
+                    manifest,
+                    "lineage_impact",
+                    "lineage-impact.json",
+                    comparison_run_root,
+                )
+            ),
             publication_results=str(
                 _resolve_package_path(
                     evidence_root,

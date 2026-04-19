@@ -13,12 +13,23 @@ from work_data_hub_pro.apps.orchestration.replay.diagnostics import (
 from work_data_hub_pro.apps.orchestration.replay.errors import (
     ReplayDiagnosticsNotFoundError,
 )
+from work_data_hub_pro.apps.orchestration.replay.lookup import (
+    ReplayLookupError,
+    load_replay_lookup,
+)
 from work_data_hub_pro.apps.orchestration.replay.registry import REPLAY_DOMAINS
+from work_data_hub_pro.governance.adjudication.service import (
+    AdjudicationError,
+    AdjudicationService,
+)
+from work_data_hub_pro.governance.evidence_index.file_store import FileEvidenceIndex
 
 
 app = typer.Typer(help="WorkDataHubPro replay utilities")
 replay_app = typer.Typer(help="Registry-backed replay commands")
+compatibility_app = typer.Typer(help="File-backed compatibility case commands")
 app.add_typer(replay_app, name="replay")
+app.add_typer(compatibility_app, name="compatibility")
 
 
 def _domain_record(domain: str, spec) -> dict[str, str]:
@@ -98,6 +109,8 @@ def _diagnostics_payload(diagnostics) -> dict[str, Any]:
             "manifest": diagnostics.report.evidence_paths.manifest,
             "gate_summary": diagnostics.report.evidence_paths.gate_summary,
             "checkpoint_results": diagnostics.report.evidence_paths.checkpoint_results,
+            "source_intake_adaptation": diagnostics.report.evidence_paths.source_intake_adaptation,
+            "lineage_impact": diagnostics.report.evidence_paths.lineage_impact,
             "publication_results": diagnostics.report.evidence_paths.publication_results,
             "report": diagnostics.report.evidence_paths.report,
             "compatibility_case": diagnostics.report.evidence_paths.compatibility_case,
@@ -107,6 +120,27 @@ def _diagnostics_payload(diagnostics) -> dict[str, Any]:
 
 def _emit_json(payload: dict[str, Any]) -> None:
     typer.echo(json.dumps(payload, ensure_ascii=False))
+
+
+def _case_payload(case) -> dict[str, Any]:
+    return {
+        "case_id": case.case_id,
+        "comparison_run_id": case.comparison_run_id,
+        "severity": case.severity,
+        "decision_owner": case.decision_owner,
+        "decision_status": case.decision_status,
+        "resolved_outcome": case.resolved_outcome,
+        "closure_evidence": case.closure_evidence,
+        "closed_by": case.closed_by,
+    }
+
+
+def _compatibility_service(evidence_root: Path) -> AdjudicationService:
+    return AdjudicationService(FileEvidenceIndex(evidence_root))
+
+
+def _emit_case_error(code: str, case_id: str) -> None:
+    _emit_json({"error": code, "case_id": case_id})
 
 
 def _emit_wrapper_summary(outcome) -> None:
@@ -169,6 +203,80 @@ def replay_diagnose(
         raise typer.Exit(code=1)
 
     _emit_json(_diagnostics_payload(diagnostics))
+
+
+@replay_app.command("lookup")
+def replay_lookup(
+    comparison_run_id: str = typer.Option(..., "--comparison-run-id"),
+    record_id: str | None = typer.Option(None, "--record-id"),
+    anchor_row_no: int | None = typer.Option(None, "--anchor-row-no"),
+) -> None:
+    try:
+        lookup = load_replay_lookup(
+            comparison_run_id,
+            record_id=record_id,
+            anchor_row_no=anchor_row_no,
+        )
+    except ReplayLookupError as exc:
+        _emit_json({"error": exc.code, "comparison_run_id": comparison_run_id})
+        raise typer.Exit(code=1) from exc
+
+    _emit_json(lookup.to_payload())
+
+
+@compatibility_app.command("show-case")
+def compatibility_show_case(
+    evidence_root: Path = typer.Option(..., "--evidence-root"),
+    case_id: str = typer.Option(..., "--case-id"),
+) -> None:
+    try:
+        case = FileEvidenceIndex(evidence_root).load_case(case_id)
+    except FileNotFoundError as exc:
+        _emit_case_error("case_not_found", case_id)
+        raise typer.Exit(code=1) from exc
+    _emit_json(_case_payload(case))
+
+
+@compatibility_app.command("transition-case")
+def compatibility_transition_case(
+    evidence_root: Path = typer.Option(..., "--evidence-root"),
+    case_id: str = typer.Option(..., "--case-id"),
+    status: str = typer.Option(..., "--status"),
+    owner: str = typer.Option(..., "--owner"),
+    resolution_note: str = typer.Option(..., "--resolution-note"),
+) -> None:
+    try:
+        case = _compatibility_service(evidence_root).transition_case(
+            case_id,
+            status=status,
+            owner=owner,
+            resolution_note=resolution_note,
+        )
+    except AdjudicationError as exc:
+        _emit_case_error(exc.code, case_id)
+        raise typer.Exit(code=1) from exc
+    _emit_json(_case_payload(case))
+
+
+@compatibility_app.command("close-case")
+def compatibility_close_case(
+    evidence_root: Path = typer.Option(..., "--evidence-root"),
+    case_id: str = typer.Option(..., "--case-id"),
+    owner: str = typer.Option(..., "--owner"),
+    resolution_note: str = typer.Option(..., "--resolution-note"),
+    closure_evidence: list[str] = typer.Option(..., "--closure-evidence"),
+) -> None:
+    try:
+        case = _compatibility_service(evidence_root).close_case(
+            case_id,
+            owner=owner,
+            resolution_note=resolution_note,
+            closure_evidence=closure_evidence,
+        )
+    except AdjudicationError as exc:
+        _emit_case_error(exc.code, case_id)
+        raise typer.Exit(code=1) from exc
+    _emit_json(_case_payload(case))
 
 
 @app.command("replay-annuity-performance")
