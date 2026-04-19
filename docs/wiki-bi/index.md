@@ -48,6 +48,8 @@
   - 它回答“这个客户关联了多少个不同计划”，不等于主导计划，也不等于 snapshot `plan_count`。
 - [`关联机构数` 到底是什么](./concepts/related-branch-count.md)
   - 它回答“这个客户关联了多少个不同机构”，不等于 `主拓机构`，也不等于 `其他开拓机构` 的清单。
+- [`组合代码` 到底是什么](./concepts/portfolio-code.md)
+  - 它回答 portfolio / classification anchor，不等于企业身份，也不等于 customer-master 聚合分类。
 - [`其他年金计划` 到底是什么](./concepts/other-annuity-plans.md)
   - 它回答“这个客户还关联了哪些计划”的 breadth-list context，不等于 `关键年金计划`，也不等于 `关联计划数`。
 - [`其他开拓机构` 到底是什么](./concepts/other-branches.md)
@@ -123,6 +125,7 @@
 - [其他年金计划](./concepts/other-annuity-plans.md) : 说明 customer-master relationship breadth 中“还关联了哪些计划”的列表语义，不把它混写成主导计划或 breadth count。
 - [关联机构数](./concepts/related-branch-count.md) : 说明 customer-master relationship breadth 中“关联了多少个不同机构”的语义，不把它混写成主导机构或机构清单。
 - [其他开拓机构](./concepts/other-branches.md) : 说明 customer-master relationship breadth 中“还关联了哪些机构”的列表语义，不把它混写成主导机构或 breadth count。
+- [组合代码](./concepts/portfolio-code.md) : 说明事实层与 `mapping.组合计划` 之间的 portfolio/classification anchor 语义，不把它混写成身份键或 customer-master 聚合分类。
 - [管理资格](./concepts/management-qualification.md) : 说明 customer-master 聚合分类中的管理角色语义，不把它混写成输入侧 `业务类型` 或 `组合代码`。
 - [年金计划类型：`plan_type`](./concepts/plan-type.md) : 说明单一计划与集合计划的语义差异和约束。
 - [快照粒度：`snapshot_granularity`](./concepts/snapshot-granularity.md) : 定义客户/产品线与客户/计划两类快照粒度。
@@ -248,5 +251,6 @@
 - [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md) : maintenance 轮次，把 shared unresolved-name / failed-record artifact family 收紧成 durable evidence dispatcher，并保持 income-specific accepted closure 与 cross-domain parity gap 分层表达。
 - [Round 33：reference_sync governance](./_meta/absorption-rounds/round-33-reference-sync-governance.md) : maintenance 轮次，把 `reference_sync` 的 target inventory、sync-state 与 current replacement boundary 收紧成对象级 evidence route。
 - [Round 34：relationship breadth list deepening](./_meta/absorption-rounds/round-34-relationship-breadth-list-deepening.md) : maintenance 轮次，把 `其他年金计划` 与 `其他开拓机构` 推进成 durable objects，并让 relationship breadth 在计划侧与机构侧都形成 dominant / count / list 三层表达。
+- [Round 35：portfolio anchor tightening](./_meta/absorption-rounds/round-35-portfolio-anchor-tightening.md) : maintenance 轮次，把 `组合代码` 推进成 durable object，并把 classification family 的 portfolio-anchor 层收紧成直接可答的入口。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

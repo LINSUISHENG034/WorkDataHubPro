@@ -17,6 +17,7 @@
 - [临时身份：`temp_id`](../concepts/temp-id.md)
 - [客户状态总览](../concepts/customer-status.md)
 - [年金计划类型：`plan_type`](../concepts/plan-type.md)
+- [组合代码](../concepts/portfolio-code.md)
 - [回填：`backfill`](../concepts/backfill.md)
 - [`tags`](../concepts/tags.md)
 - [主拓机构](../concepts/primary-branch.md)
@@ -80,6 +81,7 @@
   - 计划侧见 [关键年金计划](../concepts/key-annuity-plan.md)、[关联计划数](../concepts/related-plan-count.md)、[其他年金计划](../concepts/other-annuity-plans.md)
   - 机构侧见 [主拓机构](../concepts/primary-branch.md)、[关联机构数](../concepts/related-branch-count.md)、[其他开拓机构](../concepts/other-branches.md)
 - classification family 中的 customer-master 聚合分类见 [管理资格](../concepts/management-qualification.md) 与 [classification family 证据](../evidence/classification-family-evidence.md)。
+- portfolio/classification anchor 见 [组合代码](../concepts/portfolio-code.md)；它回答 fact rows 如何接回 `mapping.组合计划` 语境，而不是客户身份或 customer-master 聚合分类。
 - legacy unresolved-name / failed-record artifacts 现在有 shared evidence page；它说明 `annuity_performance` 属于 historical artifact breadth，但 current accepted parity 仍未闭环：[unresolved-name and failed-record 证据](../evidence/unresolved-name-and-failed-record-evidence.md)。
 - 字段级证据和证据强度分层见 [`annuity_performance` 字段处理证据](../evidence/annuity-performance-field-processing-evidence.md)。
 

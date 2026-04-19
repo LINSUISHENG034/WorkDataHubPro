@@ -3,6 +3,12 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-19 10:57] maintain | round 35 portfolio anchor tightening
+
+- 新增 `portfolio-code.md`，把 `组合代码` 从 dispatcher / field-processing 交叉入口层推进成 durable wiki 对象
+- 回写 `classification-family-evidence`、相邻 concept / domain / input-output-contract 页面，使 portfolio-anchor 层不再混写成身份键或 customer-master 聚合分类
+- 新增 Round 35 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确下一步默认回到 manual `customer-mdm` / enterprise persistence closure wave
+
 ## [2026-04-19 10:34] maintain | round 34 relationship breadth list deepening
 
 - 新增 `other-annuity-plans.md` 与 `other-branches.md`，把 `其他年金计划` 与 `其他开拓机构` 从 dispatcher-only 状态推进成 durable wiki 对象

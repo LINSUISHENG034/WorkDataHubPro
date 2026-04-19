@@ -32,6 +32,7 @@
 - `tags`、`主拓机构`、`关键年金计划`、`关联计划数` 这类 customer-master signals 都依赖 aggregation rule，不能当作无来源字段
 - `关键年金计划` 只回答“哪个计划最具主导性”，不替代 `其他年金计划`、`关联计划数` 或 `关联机构数` 这类 relationship breadth 信号
 - `其他开拓机构` 与 `其他年金计划` 是 breadth-list signals，用来补充“还关联了哪些对象”，不替代 dominant value 或 breadth count
+- `组合代码` 是 portfolio anchor；`fk_portfolio` 不是随手复制字段，而是在事实层与 `mapping.组合计划` 之间建立受治理锚点
 - `管理资格` 回答 customer-master 聚合分类，不等于输入侧 `业务类型`
 - temp-id / blank value 的处理会直接影响 backfill 输出
 
@@ -66,6 +67,7 @@
 - [关联机构数](./related-branch-count.md)
 - [其他年金计划](./other-annuity-plans.md)
 - [其他开拓机构](./other-branches.md)
+- [组合代码](./portfolio-code.md)
 - [管理资格](./management-qualification.md)
 
 ## 相关标准

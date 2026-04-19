@@ -361,9 +361,25 @@
 
 - completed on 2026-04-19
 
+## Round 35：portfolio anchor tightening（已完成）
+
+目标：
+
+- 把 `组合代码` 从 dispatcher / field-processing 交叉入口层推进成 durable portfolio-anchor object
+
+主入口页：
+
+- `concepts/portfolio-code.md`
+- `evidence/classification-family-evidence.md`
+- `concepts/plan-type.md`
+
+状态：
+
+- completed on 2026-04-19
+
 ## 当前位置
 
-`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次、Round 24-31 的 legacy 隐含语义补强、Round 32-33 的第一批 semantic-map-adjacent surface-discovery 收口，以及 Round 34 的 relationship-breadth list closeout。
+`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次、Round 24-31 的 legacy 隐含语义补强、Round 32-33 的第一批 semantic-map-adjacent surface-discovery 收口，以及 Round 34-35 对 remaining high-value business-semantics queue 的收口。
 
 当前应明确保持两条边界：
 
@@ -372,9 +388,9 @@
 
 ## 下阶段：业务语义与 surface discovery 双轨收口
 
-Round 29 到 Round 31 已经把 dominant value / breadth count / classification family 的高价值对象补了一轮；Round 32 把 shared unresolved-name / failed-record artifact family 从“gap-only 提示”推进成了 durable evidence dispatcher；Round 33 则把 `reference_sync` 的 target inventory / sync-state / replacement boundary 补成了对象级 evidence route；Round 34 进一步把 relationship-breadth list side 收口成 durable objects。
+Round 29 到 Round 31 已经把 dominant value / breadth count / classification family 的高价值对象补了一轮；Round 32 把 shared unresolved-name / failed-record artifact family 从“gap-only 提示”推进成了 durable evidence dispatcher；Round 33 则把 `reference_sync` 的 target inventory / sync-state / replacement boundary 补成了对象级 evidence route；Round 34-35 则把 remaining relationship-breadth list side 与 portfolio-anchor side 收口成 durable objects。
 
-因此，当前 business-semantics queue 已经明显变窄。若继续以 legacy 业务语义覆盖为目标，下一优先对象应是 `组合代码`；若切回 runtime/operator 发现，则应回到 semantic-map-first 的 manual `customer-mdm` / enterprise persistence closure wave。
+因此，当前已经没有另一个同等明显、仍停留在 dispatcher-only 的 high-value business-semantics candidate。若没有新的 raw-source sweep 改变这个判断，下一步更合理的方向应回到 semantic-map-first 的 runtime/operator discovery。
 
 工作原则：
 
@@ -387,7 +403,7 @@ Round 29 到 Round 31 已经把 dominant value / breadth count / classification 
 
 双轨顺序：
 
-1. 若目标是继续补 business semantics，只在 remaining candidate 真正达到 standalone question-answer 阈值时再 promotion
+1. 若目标是继续补 business semantics，只在新的 raw-source sweep 发现真正达到 standalone question-answer 阈值的对象时再 promotion
 2. 若目标是补 runtime/operator truth，则先围绕 first-wave 未闭合的 cross-cutting surfaces 开 discovery wave，而不是重复已完成的相邻 business-semantics closeout
 3. 每个 discovery wave 先补 semantic map，再把稳定结论吸收到 `evidence/`
 4. `evidence/` 稳定后，再回写 `concepts/`、`standards/`、`surfaces/`、`domains/`
@@ -395,9 +411,7 @@ Round 29 到 Round 31 已经把 dominant value / breadth count / classification 
 
 remaining business-semantic candidates：
 
-- `组合代码`
-
-这些对象目前仍更适合留在 dispatcher / evidence 层，除非后续 raw sources 或 current-side evidence 把它们推进到独立 object-page 阈值。
+- 当前无同等明显的 dispatcher-only high-value object；除非后续 raw-source sweep 暴露新的独立语义对象
 
 ## 优先 discovery 主题簇
 
@@ -411,7 +425,6 @@ remaining business-semantic candidates：
 
 ## 当前推荐入口
 
-如果马上继续推进，推荐按下面顺序二选一开工：
+如果马上继续推进，推荐按下面顺序开工：
 
-- business-semantics track：`classification-family-evidence.md`、`plan-type.md` 与相邻 field-processing / output-contract 页面作为 `组合代码` / portfolio-anchor tightening 入口
 - surface-discovery track：manual `customer-mdm` + enterprise persistence closure wave

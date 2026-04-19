@@ -10,11 +10,12 @@
 
 | evidence_id | source_type | evidence_strength | coverage_state | supported_pages | last_verified | notes |
 |---|---|---|---|---|---|---|
-| E-CF-001 | legacy_doc | strong | absorbed | `classification-family-evidence`, `plan-type`, `company-id` | 2026-04-18 | `E:\Projects\WorkDataHub\docs\business-background\年金计划类型与客户名称业务背景.md` 明确单一计划 / 集合计划会改变客户识别假设，说明输入侧 `计划类型` 不能直接等同于 customer-master 聚合标签。 |
-| E-CF-002 | legacy_config | strong | absorbed | `classification-family-evidence`, `plan-type`, `management-qualification`, `annuity-performance-field-processing-evidence`, `annuity-income-field-processing-evidence`, `annual-loss-field-processing-evidence` | 2026-04-18 | `E:\Projects\WorkDataHub\config\foreign_keys.yml` 显式声明 `业务类型 -> 管理资格`、`concat_distinct(年金计划类型)`、`fk_portfolio(组合代码)` 等聚合/映射规则，证明 classification family 跨越输入、reference 与 customer-master 多层。 |
-| E-CF-003 | legacy_doc | strong | absorbed | `classification-family-evidence`, `annuity-performance-field-processing-evidence` | 2026-04-18 | `E:\Projects\WorkDataHub\docs\cleansing-rules\annuity-performance.md` 明确 `业务类型 -> 产品线代码`、`组合代码` 的 defaulting 以及 `计划类型` 对默认计划/组合锚点的影响。 |
-| E-CF-004 | legacy_doc | strong | absorbed | `classification-family-evidence`, `annuity-income-field-processing-evidence`, `plan-type` | 2026-04-18 | `E:\Projects\WorkDataHub\docs\cleansing-rules\annuity-income.md` 明确 `组合代码` 会按 `业务类型` / `计划类型` 补默认值，且单一计划 / 集合计划会改变计划名称解释与客户识别路径。 |
-| E-CF-005 | legacy_doc | strong | absorbed | `classification-family-evidence`, `management-qualification`, `annuity-performance-field-processing-evidence`, `annuity-income-field-processing-evidence`, `annual-loss-field-processing-evidence` | 2026-04-18 | `E:\Projects\WorkDataHub\docs\verification_guide_real_data.md` 把 `管理资格`、`年金计划类型`、`其他年金计划`、`其他开拓机构` 等聚合结果列为 operator 需核验的正式输出，而不是纯实现细节。 |
+| E-CF-001 | legacy_doc | strong | absorbed | `classification-family-evidence`, `plan-type`, `company-id`, `portfolio-code` | 2026-04-19 | `E:\Projects\WorkDataHub\docs\business-background\年金计划类型与客户名称业务背景.md` 明确单一计划 / 集合计划会改变客户识别假设，说明输入侧 `计划类型` 不能直接等同于 customer-master 聚合标签，且集合计划场景下 `组合代码` 比单纯 `客户名称` 更重要。 |
+| E-CF-002 | legacy_config | strong | absorbed | `classification-family-evidence`, `plan-type`, `management-qualification`, `portfolio-code`, `annuity-performance-field-processing-evidence`, `annuity-income-field-processing-evidence`, `annual-loss-field-processing-evidence`, `annuity-performance-output-contract`, `annuity-income-output-contract` | 2026-04-19 | `E:\Projects\WorkDataHub\config\foreign_keys.yml` 显式声明 `业务类型 -> 管理资格`、`concat_distinct(年金计划类型)`、`fk_portfolio(组合代码)` 等聚合/映射规则，证明 classification family 跨越输入、reference 与 customer-master 多层。 |
+| E-CF-003 | legacy_doc | strong | absorbed | `classification-family-evidence`, `annuity-performance-field-processing-evidence`, `portfolio-code` | 2026-04-19 | `E:\Projects\WorkDataHub\docs\cleansing-rules\annuity-performance.md` 明确 `业务类型 -> 产品线代码`、`组合代码` 的 defaulting 以及 `计划类型` 对默认计划/组合锚点的影响。 |
+| E-CF-004 | legacy_doc | strong | absorbed | `classification-family-evidence`, `annuity-income-field-processing-evidence`, `plan-type`, `portfolio-code` | 2026-04-19 | `E:\Projects\WorkDataHub\docs\cleansing-rules\annuity-income.md` 明确 `组合代码` 会按 `业务类型` / `计划类型` 补默认值，且单一计划 / 集合计划会改变计划名称解释与客户识别路径。 |
+| E-CF-005 | legacy_doc | strong | absorbed | `classification-family-evidence`, `management-qualification`, `portfolio-code`, `annuity-performance-field-processing-evidence`, `annuity-income-field-processing-evidence`, `annual-loss-field-processing-evidence` | 2026-04-19 | `E:\Projects\WorkDataHub\docs\verification_guide_real_data.md` 把 `管理资格`、`年金计划类型`、`其他年金计划`、`其他开拓机构` 等聚合结果列为 operator 需核验的正式输出，而不是纯实现细节。 |
+| E-CF-006 | legacy_code | strong | absorbed | `classification-family-evidence`, `portfolio-code`, `backfill`, `annuity-performance-output-contract`, `annuity-income-output-contract` | 2026-04-19 | `E:\Projects\WorkDataHub\src\work_data_hub\domain\reference_backfill\service.py` 明确 portfolio candidate derivation 以 `组合代码` 分组并将其作为 `mapping.组合计划` 主键，证明它是受治理的 portfolio anchor。 |
 
 ## 本轮已吸收的稳定结论
 
@@ -22,6 +23,8 @@
 - `业务类型` 既是输入分类，又经常成为 `产品线代码`、`管理资格` 与组合默认规则的解释锚点，因此不能被简化成“普通枚举字段”。
 - `管理资格` 属于 customer-master 聚合分类，不等于输入侧某一行的 `业务类型` 原值；它现在已提升为独立 durable concept page。
 - `组合代码` 更接近 portfolio / classification anchor，而不是 enterprise identity truth。
+- `组合代码` 同时连接 fact rows 与 `mapping.组合计划`；它不是“仅在清洗阶段出现一下”的辅助字段。
+- 对 `组合代码` 做 regex 清洗与默认补位，是为了保护 portfolio anchor contract，而不是为了发明新的业务对象。
 - classification family 同时跨越 input contract、field-processing evidence 与 customer-master aggregation；如果只看某一页里的字段处理，很容易把层次混写。
 
 ## 哪些来源是强证
@@ -40,12 +43,13 @@
 
 - [年金计划类型：`plan_type`](../concepts/plan-type.md)
 - [管理资格](../concepts/management-qualification.md)
+- [组合代码](../concepts/portfolio-code.md)
 - [`annuity_performance` 字段处理证据](./annuity-performance-field-processing-evidence.md)
 - [`annuity_income` 字段处理证据](./annuity-income-field-processing-evidence.md)
 - [`annual_loss` 字段处理证据](./annual-loss-field-processing-evidence.md)
 
 ## 当前证据缺口
 
-- `管理资格` 现在已有独立 concept page；`组合代码` 仍保留在 dispatcher / field-processing / contract 交叉入口层，不在本轮继续 promotion。
+- `管理资格` 与 `组合代码` 现在都已有独立 concept page；`业务类型` 与 customer-master `年金计划类型` 仍主要通过 dispatcher / field-processing / contract 交叉入口解释。
 - `annual_award` 对 classification family 的承接仍主要通过 event-domain contract 与 customer-master signal family 间接呈现，尚未形成单独对象页。
 - current project 还没有把 classification family 作为整组对象写成 repo-native contract tests；当前主要依赖 legacy raw sources 与现有 field-processing pages 的 current 承接说明。

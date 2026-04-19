@@ -33,7 +33,7 @@
 | `计划代码` | 双重：工程 + 业务 | 先做特例修正，再按 `计划类型` 在缺失时补默认值 | 既保证键的可用性，也决定计划对象如何被识别 |
 | `业务类型` | 业务语义处理 | 映射为 `产品线代码` | 把源业务分类转成后续 join / snapshot / backfill 的稳定产品线键 |
 | `机构` / `机构名称` | 双重：工程 + 业务 | 列重命名后再映射为 `机构代码`，并处理 branch overrides/default | 将机构文本转成受治理的组织对象 |
-| `组合代码` | 工程性质量提升 | 去掉前缀 `F`，并在缺失时按业务类型/计划类型补默认 | 让 portfolio 相关引用具备稳定格式 |
+| `组合代码` | 工程性质量提升 | 去掉前缀 `F`，并在缺失时按业务类型/计划类型补默认 | 保护 portfolio anchor contract，使 fact 与 `mapping.组合计划` 保持稳定关联 |
 | `客户名称` | 双重：工程 + 业务 | 先复制为 `年金账户名`，再做名称归一 | 既保护 identity clue，又保持清洗后的统一客户名称 |
 | `年金账户名` | 业务语义处理 | 保留清洗前 clue 供 identity 解析使用 | 不是显示字段，而是 identity governance 的线索保留 |
 | `集团企业客户号` -> `年金账户号` | 业务语义处理 | 去掉前缀 `C` 后派生到账户号 | 为 identity 解析与后续账户相关解释保留结构化线索 |
@@ -64,7 +64,7 @@
 - identity resolution、plan-code defaulting、backfill 聚合、contract / snapshot 派生这类动作属于明确业务语义处理
 - 某些字段同时跨两类，例如 `计划代码`、`客户名称`、`机构代码`，因为它们先要被清洗成可用格式，之后才进入业务解释
 - `annuity_performance` 的隐藏字段语义不是“字段数量”，而是字段在 direct fact、backfill、snapshot 三层里的角色迁移
-- `计划类型`、`业务类型`、`组合代码` 与 customer-master `年金计划类型` / `管理资格` 属于同一 classification family 的不同层；统一解释见 [classification family 证据](./classification-family-evidence.md) 与 [管理资格](../concepts/management-qualification.md)
+- `计划类型`、`业务类型`、`组合代码` 与 customer-master `年金计划类型` / `管理资格` 属于同一 classification family 的不同层；统一解释见 [classification family 证据](./classification-family-evidence.md)、[管理资格](../concepts/management-qualification.md) 与 [组合代码](../concepts/portfolio-code.md)
 
 ## 哪些来源是强证
 
