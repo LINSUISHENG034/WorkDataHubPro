@@ -1,0 +1,119 @@
+semantic_id: sem-rule-workbook-discovery-version-arbitration
+semantic_node_type: semantic_rule
+title: Workbook discovery and version arbitration boundary
+summary: Directory scanning and highest-version arbitration are input-admission runtime
+  carriers that decide which workbook instance a domain may read, while shared workbook
+  family or folder ancestry does not merge distinct domain sheet contracts.
+business_conclusion: Directory scanning, version-folder selection, and file-pattern-aware
+  highest-version arbitration should be interpreted as operator/runtime admission
+  contracts rather than low-level plumbing. They govern which workbook instance enters
+  a domain run, but they do not redefine the domain itself. Shared workbook family,
+  shared folder ancestry, or shared version strategy can explain why multiple domains
+  are admitted through adjacent physical carriers, yet those carriers do not collapse
+  separate sheet-scoped domain contracts into one domain.
+primary_semantic_sources:
+- config/data_sources.yml
+- docs/domains/annuity_performance-capability-map.md
+- docs/domains/annuity_income-capability-map.md
+- docs/domains/annual_award-capability-map.md
+- docs/domains/annual_loss-capability-map.md
+supporting_witness_sources:
+- src/work_data_hub/io/connectors/version_scanner.py
+- src/work_data_hub/io/connectors/discovery/service.py
+- tests/integration/io/test_version_detection.py
+- docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+- docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+- docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+- docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+- docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+proposal_governance:
+  recommendation_status: claim_level_only
+  semantic_scope_type: runtime_carrier
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Shared workbook families and shared parent folders are real runtime carriers,
+    but FileDiscoveryService still binds version detection and file matching to one
+    domain config before any sheet is admitted.
+  - File-pattern-aware version arbitration allows one folder ancestry to yield different
+    admitted workbook versions for different domains, so ancestry is not equivalent
+    to one merged domain contract.
+  proxy_usage_refs:
+  - config/data_sources.yml
+  - src/work_data_hub/io/connectors/version_scanner.py
+  - src/work_data_hub/io/connectors/discovery/service.py
+  - tests/integration/io/test_version_detection.py
+  - docs/domains/annuity_income-capability-map.md
+  - docs/domains/annual_award-capability-map.md
+  - docs/domains/annual_loss-capability-map.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+  - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+  - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+  related_runtime_carriers: []
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports treating folder scanning and version arbitration as governed
+        input-admission behavior that must stay visible when deciding whether a runtime
+        or operator path is actually closed.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+      - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+      - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports deferring future retain-or-replace decisions about automatic
+        directory scanning without erasing the already evidenced discovery and version-arbitration
+        boundary.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+      - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+      - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that equate shared workbook ancestry
+        with one domain contract or that demote version arbitration to invisible plumbing.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+      - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+      - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Preserve as proposal-grade runtime-carrier guidance for workbook-discovery
+        evidence and input-reality standards, not as a merged domain concept.
+      target_pages:
+      - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+      - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+      - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: inferred
+discovery_view_status: sufficient
+consumption_readiness_status: discovery-only
+readiness_notes:
+- File-pattern-aware version arbitration allows one folder ancestry to yield different
+  admitted workbook versions for different domains, so ancestry is not equivalent
+  to one merged domain contract.
+- Shared workbook families and shared parent folders are real runtime carriers, but
+  FileDiscoveryService still binds version detection and file matching to one domain
+  config before any sheet is admitted.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-19T00:00:00Z'
+confidence: high
+last_verified: '2026-04-19'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-workbook-discovery-version-arbitration

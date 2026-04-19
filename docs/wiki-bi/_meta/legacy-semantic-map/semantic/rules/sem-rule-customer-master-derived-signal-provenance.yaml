@@ -1,0 +1,115 @@
+semantic_id: sem-rule-customer-master-derived-signal-provenance
+semantic_node_type: semantic_rule
+title: Customer-master derived signal provenance
+summary: Customer-master signals are grouped derived outputs from backfill aggregation
+  families, not raw fact publication and not snapshot-status fields.
+business_conclusion: "Customer-master signals are fact-derived backfill outputs with\
+  \ distinct provenance families. Dominant-value signals such as \u4E3B\u62D3\u673A\
+  \u6784, \u4E3B\u62D3\u673A\u6784\u4EE3\u7801, and \u5173\u952E\u5E74\u91D1\u8BA1\
+  \u5212 come from weighted max_by selection, breadth-count signals such as \u5173\
+  \u8054\u8BA1\u5212\u6570 and \u5173\u8054\u673A\u6784\u6570 come from count_distinct\
+  \ aggregation, breadth-list signals such as \u5176\u4ED6\u5E74\u91D1\u8BA1\u5212\
+  \ and \u5176\u4ED6\u5F00\u62D3\u673A\u6784 come from concat_distinct aggregation,\
+  \ classification signals such as \u5E74\u91D1\u5BA2\u6237\u7C7B\u578B, \u7BA1\u7406\
+  \u8D44\u683C, and \u5E74\u91D1\u8BA1\u5212\u7C7B\u578B come from classification-oriented\
+  \ concat_distinct or template rules, and timeline-tag signals such as tags with\
+  \ yyMM\u65B0\u5EFA, yyMM\u4E2D\u6807, and yyMM\u6D41\u5931 come from date-formatted\
+  \ tag append rules. These signal families must not be collapsed into raw fact publication\
+  \ or snapshot status semantics."
+primary_semantic_sources:
+- config/foreign_keys.yml
+- "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\u4E0E\u72B6\
+  \u6001\u6765\u6E90\u5206\u6790.md"
+supporting_witness_sources:
+- docs/verification_guide_real_data.md
+- docs/domains/annuity_performance-capability-map.md
+- docs/domains/annuity_income-capability-map.md
+- docs/wiki-bi/evidence/customer-master-signals-evidence.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+- docs/wiki-bi/standards/output-correctness/output-correctness.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/evidence/customer-master-signals-evidence.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+- docs/wiki-bi/standards/output-correctness/output-correctness.md
+proposal_governance:
+  recommendation_status: recommended_stable_canonical
+  semantic_scope_type: semantic_object
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_operational_shortcut
+  contradiction_accounting_notes:
+  - Legacy runtime and verification often discuss these fields together as generic
+    customer-master backfill results, but that convenience label should not erase
+    the distinct provenance families inside the signal set.
+  - "Some downstream narratives can read \u5E74\u91D1\u5BA2\u6237\u7C7B\u578B or tags\
+    \ as if they were status outputs, yet the accepted boundary keeps them on the\
+    \ derived customer-master side of backfill rather than in snapshot-status semantics."
+  proxy_usage_refs:
+  - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  downstream_consequence_refs:
+  - docs/verification_guide_real_data.md
+  - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  - docs/wiki-bi/standards/output-correctness/output-correctness.md
+  related_runtime_carriers:
+  - obj-annuity-performance-legacy-fact-processing
+  - obj-annuity-income-legacy-fact-processing
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports slice decisions that keep customer-master signal families
+        on the derived backfill side and block implementations that flatten them into
+        raw fact publication or snapshot-status outputs.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+      - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+      - docs/wiki-bi/standards/output-correctness/output-correctness.md
+      blocked_by: []
+    defer_candidates:
+      summary: ''
+      affected_surfaces: []
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that describe customer-master signals
+        as direct fact columns, generic snapshot status, or one undifferentiated backfill
+        blob.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+      - docs/wiki-bi/standards/output-correctness/output-correctness.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Ready for durable absorption review as a provenance boundary across
+        customer-master signal families and output-correctness guidance.
+      target_pages:
+      - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+      - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+      - docs/wiki-bi/standards/output-correctness/output-correctness.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: consumption-candidate
+discovery_view_status: sufficient
+consumption_readiness_status: reviewable
+readiness_notes:
+- Legacy runtime and verification often discuss these fields together as generic customer-master
+  backfill results, but that convenience label should not erase the distinct provenance
+  families inside the signal set.
+- "Some downstream narratives can read \u5E74\u91D1\u5BA2\u6237\u7C7B\u578B or tags\
+  \ as if they were status outputs, yet the accepted boundary keeps them on the derived\
+  \ customer-master side of backfill rather than in snapshot-status semantics."
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-19T03:06:50Z'
+confidence: high
+last_verified: '2026-04-19'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-customer-master-derived-signal-provenance

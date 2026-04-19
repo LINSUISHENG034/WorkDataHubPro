@@ -12,9 +12,12 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary",
     "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-customer-master-derived-signal-provenance",
     "claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary",
     "claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary",
     "claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering",
+    "claim-wave-2026-04-17-semantic-governance-reframe-event-domain-current-row-contract-lookup",
+    "claim-wave-2026-04-17-semantic-governance-reframe-fact-publication-refresh-scope-boundary",
     "claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence",
     "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering",
     "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
@@ -29,7 +32,8 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency",
     "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
     "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet",
-    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence"
+    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence",
+    "claim-wave-2026-04-17-semantic-governance-reframe-workbook-discovery-version-arbitration"
   ],
   "compiled_claim_ids": [
     "claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family",
@@ -39,9 +43,12 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary",
     "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle",
     "claim-wave-2026-04-17-semantic-governance-reframe-core",
+    "claim-wave-2026-04-17-semantic-governance-reframe-customer-master-derived-signal-provenance",
     "claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary",
     "claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary",
     "claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering",
+    "claim-wave-2026-04-17-semantic-governance-reframe-event-domain-current-row-contract-lookup",
+    "claim-wave-2026-04-17-semantic-governance-reframe-fact-publication-refresh-scope-boundary",
     "claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence",
     "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering",
     "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year",
@@ -56,7 +63,8 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency",
     "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor",
     "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet",
-    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence"
+    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence",
+    "claim-wave-2026-04-17-semantic-governance-reframe-workbook-discovery-version-arbitration"
   ],
   "missing_claim_ids": [],
   "mutable_claim_ids_detected": [],
@@ -72,9 +80,12 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary": "6be790c1297482f341130e77f818b8ae74eda59ff7c9239104ad07f451bcd379",
     "claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle": "c31b11d9c1ec2f12c8e36aaa1d0875b36f32ae9479e9e68cf28242305ef03ab5",
     "claim-wave-2026-04-17-semantic-governance-reframe-core": "f0571729e279bc5f36dbf3fd91c9c6b6dc56dbc6c4112f5a664b3430cbe513fe",
+    "claim-wave-2026-04-17-semantic-governance-reframe-customer-master-derived-signal-provenance": "9137632b728d8b1f961062495d467a74bc0b1db1ef61aa700b05b6720f609be1",
     "claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary": "7ee13eee406830bc2dfb502febdb80114d53d25ed7dbb7523c03948e2ddcbfd0",
     "claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary": "6adce2cd10eb2dd405af773704231d994c31c68ca40d780cbb918639dec012a1",
     "claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering": "2dcef89a21004c167300cc2304358a01d5dd73586db3f2fa915dc5084fe963ca",
+    "claim-wave-2026-04-17-semantic-governance-reframe-event-domain-current-row-contract-lookup": "371e86db86437bbfef4a45bb926c09514300705d741ca61054cc553665c3e52d",
+    "claim-wave-2026-04-17-semantic-governance-reframe-fact-publication-refresh-scope-boundary": "752ca4d120d0639e9e8fba88db23fdda668654cefbc9560b55392c3e7d50fb9b",
     "claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence": "6b8d5d0b4cec7819b96e91fbf1a2021b1dcd6bc65f34d5acc3212f881b18f012",
     "claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering": "7c6a1516070c8c77efb5a56f2176702a80f97af9e02598b16be42b4ec15b93be",
     "claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year": "87fc30e6cbb4a01ed7e9eb4a8eedc99d0e08c671cc13e344c8a5d2bddbbef7d9",
@@ -89,7 +100,8 @@
     "claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency": "342cb504a7fac0d9af7432ad2e18801d2d75940e24c37072d2f9782135866ac9",
     "claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor": "13cd4fa53871832b0ce406cfd080f15bc5e14a93de20d6621f3a0eb283921236",
     "claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet": "a670ec64b55be4d0138ae911955015efa005bd01537da4fd1eb7becd6fdf13bc",
-    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence": "28c1a28ac67fe67f05a275d81f6ac25e0d2eb7f1ef801e78dc37b32960fecd27"
+    "claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence": "28c1a28ac67fe67f05a275d81f6ac25e0d2eb7f1ef801e78dc37b32960fecd27",
+    "claim-wave-2026-04-17-semantic-governance-reframe-workbook-discovery-version-arbitration": "2bc596b2980a186f98558cf29436f815b9c752024a75e295c5591e0f9ebfb621"
   },
-  "generated_at": "2026-04-19T02:21:38Z"
+  "generated_at": "2026-04-19T03:06:50Z"
 }
