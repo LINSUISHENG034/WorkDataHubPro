@@ -154,6 +154,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
 - from_id: config/reference_sync.yml
+  to_id: sem-rule-reference-sync-governance-bridge
+  relationship: supports_claim_target
+  source_refs:
+  - config/reference_sync.yml
+  source_type: legacy_config
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-governance-bridge
+- from_id: config/reference_sync.yml
   to_id: sem-rule-reference-sync-incremental-state
   relationship: supports_claim_target
   source_refs:
@@ -385,6 +399,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-classification-family-layering
+- from_id: docs/deployment_run_guide.md
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/deployment_run_guide.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: docs/deployment_run_guide.md
+  to_id: sem-rule-standalone-tooling-operator-adjacency
+  relationship: supports_claim_target
+  source_refs:
+  - docs/deployment_run_guide.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency
 - from_id: docs/domains/annual_award-capability-map.md
   to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
   relationship: supports_claim_target
@@ -736,6 +778,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence
 - from_id: docs/guides/infrastructure/company-enrichment-service.md
+  to_id: sem-rule-company-lookup-queue-publication-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary
+- from_id: docs/guides/infrastructure/company-enrichment-service.md
   to_id: sem-rule-enrichment-index-cache-boundary
   relationship: supports_claim_target
   source_refs:
@@ -960,6 +1016,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-reference-sync-execution
 - from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  to_id: sem-rule-company-lookup-queue-publication-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
   to_id: ss-annual-award
   relationship: supports_claim_target
   source_refs:
@@ -1015,6 +1085,48 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-subsystem
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  to_id: sem-rule-company-lookup-queue-publication-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  to_id: sem-rule-standalone-tooling-operator-adjacency
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency
+- from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md
+  to_id: sem-rule-standalone-tooling-operator-adjacency
+  relationship: supports_claim_target
+  source_refs:
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md
+  source_type: current_spec
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency
 - from_id: docs/verification_guide_real_data.md
   to_id: sem-rule-annuity-performance-post-hook-chain
   relationship: supports_claim_target
@@ -1380,6 +1492,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
 - from_id: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
   to_id: sem-lifecycle-customer-status-yearly-cycle
   relationship: supports_claim_target
   source_refs:
@@ -1547,6 +1673,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
+- from_id: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  to_id: sem-rule-company-lookup-queue-publication-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary
+- from_id: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  to_id: sem-rule-standalone-tooling-operator-adjacency
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency
 - from_id: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
   to_id: ep-scheduled-orchestrated-entrypoints-reference-sync-flow-entry
   relationship: supports_claim_target
@@ -1589,6 +1743,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-layering
+- from_id: docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+  to_id: sem-rule-reference-sync-governance-bridge
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-governance-bridge
 - from_id: docs/wiki-bi/evidence/status-and-snapshot-evidence.md
   to_id: sem-rule-is-churned-this-year-definition
   relationship: supports_claim_target
@@ -1687,6 +1855,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
+- from_id: docs/wiki-bi/surfaces/company-lookup-queue.md
+  to_id: sem-rule-company-lookup-queue-publication-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary
+- from_id: docs/wiki-bi/surfaces/customer-mdm-commands.md
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/surfaces/customer-mdm-commands.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
 - from_id: docs/wiki-bi/surfaces/reference-sync.md
   to_id: sem-fact-family-reference-sync-target-inventory
   relationship: supports_claim_target
@@ -1716,6 +1912,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
 - from_id: docs/wiki-bi/surfaces/reference-sync.md
+  to_id: sem-rule-reference-sync-governance-bridge
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/surfaces/reference-sync.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-governance-bridge
+- from_id: docs/wiki-bi/surfaces/reference-sync.md
   to_id: sem-rule-reference-sync-incremental-state
   relationship: supports_claim_target
   source_refs:
@@ -1729,6 +1939,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state
+- from_id: docs/wiki-bi/surfaces/standalone-tooling.md
+  to_id: sem-rule-standalone-tooling-operator-adjacency
+  relationship: supports_claim_target
+  source_refs:
+  - docs/wiki-bi/surfaces/standalone-tooling.md
+  source_type: current_wiki
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency
 - from_id: io/schema/migrations/versions/001_initial_infrastructure.py
   to_id: sem-concept-eqc-persistence-layering
   relationship: supports_claim_target
@@ -2037,6 +2261,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object
+- from_id: src/work_data_hub/cli/__main__.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/__main__.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: src/work_data_hub/cli/__main__.py
+  to_id: sem-rule-standalone-tooling-operator-adjacency
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/__main__.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency
 - from_id: src/work_data_hub/cli/customer_mdm.py.txt
   to_id: ep-manual-cli-entrypoints-customer-mdm-manual-entry
   relationship: supports_claim_target
@@ -2065,6 +2317,62 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: src/work_data_hub/cli/customer_mdm/__init__.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm/__init__.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: src/work_data_hub/cli/customer_mdm/cutover.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm/cutover.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: src/work_data_hub/cli/customer_mdm/init_year.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm/init_year.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: src/work_data_hub/cli/customer_mdm/snapshot.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm/snapshot.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
 - from_id: src/work_data_hub/cli/customer_mdm/snapshot.py
   to_id: sem-rule-annuity-performance-post-hook-chain
   relationship: supports_claim_target
@@ -2080,6 +2388,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
 - from_id: src/work_data_hub/cli/customer_mdm/sync.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm/sync.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: src/work_data_hub/cli/customer_mdm/sync.py
   to_id: sem-rule-annuity-performance-post-hook-chain
   relationship: supports_claim_target
   source_refs:
@@ -2093,6 +2415,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
+- from_id: src/work_data_hub/cli/customer_mdm/validate.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/cli/customer_mdm/validate.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
 - from_id: src/work_data_hub/cli/etl/executors.py
   to_id: sem-rule-annuity-performance-post-hook-chain
   relationship: supports_claim_target
@@ -2135,6 +2471,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-annuity-performance-hook-chain
+- from_id: src/work_data_hub/customer_mdm/__init__.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/__init__.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
 - from_id: src/work_data_hub/customer_mdm/contract_sync.py
   to_id: sem-concept-customer-annual-identity-family
   relationship: supports_claim_target
@@ -2149,6 +2499,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family
+- from_id: src/work_data_hub/customer_mdm/contract_sync.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
 - from_id: src/work_data_hub/customer_mdm/contract_sync.py
   to_id: sem-lifecycle-customer-status-yearly-cycle
   relationship: supports_claim_target
@@ -2192,6 +2556,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-strategic-ratchet
 - from_id: src/work_data_hub/customer_mdm/snapshot_refresh.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/snapshot_refresh.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: src/work_data_hub/customer_mdm/snapshot_refresh.py
   to_id: sem-lifecycle-customer-status-yearly-cycle
   relationship: supports_claim_target
   source_refs:
@@ -2220,6 +2598,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year
 - from_id: src/work_data_hub/customer_mdm/status_evaluator.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/status_evaluator.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: src/work_data_hub/customer_mdm/status_evaluator.py
   to_id: sem-rule-is-churned-this-year-definition
   relationship: supports_claim_target
   source_refs:
@@ -2233,6 +2625,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-is-churned-this-year
+- from_id: src/work_data_hub/customer_mdm/strategic.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/strategic.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+- from_id: src/work_data_hub/customer_mdm/validation.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/validation.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
 - from_id: src/work_data_hub/customer_mdm/year_init.py
   to_id: sem-concept-customer-annual-identity-family
   relationship: supports_claim_target
@@ -2247,6 +2667,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-annual-identity-family
+- from_id: src/work_data_hub/customer_mdm/year_init.py
+  to_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/customer_mdm/year_init.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
 - from_id: src/work_data_hub/customer_mdm/year_init.py
   to_id: sem-rule-status-year-identity-anchor
   relationship: supports_claim_target
@@ -2303,6 +2737,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
+- from_id: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  to_id: sem-rule-company-lookup-queue-publication-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary
 - from_id: src/work_data_hub/domain/reference_backfill/sync_models.py
   to_id: sem-fact-family-reference-sync-target-inventory
   relationship: supports_claim_target
@@ -2317,6 +2765,62 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory
+- from_id: src/work_data_hub/domain/reference_backfill/sync_models.py
+  to_id: sem-rule-reference-sync-governance-bridge
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/domain/reference_backfill/sync_models.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-governance-bridge
+- from_id: src/work_data_hub/gui/eqc_query/app.py
+  to_id: sem-rule-standalone-tooling-operator-adjacency
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/gui/eqc_query/app.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency
+- from_id: src/work_data_hub/gui/eqc_query/controller.py
+  to_id: sem-rule-standalone-tooling-operator-adjacency
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/gui/eqc_query/controller.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency
+- from_id: src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  to_id: sem-rule-company-lookup-queue-publication-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary
 - from_id: src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
   to_id: sem-rule-enrichment-index-cache-boundary
   relationship: supports_claim_target
@@ -2387,6 +2891,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
+- from_id: src/work_data_hub/io/loader/company_enrichment_loader.py
+  to_id: sem-rule-company-lookup-queue-publication-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/io/loader/company_enrichment_loader.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary
+- from_id: src/work_data_hub/io/repositories/sync_state_repository.py
+  to_id: sem-rule-reference-sync-governance-bridge
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/io/repositories/sync_state_repository.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-governance-bridge
 - from_id: src/work_data_hub/io/repositories/sync_state_repository.py
   to_id: sem-rule-reference-sync-incremental-state
   relationship: supports_claim_target
@@ -2485,6 +3017,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-preload-cycle
+- from_id: src/work_data_hub/orchestration/reference_sync_ops.py
+  to_id: sem-rule-reference-sync-governance-bridge
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/orchestration/reference_sync_ops.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-governance-bridge
 - from_id: src/work_data_hub/orchestration/reference_sync_ops.py
   to_id: sem-rule-reference-sync-incremental-state
   relationship: supports_claim_target

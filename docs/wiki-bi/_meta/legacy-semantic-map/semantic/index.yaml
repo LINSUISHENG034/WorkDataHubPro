@@ -41,6 +41,9 @@ semantic_nodes:
 - semantic_id: sem-lifecycle-company-lookup-queue-recovery-cycle
   semantic_node_type: semantic_lifecycle
   path: semantic/lifecycles/sem-lifecycle-company-lookup-queue-recovery-cycle.yaml
+- semantic_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  semantic_node_type: semantic_lifecycle
+  path: semantic/lifecycles/sem-lifecycle-customer-mdm-manual-runtime-boundary.yaml
 - semantic_id: sem-lifecycle-customer-status-yearly-cycle
   semantic_node_type: semantic_lifecycle
   path: semantic/lifecycles/sem-lifecycle-customer-status-yearly-cycle.yaml
@@ -71,6 +74,9 @@ semantic_nodes:
 - semantic_id: sem-rule-company-id-multi-signal-resolution
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-company-id-multi-signal-resolution.yaml
+- semantic_id: sem-rule-company-lookup-queue-publication-boundary
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-company-lookup-queue-publication-boundary.yaml
 - semantic_id: sem-rule-company-lookup-queue-single-domain-boundary
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-company-lookup-queue-single-domain-boundary.yaml
@@ -86,9 +92,15 @@ semantic_nodes:
 - semantic_id: sem-rule-is-new-definition
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-is-new-definition.yaml
+- semantic_id: sem-rule-reference-sync-governance-bridge
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-reference-sync-governance-bridge.yaml
 - semantic_id: sem-rule-reference-sync-incremental-state
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-reference-sync-incremental-state.yaml
+- semantic_id: sem-rule-standalone-tooling-operator-adjacency
+  semantic_node_type: semantic_rule
+  path: semantic/rules/sem-rule-standalone-tooling-operator-adjacency.yaml
 - semantic_id: sem-rule-status-source-splitting
   semantic_node_type: semantic_rule
   path: semantic/rules/sem-rule-status-source-splitting.yaml

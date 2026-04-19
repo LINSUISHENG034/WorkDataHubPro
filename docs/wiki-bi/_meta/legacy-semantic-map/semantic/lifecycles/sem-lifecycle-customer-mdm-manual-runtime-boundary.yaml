@@ -1,0 +1,106 @@
+semantic_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+semantic_node_type: semantic_lifecycle
+title: Customer MDM manual runtime boundary
+summary: customer-mdm remains an explicit manual operator surface whose five subcommands
+  map to separate runtime controls instead of collapsing into a single hidden hook
+  path.
+business_conclusion: customer-mdm commands are a manual operator/runtime boundary
+  outside hook-only execution. sync, snapshot, init-year, validate, and cutover are
+  distinct operator controls, not aliases for one hidden hook chain. The unified CLI
+  exposes them separately, and the delegated runtime functions split contract sync,
+  monthly snapshot refresh, annual initialization, validation/reporting, and annual
+  cutover into different operator-facing actions.
+primary_semantic_sources:
+- docs/deployment_run_guide.md
+- src/work_data_hub/cli/__main__.py
+- src/work_data_hub/cli/customer_mdm/sync.py
+- src/work_data_hub/cli/customer_mdm/snapshot.py
+- src/work_data_hub/cli/customer_mdm/init_year.py
+- src/work_data_hub/cli/customer_mdm/validate.py
+- src/work_data_hub/cli/customer_mdm/cutover.py
+supporting_witness_sources:
+- src/work_data_hub/customer_mdm/__init__.py
+- src/work_data_hub/customer_mdm/contract_sync.py
+- src/work_data_hub/customer_mdm/snapshot_refresh.py
+- src/work_data_hub/customer_mdm/year_init.py
+- src/work_data_hub/customer_mdm/validation.py
+- src/work_data_hub/customer_mdm/status_evaluator.py
+- src/work_data_hub/customer_mdm/strategic.py
+- docs/wiki-bi/surfaces/customer-mdm-commands.md
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/surfaces/customer-mdm-commands.md
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+proposal_governance:
+  recommendation_status: claim_level_only
+  semantic_scope_type: runtime_carrier
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - annuity_performance post-hooks remain one automatic trigger path, but the legacy
+    CLI and run guide still expose customer-mdm as a rerunnable manual operator boundary.
+  - This claim preserves runtime/operator surface memory only; it does not try to
+    restabilize yearly formulas, status_year authority, or strategic-ratchet semantics.
+  proxy_usage_refs:
+  - docs/wiki-bi/surfaces/customer-mdm-commands.md
+  downstream_consequence_refs:
+  - docs/wiki-bi/surfaces/customer-mdm-commands.md
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  related_runtime_carriers:
+  - obj-customer-mdm-lifecycle
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports admitting customer-mdm command memory as an explicit operator/runtime
+        surface when evaluating lifecycle-boundary retention.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/customer-mdm-commands.md
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports deferring retain/replace/retire decisions for individual commands
+        without erasing the fact that legacy exposed a manual runtime boundary.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/customer-mdm-commands.md
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring descriptions that flatten sync, snapshot, init-year,
+        validate, and cutover into one hidden hook-only implementation detail.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/customer-mdm-commands.md
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Preserve as runtime-governance memory for the manual operator surface,
+        not as stable business-semantic canon.
+      target_pages:
+      - docs/wiki-bi/surfaces/customer-mdm-commands.md
+      - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: inferred
+discovery_view_status: sufficient
+consumption_readiness_status: discovery-only
+readiness_notes:
+- This claim preserves runtime/operator surface memory only; it does not try to restabilize
+  yearly formulas, status_year authority, or strategic-ratchet semantics.
+- annuity_performance post-hooks remain one automatic trigger path, but the legacy
+  CLI and run guide still expose customer-mdm as a rerunnable manual operator boundary.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-19T00:30:00Z'
+confidence: high
+last_verified: '2026-04-19'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary

@@ -1,0 +1,137 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-company-lookup-queue-publication-boundary
+sources_read:
+- source_ref: docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  note: Service guide splits company enrichment into Layer 2 enrichment-index cache, Layer 5 temp-id plus async queue, and a company_id output rather than a fact-publication contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/company-enrichment-service.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  source_type: legacy_code
+  note: Queue DAO writes raw_name, normalized_name, status, attempts, and retry state into enterprise.enrichment_requests as operational identity work state.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/io/loader/company_enrichment_loader.py
+  source_type: legacy_code
+  note: Loader caches EQC lookup results into enterprise.enrichment_index with lookup_type, confidence, and source metadata for future identity reuse.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/io/loader/company_enrichment_loader.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  source_type: legacy_code
+  note: Repository UPSERT logic keeps enrichment_index in a confidence-arbitrated cache role with hit-count telemetry instead of a business fact sink role.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  semantic_authority: runtime_witness
+- source_ref: docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  source_type: current_spec
+  note: Current architecture requires fact, derivation, and projection publication to remain separately visible transaction scopes.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  source_type: current_spec
+  note: Coverage matrix states first-wave validation proves visible publication groups, not legacy table-specific sink write semantics.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/wiki-bi/surfaces/company-lookup-queue.md
+  source_type: current_wiki
+  note: Current surface page preserves deferred queue-runtime truth and records the unresolved publication-boundary candidate.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/surfaces/company-lookup-queue.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  note: Current evidence page distinguishes accepted explicit publication flow from deferred queue runtime and persistence surfaces.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
+submitted_at: '2026-04-19T00:00:00Z'
+semantic_findings:
+- semantic_id: sem-rule-company-lookup-queue-publication-boundary
+  semantic_node_type: semantic_rule
+  title: Company lookup queue publication boundary
+  summary: company_lookup_queue persistence and adjacent enrichment-index writes publish identity-runtime state, but they are not first-wave fact publication or accepted explicit publication groups.
+  business_conclusion: >-
+    company_lookup_queue and its persistence writes are identity-runtime
+    publication carriers, not equivalents of first-wave fact publication or
+    accepted publication groups. Writes to enterprise.enrichment_requests
+    publish async identity-recovery state, while enrichment_index updates publish
+    reusable identity-cache state; both must stay separate from business fact
+    publication semantics.
+  primary_source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+  supporting_source_refs:
+  - src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  - src/work_data_hub/io/loader/company_enrichment_loader.py
+  - src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Queue inserts and enrichment-index UPSERTs are publication-like only in the narrow sense that they externalize identity-runtime work products into persistence surfaces.
+    - The current rebuild defines accepted publication as explicit fact, derivation, and projection write scopes with visible publication groups, so identity queue/cache persistence cannot be collapsed into that contract without losing the boundary.
+    proxy_usage_refs:
+    - src/work_data_hub/domain/company_enrichment/lookup_queue.py
+    - src/work_data_hub/io/loader/company_enrichment_loader.py
+    - src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/company-lookup-queue.md
+    - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports keeping identity queue/cache persistence outside first-wave fact-publication admission logic while still preserving it as a governed runtime surface.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring repo-native queue and enrichment-index persistence retention without misclassifying those writes as accepted publication closure.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that treat enrichment_requests or enrichment_index writes as if they were business fact publication or accepted publication-group equivalents.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Preserve as runtime-governance memory for queue/publication boundary review, not as stable business-semantic canon or accepted publication contract.
+        target_pages:
+        - docs/wiki-bi/surfaces/company-lookup-queue.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+trigger_id: trigger-company-lookup-queue-publication-boundary-001
+orchestration_iteration: 1

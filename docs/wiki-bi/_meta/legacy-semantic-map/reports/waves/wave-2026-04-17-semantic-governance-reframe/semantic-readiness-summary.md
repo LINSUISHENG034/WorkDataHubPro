@@ -2,4 +2,4 @@
 
 - reviewable proposal ids: sem-concept-classification-family-layering, sem-concept-company-id-anchor, sem-concept-customer-annual-identity-family, sem-concept-customer-master-backfill, sem-concept-customer-status, sem-concept-identity-governance-layering, sem-concept-reference-strategy-layering, sem-fact-family-customer-status-source-family, sem-fact-family-plan-classification-stack, sem-lifecycle-customer-status-yearly-cycle, sem-non-equivalence-company-id-vs-customer-name, sem-non-equivalence-customer-master-vs-status, sem-non-equivalence-input-plan-type-vs-customer-master-plan-type, sem-non-equivalence-reference-sync-vs-backfill, sem-non-equivalence-temp-id-vs-company-id, sem-rule-company-id-multi-signal-resolution, sem-rule-is-churned-this-year-definition, sem-rule-is-new-definition, sem-rule-status-source-splitting, sem-rule-strategic-ratchet, sem-rule-unresolved-identity-operator-visibility
 - blocked proposal ids: sem-non-equivalence-customer-type-vs-is-new, sem-rule-status-year-identity-anchor
-- durable target page count: 19
+- durable target page count: 21

@@ -1,0 +1,199 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-customer-mdm-manual-runtime-boundary
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+sources_read:
+- source_ref: src/work_data_hub/cli/__main__.py
+  source_type: legacy_code
+  note: Unified CLI exposes customer-mdm as its own top-level command and dispatches sync, snapshot, init-year, validate, and cutover as explicit subcommands.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/__main__.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/customer_mdm/__init__.py
+  source_type: legacy_code
+  note: Customer MDM CLI package docstring classifies the area as manual CLI operations rather than a hidden helper path.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/customer_mdm/__init__.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/customer_mdm/sync.py
+  source_type: legacy_code
+  note: sync is documented as a manual trigger and delegates to sync_contract_status.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/customer_mdm/sync.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/customer_mdm/snapshot.py
+  source_type: legacy_code
+  note: snapshot is documented as a manual trigger and delegates to refresh_monthly_snapshot for an explicit period.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/customer_mdm/snapshot.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/customer_mdm/init_year.py
+  source_type: legacy_code
+  note: init-year is documented as a manual annual initialization command and delegates to initialize_year_status.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/customer_mdm/init_year.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/customer_mdm/validate.py
+  source_type: legacy_code
+  note: validate exposes a separate operator-facing status-distribution check instead of piggybacking on sync or snapshot execution.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/customer_mdm/validate.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/cli/customer_mdm/cutover.py
+  source_type: legacy_code
+  note: cutover exposes a separate annual-cutover control with its own confirmation and dry-run behavior.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/customer_mdm/cutover.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/__init__.py
+  source_type: legacy_code
+  note: Service-layer exports confirm sync, snapshot, and init-year map to named runtime entry functions rather than one generic handler.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/__init__.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  note: sync_contract_status is a dedicated contract-status synchronization service, supporting sync as its own runtime operation.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/contract_sync.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/snapshot_refresh.py
+  source_type: legacy_code
+  note: refresh_monthly_snapshot is a dedicated snapshot-refresh service, supporting snapshot as its own runtime operation.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/snapshot_refresh.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/year_init.py
+  source_type: legacy_code
+  note: year_init.py holds two separate annual operations, initialize_year_status and annual_cutover, which preserves init-year and cutover as distinct controls.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/year_init.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/validation.py
+  source_type: legacy_code
+  note: validate_status_distribution is a separate validation/reporting runtime and is not an alias of sync, snapshot, or annual actions.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/validation.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/status_evaluator.py
+  source_type: legacy_code
+  note: Snapshot internals use a config-driven evaluator, which confirms formula evaluation lives beneath snapshot rather than defining the operator-boundary conclusion itself.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/status_evaluator.py
+  semantic_authority: implementation_hint
+- source_ref: src/work_data_hub/customer_mdm/strategic.py
+  source_type: legacy_code
+  note: Strategic-threshold config loading is adjacent annual-status logic and was inspected to avoid making ratchet or yearly-formula semantics the main claim.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/strategic.py
+  semantic_authority: implementation_hint
+- source_ref: docs/deployment_run_guide.md
+  source_type: legacy_doc
+  note: Deployment guide explicitly documents manual rerun commands for customer-mdm sync and snapshot after annuity_performance, proving the operator-facing runtime path is not hook-only.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/deployment_run_guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/wiki-bi/surfaces/customer-mdm-commands.md
+  source_type: current_wiki
+  note: Current surface page already preserves the command set as an operator surface and records that exact retention decisions remain deferred.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/surfaces/customer-mdm-commands.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  source_type: current_wiki
+  note: Current evidence page already preserves coexistence between hook wiring and manual customer-mdm command surfaces.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/customer-mdm-commands.md
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+submitted_at: '2026-04-19T00:30:00Z'
+semantic_findings:
+- semantic_id: sem-lifecycle-customer-mdm-manual-runtime-boundary
+  semantic_node_type: semantic_lifecycle
+  title: Customer MDM manual runtime boundary
+  summary: customer-mdm remains an explicit manual operator surface whose five subcommands map to separate runtime controls instead of collapsing into a single hidden hook path.
+  business_conclusion: >-
+    customer-mdm commands are a manual operator/runtime boundary outside
+    hook-only execution. sync, snapshot, init-year, validate, and cutover are
+    distinct operator controls, not aliases for one hidden hook chain. The
+    unified CLI exposes them separately, and the delegated runtime functions
+    split contract sync, monthly snapshot refresh, annual initialization,
+    validation/reporting, and annual cutover into different operator-facing
+    actions.
+  primary_source_refs:
+  - docs/deployment_run_guide.md
+  - src/work_data_hub/cli/__main__.py
+  - src/work_data_hub/cli/customer_mdm/sync.py
+  - src/work_data_hub/cli/customer_mdm/snapshot.py
+  - src/work_data_hub/cli/customer_mdm/init_year.py
+  - src/work_data_hub/cli/customer_mdm/validate.py
+  - src/work_data_hub/cli/customer_mdm/cutover.py
+  supporting_source_refs:
+  - src/work_data_hub/customer_mdm/__init__.py
+  - src/work_data_hub/customer_mdm/contract_sync.py
+  - src/work_data_hub/customer_mdm/snapshot_refresh.py
+  - src/work_data_hub/customer_mdm/year_init.py
+  - src/work_data_hub/customer_mdm/validation.py
+  - src/work_data_hub/customer_mdm/status_evaluator.py
+  - src/work_data_hub/customer_mdm/strategic.py
+  - docs/wiki-bi/surfaces/customer-mdm-commands.md
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/customer-mdm-commands.md
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - annuity_performance post-hooks remain one automatic trigger path, but the legacy CLI and run guide still expose customer-mdm as a rerunnable manual operator boundary.
+    - This claim preserves runtime/operator surface memory only; it does not try to restabilize yearly formulas, status_year authority, or strategic-ratchet semantics.
+    proxy_usage_refs:
+    - docs/wiki-bi/surfaces/customer-mdm-commands.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/customer-mdm-commands.md
+    - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+    related_runtime_carriers:
+    - obj-customer-mdm-lifecycle
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports admitting customer-mdm command memory as an explicit operator/runtime surface when evaluating lifecycle-boundary retention.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/customer-mdm-commands.md
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring retain/replace/retire decisions for individual commands without erasing the fact that legacy exposed a manual runtime boundary.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/customer-mdm-commands.md
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring descriptions that flatten sync, snapshot, init-year, validate, and cutover into one hidden hook-only implementation detail.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/customer-mdm-commands.md
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Preserve as runtime-governance memory for the manual operator surface, not as stable business-semantic canon.
+        target_pages:
+        - docs/wiki-bi/surfaces/customer-mdm-commands.md
+        - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+        blocked_by: []
+trigger_id: trigger-customer-mdm-manual-runtime-boundary-001
+orchestration_iteration: 1

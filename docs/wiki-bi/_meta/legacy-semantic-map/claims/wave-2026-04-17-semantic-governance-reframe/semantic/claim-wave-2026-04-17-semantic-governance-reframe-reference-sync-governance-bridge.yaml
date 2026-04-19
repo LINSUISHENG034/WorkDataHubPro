@@ -1,0 +1,127 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-governance-bridge
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-reference-sync-governance-bridge
+sources_read:
+- source_ref: config/reference_sync.yml
+  source_type: legacy_config
+  note: Reference sync config preserves the authoritative target inventory and per-table sync contract that the rebuild still needs to explain.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/reference_sync.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/orchestration/reference_sync_ops.py
+  source_type: legacy_code
+  note: reference_sync_op shows the legacy bridge lived in an explicit runtime carrier with plan_only, force_full_sync, and state-resolution controls.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/reference_sync_ops.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/io/repositories/sync_state_repository.py
+  source_type: legacy_code
+  note: SyncStateRepository proves the runtime carrier persisted per-job and per-table sync state, but that state mechanism is not the whole governance truth.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/io/repositories/sync_state_repository.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/domain/reference_backfill/sync_models.py
+  source_type: legacy_code
+  note: ReferenceSyncTableConfig formalizes target table, target schema, source type, sync mode, primary key, and incremental config as governed contract fields.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/domain/reference_backfill/sync_models.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/surfaces/reference-sync.md
+  source_type: current_wiki
+  note: Current surface page explicitly preserves retained governance memory while marking repo-native runtime, schedule, and sync-state persistence as deferred.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/surfaces/reference-sync.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+  source_type: current_wiki
+  note: Current evidence page explicitly splits target inventory, incremental state, and the accepted reference_derivation -> publication replacement boundary.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/reference-sync.md
+- docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+submitted_at: '2026-04-19T02:21:38Z'
+semantic_findings:
+- semantic_id: sem-rule-reference-sync-governance-bridge
+  semantic_node_type: semantic_rule
+  title: Reference sync governance bridge
+  summary: >-
+    reference_sync is the governance bridge between retained authoritative
+    inventory and sync-contract memory and the current explicit
+    reference_derivation -> publication replacement path.
+  business_conclusion: >-
+    legacy reference_sync should be interpreted as a governance bridge rather
+    than as a requirement to keep the same repo-native runtime alive. The
+    retained truth is the authoritative target inventory and sync contract
+    memory carried by reference_sync configuration and models, while the current
+    accepted replacement path is explicit reference_derivation -> publication.
+    Replacing the runtime carrier therefore must not erase the retained
+    governance truth about what authoritative reference targets and contracts
+    still need to be explained.
+  primary_source_refs:
+  - config/reference_sync.yml
+  supporting_source_refs:
+  - src/work_data_hub/orchestration/reference_sync_ops.py
+  - src/work_data_hub/io/repositories/sync_state_repository.py
+  - src/work_data_hub/domain/reference_backfill/sync_models.py
+  - docs/wiki-bi/surfaces/reference-sync.md
+  - docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/reference-sync.md
+  - docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Current accepted slices use explicit reference_derivation -> publication as a scope-limited replacement path for legacy runtime coverage, but that replacement does not delete the retained governance truth about authoritative targets and sync contracts.
+    proxy_usage_refs:
+    - docs/wiki-bi/surfaces/reference-sync.md
+    - docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/reference-sync.md
+    - docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+    related_runtime_carriers:
+    - obj-reference-sync-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports evaluating accepted reference_derivation and publication coverage as a runtime replacement path without treating legacy reference_sync governance truth as deleted.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        - docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports keeping repo-native bootstrap and runtime retention deferred while preserving target-inventory and sync-contract memory as required governance context.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        - docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that equate runtime replacement with permission to erase authoritative reference_sync governance memory.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        - docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Preserve as governance-bridge memory linking retained legacy reference_sync truth to the explicit reference_derivation -> publication replacement story, not as proof that repo-native runtime has been restored.
+        target_pages:
+        - docs/wiki-bi/surfaces/reference-sync.md
+        - docs/wiki-bi/evidence/reference-sync-runtime-and-state-evidence.md
+        blocked_by: []
+trigger_id: trigger-reference-sync-governance-bridge-001
+orchestration_iteration: 1
