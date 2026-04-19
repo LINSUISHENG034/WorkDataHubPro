@@ -28,7 +28,9 @@
 - `reference_sync` 的 target inventory、incremental sync-state 与 current replacement story 现在已有对象级 evidence route，不再只停留在 shared decision table
 - `failed-record export` 不是普通 debug 输出，而是 operator artifact
 - manual `customer-mdm` commands 不是 hook 的副产品，而是独立 operator surface，并且 deployment guide 暴露了手工 recovery / recompute 路径
+- manual `customer-mdm` runtime boundary 现在已有独立 evidence route，可直接回答 legacy operator surface、primary-vs-recovery trigger 与 current deferred boundary
 - `enterprise.enrichment_index`、`enterprise.enrichment_requests`、`enterprise.base_info` 共同构成 identity 相关 persistence surface，不能长期隐身
+- enterprise persistence family 现在已有独立 evidence route，可直接回答 cache/queue persistence、provider-retention root 与 downstream normalized persistence 的 layering
 - `company_lookup_queue` 不是模糊的 fallback 细节，而是 temp-id 之后的异步补查运行面，带有 dedup 与 graceful degradation 语义
 - standalone `cleanse` CLI 与多种 GUI 工具是 operator-adjacent tooling family，应显式登记，但不应自动提升为 rebuild 核心边界
 - surface 主题最容易被“当前主线只关注 fact domain”掩盖，因此必须显式登记
@@ -77,11 +79,13 @@
 ## 对象级补强页
 
 - [enterprise enrichment persistence](../surfaces/enterprise-enrichment-persistence.md)
+- [enterprise enrichment persistence 证据](./enterprise-enrichment-persistence-evidence.md)
 - [standalone tooling](../surfaces/standalone-tooling.md)
 - [reference_sync](../surfaces/reference-sync.md)
 - [`reference_sync` runtime and state 证据](./reference-sync-runtime-and-state-evidence.md)
 - [引用同步与回填证据](./reference-and-backfill-evidence.md)
 - [`company_lookup_queue`](../surfaces/company-lookup-queue.md)
+- [`customer-mdm` manual runtime 证据](./customer-mdm-manual-runtime-evidence.md)
 - [business collection ledger workbook](../surfaces/business-collection-ledger-workbook.md)
 - [business collection workbook variants 证据](./business-collection-workbook-variants-evidence.md)
 - [unresolved-name and failed-record 证据](./unresolved-name-and-failed-record-evidence.md)
@@ -91,6 +95,6 @@
 
 - shared unresolved-name / failed-record artifact parity 仍未完成 cross-domain closure；当前已有 shared evidence dispatcher，但 accepted artifact contract 仍只有 `annuity_income`
 - standalone tooling family 已被显式登记，但 retain / retire / defer 边界仍待后续治理决策
-- manual `customer-mdm` commands 虽已显式登记，但每条命令的 retain / replace / retire 边界仍待后续治理决策
+- manual `customer-mdm` commands 现在已有对象级 evidence route，但每条命令的 retain / replace / retire 边界仍待后续治理决策
 - `业务收集` 目录下相邻 workbook variants 的多月稳定性与最终 surface catalog 仍待更多样本验证
 - 本仓库未携带 legacy `src/work_data_hub/*` 与 `docs/guides/validation/*` 原始路径，当前对 legacy runtime breadth 的表述依赖既有 audit 产物；若后续需要对象级 closure，需补充可复核的原始证据映射

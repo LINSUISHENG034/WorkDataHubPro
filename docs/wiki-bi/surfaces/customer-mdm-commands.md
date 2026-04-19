@@ -78,6 +78,7 @@ legacy unified CLI 与 deployment guide 都把这组命令当作独立 operator 
 
 ## 关键证据来源
 
+- [`customer-mdm` manual runtime 证据](../evidence/customer-mdm-manual-runtime-evidence.md)
 - [状态与快照证据](../evidence/status-and-snapshot-evidence.md)
 - [customer MDM 生命周期证据](../evidence/customer-mdm-lifecycle-evidence.md)
 - [operator 与 surface 证据](../evidence/operator-and-surface-evidence.md)
@@ -89,6 +90,7 @@ legacy unified CLI 与 deployment guide 都把这组命令当作独立 operator 
 - 在做 state / snapshot / annual lifecycle 相关判断时，不应假设只有自动 hook 路径存在
 - 当前至少应保留“手工 recovery / recompute controls 曾经是正式操作面”的制度记忆
 - Phase B consume/absorb 已将 `cand-customer-mdm-manual-runtime-boundary` 明确归一为 `deferred`；当前 durable truth 是保留 manual runtime/operator surface 的制度记忆，而不是提前宣称命令集合已经定案
+- manual `customer-mdm` commands 的 current boundary、legacy primary-vs-recovery trigger 关系与 current deferred 状态，统一见 [`customer-mdm` manual runtime 证据](../evidence/customer-mdm-manual-runtime-evidence.md)
 
 ## 仍未决的问题
 

@@ -30,6 +30,7 @@
 - mapping / override files、cache、provider、queue 与 temp-id 一起构成 identity governance，而不是彼此孤立的“小功能”
 - current project 已显式保护 deterministic / opaque temp identity 与 source-value-first 行为，broader identity governance 也已被提升为独立标准层
 - `annual_award` 与 `annual_loss` 当前都已具备 contract-grade identity writeback 入口，不再只是状态语义的旁路来源
+- enterprise persistence family 现在也有独立 evidence route，可直接说明 cache/queue persistence、provider-retention root 与 downstream normalized persistence 的分层边界
 
 ## 四层分离证据视图
 
@@ -65,6 +66,7 @@
 ## shared artifact 补强页
 
 - [unresolved-name and failed-record 证据](./unresolved-name-and-failed-record-evidence.md)
+- [enterprise enrichment persistence 证据](./enterprise-enrichment-persistence-evidence.md)
 
 ## 当前证据缺口
 

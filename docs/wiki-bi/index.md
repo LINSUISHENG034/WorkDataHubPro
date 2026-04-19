@@ -20,6 +20,8 @@
   - 先看 [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md)，再从 [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) 与 [`company_lookup_queue`](./surfaces/company-lookup-queue.md) 进入。
 - 我想继续补 `reference_sync` runtime / state 这条线
   - 先看 [Round 33：reference_sync governance](./_meta/absorption-rounds/round-33-reference-sync-governance.md)，再从 [`reference_sync` runtime and state 证据](./evidence/reference-sync-runtime-and-state-evidence.md) 与 [`reference_sync`](./surfaces/reference-sync.md) 进入。
+- 我想继续补 manual `customer-mdm` / enterprise persistence 这条线
+  - 先看 [Round 36：manual customer-mdm and persistence closure](./_meta/absorption-rounds/round-36-manual-customer-mdm-and-persistence-closure.md)，再从 [`customer-mdm` manual runtime 证据](./evidence/customer-mdm-manual-runtime-evidence.md) 与 [enterprise enrichment persistence 证据](./evidence/enterprise-enrichment-persistence-evidence.md) 进入。
 
 ## 阅读意图
 
@@ -60,6 +62,10 @@
   - temp-id、mapping files、cache、provider、queue 的边界需要作为 identity governance 统一理解。
 - [如何区分当前运行路径、历史记忆、已退休行为与可见后果](./standards/semantic-correctness/identity-governance.md)
   - 身份治理相关叙述必须四层分离；未闭环项进入 evidence gaps，不混写成当前运行路径。
+- [manual `customer-mdm` commands 与默认 hook path 到底是什么关系](./evidence/customer-mdm-manual-runtime-evidence.md)
+  - 它们是 legacy recovery / recompute surface，不应被混写成 current monthly primary trigger。
+- [enterprise persistence 当前到底保留了什么、递延了什么](./evidence/enterprise-enrichment-persistence-evidence.md)
+  - 先看 cache / queue / provider-root / downstream normalized persistence 的 layering，再看 current deferred boundary。
 - [什么算 real-data validation](./standards/verification-method/real-data-validation.md)
   - 真实数据验证不是“拿真实文件跑一下”，而是有边界和目标的验证方法。
 - [当前生产 workbook 长什么样](./evidence/input-reality-evidence.md)
@@ -189,6 +195,7 @@
 - [身份与补查证据](./evidence/identity-and-lookup-evidence.md) : 聚合 `company_id`、temp-id、lookup、plan-code enrichment 相关证据。
 - [状态与快照证据](./evidence/status-and-snapshot-evidence.md) : 聚合客户状态、快照、customer MDM 相关证据。
 - [customer MDM 生命周期证据](./evidence/customer-mdm-lifecycle-evidence.md) : 固化 `year_init`、`sync`、`snapshot`、ratchet-style 与 `status_year` 的年度生命周期证据边界。
+- [`customer-mdm` manual runtime 证据](./evidence/customer-mdm-manual-runtime-evidence.md) : 聚合 manual `customer-mdm` command surface、default hook chain 与 current deferred boundary 的对象级证据。
 - [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md) : 固化 `is_strategic`、`is_existing`、`contract_status`、`status_year` 与 proxy-conflict 边界。
 - [customer_type vs `is_new` 治理证据](./evidence/customer-type-is-new-governance-evidence.md) : 固化 semantic non-equivalence、legacy proxy usage 与 disposition question。
 - [`is_new` 对象级证据](./evidence/is-new-evidence.md) : 聚合 `is_new` 的公式、粒度边界、非例与验证路径。
@@ -197,6 +204,7 @@
 - [验证资产证据](./evidence/verification-assets-evidence.md) : 聚合 golden set、replay baseline、validation guide、error fixtures 等证据。
 - [validation result history 证据](./evidence/validation-result-history-evidence.md) : 聚合 legacy parity result 目录、current asset registry 与 validation history 的治理结论。
 - [operator 与 surface 证据](./evidence/operator-and-surface-evidence.md) : 聚合 queue、reference sync、manual commands 与 operator artifacts 相关证据。
+- [enterprise enrichment persistence 证据](./evidence/enterprise-enrichment-persistence-evidence.md) : 聚合 cache/queue persistence、provider-retention root 与 downstream normalized persistence 的分层边界。
 - [`reference_sync` runtime and state 证据](./evidence/reference-sync-runtime-and-state-evidence.md) : 聚合 `reference_sync` 的 target inventory、incremental sync-state 与 current replacement boundary。
 - [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) : 聚合 shared unresolved-name / failed-record artifacts 的 legacy breadth、current accepted closure 与 parity gaps。
 - [引用同步与回填证据](./evidence/reference-and-backfill-evidence.md) : 聚合 authoritative `reference_sync`、fact-derived `backfill` 与 customer-master 衍生写入之间的稳定边界。
@@ -252,5 +260,6 @@
 - [Round 33：reference_sync governance](./_meta/absorption-rounds/round-33-reference-sync-governance.md) : maintenance 轮次，把 `reference_sync` 的 target inventory、sync-state 与 current replacement boundary 收紧成对象级 evidence route。
 - [Round 34：relationship breadth list deepening](./_meta/absorption-rounds/round-34-relationship-breadth-list-deepening.md) : maintenance 轮次，把 `其他年金计划` 与 `其他开拓机构` 推进成 durable objects，并让 relationship breadth 在计划侧与机构侧都形成 dominant / count / list 三层表达。
 - [Round 35：portfolio anchor tightening](./_meta/absorption-rounds/round-35-portfolio-anchor-tightening.md) : maintenance 轮次，把 `组合代码` 推进成 durable object，并把 classification family 的 portfolio-anchor 层收紧成直接可答的入口。
+- [Round 36：manual customer-mdm and persistence closure](./_meta/absorption-rounds/round-36-manual-customer-mdm-and-persistence-closure.md) : maintenance 轮次，把 manual `customer-mdm` runtime 与 enterprise persistence layering 收紧成对象级 evidence route。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

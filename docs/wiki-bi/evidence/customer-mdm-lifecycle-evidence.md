@@ -24,6 +24,7 @@ annual identity family 的对象级含义由 [customer 年度身份证据](./cus
 - `status_year` 语义是“年度身份锚点”，但具体运行时取值可能来自 period 推导而非单一配置项。
 - annual identity family 的对象含义应由独立对象页承接，避免把 lifecycle sequencing 与 status-family definition 混写。
 - 年度语义与公式记忆应留在概念/标准；命令触发路径与执行顺序应留在 surface/evidence。
+- manual `customer-mdm` runtime boundary 现在已有独立 evidence route；本页继续承接 lifecycle action split，不再单独承担 current runtime closure 叙述。
 
 ## 语义边界提醒
 
@@ -43,3 +44,4 @@ annual identity family 的对象级含义由 [customer 年度身份证据](./cus
 - [客户状态语义正确性](../standards/semantic-correctness/customer-status-semantics.md)
 - [状态与快照证据](./status-and-snapshot-evidence.md)
 - [`customer-mdm` 手工命令面](../surfaces/customer-mdm-commands.md)
+- [`customer-mdm` manual runtime 证据](./customer-mdm-manual-runtime-evidence.md)

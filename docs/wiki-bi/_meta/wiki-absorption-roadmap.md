@@ -377,20 +377,37 @@
 
 - completed on 2026-04-19
 
+## Round 36：manual `customer-mdm` and persistence closure（已完成）
+
+目标：
+
+- 把 manual `customer-mdm` runtime boundary 与 enterprise persistence layering 从 aggregate surface text 收紧成对象级 evidence route
+
+主入口页：
+
+- `evidence/customer-mdm-manual-runtime-evidence.md`
+- `evidence/enterprise-enrichment-persistence-evidence.md`
+- `surfaces/customer-mdm-commands.md`
+- `surfaces/enterprise-enrichment-persistence.md`
+
+状态：
+
+- completed on 2026-04-19
+
 ## 当前位置
 
-`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次、Round 24-31 的 legacy 隐含语义补强、Round 32-33 的第一批 semantic-map-adjacent surface-discovery 收口，以及 Round 34-35 对 remaining high-value business-semantics queue 的收口。
+`wiki-bi` 当前已经完成基础主题簇、follow-on 拆分、主干 maintenance 轮次、Round 24-31 的 legacy 隐含语义补强、Round 32-33 的第一批 semantic-map-adjacent surface-discovery 收口、Round 34-35 对 remaining high-value business-semantics queue 的收口，以及 Round 36 对 manual `customer-mdm` / enterprise persistence closure wave 的对象级收紧。
 
 当前应明确保持两条边界：
 
 - durable wiki 只保留业务语义、标准、surface、evidence 与 round sediment
 - subagent / worktree / merge sequencing 这类执行层材料不再放在 `docs/wiki-bi/`，应留在 `docs/superpowers/`、`.planning/` 或 git history
 
-## 下阶段：业务语义与 surface discovery 双轨收口
+## 下阶段：runtime/operator discovery 收口
 
-Round 29 到 Round 31 已经把 dominant value / breadth count / classification family 的高价值对象补了一轮；Round 32 把 shared unresolved-name / failed-record artifact family 从“gap-only 提示”推进成了 durable evidence dispatcher；Round 33 则把 `reference_sync` 的 target inventory / sync-state / replacement boundary 补成了对象级 evidence route；Round 34-35 则把 remaining relationship-breadth list side 与 portfolio-anchor side 收口成 durable objects。
+Round 29 到 Round 31 已经把 dominant value / breadth count / classification family 的高价值对象补了一轮；Round 32 把 shared unresolved-name / failed-record artifact family 从“gap-only 提示”推进成了 durable evidence dispatcher；Round 33 则把 `reference_sync` 的 target inventory / sync-state / replacement boundary 补成了对象级 evidence route；Round 34-35 把 remaining relationship-breadth list side 与 portfolio-anchor side 收口成 durable objects；Round 36 则把 manual `customer-mdm` runtime 与 enterprise persistence layering 收紧成对象级 evidence route。
 
-因此，当前已经没有另一个同等明显、仍停留在 dispatcher-only 的 high-value business-semantics candidate。若没有新的 raw-source sweep 改变这个判断，下一步更合理的方向应回到 semantic-map-first 的 runtime/operator discovery。
+因此，当前已经没有另一个同等明显的 dispatcher-only business-semantics candidate，也已经把最直接的 manual `customer-mdm` / enterprise persistence closure wave 收口到了对象级。若没有新的 raw-source sweep 改变这个判断，下一步更合理的方向应转向 `company_lookup_queue` retry/runtime closure、standalone tooling closure，或其他明确的 runtime/operator decision package。
 
 工作原则：
 
@@ -404,7 +421,7 @@ Round 29 到 Round 31 已经把 dominant value / breadth count / classification 
 双轨顺序：
 
 1. 若目标是继续补 business semantics，只在新的 raw-source sweep 发现真正达到 standalone question-answer 阈值的对象时再 promotion
-2. 若目标是补 runtime/operator truth，则先围绕 first-wave 未闭合的 cross-cutting surfaces 开 discovery wave，而不是重复已完成的相邻 business-semantics closeout
+2. 若目标是补 runtime/operator truth，则优先围绕仍未闭合的 queue/runtime/operator-decision package 开 discovery wave，而不是重复已完成的 manual-commands / persistence layering closeout
 3. 每个 discovery wave 先补 semantic map，再把稳定结论吸收到 `evidence/`
 4. `evidence/` 稳定后，再回写 `concepts/`、`standards/`、`surfaces/`、`domains/`
 5. wiki 更新被接受后，关闭对应 semantic-map wave，并评估 claims / tooling 的归档
@@ -427,4 +444,4 @@ remaining business-semantic candidates：
 
 如果马上继续推进，推荐按下面顺序开工：
 
-- surface-discovery track：manual `customer-mdm` + enterprise persistence closure wave
+- surface-discovery track：`company_lookup_queue` retry/runtime closure 或 standalone tooling closure

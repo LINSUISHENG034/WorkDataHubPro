@@ -72,7 +72,9 @@
   - maintenance 轮次，把 `其他年金计划` 与 `其他开拓机构` 推进成 durable objects，并让 relationship breadth 在计划侧与机构侧都形成 dominant / count / list 三层表达。
 - [Round 35：portfolio anchor tightening](./round-35-portfolio-anchor-tightening.md)
   - maintenance 轮次，把 `组合代码` 推进成 durable object，并把 classification family 的 portfolio-anchor 层收紧成直接可答的入口。
+- [Round 36：manual customer-mdm and persistence closure](./round-36-manual-customer-mdm-and-persistence-closure.md)
+  - maintenance 轮次，把 manual `customer-mdm` runtime 与 enterprise persistence layering 收紧成对象级 evidence route。
 
 ## 计划轮次
 
-- 当前无其他 planned round；如需继续推进，默认回到 manual `customer-mdm` / enterprise persistence closure wave，除非新的 raw-source sweep 暴露出新的高价值业务语义对象。
+- 当前无其他 planned round；如需继续推进，默认转向 `company_lookup_queue` / standalone tooling 等 runtime decision package，除非新的 raw-source sweep 暴露出新的高价值业务语义对象。
