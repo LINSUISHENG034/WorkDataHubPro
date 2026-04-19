@@ -15,7 +15,7 @@
 - 我想补强 customer status 里最容易被误读的 annual identity 语义
   - 先看 [customer 年度身份证据](./evidence/customer-status-annual-identity-evidence.md)，再看 [客户状态语义正确性](./standards/semantic-correctness/customer-status-semantics.md)。
 - 我想继续补强 legacy business semantics
-  - 先看 [Round 31：relationship breadth and classification closeout](./_meta/absorption-rounds/round-31-relationship-breadth-and-classification-closeout.md)，再从 [关联机构数](./concepts/related-branch-count.md)、[管理资格](./concepts/management-qualification.md) 与 [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) 进入。
+  - 先看 [Round 34：relationship breadth list deepening](./_meta/absorption-rounds/round-34-relationship-breadth-list-deepening.md)，再从 [其他年金计划](./concepts/other-annuity-plans.md)、[其他开拓机构](./concepts/other-branches.md) 与 [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) 进入。
 - 我想继续补 shared operator artifacts / queue replacement 这条线
   - 先看 [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md)，再从 [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) 与 [`company_lookup_queue`](./surfaces/company-lookup-queue.md) 进入。
 - 我想继续补 `reference_sync` runtime / state 这条线
@@ -48,6 +48,10 @@
   - 它回答“这个客户关联了多少个不同计划”，不等于主导计划，也不等于 snapshot `plan_count`。
 - [`关联机构数` 到底是什么](./concepts/related-branch-count.md)
   - 它回答“这个客户关联了多少个不同机构”，不等于 `主拓机构`，也不等于 `其他开拓机构` 的清单。
+- [`其他年金计划` 到底是什么](./concepts/other-annuity-plans.md)
+  - 它回答“这个客户还关联了哪些计划”的 breadth-list context，不等于 `关键年金计划`，也不等于 `关联计划数`。
+- [`其他开拓机构` 到底是什么](./concepts/other-branches.md)
+  - 它回答“这个客户还关联了哪些机构”的 breadth-list context，不等于 `主拓机构`，也不等于 `关联机构数`。
 - [`管理资格` 到底是什么](./concepts/management-qualification.md)
   - 它是 customer-master 聚合分类结果，不等于输入行上的 `业务类型`，也不等于 portfolio 锚点 `组合代码`。
 - [什么算受治理的身份 fallback](./standards/semantic-correctness/identity-governance.md)
@@ -116,7 +120,9 @@
 - [主拓机构](./concepts/primary-branch.md) : 说明 customer-master / reference 对象上的主导机构归属不是输入列直接复制。
 - [关键年金计划](./concepts/key-annuity-plan.md) : 说明 customer-master signal family 中“主导计划锚点”的语义，不把它混写成原始 `计划代码`。
 - [关联计划数](./concepts/related-plan-count.md) : 说明 customer-master relationship breadth 中“关联了多少个不同计划”的语义，不把它混写成主导计划或 snapshot `plan_count`。
+- [其他年金计划](./concepts/other-annuity-plans.md) : 说明 customer-master relationship breadth 中“还关联了哪些计划”的列表语义，不把它混写成主导计划或 breadth count。
 - [关联机构数](./concepts/related-branch-count.md) : 说明 customer-master relationship breadth 中“关联了多少个不同机构”的语义，不把它混写成主导机构或机构清单。
+- [其他开拓机构](./concepts/other-branches.md) : 说明 customer-master relationship breadth 中“还关联了哪些机构”的列表语义，不把它混写成主导机构或 breadth count。
 - [管理资格](./concepts/management-qualification.md) : 说明 customer-master 聚合分类中的管理角色语义，不把它混写成输入侧 `业务类型` 或 `组合代码`。
 - [年金计划类型：`plan_type`](./concepts/plan-type.md) : 说明单一计划与集合计划的语义差异和约束。
 - [快照粒度：`snapshot_granularity`](./concepts/snapshot-granularity.md) : 定义客户/产品线与客户/计划两类快照粒度。
@@ -191,7 +197,7 @@
 - [`reference_sync` runtime and state 证据](./evidence/reference-sync-runtime-and-state-evidence.md) : 聚合 `reference_sync` 的 target inventory、incremental sync-state 与 current replacement boundary。
 - [unresolved-name and failed-record 证据](./evidence/unresolved-name-and-failed-record-evidence.md) : 聚合 shared unresolved-name / failed-record artifacts 的 legacy breadth、current accepted closure 与 parity gaps。
 - [引用同步与回填证据](./evidence/reference-and-backfill-evidence.md) : 聚合 authoritative `reference_sync`、fact-derived `backfill` 与 customer-master 衍生写入之间的稳定边界。
-- [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) : 聚合 `tags`、`主拓机构`、`关键年金计划`、关系计数与 `年金客户类型` 的 cross-domain customer-master 语义。
+- [customer-master signals 证据](./evidence/customer-master-signals-evidence.md) : 聚合 `tags`、主导锚点、relationship breadth counts / lists 与 `年金客户类型` 的 cross-domain customer-master 语义。
 - [classification family 证据](./evidence/classification-family-evidence.md) : 聚合 `计划类型`、`年金计划类型`、`业务类型`、`管理资格` 与 `组合代码` 的跨层语义边界。
 - [`annuity_income` 专题证据](./evidence/annuity-income-gap-evidence.md) : 聚合 annuity_income 的专题差异，并把细节分发到对象级 evidence page。
 - [`annuity_income` 字段处理证据](./evidence/annuity-income-field-processing-evidence.md) : 把 annuity_income 的关键字段处理分成工程性质量提升与业务语义处理。
@@ -241,5 +247,6 @@
 - [Round 31：relationship breadth and classification closeout](./_meta/absorption-rounds/round-31-relationship-breadth-and-classification-closeout.md) : maintenance 轮次，把 `关联机构数` 与 `管理资格` 推进成 durable objects，并收紧 remaining follow-on candidates。
 - [Round 32：shared unresolved artifact governance](./_meta/absorption-rounds/round-32-shared-unresolved-artifact-governance.md) : maintenance 轮次，把 shared unresolved-name / failed-record artifact family 收紧成 durable evidence dispatcher，并保持 income-specific accepted closure 与 cross-domain parity gap 分层表达。
 - [Round 33：reference_sync governance](./_meta/absorption-rounds/round-33-reference-sync-governance.md) : maintenance 轮次，把 `reference_sync` 的 target inventory、sync-state 与 current replacement boundary 收紧成对象级 evidence route。
+- [Round 34：relationship breadth list deepening](./_meta/absorption-rounds/round-34-relationship-breadth-list-deepening.md) : maintenance 轮次，把 `其他年金计划` 与 `其他开拓机构` 推进成 durable objects，并让 relationship breadth 在计划侧与机构侧都形成 dominant / count / list 三层表达。
 - [LLM Wiki 参考](./_meta/llm-wiki.md) : 上位方法论参考文本。
 - [变更日志](./log.md) : 按日期与时间记录 `wiki-bi` 的搭建与后续增量维护。

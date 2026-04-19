@@ -3,6 +3,12 @@
 > 标题格式规则：自 `2026-04-15` 起，新日志标题统一使用 `## [YYYY-MM-DD HH:MM] action | summary`。
 > 目的：区分同一天内的多次改动；历史条目保留原日期格式，不做追溯性改写。
 
+## [2026-04-19 10:34] maintain | round 34 relationship breadth list deepening
+
+- 新增 `other-annuity-plans.md` 与 `other-branches.md`，把 `其他年金计划` 与 `其他开拓机构` 从 dispatcher-only 状态推进成 durable wiki 对象
+- 回写 `customer-master-signals-evidence`、相邻 concept / domain / output-contract 页面，使 relationship breadth 在计划侧与机构侧都形成 dominant / count / list 三层表达
+- 新增 Round 34 轮次沉淀并更新 `index.md` / `wiki-absorption-roadmap.md` / `absorption-rounds/index.md`，明确 `组合代码` 成为剩余主要 business-semantics follow-on candidate
+
 ## [2026-04-18 20:34] maintain | customer_type vs is_new governance package
 
 ## [2026-04-19 00:11] maintain | round 33 reference_sync governance

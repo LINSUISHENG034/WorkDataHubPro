@@ -21,19 +21,20 @@
 - 不同 domain 的 dominant-value 规则可以不同，不能强行假设只有一条统一来源
 - 主拓机构属于 customer-master / reference signal，不是 snapshot status 字段
 - 主拓机构不等于 `关联机构数` 这类 relationship-breadth count signal
+- 主拓机构不等于 `其他开拓机构` 这类 relationship-breadth list signal
 
 ## 输入现实与边界情况
 
 - `annuity_performance` 以 `期末资产规模` 选择主导机构
 - `annuity_income` 以 `固费` 选择主导机构
 - `annual_award` / `annual_loss` 以 `计划规模` 形成 event-driven 主导值
-- 它经常与 `主拓机构代码`、`关键年金计划`、`关联计划数`、`关联机构数` 一起出现
+- 它经常与 `主拓机构代码`、`关键年金计划`、`关联计划数`、`关联机构数`、`其他开拓机构` 一起出现
 - 默认机构码或空值过滤会影响哪些输入能进入 dominant-value 选择
 
 ## 对输出与下游的影响
 
 - 影响 `customer.客户明细` 与 `mapping.年金计划` 的 customer-master / reference 解释
-- 影响 `关键年金计划`、`关联机构数` 等 customer-master signals 的可解释性
+- 影响 `关键年金计划`、`关联机构数`、`其他开拓机构` 等 customer-master signals 的可解释性
 - 影响 operator 在 real-data validation 中对主导对象的核验路径
 
 ## 常见误解 / 非例
@@ -48,6 +49,7 @@
 - [`tags`](./tags.md)
 - [关键年金计划](./key-annuity-plan.md)
 - [关联机构数](./related-branch-count.md)
+- [其他开拓机构](./other-branches.md)
 
 ## 相关标准
 
