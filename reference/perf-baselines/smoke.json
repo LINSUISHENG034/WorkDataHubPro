@@ -1,0 +1,9 @@
+{
+  "tier": "smoke",
+  "threshold_ratio": 2.0,
+  "metrics": {
+    "p50": 30.0,
+    "p95": 30.0,
+    "peak_memory": 1024.0
+  }
+}
