@@ -13,6 +13,7 @@
 | 3 | Orchestration Refactor & Failure Explainability | Remove replay orchestration duplication and standardize typed diagnostics/failure paths | PIPE-03, PIPE-04, OPS-01, GOV-02 | 5 |
 | 4 | Agent Operations & Governance Hardening | Deliver agent-runbook-ready operations model with lineage, observability, and evidence governance | OPS-02, OPS-03, OPS-04, GOV-01, GOV-03 | 5 |
 | 5 | Performance Reliability Optimization with Drift Safeguards | Improve bottlenecks and policy safety while preserving parity behavior | PERF-01, PERF-02, PERF-03 | 5 |
+| 6 | Minimum viable workbook discovery to PostgreSQL publication pilot | Prove one operator-visible workbook discovery to PostgreSQL write path on the admitted architecture | TBD | TBD |
 
 ## Phase Details
 
@@ -209,9 +210,19 @@ Plans:
 - [x] 02.1-02 - truthful intermediate checkpoint wiring and accepted replay baseline assets for all accepted slices
 - [x] 02.1-03 - governance and planning status synchronization plus contract coverage
 
+### Phase 6: Minimum viable workbook discovery to PostgreSQL publication pilot
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 5
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd-plan-phase 6 to break down)
+
 ---
 *Roadmap created: 2026-04-12*
-*Last updated: 2026-04-19 after Phase 04 Plan 03 execution*
+*Last updated: 2026-04-19 after Phase 06 admission*
 
 ### Phase 03.1: Phase 3 governance remediation - truthful failure evidence and diagnose hardening
 
