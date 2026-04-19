@@ -1,0 +1,135 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-concept-eqc-persistence-layering
+sources_read:
+- source_ref: docs/reference/data_processing_guide.md
+  source_type: legacy_doc
+  note: Reference guide explicitly states that EQC query results are written to enterprise.base_info and only secondarily cached to enrichment_index, making base_info the retained EQC result surface.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/reference/data_processing_guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/reference/database-schema-panorama.md
+  source_type: legacy_doc
+  note: Schema panorama explicitly separates enterprise.base_info as the primary EQC persistence table from enterprise.business_info as normalized business detail persistence and enterprise.biz_label as flattened EQC label persistence.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/reference/database-schema-panorama.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: io/schema/migrations/versions/001_initial_infrastructure.py
+  source_type: legacy_code
+  note: Migration DDL persists raw EQC responses in base_info JSON fields and places business_info and biz_label behind foreign keys to base_info, proving a raw-retention root with downstream derived persistence.
+  workspace_id: legacy_work_data_hub
+  relative_path: io/schema/migrations/versions/001_initial_infrastructure.py
+  semantic_authority: runtime_witness
+- source_ref: scripts/validation/EQC/eqc_iter_acquire.py
+  source_type: legacy_code
+  note: Validation acquisition flow documents and executes a two-step pattern where raw search, business-info, and label payloads are first retained on base_info, then cleansed or parsed into business_info and biz_label.
+  workspace_id: legacy_work_data_hub
+  relative_path: scripts/validation/EQC/eqc_iter_acquire.py
+  semantic_authority: runtime_witness
+- source_ref: scripts/validation/EQC/cleansing-rules-iteration-guide.md
+  source_type: legacy_doc
+  note: Cleansing guide explicitly says base_info raw JSONB data is transformed into business_info and biz_label, independently witnessing that those tables are downstream normalized or parsed surfaces rather than the provider-retention root.
+  workspace_id: legacy_work_data_hub
+  relative_path: scripts/validation/EQC/cleansing-rules-iteration-guide.md
+  semantic_authority: runtime_witness
+- source_ref: tests/integration/infrastructure/enrichment/test_eqc_data_persistence_integration.py
+  source_type: legacy_test
+  note: Integration test verifies refresh writes raw_data to base_info while business_info is separately best-effort cleansed, preserving the same layering in runtime behavior.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/integration/infrastructure/enrichment/test_eqc_data_persistence_integration.py
+  semantic_authority: runtime_witness
+- source_ref: tests/integration/migrations/test_enterprise_schema_migration.py
+  source_type: legacy_test
+  note: Migration tests verify business_info and biz_label foreign-key dependence on base_info and confirm their normalized or flattened structure, reinforcing the layered persistence contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/integration/migrations/test_enterprise_schema_migration.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/test_business_info_cleanser.py
+  source_type: legacy_test
+  note: BusinessInfoCleanser tests show business_info is a normalized business-semantic projection with type conversion and cleansing-status tracking rather than a raw provider payload store.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/test_business_info_cleanser.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/test_biz_label_parser.py
+  source_type: legacy_test
+  note: BizLabelParser tests show biz_label is a parsed label-hierarchy projection keyed by company_id rather than a provider-retention blob.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/test_biz_label_parser.py
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+submitted_at: '2026-04-19T00:00:00Z'
+semantic_findings:
+- semantic_id: sem-concept-eqc-persistence-layering
+  semantic_node_type: semantic_concept
+  title: EQC persistence layering
+  summary: EQC persistence is layered around a provider-retention root in base_info, with business_info and biz_label acting as downstream normalized and parsed persistence surfaces keyed to that root.
+  business_conclusion: base_info should be interpreted as the retained provider-result surface for EQC acquisition, while business_info and biz_label should be interpreted as downstream business-canonicalized persistence derived from retained raw payloads rather than as independent provider-truth stores or runtime-only scratch tables.
+  primary_source_refs:
+  - docs/reference/data_processing_guide.md
+  - docs/reference/database-schema-panorama.md
+  supporting_source_refs:
+  - io/schema/migrations/versions/001_initial_infrastructure.py
+  - scripts/validation/EQC/eqc_iter_acquire.py
+  - scripts/validation/EQC/cleansing-rules-iteration-guide.md
+  - tests/integration/infrastructure/enrichment/test_eqc_data_persistence_integration.py
+  - tests/integration/migrations/test_enterprise_schema_migration.py
+  - tests/unit/test_business_info_cleanser.py
+  - tests/unit/test_biz_label_parser.py
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - business_info and biz_label persist durable rows, but their durability does not make them independent provider-retention truth surfaces because their semantic contract is still downstream cleansing or parsing from base_info-carried raw payloads.
+    - base_info also carries canonical convenience columns, yet the retained raw EQC payload fields and downstream FK structure show that its distinguishing semantic role here is the provider-retention root of the EQC persistence family.
+    proxy_usage_refs:
+    - scripts/validation/EQC/eqc_iter_acquire.py
+    - tests/integration/infrastructure/enrichment/test_eqc_data_persistence_integration.py
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+    - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+    related_runtime_carriers: []
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports admitting a semantic boundary where EQC raw retention stays anchored in base_info and downstream cleansing or parsing work is evaluated separately for business_info and biz_label.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring finer current-side adoption decisions without collapsing raw-retention and normalized-parsing semantics into one undifferentiated persistence claim.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that treat business_info or biz_label as raw provider stores or that treat the full EQC persistence family as runtime-only scratch storage.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Not yet targeted for stable canonical absorption; retain as a wave-level semantic boundary until stronger current-side adoption evidence exists.
+        target_pages:
+        - docs/wiki-bi/surfaces/enterprise-enrichment-persistence.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+trigger_id: trigger-eqc-persistence-layering-001
+orchestration_iteration: 1

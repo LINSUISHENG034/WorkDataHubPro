@@ -482,6 +482,20 @@ edges:
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-annuity-income-object
 - from_id: docs/domains/annuity_income-capability-map.md
+  to_id: sem-rule-first-wave-artifact-operator-evidence
+  relationship: supports_claim_target
+  source_refs:
+  - docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
+- from_id: docs/domains/annuity_income-capability-map.md
   to_id: ss-annuity-income
   relationship: supports_claim_target
   source_refs:
@@ -607,6 +621,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-execution
+- from_id: docs/guides/domain-migration/development-guide.md
+  to_id: sem-rule-first-wave-artifact-operator-evidence
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/domain-migration/development-guide.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
 - from_id: docs/guides/infrastructure/backfill-mechanism-guide.md
   to_id: sem-concept-reference-strategy-layering
   relationship: supports_claim_target
@@ -691,6 +719,62 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-temp-id-non-equivalence
+- from_id: docs/guides/infrastructure/company-enrichment-service.md
+  to_id: sem-rule-enrichment-index-cache-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary
+- from_id: docs/guides/infrastructure/enrichment-index-update-mechanism.md
+  to_id: sem-rule-enrichment-index-cache-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - docs/guides/infrastructure/enrichment-index-update-mechanism.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary
+- from_id: docs/reference/data_processing_guide.md
+  to_id: sem-concept-eqc-persistence-layering
+  relationship: supports_claim_target
+  source_refs:
+  - docs/reference/data_processing_guide.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering
+- from_id: docs/reference/database-schema-panorama.md
+  to_id: sem-concept-eqc-persistence-layering
+  relationship: supports_claim_target
+  source_refs:
+  - docs/reference/database-schema-panorama.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering
 - from_id: docs/runbooks/annual-award-replay.md
   to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
   relationship: supports_claim_target
@@ -747,6 +831,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-execution
+- from_id: docs/runbooks/annuity_income.md
+  to_id: sem-rule-first-wave-artifact-operator-evidence
+  relationship: supports_claim_target
+  source_refs:
+  - docs/runbooks/annuity_income.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
 - from_id: docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
   to_id: ep-manual-cli-entrypoints-annual-award-manual-entry
   relationship: supports_claim_target
@@ -1615,6 +1713,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-state
+- from_id: io/schema/migrations/versions/001_initial_infrastructure.py
+  to_id: sem-concept-eqc-persistence-layering
+  relationship: supports_claim_target
+  source_refs:
+  - io/schema/migrations/versions/001_initial_infrastructure.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering
+- from_id: io/schema/migrations/versions/001_initial_infrastructure.py
+  to_id: sem-rule-enrichment-index-cache-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - io/schema/migrations/versions/001_initial_infrastructure.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary
 - from_id: io/schema/migrations/versions/007_create_customer_plan_contract.py
   to_id: sem-concept-company-id-anchor
   relationship: supports_claim_target
@@ -1839,6 +1965,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-annuity-performance-object
+- from_id: scripts/validation/EQC/cleansing-rules-iteration-guide.md
+  to_id: sem-concept-eqc-persistence-layering
+  relationship: supports_claim_target
+  source_refs:
+  - scripts/validation/EQC/cleansing-rules-iteration-guide.md
+  source_type: legacy_doc
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering
+- from_id: scripts/validation/EQC/eqc_iter_acquire.py
+  to_id: sem-concept-eqc-persistence-layering
+  relationship: supports_claim_target
+  source_refs:
+  - scripts/validation/EQC/eqc_iter_acquire.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering
 - from_id: src/work_data_hub/backfill/company_lookup_backfill.py.txt
   to_id: ep-scheduled-orchestrated-entrypoints-company-lookup-queue-flow-entry
   relationship: supports_claim_target
@@ -2091,6 +2245,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-status-year-anchor
+- from_id: src/work_data_hub/domain/annuity_income/service.py
+  to_id: sem-rule-first-wave-artifact-operator-evidence
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/domain/annuity_income/service.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
+- from_id: src/work_data_hub/domain/annuity_performance/service.py
+  to_id: sem-rule-first-wave-artifact-operator-evidence
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/domain/annuity_performance/service.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
 - from_id: src/work_data_hub/domain/company_enrichment/lookup_queue.py
   to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
   relationship: supports_claim_target
@@ -2119,6 +2301,20 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-reference-sync-inventory
+- from_id: src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  to_id: sem-rule-enrichment-index-cache-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary
 - from_id: src/work_data_hub/infrastructure/enrichment/repository/other_ops.py
   to_id: sem-concept-identity-governance-layering
   relationship: supports_claim_target
@@ -2147,6 +2343,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-identity-governance-layering
+- from_id: src/work_data_hub/infrastructure/enrichment/resolver/core.py
+  to_id: sem-rule-enrichment-index-cache-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/infrastructure/enrichment/resolver/core.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary
+- from_id: src/work_data_hub/infrastructure/validation/failure_exporter.py
+  to_id: sem-rule-first-wave-artifact-operator-evidence
+  relationship: supports_claim_target
+  source_refs:
+  - src/work_data_hub/infrastructure/validation/failure_exporter.py
+  source_type: legacy_code
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
 - from_id: src/work_data_hub/io/repositories/sync_state_repository.py
   to_id: sem-rule-reference-sync-incremental-state
   relationship: supports_claim_target
@@ -2357,6 +2581,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-customer-mdm-object
+- from_id: tests/integration/infrastructure/enrichment/test_eqc_data_persistence_integration.py
+  to_id: sem-concept-eqc-persistence-layering
+  relationship: supports_claim_target
+  source_refs:
+  - tests/integration/infrastructure/enrichment/test_eqc_data_persistence_integration.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering
+- from_id: tests/integration/migrations/test_enterprise_schema_migration.py
+  to_id: sem-concept-eqc-persistence-layering
+  relationship: supports_claim_target
+  source_refs:
+  - tests/integration/migrations/test_enterprise_schema_migration.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering
 - from_id: tests/integration/test_cli_multi_domain.py
   to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
   relationship: supports_claim_target
@@ -2399,6 +2651,48 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-first-wave-pilot-company-lookup-queue-object
+- from_id: tests/unit/domain/annuity_income/test_income_failed_records_export.py
+  to_id: sem-rule-first-wave-artifact-operator-evidence
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/domain/annuity_income/test_income_failed_records_export.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
+- from_id: tests/unit/domain/annuity_income/test_service.py
+  to_id: sem-rule-first-wave-artifact-operator-evidence
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/domain/annuity_income/test_service.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
+- from_id: tests/unit/domain/annuity_performance/test_failed_records_export.py
+  to_id: sem-rule-first-wave-artifact-operator-evidence
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/domain/annuity_performance/test_failed_records_export.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
 - from_id: tests/unit/domain/company_enrichment/test_lookup_queue.py
   to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
   relationship: supports_claim_target
@@ -2413,6 +2707,34 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
+- from_id: tests/unit/infrastructure/enrichment/test_company_id_resolver.py
+  to_id: sem-rule-enrichment-index-cache-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/infrastructure/enrichment/test_company_id_resolver.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary
+- from_id: tests/unit/infrastructure/enrichment/test_mapping_repository_enrichment_index.py
+  to_id: sem-rule-enrichment-index-cache-boundary
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/infrastructure/enrichment/test_mapping_repository_enrichment_index.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary
 - from_id: tests/unit/orchestration/test_schedules.py
   to_id: sem-lifecycle-company-lookup-queue-recovery-cycle
   relationship: supports_claim_target
@@ -2441,3 +2763,31 @@ edges:
   open_questions: []
   compiled_from_claims:
   - claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-recovery-cycle
+- from_id: tests/unit/test_biz_label_parser.py
+  to_id: sem-concept-eqc-persistence-layering
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/test_biz_label_parser.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering
+- from_id: tests/unit/test_business_info_cleanser.py
+  to_id: sem-concept-eqc-persistence-layering
+  relationship: supports_claim_target
+  source_refs:
+  - tests/unit/test_business_info_cleanser.py
+  source_type: legacy_test
+  claim_type: compiled_summary
+  evidence_strength: supporting
+  coverage_state: partial
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  compiled_from_claims:
+  - claim-wave-2026-04-17-semantic-governance-reframe-eqc-persistence-layering

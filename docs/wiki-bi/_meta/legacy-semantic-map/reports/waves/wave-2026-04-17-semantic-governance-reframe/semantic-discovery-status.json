@@ -3,30 +3,31 @@
   "discovery_view_status": "green",
   "semantic_maturity_counts": {
     "observed": 0,
-    "inferred": 3,
+    "inferred": 4,
     "contested": 1,
-    "consumption-candidate": 27
+    "consumption-candidate": 29
   },
   "contested_semantic_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
   "recommendation_counts": {
-    "recommended_stable_canonical": 27,
+    "recommended_stable_canonical": 29,
     "recommended_contested": 1,
-    "claim_level_only": 3
+    "claim_level_only": 4
   },
   "contested_proposal_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
   "governance_implication_summaries": {
     "slice_admission": {
-      "count": 31,
+      "count": 34,
       "ids": [
         "sem-concept-classification-family-layering",
         "sem-concept-company-id-anchor",
         "sem-concept-customer-annual-identity-family",
         "sem-concept-customer-master-backfill",
         "sem-concept-customer-status",
+        "sem-concept-eqc-persistence-layering",
         "sem-concept-identity-governance-layering",
         "sem-concept-reference-strategy-layering",
         "sem-decision-anchor-customer-status-rules",
@@ -46,6 +47,8 @@
         "sem-rule-annuity-performance-post-hook-chain",
         "sem-rule-company-id-multi-signal-resolution",
         "sem-rule-company-lookup-queue-single-domain-boundary",
+        "sem-rule-enrichment-index-cache-boundary",
+        "sem-rule-first-wave-artifact-operator-evidence",
         "sem-rule-is-churned-this-year-definition",
         "sem-rule-is-new-definition",
         "sem-rule-reference-sync-incremental-state",
@@ -56,8 +59,9 @@
       ]
     },
     "defer_candidates": {
-      "count": 12,
+      "count": 15,
       "ids": [
+        "sem-concept-eqc-persistence-layering",
         "sem-concept-identity-governance-layering",
         "sem-concept-reference-strategy-layering",
         "sem-lifecycle-company-lookup-queue-recovery-cycle",
@@ -67,17 +71,20 @@
         "sem-rule-annuity-performance-post-hook-chain",
         "sem-rule-company-id-multi-signal-resolution",
         "sem-rule-company-lookup-queue-single-domain-boundary",
+        "sem-rule-enrichment-index-cache-boundary",
+        "sem-rule-first-wave-artifact-operator-evidence",
         "sem-rule-reference-sync-incremental-state",
         "sem-rule-status-year-identity-anchor",
         "sem-rule-unresolved-identity-operator-visibility"
       ]
     },
     "retire_candidates": {
-      "count": 24,
+      "count": 27,
       "ids": [
         "sem-concept-classification-family-layering",
         "sem-concept-company-id-anchor",
         "sem-concept-customer-annual-identity-family",
+        "sem-concept-eqc-persistence-layering",
         "sem-concept-identity-governance-layering",
         "sem-concept-reference-strategy-layering",
         "sem-fact-family-customer-status-source-family",
@@ -94,6 +101,8 @@
         "sem-rule-annuity-performance-post-hook-chain",
         "sem-rule-company-id-multi-signal-resolution",
         "sem-rule-company-lookup-queue-single-domain-boundary",
+        "sem-rule-enrichment-index-cache-boundary",
+        "sem-rule-first-wave-artifact-operator-evidence",
         "sem-rule-is-churned-this-year-definition",
         "sem-rule-is-new-definition",
         "sem-rule-status-source-splitting",
@@ -102,13 +111,14 @@
       ]
     },
     "durable_wiki_absorption": {
-      "count": 31,
+      "count": 34,
       "ids": [
         "sem-concept-classification-family-layering",
         "sem-concept-company-id-anchor",
         "sem-concept-customer-annual-identity-family",
         "sem-concept-customer-master-backfill",
         "sem-concept-customer-status",
+        "sem-concept-eqc-persistence-layering",
         "sem-concept-identity-governance-layering",
         "sem-concept-reference-strategy-layering",
         "sem-decision-anchor-customer-status-rules",
@@ -128,6 +138,8 @@
         "sem-rule-annuity-performance-post-hook-chain",
         "sem-rule-company-id-multi-signal-resolution",
         "sem-rule-company-lookup-queue-single-domain-boundary",
+        "sem-rule-enrichment-index-cache-boundary",
+        "sem-rule-first-wave-artifact-operator-evidence",
         "sem-rule-is-churned-this-year-definition",
         "sem-rule-is-new-definition",
         "sem-rule-reference-sync-incremental-state",
@@ -144,5 +156,5 @@
   "unresolved_proxy_conflict_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
-  "generated_at": "2026-04-18T09:30:00Z"
+  "generated_at": "2026-04-19T00:00:00Z"
 }
