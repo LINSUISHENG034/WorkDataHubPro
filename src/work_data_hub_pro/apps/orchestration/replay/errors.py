@@ -2,6 +2,13 @@ from __future__ import annotations
 
 from typing import Any
 
+from work_data_hub_pro.platform.publication.service import (
+    PolicyFileMissingError,
+    PolicyParseError,
+    UnknownDomainError,
+    UnknownTargetError,
+)
+
 
 class ReplaySetupError(Exception):
     def __init__(
@@ -56,12 +63,12 @@ def translate_replay_setup_error(
     )
     error_cls: type[ReplaySetupError]
 
-    if isinstance(exc, FileNotFoundError):
+    if isinstance(exc, FileNotFoundError | PolicyFileMissingError):
         if "diagnostic" in stage or "comparison_run_id" in context:
             error_cls = ReplayDiagnosticsNotFoundError
         else:
             error_cls = ReplayAssetNotFoundError
-    elif isinstance(exc, (TypeError, KeyError)):
+    elif isinstance(exc, (TypeError, KeyError, PolicyParseError, UnknownDomainError, UnknownTargetError)):
         error_cls = ReplayConfigurationError
     elif isinstance(exc, ValueError):
         error_cls = ReplayContractSetupError

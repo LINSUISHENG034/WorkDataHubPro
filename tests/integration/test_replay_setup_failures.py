@@ -35,6 +35,8 @@ from work_data_hub_pro.platform.contracts.validators import validate_publication
 from work_data_hub_pro.platform.publication.service import (
     PublicationPolicy,
     PublicationPolicyEntry,
+    UnknownDomainError,
+    UnknownTargetError,
     build_publication_plan,
     load_publication_policy,
 )
@@ -474,8 +476,10 @@ def test_missing_publication_policy_domain_translates_from_real_loader(
         encoding="utf-8",
     )
 
-    with pytest.raises(KeyError) as excinfo:
+    with pytest.raises(Exception) as excinfo:
         load_publication_policy(policy_path, domain="annual_award")
+
+    assert type(excinfo.value).__name__ == "UnknownDomainError"
 
     error = translate_replay_setup_error(
         domain="annual_award",
@@ -485,7 +489,10 @@ def test_missing_publication_policy_domain_translates_from_real_loader(
     )
 
     assert isinstance(error, ReplayConfigurationError)
-    assert error.original_exception_message == "'annual_award'"
+    assert error.original_exception_type == "UnknownDomainError"
+    assert error.original_exception_message == (
+        "Publication policy domain is not configured: annual_award"
+    )
 
 
 def test_missing_publication_policy_target_translates_from_real_builder() -> None:
@@ -500,7 +507,7 @@ def test_missing_publication_policy_target_translates_from_real_builder() -> Non
         },
     )
 
-    with pytest.raises(KeyError) as excinfo:
+    with pytest.raises(Exception) as excinfo:
         build_publication_plan(
             policy=policy,
             publication_id="publication-monthly-snapshot",
@@ -512,6 +519,8 @@ def test_missing_publication_policy_target_translates_from_real_builder() -> Non
             source_run_id="run-001",
         )
 
+    assert type(excinfo.value).__name__ == "UnknownTargetError"
+
     error = translate_replay_setup_error(
         domain="annual_award",
         stage="publication_policy_target",
@@ -520,7 +529,10 @@ def test_missing_publication_policy_target_translates_from_real_builder() -> Non
     )
 
     assert isinstance(error, ReplayConfigurationError)
-    assert error.original_exception_message == "'monthly_snapshot'"
+    assert error.original_exception_type == "UnknownTargetError"
+    assert error.original_exception_message == (
+        "Publication target is not configured for domain annual_award: monthly_snapshot"
+    )
 
 
 def test_translate_replay_setup_error_maps_publication_plan_validation_failures() -> None:
