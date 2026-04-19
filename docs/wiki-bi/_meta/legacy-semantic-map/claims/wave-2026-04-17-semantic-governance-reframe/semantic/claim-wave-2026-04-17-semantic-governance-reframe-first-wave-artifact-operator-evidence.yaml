@@ -1,0 +1,137 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-first-wave-artifact-operator-evidence
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-first-wave-artifact-operator-evidence
+sources_read:
+- source_ref: docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  note: Capability map explicitly classifies unknown_names_csv and failed-record exports as operator-facing artifact side effects rather than fact-schema outputs.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_income-capability-map.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/guides/domain-migration/development-guide.md
+  source_type: legacy_doc
+  note: Migration guide presents failed-record CSV export as an analysis/debugging control to prevent silent row loss.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/domain-migration/development-guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/runbooks/annuity_income.md
+  source_type: legacy_doc
+  note: Runbook requires inspecting unknown_names_csv before treating a run as fully reconciled, reinforcing its manual-review operator role.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/runbooks/annuity_income.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/domain/annuity_income/service.py
+  source_type: legacy_code
+  note: Income service returns unknown_names_csv separately from records and emits unified failed-record CSVs only as side-effect logging artifacts.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/domain/annuity_income/service.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/domain/annuity_performance/service.py
+  source_type: legacy_code
+  note: Performance service mirrors the same split: fact records stay in the processing result while failed rows export through a unified CSV side effect.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/domain/annuity_performance/service.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/infrastructure/validation/failure_exporter.py
+  source_type: legacy_code
+  note: Shared exporter groups failures into session-scoped CSV files for analysis and debugging across domains rather than publishing business facts.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/validation/failure_exporter.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/domain/annuity_income/test_service.py
+  source_type: legacy_test
+  note: Unit test preserves unknown_names_csv as operator output in the service result contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/domain/annuity_income/test_service.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/domain/annuity_income/test_income_failed_records_export.py
+  source_type: legacy_test
+  note: Income failed-record tests preserve dropped-row export behavior without promoting the export into fact-schema output.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/domain/annuity_income/test_income_failed_records_export.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/domain/annuity_performance/test_failed_records_export.py
+  source_type: legacy_test
+  note: Performance failed-record tests preserve the same original-row export behavior as an auxiliary artifact contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/domain/annuity_performance/test_failed_records_export.py
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/surfaces/unknown-names-csv.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
+submitted_at: '2026-04-19T00:00:00Z'
+semantic_findings:
+- semantic_id: sem-rule-first-wave-artifact-operator-evidence
+  semantic_node_type: semantic_rule
+  title: First-wave unresolved-name and failed-record artifacts are operator evidence
+  summary: Across first-wave annuity_performance and annuity_income runs, unresolved-name CSVs and unified failed-record CSVs preserve operator review visibility, but they do so as evidence artifacts rather than as business-semantic fact outputs.
+  business_conclusion: First-wave unresolved-name and failed-record artifacts should be interpreted as operator-only evidence carriers. They make unresolved identity and dropped-row conditions inspectable for manual review and reconciliation, but they do not themselves encode business truth objects, downstream fact schema, or stable business-semantic outputs.
+  primary_source_refs:
+  - docs/domains/annuity_income-capability-map.md
+  - docs/guides/domain-migration/development-guide.md
+  - docs/runbooks/annuity_income.md
+  supporting_source_refs:
+  - src/work_data_hub/domain/annuity_income/service.py
+  - src/work_data_hub/domain/annuity_performance/service.py
+  - src/work_data_hub/infrastructure/validation/failure_exporter.py
+  - tests/unit/domain/annuity_income/test_service.py
+  - tests/unit/domain/annuity_income/test_income_failed_records_export.py
+  - tests/unit/domain/annuity_performance/test_failed_records_export.py
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/unknown-names-csv.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to:
+  - sem-concept-company-id-anchor
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - These artifacts preserve a visibility obligation for unresolved or dropped outcomes, but that visibility carrier role does not make the artifacts themselves business-semantic output objects.
+    - The same run may still produce business-semantic records with temp IDs or resolved company_id values; the exported CSVs remain auxiliary review evidence around that runtime, not replacements for business truth.
+    proxy_usage_refs:
+    - docs/wiki-bi/surfaces/unknown-names-csv.md
+    - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/unknown-names-csv.md
+    - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports admitting unresolved-name and dropped-row artifact memory as operator evidence without misclassifying those CSVs as business-semantic outputs.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/unknown-names-csv.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring exact storage or presentation choices for artifact handling while preserving the operator-evidence boundary.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that treat unknown-name or failed-record CSVs as if they were part of the business fact schema.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a stable carrier-classification rule for first-wave unresolved-name and failed-record artifacts.
+        target_pages:
+        - docs/wiki-bi/surfaces/unknown-names-csv.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+trigger_id: trigger-first-wave-artifact-evidence-001
+orchestration_iteration: 1

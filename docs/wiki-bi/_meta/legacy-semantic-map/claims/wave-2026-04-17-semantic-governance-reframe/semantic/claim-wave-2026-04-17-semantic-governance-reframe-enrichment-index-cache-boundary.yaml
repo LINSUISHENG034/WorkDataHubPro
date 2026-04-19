@@ -1,0 +1,117 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-enrichment-index-cache-boundary
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-enrichment-index-cache-boundary
+sources_read:
+- source_ref: docs/guides/infrastructure/enrichment-index-update-mechanism.md
+  source_type: legacy_doc
+  note: Enrichment-index guide explicitly defines enrichment_index as a cache layer, marks it append-only, and documents confidence-, provenance-, and hit-tracking update semantics.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/enrichment-index-update-mechanism.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  note: Service guide places enrichment_index at Layer 2 of the resolver chain and contrasts it with canonical company_id output, EQC sync lookup, and temp-id fallback.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/company-enrichment-service.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: io/schema/migrations/versions/001_initial_infrastructure.py
+  source_type: legacy_code
+  note: Migration schema names enrichment_index as a multi-priority company-ID resolution cache and persists confidence, source, source_domain, source_table, hit_count, and last_hit_at as first-class columns.
+  workspace_id: legacy_work_data_hub
+  relative_path: io/schema/migrations/versions/001_initial_infrastructure.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  source_type: legacy_code
+  note: Repository UPSERT logic keeps the higher-confidence mapping, preserves prior mapping when new confidence is lower, and increments hit-count telemetry on reuse.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/infrastructure/enrichment/resolver/core.py
+  source_type: legacy_code
+  note: Resolver treats enrichment_index as the database-cache stage between YAML overrides and downstream fallback paths, not as the final semantic truth object.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/enrichment/resolver/core.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/infrastructure/enrichment/test_mapping_repository_enrichment_index.py
+  source_type: legacy_test
+  note: Repository tests preserve confidence arbitration, source metadata carriage, and hit-count behavior as stable runtime expectations.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/infrastructure/enrichment/test_mapping_repository_enrichment_index.py
+  semantic_authority: runtime_witness
+- source_ref: tests/unit/infrastructure/enrichment/test_company_id_resolver.py
+  source_type: legacy_test
+  note: Resolver tests preserve enrichment_index as the DB-cache decision stage with cache-hit accounting and per-hit update semantics.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/unit/infrastructure/enrichment/test_company_id_resolver.py
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into: []
+submitted_at: '2026-04-19T00:00:00Z'
+semantic_findings:
+- semantic_id: sem-rule-enrichment-index-cache-boundary
+  semantic_node_type: semantic_rule
+  title: Enrichment index cache boundary
+  summary: enrichment_index is a governed runtime cache with confidence and provenance arbitration, not the durable enterprise identity truth object itself.
+  business_conclusion: enrichment_index should be interpreted as a reusable runtime cache layer that accelerates and records company_id resolution evidence, while durable business identity semantics remain anchored in company_id and downstream business projections rather than in cache rows themselves.
+  primary_source_refs:
+  - docs/guides/infrastructure/enrichment-index-update-mechanism.md
+  - docs/guides/infrastructure/company-enrichment-service.md
+  supporting_source_refs:
+  - io/schema/migrations/versions/001_initial_infrastructure.py
+  - src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  - src/work_data_hub/infrastructure/enrichment/resolver/core.py
+  - tests/unit/infrastructure/enrichment/test_mapping_repository_enrichment_index.py
+  - tests/unit/infrastructure/enrichment/test_company_id_resolver.py
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to:
+  - sem-concept-company-id-anchor
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - enrichment_index rows carry durable-looking metadata such as confidence, provenance, and hit counts, but the legacy docs and resolver ordering still classify the table as a cache layer inside the identity pipeline rather than as the enterprise identity object.
+    - Runtime reuse and append-only behavior make the cache operationally important, yet lower layers such as queueing, EQC lookup, and temp-id fallback remain able to supersede cache misses or populate new cache evidence.
+    proxy_usage_refs:
+    - src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+    - tests/unit/infrastructure/enrichment/test_company_id_resolver.py
+    downstream_consequence_refs:
+    - docs/guides/infrastructure/company-enrichment-service.md
+    related_runtime_carriers:
+    - obj-company-lookup-queue-runtime
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports preserving enrichment_index as a governed runtime-memory surface without collapsing cache entries into canonical enterprise identity truth.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring exact cache-retention mechanics while preserving the stable semantic boundary that cache evidence is subordinate to company_id governance.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that treat enrichment_index rows as if they were the canonical identity object instead of an arbitration cache.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a stable cache-boundary rule inside legacy identity resolution governance.
+        target_pages:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+trigger_id: trigger-enrichment-index-cache-boundary-001
+orchestration_iteration: 1
