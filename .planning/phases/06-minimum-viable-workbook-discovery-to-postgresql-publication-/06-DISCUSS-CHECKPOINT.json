@@ -1,0 +1,164 @@
+{
+  "phase": "6",
+  "phase_name": "minimum-viable-workbook-discovery-to-postgresql-publication",
+  "timestamp": "2026-04-19T13:45:00Z",
+  "areas_completed": [
+    "A. Pilot slice 边界",
+    "B. PostgreSQL adapter 形态",
+    "C. Workbook discovery + operator 入口",
+    "D. Pilot 验收轴 & Requirements 映射"
+  ],
+  "areas_remaining": [],
+  "decisions": {
+    "A. Pilot slice 边界": [
+      {
+        "question": "Phase 6 覆盖哪个 domain？",
+        "answer": "annuity_performance 单 domain",
+        "options_presented": [
+          "annuity_performance 单 domain (Recommended)",
+          "annuity_performance + annuity_income 两个",
+          "四个 domain 全上 (annuity_performance + annuity_income + annual_award + annual_loss)"
+        ]
+      },
+      {
+        "question": "哪些 publication target 在本期走 PostgreSQL？",
+        "answer": "四个 target 全上线 — fact_annuity_performance + company_reference + contract_state + monthly_snapshot (覆盖 REFRESH / UPSERT / APPEND_ONLY)",
+        "options_presented": [
+          "四个 target 全上线 (Recommended)",
+          "只上 fact_annuity_performance 一个 target",
+          "fact + contract_state 两个"
+        ]
+      },
+      {
+        "question": "上游阶段（intake、identity_resolution、reference_derivation、projections、tracing、evidence）怎么办？",
+        "answer": "完全不改，纯 PG adapter 插拔 — pilot 只在 PublicationService 下穿存储层加 PG adapter；trace 和 evidence 维持当前实现",
+        "options_presented": [
+          "完全不改，纯 PG adapter 插拔 (Recommended)",
+          "publication 换 PG，同时抗干地给 trace_store 加 PG adapter",
+          "顺便重构 intake 的工作簿加载"
+        ]
+      }
+    ],
+    "B. PostgreSQL adapter 形态": [
+      {
+        "question": "PostgreSQL 驱动与 adapter 形态？",
+        "answer": "psycopg3 (同步) + 新建 PostgresTableStore 同形接口",
+        "options_presented": [
+          "psycopg3 (同步) + 新建 PostgresTableStore同形接口 (Recommended)",
+          "psycopg2-binary + PostgresTableStore 同形接口",
+          "SQLAlchemy Core + Alembic 完整套",
+          "asyncpg + async 改造 publication 端"
+        ]
+      },
+      {
+        "question": "连接配置来源？",
+        "answer": "环境变量 WDH_PG_DSN / DATABASE_URL + schema 前缀",
+        "options_presented": [
+          "环境变量 WDH_PG_DSN / DATABASE_URL + 带 schema 前缀 (Recommended)",
+          "新建 config/runtime/postgres.json",
+          "per-domain 配置（每个 domain 一个连接）"
+        ]
+      },
+      {
+        "question": "Schema 管理策略？",
+        "answer": "手工 DDL 脚本 + 启动时 fail-closed 校验",
+        "options_presented": [
+          "手工 DDL 脚本 + 启动时 fail-closed 校验 (Recommended)",
+          "转入专有的 Alembic env（微型版）",
+          "首次运行自动 CREATE (IF NOT EXISTS)",
+          "假设 DBA 预建表，adapter 只校验存在性和列"
+        ]
+      },
+      {
+        "question": "事务边界怎么用？",
+        "answer": "整个 run 一个 PG 事务，任一 target 失败 rollback 全部",
+        "options_presented": [
+          "整个 run 一个 PG 事务，任一 target 失败 rollback 全部 (Recommended)",
+          "按 transaction_group 分三个事务 (fact / reference / projection)",
+          "每个 target 一个事务，fail-fast 在首个失败 target 停止"
+        ]
+      }
+    ],
+    "C. Workbook discovery + operator 入口": [
+      {
+        "question": "operator 怎么告诉命令要发布哪份工作簿？",
+        "answer": "显式 path 参数 + period 参数，与 replay 概念对齐",
+        "options_presented": [
+          "显式 path 参数 + period 参数，与 replay 概念对齐 (Recommended)",
+          "目录扫描 + 文件名模式自动识别 period",
+          "清单文件 (manifest.json / yaml) 驱动批量发布"
+        ]
+      },
+      {
+        "question": "CLI 命令挂在哪里？",
+        "answer": "在 apps/etl_cli/main.py 新增 publish Typer 子群",
+        "options_presented": [
+          "在 apps/etl_cli/main.py 新增 publish Typer 子群 (Recommended)",
+          "在 etl_cli/main.py 直接添加根命令 publish-annuity-performance",
+          "新建 apps/publish_cli/ 独立入口"
+        ]
+      },
+      {
+        "question": "publication_id / run_id / batch_id 怎么生成？",
+        "answer": "命令内自动生成（timestamp + domain + period)",
+        "options_presented": [
+          "命令内自动生成（timestamp + domain + period) (Recommended)",
+          "operator 可选传 --run-id/--batch-id，不传时自动生成",
+          "强制 operator 提供所有标识"
+        ]
+      }
+    ],
+    "D. Pilot 验收轴 & Requirements 映射": [
+      {
+        "question": "Phase 6 要靠什么证据来宣布 pilot 成功？",
+        "answer": "Replay 行数/值一致 + PG 读回 diff",
+        "options_presented": [
+          "Replay 行数/值一致 + PG 读回 diff (Recommended)",
+          "仅行数一致 + typed error 覆盖 + CLI smoke",
+          "新设一个 performance/pg tier，走完整 perf matrix"
+        ]
+      },
+      {
+        "question": "Phase 6 与 REQ-ID 的映射？",
+        "answer": "本期新开 RUN-01a (pilot-scoped) 内嵌 REQ，并在 REQUIREMENTS.md 显式记录",
+        "options_presented": [
+          "本期新开 RUN-01a (pilot-scoped) 内陆 REQ，并在 REQUIREMENTS.md 显式记录 (Recommended)",
+          "直接把 v2 RUN-01 缩写为本期任务，Phase 6 执行完即 RUN-01 validated",
+          "不开新 REQ，ROADMAP 里保持 Requirements: TBD，Phase 6 在 verification 里用「pilot 轴」描述成功标准"
+        ]
+      },
+      {
+        "question": "PostgreSQL 测试基础设施用哪种？",
+        "answer": "testcontainers-python 单元 fixture，本地和 CI 同皮肤",
+        "options_presented": [
+          "testcontainers-python 单元 fixture，本地和 CI 同皮肤 (Recommended)",
+          "主力用本地 pg，CI 暂跳过 PG tier，只运行单元/契约测试",
+          "Mock / stub PG 连接，不设置真 PG"
+        ]
+      }
+    ]
+  },
+  "deferred_ideas": [
+    "PostgreSQL-backed tracing adapter",
+    "PostgreSQL-backed evidence adapter",
+    "Schema migration framework beyond hand-rolled DDL",
+    "Batch / manifest-driven publish command",
+    "Operator-facing dashboards or self-service UI",
+    "Queue / retry runtime for publish backlog",
+    "Additional publication channels beyond PostgreSQL"
+  ],
+  "canonical_refs": [
+    ".planning/ROADMAP.md",
+    ".planning/REQUIREMENTS.md",
+    ".planning/PROJECT.md",
+    ".planning/STATE.md",
+    ".planning/phases/05-performance-reliability-optimization-with-drift-safeguards/05-CONTEXT.md",
+    ".planning/phases/04-agent-operations-governance-hardening/04-CONTEXT.md",
+    "docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md",
+    "src/work_data_hub_pro/platform/publication/service.py",
+    "src/work_data_hub_pro/platform/storage/in_memory_tables.py",
+    "src/work_data_hub_pro/platform/contracts/publication.py",
+    "src/work_data_hub_pro/apps/etl_cli/main.py",
+    "config/policies/publication.json"
+  ]
+}
