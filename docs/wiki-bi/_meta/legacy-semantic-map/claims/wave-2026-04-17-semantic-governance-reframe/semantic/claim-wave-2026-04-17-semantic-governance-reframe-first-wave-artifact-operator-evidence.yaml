@@ -29,7 +29,7 @@ sources_read:
   semantic_authority: runtime_witness
 - source_ref: src/work_data_hub/domain/annuity_performance/service.py
   source_type: legacy_code
-  note: Performance service mirrors the same split: fact records stay in the processing result while failed rows export through a unified CSV side effect.
+  note: "Performance service mirrors the same split: fact records stay in the processing result while failed rows export through a unified CSV side effect."
   workspace_id: legacy_work_data_hub
   relative_path: src/work_data_hub/domain/annuity_performance/service.py
   semantic_authority: runtime_witness
