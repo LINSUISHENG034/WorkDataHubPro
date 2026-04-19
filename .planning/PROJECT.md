@@ -23,8 +23,8 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 - ✓ Deterministic replay checkpoints and comparison-run evidence packages for the accepted slices — validated in Phase 2
 - ✓ Explicit compatibility adjudication semantics for severity, precedent, exception scope, and checkpoint identity — validated in Phase 2
 - ✓ Repository-native PR / protected-branch / nightly parity gate tiers — validated in Phase 2
-- ✓ Phase 6 governance remediation: fail-closed baseline loading (`load_required_checkpoint_baseline`), multiset duplicate-row diff accuracy (`_build_diff`), stable intermediate checkpoint payload normalization, and explicit bootstrap entrypoint (`scripts/bootstrap_phase2_checkpoint_baselines.py`) — validated in Phase 6
-- ✓ Phase 6 governance status sync: PROJECT.md, ROADMAP.md, STATE.md, and `06-VERIFICATION.md` record Phase 2 implementation complete and governance sign-off closed from executed evidence — validated in Phase 6
+- ✓ Phase 02.1 governance remediation: fail-closed baseline loading (`load_required_checkpoint_baseline`), multiset duplicate-row diff accuracy (`_build_diff`), stable intermediate checkpoint payload normalization, and explicit bootstrap entrypoint (`scripts/bootstrap_phase2_checkpoint_baselines.py`) — validated in Phase 02.1
+- ✓ Phase 02.1 governance status sync: PROJECT.md, ROADMAP.md, STATE.md, and `02.1-VERIFICATION.md` record Phase 2 implementation complete and governance sign-off closed from executed evidence — validated in Phase 02.1
 - ✓ Shared replay orchestration primitives now power annuity, annual-award, and annual-loss slices with typed run reports and typed setup-failure paths — validated in Phase 3
 - ✓ Registry-backed replay CLI entrypoints (`replay list-domains`, `replay run`, `replay diagnose`) and updated replay runbooks are available for agents and humans — validated in Phase 3
 - ✓ Governed temp-id fallback avoids raw identifier leakage in replay-facing loss-domain assertions and identity-resolution contracts — validated in Phase 3
@@ -38,12 +38,12 @@ WorkDataHubPro is a brownfield rebuild of `E:\Projects\WorkDataHub`, focused on 
 
 - Phase 1 complete: authoritative mapping, rule-classification, parity-baseline, and offline checkpoint artifacts are in place
 - Phase 2 implementation complete: explicit stage contracts, deterministic parity gates, derivation checkpoint governance, and CI-ready gate tiers are in place
-- Phase 2 governance sign-off closed: Phase 6 remediation and re-verification completed on 2026-04-13 with the exact replay acceptance suite and governance contract suite both passing
+- Phase 2 governance sign-off closed: Phase 02.1 remediation and re-verification completed on 2026-04-13 with the exact replay acceptance suite and governance contract suite both passing
 - Phase 3 implementation complete: all three replay slices use shared orchestration primitives, typed diagnostics are stable, and replay execution/diagnostics have agent- and human-facing CLI entrypoints
 - Phase 3 governance sign-off closed (2026-04-13): Phase 03.1 remediation addressed truthful failure evidence, fail-closed diagnose package loading, and typed invalid-id CLI behavior; project/verification/wiki wording now synchronized
 - Phase 4 planned and ready to execute: `.planning/phases/04-agent-operations-governance-hardening/` contains context, research, validation, and four approved execution plans for lineage lookup, evidence redaction, compatibility lifecycle hardening, and runbook alignment
 - Phase 4 execution has not started yet: there are no `04-xx-SUMMARY.md` artifacts on disk, so the next truthful step is execution rather than more planning
-- Phase 6 complete: truthful `source_intake` contract semantics, stable intermediate checkpoint payloads, annual-award outcome repair, and governance status synchronization are all in place
+- Phase 02.1 complete: truthful `source_intake` contract semantics, stable intermediate checkpoint payloads, annual-award outcome repair, and governance status synchronization are all in place
 - Deferred carry-forward from Phase 2: verification-asset rows for `golden_set`, `golden_baseline`, `real_data_sample`, and dedicated error-case fixtures remain explicitly deferred
 
 ### Out of Scope

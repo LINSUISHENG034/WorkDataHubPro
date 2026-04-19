@@ -196,7 +196,7 @@ Each phase completion requires:
 3. High-risk checklist closure or explicit carry-over
 4. Regression test evidence for touched boundaries
 
-### Phase 6: Phase 2 governance remediation - truthful gates and status sync
+### Phase 02.1: Phase 2 governance remediation - truthful gates and status sync
 
 **Goal:** Restore truthful Phase 2 intermediate gates and synchronize governance status with the actual remediation state.
 **Requirements**: PAR-02, PAR-03, PIPE-01, PIPE-02
@@ -205,9 +205,9 @@ Each phase completion requires:
 **Plans:** 3 plans
 
 Plans:
-- [x] 06-01 - shared fail-closed baseline runtime, explicit bootstrap path, and duplicate-row diff fix
-- [x] 06-02 - truthful intermediate checkpoint wiring and accepted replay baseline assets for all accepted slices
-- [x] 06-03 - governance and planning status synchronization plus contract coverage
+- [x] 02.1-01 - shared fail-closed baseline runtime, explicit bootstrap path, and duplicate-row diff fix
+- [x] 02.1-02 - truthful intermediate checkpoint wiring and accepted replay baseline assets for all accepted slices
+- [x] 02.1-03 - governance and planning status synchronization plus contract coverage
 
 ---
 *Roadmap created: 2026-04-12*

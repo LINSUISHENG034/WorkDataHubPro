@@ -26,10 +26,10 @@ Out of scope: persistent storage / queue runtime adapters (v2 RUN-01/02), additi
 - **D-04:** Index lifecycle is build-once-at-call-site: build on first invocation per call (or per store snapshot), then read-only for the duration of that call. Matches the batch-oriented nature of replay runs and avoids touching any write path.
 
 ### PERF-01 ↔ Parity — Drift-safety harness
-- **D-05:** Primary drift-safety mechanism is the existing replay acceptance suite under `tests/replay/` (annuity_performance / annual_award / annual_loss + Phase 6 fail-closed baselines). Each PERF-01 optimization commit must be green against the full replay suite before it lands. No new bespoke parity harness is added.
+- **D-05:** Primary drift-safety mechanism is the existing replay acceptance suite under `tests/replay/` (annuity_performance / annual_award / annual_loss + Phase 02.1 fail-closed baselines). Each PERF-01 optimization commit must be green against the full replay suite before it lands. No new bespoke parity harness is added.
 - **D-06:** Each hotspot optimization lands as its own atomic commit so any future regression can be reverted at hotspot granularity. No `_legacy()` shim functions in source; no runtime feature flag (consistent with D-03).
 - **D-07:** If any micro-level oracle test is added during planning/execution to spot-check a hotspot, the convention is precomputed `(input, expected_output)` fixtures committed under `reference/perf-baselines/` — never retain a `_legacy()` dual implementation in source code.
-- **D-08:** Conflict resolution authority: replay acceptance suite + Phase 6 deterministic baselines are the final arbiter. If any micro oracle test disagrees with the replay suite, the oracle/fixture is treated as suspect and re-derived; the replay suite verdict stands.
+- **D-08:** Conflict resolution authority: replay acceptance suite + Phase 02.1 deterministic baselines are the final arbiter. If any micro oracle test disagrees with the replay suite, the oracle/fixture is treated as suspect and re-derived; the replay suite verdict stands.
 
 ### PERF-02 — Publication policy validation and failure semantics
 - **D-09:** Replace raw `payload[domain]` / `policy.targets[target_name]` access with a Pydantic v2 model for the publication policy file. Aligns with the existing Pydantic-based contracts under `platform/contracts/`.
@@ -68,7 +68,7 @@ Out of scope: persistent storage / queue runtime adapters (v2 RUN-01/02), additi
 - `.planning/phases/02-transparent-pipeline-contracts-parity-gates/02-CONTEXT.md` — deterministic parity gates, comparator semantics, CI tiering that PERF-03 builds on.
 - `.planning/phases/03-orchestration-refactor-failure-explainability/03-CONTEXT.md` — typed-diagnostic and replay-entrypoint conventions that PERF-02 typed errors must follow.
 - `.planning/phases/04-agent-operations-governance-hardening/04-CONTEXT.md` — file-backed evidence baseline and lineage helpers that constrain how PERF-01 changes interact with trace lookup.
-- `.planning/phases/06-phase-2-governance-remediation-truthful-gates-and-status-sync/06-CONTEXT.md` — Phase 6 truthful baseline contracts that the replay acceptance suite (D-05) depends on; do not weaken.
+- `.planning/phases/02.1-phase-2-governance-remediation-truthful-gates-and-status-sync/02.1-CONTEXT.md` — Phase 02.1 truthful baseline contracts that the replay acceptance suite (D-05) depends on; do not weaken.
 
 ### Architecture and concerns
 - `docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md` — capability/platform/governance/app boundaries and trace/evidence invariants Phase 5 must preserve.
@@ -99,7 +99,7 @@ Out of scope: persistent storage / queue runtime adapters (v2 RUN-01/02), additi
 
 ### Reusable Assets
 - `platform/contracts/` already centralizes Pydantic v2 typed contracts for the project; `PublicationPolicy` Pydantic model (D-09) belongs in or adjacent to this module.
-- `tests/replay/` contains the deterministic replay acceptance suite for the three slices and the Phase 6 fail-closed baseline machinery. D-05 reuses this directly — no new harness required.
+- `tests/replay/` contains the deterministic replay acceptance suite for the three slices and the Phase 02.1 fail-closed baseline machinery. D-05 reuses this directly — no new harness required.
 - `tests/performance/test_trace_lookup_micro_benchmark.py` is the existing performance-suite anchor; the verification matrix (D-14/D-17) extends rather than replaces it.
 - `reference/historical_replays/` already establishes the "baseline assets in `reference/`" convention; `reference/perf-baselines/` (D-16) follows the same shape.
 - The replay acceptance suite already exercises both `_has_match` (via projection comparison) and `find` (via trace lookup) on real per-slice data, which is what makes D-05 sufficient as the parity guarantor without a new harness.

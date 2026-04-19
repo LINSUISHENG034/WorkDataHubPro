@@ -64,7 +64,7 @@
 
 | Option | Description | Selected |
 |--------|-------------|----------|
-| 复用现有 replay acceptance suite | Each optimization commit must pass `tests/replay/` full suite + Phase 6 fail-closed baselines | ✓ |
+| 复用现有 replay acceptance suite | Each optimization commit must pass `tests/replay/` full suite + Phase 02.1 fail-closed baselines | ✓ |
 | 新增 "优化前后 snapshot diff" 专项测试 | Per-hotspot oracle test asserting set equality of legacy vs new implementation | |
 | 两者叠加 | Replay suite as release gate + snapshot diff as hotspot-level proof | |
 
@@ -88,7 +88,7 @@
 
 | Option | Description | Selected |
 |--------|-------------|----------|
-| Replay suite 为最终判决 | Replay suite + Phase 6 baselines override any micro oracle disagreement | ✓ |
+| Replay suite 为最终判决 | Replay suite + Phase 02.1 baselines override any micro oracle disagreement | ✓ |
 | Snapshot diff 为最终判决 | Micro oracle wins; replay suite gap requires expansion | |
 
 **User's choice:** Replay suite 为最终判决.

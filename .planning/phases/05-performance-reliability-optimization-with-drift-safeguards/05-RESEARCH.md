@@ -16,10 +16,10 @@
 - **D-04:** 索引生命周期是 build-once-at-call-site / first-use lazy build；不触碰 write path。
 
 ### PERF-01 ↔ Parity — Drift safety
-- **D-05:** 语义漂移防线复用现有 `tests/replay/` 全 acceptance suite 与 Phase 6 fail-closed baseline 体系；不新建独立 parity harness。
+- **D-05:** 语义漂移防线复用现有 `tests/replay/` 全 acceptance suite 与 Phase 02.1 fail-closed baseline 体系；不新建独立 parity harness。
 - **D-06:** 每个热点优化必须支持 per-hotspot atomic landing / revert；计划应保持改动边界清晰。
 - **D-07:** 如需加 hotspot 级 micro oracle，必须用 `reference/perf-baselines/` 下的预计算 `(input, expected_output)` fixture；不能在源码里保留 `_legacy()` 双实现。
-- **D-08:** replay acceptance suite + Phase 6 baselines 是最终裁决者；micro oracle 只做辅助诊断，不能推翻 replay 结果。
+- **D-08:** replay acceptance suite + Phase 02.1 baselines 是最终裁决者；micro oracle 只做辅助诊断，不能推翻 replay 结果。
 
 ### PERF-02 — Publication policy validation and failure semantics
 - **D-09:** `config/policies/publication.json` 的读取与校验采用 Pydantic v2 model，而不是 JSON Schema 或手写验证函数。
@@ -77,7 +77,7 @@ Phase 5 不应被规划成“大范围性能清理”或“通用可靠性重构
 
 - 保持 capability-first 边界：业务语义仍留在 `capabilities/`；索引化只是实现细节优化，不能把 projection 语义搬到 generic helper 或 orchestration。
 - 保持 public signatures 不变：`ContractStateProjection.run()`、`ContractStateProjection._has_match(...)` 的调用方式，以及 `InMemoryTraceStore.find(...)` 的对外接口都不能漂移。
-- Phase 2 / Phase 6 的 replay baselines 与 fail-closed checkpoint truthfulness 是 Phase 5 的上游硬约束；任何 perf 优化不能弱化这些 gate。
+- Phase 2 / Phase 02.1 的 replay baselines 与 fail-closed checkpoint truthfulness 是 Phase 5 的上游硬约束；任何 perf 优化不能弱化这些 gate。
 - publication policy 安全修复必须沿用 Phase 3 的 typed diagnostic 风格，而不是引入临时 error-code dict 或裸 `ValueError`。
 - 验证命令必须遵守 `uv run ...` 工具链 discipline；计划中不应出现 `pip`, `python` 直跑或 ad hoc shell harness。
 - 在 claim completion 之前必须仍能跑 `uv run pytest -v`；Phase 5 的 perf 资产是补充，不是替代全量回归。
@@ -293,7 +293,7 @@ Key outputs:
 - `.planning/phases/02-transparent-pipeline-contracts-parity-gates/02-CONTEXT.md`
 - `.planning/phases/03-orchestration-refactor-failure-explainability/03-CONTEXT.md`
 - `.planning/phases/04-agent-operations-governance-hardening/04-CONTEXT.md`
-- `.planning/phases/06-phase-2-governance-remediation-truthful-gates-and-status-sync/06-CONTEXT.md`
+- `.planning/phases/02.1-phase-2-governance-remediation-truthful-gates-and-status-sync/02.1-CONTEXT.md`
 - `docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md`
 - `docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md`
 - `docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md`

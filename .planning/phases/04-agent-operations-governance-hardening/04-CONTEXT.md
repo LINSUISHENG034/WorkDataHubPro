@@ -54,7 +54,7 @@ Phase 4 makes the replay/governance system operationally handoff-ready after Pha
 ### Prior phase decisions that constrain Phase 4
 - `.planning/phases/03-orchestration-refactor-failure-explainability/03-CONTEXT.md` — locked replay entrypoint, diagnostics, and temp-id decisions from Phase 3.
 - `.planning/phases/03-orchestration-refactor-failure-explainability/03-VERIFICATION.md` — what Phase 3 actually delivered and what Phase 4 can build on.
-- `.planning/phases/06-phase-2-governance-remediation-truthful-gates-and-status-sync/06-CONTEXT.md` — truthful checkpoint and governance-state constraints that Phase 4 must preserve.
+- `.planning/phases/02.1-phase-2-governance-remediation-truthful-gates-and-status-sync/02.1-CONTEXT.md` — truthful checkpoint and governance-state constraints that Phase 4 must preserve.
 
 ### Architecture and concerns
 - `docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md` — capability/platform/governance/app boundaries and trace/evidence invariants.

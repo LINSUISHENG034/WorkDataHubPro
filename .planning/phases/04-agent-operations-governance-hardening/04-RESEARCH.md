@@ -263,7 +263,7 @@ Key outputs:
 - `.planning/STATE.md`
 - `.planning/phases/03-orchestration-refactor-failure-explainability/03-CONTEXT.md`
 - `.planning/phases/03-orchestration-refactor-failure-explainability/03-VERIFICATION.md`
-- `.planning/phases/06-phase-2-governance-remediation-truthful-gates-and-status-sync/06-CONTEXT.md`
+- `.planning/phases/02.1-phase-2-governance-remediation-truthful-gates-and-status-sync/02.1-CONTEXT.md`
 - `.planning/codebase/CONCERNS.md`
 - `.planning/codebase/STRUCTURE.md`
 - `.planning/codebase/TESTING.md`
