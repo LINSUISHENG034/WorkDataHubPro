@@ -20,8 +20,8 @@ durable_target_pages:
 - docs/wiki-bi/surfaces/reference-sync.md
 - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
 proposal_governance:
-  recommendation_status: recommended_stable_canonical
-  semantic_scope_type: semantic_object
+  recommendation_status: claim_level_only
+  semantic_scope_type: runtime_carrier
   authority_gate_passed: true
   downstream_consequence_gate_passed: true
   contradiction_accounting_status: explained_operational_shortcut
@@ -55,8 +55,8 @@ proposal_governance:
       - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
       blocked_by: []
     durable_wiki_absorption:
-      summary: Ready for durable absorption review as a stable target-inventory fact
-        family.
+      summary: Preserve as governed surface-inventory memory for reference_sync, not
+        as stable business-semantic canon.
       target_pages:
       - docs/wiki-bi/surfaces/reference-sync.md
       - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
@@ -65,9 +65,9 @@ durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
 archive_after_absorption: true
-semantic_maturity_level: consumption-candidate
+semantic_maturity_level: inferred
 discovery_view_status: sufficient
-consumption_readiness_status: reviewable
+consumption_readiness_status: discovery-only
 readiness_notes:
 - The runtime implementation details can change, but the target-inventory contract
   is stable and is already preserved by current wiki guidance.

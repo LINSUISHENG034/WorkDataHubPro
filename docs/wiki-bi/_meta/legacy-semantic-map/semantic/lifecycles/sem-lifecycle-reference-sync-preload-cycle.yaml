@@ -25,8 +25,8 @@ durable_target_pages:
 - docs/wiki-bi/surfaces/reference-sync.md
 - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
 proposal_governance:
-  recommendation_status: recommended_stable_canonical
-  semantic_scope_type: semantic_object
+  recommendation_status: claim_level_only
+  semantic_scope_type: runtime_carrier
   authority_gate_passed: true
   downstream_consequence_gate_passed: true
   contradiction_accounting_status: explained_scope_limited_alias
@@ -62,8 +62,8 @@ proposal_governance:
       - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
       blocked_by: []
     durable_wiki_absorption:
-      summary: Ready for durable absorption review as a stable lifecycle description
-        of legacy reference_sync.
+      summary: Preserve as runtime-governance memory for the reference_sync surface,
+        not as stable business-semantic canon.
       target_pages:
       - docs/wiki-bi/surfaces/reference-sync.md
       - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
@@ -72,9 +72,9 @@ durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
 archive_after_absorption: true
-semantic_maturity_level: consumption-candidate
+semantic_maturity_level: inferred
 discovery_view_status: sufficient
-consumption_readiness_status: reviewable
+consumption_readiness_status: discovery-only
 readiness_notes:
 - Later runtime simplifications may hide or defer pieces of the repo-native cycle,
   but the legacy pre-load lifecycle itself remains stable and explainable.

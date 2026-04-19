@@ -3,13 +3,19 @@ wave_id: wave-2026-04-17-semantic-governance-reframe
 claim_scope: semantic
 claim_target_id: sem-lifecycle-customer-status-yearly-cycle
 sources_read:
+- source_ref: docs/business-background/战客身份定义与更新逻辑.md
+  source_type: legacy_doc
+  note: Business-background guidance explicitly separates yearly-init, contract sync, and snapshot refresh as distinct annual-identity lifecycle actions.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/战客身份定义与更新逻辑.md
+  semantic_authority: authoritative_semantic_source
 - source_ref: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
   source_type: current_wiki
   note: Current lifecycle evidence page already preserves the stable lifecycle action
     split.
   workspace_id: work_data_hub_pro
   relative_path: docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
-  semantic_authority: authoritative_semantic_source
+  semantic_authority: runtime_witness
 - source_ref: src/work_data_hub/customer_mdm/contract_sync.py
   source_type: legacy_code
   note: Legacy contract sync implementation witnesses sync semantics and yearly identity
@@ -46,8 +52,9 @@ semantic_findings:
   business_conclusion: yearly-init, sync, and snapshot are distinct lifecycle actions
     and should not be collapsed into one status operation.
   primary_source_refs:
-  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+  - docs/business-background/战客身份定义与更新逻辑.md
   supporting_source_refs:
+  - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
   - src/work_data_hub/customer_mdm/contract_sync.py
   - src/work_data_hub/customer_mdm/snapshot_refresh.py
   - src/work_data_hub/cli/etl/hooks.py

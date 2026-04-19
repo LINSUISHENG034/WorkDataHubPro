@@ -49,8 +49,8 @@ semantic_findings:
   open_questions: []
   non_equivalent_to: []
   proposal_governance:
-    recommendation_status: recommended_stable_canonical
-    semantic_scope_type: semantic_object
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
     authority_gate_passed: true
     downstream_consequence_gate_passed: true
     contradiction_accounting_status: explained_operational_shortcut
@@ -81,7 +81,7 @@ semantic_findings:
         - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
         blocked_by: []
       durable_wiki_absorption:
-        summary: Ready for durable absorption review as a stable target-inventory fact family.
+        summary: Preserve as governed surface-inventory memory for reference_sync, not as stable business-semantic canon.
         target_pages:
         - docs/wiki-bi/surfaces/reference-sync.md
         - docs/wiki-bi/evidence/reference-and-backfill-evidence.md

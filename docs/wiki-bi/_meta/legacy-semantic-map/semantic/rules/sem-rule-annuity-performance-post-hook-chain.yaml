@@ -30,8 +30,8 @@ durable_target_pages:
 - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
 - docs/wiki-bi/standards/semantic-correctness/customer-status-semantics.md
 proposal_governance:
-  recommendation_status: recommended_stable_canonical
-  semantic_scope_type: semantic_object
+  recommendation_status: claim_level_only
+  semantic_scope_type: runtime_carrier
   authority_gate_passed: true
   downstream_consequence_gate_passed: true
   contradiction_accounting_status: explained_operational_shortcut
@@ -67,8 +67,8 @@ proposal_governance:
       - docs/wiki-bi/surfaces/customer-mdm-commands.md
       blocked_by: []
     durable_wiki_absorption:
-      summary: Ready for durable absorption review as a stable runtime-to-semantic
-        trigger rule for customer_mdm downstream updates.
+      summary: Preserve as runtime-governance memory for adjacent surfaces and evidence
+        pages, not as stable business-semantic canon.
       target_pages:
       - docs/wiki-bi/surfaces/customer-mdm-commands.md
       - docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
@@ -78,9 +78,9 @@ durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
 archive_after_absorption: true
-semantic_maturity_level: consumption-candidate
+semantic_maturity_level: inferred
 discovery_view_status: sufficient
-consumption_readiness_status: reviewable
+consumption_readiness_status: discovery-only
 readiness_notes:
 - Manual customer-mdm commands remain valid operator surfaces, but they act as recovery
   paths and do not overturn the default annuity_performance-triggered hook chain.

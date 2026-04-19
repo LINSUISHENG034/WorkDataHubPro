@@ -44,8 +44,8 @@ semantic_findings:
   business_conclusion: temp_id is a governed record-retention fallback for unresolved identity and is not equivalent to formal company_id.
   primary_source_refs:
   - docs/guides/infrastructure/company-enrichment-service.md
-  - docs/wiki-bi/concepts/temp-id.md
   supporting_source_refs:
+  - docs/wiki-bi/concepts/temp-id.md
   - docs/wiki-bi/concepts/company-id.md
   - docs/wiki-bi/evidence/annuity-income-id5-retirement-evidence.md
   semantic_authority: authoritative_semantic_source

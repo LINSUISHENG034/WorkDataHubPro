@@ -108,8 +108,8 @@ semantic_findings:
   open_questions: []
   non_equivalent_to: []
   proposal_governance:
-    recommendation_status: recommended_stable_canonical
-    semantic_scope_type: semantic_object
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
     authority_gate_passed: true
     downstream_consequence_gate_passed: true
     contradiction_accounting_status: explained_operational_shortcut
@@ -141,7 +141,7 @@ semantic_findings:
         - docs/wiki-bi/evidence/operator-and-surface-evidence.md
         blocked_by: []
       durable_wiki_absorption:
-        summary: Ready for durable absorption review as a stable description of the legacy queue recovery lifecycle.
+        summary: Preserve as queue-runtime governance memory for surface and evidence review, not as stable business-semantic canon.
         target_pages:
         - docs/wiki-bi/surfaces/company-lookup-queue.md
         - docs/wiki-bi/evidence/operator-and-surface-evidence.md
@@ -169,8 +169,8 @@ semantic_findings:
   open_questions: []
   non_equivalent_to: []
   proposal_governance:
-    recommendation_status: recommended_stable_canonical
-    semantic_scope_type: semantic_object
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
     authority_gate_passed: true
     downstream_consequence_gate_passed: true
     contradiction_accounting_status: explained_scope_limited_alias
@@ -202,7 +202,7 @@ semantic_findings:
         - docs/wiki-bi/evidence/operator-and-surface-evidence.md
         blocked_by: []
       durable_wiki_absorption:
-        summary: Ready for durable absorption review as a stable operator-boundary rule for company_lookup_queue.
+        summary: Preserve as orchestration-boundary memory for surface governance, not as stable business-semantic canon.
         target_pages:
         - docs/wiki-bi/surfaces/company-lookup-queue.md
         - docs/wiki-bi/evidence/operator-and-surface-evidence.md

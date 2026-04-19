@@ -26,8 +26,8 @@ open_questions: []
 durable_target_pages:
 - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
 proposal_governance:
-  recommendation_status: recommended_stable_canonical
-  semantic_scope_type: semantic_object
+  recommendation_status: claim_level_only
+  semantic_scope_type: runtime_carrier
   authority_gate_passed: true
   downstream_consequence_gate_passed: true
   contradiction_accounting_status: explained_scope_limited_alias
@@ -69,8 +69,8 @@ proposal_governance:
       - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
       blocked_by: []
     durable_wiki_absorption:
-      summary: Ready for durable absorption review as a stable cache-boundary rule
-        inside legacy identity resolution governance.
+      summary: Preserve as runtime-governance memory for cache boundary review, not
+        as stable business-semantic canon.
       target_pages:
       - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
       blocked_by: []
@@ -78,9 +78,9 @@ durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
 archive_after_absorption: true
-semantic_maturity_level: consumption-candidate
+semantic_maturity_level: inferred
 discovery_view_status: sufficient
-consumption_readiness_status: reviewable
+consumption_readiness_status: discovery-only
 readiness_notes:
 - Runtime reuse and append-only behavior make the cache operationally important, yet
   lower layers such as queueing, EQC lookup, and temp-id fallback remain able to supersede

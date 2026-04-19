@@ -6,8 +6,10 @@ summary: The yearly customer-status lifecycle is composed of distinct yearly-ini
 business_conclusion: yearly-init, sync, and snapshot are distinct lifecycle actions
   and should not be collapsed into one status operation.
 primary_semantic_sources:
-- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
+- "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\u66F4\u65B0\
+  \u903B\u8F91.md"
 supporting_witness_sources:
+- docs/wiki-bi/evidence/customer-mdm-lifecycle-evidence.md
 - src/work_data_hub/customer_mdm/contract_sync.py
 - src/work_data_hub/customer_mdm/snapshot_refresh.py
 - src/work_data_hub/cli/etl/hooks.py

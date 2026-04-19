@@ -29,8 +29,8 @@ durable_target_pages:
 - docs/wiki-bi/surfaces/company-lookup-queue.md
 - docs/wiki-bi/evidence/operator-and-surface-evidence.md
 proposal_governance:
-  recommendation_status: recommended_stable_canonical
-  semantic_scope_type: semantic_object
+  recommendation_status: claim_level_only
+  semantic_scope_type: runtime_carrier
   authority_gate_passed: true
   downstream_consequence_gate_passed: true
   contradiction_accounting_status: explained_operational_shortcut
@@ -67,8 +67,8 @@ proposal_governance:
       - docs/wiki-bi/evidence/operator-and-surface-evidence.md
       blocked_by: []
     durable_wiki_absorption:
-      summary: Ready for durable absorption review as a stable description of the
-        legacy queue recovery lifecycle.
+      summary: Preserve as queue-runtime governance memory for surface and evidence
+        review, not as stable business-semantic canon.
       target_pages:
       - docs/wiki-bi/surfaces/company-lookup-queue.md
       - docs/wiki-bi/evidence/operator-and-surface-evidence.md
@@ -77,9 +77,9 @@ durable_summary_ready: true
 requires_human_judgement: false
 blocked_by: []
 archive_after_absorption: true
-semantic_maturity_level: consumption-candidate
+semantic_maturity_level: inferred
 discovery_view_status: sufficient
-consumption_readiness_status: reviewable
+consumption_readiness_status: discovery-only
 readiness_notes:
 - Current accepted runtime may externalize unresolved identity through artifacts instead
   of retaining the full repo-native queue, but the legacy queue recovery cycle itself
