@@ -1,11 +1,16 @@
 from pathlib import Path
 
+import pytest
+
 from work_data_hub_pro.platform.contracts.publication import (
     PublicationMode,
 )
 from work_data_hub_pro.platform.publication.service import (
+    PolicyFileMissingError,
+    PolicyParseError,
     PublicationBundle,
     PublicationService,
+    UnknownDomainError,
     build_publication_plan,
     load_publication_policy,
 )
@@ -256,3 +261,32 @@ def test_publication_service_supports_annuity_income_fact_and_signal_targets_wit
         "customer_master_signal",
     ]
     assert storage.read("customer_master_signal")[0]["customer_type"] == "INCOME_CUSTOMER"
+
+
+def test_load_publication_policy_raises_typed_error_for_missing_file(tmp_path: Path) -> None:
+    missing_path = tmp_path / "missing-publication.json"
+
+    with pytest.raises(PolicyFileMissingError):
+        load_publication_policy(missing_path, domain="annuity_performance")
+
+
+def test_load_publication_policy_raises_typed_error_for_malformed_policy(tmp_path: Path) -> None:
+    malformed_path = tmp_path / "publication.json"
+    malformed_path.write_text(
+        '{"annuity_performance": {"fact_annuity_performance": ',
+        encoding="utf-8",
+    )
+
+    with pytest.raises(PolicyParseError):
+        load_publication_policy(malformed_path, domain="annuity_performance")
+
+
+def test_load_publication_policy_raises_typed_error_for_unknown_domain(tmp_path: Path) -> None:
+    policy_path = tmp_path / "publication.json"
+    policy_path.write_text(
+        '{"annuity_performance": {"fact_annuity_performance": {"mode": "REFRESH", "transaction_group": "fact-publication", "idempotency_scope": "batch"}}}',
+        encoding="utf-8",
+    )
+
+    with pytest.raises(UnknownDomainError):
+        load_publication_policy(policy_path, domain="annual_loss")
