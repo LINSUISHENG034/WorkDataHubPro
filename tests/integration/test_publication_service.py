@@ -1,11 +1,18 @@
 from pathlib import Path
 
+import pytest
+
 from work_data_hub_pro.platform.contracts.publication import (
     PublicationMode,
 )
 from work_data_hub_pro.platform.publication.service import (
+    PolicyFileMissingError,
+    PolicyParseError,
     PublicationBundle,
+    PublicationExecutionError,
     PublicationService,
+    UnknownDomainError,
+    UnknownTargetError,
     build_publication_plan,
     load_publication_policy,
 )
@@ -256,3 +263,126 @@ def test_publication_service_supports_annuity_income_fact_and_signal_targets_wit
         "customer_master_signal",
     ]
     assert storage.read("customer_master_signal")[0]["customer_type"] == "INCOME_CUSTOMER"
+
+
+def test_load_publication_policy_raises_typed_error_for_missing_file(tmp_path: Path) -> None:
+    missing_path = tmp_path / "missing-publication.json"
+
+    with pytest.raises(PolicyFileMissingError):
+        load_publication_policy(missing_path, domain="annuity_performance")
+
+
+def test_load_publication_policy_raises_typed_error_for_malformed_policy(tmp_path: Path) -> None:
+    malformed_path = tmp_path / "publication.json"
+    malformed_path.write_text(
+        '{"annuity_performance": {"fact_annuity_performance": ',
+        encoding="utf-8",
+    )
+
+    with pytest.raises(PolicyParseError):
+        load_publication_policy(malformed_path, domain="annuity_performance")
+
+
+def test_load_publication_policy_raises_typed_error_for_unknown_domain(tmp_path: Path) -> None:
+    policy_path = tmp_path / "publication.json"
+    policy_path.write_text(
+        '{"annuity_performance": {"fact_annuity_performance": {"mode": "REFRESH", "transaction_group": "fact-publication", "idempotency_scope": "batch"}}}',
+        encoding="utf-8",
+    )
+
+    with pytest.raises(UnknownDomainError):
+        load_publication_policy(policy_path, domain="annual_loss")
+
+
+def test_build_publication_plan_raises_typed_error_for_unknown_target() -> None:
+    policy = load_publication_policy(
+        Path("config/policies/publication.json"),
+        domain="annuity_performance",
+    )
+
+    with pytest.raises(UnknownTargetError):
+        build_publication_plan(
+            policy=policy,
+            publication_id="publication-unknown-target",
+            target_name="missing_target",
+            target_kind="fact",
+            refresh_keys=["batch_id"],
+            upsert_keys=[],
+            source_batch_id="annuity_performance:2026-03",
+            source_run_id="run-001",
+        )
+
+
+class FailingOnSecondWriteStore(InMemoryTableStore):
+    def __init__(self) -> None:
+        super().__init__()
+        self.calls: list[str] = []
+
+    def refresh(self, target_name: str, rows: list[dict[str, object]]) -> int:
+        self.calls.append(target_name)
+        if len(self.calls) == 2:
+            raise RuntimeError("simulated second write failure")
+        return super().refresh(target_name, rows)
+
+
+def test_publication_service_raises_typed_error_and_stops_after_mid_bundle_failure() -> None:
+    storage = FailingOnSecondWriteStore()
+    service = PublicationService(storage)
+    policy = load_publication_policy(
+        Path("config/policies/publication.json"),
+        domain="annuity_performance",
+    )
+
+    bundles = [
+        PublicationBundle(
+            plan=build_publication_plan(
+                policy=policy,
+                publication_id="publication-fact-001",
+                target_name="fact_annuity_performance",
+                target_kind="fact",
+                refresh_keys=["batch_id"],
+                upsert_keys=[],
+                source_batch_id="annuity_performance:2026-03",
+                source_run_id="run-001",
+            ),
+            rows=[{"record_id": "fact-001", "batch_id": "annuity_performance:2026-03"}],
+        ),
+        PublicationBundle(
+            plan=build_publication_plan(
+                policy=policy,
+                publication_id="publication-contract-state-001",
+                target_name="contract_state",
+                target_kind="projection",
+                refresh_keys=["period"],
+                upsert_keys=[],
+                source_batch_id="annuity_performance:2026-03",
+                source_run_id="run-001",
+            ),
+            rows=[{"company_id": "company-001", "period": "2026-03"}],
+        ),
+        PublicationBundle(
+            plan=build_publication_plan(
+                policy=policy,
+                publication_id="publication-snapshot-001",
+                target_name="monthly_snapshot",
+                target_kind="projection",
+                refresh_keys=[],
+                upsert_keys=[],
+                source_batch_id="annuity_performance:2026-03",
+                source_run_id="run-001",
+            ),
+            rows=[{"company_id": "company-001", "period": "2026-03"}],
+        ),
+    ]
+
+    with pytest.raises(PublicationExecutionError) as exc_info:
+        service.execute(bundles)
+
+    assert exc_info.value.publication_id == "publication-contract-state-001"
+    assert exc_info.value.target_name == "contract_state"
+    assert exc_info.value.message == "simulated second write failure"
+    assert storage.calls == ["fact_annuity_performance", "contract_state"]
+    assert storage.read("fact_annuity_performance") == [
+        {"record_id": "fact-001", "batch_id": "annuity_performance:2026-03"}
+    ]
+    assert storage.read("monthly_snapshot") == []
