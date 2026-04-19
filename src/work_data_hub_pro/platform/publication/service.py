@@ -34,6 +34,20 @@ class UnknownTargetError(PublicationPolicyError):
     pass
 
 
+class PublicationExecutionError(Exception):
+    def __init__(
+        self,
+        *,
+        publication_id: str,
+        target_name: str,
+        message: str,
+    ) -> None:
+        super().__init__(message)
+        self.publication_id = publication_id
+        self.target_name = target_name
+        self.message = message
+
+
 @dataclass(frozen=True)
 class PublicationBundle:
     plan: PublicationPlan
@@ -106,7 +120,13 @@ def build_publication_plan(
     source_batch_id: str,
     source_run_id: str,
 ) -> PublicationPlan:
-    target_policy = policy.targets[target_name]
+    try:
+        target_policy = policy.targets[target_name]
+    except KeyError as exc:
+        raise UnknownTargetError(
+            f"Publication target is not configured for domain {policy.domain}: {target_name}"
+        ) from exc
+
     return PublicationPlan(
         publication_id=publication_id,
         target_name=target_name,
@@ -128,16 +148,23 @@ class PublicationService:
     def execute(self, bundles: list[PublicationBundle]) -> list[PublicationResult]:
         results: list[PublicationResult] = []
         for bundle in bundles:
-            if bundle.plan.mode is PublicationMode.REFRESH:
-                affected_rows = self._storage.refresh(bundle.plan.target_name, bundle.rows)
-            elif bundle.plan.mode is PublicationMode.UPSERT:
-                affected_rows = self._storage.upsert(
-                    bundle.plan.target_name,
-                    bundle.rows,
-                    key_fields=bundle.plan.upsert_keys,
-                )
-            else:
-                affected_rows = self._storage.append(bundle.plan.target_name, bundle.rows)
+            try:
+                if bundle.plan.mode is PublicationMode.REFRESH:
+                    affected_rows = self._storage.refresh(bundle.plan.target_name, bundle.rows)
+                elif bundle.plan.mode is PublicationMode.UPSERT:
+                    affected_rows = self._storage.upsert(
+                        bundle.plan.target_name,
+                        bundle.rows,
+                        key_fields=bundle.plan.upsert_keys,
+                    )
+                else:
+                    affected_rows = self._storage.append(bundle.plan.target_name, bundle.rows)
+            except Exception as exc:
+                raise PublicationExecutionError(
+                    publication_id=bundle.plan.publication_id,
+                    target_name=bundle.plan.target_name,
+                    message=str(exc),
+                ) from exc
 
             results.append(
                 PublicationResult(
@@ -147,6 +174,7 @@ class PublicationService:
                     affected_rows=affected_rows,
                     transaction_group=bundle.plan.transaction_group,
                     success=True,
+                    error_message=None,
                 )
             )
         return results
