@@ -1,0 +1,137 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-standalone-tooling-operator-adjacency
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-standalone-tooling-operator-adjacency
+sources_read:
+- source_ref: src/work_data_hub/cli/__main__.py
+  source_type: legacy_code
+  note: Unified CLI registers cleanse, eqc-gui, eqc-gui-fluent, and intranet-deploy-gui as top-level subcommands and dispatches GUI launchers directly, which makes them explicit operator entrypoints rather than hidden helpers.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/cli/__main__.py
+  semantic_authority: runtime_witness
+- source_ref: docs/deployment_run_guide.md
+  source_type: legacy_doc
+  note: Deployment guidance separates GUI capability prerequisites and manual operator reruns from the default ETL flow, which supports adjacency to operator workflow without automatic core-runtime admission.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/deployment_run_guide.md
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/gui/eqc_query/app.py
+  source_type: legacy_code
+  note: The Tkinter EQC query app exposes interactive login, search, copy, and manual save actions as a first-class GUI tool surface.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/gui/eqc_query/app.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/gui/eqc_query/controller.py
+  source_type: legacy_code
+  note: The EQC GUI controller manages token acquisition, budgeted lookup, and optional manual persistence to enrichment_index and base_info, which proves operator adjacency can touch runtime storage without becoming business-semantic canon by itself.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/gui/eqc_query/controller.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/surfaces/standalone-tooling.md
+  source_type: current_wiki
+  note: Current standalone-tooling guidance already preserves the operator-adjacent surface family and rejects automatic promotion into the rebuild core boundary.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/surfaces/standalone-tooling.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  source_type: current_wiki
+  note: Current surface-evidence guidance records explicit CLI and GUI entrypoints as governance-visible surface evidence and keeps standalone tooling out of automatic core-runtime promotion.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  semantic_authority: runtime_witness
+- source_ref: docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  source_type: current_spec
+  note: The active blueprint keeps GUI and manual EQC tooling out of the first validation slice, which blocks automatic admission into rebuild core runtime.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md
+  source_type: current_spec
+  note: The refactor program tracks operator tooling as deferred separate from core runtime closure, reinforcing governance visibility without implying mandatory rebuild retention.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md
+  semantic_authority: authoritative_semantic_source
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions:
+- Which individual standalone tools, if any, should later receive retain, replace, defer, or retire decisions in an operator-tooling plan?
+- Whether EQC GUI optional persistence should remain a governed adjunct surface or be replaced or retired remains unresolved.
+compiled_into:
+- docs/wiki-bi/surfaces/standalone-tooling.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
+submitted_at: '2026-04-19T00:00:00Z'
+semantic_findings:
+- semantic_id: sem-rule-standalone-tooling-operator-adjacency
+  semantic_node_type: semantic_rule
+  title: Standalone tooling operator adjacency boundary
+  summary: Standalone tooling surfaces are explicit operator-adjacent entrypoints exposed through direct CLI commands or dedicated GUIs, but that adjacency alone does not make them rebuild-core runtime or business-semantic canon.
+  business_conclusion: Standalone tooling should be interpreted as operator-adjacent runtime carriers. Direct CLI registration or dedicated GUI/controller flow is enough to preserve a tool as governance-visible surface memory and to show it is not a hidden helper. That same adjacency is not enough to promote the tool into the rebuild core runtime or business-semantic canon, even when the tool can optionally write to shared persistence.
+  primary_source_refs:
+  - src/work_data_hub/cli/__main__.py
+  - src/work_data_hub/gui/eqc_query/app.py
+  - src/work_data_hub/gui/eqc_query/controller.py
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+  - docs/superpowers/specs/2026-04-11-workdatahubpro-refactor-program.md
+  supporting_source_refs:
+  - docs/deployment_run_guide.md
+  - docs/wiki-bi/surfaces/standalone-tooling.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/surfaces/standalone-tooling.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions:
+  - Which individual standalone tools, if any, should later receive retain, replace, defer, or retire decisions in an operator-tooling plan?
+  - Whether EQC GUI optional persistence should remain a governed adjunct surface or be replaced or retired remains unresolved.
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - The shared work_data_hub.cli launcher places ETL, manual commands, and standalone tools next to each other, but shared launcher adjacency proves operator exposure rather than identical runtime rank or business truth.
+    - The EQC GUI can manually persist to enrichment_index and base_info, but optional persistence makes the tool governance-relevant rather than business-semantic canon.
+    proxy_usage_refs:
+    - src/work_data_hub/cli/__main__.py
+    - src/work_data_hub/gui/eqc_query/app.py
+    - src/work_data_hub/gui/eqc_query/controller.py
+    - docs/wiki-bi/surfaces/standalone-tooling.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/surfaces/standalone-tooling.md
+    - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+    related_runtime_carriers: []
+    high_priority_governance_questions:
+    - Which individual standalone tools, if any, should later receive retain, replace, defer, or retire decisions in an operator-tooling plan?
+    - Whether EQC GUI optional persistence should remain a governed adjunct surface or be replaced or retired remains unresolved.
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports keeping standalone CLI and GUI surfaces visible in governance review without admitting the whole tooling family into the first-wave rebuild core runtime.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/standalone-tooling.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring object-level retain or retire decisions for individual tools while preserving the explicit operator-adjacency boundary.
+        affected_surfaces:
+        - docs/wiki-bi/surfaces/standalone-tooling.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that treat standalone tools as hidden helpers or that treat any CLI or GUI adjacency as automatic rebuild-core membership.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Preserve as operator-surface governance memory for standalone tooling and surface evidence, not as stable business-semantic canon.
+        target_pages:
+        - docs/wiki-bi/surfaces/standalone-tooling.md
+        - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+        blocked_by: []
+trigger_id: trigger-standalone-tooling-operator-adjacency-001
+orchestration_iteration: 1

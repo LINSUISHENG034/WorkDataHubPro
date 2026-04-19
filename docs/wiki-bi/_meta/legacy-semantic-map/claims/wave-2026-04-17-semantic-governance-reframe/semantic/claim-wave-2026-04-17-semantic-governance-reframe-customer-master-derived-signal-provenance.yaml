@@ -1,0 +1,136 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-customer-master-derived-signal-provenance
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-customer-master-derived-signal-provenance
+sources_read:
+- source_ref: config/foreign_keys.yml
+  source_type: legacy_config
+  note: fk_customer rules across four domains declare customer-master outputs via max_by, concat_distinct, count_distinct, template, and jsonb_append, proving these fields are derived aggregation products rather than raw fact columns.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/foreign_keys.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/business-background/客户主数据回填与状态来源分析.md
+  source_type: legacy_doc
+  note: Business background explicitly separates customer master backfill from status rules and monthly snapshots, and distinguishes 年金客户类型 from is_new.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/business-background/客户主数据回填与状态来源分析.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/verification_guide_real_data.md
+  source_type: legacy_doc
+  note: Verification guidance treats 主拓机构, 关键年金计划, 关联计划数, 关联机构数, other breadth fields, tags, and 年金客户类型 as outputs that must be validated after backfill, not as raw fact publication or snapshot status.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/verification_guide_real_data.md
+  semantic_authority: runtime_witness
+- source_ref: docs/domains/annuity_performance-capability-map.md
+  source_type: legacy_doc
+  note: Capability map records annuity_performance customer-master signals as backfill outputs with dominant-value selection weighted by 期末资产规模 and time-tag derivation into tags.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_performance-capability-map.md
+  semantic_authority: runtime_witness
+- source_ref: docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  note: Capability map records annuity_income customer-master signals as backfill outputs with dominant-value selection weighted by 固费 and classification/tag side effects written into customer master.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_income-capability-map.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/customer-master-signals-evidence.md
+  source_type: current_wiki
+  note: Current evidence page already groups customer-master signals into dominant, breadth, classification, and tag families, which this claim consolidates into a provenance boundary.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/customer-master-signals-evidence.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  source_type: current_wiki
+  note: Current evidence page preserves that backfill writes derived customer-master signals with different provenance from authoritative reference_sync and from raw fact publication.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/output-correctness/output-correctness.md
+  source_type: current_wiki
+  note: Output-correctness guidance already prohibits provenance collapse between backfill outputs and snapshot-status semantics.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/output-correctness/output-correctness.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/evidence/customer-master-signals-evidence.md
+- docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+- docs/wiki-bi/standards/output-correctness/output-correctness.md
+submitted_at: '2026-04-19T03:06:50Z'
+semantic_findings:
+- semantic_id: sem-rule-customer-master-derived-signal-provenance
+  semantic_node_type: semantic_rule
+  title: Customer-master derived signal provenance
+  summary: Customer-master signals are grouped derived outputs from backfill aggregation families, not raw fact publication and not snapshot-status fields.
+  business_conclusion: Customer-master signals are fact-derived backfill outputs with distinct provenance families. Dominant-value signals such as 主拓机构, 主拓机构代码, and 关键年金计划 come from weighted max_by selection, breadth-count signals such as 关联计划数 and 关联机构数 come from count_distinct aggregation, breadth-list signals such as 其他年金计划 and 其他开拓机构 come from concat_distinct aggregation, classification signals such as 年金客户类型, 管理资格, and 年金计划类型 come from classification-oriented concat_distinct or template rules, and timeline-tag signals such as tags with yyMM新建, yyMM中标, and yyMM流失 come from date-formatted tag append rules. These signal families must not be collapsed into raw fact publication or snapshot status semantics.
+  primary_source_refs:
+  - config/foreign_keys.yml
+  - docs/business-background/客户主数据回填与状态来源分析.md
+  supporting_source_refs:
+  - docs/verification_guide_real_data.md
+  - docs/domains/annuity_performance-capability-map.md
+  - docs/domains/annuity_income-capability-map.md
+  - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  - docs/wiki-bi/standards/output-correctness/output-correctness.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+  - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+  - docs/wiki-bi/standards/output-correctness/output-correctness.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: recommended_stable_canonical
+    semantic_scope_type: semantic_object
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Legacy runtime and verification often discuss these fields together as generic customer-master backfill results, but that convenience label should not erase the distinct provenance families inside the signal set.
+    - Some downstream narratives can read 年金客户类型 or tags as if they were status outputs, yet the accepted boundary keeps them on the derived customer-master side of backfill rather than in snapshot-status semantics.
+    proxy_usage_refs:
+    - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+    - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+    downstream_consequence_refs:
+    - docs/verification_guide_real_data.md
+    - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+    - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+    - docs/wiki-bi/standards/output-correctness/output-correctness.md
+    related_runtime_carriers:
+    - obj-annuity-performance-legacy-fact-processing
+    - obj-annuity-income-legacy-fact-processing
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports slice decisions that keep customer-master signal families on the derived backfill side and block implementations that flatten them into raw fact publication or snapshot-status outputs.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        - docs/wiki-bi/standards/output-correctness/output-correctness.md
+        blocked_by: []
+      defer_candidates:
+        summary: ''
+        affected_surfaces: []
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that describe customer-master signals as direct fact columns, generic snapshot status, or one undifferentiated backfill blob.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+        - docs/wiki-bi/standards/output-correctness/output-correctness.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Ready for durable absorption review as a provenance boundary across customer-master signal families and output-correctness guidance.
+        target_pages:
+        - docs/wiki-bi/evidence/customer-master-signals-evidence.md
+        - docs/wiki-bi/evidence/reference-and-backfill-evidence.md
+        - docs/wiki-bi/standards/output-correctness/output-correctness.md
+        blocked_by: []
+trigger_id: trigger-customer-master-derived-signal-provenance-001
+orchestration_iteration: 1

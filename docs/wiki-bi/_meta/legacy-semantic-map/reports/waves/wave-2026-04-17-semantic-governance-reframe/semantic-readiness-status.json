@@ -17,6 +17,7 @@
     "sem-non-equivalence-reference-sync-vs-backfill",
     "sem-non-equivalence-temp-id-vs-company-id",
     "sem-rule-company-id-multi-signal-resolution",
+    "sem-rule-customer-master-derived-signal-provenance",
     "sem-rule-is-churned-this-year-definition",
     "sem-rule-is-new-definition",
     "sem-rule-status-source-splitting",
@@ -31,6 +32,6 @@
     "contradiction_unresolved": 1,
     "high_priority_governance_questions_open": 2
   },
-  "durable_target_page_count": 19,
-  "generated_at": "2026-04-19T00:00:00Z"
+  "durable_target_page_count": 30,
+  "generated_at": "2026-04-19T03:06:50Z"
 }

@@ -1,0 +1,142 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-event-domain-current-row-contract-lookup
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-event-domain-current-row-contract-lookup
+sources_read:
+- source_ref: docs/domains/annual_award-capability-map.md
+  source_type: legacy_doc
+  note: Annual-award capability and field-trace sections define plan-code enrichment as a separate stage after company_id resolution and before domain-default fallback, while dependency notes still use customer-plan history wording for the lookup family.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annual_award-capability-map.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/domains/annual_loss-capability-map.md
+  source_type: legacy_doc
+  note: Annual-loss capability and mechanism sections keep DB lookup and domain-default fallback as distinct stages and treat plan-code inference as a customer-contract-table lookup rather than a free-form replay over all past contracts.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annual_loss-capability-map.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: tests/slice_tests/test_j_real_effect_guards.py
+  source_type: legacy_test
+  note: Guard tests for annual_award and annual_loss prove three ordered behaviors at runtime; existing source plan_code is preserved, empty plan_code rows query the contract lookup, and the SQL is constrained to current rows with valid_to = '9999-12-31'.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/slice_tests/test_j_real_effect_guards.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+  source_type: current_wiki
+  note: Current annual-award output contract preserves the ordered rule preserve source value -> customer_plan_history candidate selection -> domain default fallback and treats the sequence as part of output explainability.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+  source_type: current_wiki
+  note: Current annual-loss output contract makes the temporal boundary explicit by naming current contract rows valid_to=9999-12-31, effective_period ordering, and domain-default fallback as separate stages.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  source_type: current_wiki
+  note: Annual-award field-processing evidence classifies plan_code enrichment as business-semantic handling, preserves source-first behavior, and records effective_period as the lookup-ordering key while noting remaining equivalence questions with legacy current-row filtering.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  source_type: current_wiki
+  note: Annual-loss field-processing evidence explicitly frames plan_code enrichment as current-row temporal lookup behavior with effective_period ordering and domain-default fallback.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  source_type: current_wiki
+  note: Identity-and-lookup evidence treats event-domain plan-code enrichment as an identity-adjacent governed lookup surface, which makes the lookup boundary important without turning it into a general historical replay rule.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+- docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+- docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+submitted_at: '2026-04-19T00:00:00Z'
+semantic_findings:
+- semantic_id: sem-rule-event-domain-current-row-contract-lookup
+  semantic_node_type: semantic_rule
+  title: Event-domain current-row contract lookup
+  summary: annual_award and annual_loss enrich missing event-domain plan_code values through a three-stage boundary of source preservation, current-row contract lookup, and domain-default fallback rather than through generic historical contract replay.
+  business_conclusion: >-
+    For annual_award and annual_loss, event-domain plan-code enrichment is a
+    current-row temporal contract lookup boundary. The runtime first preserves
+    any non-empty source plan_code, then uses the resolved company_id plus
+    product_line_code to query current contract rows and choose the best
+    candidate with effective-period and plan-type preference, and only then
+    applies the domain default fallback. This is not a general replay across
+    arbitrary historical customer-plan rows.
+  primary_source_refs:
+  - docs/domains/annual_award-capability-map.md
+  - docs/domains/annual_loss-capability-map.md
+  - tests/slice_tests/test_j_real_effect_guards.py
+  supporting_source_refs:
+  - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+  - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+  - docs/wiki-bi/evidence/annual-award-field-processing-evidence.md
+  - docs/wiki-bi/evidence/annual-loss-field-processing-evidence.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+  - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+  - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_operational_shortcut
+    contradiction_accounting_notes:
+    - Legacy capability-map wording sometimes says customer-plan history or historical/current rows because the lookup table is historically versioned, but the guard tests constrain event-domain enrichment to current contract rows via valid_to = '9999-12-31'.
+    - effective_period ordering and plan-type prefix preference refine candidate choice inside the current-row lookup stage; they do not widen the behavior into arbitrary historical contract replay.
+    - preserve-source behavior, current-row lookup, and domain-default fallback are distinct enrichment stages with different rule identities and should not be collapsed into one generic enrichment step.
+    proxy_usage_refs:
+    - docs/domains/annual_award-capability-map.md
+    - docs/domains/annual_loss-capability-map.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+    - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+    - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+    related_runtime_carriers: []
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports admitting annual_award and annual_loss only when plan-code enrichment preserves the ordered boundary of source value, current-row lookup, and domain-default fallback.
+        affected_surfaces:
+        - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+        - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring any broader historical-contract replay interpretation until separate evidence proves that event domains intentionally replay non-current rows.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that describe annual_award or annual_loss plan-code enrichment as a generic customer-plan history replay or that merge source preservation, lookup, and defaulting into one undifferentiated step.
+        affected_surfaces:
+        - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+        - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Preserve as proposal-grade runtime-governance memory for event-domain lookup semantics, not as stable shared canonical truth.
+        target_pages:
+        - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+        - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+        - docs/wiki-bi/evidence/identity-and-lookup-evidence.md
+        blocked_by: []
+trigger_id: trigger-event-domain-current-row-contract-lookup-001
+orchestration_iteration: 1

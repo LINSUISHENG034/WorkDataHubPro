@@ -1,0 +1,171 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-workbook-discovery-version-arbitration
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-workbook-discovery-version-arbitration
+sources_read:
+- source_ref: config/data_sources.yml
+  source_type: legacy_config
+  note: Defaults make highest_number version selection and error fallback part of the shared discovery contract, while domain entries still keep distinct base paths, file patterns, and sheet admission.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/data_sources.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/io/connectors/version_scanner.py
+  source_type: legacy_code
+  note: VersionScanner scopes version arbitration to domain file patterns, supports highest_number or manual selection, and falls back to the base path when version folders do not contain matching files.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/io/connectors/version_scanner.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/io/connectors/discovery/service.py
+  source_type: legacy_code
+  note: FileDiscoveryService makes version detection the first explicit discovery stage and returns the selected version and resolved base path as part of the discovery result.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/io/connectors/discovery/service.py
+  semantic_authority: runtime_witness
+- source_ref: tests/integration/io/test_version_detection.py
+  source_type: legacy_test
+  note: Integration tests prove pattern-aware partial correction semantics, no-version base-path fallback, and realistic version-folder arbitration across shared folder ancestry.
+  workspace_id: legacy_work_data_hub
+  relative_path: tests/integration/io/test_version_detection.py
+  semantic_authority: runtime_witness
+- source_ref: docs/domains/annuity_performance-capability-map.md
+  source_type: legacy_doc
+  note: The annuity_performance capability map records workbook discovery and sheet loading as a domain capability rather than hidden plumbing.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_performance-capability-map.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  note: The annuity_income capability map confirms a shared annuity workbook family with annuity_performance while preserving a separate domain sheet contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_income-capability-map.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/domains/annual_award-capability-map.md
+  source_type: legacy_doc
+  note: The annual_award capability map treats business-collection workbook discovery and merged read as an event-domain capability, not as a folder-level collapse of domain meaning.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annual_award-capability-map.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/domains/annual_loss-capability-map.md
+  source_type: legacy_doc
+  note: The annual_loss capability map preserves the same business-collection ancestry while keeping a separate event-domain intake contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annual_loss-capability-map.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+  source_type: current_wiki
+  note: Current evidence already states that a shared annuity workbook family does not collapse annuity_performance and annuity_income into one domain contract.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+  source_type: current_wiki
+  note: Current evidence preserves business-collection workbook variants and rejects automatic promotion from shared folder ancestry to one accepted domain contract.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+  source_type: current_wiki
+  note: The input-reality standard explicitly treats directory naming, version strategy, and sheet_name versus sheet_names as part of the input contract.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+- docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+- docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+submitted_at: '2026-04-19T00:00:00Z'
+semantic_findings:
+- semantic_id: sem-rule-workbook-discovery-version-arbitration
+  semantic_node_type: semantic_rule
+  title: Workbook discovery and version arbitration boundary
+  summary: Directory scanning and highest-version arbitration are input-admission runtime carriers that decide which workbook instance a domain may read, while shared workbook family or folder ancestry does not merge distinct domain sheet contracts.
+  business_conclusion: >-
+    Directory scanning, version-folder selection, and file-pattern-aware
+    highest-version arbitration should be interpreted as operator/runtime
+    admission contracts rather than low-level plumbing. They govern which
+    workbook instance enters a domain run, but they do not redefine the domain
+    itself. Shared workbook family, shared folder ancestry, or shared version
+    strategy can explain why multiple domains are admitted through adjacent
+    physical carriers, yet those carriers do not collapse separate sheet-scoped
+    domain contracts into one domain.
+  primary_source_refs:
+  - config/data_sources.yml
+  - docs/domains/annuity_performance-capability-map.md
+  - docs/domains/annuity_income-capability-map.md
+  - docs/domains/annual_award-capability-map.md
+  - docs/domains/annual_loss-capability-map.md
+  supporting_source_refs:
+  - src/work_data_hub/io/connectors/version_scanner.py
+  - src/work_data_hub/io/connectors/discovery/service.py
+  - tests/integration/io/test_version_detection.py
+  - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+  - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+  - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+  - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+  - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to: []
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Shared workbook families and shared parent folders are real runtime carriers, but FileDiscoveryService still binds version detection and file matching to one domain config before any sheet is admitted.
+    - File-pattern-aware version arbitration allows one folder ancestry to yield different admitted workbook versions for different domains, so ancestry is not equivalent to one merged domain contract.
+    proxy_usage_refs:
+    - config/data_sources.yml
+    - src/work_data_hub/io/connectors/version_scanner.py
+    - src/work_data_hub/io/connectors/discovery/service.py
+    - tests/integration/io/test_version_detection.py
+    - docs/domains/annuity_income-capability-map.md
+    - docs/domains/annual_award-capability-map.md
+    - docs/domains/annual_loss-capability-map.md
+    downstream_consequence_refs:
+    - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+    - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+    - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+    related_runtime_carriers: []
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports treating folder scanning and version arbitration as governed input-admission behavior that must stay visible when deciding whether a runtime or operator path is actually closed.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+        - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+        - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring future retain-or-replace decisions about automatic directory scanning without erasing the already evidenced discovery and version-arbitration boundary.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+        - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+        - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring narratives that equate shared workbook ancestry with one domain contract or that demote version arbitration to invisible plumbing.
+        affected_surfaces:
+        - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+        - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+        - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Preserve as proposal-grade runtime-carrier guidance for workbook-discovery evidence and input-reality standards, not as a merged domain concept.
+        target_pages:
+        - docs/wiki-bi/evidence/annuity-workbook-family-evidence.md
+        - docs/wiki-bi/evidence/business-collection-workbook-variants-evidence.md
+        - docs/wiki-bi/standards/input-reality/input-reality-contracts.md
+        blocked_by: []
+trigger_id: trigger-workbook-discovery-version-arbitration-001
+orchestration_iteration: 1

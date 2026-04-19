@@ -1,0 +1,102 @@
+semantic_id: sem-rule-company-lookup-queue-publication-boundary
+semantic_node_type: semantic_rule
+title: Company lookup queue publication boundary
+summary: company_lookup_queue persistence and adjacent enrichment-index writes publish
+  identity-runtime state, but they are not first-wave fact publication or accepted
+  explicit publication groups.
+business_conclusion: company_lookup_queue and its persistence writes are identity-runtime
+  publication carriers, not equivalents of first-wave fact publication or accepted
+  publication groups. Writes to enterprise.enrichment_requests publish async identity-recovery
+  state, while enrichment_index updates publish reusable identity-cache state; both
+  must stay separate from business fact publication semantics.
+primary_semantic_sources:
+- docs/guides/infrastructure/company-enrichment-service.md
+- docs/superpowers/specs/2026-04-11-workdatahubpro-rebuild-architecture-draft.md
+- docs/superpowers/specs/2026-04-11-workdatahubpro-first-wave-legacy-coverage-matrix.md
+supporting_witness_sources:
+- src/work_data_hub/domain/company_enrichment/lookup_queue.py
+- src/work_data_hub/io/loader/company_enrichment_loader.py
+- src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
+semantic_authority: authoritative_semantic_source
+related_execution_nodes: []
+related_subsystems: []
+related_objects: []
+non_equivalent_to: []
+open_questions: []
+durable_target_pages:
+- docs/wiki-bi/surfaces/company-lookup-queue.md
+- docs/wiki-bi/evidence/operator-and-surface-evidence.md
+proposal_governance:
+  recommendation_status: claim_level_only
+  semantic_scope_type: runtime_carrier
+  authority_gate_passed: true
+  downstream_consequence_gate_passed: true
+  contradiction_accounting_status: explained_scope_limited_alias
+  contradiction_accounting_notes:
+  - Queue inserts and enrichment-index UPSERTs are publication-like only in the narrow
+    sense that they externalize identity-runtime work products into persistence surfaces.
+  - The current rebuild defines accepted publication as explicit fact, derivation,
+    and projection write scopes with visible publication groups, so identity queue/cache
+    persistence cannot be collapsed into that contract without losing the boundary.
+  proxy_usage_refs:
+  - src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  - src/work_data_hub/io/loader/company_enrichment_loader.py
+  - src/work_data_hub/infrastructure/enrichment/repository/enrichment_index_ops.py
+  downstream_consequence_refs:
+  - docs/wiki-bi/surfaces/company-lookup-queue.md
+  - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+  related_runtime_carriers:
+  - obj-company-lookup-queue-runtime
+  high_priority_governance_questions: []
+  gate_blockers: []
+  governance_implications:
+    slice_admission:
+      summary: Supports keeping identity queue/cache persistence outside first-wave
+        fact-publication admission logic while still preserving it as a governed runtime
+        surface.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+      blocked_by: []
+    defer_candidates:
+      summary: Supports deferring repo-native queue and enrichment-index persistence
+        retention without misclassifying those writes as accepted publication closure.
+      affected_surfaces:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+      blocked_by: []
+    retire_candidates:
+      summary: Candidate for retiring narratives that treat enrichment_requests or
+        enrichment_index writes as if they were business fact publication or accepted
+        publication-group equivalents.
+      affected_surfaces:
+      - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+      blocked_by: []
+    durable_wiki_absorption:
+      summary: Preserve as runtime-governance memory for queue/publication boundary
+        review, not as stable business-semantic canon or accepted publication contract.
+      target_pages:
+      - docs/wiki-bi/surfaces/company-lookup-queue.md
+      - docs/wiki-bi/evidence/operator-and-surface-evidence.md
+      blocked_by: []
+durable_summary_ready: true
+requires_human_judgement: false
+blocked_by: []
+archive_after_absorption: true
+semantic_maturity_level: inferred
+discovery_view_status: sufficient
+consumption_readiness_status: discovery-only
+readiness_notes:
+- Queue inserts and enrichment-index UPSERTs are publication-like only in the narrow
+  sense that they externalize identity-runtime work products into persistence surfaces.
+- The current rebuild defines accepted publication as explicit fact, derivation, and
+  projection write scopes with visible publication groups, so identity queue/cache
+  persistence cannot be collapsed into that contract without losing the boundary.
+compiled_from_wave_id: wave-2026-04-17-semantic-governance-reframe
+compiled_at: '2026-04-19T00:00:00Z'
+confidence: high
+last_verified: '2026-04-19'
+compiled_from_claims:
+- claim-wave-2026-04-17-semantic-governance-reframe-company-lookup-queue-publication-boundary

@@ -1,0 +1,234 @@
+claim_id: claim-wave-2026-04-17-semantic-governance-reframe-fact-publication-refresh-scope-boundary
+wave_id: wave-2026-04-17-semantic-governance-reframe
+claim_scope: semantic
+claim_target_id: sem-rule-fact-publication-refresh-scope-boundary
+sources_read:
+- source_ref: config/data_sources.yml
+  source_type: legacy_config
+  note: Domain output configs define fact-sink `pk` columns as the refresh/delete scope for `delete_insert` loads across annuity performance, annuity income, annual award, and annual loss.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/data_sources.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/guides/domain-migration/development-guide.md
+  source_type: legacy_doc
+  note: Development guide states the `pk` attribute scopes the DELETE before INSERT and describes `delete_insert` as idempotent replacement rather than `ON CONFLICT` upsert semantics.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/domain-migration/development-guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/domains/annuity_performance-capability-map.md
+  source_type: legacy_doc
+  note: Capability map separates fact load to `business."规模明细"` from downstream contract and snapshot consequences, showing the refresh scope is not the full semantic meaning of the published family.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_performance-capability-map.md
+  semantic_authority: runtime_witness
+- source_ref: docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  note: Capability map marks income fact publication as idempotent refresh semantics and explicitly records delete scope as `月度 + 业务类型 + 计划类型`.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_income-capability-map.md
+  semantic_authority: runtime_witness
+- source_ref: docs/domains/annual_award-capability-map.md
+  source_type: legacy_doc
+  note: Capability map records delete-insert writes to `customer."中标客户明细"` and shows those published facts later feed snapshot status logic rather than defining snapshot grain themselves.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annual_award-capability-map.md
+  semantic_authority: runtime_witness
+- source_ref: docs/domains/annual_loss-capability-map.md
+  source_type: legacy_doc
+  note: Capability map records delete-insert writes to `customer."流失客户明细"` and shows those published facts later feed reported-loss status logic rather than defining snapshot grain themselves.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annual_loss-capability-map.md
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/orchestration/ops/loading.py
+  source_type: legacy_code
+  note: >-
+    load_op passes mode and configured pk directly into the warehouse loader
+    and treats fact loading as an explicit delete_insert or append runtime
+    contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/ops/loading.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/io/loader/operations.py
+  source_type: legacy_code
+  note: Loader implementation validates `pk` for `delete_insert`, deduplicates PK tuples, executes DELETE by those tuples, then bulk inserts the full replacement rows.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/io/loader/operations.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/infrastructure/schema/definitions/__init__.py
+  source_type: legacy_code
+  note: Definitions package entrypoint adds no competing semantic override; runtime meaning comes from the individual domain schema modules.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/schema/definitions/__init__.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/infrastructure/schema/definitions/annuity_performance.py
+  source_type: legacy_code
+  note: Schema definition separates `primary_key=id`, `delete_scope_key=[月度, 业务类型, 计划类型]`, and a broader `composite_key`, proving refresh scope is not identical to row identity grain.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/schema/definitions/annuity_performance.py
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/infrastructure/schema/definitions/annuity_income.py
+  source_type: legacy_code
+  note: Schema definition repeats the same split between `primary_key=id`, `delete_scope_key`, and `composite_key` for the income fact sink.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/schema/definitions/annuity_income.py
+  semantic_authority: authoritative_semantic_source
+- source_ref: src/work_data_hub/infrastructure/schema/definitions/annuity_plans.py
+  source_type: legacy_code
+  note: Reference-table schema uses business-key identity and a different delete scope pattern, which helps contrast reference replacement semantics with fact-sink refresh scope.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/schema/definitions/annuity_plans.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/infrastructure/schema/definitions/portfolio_plans.py
+  source_type: legacy_code
+  note: Portfolio-plan definition likewise shows reference-side business-key identity differs from delete scope, reinforcing that overwrite boundary is a publication concern rather than full semantic identity.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/schema/definitions/portfolio_plans.py
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/output-correctness/output-correctness.md
+  source_type: current_wiki
+  note: Current output-correctness standard separates fact, backfill, and snapshot outputs, making it the right durable target for an explicit refresh-scope boundary rule.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/output-correctness/output-correctness.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/output-correctness/annuity-performance-output-contract.md
+  source_type: current_wiki
+  note: Current page already names the refresh range for `business."规模明细"` but needs the boundary clarified as a replacement contract instead of full fact-family meaning.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/output-correctness/annuity-performance-output-contract.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/output-correctness/annuity-income-output-contract.md
+  source_type: current_wiki
+  note: Current page separates direct fact output from reference and operator-facing artifacts, making it a durable witness that refresh scope should not be collapsed into total output meaning.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/output-correctness/annuity-income-output-contract.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+  source_type: current_wiki
+  note: Current page distinguishes direct fact publication from downstream projections, which supports keeping award delete scope separate from snapshot or contract semantics.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+  semantic_authority: runtime_witness
+- source_ref: docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+  source_type: current_wiki
+  note: Current page distinguishes direct loss facts from downstream projection results, which supports keeping loss delete scope separate from snapshot or contract semantics.
+  workspace_id: work_data_hub_pro
+  relative_path: docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+  semantic_authority: runtime_witness
+objects_discovered: []
+edges_added: []
+candidates_raised: []
+open_questions: []
+compiled_into:
+- docs/wiki-bi/standards/output-correctness/output-correctness.md
+- docs/wiki-bi/standards/output-correctness/annuity-performance-output-contract.md
+- docs/wiki-bi/standards/output-correctness/annuity-income-output-contract.md
+- docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+- docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+submitted_at: '2026-04-19T00:00:00Z'
+semantic_findings:
+- semantic_id: sem-rule-fact-publication-refresh-scope-boundary
+  semantic_node_type: semantic_rule
+  title: Fact publication refresh-scope boundary
+  summary: Delete-scope or refresh-key columns in legacy `delete_insert` fact publication decide which previously published fact rows are replaced on rerun, but they do not define the full business identity grain or downstream semantic scope of the published fact family.
+  business_conclusion: >-
+    delete-scope and refresh-key semantics in the legacy fact sinks are
+    fact-publication replacement contracts, not business identity grain or
+    snapshot grain. The refresh keys decide the overwrite boundary for a rerun
+    of a fact family, not the full semantic meaning of that family or all of
+    its downstream contract and snapshot consequences.
+  primary_source_refs:
+  - config/data_sources.yml
+  - docs/guides/domain-migration/development-guide.md
+  - src/work_data_hub/io/loader/operations.py
+  - src/work_data_hub/infrastructure/schema/definitions/annuity_performance.py
+  - src/work_data_hub/infrastructure/schema/definitions/annuity_income.py
+  supporting_source_refs:
+  - docs/domains/annuity_performance-capability-map.md
+  - docs/domains/annuity_income-capability-map.md
+  - docs/domains/annual_award-capability-map.md
+  - docs/domains/annual_loss-capability-map.md
+  - src/work_data_hub/orchestration/ops/loading.py
+  - src/work_data_hub/infrastructure/schema/definitions/__init__.py
+  - src/work_data_hub/infrastructure/schema/definitions/annuity_plans.py
+  - src/work_data_hub/infrastructure/schema/definitions/portfolio_plans.py
+  - docs/wiki-bi/standards/output-correctness/output-correctness.md
+  - docs/wiki-bi/standards/output-correctness/annuity-performance-output-contract.md
+  - docs/wiki-bi/standards/output-correctness/annuity-income-output-contract.md
+  - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+  - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+  semantic_authority: authoritative_semantic_source
+  durable_target_pages:
+  - docs/wiki-bi/standards/output-correctness/output-correctness.md
+  - docs/wiki-bi/standards/output-correctness/annuity-performance-output-contract.md
+  - docs/wiki-bi/standards/output-correctness/annuity-income-output-contract.md
+  - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+  - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+  confidence: high
+  last_verified: '2026-04-19'
+  open_questions: []
+  non_equivalent_to:
+  - sem-rule-company-lookup-queue-publication-boundary
+  - sem-rule-reference-sync-incremental-state
+  proposal_governance:
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
+    authority_gate_passed: true
+    downstream_consequence_gate_passed: true
+    contradiction_accounting_status: explained_scope_limited_alias
+    contradiction_accounting_notes:
+    - Legacy docs often label the configured columns as `pk`, `refresh key`, or refresh range, but loader code uses them specifically to choose which existing fact rows are deleted before replacement insert.
+    - Fact schema definitions split `primary_key` and `composite_key` from `delete_scope_key`, which shows refresh scope is narrower than the total semantic identity or relation surface of the fact family.
+    - Capability maps and current output-contract pages show the same fact families also drive backfill, contract-state, and monthly-snapshot consequences, so refresh scope cannot be promoted into the full semantic meaning of the published record family.
+    - This rule is about fact sinks and `delete_insert` refresh scope only; it must not be collapsed into company lookup queue publication boundary or reference_sync incremental-state semantics.
+    proxy_usage_refs:
+    - config/data_sources.yml
+    - docs/guides/domain-migration/development-guide.md
+    - src/work_data_hub/orchestration/ops/loading.py
+    - src/work_data_hub/io/loader/operations.py
+    - src/work_data_hub/infrastructure/schema/definitions/annuity_performance.py
+    - src/work_data_hub/infrastructure/schema/definitions/annuity_income.py
+    downstream_consequence_refs:
+    - docs/domains/annuity_performance-capability-map.md
+    - docs/domains/annuity_income-capability-map.md
+    - docs/domains/annual_award-capability-map.md
+    - docs/domains/annual_loss-capability-map.md
+    - docs/wiki-bi/standards/output-correctness/output-correctness.md
+    - docs/wiki-bi/standards/output-correctness/annuity-performance-output-contract.md
+    - docs/wiki-bi/standards/output-correctness/annuity-income-output-contract.md
+    - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+    - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+    related_runtime_carriers: []
+    high_priority_governance_questions: []
+    gate_blockers: []
+    governance_implications:
+      slice_admission:
+        summary: Supports evaluating first-wave fact publication by visible replacement contracts per sink, without mistaking refresh keys for the whole business grain or output family.
+        affected_surfaces:
+        - docs/wiki-bi/standards/output-correctness/output-correctness.md
+        - docs/wiki-bi/standards/output-correctness/annuity-performance-output-contract.md
+        - docs/wiki-bi/standards/output-correctness/annuity-income-output-contract.md
+        - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+        - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+        blocked_by: []
+      defer_candidates:
+        summary: Supports deferring any stronger canonical statement that would equate refresh keys with business identity grain, because current evidence only stabilizes the runtime replacement boundary.
+        affected_surfaces:
+        - docs/wiki-bi/standards/output-correctness/output-correctness.md
+        blocked_by: []
+      retire_candidates:
+        summary: Candidate for retiring wording that treats delete scope, refresh range, or configured `pk` as if they fully define the semantic grain of the fact family or its downstream projections.
+        affected_surfaces:
+        - docs/wiki-bi/standards/output-correctness/output-correctness.md
+        - docs/wiki-bi/standards/output-correctness/annuity-performance-output-contract.md
+        blocked_by: []
+      durable_wiki_absorption:
+        summary: Preserve as proposal-grade runtime-governance memory for output-correctness pages so fact replacement boundary remains explicit while identity grain and snapshot grain stay separately governed.
+        target_pages:
+        - docs/wiki-bi/standards/output-correctness/output-correctness.md
+        - docs/wiki-bi/standards/output-correctness/annuity-performance-output-contract.md
+        - docs/wiki-bi/standards/output-correctness/annuity-income-output-contract.md
+        - docs/wiki-bi/standards/output-correctness/annual-award-output-contract.md
+        - docs/wiki-bi/standards/output-correctness/annual-loss-output-contract.md
+        blocked_by: []
+trigger_id: trigger-fact-publication-refresh-scope-boundary-001
+orchestration_iteration: 1
