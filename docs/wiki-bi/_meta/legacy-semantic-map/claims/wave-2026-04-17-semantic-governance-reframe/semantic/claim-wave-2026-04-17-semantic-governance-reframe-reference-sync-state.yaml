@@ -56,8 +56,8 @@ semantic_findings:
   open_questions: []
   non_equivalent_to: []
   proposal_governance:
-    recommendation_status: recommended_stable_canonical
-    semantic_scope_type: semantic_object
+    recommendation_status: claim_level_only
+    semantic_scope_type: runtime_carrier
     authority_gate_passed: true
     downstream_consequence_gate_passed: true
     contradiction_accounting_status: explained_scope_limited_alias
@@ -89,7 +89,7 @@ semantic_findings:
         affected_surfaces: []
         blocked_by: []
       durable_wiki_absorption:
-        summary: Ready for durable absorption review as a stable legacy semantic contract with deferred runtime disposition.
+        summary: Preserve as runtime-governance memory for sync-state control, not as stable business-semantic canon.
         target_pages:
         - docs/wiki-bi/surfaces/reference-sync.md
         - docs/wiki-bi/evidence/reference-and-backfill-evidence.md

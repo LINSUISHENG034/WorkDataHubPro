@@ -3,17 +3,17 @@
   "discovery_view_status": "green",
   "semantic_maturity_counts": {
     "observed": 0,
-    "inferred": 4,
+    "inferred": 12,
     "contested": 1,
-    "consumption-candidate": 29
+    "consumption-candidate": 21
   },
   "contested_semantic_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
   ],
   "recommendation_counts": {
-    "recommended_stable_canonical": 29,
+    "recommended_stable_canonical": 21,
     "recommended_contested": 1,
-    "claim_level_only": 4
+    "claim_level_only": 12
   },
   "contested_proposal_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
@@ -151,7 +151,15 @@
     }
   },
   "carrier_scope_mismatch_ids": [
-    "sem-decision-anchor-customer-status-rules"
+    "sem-decision-anchor-customer-status-rules",
+    "sem-fact-family-reference-sync-target-inventory",
+    "sem-lifecycle-company-lookup-queue-recovery-cycle",
+    "sem-lifecycle-reference-sync-preload-cycle",
+    "sem-rule-annuity-performance-post-hook-chain",
+    "sem-rule-company-lookup-queue-single-domain-boundary",
+    "sem-rule-enrichment-index-cache-boundary",
+    "sem-rule-first-wave-artifact-operator-evidence",
+    "sem-rule-reference-sync-incremental-state"
   ],
   "unresolved_proxy_conflict_ids": [
     "sem-non-equivalence-customer-type-vs-is-new"
