@@ -135,3 +135,140 @@ def test_projections_consume_published_annual_loss_facts_with_compatibility_brid
             "loss_fixture_rows": 1,
         }
     ]
+
+
+def test_contract_state_projection_preserves_membership_combinations() -> None:
+    storage = InMemoryTableStore(
+        seed={
+            "fact_annuity_performance": [
+                {
+                    "record_id": "fact-perf-both",
+                    "company_id": "company-both",
+                    "plan_code": "PLAN-BOTH",
+                    "period": "2026-03",
+                },
+                {
+                    "record_id": "fact-perf-fact-only",
+                    "company_id": "company-fact-only",
+                    "plan_code": "PLAN-FACT-ONLY",
+                    "period": "2026-03",
+                },
+                {
+                    "record_id": "fact-perf-fixture-only",
+                    "company_id": "company-fixture-only",
+                    "plan_code": "PLAN-FIXTURE-ONLY",
+                    "period": "2026-03",
+                },
+                {
+                    "record_id": "fact-perf-miss",
+                    "company_id": "company-miss",
+                    "plan_code": "PLAN-MISS",
+                    "period": "2026-03",
+                },
+            ],
+            "fact_annual_award": [
+                {
+                    "record_id": "award-fact-both",
+                    "company_id": "company-both",
+                    "plan_code": "PLAN-BOTH",
+                    "period": "2026-03",
+                },
+                {
+                    "record_id": "award-fact-only",
+                    "company_id": "company-fact-only",
+                    "plan_code": "PLAN-FACT-ONLY",
+                    "period": "2026-03",
+                },
+            ],
+            "fixture_annual_award": [
+                {
+                    "company_id": "company-both",
+                    "plan_code": "PLAN-BOTH",
+                    "period": "2026-03",
+                    "source_record_id": "award-fixture-both",
+                },
+                {
+                    "company_id": "company-fixture-only",
+                    "plan_code": "PLAN-FIXTURE-ONLY",
+                    "period": "2026-03",
+                    "source_record_id": "award-fixture-only",
+                },
+            ],
+            "fact_annual_loss": [
+                {
+                    "record_id": "loss-fact-both",
+                    "company_id": "company-both",
+                    "plan_code": "PLAN-BOTH",
+                    "period": "2026-03",
+                },
+                {
+                    "record_id": "loss-fact-only",
+                    "company_id": "company-fact-only",
+                    "plan_code": "PLAN-FACT-ONLY",
+                    "period": "2026-03",
+                },
+            ],
+            "fixture_annual_loss": [
+                {
+                    "company_id": "company-both",
+                    "plan_code": "PLAN-BOTH",
+                    "period": "2026-03",
+                    "source_record_id": "loss-fixture-both",
+                },
+                {
+                    "company_id": "company-fixture-only",
+                    "plan_code": "PLAN-FIXTURE-ONLY",
+                    "period": "2026-03",
+                    "source_record_id": "loss-fixture-only",
+                },
+            ],
+        }
+    )
+
+    result = ContractStateProjection(storage).run(
+        publication_ids=["publication-membership-combinations"],
+        period="2026-03",
+    )
+
+    assert result.rows == [
+        {
+            "company_id": "company-both",
+            "plan_code": "PLAN-BOTH",
+            "period": "2026-03",
+            "has_annuity_performance": True,
+            "has_annual_award_fact": True,
+            "has_annual_award_fixture": True,
+            "has_annual_loss_fact": True,
+            "has_annual_loss_fixture": True,
+        },
+        {
+            "company_id": "company-fact-only",
+            "plan_code": "PLAN-FACT-ONLY",
+            "period": "2026-03",
+            "has_annuity_performance": True,
+            "has_annual_award_fact": True,
+            "has_annual_award_fixture": True,
+            "has_annual_loss_fact": True,
+            "has_annual_loss_fixture": True,
+        },
+        {
+            "company_id": "company-fixture-only",
+            "plan_code": "PLAN-FIXTURE-ONLY",
+            "period": "2026-03",
+            "has_annuity_performance": True,
+            "has_annual_award_fact": False,
+            "has_annual_award_fixture": True,
+            "has_annual_loss_fact": False,
+            "has_annual_loss_fixture": True,
+        },
+        {
+            "company_id": "company-miss",
+            "plan_code": "PLAN-MISS",
+            "period": "2026-03",
+            "has_annuity_performance": True,
+            "has_annual_award_fact": False,
+            "has_annual_award_fixture": False,
+            "has_annual_loss_fact": False,
+            "has_annual_loss_fixture": False,
+        },
+    ]
