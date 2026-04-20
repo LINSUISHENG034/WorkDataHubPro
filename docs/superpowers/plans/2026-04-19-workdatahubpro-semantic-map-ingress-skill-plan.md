@@ -4,7 +4,7 @@
 
 **Goal:** Add a repository-local semantic-ingress workflow that writes lighter-weight ingress findings from legacy-only evidence, runs a mechanical guard, and optionally auto-promotes promotion-ready ingress records into new semantic claim artifacts under the active open wave.
 
-**Architecture:** Extend the existing semantic-map wave, claim, compiler, and reporting stack instead of adding a parallel pipeline. Introduce one new ingress ledger under `docs/wiki-bi/_meta/legacy-semantic-map/ingress/`, one new mechanical guard under `scripts/legacy_semantic_map/semantic_ingress_guard.py`, and one repo-local skill under `.codex/skills/wdhp-semantic-map-ingress/`. The new workflow may write ingress records and new semantic claim artifacts, but it must not compile canonical semantic files automatically and it must never write durable `docs/wiki-bi/` pages.
+**Architecture:** Extend the existing semantic-map wave, claim, compiler, and reporting stack instead of adding a parallel pipeline. Introduce one new ingress ledger under `docs/wiki-bi/_meta/legacy-semantic-map/ingress/`, one new mechanical guard under `scripts/legacy_semantic_map/semantic_ingress_guard.py`, and one repo-local skill under `.codex/skills/wdhp-semantic-ingress/`. The new workflow may write ingress records and new semantic claim artifacts, but it must not compile canonical semantic files automatically and it must never write durable `docs/wiki-bi/` pages.
 
 **Tech Stack:** Python 3.12, `uv`, `pytest`, `PyYAML`, Markdown, local Codex skill packaging
 
@@ -34,11 +34,11 @@ Do not use the docs-only fast path for implementation. This slice changes Python
 - `tests/contracts/test_legacy_semantic_map_ingress_workflow.py`
 - `tests/contracts/test_legacy_semantic_map_semantic_ingress_guard.py`
 - `tests/contracts/test_legacy_semantic_map_ingress_skill_docs.py`
-- `.codex/skills/wdhp-semantic-map-ingress/SKILL.md`
-- `.codex/skills/wdhp-semantic-map-ingress/references/ingress-template.md`
-- `.codex/skills/wdhp-semantic-map-ingress/references/promotion-gates.md`
-- `.codex/skills/wdhp-semantic-map-ingress/references/claim-minimum-fields.md`
-- `.codex/skills/wdhp-semantic-map-ingress/scripts/semantic_ingress_guard.py`
+- `.codex/skills/wdhp-semantic-ingress/SKILL.md`
+- `.codex/skills/wdhp-semantic-ingress/references/ingress-template.md`
+- `.codex/skills/wdhp-semantic-ingress/references/promotion-gates.md`
+- `.codex/skills/wdhp-semantic-ingress/references/claim-minimum-fields.md`
+- `.codex/skills/wdhp-semantic-ingress/scripts/semantic_ingress_guard.py`
 - `docs/wiki-bi/_meta/legacy-semantic-map/ingress/waves/wave-2026-04-17-semantic-governance-reframe/index.yaml`
 - `docs/wiki-bi/_meta/legacy-semantic-map/ingress/waves/wave-2026-04-17-semantic-governance-reframe/question-clusters/.gitkeep`
 - `docs/wiki-bi/_meta/legacy-semantic-map/ingress/waves/wave-2026-04-17-semantic-governance-reframe/findings/.gitkeep`
@@ -59,7 +59,7 @@ Do not use the docs-only fast path for implementation. This slice changes Python
 - `scripts/legacy_semantic_map/semantic_ingress_guard.py` owns active-wave resolution, legacy-evidence boundary checks, overlap detection, and conservative promotion-gate evaluation. It must stay mechanical and must not interpret business meaning.
 - `scripts/legacy_semantic_map/waves.py` exposes a reusable helper that resolves the active or explicitly requested open wave for ingress tooling.
 - `bootstrap.py`, `README.md`, and `AGENTS.md` keep the ingress tree and its write boundary visible in both bootstrap registries and the checked-in registry.
-- `.codex/skills/wdhp-semantic-map-ingress/` packages the operator-facing instructions and reusable references, but it must reuse the repo-root guard/helper code instead of duplicating semantic logic inside the skill.
+- `.codex/skills/wdhp-semantic-ingress/` packages the operator-facing instructions and reusable references, but it must reuse the repo-root guard/helper code instead of duplicating semantic logic inside the skill.
 - the new contract tests lock path shapes, wave guards, evidence provenance, overlap handling, promotion rules, and skill-packaging expectations.
 
 ---
@@ -1238,11 +1238,11 @@ git commit -m "feat(platform.execution): add semantic ingress promotion workflow
 ### Task 5: Package The Repo-Local Skill And Reference Docs
 
 **Files:**
-- Create: `.codex/skills/wdhp-semantic-map-ingress/SKILL.md`
-- Create: `.codex/skills/wdhp-semantic-map-ingress/references/ingress-template.md`
-- Create: `.codex/skills/wdhp-semantic-map-ingress/references/promotion-gates.md`
-- Create: `.codex/skills/wdhp-semantic-map-ingress/references/claim-minimum-fields.md`
-- Create: `.codex/skills/wdhp-semantic-map-ingress/scripts/semantic_ingress_guard.py`
+- Create: `.codex/skills/wdhp-semantic-ingress/SKILL.md`
+- Create: `.codex/skills/wdhp-semantic-ingress/references/ingress-template.md`
+- Create: `.codex/skills/wdhp-semantic-ingress/references/promotion-gates.md`
+- Create: `.codex/skills/wdhp-semantic-ingress/references/claim-minimum-fields.md`
+- Create: `.codex/skills/wdhp-semantic-ingress/scripts/semantic_ingress_guard.py`
 - Create: `tests/contracts/test_legacy_semantic_map_ingress_skill_docs.py`
 
 - [ ] **Step 1: Write the failing skill-packaging contract**
@@ -1256,7 +1256,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-SKILL_ROOT = REPO_ROOT / ".codex" / "skills" / "wdhp-semantic-map-ingress"
+SKILL_ROOT = REPO_ROOT / ".codex" / "skills" / "wdhp-semantic-ingress"
 
 
 def test_semantic_ingress_skill_assets_exist_and_reference_repo_guard() -> None:
@@ -1296,11 +1296,11 @@ Expected: fail because the new skill package does not exist yet.
 
 - [ ] **Step 3: Create the skill, references, and wrapper script**
 
-Create `.codex/skills/wdhp-semantic-map-ingress/SKILL.md` with this content:
+Create `.codex/skills/wdhp-semantic-ingress/SKILL.md` with this content:
 
 ```markdown
 ---
-name: wdhp-semantic-map-ingress
+name: wdhp-semantic-ingress
 description: Use only when the user explicitly invokes semantic-ingress work for `docs/wiki-bi/_meta/legacy-semantic-map/ingress/` or asks to capture legacy business semantics through the ingress workflow. Do not auto-activate for ordinary wiki work or for canonical semantic compilation.
 ---
 
@@ -1341,7 +1341,7 @@ This skill must not:
 - use `references/ingress-template.md`, `references/promotion-gates.md`, and `references/claim-minimum-fields.md` when drafting the ingress and promoted claim payloads
 ```
 
-Create `.codex/skills/wdhp-semantic-map-ingress/references/ingress-template.md`:
+Create `.codex/skills/wdhp-semantic-ingress/references/ingress-template.md`:
 
 ```markdown
 # Ingress Template
@@ -1361,7 +1361,7 @@ Create `.codex/skills/wdhp-semantic-map-ingress/references/ingress-template.md`:
 - `promotion_recommendation`
 ```
 
-Create `.codex/skills/wdhp-semantic-map-ingress/references/promotion-gates.md`:
+Create `.codex/skills/wdhp-semantic-ingress/references/promotion-gates.md`:
 
 ```markdown
 # Promotion Gates
@@ -1377,7 +1377,7 @@ Auto-promotion is allowed only when all of these are true:
 - no existing semantic claim or canonical semantic file would need modification
 ```
 
-Create `.codex/skills/wdhp-semantic-map-ingress/references/claim-minimum-fields.md`:
+Create `.codex/skills/wdhp-semantic-ingress/references/claim-minimum-fields.md`:
 
 ```markdown
 # Minimum Promoted Claim Fields
@@ -1396,7 +1396,7 @@ Create `.codex/skills/wdhp-semantic-map-ingress/references/claim-minimum-fields.
 - `last_verified`
 ```
 
-Create the thin wrapper `.codex/skills/wdhp-semantic-map-ingress/scripts/semantic_ingress_guard.py`:
+Create the thin wrapper `.codex/skills/wdhp-semantic-ingress/scripts/semantic_ingress_guard.py`:
 
 ```python
 from scripts.legacy_semantic_map.semantic_ingress_guard import main
@@ -1421,7 +1421,7 @@ Expected: pass.
 Run:
 
 ```bash
-git add .codex/skills/wdhp-semantic-map-ingress tests/contracts/test_legacy_semantic_map_ingress_skill_docs.py
+git add .codex/skills/wdhp-semantic-ingress tests/contracts/test_legacy_semantic_map_ingress_skill_docs.py
 git commit -m "docs(docs.architecture): add semantic ingress skill package"
 ```
 
@@ -1433,7 +1433,7 @@ Run:
 uv sync --dev
 uv run pytest tests/contracts/test_legacy_semantic_map_bootstrap.py tests/contracts/test_legacy_semantic_map_repo_docs.py tests/contracts/test_legacy_semantic_map_ingress_workflow.py tests/contracts/test_legacy_semantic_map_semantic_ingress_guard.py tests/contracts/test_legacy_semantic_map_ingress_skill_docs.py tests/contracts/test_legacy_semantic_map_wave_guarding.py tests/contracts/test_legacy_semantic_map_semantic_schema.py -v
 uv run pytest -v
-git diff -- docs/wiki-bi/_meta/legacy-semantic-map scripts/legacy_semantic_map .codex/skills/wdhp-semantic-map-ingress tests/contracts
+git diff -- docs/wiki-bi/_meta/legacy-semantic-map scripts/legacy_semantic_map .codex/skills/wdhp-semantic-ingress tests/contracts
 git status -sb
 ```
 

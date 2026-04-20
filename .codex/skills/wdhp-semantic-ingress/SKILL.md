@@ -1,9 +1,9 @@
 ---
-name: wdhp-semantic-map-ingress
-description: Use only when the user explicitly invokes `wdhp-semantic-map-ingress` or directly asks for semantic-ingress work that writes proposal-grade ingress records for `docs/wiki-bi/_meta/legacy-semantic-map/ingress/`. Do not auto-activate from repository context alone.
+name: wdhp-semantic-ingress
+description: Use only when the user explicitly invokes `wdhp-semantic-ingress` or directly asks for semantic-ingress work that writes proposal-grade ingress records for `docs/wiki-bi/_meta/legacy-semantic-map/ingress/`. Do not auto-activate from repository context alone.
 ---
 
-# WDHP Semantic Map Ingress
+# WDHP Semantic Ingress
 
 ## Overview
 

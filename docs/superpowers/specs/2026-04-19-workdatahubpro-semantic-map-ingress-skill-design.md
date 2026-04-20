@@ -349,12 +349,12 @@ contains partially overlapping findings.
 
 The skill should live under:
 
-`E:\Projects\WorkDataHubPro\.codex\skills\wdhp-semantic-map-ingress/`
+`E:\Projects\WorkDataHubPro\.codex\skills\wdhp-semantic-ingress/`
 
 Recommended contents:
 
 ```text
-.codex/skills/wdhp-semantic-map-ingress/
+.codex/skills/wdhp-semantic-ingress/
 ├── SKILL.md
 ├── references/
 │   ├── ingress-template.md

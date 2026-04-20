@@ -1,0 +1,4 @@
+interface:
+  display_name: "Semantic Ingress"
+  short_description: "Capture legacy semantic ingress records"
+  default_prompt: "Use $wdhp-semantic-ingress to capture a legacy semantic finding and evaluate promotion readiness."

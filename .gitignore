@@ -38,8 +38,8 @@ docs/gsd/
 .codex/skills/*
 !.codex/skills/wdhp-governance/
 !.codex/skills/wdhp-wiki-maintenance/
-!.codex/skills/wdhp-semantic-map-ingress/
-!.codex/skills/wdhp-semantic-map-ingress/**
+!.codex/skills/wdhp-semantic-ingress/
+!.codex/skills/wdhp-semantic-ingress/**
 
 .omx/
 docs/omx/
