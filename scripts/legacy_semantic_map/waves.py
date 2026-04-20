@@ -34,3 +34,13 @@ def allow_audit_wave_read(registry_root: Path, wave_id: str) -> dict[str, object
     _, waves = wave_lookup(registry_root)
     return waves[wave_id]
 
+
+def resolve_requested_or_active_open_wave(
+    registry_root: Path,
+    wave_id: str | None = None,
+) -> tuple[str, dict[str, object]]:
+    active_wave_id, waves = wave_lookup(registry_root)
+    target_wave_id = wave_id or active_wave_id
+    if target_wave_id not in waves:
+        raise ValueError(f"Unknown wave_id: {target_wave_id}")
+    return target_wave_id, require_active_open_wave(registry_root, target_wave_id)

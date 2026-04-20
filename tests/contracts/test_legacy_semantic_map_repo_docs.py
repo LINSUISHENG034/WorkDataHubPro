@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import yaml
+
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SEMANTIC_MAP_ROOT = REPO_ROOT / "docs" / "wiki-bi" / "_meta" / "legacy-semantic-map"
@@ -12,6 +14,7 @@ def test_semantic_map_repo_docs_are_governed() -> None:
     assert SEMANTIC_MAP_ROOT.is_dir()
 
     expected_paths = [
+        SEMANTIC_MAP_ROOT / "AGENTS.md",
         SEMANTIC_MAP_ROOT / "README.md",
         SEMANTIC_MAP_ROOT / "manifest.json",
         SEMANTIC_MAP_ROOT / "execution" / "entry-surfaces.yaml",
@@ -87,6 +90,23 @@ def test_semantic_map_repo_docs_are_governed() -> None:
         / "wave-2026-04-17-semantic-governance-reframe"
         / "semantic"
         / "claim-wave-2026-04-17-semantic-governance-reframe-core.yaml",
+        SEMANTIC_MAP_ROOT
+        / "ingress"
+        / "waves"
+        / "wave-2026-04-17-semantic-governance-reframe"
+        / "index.yaml",
+        SEMANTIC_MAP_ROOT
+        / "ingress"
+        / "waves"
+        / "wave-2026-04-17-semantic-governance-reframe"
+        / "question-clusters"
+        / ".gitkeep",
+        SEMANTIC_MAP_ROOT
+        / "ingress"
+        / "waves"
+        / "wave-2026-04-17-semantic-governance-reframe"
+        / "findings"
+        / ".gitkeep",
     ]
     for path in expected_paths:
         assert path.exists(), f"Expected semantic-map pilot artifact at {path}"
@@ -110,9 +130,42 @@ def test_semantic_map_repo_docs_are_governed() -> None:
     assert "not durable wiki content" in readme_text
     assert "active owner:" in readme_text
     assert "archive trigger:" in readme_text
-    assert "distributed agents may write only under `claims/<wave_id>/`" in readme_text
+    assert "ordinary distributed agents may write only under `claims/<wave_id>/`" in readme_text
+    assert (
+        "the semantic-ingress workflow may also write proposal-grade records under "
+        "`ingress/waves/<wave_id>/`" in readme_text
+    )
     assert "canonical registry files remain main-thread-managed" in readme_text
     assert "canonical compilation is a main-thread-only operation" in readme_text
+
+    agents_text = (SEMANTIC_MAP_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    assert "semantic ingress workflow" in agents_text
+    assert "ingress/waves/<wave_id>/" in agents_text
+    assert "ordinary distributed agents may write only under `claims/<wave_id>/`" in agents_text
+    assert (
+        "the semantic-ingress workflow may also write proposal-grade records under "
+        "`ingress/waves/<wave_id>/`" in agents_text
+    )
+    assert (
+        "current repo materials may be read only for routing, duplicate detection, "
+        "or durable target awareness" in agents_text
+    )
+    assert "must not be cited as business-semantic evidence for ingress" in agents_text
+
+    ingress_index = yaml.safe_load(
+        (
+            SEMANTIC_MAP_ROOT
+            / "ingress"
+            / "waves"
+            / "wave-2026-04-17-semantic-governance-reframe"
+            / "index.yaml"
+        ).read_text(encoding="utf-8")
+    )
+    assert ingress_index == {
+        "wave_id": "wave-2026-04-17-semantic-governance-reframe",
+        "question_clusters": [],
+        "findings": [],
+    }
 
     wiki_index_text = (REPO_ROOT / "docs" / "wiki-bi" / "index.md").read_text(encoding="utf-8")
     assert "legacy-semantic-map" not in wiki_index_text

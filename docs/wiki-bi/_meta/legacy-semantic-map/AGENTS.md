@@ -41,6 +41,15 @@ This `AGENTS.md` governs the `docs/wiki-bi/_meta/legacy-semantic-map/` subtree.
   - `legacy_code`
 - Use current wiki pages as supporting witnesses or durable targets, not as the main source of truth for legacy meaning.
 
+## Semantic ingress workflow
+
+- semantic ingress workflow rules apply before proposal promotion or canonical mutation
+- ingress lives under `ingress/waves/<wave_id>/` and is the lighter discovery front door
+- semantic ingress may write ingress records under `ingress/waves/<wave_id>/` and new proposal claims under `claims/<wave_id>/semantic/`
+- current repo materials may be read only for routing, duplicate detection, or durable target awareness
+- current repo materials must not be cited as business-semantic evidence for ingress
+- overlap that would require modifying an existing semantic claim or canonical semantic file must stop for user review
+
 ## Discovery ordering
 
 - Keep discovery execution-first.
@@ -197,9 +206,10 @@ This loop was successfully used to extract a customer-status semantic rule from:
 
 ## Safety rules
 
-- Distributed agents may write only under `claims/<wave_id>/`.
-- Canonical registry files are main-thread-managed.
-- Canonical compilation is a main-thread-only operation.
+- ordinary distributed agents may write only under `claims/<wave_id>/`
+- the semantic-ingress workflow may also write proposal-grade records under `ingress/waves/<wave_id>/`
+- canonical registry files are main-thread-managed
+- canonical compilation is a main-thread-only operation
 
 ## Documentation style
 

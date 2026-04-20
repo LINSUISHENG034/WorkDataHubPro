@@ -106,6 +106,10 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
         "claims/wave-2026-04-16-registry-bootstrap/execution/.gitkeep",
         "claims/wave-2026-04-16-registry-bootstrap/subsystems/.gitkeep",
         "claims/wave-2026-04-16-registry-bootstrap/objects/.gitkeep",
+        "claims/wave-2026-04-16-registry-bootstrap/semantic/.gitkeep",
+        "ingress/waves/wave-2026-04-16-registry-bootstrap/index.yaml",
+        "ingress/waves/wave-2026-04-16-registry-bootstrap/question-clusters/.gitkeep",
+        "ingress/waves/wave-2026-04-16-registry-bootstrap/findings/.gitkeep",
     }
     actual_files = {
         path.relative_to(registry_root).as_posix()
@@ -120,9 +124,19 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
     assert "active owner:" in readme_text
     assert "archive trigger:" in readme_text
     assert "must never be added to `docs/wiki-bi/index.md`" in readme_text
-    assert "distributed agents may write only under `claims/<wave_id>/`" in readme_text
+    assert "ordinary distributed agents may write only under `claims/<wave_id>/`" in readme_text
+    assert (
+        "the semantic-ingress workflow may also write proposal-grade records under "
+        "`ingress/waves/<wave_id>/`" in readme_text
+    )
     assert "canonical registry files remain main-thread-managed" in readme_text
     assert "canonical compilation is a main-thread-only operation" in readme_text
+    assert "ingress/waves/<wave_id>/" in readme_text
+    assert (
+        "semantic ingress uses legacy-only business-semantic evidence from "
+        "`E:\\Projects\\WorkDataHub`" in readme_text
+    )
+    assert "promotion to final shared truth is also main-thread-only" in readme_text
 
     manifest = json.loads((registry_root / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["canonical_seed_sources"] == [
@@ -199,3 +213,18 @@ def test_bootstrap_semantic_map_writes_minimal_registry(tmp_path: Path) -> None:
             "closed_at": None,
         }
     ]
+
+    ingress_index = yaml.safe_load(
+        (
+            registry_root
+            / "ingress"
+            / "waves"
+            / "wave-2026-04-16-registry-bootstrap"
+            / "index.yaml"
+        ).read_text(encoding="utf-8")
+    )
+    assert ingress_index == {
+        "wave_id": "wave-2026-04-16-registry-bootstrap",
+        "question_clusters": [],
+        "findings": [],
+    }

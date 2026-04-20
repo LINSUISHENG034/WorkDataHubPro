@@ -36,9 +36,13 @@ This subtree is an internal discovery ledger for legacy semantic mapping work.
 It is not durable wiki content.
 It must never be added to `docs/wiki-bi/index.md`.
 
-distributed agents may write only under `claims/<wave_id>/`.
+ordinary distributed agents may write only under `claims/<wave_id>/`.
+the semantic-ingress workflow may also write proposal-grade records under `ingress/waves/<wave_id>/`.
 canonical registry files remain main-thread-managed.
 canonical compilation is a main-thread-only operation.
+ingress under `ingress/waves/<wave_id>/` is the discovery front door.
+semantic ingress uses legacy-only business-semantic evidence from `E:\\Projects\\WorkDataHub`.
+promotion to final shared truth is also main-thread-only.
 
 active owner: the main-thread maintainer of the current semantic-map wave
 archive trigger: acceptance of the target durable wiki updates plus disposition of remaining findings for that wave
@@ -56,6 +60,20 @@ def _write_json(path: Path, payload: object) -> None:
 
 def _write_yaml(path: Path, payload: object) -> None:
     _write_text(path, yaml.safe_dump(payload, sort_keys=False, allow_unicode=False))
+
+
+def _ensure_ingress_wave_tree(registry_root: Path, wave_id: str) -> None:
+    ingress_root = registry_root / "ingress" / "waves" / wave_id
+    _write_text(ingress_root / "question-clusters" / ".gitkeep", "")
+    _write_text(ingress_root / "findings" / ".gitkeep", "")
+    _write_yaml(
+        ingress_root / "index.yaml",
+        {
+            "wave_id": wave_id,
+            "question_clusters": [],
+            "findings": [],
+        },
+    )
 
 
 def bootstrap_semantic_map(registry_root: Path = DEFAULT_REGISTRY_ROOT) -> Path:
@@ -78,6 +96,7 @@ def bootstrap_semantic_map(registry_root: Path = DEFAULT_REGISTRY_ROOT) -> Path:
         f"claims/{BOOTSTRAP_WAVE.wave_id}/execution",
         f"claims/{BOOTSTRAP_WAVE.wave_id}/subsystems",
         f"claims/{BOOTSTRAP_WAVE.wave_id}/objects",
+        f"claims/{BOOTSTRAP_WAVE.wave_id}/semantic",
     ):
         directory = registry_root / relative_dir
         directory.mkdir(parents=True, exist_ok=True)
@@ -106,6 +125,7 @@ def bootstrap_semantic_map(registry_root: Path = DEFAULT_REGISTRY_ROOT) -> Path:
         registry_root / "waves" / "index.yaml",
         bootstrap_wave_payload(),
     )
+    _ensure_ingress_wave_tree(registry_root, BOOTSTRAP_WAVE.wave_id)
     for relative_path, payload in EMPTY_REGISTRY_PAYLOADS.items():
         _write_yaml(registry_root / relative_path, payload)
     return registry_root

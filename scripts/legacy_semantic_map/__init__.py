@@ -15,6 +15,15 @@ from .claims import (
     claim_relative_path,
     write_claim_artifact,
 )
+from .ingress import (
+    INGRESS_KIND_DIRECTORIES,
+    LEGACY_WORKSPACE_ID,
+    IngressPromotionRecommendation,
+    IngressRecord,
+    ingress_relative_path,
+    promote_ingress_record,
+    write_ingress_record,
+)
 from .models import (
     BOOTSTRAP_WAVE,
     CLAIM_TYPES,
@@ -43,7 +52,18 @@ from .models import (
 )
 from .probe import ProbeRunResult, StabilityCheck, probe_wave
 from .reporting import ReportGenerationResult, generate_reports
-from .waves import allow_audit_wave_read, load_waves_index, require_active_open_wave, wave_lookup
+from .semantic_ingress_guard import (
+    IngressGuardResult,
+    SemanticPromotionDraft,
+    guard_ingress_record,
+)
+from .waves import (
+    allow_audit_wave_read,
+    load_waves_index,
+    require_active_open_wave,
+    resolve_requested_or_active_open_wave,
+    wave_lookup,
+)
 
 __all__ = [
     "BOOTSTRAP_WAVE",
@@ -78,6 +98,7 @@ __all__ = [
     "generate_reports",
     "GREEN_OBJECT_EDGE_COVERAGE_THRESHOLD",
     "load_waves_index",
+    "LEGACY_WORKSPACE_ID",
     "mutable_claim_ids",
     "PRIORITY_LEVELS",
     "PROPOSAL_CONTRADICTION_ACCOUNTING_STATUSES",
@@ -88,10 +109,20 @@ __all__ = [
     "probe_wave",
     "ReportGenerationResult",
     "require_active_open_wave",
+    "resolve_requested_or_active_open_wave",
+    "IngressPromotionRecommendation",
+    "IngressRecord",
+    "INGRESS_KIND_DIRECTORIES",
+    "IngressGuardResult",
+    "ingress_relative_path",
+    "promote_ingress_record",
     "allow_audit_wave_read",
+    "guard_ingress_record",
     "SEMANTIC_MATURITY_LEVELS",
+    "SemanticPromotionDraft",
     "StabilityCheck",
     "write_claim_artifact",
+    "write_ingress_record",
     "SeededEntrySurface",
     "SeededSourceFamily",
     "SeededWave",

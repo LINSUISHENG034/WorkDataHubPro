@@ -32,12 +32,14 @@ Thumbs.db
 .claude/
 docs/gsd/
 
-# Codex files - only track wdhp-governance
+# Codex files - track the approved repo-local skills only
 .codex/*
 !.codex/skills/
 .codex/skills/*
 !.codex/skills/wdhp-governance/
 !.codex/skills/wdhp-wiki-maintenance/
+!.codex/skills/wdhp-semantic-map-ingress/
+!.codex/skills/wdhp-semantic-map-ingress/**
 
 .omx/
 docs/omx/
