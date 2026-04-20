@@ -1,0 +1,98 @@
+ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-company-identity-governance-absorption-bundle
+wave_id: wave-2026-04-17-semantic-governance-reframe
+ingress_kind: finding
+title: Company-identity governance absorption bundle
+granularity_rationale: This bundle captures the high-value company-identity semantics
+  that must be absorbed together. Splitting company_id anchor meaning, multi-signal
+  resolution, and temp-id fallback into isolated fragments would hide the actual business
+  identity boundary preserved by the legacy system.
+questions:
+- Which identity semantics must be absorbed together so company_id, temp_id, and multi-signal
+  resolution are not flattened into one local lookup story?
+- Which details belong to the business identity boundary and which should remain operator-facing
+  explanation surfaces?
+candidate_conclusions:
+- Absorb company_id as the stable cross-domain enterprise identity anchor rather than
+  a byproduct of one resolver step or one local cache path.
+- 'Absorb multi-signal resolution as part of the identity boundary: plan clues, customer-name
+  clues, cache, provider lookup, and fallback handling all witness that identity is
+  not reducible to one field.'
+- Absorb temp_id as a governed unresolved-identity retention fallback, not as equivalent
+  identity truth.
+- Treat lookup-queue mechanics, EQC budgeting, and cache implementation details as
+  secondary explanation surfaces unless they are needed to explain the identity boundary
+  itself.
+primary_semantic_sources:
+- source_ref: "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\
+    \u5BA2\u6237\u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+  source_type: legacy_doc
+  note: Defines plan-type and customer-name interpretation as layered identity clues
+    instead of a single-field heuristic.
+  workspace_id: legacy_work_data_hub
+  relative_path: "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\
+    \u5BA2\u6237\u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  note: Defines the layered company-id resolution design and temp-id fallback contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/company-enrichment-service.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/mappings/company_id/company_id_overrides_plan.yml
+  source_type: legacy_config
+  note: Shows governed plan-code identity overrides.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/mappings/company_id/company_id_overrides_plan.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/mappings/company_id/company_id_overrides_name.yml
+  source_type: legacy_config
+  note: Shows governed customer-name identity overrides, including intentional empty
+    exclusions.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/mappings/company_id/company_id_overrides_name.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/mappings/company_id/company_id_overrides_hardcode.yml
+  source_type: legacy_config
+  note: Shows governed hardcoded special-case identity handling.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/mappings/company_id/company_id_overrides_hardcode.yml
+  semantic_authority: authoritative_semantic_source
+supporting_witness_sources:
+- source_ref: src/work_data_hub/infrastructure/enrichment/company_id_resolver.py
+  source_type: legacy_code
+  note: Witnesses layered resolution priority and temp-id fallback behavior.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/enrichment/company_id_resolver.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  source_type: legacy_code
+  note: Witnesses deterministic temp-id generation and queued unresolved-identity
+    handling.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  semantic_authority: runtime_witness
+possible_non_equivalences:
+- temp_id is not formal company_id
+- company_id is not reducible to customer_name presence or emptiness
+- company identity is not equivalent to one single lookup priority narration
+proxy_usage_refs:
+- config/mappings/company_id/company_id_overrides_plan.yml
+- config/mappings/company_id/company_id_overrides_name.yml
+- src/work_data_hub/infrastructure/enrichment/company_id_resolver.py
+- src/work_data_hub/domain/company_enrichment/lookup_queue.py
+open_points:
+- Legacy materials preserve more than one historical priority-order narration; durable
+  absorption should explain that drift rather than silently normalize it away.
+- Main-thread absorption still needs a final split between concept-level identity
+  pages and evidence-level runtime explanation so queue and cache details do not crowd
+  the core business boundary.
+promotion_recommendation:
+  recommended_action: hold_ingress
+  rationale: This bundle spans multiple identity semantics and should guide absorption
+    sequencing rather than auto-promote as one claim.
+  gate_failures:
+  - derived_absorption_bundle
+  - not_a_single_semantic_target
+  requires_user_review: false
+promoted_claim_ids: []
+created_at: '2026-04-20T00:11:00Z'

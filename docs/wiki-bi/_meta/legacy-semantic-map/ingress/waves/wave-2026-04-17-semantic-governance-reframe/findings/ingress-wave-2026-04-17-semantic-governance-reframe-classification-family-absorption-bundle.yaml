@@ -1,0 +1,80 @@
+ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-classification-family-absorption-bundle
+wave_id: wave-2026-04-17-semantic-governance-reframe
+ingress_kind: finding
+title: Classification-family absorption bundle
+granularity_rationale: This finding captures the classification-family boundary that
+  should be absorbed together. Input plan type, customer-master annuity-plan type,
+  business type, management qualification, and portfolio anchors only remain intelligible
+  when treated as one layered family instead of disconnected field notes.
+questions:
+- Which classification semantics must be absorbed together so input labels, customer-master
+  aggregations, and portfolio anchors are not flattened into one interchangeable field
+  set?
+- Which distinctions should stay explicit in first-pass durable absorption?
+candidate_conclusions:
+- Absorb input-side plan type, customer-master annuity-plan type, business type, management
+  qualification, and portfolio anchors as one layered classification family.
+- Absorb the boundary that input-side plan type is not equivalent to aggregated customer-master
+  annuity-plan type.
+- Treat classification-family context as a prerequisite for later identity and output
+  explanations rather than as one local data-cleaning detail.
+primary_semantic_sources:
+- source_ref: "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\
+    \u5BA2\u6237\u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+  source_type: legacy_doc
+  note: Defines plan-type interpretation and why different plan families cannot share
+    one identification assumption.
+  workspace_id: legacy_work_data_hub
+  relative_path: "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\
+    \u5BA2\u6237\u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/foreign_keys.yml
+  source_type: legacy_config
+  note: Shows customer-master aggregation and classification-bearing backfill columns
+    across plan, management qualification, and related anchors.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/foreign_keys.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/reference/database-schema-panorama.md
+  source_type: legacy_doc
+  note: Shows where the active classification-bearing tables and outputs sit across
+    schemas.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/reference/database-schema-panorama.md
+  semantic_authority: authoritative_semantic_source
+supporting_witness_sources:
+- source_ref: docs/domains/annuity_performance-capability-map.md
+  source_type: legacy_doc
+  note: Shows annuity-performance carriers that consume classification-family distinctions.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_performance-capability-map.md
+  semantic_authority: historical_context
+- source_ref: docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  note: Shows annuity-income carriers that consume classification-family distinctions.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_income-capability-map.md
+  semantic_authority: historical_context
+possible_non_equivalences:
+- input-side plan type is not aggregated customer-master annuity-plan type
+- business type is not the same semantic layer as management qualification
+- portfolio anchors are not interchangeable with customer-master classification labels
+proxy_usage_refs:
+- config/foreign_keys.yml
+- docs/domains/annuity_performance-capability-map.md
+- docs/domains/annuity_income-capability-map.md
+open_points:
+- Main-thread absorption still needs to decide whether portfolio-anchor explanation
+  stays inside the first classification bundle or moves to a secondary support surface.
+- The final durable wording should keep classification-family semantics visible without
+  duplicating company-identity explanations that only consume this family.
+promotion_recommendation:
+  recommended_action: hold_ingress
+  rationale: This is a multi-object classification bundle and should not auto-promote
+    as one semantic target.
+  gate_failures:
+  - derived_absorption_bundle
+  - not_a_single_semantic_target
+  requires_user_review: false
+promoted_claim_ids: []
+created_at: '2026-04-20T00:12:00Z'

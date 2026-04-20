@@ -1,0 +1,193 @@
+ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-current-high-value-absorption-queue
+wave_id: wave-2026-04-17-semantic-governance-reframe
+ingress_kind: question_cluster
+title: Current high-value durable absorption queue
+granularity_rationale: 'The user asked for the current high-value business-semantic
+  list that still needs durable absorption planning. The stable unit is a question
+  cluster because several accepted semantic families share one governance decision:
+  what should be absorbed now as durable business meaning, what should be preserved
+  only as evidence-oriented memory, and what can remain deferred runtime-governance
+  detail.'
+questions:
+- Which accepted semantic families should be first in the durable wiki absorption
+  queue right now?
+- Which items are stable business-semantic canon versus proposal-grade runtime-governance
+  memory?
+- Which non-equivalences must be absorbed together so legacy shortcut wording does
+  not collapse distinct meanings?
+- Which secondary runtime/operator surfaces can stay deferred without losing core
+  business meaning?
+candidate_conclusions:
+- 'Tier 1 absorb-now cluster: customer-status governance core should be absorbed first,
+  centered on customer status as a distinct business layer, customer-master backfill
+  vs customer-status non-equivalence, the annual identity family, the strategic ratchet
+  rule, and the status-rule decision anchor.'
+- 'Tier 1 absorb-now cluster: company-identity governance should be absorbed immediately,
+  centered on company_id as the cross-domain identity anchor, temp_id as a governed
+  unresolved-identity fallback rather than equivalent identity truth, and multi-signal
+  resolution across plan, name, cache, EQC, and fallback paths.'
+- 'Tier 1 absorb-now cluster: classification-family layering should be absorbed immediately
+  so input-side plan type, customer-master annuity-plan type, business type, management
+  qualification, and portfolio anchors are not flattened into one interchangeable
+  label family.'
+- 'Tier 2 absorb-as-governed-memory cluster: reference strategy layering should be
+  preserved explicitly as a two-layer strategy, where reference_sync preloads authoritative
+  reference data and backfill derives missing references under FK-safe constraints
+  rather than acting as the same semantic step.'
+- 'Tier 2 absorb-as-governed-memory cluster: fact publication refresh-scope boundary
+  should be absorbed on output-correctness and evidence surfaces as proposal-grade
+  memory, because refresh keys and delete scopes govern rerun replacement boundaries
+  but do not define the full business grain of the published fact families.'
+- 'Secondary and generally deferrable surfaces: queue retry mechanics, incremental-state
+  persistence, workbook discovery arbitration, and other operator-adjacent runtime
+  carriers should only be absorbed when they are needed to explain one of the Tier
+  1 or Tier 2 business boundaries.'
+primary_semantic_sources:
+- source_ref: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\
+    \u4E0E\u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  source_type: legacy_doc
+  note: Separates customer master backfill from status evaluation and enumerates source-family
+    splitting for status fields.
+  workspace_id: legacy_work_data_hub
+  relative_path: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\
+    \u4E0E\u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  semantic_authority: authoritative_semantic_source
+- source_ref: "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\
+    \u66F4\u65B0\u903B\u8F91.md"
+  source_type: legacy_doc
+  note: Defines annual identity fields, status_year semantics, and the strategic ratchet
+    rule.
+  workspace_id: legacy_work_data_hub
+  relative_path: "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\
+    \u66F4\u65B0\u903B\u8F91.md"
+  semantic_authority: authoritative_semantic_source
+- source_ref: "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\
+    \u5BA2\u6237\u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+  source_type: legacy_doc
+  note: Defines plan-type and customer-name interpretation as layered identity clues
+    rather than a single-field heuristic.
+  workspace_id: legacy_work_data_hub
+  relative_path: "docs/business-background/\u5E74\u91D1\u8BA1\u5212\u7C7B\u578B\u4E0E\
+    \u5BA2\u6237\u540D\u79F0\u4E1A\u52A1\u80CC\u666F.md"
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/guides/infrastructure/backfill-mechanism-guide.md
+  source_type: legacy_doc
+  note: Defines the hybrid reference strategy and FK-safe split between pre-load reference_sync
+    and dynamic backfill.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/backfill-mechanism-guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/guides/infrastructure/company-enrichment-service.md
+  source_type: legacy_doc
+  note: Defines company_id resolution as a multi-layer governed process with temp-id
+    fallback rather than a single-field lookup.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/company-enrichment-service.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/customer_status_rules.yml
+  source_type: legacy_config
+  note: Makes the status-source split explicit across award, loss, annuity-performance,
+    and derived new-customer logic.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/customer_status_rules.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/reference_sync.yml
+  source_type: legacy_config
+  note: Defines authoritative reference-sync target inventory and per-table contracts.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/reference_sync.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/foreign_keys.yml
+  source_type: legacy_config
+  note: Defines customer-master backfill contracts and classification-family aggregation
+    consequences.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/foreign_keys.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/data_sources.yml
+  source_type: legacy_config
+  note: Shows fact refresh-key scope and the per-domain publication replacement boundary.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/data_sources.yml
+  semantic_authority: authoritative_semantic_source
+supporting_witness_sources:
+- source_ref: src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  note: Implements contract-status change handling and the strategic ratchet rule
+    witness.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/contract_sync.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/year_init.py
+  source_type: legacy_code
+  note: Witnesses the annual identity family and status_year anchoring through annual
+    cutover and prior-year lookup behavior.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/year_init.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/status_evaluator.py
+  source_type: legacy_code
+  note: Witnesses config-driven status evaluation over split source families.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/status_evaluator.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/infrastructure/enrichment/company_id_resolver.py
+  source_type: legacy_code
+  note: Witnesses multi-signal company identity resolution and temp-id fallback.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/infrastructure/enrichment/company_id_resolver.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  source_type: legacy_code
+  note: Witnesses deterministic temp-id generation and queued unresolved-identity
+    handling.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/domain/company_enrichment/lookup_queue.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/orchestration/reference_sync_ops.py
+  source_type: legacy_code
+  note: Witnesses reference_sync as a first-class pre-load orchestration surface with
+    state handling.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/reference_sync_ops.py
+  semantic_authority: runtime_witness
+possible_non_equivalences:
+- customer master backfill is not customer-status evaluation
+- status_year identity anchor is not snapshot_month or generic record-creation year
+- "input-side \u8BA1\u5212\u7C7B\u578B is not aggregated customer-master \u5E74\u91D1\
+  \u8BA1\u5212\u7C7B\u578B"
+- temp_id is not formal company_id
+- company_id is not reducible to customer_name presence or emptiness
+- reference_sync is not backfill
+- fact publication refresh scope is not the full business grain of the fact family
+proxy_usage_refs:
+- config/data_sources.yml
+- config/foreign_keys.yml
+- src/work_data_hub/customer_mdm/contract_sync.py
+- src/work_data_hub/infrastructure/enrichment/company_id_resolver.py
+- src/work_data_hub/domain/company_enrichment/lookup_queue.py
+- src/work_data_hub/orchestration/reference_sync_ops.py
+open_points:
+- status_year belongs in the first customer-status absorption cluster, but durable
+  wording should preserve the current rebuild-side carrier gap rather than presenting
+  it as fully closed runtime truth.
+- Main-thread absorption sequencing still needs a page-level bundling decision so
+  customer-status, identity-governance, and classification-family summaries are not
+  duplicated across concept, evidence, and standards pages.
+- Reference-sync target inventory and fact-publication refresh-scope boundary are
+  high-value governance memory, but they should stay evidence-oriented unless the
+  main thread explicitly wants a stronger canonical semantic treatment.
+- Legacy company-identity materials preserve more than one historical priority-order
+  narration; durable absorption should explain that drift rather than silently normalizing
+  it away.
+promotion_recommendation:
+  recommended_action: hold_ingress
+  rationale: This is a derived wave-level prioritization cluster across multiple semantic
+    families. It should guide absorption sequencing and bundling, not auto-promote
+    as one semantic claim.
+  gate_failures:
+  - derived_inventory_cluster
+  - not_a_single_semantic_target
+  requires_user_review: false
+promoted_claim_ids: []
+created_at: '2026-04-20T00:00:00Z'

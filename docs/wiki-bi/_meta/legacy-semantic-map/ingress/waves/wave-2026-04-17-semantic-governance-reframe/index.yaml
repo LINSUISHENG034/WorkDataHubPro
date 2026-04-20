@@ -1,3 +1,27 @@
 wave_id: wave-2026-04-17-semantic-governance-reframe
-question_clusters: []
-findings: []
+question_clusters:
+- ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-current-high-value-absorption-queue
+  title: Current high-value durable absorption queue
+  path: ingress/waves/wave-2026-04-17-semantic-governance-reframe/question-clusters/ingress-wave-2026-04-17-semantic-governance-reframe-current-high-value-absorption-queue.yaml
+  promotion_state: hold_ingress
+findings:
+- ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-classification-family-absorption-bundle
+  title: Classification-family absorption bundle
+  path: ingress/waves/wave-2026-04-17-semantic-governance-reframe/findings/ingress-wave-2026-04-17-semantic-governance-reframe-classification-family-absorption-bundle.yaml
+  promotion_state: hold_ingress
+- ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-company-identity-governance-absorption-bundle
+  title: Company-identity governance absorption bundle
+  path: ingress/waves/wave-2026-04-17-semantic-governance-reframe/findings/ingress-wave-2026-04-17-semantic-governance-reframe-company-identity-governance-absorption-bundle.yaml
+  promotion_state: hold_ingress
+- ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-customer-status-governance-absorption-bundle
+  title: Customer-status governance absorption bundle
+  path: ingress/waves/wave-2026-04-17-semantic-governance-reframe/findings/ingress-wave-2026-04-17-semantic-governance-reframe-customer-status-governance-absorption-bundle.yaml
+  promotion_state: hold_ingress
+- ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-fact-publication-refresh-boundary-absorption-bundle
+  title: Fact-publication refresh-boundary absorption bundle
+  path: ingress/waves/wave-2026-04-17-semantic-governance-reframe/findings/ingress-wave-2026-04-17-semantic-governance-reframe-fact-publication-refresh-boundary-absorption-bundle.yaml
+  promotion_state: hold_ingress
+- ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-reference-strategy-absorption-bundle
+  title: Reference-strategy absorption bundle
+  path: ingress/waves/wave-2026-04-17-semantic-governance-reframe/findings/ingress-wave-2026-04-17-semantic-governance-reframe-reference-strategy-absorption-bundle.yaml
+  promotion_state: hold_ingress

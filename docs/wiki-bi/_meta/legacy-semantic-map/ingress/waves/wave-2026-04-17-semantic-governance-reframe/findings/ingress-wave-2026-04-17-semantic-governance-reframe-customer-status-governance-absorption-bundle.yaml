@@ -1,0 +1,96 @@
+ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-customer-status-governance-absorption-bundle
+wave_id: wave-2026-04-17-semantic-governance-reframe
+ingress_kind: finding
+title: Customer-status governance absorption bundle
+granularity_rationale: This bundle is a single finding about what must be absorbed
+  together from the legacy customer-status semantics. It is intentionally broader
+  than one semantic node because the business boundary becomes misleading when customer
+  status, annual identity fields, and status-source splitting are absorbed separately.
+questions:
+- Which customer-status meanings must be absorbed together so master-data completion,
+  status evaluation, and snapshot analysis are not collapsed?
+- Which annual identity fields belong to the same first-pass absorption bundle?
+- Which adjacent proxy surfaces should stay outside the first absorption pass until
+  separately adjudicated?
+candidate_conclusions:
+- Absorb customer status as a distinct business layer rather than a byproduct of customer-master
+  completion or one mixed status table.
+- 'Absorb the annual identity family together: is_strategic, is_existing, contract_status,
+  and status_year belong to one yearly customer-identity interpretation bundle.'
+- Absorb the strategic ratchet rule and source-family splitting as first-pass durable
+  semantics because they materially constrain downstream interpretation.
+- Keep the customer-master new-customer tag versus snapshot is_new proxy conflict
+  outside the first absorption pass until the alias conflict is explicitly adjudicated.
+primary_semantic_sources:
+- source_ref: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\
+    \u4E0E\u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  source_type: legacy_doc
+  note: Separates customer-master completion from status evaluation and describes
+    the status-source split.
+  workspace_id: legacy_work_data_hub
+  relative_path: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\
+    \u4E0E\u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  semantic_authority: authoritative_semantic_source
+- source_ref: "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\
+    \u66F4\u65B0\u903B\u8F91.md"
+  source_type: legacy_doc
+  note: Defines annual identity fields, status_year meaning, and the strategic ratchet
+    rule.
+  workspace_id: legacy_work_data_hub
+  relative_path: "docs/business-background/\u6218\u5BA2\u8EAB\u4EFD\u5B9A\u4E49\u4E0E\
+    \u66F4\u65B0\u903B\u8F91.md"
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/customer_status_rules.yml
+  source_type: legacy_config
+  note: Defines source-family splitting and derived status logic across award, loss,
+    annuity performance, and is_new.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/customer_status_rules.yml
+  semantic_authority: authoritative_semantic_source
+supporting_witness_sources:
+- source_ref: src/work_data_hub/customer_mdm/status_evaluator.py
+  source_type: legacy_code
+  note: Witnesses config-driven status evaluation over split source families.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/status_evaluator.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/contract_sync.py
+  source_type: legacy_code
+  note: Witnesses contract-status changes and the strategic upgrade-only rule.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/contract_sync.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/customer_mdm/year_init.py
+  source_type: legacy_code
+  note: Witnesses annual initialization and status_year-anchored yearly identity handling.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/customer_mdm/year_init.py
+  semantic_authority: runtime_witness
+possible_non_equivalences:
+- customer master backfill is not customer status evaluation
+- status_year is not snapshot_month or a generic record-creation year
+- customer-master new-customer tagging is not snapshot is_new semantics
+proxy_usage_refs:
+- config/customer_status_rules.yml
+- src/work_data_hub/customer_mdm/status_evaluator.py
+- src/work_data_hub/customer_mdm/contract_sync.py
+- src/work_data_hub/customer_mdm/year_init.py
+open_points:
+- The current rebuild-side authoritative carrier for status_year still needs separate
+  adjudication, so the bundle should preserve that gap instead of overstating runtime
+  closure.
+- The customer-type versus is_new alias conflict should remain excluded from first-pass
+  absorption until proxy usage is explicitly resolved.
+- Main-thread absorption still needs to decide how to split the final wording across
+  concept, evidence, and standards surfaces without duplicating the same annual-identity
+  explanation.
+promotion_recommendation:
+  recommended_action: hold_ingress
+  rationale: This is an absorption bundle spanning multiple existing semantic boundaries,
+    not a single promotion target.
+  gate_failures:
+  - derived_absorption_bundle
+  - not_a_single_semantic_target
+  requires_user_review: false
+promoted_claim_ids: []
+created_at: '2026-04-20T00:10:00Z'

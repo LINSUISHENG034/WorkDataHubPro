@@ -1,0 +1,99 @@
+ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-reference-strategy-absorption-bundle
+wave_id: wave-2026-04-17-semantic-governance-reframe
+ingress_kind: finding
+title: Reference-strategy absorption bundle
+granularity_rationale: This finding captures the high-value reference-strategy semantics
+  that should be absorbed together. The legacy materials preserve a two-layer strategy,
+  and that meaning becomes distorted if reference_sync, backfill, and FK-safe sequencing
+  are described as one undifferentiated completion step.
+questions:
+- What should be absorbed as the core reference-strategy meaning, and what should
+  remain governed surface memory?
+- Which distinctions must stay explicit so authoritative pre-load and derived backfill
+  are not collapsed?
+candidate_conclusions:
+- Absorb reference_sync and backfill as two related but non-equivalent layers of one
+  reference strategy.
+- Absorb reference_sync as the authoritative pre-load layer that prepares governed
+  reference data before fact loading.
+- Absorb backfill as the derived FK-safe completion layer that materializes missing
+  references and customer-master side effects from processed fact data.
+- Keep target-inventory details, incremental-state mechanics, and preload-cycle narration
+  as governed evidence memory unless the main thread explicitly needs a stronger canonical
+  treatment.
+primary_semantic_sources:
+- source_ref: docs/guides/infrastructure/backfill-mechanism-guide.md
+  source_type: legacy_doc
+  note: Defines the hybrid reference strategy and FK-safe split between pre-load and
+    backfill.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/infrastructure/backfill-mechanism-guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/reference_sync.yml
+  source_type: legacy_config
+  note: Defines the authoritative pre-load target inventory and per-table sync contracts.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/reference_sync.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: config/foreign_keys.yml
+  source_type: legacy_config
+  note: Defines derived backfill behavior and target-side completion under FK-safe
+    constraints.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/foreign_keys.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\
+    \u4E0E\u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  source_type: legacy_doc
+  note: Shows that master-data completion and downstream status work are layered rather
+    than one mixed process.
+  workspace_id: legacy_work_data_hub
+  relative_path: "docs/business-background/\u5BA2\u6237\u4E3B\u6570\u636E\u56DE\u586B\
+    \u4E0E\u72B6\u6001\u6765\u6E90\u5206\u6790.md"
+  semantic_authority: authoritative_semantic_source
+supporting_witness_sources:
+- source_ref: src/work_data_hub/orchestration/reference_sync_ops.py
+  source_type: legacy_code
+  note: Witnesses reference_sync as a first-class pre-load orchestration surface.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/reference_sync_ops.py
+  semantic_authority: runtime_witness
+- source_ref: src/work_data_hub/orchestration/reference_sync_jobs.py
+  source_type: legacy_code
+  note: Witnesses scheduled pre-load execution rather than inline fact-local backfill.
+  workspace_id: legacy_work_data_hub
+  relative_path: src/work_data_hub/orchestration/reference_sync_jobs.py
+  semantic_authority: runtime_witness
+- source_ref: docs/reference/data_processing_guide.md
+  source_type: legacy_doc
+  note: Shows operator-facing flow ordering with backfill before fact load and hooks
+    after load.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/reference/data_processing_guide.md
+  semantic_authority: historical_context
+possible_non_equivalences:
+- reference_sync is not backfill
+- authoritative pre-load inventory is not the same semantic layer as derived FK-safe
+  completion
+- reference strategy is not one generic completion step
+proxy_usage_refs:
+- config/reference_sync.yml
+- config/foreign_keys.yml
+- src/work_data_hub/orchestration/reference_sync_ops.py
+- docs/reference/data_processing_guide.md
+open_points:
+- Target-inventory and incremental-state details are high-value governance memory,
+  but the main thread still needs to decide how much of that detail belongs on durable
+  surfaces versus evidence pages.
+- The first-pass absorption should preserve the two-layer strategy without accidentally
+  promoting every operator detail into business-semantic canon.
+promotion_recommendation:
+  recommended_action: hold_ingress
+  rationale: This bundle mixes stable semantic layering with secondary governed-memory
+    detail and should remain ingress-only for now.
+  gate_failures:
+  - derived_absorption_bundle
+  - not_a_single_semantic_target
+  requires_user_review: false
+promoted_claim_ids: []
+created_at: '2026-04-20T00:13:00Z'

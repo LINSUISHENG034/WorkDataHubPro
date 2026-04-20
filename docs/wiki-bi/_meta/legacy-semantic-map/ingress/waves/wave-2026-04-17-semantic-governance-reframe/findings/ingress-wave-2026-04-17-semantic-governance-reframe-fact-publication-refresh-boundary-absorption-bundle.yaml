@@ -1,0 +1,92 @@
+ingress_id: ingress-wave-2026-04-17-semantic-governance-reframe-fact-publication-refresh-boundary-absorption-bundle
+wave_id: wave-2026-04-17-semantic-governance-reframe
+ingress_kind: finding
+title: Fact-publication refresh-boundary absorption bundle
+granularity_rationale: This finding captures the high-value publication-boundary semantics
+  around refresh scope. The legacy system clearly uses delete-scope and refresh-key
+  contracts for rerun replacement, but those contracts do not define the full business
+  grain of the fact families they publish.
+questions:
+- How should refresh-key and delete-scope semantics be absorbed without overstating
+  them as the full business grain?
+- What belongs to output-governance memory versus stable business meaning?
+candidate_conclusions:
+- Absorb refresh-key and delete-scope semantics as rerun replacement contracts for
+  fact publication, not as the full business identity grain or snapshot grain of the
+  published families.
+- Absorb the consequence that the same fact families still feed backfill, contract-state,
+  and snapshot interpretation beyond their refresh boundary.
+- Keep this boundary on output-governance and evidence-oriented surfaces so refresh
+  scope stays explicit without displacing the broader business semantics of the fact
+  families.
+primary_semantic_sources:
+- source_ref: config/data_sources.yml
+  source_type: legacy_config
+  note: Defines per-domain output tables and pk-driven delete_insert replacement scopes.
+  workspace_id: legacy_work_data_hub
+  relative_path: config/data_sources.yml
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/guides/domain-migration/development-guide.md
+  source_type: legacy_doc
+  note: Explains delete_insert loading as a replacement contract driven by composite
+    pk values.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/guides/domain-migration/development-guide.md
+  semantic_authority: authoritative_semantic_source
+- source_ref: docs/reference/data_processing_guide.md
+  source_type: legacy_doc
+  note: Shows the active ETL chain and how load_op sits after backfill rather than
+    defining the whole downstream meaning of the facts.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/reference/data_processing_guide.md
+  semantic_authority: authoritative_semantic_source
+supporting_witness_sources:
+- source_ref: docs/domains/annuity_performance-capability-map.md
+  source_type: legacy_doc
+  note: Shows that annuity-performance outputs participate in downstream business
+    interpretation beyond refresh scope.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_performance-capability-map.md
+  semantic_authority: historical_context
+- source_ref: docs/domains/annuity_income-capability-map.md
+  source_type: legacy_doc
+  note: Shows that annuity-income outputs participate in downstream business interpretation
+    beyond refresh scope.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annuity_income-capability-map.md
+  semantic_authority: historical_context
+- source_ref: docs/domains/annual_award-capability-map.md
+  source_type: legacy_doc
+  note: Shows downstream use of annual-award outputs beyond one refresh contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annual_award-capability-map.md
+  semantic_authority: historical_context
+- source_ref: docs/domains/annual_loss-capability-map.md
+  source_type: legacy_doc
+  note: Shows downstream use of annual-loss outputs beyond one refresh contract.
+  workspace_id: legacy_work_data_hub
+  relative_path: docs/domains/annual_loss-capability-map.md
+  semantic_authority: historical_context
+possible_non_equivalences:
+- refresh scope is not the full business identity grain of a fact family
+- refresh scope is not snapshot grain
+- publication replacement boundary is not the same thing as downstream semantic consequence
+proxy_usage_refs:
+- config/data_sources.yml
+- docs/guides/domain-migration/development-guide.md
+- docs/reference/data_processing_guide.md
+open_points:
+- This bundle should stay output-governance-oriented unless the main thread explicitly
+  wants to elevate refresh-boundary narration into a stronger semantic object.
+- Main-thread absorption still needs to decide how to keep refresh-boundary wording
+  separate from reference-strategy and identity-governance explanations.
+promotion_recommendation:
+  recommended_action: hold_ingress
+  rationale: This bundle is best preserved as absorption-ready output-governance memory,
+    not auto-promoted as a single semantic target.
+  gate_failures:
+  - derived_absorption_bundle
+  - not_a_single_semantic_target
+  requires_user_review: false
+promoted_claim_ids: []
+created_at: '2026-04-20T00:14:00Z'
